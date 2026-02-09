@@ -110,7 +110,7 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-xs) 0;
-  border-bottom: 1px solid rgba(107, 144, 128, 0.2);
+  border-bottom: 1px solid var(--primary-alpha-20);
 }
 
 .ingredients-section li:last-child {
@@ -149,19 +149,76 @@
   background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-md);
   min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.step-text {
+.step-content {
+  width: 100%;
+  text-align: left;
+}
+
+.step-content p {
   font-size: 1.25rem;
   line-height: 1.8;
   color: var(--text-primary);
   font-weight: 300;
-  text-align: left;
+  margin: 0;
+}
+
+/* Ingredient references in steps */
+.step-content .ingredient-ref {
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px dotted var(--accent-color);
+  padding-bottom: 1px;
+  pointer-events: none;
+}
+
+/* Step ingredients container - separate from step text */
+.step-ingredients-container {
+  margin-top: var(--spacing-md);
+}
+
+/* Step ingredients in cooking mode - match collection step styling */
+.step-ingredients-cooking {
+  padding: var(--spacing-md);
+  background-color: var(--accent-light);
+  border: 1px solid var(--accent-color);
+  border-radius: var(--radius-md);
+}
+
+.step-ingredients-cooking h4 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.step-ingredients-cooking ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-ingredients-cooking li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--primary-alpha-20);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.step-ingredients-cooking li:last-child {
+  border-bottom: none;
 }
 
 /* Footer Navigation */
@@ -233,7 +290,7 @@
     padding: var(--spacing-md) var(--spacing-sm);
   }
 
-  .step-text {
+  .step-content p {
     font-size: 1.15rem;
   }
 
@@ -243,11 +300,7 @@
 }
 
 @media (max-width: 480px) {
-  .step-container {
-    padding: var(--spacing-lg);
-  }
-
-  .step-text {
+  .step-content p {
     font-size: 1.1rem;
     line-height: 1.7;
   }

@@ -83,7 +83,28 @@ function renderStep() {
       `Step ${currentStep + 1} of ${totalSteps}`;
 
     // Update step content
-    document.getElementById('step-content').textContent = step;
+    const parsedStep = parseStepText(step, recipe.ingredients, currentStep);
+    document.getElementById('step-content').innerHTML = `<p>${parsedStep}</p>`;
+
+    // Update step ingredients in separate container
+    const stepIngredients = getStepIngredients(step, recipe.ingredients);
+    const stepIngredientsContainer = document.getElementById('step-ingredients-container');
+
+    if (stepIngredients.length > 0) {
+      stepIngredientsContainer.innerHTML = `
+        <div class="step-ingredients-cooking">
+          <h4>Ingredients for this step:</h4>
+          <ul>
+            ${stepIngredients.map(ingredient => `
+              <li>${ingredient}</li>
+            `).join('')}
+          </ul>
+        </div>
+      `;
+      stepIngredientsContainer.style.display = 'block';
+    } else {
+      stepIngredientsContainer.style.display = 'none';
+    }
 
     // Update navigation buttons
     prevBtn.disabled = false;

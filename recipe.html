@@ -78,7 +78,10 @@
           <section class="instructions">
             <h3>Instructions</h3>
             <ol>
-              ${recipe.steps.map(step => `<li>${step}</li>`).join('')}
+              ${recipe.steps.map((step, index) => {
+                const parsedStep = parseStepText(step, recipe.ingredients, index);
+                return `<li>${parsedStep}</li>`;
+              }).join('')}
             </ol>
           </section>
 

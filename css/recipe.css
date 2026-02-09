@@ -72,7 +72,7 @@
   align-items: center;
   gap: var(--spacing-sm);
   border-left: 3px solid var(--accent-light);
-  background-color: rgba(234, 244, 244, 0.3);
+  background-color: var(--accent-light-alpha-30);
   border-radius: var(--radius-sm);
   transition: border-color 0.2s;
 }
@@ -108,6 +108,16 @@
   padding: 0;
 }
 
+/* Ingredient references in steps */
+.ingredient-ref {
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px dotted var(--accent-color);
+  padding-bottom: 1px;
+}
+
+/* Instructions List */
 .instructions li {
   counter-increment: step-counter;
   padding: var(--spacing-md) 0;
