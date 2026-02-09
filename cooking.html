@@ -4,17 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cooking mode">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Cooking - biteme</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/cooking.css">
 </head>
-<body>
-  <main>
-    <div class="placeholder">
-      <h1>Cooking Mode</h1>
-      <p>Coming in Phase 2!</p>
-      <a href="index.html" class="button">Back to Recipes</a>
-    </div>
+<body class="cooking-mode">
+  <header class="cooking-header">
+    <button id="exit-btn" class="exit-button" aria-label="Exit cooking mode">✕</button>
+    <div id="step-progress" class="step-progress">Step 1 of 4</div>
+  </header>
+
+  <main class="cooking-main">
+    <section id="ingredients-checklist" class="ingredients-section">
+      <!-- Ingredients will be loaded here -->
+    </section>
+
+    <section class="step-section">
+      <div class="step-container">
+        <p id="step-content" class="step-text">
+          <!-- Current step will be loaded here -->
+        </p>
+      </div>
+    </section>
   </main>
+
+  <footer class="cooking-footer">
+    <button id="prev-btn" class="nav-button prev-button">Previous</button>
+    <button id="next-btn" class="nav-button next-button">Next</button>
+  </footer>
+
+  <script src="js/recipes.js"></script>
+  <script src="js/cooking.js"></script>
 </body>
 </html>
