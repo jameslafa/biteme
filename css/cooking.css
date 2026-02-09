@@ -1,0 +1,10 @@
+/* Cooking Mode Styles - Phase 2 */
+
+/* Placeholder for now */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}

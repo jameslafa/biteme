@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Recipe details">
+  <title>Recipe - biteme</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/recipe.css">
+</head>
+<body>
+  <header>
+    <nav class="recipe-nav">
+      <a href="index.html" class="back-button" aria-label="Back to recipes">← Back</a>
+      <h1>biteme</h1>
+    </nav>
+  </header>
+
+  <main id="recipe-detail">
+    <!-- Recipe will be loaded here by JavaScript -->
+  </main>
+
+  <script src="js/recipes.js"></script>
+  <script>
+    // Load recipe detail
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const recipeId = urlParams.get('id');
+
+      if (!recipeId) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const recipe = getRecipeById(recipeId);
+
+      if (!recipe) {
+        document.getElementById('recipe-detail').innerHTML = `
+          <div class="error">
+            <p>Recipe not found.</p>
+            <a href="index.html" class="button">Back to Recipes</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Display recipe
+      document.title = `${recipe.name} - biteme`;
+      document.getElementById('recipe-detail').innerHTML = `
+        <article class="recipe">
+          <h2 class="recipe-name">${recipe.name}</h2>
+          <p class="recipe-description">${recipe.description}</p>
+
+          <div class="recipe-tags">
+            ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+
+          <section class="ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              ${recipe.ingredients.map((ingredient, index) => `
+                <li>
+                  <input type="checkbox" id="ingredient-${index}" />
+                  <label for="ingredient-${index}">${ingredient}</label>
+                </li>
+              `).join('')}
+            </ul>
+          </section>
+
+          <section class="instructions">
+            <h3>Instructions</h3>
+            <ol>
+              ${recipe.steps.map(step => `<li>${step}</li>`).join('')}
+            </ol>
+          </section>
+
+          <div class="action-buttons">
+            <button class="button button-primary" onclick="startCooking(${recipe.id})">
+              Start Cooking
+            </button>
+          </div>
+        </article>
+      `;
+    });
+
+    function startCooking(id) {
+      window.location.href = `cooking.html?id=${id}`;
+    }
+  </script>
+</body>
+</html>
