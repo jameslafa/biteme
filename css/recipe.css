@@ -43,6 +43,23 @@
 }
 
 /* Ingredients List */
+.ingredient-category {
+  margin-bottom: var(--spacing-lg);
+}
+
+.ingredient-category:last-child {
+  margin-bottom: 0;
+}
+
+.ingredient-category h4 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+}
+
 .ingredients ul {
   list-style: none;
   padding: 0;

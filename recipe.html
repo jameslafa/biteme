@@ -57,14 +57,22 @@
 
           <section class="ingredients">
             <h3>Ingredients</h3>
-            <ul>
-              ${recipe.ingredients.map((ingredient, index) => `
-                <li>
-                  <input type="checkbox" id="ingredient-${index}" />
-                  <label for="ingredient-${index}">${ingredient}</label>
-                </li>
-              `).join('')}
-            </ul>
+            ${Object.entries(recipe.ingredients).map(([category, items]) => {
+              if (items.length === 0) return '';
+              return `
+                <div class="ingredient-category">
+                  <h4>${category}</h4>
+                  <ul>
+                    ${items.map((ingredient, index) => `
+                      <li>
+                        <input type="checkbox" id="ingredient-${category}-${index}" />
+                        <label for="ingredient-${category}-${index}">${ingredient}</label>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </div>
+              `;
+            }).join('')}
           </section>
 
           <section class="instructions">

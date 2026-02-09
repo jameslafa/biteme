@@ -27,16 +27,26 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeCookingMode() {
   // Render ingredients checklist
   const ingredientsContainer = document.getElementById('ingredients-checklist');
+
+  const categoriesHTML = Object.entries(recipe.ingredients)
+    .filter(([category, items]) => items.length > 0)
+    .map(([category, items]) => `
+      <div class="ingredient-group">
+        <h4>${category}</h4>
+        <ul>
+          ${items.map((ingredient, index) => `
+            <li>
+              <input type="checkbox" id="cook-ingredient-${category}-${index}" />
+              <label for="cook-ingredient-${category}-${index}">${ingredient}</label>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `).join('');
+
   ingredientsContainer.innerHTML = `
     <h3>Collect Your Ingredients</h3>
-    <ul>
-      ${recipe.ingredients.map((ingredient, index) => `
-        <li>
-          <input type="checkbox" id="cook-ingredient-${index}" />
-          <label for="cook-ingredient-${index}">${ingredient}</label>
-        </li>
-      `).join('')}
-    </ul>
+    ${categoriesHTML}
   `;
 
   // Setup navigation buttons

@@ -77,9 +77,26 @@
   font-size: 1rem;
   font-weight: 400;
   color: var(--primary-color);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
   letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+
+.ingredient-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.ingredient-group:last-child {
+  margin-bottom: 0;
+}
+
+.ingredient-group h4 {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-xs);
 }
 
 .ingredients-section ul {
