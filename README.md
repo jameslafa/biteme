@@ -1,24 +1,23 @@
-# BiteMe 🌱
+# biteme 🌱
 
-A simple, open-source vegetarian/vegan recipe app built as a Progressive Web App (PWA).
-
-## Features
-
-- 📱 Mobile-first design for iPhone
-- 🥗 Vegetarian and vegan recipes
-- 👨‍🍳 Step-by-step cooking mode
-- 📝 Add notes to improve recipes
-- 🔄 Multi-device sync (coming soon)
-- 📴 Offline support (coming soon)
+A simple, open-source vegetarian/vegan recipe app with an elegant minimalist design.
 
 ## Live Demo
 
-Coming soon - will be hosted on GitHub Pages!
+**https://jameslafa.github.io/biteme/**
+
+## Features
+
+- 📱 Mobile-first elegant design
+- 🥗 Vegetarian and vegan recipes organized by kitchen location
+- 👨‍🍳 Step-by-step cooking mode with ingredient prep
+- 🔗 Smart ingredient references - steps link to ingredient quantities
+- 📋 Ingredient checklist to gather what you need
 
 ## Technology Stack
 
 - Vanilla JavaScript (no frameworks)
-- HTML5/CSS3
+- HTML5/CSS3 with CSS custom properties
 - Mobile-first responsive design
 - GitHub Pages hosting
 
@@ -26,7 +25,7 @@ Coming soon - will be hosted on GitHub Pages!
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/biteme.git
+   git clone https://github.com/jameslafa/biteme.git
    cd biteme
    ```
 
@@ -37,44 +36,48 @@ Coming soon - will be hosted on GitHub Pages!
 
 3. Open your browser to `http://localhost:8000`
 
-## Project Status
-
-**Phase 1** (Current): Static site with mock recipe data
-- ✅ Basic recipe list view
-- ✅ Recipe detail page
-- ✅ Mobile-optimized design
-
-**Coming Soon:**
-- Phase 2: Step-by-step cooking mode
-- Phase 3: More recipes
-- Phase 4: Notes feature
-- Phase 5: Firebase backend for multi-device sync
-- Phase 6: Full PWA with offline support
-
 ## Contributing
 
 Contributions are welcome! This project is built to be collaborative.
 
-### Adding Recipes (Phase 1-3)
+### Adding Recipes
 
 To add a recipe, edit `/js/recipes.js` and add your recipe to the `mockRecipes` array:
 
 ```javascript
 {
-  id: 2,
+  id: 4,
   name: "Your Recipe Name",
   description: "Brief description",
-  tags: ["vegan", "dinner"],
-  ingredients: [
-    "ingredient 1",
-    "ingredient 2"
-  ],
+  tags: ["vegan", "dinner", "quick"],
+  ingredients: {
+    "Fresh Produce": [
+      "1 onion, diced",
+      "2 cloves garlic"
+    ],
+    "Refrigerated Items": [],
+    "Pantry/Cupboard": [
+      "1 cup rice"
+    ],
+    "Spices & Dried Herbs": [
+      "Salt to taste"
+    ],
+    "Oils & Condiments": [
+      "2 tbsp olive oil"
+    ]
+  },
   steps: [
-    "Step 1 instructions",
-    "Step 2 instructions"
+    "Heat {olive oil} in a pan. Add {onion} and cook until soft.",
+    "Add {garlic} and cook for 1 minute.",
+    "Add {rice} and {salt}. Cook until done."
   ]
 }
 ```
+
+**Key points:**
+- Organize ingredients by kitchen location (Fresh Produce, Refrigerated Items, Pantry/Cupboard, Spices & Dried Herbs, Oils & Condiments)
+- Use `{ingredient}` syntax in steps to reference ingredients
+- The reference must match a word in the ingredient list (e.g., `{oil}` matches "2 tbsp olive oil")
 
 Then submit a pull request!
 
@@ -89,10 +92,6 @@ Then submit a pull request!
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Author
-
-James Laffat
 
 ## Acknowledgments
 
