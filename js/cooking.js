@@ -31,6 +31,12 @@ function initializeCookingMode() {
   document.getElementById('exit-btn').addEventListener('click', exitCookingMode);
 }
 
+function updateProgressBar() {
+  const totalSteps = recipe.steps.length;
+  const progress = (currentStep / totalSteps) * 100;
+  document.getElementById('progress-bar').style.width = `${progress}%`;
+}
+
 function renderStep() {
   const totalSteps = recipe.steps.length;
   const prevBtn = document.getElementById('prev-btn');
@@ -38,9 +44,10 @@ function renderStep() {
 
   const step = recipe.steps[currentStep];
 
-  // Update progress
+  // Update progress text and bar
   document.getElementById('step-progress').textContent =
     `Step ${currentStep + 1} of ${totalSteps}`;
+  updateProgressBar();
 
   // Update step content
   const parsedStep = parseStepText(step, recipe.ingredients, currentStep);
@@ -96,8 +103,11 @@ function nextStep() {
     renderStep();
     scrollToTop();
   } else {
-    // Finished cooking
-    exitCookingMode();
+    // Finished cooking - show 100% progress briefly before exiting
+    document.getElementById('progress-bar').style.width = '100%';
+    setTimeout(() => {
+      exitCookingMode();
+    }, 500);
   }
 }
 
