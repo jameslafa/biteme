@@ -151,34 +151,6 @@
   transform: scale(0.95);
 }
 
-/* Empty State */
-.empty-state {
-  text-align: center;
-  padding: var(--spacing-xl);
-  color: var(--text-secondary);
-}
-
-.empty-state-icon {
-  width: 200px;
-  margin: 0 auto var(--spacing-lg);
-}
-
-.empty-state-icon img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.empty-state p {
-  margin-bottom: var(--spacing-sm);
-  font-size: 1.1rem;
-}
-
-.empty-subtitle {
-  font-size: 0.95rem;
-  margin-bottom: var(--spacing-lg);
-}
-
 /* Celebration Overlay */
 .celebration-overlay {
   position: fixed;

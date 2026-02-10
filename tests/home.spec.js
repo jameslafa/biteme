@@ -42,6 +42,19 @@ test.describe('Home Page', () => {
     await expect(page.locator('.recipe-card')).toHaveCount(3);
   });
 
+  test('search with no results shows empty state', async ({ page }) => {
+    const searchInput = page.locator('#search-input');
+
+    await searchInput.fill('pizza');
+    await expect(page.locator('.recipe-card')).toHaveCount(0);
+    await expect(page.locator('.empty-state')).toBeVisible();
+    await expect(page.locator('.empty-state p').first()).toHaveText('No recipes found');
+
+    // Click browse all to clear search
+    await page.locator('#clear-search-btn').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+  });
+
   test('favourite toggle', async ({ page }) => {
     const firstCard = page.locator('.recipe-card').first();
     const heartBtn = firstCard.locator('.favorite-button-small');
@@ -73,7 +86,7 @@ test.describe('Home Page', () => {
   test('empty favourites state', async ({ page }) => {
     await page.locator('#favorites-filter').click();
 
-    await expect(page.locator('.no-results')).toBeVisible();
+    await expect(page.locator('.empty-state')).toBeVisible();
     await expect(page.locator('#browse-all-btn')).toBeVisible();
 
     // Click browse all to go back

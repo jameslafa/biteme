@@ -41,13 +41,13 @@ async function displayRecipes(recipes) {
   if (recipes.length === 0) {
     if (showFavoritesOnly) {
       recipeGrid.innerHTML = `
-        <div class="no-results">
-          <div class="no-results-icon">
+        <div class="empty-state">
+          <div class="empty-state-icon">
             <img src="assets/illustrations/empty_favourite.svg" alt="No favourites yet" />
           </div>
           <p>No favourites yet</p>
-          <p class="no-results-subtitle">Tap the heart on any recipe to save it here.</p>
-          <button class="button" id="browse-all-btn" style="margin-top: var(--spacing-lg);">Browse all recipes</button>
+          <p class="empty-subtitle">Tap the heart on any recipe to save it here.</p>
+          <button class="button" id="browse-all-btn">Browse all recipes</button>
         </div>
       `;
       document.getElementById('browse-all-btn').addEventListener('click', () => {
@@ -59,7 +59,20 @@ async function displayRecipes(recipes) {
         loadRecipes();
       });
     } else {
-      recipeGrid.innerHTML = '<p class="no-results">No recipes found. Try a different search.</p>';
+      recipeGrid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <img src="assets/illustrations/empty.svg" alt="No recipes found" />
+          </div>
+          <p>No recipes found</p>
+          <p class="empty-subtitle">Try a different search or browse all recipes.</p>
+          <button class="button" id="clear-search-btn">Browse all recipes</button>
+        </div>
+      `;
+      document.getElementById('clear-search-btn').addEventListener('click', () => {
+        document.getElementById('search-input').value = '';
+        loadRecipes();
+      });
     }
     return;
   }
