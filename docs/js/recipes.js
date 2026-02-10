@@ -1,21 +1,57 @@
 // Cache for loaded recipes
 let recipesCache = null;
 
-// Load recipes from JSON file
+// Load recipes from JSON file with manifest-based caching
 async function loadRecipesData() {
   if (recipesCache) {
     return recipesCache;
   }
 
   try {
-    const response = await fetch('recipes.json');
-    if (!response.ok) {
-      throw new Error(`Failed to load recipes: ${response.status}`);
+    // Try to fetch manifest to check version
+    const manifestResponse = await fetch('recipes-manifest.json');
+
+    if (manifestResponse.ok) {
+      const manifest = await manifestResponse.json();
+      const cachedManifest = localStorage.getItem('recipes-manifest');
+      const cachedRecipes = localStorage.getItem('recipes-cache');
+
+      // If we have cached data and version matches, use cache
+      if (cachedManifest && cachedRecipes) {
+        const cached = JSON.parse(cachedManifest);
+        if (cached.version === manifest.version) {
+          console.log('[Recipes] Using cached recipes (version match)');
+          recipesCache = JSON.parse(cachedRecipes);
+          return recipesCache;
+        }
+      }
+
+      // Version mismatch or no cache - fetch fresh recipes
+      console.log('[Recipes] Fetching fresh recipes (new version)');
+      const response = await fetch('recipes.json');
+      if (!response.ok) {
+        throw new Error(`Failed to load recipes: ${response.status}`);
+      }
+      recipesCache = await response.json();
+
+      // Update cache
+      localStorage.setItem('recipes-manifest', JSON.stringify(manifest));
+      localStorage.setItem('recipes-cache', JSON.stringify(recipesCache));
+
+      return recipesCache;
     }
-    recipesCache = await response.json();
-    return recipesCache;
   } catch (error) {
-    console.error('Error loading recipes:', error);
+    // Network error - try to use cached data
+    console.log('[Recipes] Network error, trying cache:', error.message);
+    const cachedRecipes = localStorage.getItem('recipes-cache');
+    if (cachedRecipes) {
+      console.log('[Recipes] Using cached recipes (offline)');
+      recipesCache = JSON.parse(cachedRecipes);
+      return recipesCache;
+    }
+
+    // No cache available
+    console.error('[Recipes] No cached data available');
     return [];
   }
 }
