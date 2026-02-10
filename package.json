@@ -7,7 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "test-parser": "~/.cargo/bin/cargo test --manifest-path recipe-parser/Cargo.toml",
+    "parse-recipes": "~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release",
+    "lint-recipes": "~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release -- --lint"
   },
   "repository": {
     "type": "git",

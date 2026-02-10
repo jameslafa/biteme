@@ -1,0 +1,237 @@
+[
+  {
+    "id": "pumpkin-potato-curry",
+    "name": "Creamy Pumpkin & Potato Curry",
+    "description": "Warming vegan curry perfect for batch cooking and meal prep",
+    "servings": 4,
+    "time": 40,
+    "difficulty": "easy",
+    "tags": [
+      "vegan",
+      "curry",
+      "dinner",
+      "batch-cooking",
+      "comfort-food"
+    ],
+    "notes": "If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2. A handful of spinach stirred in at the end is a nice addition. Keeps well in the fridge for 3–4 days and actually tastes even better the next day!",
+    "ingredients": {
+      "Fresh Produce": [
+        {
+          "id": 1,
+          "text": "500g pumpkin, peeled and cubed"
+        },
+        {
+          "id": 2,
+          "text": "500g floury potatoes, peeled and cubed"
+        },
+        {
+          "id": 3,
+          "text": "1 onion, diced"
+        },
+        {
+          "id": 4,
+          "text": "2 cloves garlic, minced"
+        },
+        {
+          "id": 5,
+          "text": "Thumb-sized piece of ginger, grated"
+        },
+        {
+          "id": 6,
+          "text": "Fresh coriander to serve"
+        },
+        {
+          "id": 7,
+          "text": "Lime to serve"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 9,
+          "text": "200ml vegetable stock"
+        },
+        {
+          "id": 10,
+          "text": "2 tbsp curry paste (red or yellow)"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 11,
+          "text": "1 tsp ground cumin"
+        },
+        {
+          "id": 12,
+          "text": "1 tsp ground turmeric"
+        },
+        {
+          "id": 13,
+          "text": "Salt and pepper to taste"
+        }
+      ],
+      "Refrigerated Items": [
+        {
+          "id": 8,
+          "text": "1 tin (400ml) coconut milk"
+        }
+      ],
+      "Oils & Condiments": [
+        {
+          "id": 14,
+          "text": "1 tbsp vegetable oil"
+        }
+      ]
+    },
+    "steps": [
+      "Heat oil in a large pot over medium heat. Add onion and cook for about 5 minutes until soft.",
+      "Add garlic, ginger, curry paste, cumin, and turmeric. Stir and cook for another minute until fragrant.",
+      "Add pumpkin and potato cubes and stir everything together so they're coated in the spices.",
+      "Pour in coconut milk and vegetable stock. Give it a good stir and bring to a gentle boil.",
+      "Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the pumpkin and potatoes are tender. The floury potatoes will start to break down and thicken the sauce beautifully.",
+      "Season with salt and pepper, then serve over rice (or with naan) topped with fresh coriander and a squeeze of lime."
+    ],
+    "serving_suggestions": "Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime. Great for meal prep – portion into containers for easy weeknight dinners throughout the week."
+  },
+  {
+    "id": "creamy-hummus",
+    "name": "Silky Smooth Hummus",
+    "description": "Silky smooth hummus with the perfect creamy texture",
+    "servings": 6,
+    "time": 90,
+    "difficulty": "medium",
+    "tags": [
+      "vegan",
+      "middle-eastern",
+      "spread",
+      "snack",
+      "dip"
+    ],
+    "notes": "Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not optional! The cold shock against the warm chickpeas aerates the hummus beautifully. Don't add olive oil to the base mixture. The tahini has plenty of fat. Olive oil goes on top when serving. The hummus keeps well in the fridge for up to 3 days.",
+    "ingredients": {
+      "Oils & Condiments": [
+        {
+          "id": 9,
+          "text": "Good quality olive oil (for serving)"
+        },
+        {
+          "id": 10,
+          "text": "Optional: pinch of cumin, paprika, sumac, or za'atar"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 8,
+          "text": "Salt to taste"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 1,
+          "text": "250g dried chickpeas"
+        },
+        {
+          "id": 2,
+          "text": "1 tsp bicarbonate of soda (for soaking)"
+        },
+        {
+          "id": 3,
+          "text": "1 tsp bicarbonate of soda (for cooking)"
+        },
+        {
+          "id": 4,
+          "text": "120g tahini (or more to taste)"
+        },
+        {
+          "id": 5,
+          "text": "Ice cubes (about 25g)"
+        }
+      ],
+      "Fresh Produce": [
+        {
+          "id": 6,
+          "text": "1 clove garlic, crushed"
+        },
+        {
+          "id": 7,
+          "text": "Juice of 1 lemon"
+        }
+      ]
+    },
+    "steps": [
+      "Soak chickpeas overnight in plenty of water with 1 teaspoon of bicarbonate of soda.",
+      "Drain and rinse the chickpeas. Place them in a pan with the second teaspoon of bicarbonate of soda and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+      "Drain chickpeas over a bowl, saving the cooking water.",
+      "While the chickpeas are still warm, put them into a food processor with tahini, garlic, lemon juice, ice cubes, 2 tablespoons of the reserved chickpea water, and a good pinch of salt.",
+      "Blitz until smooth, then taste and adjust. You might need more tahini, garlic, lemon, salt, or chickpea water. Don't be shy about adding more tahini. Blitz for a few minutes at least until it's really smooth and creamy.",
+      "Transfer to a bowl, cover the surface with cling film, and let it rest for at least 30 minutes.",
+      "Serve drizzled with good olive oil and a squeeze of lemon."
+    ],
+    "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter."
+  },
+  {
+    "id": "classic-british-scones",
+    "name": "Classic British Scones",
+    "description": "Light and fluffy vegan scones perfect for afternoon tea",
+    "servings": 10,
+    "time": 30,
+    "difficulty": "easy",
+    "tags": [
+      "vegan",
+      "baking",
+      "british",
+      "breakfast",
+      "snack"
+    ],
+    "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
+    "ingredients": {
+      "Oils & Condiments": [
+        {
+          "id": 5,
+          "text": "55g plant-based block margarine, cold"
+        }
+      ],
+      "Baking & Grains": [
+        {
+          "id": 1,
+          "text": "225g plain flour (Type 405)"
+        },
+        {
+          "id": 2,
+          "text": "3 tsp baking powder"
+        },
+        {
+          "id": 3,
+          "text": "25g caster sugar"
+        }
+      ],
+      "Refrigerated Items": [
+        {
+          "id": 6,
+          "text": "150ml plant milk (oat or soy work best)"
+        },
+        {
+          "id": 7,
+          "text": "A little extra plant milk for glazing"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 4,
+          "text": "Pinch of salt"
+        }
+      ]
+    },
+    "steps": [
+      "Preheat the oven to 220°C / 200°C fan / Gas 7 and lightly grease a large baking tray.",
+      "Whisk together flour, baking powder, and salt so the raising agent is evenly distributed.",
+      "Using your fingertips, rub the cold margarine into the flour until the mixture resembles fine breadcrumbs.",
+      "Stir in sugar. Add most of the plant milk and mix to form a soft and slightly sticky dough. If it's a little dry, add more milk until you get the right consistency.",
+      "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick.",
+      "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up.",
+      "Brush the tops with a little plant milk.",
+      "Bake for 12-15 minutes until well risen and golden.",
+      "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
+    ],
+    "serving_suggestions": "Serve warm with jam and vegan butter. For a traditional cream tea, add vegan whipped cream. Try adding dried fruit or a pinch of cinnamon to the dough for a twist."
+  }
+]
