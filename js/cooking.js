@@ -103,16 +103,20 @@ function nextStep() {
     renderStep();
     scrollToTop();
   } else {
-    // Finished cooking - show 100% progress briefly before exiting
+    // Finished cooking - show 100% progress briefly before going to completion page
     document.getElementById('progress-bar').style.width = '100%';
     setTimeout(() => {
-      exitCookingMode();
+      finishCookingMode();
     }, 500);
   }
 }
 
 function exitCookingMode() {
   window.location.href = `recipe.html?id=${recipe.id}`;
+}
+
+function finishCookingMode() {
+  window.location.href = `completion.html?id=${recipe.id}`;
 }
 
 function scrollToTop() {

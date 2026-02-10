@@ -66,9 +66,26 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Send browser notifications/audio alerts when time is up
 - **To explore**: Browser notification permissions, audio alerts, mobile vibration
 
-### [ ] Completion Animation
-- Show celebration/completion animation when recipe is finished
-- Confetti, checkmark, something fun and rewarding
+### [ ] Cooking Time Tracking
+- Track how long user takes to complete a recipe
+- Start timer when entering cooking mode
+- Display total time on completion page
+- Store history in IndexedDB for personal reference
+
+### [ ] Post-Cooking Complexity Rating
+- After finishing a recipe, ask user to rate complexity
+- Simple scale: Easy / Medium / Hard
+- Store in IndexedDB with cooking notes
+- Helps users remember which recipes are quick vs involved
+- Could display personal complexity rating on recipe cards
+
+### [x] Completion Page with Animation
+- Dedicated completion page after finishing cooking
+- "Bon appétit!" message with illustration from unDraw
+- Bounce-in animation on page load
+- Two buttons: return to recipe or browse more recipes
+- Clean, celebratory design matching site aesthetic
+- Future: Add notes, ratings, complexity feedback on this page
 
 ### [x] Progress Bar for Cooking Steps
 - Visual indicator showing how far through the recipe you are
@@ -76,6 +93,15 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Smooth animation on step transitions
 - Progress: 0% at step 1, fills incrementally, 100% on finish
 - Adds polish and sense of accomplishment to cooking mode
+
+## Site Information & Credits
+
+### [ ] Credits/Acknowledgments Page
+- Create a dedicated page to acknowledge tools and resources
+- Thank unDraw (https://undraw.co/) for beautiful free illustrations
+- Credit any other open-source tools or resources used
+- Accessible from footer or about section
+- Simple, elegant design matching site aesthetic
 
 ## UX Improvements
 
