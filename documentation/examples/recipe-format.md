@@ -25,13 +25,10 @@ tags: [vegan, dinner]    # Array of tags for filtering
 
 #### `# Ingredients`
 Ingredients grouped by category (H2 headings). Categories must match the predefined list:
-- Fresh Produce
-- Refrigerated Items
-- Pantry
+- Fresh
+- Fridge
 - Spices
-- Oils & Condiments
-- Frozen
-- Baking & Grains
+- Pantry
 
 Format: Simple bullet points with plain text
 
@@ -65,23 +62,19 @@ Make sure to rinse the lentils thoroughly to remove any debris. Red lentils cook
 
 # Ingredients
 
-## Fresh Produce
+## Fresh
 - 1 onion, diced
 - 2 cloves garlic, minced
 - Fresh cilantro for garnish
 
-## Refrigerated Items
-- 1 can (400ml) coconut milk
-
-## Pantry
-- 1 cup red lentils, rinsed
-- 2 cups vegetable broth
-- 2 tbsp curry paste
-
 ## Spices
 - Salt to taste
 
-## Oils & Condiments
+## Pantry
+- 1 can (400ml) coconut milk
+- 1 cup red lentils, rinsed
+- 2 cups vegetable broth
+- 2 tbsp curry paste
 - 1 tbsp oil
 
 # Instructions
@@ -117,23 +110,19 @@ The Rust parser will:
   "tags": ["vegan", "dinner", "quick", "curry", "indian"],
   "notes": "Make sure to rinse the lentils...",
   "ingredients": {
-    "Fresh Produce": [
+    "Fresh": [
       {"id": 1, "text": "1 onion, diced"},
       {"id": 2, "text": "2 cloves garlic, minced"},
       {"id": 3, "text": "Fresh cilantro for garnish"}
     ],
-    "Refrigerated Items": [
-      {"id": 4, "text": "1 can (400ml) coconut milk"}
+    "Spices": [
+      {"id": 4, "text": "Salt to taste"}
     ],
     "Pantry": [
-      {"id": 5, "text": "1 cup red lentils, rinsed"},
-      {"id": 6, "text": "2 cups vegetable broth"},
-      {"id": 7, "text": "2 tbsp curry paste"}
-    ],
-    "Spices": [
-      {"id": 8, "text": "Salt to taste"}
-    ],
-    "Oils & Condiments": [
+      {"id": 5, "text": "1 can (400ml) coconut milk"},
+      {"id": 6, "text": "1 cup red lentils, rinsed"},
+      {"id": 7, "text": "2 cups vegetable broth"},
+      {"id": 8, "text": "2 tbsp curry paste"},
       {"id": 9, "text": "1 tbsp oil"}
     ]
   },

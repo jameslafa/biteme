@@ -49,7 +49,7 @@ name: Pad Thai
 ```javascript
 {
   "ingredients": {
-    "Fresh Produce": [
+    "Fresh": [
       { "id": 1, "text": "2 tomatoes, diced" },
       { "id": 2, "text": "1 onion, diced" }
     ],

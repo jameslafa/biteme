@@ -15,6 +15,24 @@
     ],
     "notes": "If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2. A handful of spinach stirred in at the end is a nice addition. Keeps well in the fridge for 3–4 days and actually tastes even better the next day!",
     "ingredients": {
+      "Pantry": [
+        {
+          "id": 11,
+          "text": "1 tin (400ml) coconut milk"
+        },
+        {
+          "id": 12,
+          "text": "200ml vegetable stock"
+        },
+        {
+          "id": 13,
+          "text": "1 tbsp vegetable oil"
+        },
+        {
+          "id": 14,
+          "text": "2 tbsp curry paste (red or yellow)"
+        }
+      ],
       "Fresh": [
         {
           "id": 1,
@@ -58,24 +76,6 @@
           "id": 10,
           "text": "Salt and pepper to taste"
         }
-      ],
-      "Pantry": [
-        {
-          "id": 11,
-          "text": "1 tin (400ml) coconut milk"
-        },
-        {
-          "id": 12,
-          "text": "200ml vegetable stock"
-        },
-        {
-          "id": 13,
-          "text": "1 tbsp vegetable oil"
-        },
-        {
-          "id": 14,
-          "text": "2 tbsp curry paste (red or yellow)"
-        }
       ]
     },
     "steps": [
@@ -104,22 +104,6 @@
     ],
     "notes": "Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not optional! The cold shock against the warm chickpeas aerates the hummus beautifully. Don't add olive oil to the base mixture. The tahini has plenty of fat. Olive oil goes on top when serving. The hummus keeps well in the fridge for up to 3 days.",
     "ingredients": {
-      "Spices": [
-        {
-          "id": 4,
-          "text": "Salt to taste"
-        },
-        {
-          "id": 5,
-          "text": "Optional: pinch of cumin, paprika, sumac, or za'atar"
-        }
-      ],
-      "Fridge": [
-        {
-          "id": 3,
-          "text": "Ice cubes (about 25g)"
-        }
-      ],
       "Pantry": [
         {
           "id": 6,
@@ -140,6 +124,22 @@
         {
           "id": 10,
           "text": "Good quality olive oil (for serving)"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 4,
+          "text": "Salt to taste"
+        },
+        {
+          "id": 5,
+          "text": "Optional: pinch of cumin, paprika, sumac, or za'atar"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 3,
+          "text": "Ice cubes (about 25g)"
         }
       ],
       "Fresh": [
@@ -180,20 +180,6 @@
     ],
     "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
     "ingredients": {
-      "Pantry": [
-        {
-          "id": 5,
-          "text": "225g plain flour (Type 405)"
-        },
-        {
-          "id": 6,
-          "text": "3 tsp baking powder"
-        },
-        {
-          "id": 7,
-          "text": "25g caster sugar"
-        }
-      ],
       "Fridge": [
         {
           "id": 1,
@@ -206,6 +192,20 @@
         {
           "id": 3,
           "text": "A little extra plant milk for glazing"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "225g plain flour (Type 405)"
+        },
+        {
+          "id": 6,
+          "text": "3 tsp baking powder"
+        },
+        {
+          "id": 7,
+          "text": "25g caster sugar"
         }
       ],
       "Spices": [

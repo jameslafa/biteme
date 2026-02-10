@@ -15,8 +15,16 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 - 🛒 **Shopping list builder** - Add ingredients and check them off as you shop
 - ⭐ **Save favorites** - Keep your go-to recipes at your fingertips
 - 🔒 **Privacy-first** - No accounts, no tracking, everything stored locally
-- 📴 **Works offline** - Access your recipes anywhere
-- 🆓 **Free forever** - Open source with no ads
+- 🤝 **Community-driven** - Open source project where anyone can contribute recipes or improve the app
+- 🆓 **Free forever** - No ads, no paywalls, no premium tiers
+
+## Why I Built This
+
+I haven't found a cooking app I truly enjoyed using. Most are cluttered with ads, tracking, paywalls, or endless content you don't need. I wanted something different—a community-driven, open-source recipe app that's private, safe, and focused on what matters: cooking great food.
+
+Simple features like checking off ingredients, building a shopping list, and having a distraction-free focus mode while cooking make all the difference. BiteMe is built for people who want a clean, functional tool without the noise.
+
+**Want to contribute?** Share your favorite recipes by opening a pull request. Help make this the recipe app we all wish existed.
 
 ## Technology Stack
 
@@ -52,7 +60,9 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 E2E regression tests are built with [Playwright](https://playwright.dev/):
 
 ```bash
-npm test                          # Run all tests
+npm run test:all                  # Run all tests (parser + Playwright)
+npm test                          # Run Playwright tests only
+npm run test-parser               # Run parser tests only
 npx playwright test --ui          # Visual test runner
 npx playwright test tests/home    # Run a specific file
 ```
@@ -66,7 +76,7 @@ Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) 
 - Recipe format and guidelines
 - Code contributions
 
-See our [Roadmap](docs/ROADMAP.md) for planned features and ideas.
+See our [Roadmap](documentation/ROADMAP.md) for planned features and ideas.
 
 ### Quick Start for Contributors
 
@@ -83,9 +93,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Documentation
 
 - [Contributing Guide](CONTRIBUTING.md) - How to add recipes and contribute
-- [Roadmap](docs/ROADMAP.md) - Planned features and ideas
-- [Architecture](docs/ARCHITECTURE.md) - Technical decisions
-- [Data Structure](docs/DATA_STRUCTURE.md) - Database schemas
+- [Roadmap](documentation/ROADMAP.md) - Planned features and ideas
+- [Architecture](documentation/ARCHITECTURE.md) - Technical decisions
+- [Data Structure](documentation/DATA_STRUCTURE.md) - Database schemas
 
 ## Acknowledgments
 

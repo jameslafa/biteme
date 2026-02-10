@@ -26,11 +26,11 @@ tags: [thai, curry, dinner]
 
 ## Ingredients
 
-### Fresh Produce
+### Fresh
 - 2 bell peppers, sliced
 - 1 onion, diced
 
-### Spices & Seasonings
+### Spices
 - 2 tbsp green curry paste
 - 1 tsp salt
 
@@ -69,12 +69,10 @@ tags: [thai, curry, dinner]
 
 Group ingredients by kitchen location for better organization:
 
-- Fresh Produce
-- Refrigerated Items
-- Pantry Staples
-- Spices & Seasonings
-- Frozen Items
-- Baking & Grains
+- Fresh
+- Fridge
+- Spices
+- Pantry
 
 ## Automated Validation
 

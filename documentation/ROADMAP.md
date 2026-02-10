@@ -24,11 +24,11 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Could use git commit hash, timestamp, or incremental version number
 - Consider manifest file approach: check small manifest first, only fetch full JSON if version changed
 
-### [ ] Better Ingredient Categorization System
-- **Problem**: Current system uses hardcoded strings like "Fresh Produce", "Refrigerated Items"
-- Prone to typos and inconsistency across many MD files
-- Need a better system (taxonomy file, ingredient database, or tags)
-- **To explore**: What's the best approach for maintainability and scaling?
+### [x] Better Ingredient Categorization System
+- **Solution**: Simplified from 7 categories to 4 clear categories
+- New categories: Fresh, Fridge, Spices, Pantry
+- Validated by Rust parser to prevent typos and inconsistency
+- Simple, maintainable system that scales well
 
 ## User Features
 
