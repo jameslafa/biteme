@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "dev": "http-server docs -p 8080 -c-1",
     "test": "playwright test",
     "test-parser": "~/.cargo/bin/cargo test --manifest-path recipe-parser/Cargo.toml",
     "test:all": "npm run test-parser && npm test",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/jameslafa/biteme#readme",
   "devDependencies": {
-    "@playwright/test": "^1.58.2"
+    "@playwright/test": "^1.58.2",
+    "http-server": "^14.1.1"
   }
 }

@@ -49,12 +49,12 @@ Simple features like checking off ingredients, building a shopping list, and hav
    npx playwright install chromium
    ```
 
-3. Start a local server:
+3. Start the development server:
    ```bash
-   python -m http.server 8000
+   npm run dev
    ```
 
-4. Open your browser to `http://localhost:8000`
+4. Open your browser to `http://localhost:8080`
 
 ## Testing
 
