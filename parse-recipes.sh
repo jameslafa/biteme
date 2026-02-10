@@ -5,4 +5,4 @@ echo "🔍 Parsing recipes..."
 ~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release
 
 echo ""
-echo "✅ Done! Check recipes.json"
+echo "✅ Done! Check docs/recipes.json"

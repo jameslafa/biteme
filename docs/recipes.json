@@ -15,6 +15,12 @@
     ],
     "notes": "If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2. A handful of spinach stirred in at the end is a nice addition. Keeps well in the fridge for 3–4 days and actually tastes even better the next day!",
     "ingredients": {
+      "Refrigerated Items": [
+        {
+          "id": 8,
+          "text": "1 tin (400ml) coconut milk"
+        }
+      ],
       "Fresh Produce": [
         {
           "id": 1,
@@ -45,16 +51,6 @@
           "text": "Lime to serve"
         }
       ],
-      "Pantry": [
-        {
-          "id": 9,
-          "text": "200ml vegetable stock"
-        },
-        {
-          "id": 10,
-          "text": "2 tbsp curry paste (red or yellow)"
-        }
-      ],
       "Spices": [
         {
           "id": 11,
@@ -69,10 +65,14 @@
           "text": "Salt and pepper to taste"
         }
       ],
-      "Refrigerated Items": [
+      "Pantry": [
         {
-          "id": 8,
-          "text": "1 tin (400ml) coconut milk"
+          "id": 9,
+          "text": "200ml vegetable stock"
+        },
+        {
+          "id": 10,
+          "text": "2 tbsp curry paste (red or yellow)"
         }
       ],
       "Oils & Condiments": [
@@ -118,6 +118,16 @@
           "text": "Optional: pinch of cumin, paprika, sumac, or za'atar"
         }
       ],
+      "Fresh Produce": [
+        {
+          "id": 6,
+          "text": "1 clove garlic, crushed"
+        },
+        {
+          "id": 7,
+          "text": "Juice of 1 lemon"
+        }
+      ],
       "Spices": [
         {
           "id": 8,
@@ -144,16 +154,6 @@
         {
           "id": 5,
           "text": "Ice cubes (about 25g)"
-        }
-      ],
-      "Fresh Produce": [
-        {
-          "id": 6,
-          "text": "1 clove garlic, crushed"
-        },
-        {
-          "id": 7,
-          "text": "Juice of 1 lemon"
         }
       ]
     },
@@ -184,12 +184,6 @@
     ],
     "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
     "ingredients": {
-      "Oils & Condiments": [
-        {
-          "id": 5,
-          "text": "55g plant-based block margarine, cold"
-        }
-      ],
       "Baking & Grains": [
         {
           "id": 1,
@@ -204,6 +198,18 @@
           "text": "25g caster sugar"
         }
       ],
+      "Oils & Condiments": [
+        {
+          "id": 5,
+          "text": "55g plant-based block margarine, cold"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 4,
+          "text": "Pinch of salt"
+        }
+      ],
       "Refrigerated Items": [
         {
           "id": 6,
@@ -212,12 +218,6 @@
         {
           "id": 7,
           "text": "A little extra plant milk for glazing"
-        }
-      ],
-      "Spices": [
-        {
-          "id": 4,
-          "text": "Pinch of salt"
         }
       ]
     },

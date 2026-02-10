@@ -15,7 +15,7 @@ struct Cli {
     input: PathBuf,
 
     /// Output JSON file path
-    #[arg(short, long, default_value = "recipes.json")]
+    #[arg(short, long, default_value = "docs/recipes.json")]
     output: PathBuf,
 
     /// Enable strict linting mode

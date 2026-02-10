@@ -5,15 +5,15 @@ module.exports = defineConfig({
   timeout: 15000,
   retries: 0,
   use: {
-    baseURL: 'http://localhost:8080',
+    baseURL: 'http://localhost:8081',
     headless: true,
   },
   projects: [
     { name: 'chromium', use: { browserName: 'chromium' } },
   ],
   webServer: {
-    command: 'python3 -m http.server 8080',
-    port: 8080,
+    command: 'npx http-server docs -p 8081 -c-1',
+    port: 8081,
     reuseExistingServer: !process.env.CI,
   },
 });
