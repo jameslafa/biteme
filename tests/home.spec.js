@@ -1,0 +1,103 @@
+const { test, expect } = require('@playwright/test');
+
+async function clearAppState(page) {
+  await page.evaluate(() => {
+    localStorage.clear();
+    // Close any open DB connection from the app
+    if (typeof db !== 'undefined' && db) db.close();
+    return new Promise((resolve) => {
+      const req = indexedDB.deleteDatabase('biteme_db');
+      req.onsuccess = resolve;
+      req.onerror = resolve;
+      req.onblocked = resolve;
+    });
+  });
+}
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('/');
+  await clearAppState(page);
+  await page.goto('/');
+});
+
+test.describe('Home Page', () => {
+  test('displays all recipes', async ({ page }) => {
+    const cards = page.locator('.recipe-card');
+    await expect(cards).toHaveCount(3);
+
+    await expect(cards.nth(0).locator('.recipe-title')).toHaveText('Simple Lentil Curry');
+    await expect(cards.nth(1).locator('.recipe-title')).toHaveText('Overnight Oats');
+    await expect(cards.nth(2).locator('.recipe-title')).toHaveText('Classic Hummus');
+  });
+
+  test('search filters recipes', async ({ page }) => {
+    const searchInput = page.locator('#search-input');
+
+    await searchInput.fill('lentil');
+    const cards = page.locator('.recipe-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first().locator('.recipe-title')).toHaveText('Simple Lentil Curry');
+
+    await searchInput.clear();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+  });
+
+  test('favourite toggle', async ({ page }) => {
+    const firstCard = page.locator('.recipe-card').first();
+    const heartBtn = firstCard.locator('.favorite-button-small');
+
+    await expect(heartBtn).not.toHaveClass(/favorited/);
+    await heartBtn.click();
+    await expect(heartBtn).toHaveClass(/favorited/);
+    await heartBtn.click();
+    await expect(heartBtn).not.toHaveClass(/favorited/);
+  });
+
+  test('favourites filter shows only favourited recipes', async ({ page }) => {
+    // Favourite the first recipe
+    const firstHeart = page.locator('.recipe-card').first().locator('.favorite-button-small');
+    await firstHeart.click();
+    await expect(firstHeart).toHaveClass(/favorited/);
+
+    // Toggle favourites filter
+    await page.locator('#favorites-filter').click();
+    const cards = page.locator('.recipe-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first().locator('.recipe-title')).toHaveText('Simple Lentil Curry');
+
+    // Toggle off
+    await page.locator('#favorites-filter').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+  });
+
+  test('empty favourites state', async ({ page }) => {
+    await page.locator('#favorites-filter').click();
+
+    await expect(page.locator('.no-results')).toBeVisible();
+    await expect(page.locator('#browse-all-btn')).toBeVisible();
+
+    // Click browse all to go back
+    await page.locator('#browse-all-btn').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+  });
+
+  test('navigate to recipe', async ({ page }) => {
+    await page.locator('.recipe-card').first().click();
+    await expect(page).toHaveURL(/recipe\.html\?id=simple-lentil-curry/);
+  });
+
+  test('cart badge updates', async ({ page }) => {
+    const badge = page.locator('#cart-count');
+    await expect(badge).toBeHidden();
+
+    // Go to a recipe and add an ingredient to shopping list
+    await page.goto('/recipe.html?id=simple-lentil-curry');
+    await page.locator('.add-to-cart').first().click();
+    await expect(page.locator('.add-to-cart').first()).toHaveClass(/in-cart/);
+
+    // Go back home and check badge
+    await page.goto('/');
+    await expect(badge).toBeVisible();
+    await expect(badge).toHaveText('1');
+  });
+});

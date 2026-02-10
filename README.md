@@ -34,12 +34,30 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
    cd biteme
    ```
 
-2. Start a local server:
+2. Install dependencies:
+   ```bash
+   npm install
+   npx playwright install chromium
+   ```
+
+3. Start a local server:
    ```bash
    python -m http.server 8000
    ```
 
-3. Open your browser to `http://localhost:8000`
+4. Open your browser to `http://localhost:8000`
+
+## Testing
+
+E2E regression tests are built with [Playwright](https://playwright.dev/):
+
+```bash
+npm test                          # Run all tests
+npx playwright test --ui          # Visual test runner
+npx playwright test tests/home    # Run a specific file
+```
+
+A pre-push git hook automatically runs tests before every `git push`.
 
 ## Contributing
 

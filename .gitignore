@@ -13,3 +13,10 @@
 # Environment
 .env
 .env.local
+
+# Dependencies
+node_modules/
+
+# Test artifacts
+test-results/
+playwright-report/
