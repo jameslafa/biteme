@@ -47,13 +47,24 @@
   transform: scale(0.95);
 }
 
+.cooking-header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.cooking-recipe-name {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.125rem;
+}
+
 .step-progress {
   font-size: 1rem;
   font-weight: 300;
   color: var(--primary-color);
   letter-spacing: 0.02em;
-  flex: 1;
-  text-align: center;
 }
 
 /* Progress Bar */
@@ -100,10 +111,11 @@
 .step-content {
   width: 100%;
   text-align: left;
+  transition: opacity 0.2s ease;
 }
 
 .step-content p {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   line-height: 1.8;
   color: var(--text-primary);
   font-weight: 300;
@@ -123,6 +135,7 @@
 /* Step ingredients container - separate from step text */
 .step-ingredients-container {
   margin-top: var(--spacing-md);
+  transition: opacity 0.2s ease;
 }
 
 /* Step ingredients in cooking mode - match collection step styling */
@@ -135,7 +148,7 @@
 
 .step-ingredients-cooking h4 {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--primary-color);
   margin-bottom: var(--spacing-sm);
   letter-spacing: 0.02em;
@@ -154,7 +167,7 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-xs) 0;
   border-bottom: 1px solid var(--primary-alpha-20);
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
@@ -177,8 +190,8 @@
 
 .nav-button {
   padding: var(--spacing-md) var(--spacing-lg);
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.1rem;
+  font-weight: 500;
   letter-spacing: 0.02em;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -186,7 +199,7 @@
   color: var(--text-primary);
   cursor: pointer;
   transition: all 0.2s;
-  min-height: 3rem;
+  min-height: 3.5rem;
 }
 
 .nav-button:hover {
@@ -232,17 +245,13 @@
   }
 
   .step-content p {
-    font-size: 1.15rem;
-  }
-
-  .ingredients-section {
-    margin-bottom: var(--spacing-lg);
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 480px) {
   .step-content p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.7;
   }
 
@@ -252,7 +261,8 @@
   }
 
   .nav-button {
-    font-size: 0.95rem;
+    min-height: 3.25rem;
+    font-size: 1rem;
     padding: var(--spacing-sm) var(--spacing-md);
   }
 }
@@ -262,9 +272,5 @@
   .step-container {
     min-height: 150px;
     padding: var(--spacing-md);
-  }
-
-  .ingredients-section {
-    margin-bottom: var(--spacing-md);
   }
 }

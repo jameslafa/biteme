@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   document.title = `Cooking: ${recipe.name}`;
+  document.getElementById('recipe-name').textContent = recipe.name;
   initializeCookingMode();
   renderStep();
 });
@@ -82,16 +83,37 @@ function renderStep() {
   } else {
     nextBtn.textContent = 'Next';
   }
+
+  if (currentStep === 0) {
+    prevBtn.textContent = 'Back to recipe';
+  } else {
+    prevBtn.textContent = 'Previous';
+  }
+}
+
+function transitionStep(callback) {
+  const stepContent = document.getElementById('step-content');
+  const ingredientsContainer = document.getElementById('step-ingredients-container');
+
+  stepContent.style.opacity = '0';
+  ingredientsContainer.style.opacity = '0';
+
+  setTimeout(() => {
+    callback();
+    stepContent.style.opacity = '1';
+    ingredientsContainer.style.opacity = '1';
+  }, 200);
 }
 
 function previousStep() {
   if (currentStep === 0) {
-    // On first step, go back to recipe overview
     exitCookingMode();
   } else {
-    currentStep--;
-    renderStep();
-    scrollToTop();
+    transitionStep(() => {
+      currentStep--;
+      renderStep();
+      scrollToTop();
+    });
   }
 }
 
@@ -99,9 +121,11 @@ function nextStep() {
   const totalSteps = recipe.steps.length;
 
   if (currentStep < totalSteps - 1) {
-    currentStep++;
-    renderStep();
-    scrollToTop();
+    transitionStep(() => {
+      currentStep++;
+      renderStep();
+      scrollToTop();
+    });
   } else {
     // Finished cooking - show 100% progress briefly before going to completion page
     document.getElementById('progress-bar').style.width = '100%';

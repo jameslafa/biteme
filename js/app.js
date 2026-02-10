@@ -39,7 +39,28 @@ async function displayRecipes(recipes) {
   const recipeGrid = document.getElementById('recipe-grid');
 
   if (recipes.length === 0) {
-    recipeGrid.innerHTML = '<p class="no-results">No recipes found. Try a different search.</p>';
+    if (showFavoritesOnly) {
+      recipeGrid.innerHTML = `
+        <div class="no-results">
+          <div class="no-results-icon">
+            <img src="assets/illustrations/empty_favourite.svg" alt="No favourites yet" />
+          </div>
+          <p>No favourites yet</p>
+          <p class="no-results-subtitle">Tap the heart on any recipe to save it here.</p>
+          <button class="button" id="browse-all-btn" style="margin-top: var(--spacing-lg);">Browse all recipes</button>
+        </div>
+      `;
+      document.getElementById('browse-all-btn').addEventListener('click', () => {
+        showFavoritesOnly = false;
+        localStorage.setItem('showFavoritesOnly', false);
+        const filterBtn = document.getElementById('favorites-filter');
+        filterBtn.classList.remove('active');
+        filterBtn.setAttribute('aria-label', 'Show favourites only');
+        loadRecipes();
+      });
+    } else {
+      recipeGrid.innerHTML = '<p class="no-results">No recipes found. Try a different search.</p>';
+    }
     return;
   }
 

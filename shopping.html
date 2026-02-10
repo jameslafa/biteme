@@ -19,7 +19,7 @@
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
       </a>
-      <h1>biteme</h1>
+      <h1 class="logo">bite<span class="logo-accent">me</span></h1>
       <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="9" cy="21" r="1"/>
@@ -34,7 +34,7 @@
   <main>
     <div class="shopping-header">
       <h2>Shopping List</h2>
-      <p class="shopping-subtitle">Items grouped by recipe</p>
+      <p id="shopping-progress" class="shopping-progress"></p>
     </div>
 
     <div id="shopping-list" class="shopping-list">
@@ -42,9 +42,12 @@
     </div>
 
     <div id="empty-state" class="empty-state" style="display: none;">
-      <p>Your shopping list is empty.</p>
+      <div class="empty-state-icon">
+        <img src="assets/illustrations/empty_cart.svg" alt="Empty shopping list" />
+      </div>
+      <p>Your shopping list is empty</p>
       <p class="empty-subtitle">Add ingredients from recipes to build your list.</p>
-      <a href="index.html" class="button">Browse Recipes</a>
+      <a href="index.html" class="button">Browse recipes</a>
     </div>
   </main>
 

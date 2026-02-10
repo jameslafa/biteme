@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  // Update page title
+  // Update page title and recipe name
   document.title = 'Bon appétit! - biteme';
+  document.getElementById('recipe-name').textContent = recipe.name;
 
   // Setup navigation buttons
   document.getElementById('back-to-recipe-btn').addEventListener('click', function() {

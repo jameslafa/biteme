@@ -170,6 +170,10 @@
   flex-shrink: 0;
 }
 
+.add-to-cart:active {
+  transform: scale(0.9);
+}
+
 .add-to-cart.in-cart {
   background-color: var(--accent-light);
   color: var(--primary-color);
@@ -256,6 +260,22 @@
     width: 2rem;
     height: 2rem;
     font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: var(--spacing-md);
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  #recipe-detail {
+    padding-bottom: 5rem;
   }
 }
 

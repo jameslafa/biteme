@@ -56,7 +56,6 @@ async function loadShoppingList() {
     .map(([recipeId, group]) => `
       <div class="recipe-group">
         <div class="recipe-group-header">
-          <span class="recipe-group-icon">📖</span>
           <h3 class="recipe-group-title">${group.recipe_name}</h3>
         </div>
         <ul class="shopping-items">
@@ -85,6 +84,7 @@ async function loadShoppingList() {
 
   // Setup event listeners
   setupEventListeners();
+  updateProgress();
 }
 
 function setupEventListeners() {
@@ -101,12 +101,24 @@ function setupEventListeners() {
         // Update UI
         if (e.target.checked) {
           listItem.classList.add('checked');
+          listItem.style.transform = 'scale(1.02)';
+          setTimeout(() => { listItem.style.transform = ''; }, 150);
         } else {
           listItem.classList.remove('checked');
         }
 
-        // Update cart count
+        // Update cart count and progress
         await updateCartCount();
+        updateProgress();
+
+        // Celebrate when all items are checked
+        if (e.target.checked) {
+          const total = document.querySelectorAll('.shopping-item').length;
+          const checked = document.querySelectorAll('.shopping-item.checked').length;
+          if (checked === total) {
+            showCelebration();
+          }
+        }
       } catch (error) {
         console.error('Error toggling item:', error);
         // Revert checkbox state on error
@@ -136,6 +148,42 @@ function setupEventListeners() {
       }
     });
   });
+}
+
+function updateProgress() {
+  const total = document.querySelectorAll('.shopping-item').length;
+  const checked = document.querySelectorAll('.shopping-item.checked').length;
+  const progressEl = document.getElementById('shopping-progress');
+
+  if (progressEl && total > 0) {
+    progressEl.textContent = `${checked} of ${total} items`;
+  }
+}
+
+function showCelebration() {
+  if (document.querySelector('.celebration-overlay')) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'celebration-overlay';
+  overlay.innerHTML = `
+    <img src="assets/illustrations/celebrate.svg" alt="All done!" />
+    <p>All done!</p>
+  `;
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    overlay.classList.add('visible');
+  });
+
+  overlay.addEventListener('click', () => {
+    overlay.classList.remove('visible');
+    setTimeout(() => overlay.remove(), 400);
+  });
+
+  setTimeout(() => {
+    overlay.classList.remove('visible');
+    setTimeout(() => overlay.remove(), 400);
+  }, 3000);
 }
 
 async function updateCartCount() {

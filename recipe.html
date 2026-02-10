@@ -19,7 +19,7 @@
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
       </a>
-      <h1>biteme</h1>
+      <h1 class="logo">bite<span class="logo-accent">me</span></h1>
       <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="9" cy="21" r="1"/>
@@ -54,7 +54,7 @@
         document.getElementById('recipe-detail').innerHTML = `
           <div class="error">
             <p>Recipe not found.</p>
-            <a href="index.html" class="button">Back to Recipes</a>
+            <a href="index.html" class="button">Back to recipes</a>
           </div>
         `;
         return;
@@ -123,7 +123,7 @@
 
           <div class="action-buttons">
             <button class="button button-primary" onclick="startCooking('${recipe.id}')">
-              Start Cooking
+              Start cooking
             </button>
           </div>
         </article>
