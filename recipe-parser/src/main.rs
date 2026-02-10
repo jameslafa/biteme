@@ -1,7 +1,7 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser as ClapParser;
 use pulldown_cmark::{Event, Parser as MarkdownParser, Tag, TagEnd};
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Serializer};
 use std::collections::HashMap;
 use std::fs;
 use std::path::PathBuf;
@@ -51,19 +51,41 @@ struct Recipe {
     tags: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     notes: Option<String>,
+    #[serde(serialize_with = "serialize_ingredients_ordered")]
     ingredients: HashMap<String, Vec<Ingredient>>,
     steps: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     serving_suggestions: Option<String>,
 }
 
-// Valid ingredient categories
+// Valid ingredient categories (also defines the output order)
 const VALID_CATEGORIES: &[&str] = &[
     "Fresh",
     "Fridge",
-    "Spices",
     "Pantry",
+    "Spices",
 ];
+
+// Custom serializer to maintain category order
+fn serialize_ingredients_ordered<S>(
+    ingredients: &HashMap<String, Vec<Ingredient>>,
+    serializer: S,
+) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    use serde::ser::SerializeMap;
+    let mut map = serializer.serialize_map(Some(ingredients.len()))?;
+
+    // Serialize in VALID_CATEGORIES order
+    for &category in VALID_CATEGORIES {
+        if let Some(items) = ingredients.get(category) {
+            map.serialize_entry(category, items)?;
+        }
+    }
+
+    map.end()
+}
 
 fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
     let content = fs::read_to_string(path)
@@ -882,6 +904,61 @@ tags: [test]
         assert!(recipe.ingredients.contains_key("Fresh"));
         assert!(recipe.ingredients.contains_key("Pantry"));
         assert!(recipe.ingredients.contains_key("Spices"));
+    }
+
+    #[test]
+    fn test_ingredient_category_order() {
+        // Test that categories are always output in VALID_CATEGORIES order
+        // regardless of their order in the markdown file
+        let test_recipe = r#"---
+id: order-test
+name: Category Order Test
+description: Test category ordering
+servings: 2
+time: 10
+difficulty: easy
+tags: [test]
+---
+
+# Ingredients
+
+## Spices
+- 1 tsp salt
+
+## Fresh
+- 1 onion
+
+## Pantry
+- 1 cup rice
+
+## Fridge
+- 1 cup milk
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("order-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+
+        // Serialize to JSON to check order
+        let json = serde_json::to_string(&recipe).unwrap();
+        let value: serde_json::Value = serde_json::from_str(&json).unwrap();
+
+        // Get the keys in order they appear in JSON
+        let ingredients = value["ingredients"].as_object().unwrap();
+        let keys: Vec<&str> = ingredients.keys().map(|s| s.as_str()).collect();
+
+        // Should be in VALID_CATEGORIES order: Fresh, Fridge, Pantry, Spices
+        assert_eq!(keys, vec!["Fresh", "Fridge", "Pantry", "Spices"]);
     }
 
     #[test]
