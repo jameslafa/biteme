@@ -32,10 +32,12 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 
 ## User Features
 
-### [ ] Favorites System
-- Let users mark recipes as favorites
-- Store in browser IndexedDB (no backend needed)
-- Persist across sessions
+### [x] Favorites System
+- Mark recipes as favorites with heart icon
+- Store in IndexedDB (local, no backend)
+- Filter view to show only favorites
+- Filter state persists across sessions
+- Works on recipe cards and recipe detail page
 
 ### [ ] My Pantry/Spices Inventory
 - Users can store a list of ingredients/spices they have at home

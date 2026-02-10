@@ -23,6 +23,7 @@
     <!-- Recipe will be loaded here by JavaScript -->
   </main>
 
+  <script src="js/db.js"></script>
   <script src="js/recipes.js"></script>
   <script>
     // Load recipe detail
@@ -51,8 +52,17 @@
       document.title = `${recipe.name} - biteme`;
       document.getElementById('recipe-detail').innerHTML = `
         <article class="recipe">
-          <h2 class="recipe-name">${recipe.name}</h2>
-          <p class="recipe-description">${recipe.description}</p>
+          <div class="recipe-header">
+            <div>
+              <h2 class="recipe-name">${recipe.name}</h2>
+              <p class="recipe-description">${recipe.description}</p>
+            </div>
+            <button id="favorite-btn" class="favorite-button" aria-label="Add to favorites">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </button>
+          </div>
 
           <div class="recipe-tags">
             ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
@@ -95,7 +105,37 @@
           </div>
         </article>
       `;
+
+      // Setup favorite button
+      setupFavoriteButton(recipeId);
     });
+
+    async function setupFavoriteButton(recipeId) {
+      await initDB();
+
+      const favoriteBtn = document.getElementById('favorite-btn');
+      const favorited = await isFavorited(recipeId);
+
+      // Update button state
+      updateFavoriteButton(favoriteBtn, favorited);
+
+      // Handle click
+      favoriteBtn.addEventListener('click', async () => {
+        await toggleFavorite(recipeId);
+        const newState = await isFavorited(recipeId);
+        updateFavoriteButton(favoriteBtn, newState);
+      });
+    }
+
+    function updateFavoriteButton(button, favorited) {
+      if (favorited) {
+        button.classList.add('favorited');
+        button.setAttribute('aria-label', 'Remove from favorites');
+      } else {
+        button.classList.remove('favorited');
+        button.setAttribute('aria-label', 'Add to favorites');
+      }
+    }
 
     function startCooking(id) {
       window.location.href = `cooking.html?id=${id}`;

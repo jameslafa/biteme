@@ -116,10 +116,13 @@ main {
 /* Search */
 .search-container {
   margin-bottom: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
 }
 
 #search-input {
-  width: 100%;
+  flex: 1;
   padding: var(--spacing-sm) var(--spacing-md);
   font-size: 0.95rem;
   font-weight: 300;
@@ -140,6 +143,42 @@ main {
   font-weight: 300;
 }
 
+.favorites-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.favorites-filter:hover {
+  background-color: var(--accent-light);
+  border-color: var(--accent-color);
+  color: var(--primary-color);
+}
+
+.favorites-filter.active {
+  background-color: var(--accent-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.favorites-filter.active svg {
+  fill: var(--primary-color);
+}
+
+.favorites-filter svg {
+  flex-shrink: 0;
+}
+
 /* Recipe Grid */
 .recipe-grid {
   display: grid;
@@ -157,6 +196,14 @@ main {
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+}
+
+.recipe-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
 }
 
 .recipe-card:before {
@@ -188,9 +235,44 @@ main {
 .recipe-title {
   font-size: 1.25rem;
   font-weight: 400;
-  margin-bottom: var(--spacing-xs);
+  margin: 0;
   color: var(--text-primary);
   letter-spacing: 0.01em;
+  flex: 1;
+}
+
+.favorite-button-small {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.favorite-button-small:hover {
+  background-color: var(--accent-light);
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.favorite-button-small:active {
+  transform: scale(0.95);
+}
+
+.favorite-button-small.favorited {
+  color: var(--primary-color);
+}
+
+.favorite-button-small.favorited svg {
+  fill: var(--primary-color);
 }
 
 .recipe-description {

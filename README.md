@@ -6,18 +6,22 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 
 **https://jameslafa.github.io/biteme/**
 
-## Features
+## Why BiteMe?
 
-- 📱 Mobile-first elegant design
-- 🥗 Vegetarian and vegan recipes organized by kitchen location
-- 👨‍🍳 Step-by-step cooking mode with ingredient prep
-- 🔗 Smart ingredient references - steps link to ingredient quantities
-- 📋 Ingredient checklist to gather what you need
+- 🌱 **Plant-based focus** - Curated vegetarian and vegan recipes
+- 📱 **Cook-friendly design** - Clean interface that works while your hands are messy
+- 📋 **Smart ingredient prep** - Organized by where items are in your kitchen
+- 👨‍🍳 **Step-by-step guidance** - Track your progress as you cook
+- ⭐ **Save favorites** - Keep your go-to recipes at your fingertips
+- 🔒 **Privacy-first** - No accounts, no tracking, everything stored locally
+- 📴 **Works offline** - Access your recipes anywhere
+- 🆓 **Free forever** - Open source with no ads
 
 ## Technology Stack
 
 - Vanilla JavaScript (no frameworks)
 - HTML5/CSS3 with CSS custom properties
+- IndexedDB for local data storage
 - Mobile-first responsive design
 - GitHub Pages hosting
 
@@ -38,50 +42,14 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 
 ## Contributing
 
-Contributions are welcome! This project is built to be collaborative.
+Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+- Adding new recipes
+- Recipe format and guidelines
+- Code contributions
 
-### Adding Recipes
+See our [Roadmap](docs/ROADMAP.md) for planned features and ideas.
 
-To add a recipe, edit `/js/recipes.js` and add your recipe to the `mockRecipes` array:
-
-```javascript
-{
-  id: 4,
-  name: "Your Recipe Name",
-  description: "Brief description",
-  tags: ["vegan", "dinner", "quick"],
-  ingredients: {
-    "Fresh Produce": [
-      "1 onion, diced",
-      "2 cloves garlic"
-    ],
-    "Refrigerated Items": [],
-    "Pantry/Cupboard": [
-      "1 cup rice"
-    ],
-    "Spices & Dried Herbs": [
-      "Salt to taste"
-    ],
-    "Oils & Condiments": [
-      "2 tbsp olive oil"
-    ]
-  },
-  steps: [
-    "Heat {olive oil} in a pan. Add {onion} and cook until soft.",
-    "Add {garlic} and cook for 1 minute.",
-    "Add {rice} and {salt}. Cook until done."
-  ]
-}
-```
-
-**Key points:**
-- Organize ingredients by kitchen location (Fresh Produce, Refrigerated Items, Pantry/Cupboard, Spices & Dried Herbs, Oils & Condiments)
-- Use `{ingredient}` syntax in steps to reference ingredients
-- The reference must match a word in the ingredient list (e.g., `{oil}` matches "2 tbsp olive oil")
-
-Then submit a pull request!
-
-### Code Contributions
+### Quick Start for Contributors
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -93,6 +61,14 @@ Then submit a pull request!
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## Documentation
+
+- [Contributing Guide](CONTRIBUTING.md) - How to add recipes and contribute
+- [Roadmap](docs/ROADMAP.md) - Planned features and ideas
+- [Architecture](docs/ARCHITECTURE.md) - Technical decisions
+- [Data Structure](docs/DATA_STRUCTURE.md) - Database schemas
+
 ## Acknowledgments
 
-Built with love for plant-based cooking! 🌱
+- Illustrations by [unDraw](https://undraw.co/)
+- Built with love for plant-based cooking! 🌱

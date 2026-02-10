@@ -17,21 +17,13 @@ This document defines the data schemas used in BiteMe for local storage and futu
 **Primary key:** `recipe_id`
 
 **Indexes:**
-- `favorited` - Filter active favorites
-- `updated_at` - Sort by date
-- `synced_at` - Find unsynced items
-- `user_id` - Filter by user (for future multi-user)
+- `created_at` - Sort by date favorited
 
-**Schema:**
+**Current Schema (v1 - Local Only):**
 ```typescript
 {
-  recipe_id: string;        // Primary key (e.g., "thai-green-curry")
-  user_id: string | null;   // null for local, real ID when backend added
-  favorited: boolean;       // true = favorited, false = soft delete
-  created_at: number;       // Unix timestamp (milliseconds)
-  updated_at: number;       // Unix timestamp (milliseconds)
-  synced_at: number | null; // null = never synced, timestamp = last sync
-  device_id: string;        // Unique device identifier
+  recipe_id: string;   // Primary key (e.g., "thai-green-curry")
+  created_at: number;  // Unix timestamp (milliseconds)
 }
 ```
 
@@ -39,12 +31,25 @@ This document defines the data schemas used in BiteMe for local storage and futu
 ```json
 {
   "recipe_id": "pad-thai",
-  "user_id": null,
-  "favorited": true,
-  "created_at": 1707567890123,
-  "updated_at": 1707567890123,
-  "synced_at": null,
-  "device_id": "abc-123-def"
+  "created_at": 1707567890123
+}
+```
+
+**Notes:**
+- Uses hard delete (record removed when unfavorited)
+- Simplified for local-only use
+- Will be extended with sync fields when backend is added (see Future Schema below)
+
+**Future Schema (v2 - With Sync):**
+```typescript
+{
+  recipe_id: string;
+  user_id: string | null;
+  favorited: boolean;       // For soft delete
+  created_at: number;
+  updated_at: number;
+  synced_at: number | null;
+  device_id: string;
 }
 ```
 
@@ -107,43 +112,56 @@ This document defines the data schemas used in BiteMe for local storage and futu
 }
 ```
 
-## Sync Strategy
+## Sync Strategy (Future)
 
-### Finding Unsynced Items
+**Note:** Current implementation uses hard delete for simplicity. Sync strategy will be implemented when backend is added.
+
+### Migration to Sync (v1 → v2)
+
+When backend sync is added:
+1. Bump DB version from 1 to 2
+2. Add new fields to existing records
+3. Switch from hard delete to soft delete
+4. Migration runs automatically on user's device
 
 ```javascript
-// Items that need syncing to backend
+// Migration code (future)
+if (oldVersion < 2) {
+  const store = transaction.objectStore('favorites');
+  store.openCursor().onsuccess = (e) => {
+    const cursor = e.target.result;
+    if (cursor) {
+      const record = cursor.value;
+      record.user_id = null;
+      record.favorited = true;
+      record.updated_at = record.created_at;
+      record.synced_at = null;
+      record.device_id = getDeviceId();
+      cursor.update(record);
+      cursor.continue();
+    }
+  };
+}
+```
+
+### Finding Unsynced Items (Future)
+
+```javascript
 const needsSync = items.filter(item =>
   !item.synced_at || item.updated_at > item.synced_at
 )
 ```
 
-### Conflict Resolution
-
-When syncing, compare timestamps:
+### Conflict Resolution (Future)
 
 ```javascript
 function mergeItem(local, remote) {
-  // Newest wins
   if (remote.updated_at > local.updated_at) {
     return { ...remote, synced_at: Date.now() }
   }
   return local
 }
 ```
-
-### Soft Deletes
-
-Never hard delete - use flags instead:
-
-```javascript
-// Unfavorite (don't delete)
-item.favorited = false
-item.updated_at = Date.now()
-item.synced_at = null  // Mark for sync
-```
-
-This preserves history and allows deletion to sync to backend.
 
 ## Backend Schema (Future)
 

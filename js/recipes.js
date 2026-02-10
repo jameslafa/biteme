@@ -1,7 +1,7 @@
 // Mock recipe data (keep only 3 recipes)
 const mockRecipes = [
   {
-    id: 1,
+    id: "simple-lentil-curry",
     name: "Simple Lentil Curry",
     description: "Quick and flavorful vegan curry perfect for weeknight dinners",
     tags: ["vegan", "dinner", "quick"],
@@ -35,7 +35,7 @@ const mockRecipes = [
     ]
   },
   {
-    id: 2,
+    id: "overnight-oats",
     name: "Overnight Oats",
     description: "Easy no-cook breakfast ready when you wake up",
     tags: ["vegan", "breakfast", "no-cook"],
@@ -68,7 +68,7 @@ const mockRecipes = [
     ]
   },
   {
-    id: 3,
+    id: "classic-hummus",
     name: "Classic Hummus",
     description: "Smooth and creamy homemade hummus",
     tags: ["vegan", "snack", "mediterranean"],
@@ -110,7 +110,7 @@ function getRecipes() {
 
 // Get recipe by ID
 function getRecipeById(id) {
-  return mockRecipes.find(recipe => recipe.id === parseInt(id));
+  return mockRecipes.find(recipe => recipe.id === id);
 }
 
 // Search recipes by name
