@@ -59,13 +59,10 @@ struct Recipe {
 
 // Valid ingredient categories
 const VALID_CATEGORIES: &[&str] = &[
-    "Fresh Produce",
-    "Refrigerated Items",
-    "Pantry",
+    "Fresh",
+    "Fridge",
     "Spices",
-    "Oils & Condiments",
-    "Frozen",
-    "Baking & Grains",
+    "Pantry",
 ];
 
 fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
@@ -858,7 +855,7 @@ tags: [test]
 
 # Ingredients
 
-## Fresh Produce
+## Fresh
 - 1 onion
 
 ## Pantry
@@ -882,7 +879,7 @@ tags: [test]
         assert!(result.is_ok());
         let recipe = result.unwrap();
         assert_eq!(recipe.ingredients.len(), 3);
-        assert!(recipe.ingredients.contains_key("Fresh Produce"));
+        assert!(recipe.ingredients.contains_key("Fresh"));
         assert!(recipe.ingredients.contains_key("Pantry"));
         assert!(recipe.ingredients.contains_key("Spices"));
     }

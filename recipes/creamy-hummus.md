@@ -14,23 +14,23 @@ Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not
 
 # Ingredients
 
+## Fresh
+- 1 clove garlic, crushed
+- Juice of 1 lemon
+
+## Fridge
+- Ice cubes (about 25g)
+
+## Spices
+- Salt to taste
+- Optional: pinch of cumin, paprika, sumac, or za'atar
+
 ## Pantry
 - 250g dried chickpeas
 - 1 tsp bicarbonate of soda (for soaking)
 - 1 tsp bicarbonate of soda (for cooking)
 - 120g tahini (or more to taste)
-- Ice cubes (about 25g)
-
-## Fresh Produce
-- 1 clove garlic, crushed
-- Juice of 1 lemon
-
-## Spices
-- Salt to taste
-
-## Oils & Condiments
 - Good quality olive oil (for serving)
-- Optional: pinch of cumin, paprika, sumac, or za'atar
 
 # Instructions
 

@@ -8,18 +8,16 @@
     "difficulty": "easy",
     "tags": ["vegan", "dinner", "curry"],
     "ingredients": {
-      "Fresh Produce": [
+      "Fresh": [
         { "id": 1, "text": "1 onion, diced" },
         { "id": 2, "text": "2 cloves garlic, minced" }
       ],
-      "Pantry": [
-        { "id": 3, "text": "1 cup lentils" },
-        { "id": 4, "text": "2 cups vegetable broth" }
-      ],
       "Spices": [
-        { "id": 5, "text": "1 tsp curry powder" }
+        { "id": 3, "text": "1 tsp curry powder" }
       ],
-      "Oils & Condiments": [
+      "Pantry": [
+        { "id": 4, "text": "1 cup lentils" },
+        { "id": 5, "text": "2 cups vegetable broth" },
         { "id": 6, "text": "1 tbsp oil" }
       ]
     },
@@ -40,11 +38,11 @@
     "difficulty": "easy",
     "tags": ["vegan", "lunch", "salad"],
     "ingredients": {
-      "Fresh Produce": [
+      "Fresh": [
         { "id": 1, "text": "2 cups lettuce" },
         { "id": 2, "text": "1 tomato" }
       ],
-      "Oils & Condiments": [
+      "Pantry": [
         { "id": 3, "text": "2 tbsp olive oil" }
       ]
     },
@@ -63,10 +61,8 @@
     "difficulty": "easy",
     "tags": ["vegan", "breakfast", "quick"],
     "ingredients": {
-      "Baking & Grains": [
-        { "id": 1, "text": "2 slices bread" }
-      ],
-      "Oils & Condiments": [
+      "Pantry": [
+        { "id": 1, "text": "2 slices bread" },
         { "id": 2, "text": "1 tbsp butter" }
       ]
     },

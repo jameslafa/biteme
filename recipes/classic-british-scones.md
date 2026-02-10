@@ -14,20 +14,18 @@ Keep the margarine cold – this helps create a flaky texture. Don't overwork th
 
 # Ingredients
 
-## Baking & Grains
-- 225g plain flour (Type 405)
-- 3 tsp baking powder
-- 25g caster sugar
+## Fridge
+- 55g plant-based block margarine, cold
+- 150ml plant milk (oat or soy work best)
+- A little extra plant milk for glazing
 
 ## Spices
 - Pinch of salt
 
-## Oils & Condiments
-- 55g plant-based block margarine, cold
-
-## Refrigerated Items
-- 150ml plant milk (oat or soy work best)
-- A little extra plant milk for glazing
+## Pantry
+- 225g plain flour (Type 405)
+- 3 tsp baking powder
+- 25g caster sugar
 
 # Instructions
 
