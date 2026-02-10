@@ -1,0 +1,78 @@
+[
+  {
+    "id": "test-curry",
+    "name": "Test Curry",
+    "description": "A simple test curry recipe",
+    "servings": 2,
+    "time": 30,
+    "difficulty": "easy",
+    "tags": ["vegan", "dinner", "curry"],
+    "ingredients": {
+      "Fresh Produce": [
+        { "id": 1, "text": "1 onion, diced" },
+        { "id": 2, "text": "2 cloves garlic, minced" }
+      ],
+      "Pantry": [
+        { "id": 3, "text": "1 cup lentils" },
+        { "id": 4, "text": "2 cups vegetable broth" }
+      ],
+      "Spices": [
+        { "id": 5, "text": "1 tsp curry powder" }
+      ],
+      "Oils & Condiments": [
+        { "id": 6, "text": "1 tbsp oil" }
+      ]
+    },
+    "steps": [
+      "Heat {oil} in a pot",
+      "Add {onion} and {garlic}",
+      "Add {curry powder}",
+      "Add {lentils} and {broth}",
+      "Simmer for 20 minutes"
+    ]
+  },
+  {
+    "id": "test-salad",
+    "name": "Test Salad",
+    "description": "A simple test salad recipe",
+    "servings": 2,
+    "time": 10,
+    "difficulty": "easy",
+    "tags": ["vegan", "lunch", "salad"],
+    "ingredients": {
+      "Fresh Produce": [
+        { "id": 1, "text": "2 cups lettuce" },
+        { "id": 2, "text": "1 tomato" }
+      ],
+      "Oils & Condiments": [
+        { "id": 3, "text": "2 tbsp olive oil" }
+      ]
+    },
+    "steps": [
+      "Chop lettuce",
+      "Slice tomato",
+      "Mix and add oil"
+    ]
+  },
+  {
+    "id": "test-toast",
+    "name": "Test Toast",
+    "description": "A simple test toast recipe",
+    "servings": 1,
+    "time": 5,
+    "difficulty": "easy",
+    "tags": ["vegan", "breakfast", "quick"],
+    "ingredients": {
+      "Baking & Grains": [
+        { "id": 1, "text": "2 slices bread" }
+      ],
+      "Oils & Condiments": [
+        { "id": 2, "text": "1 tbsp butter" }
+      ]
+    },
+    "steps": [
+      "Toast the bread",
+      "Spread butter"
+    ]
+  }
+]

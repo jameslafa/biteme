@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const testRecipes = require('./fixtures/recipes.test.json');
 
 async function clearAppState(page) {
   await page.evaluate(() => {
@@ -24,6 +25,15 @@ async function addIngredientsToCart(page, recipeId, count = 2) {
 }
 
 test.beforeEach(async ({ page }) => {
+  // Mock the recipes.json fetch to return test data
+  await page.route('**/recipes.json', route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(testRecipes)
+    });
+  });
+
   await page.goto('/');
   await clearAppState(page);
 });
@@ -43,19 +53,19 @@ test.describe('Shopping List', () => {
   });
 
   test('display items grouped by recipe', async ({ page }) => {
-    await addIngredientsToCart(page, 'simple-lentil-curry', 2);
+    await addIngredientsToCart(page, 'test-curry', 2);
 
     await page.goto('/shopping.html');
 
     await expect(page.locator('#empty-state')).toBeHidden();
     await expect(page.locator('#shopping-list')).toBeVisible();
     await expect(page.locator('.recipe-group')).toHaveCount(1);
-    await expect(page.locator('.recipe-group-title')).toHaveText('Simple Lentil Curry');
+    await expect(page.locator('.recipe-group-title')).toHaveText('Test Curry');
     await expect(page.locator('.shopping-item')).toHaveCount(2);
   });
 
   test('check item', async ({ page }) => {
-    await addIngredientsToCart(page, 'simple-lentil-curry', 2);
+    await addIngredientsToCart(page, 'test-curry', 2);
     await page.goto('/shopping.html');
 
     const firstItem = page.locator('.shopping-item').first();
@@ -70,7 +80,7 @@ test.describe('Shopping List', () => {
   });
 
   test('uncheck item', async ({ page }) => {
-    await addIngredientsToCart(page, 'simple-lentil-curry', 2);
+    await addIngredientsToCart(page, 'test-curry', 2);
     await page.goto('/shopping.html');
 
     const firstItem = page.locator('.shopping-item').first();
@@ -85,7 +95,7 @@ test.describe('Shopping List', () => {
   });
 
   test('remove item', async ({ page }) => {
-    await addIngredientsToCart(page, 'simple-lentil-curry', 2);
+    await addIngredientsToCart(page, 'test-curry', 2);
     await page.goto('/shopping.html');
 
     await expect(page.locator('.shopping-item')).toHaveCount(2);
@@ -98,7 +108,7 @@ test.describe('Shopping List', () => {
   });
 
   test('all checked celebration', async ({ page }) => {
-    await addIngredientsToCart(page, 'simple-lentil-curry', 2);
+    await addIngredientsToCart(page, 'test-curry', 2);
     await page.goto('/shopping.html');
 
     // Check all items
@@ -111,7 +121,7 @@ test.describe('Shopping List', () => {
   });
 
   test('progress counter', async ({ page }) => {
-    await addIngredientsToCart(page, 'simple-lentil-curry', 3);
+    await addIngredientsToCart(page, 'test-curry', 3);
     await page.goto('/shopping.html');
 
     const progress = page.locator('#shopping-progress');

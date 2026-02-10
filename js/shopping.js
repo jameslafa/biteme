@@ -25,7 +25,7 @@ async function loadShoppingList() {
   const groupedItems = {};
 
   for (const item of items) {
-    const recipe = getRecipeById(item.recipe_id);
+    const recipe = await getRecipeById(item.recipe_id);
     if (!recipe) continue;
 
     if (!groupedItems[item.recipe_id]) {

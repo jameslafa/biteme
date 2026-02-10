@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const testRecipes = require('./fixtures/recipes.test.json');
 
 async function clearAppState(page) {
   await page.evaluate(() => {
@@ -14,21 +15,30 @@ async function clearAppState(page) {
 }
 
 test.beforeEach(async ({ page }) => {
+  // Mock the recipes.json fetch to return test data
+  await page.route('**/recipes.json', route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(testRecipes)
+    });
+  });
+
   await page.goto('/');
   await clearAppState(page);
 });
 
 test.describe('Cooking Mode', () => {
   test('shows recipe name and first step', async ({ page }) => {
-    await page.goto('/cooking.html?id=simple-lentil-curry');
+    await page.goto('/cooking.html?id=test-curry');
 
-    await expect(page.locator('#recipe-name')).toHaveText('Simple Lentil Curry');
+    await expect(page.locator('#recipe-name')).toHaveText('Test Curry');
     await expect(page.locator('#step-progress')).toHaveText('Step 1 of 5');
     await expect(page.locator('#step-content')).toContainText('Heat');
   });
 
   test('navigate through steps', async ({ page }) => {
-    await page.goto('/cooking.html?id=simple-lentil-curry');
+    await page.goto('/cooking.html?id=test-curry');
 
     await expect(page.locator('#step-progress')).toHaveText('Step 1 of 5');
 
@@ -45,24 +55,23 @@ test.describe('Cooking Mode', () => {
   });
 
   test('previous on step 1 goes back to recipe', async ({ page }) => {
-    await page.goto('/cooking.html?id=simple-lentil-curry');
+    await page.goto('/cooking.html?id=test-curry');
 
     const prevBtn = page.locator('#prev-btn');
     await expect(prevBtn).toHaveText('Back to recipe');
 
     await prevBtn.click();
-    await expect(page).toHaveURL(/recipe\.html\?id=simple-lentil-curry/);
+    await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);
   });
 
   test('finish on last step goes to completion', async ({ page }) => {
-    await page.goto('/cooking.html?id=simple-lentil-curry');
+    await page.goto('/cooking.html?id=test-curry');
 
     const nextBtn = page.locator('#next-btn');
 
     // Navigate to last step (5 steps, need 4 clicks to reach last)
     for (let i = 0; i < 4; i++) {
       await nextBtn.click();
-      // Wait for step transition animation
       await page.waitForTimeout(300);
     }
 
@@ -70,11 +79,11 @@ test.describe('Cooking Mode', () => {
     await expect(nextBtn).toHaveText('Finish');
 
     await nextBtn.click();
-    await expect(page).toHaveURL(/completion\.html\?id=simple-lentil-curry/);
+    await expect(page).toHaveURL(/completion\.html\?id=test-curry/);
   });
 
   test('step ingredients shown when relevant', async ({ page }) => {
-    await page.goto('/cooking.html?id=simple-lentil-curry');
+    await page.goto('/cooking.html?id=test-curry');
 
     // Step 1 uses oil and onion — ingredients container should be visible
     const ingredientsContainer = page.locator('#step-ingredients-container');
@@ -83,7 +92,7 @@ test.describe('Cooking Mode', () => {
   });
 
   test('previous button text changes after step 1', async ({ page }) => {
-    await page.goto('/cooking.html?id=simple-lentil-curry');
+    await page.goto('/cooking.html?id=test-curry');
 
     const prevBtn = page.locator('#prev-btn');
     await expect(prevBtn).toHaveText('Back to recipe');

@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const testRecipes = require('./fixtures/recipes.test.json');
 
 async function clearAppState(page) {
   await page.evaluate(() => {
@@ -14,23 +15,32 @@ async function clearAppState(page) {
 }
 
 test.beforeEach(async ({ page }) => {
+  // Mock the recipes.json fetch to return test data
+  await page.route('**/recipes.json', route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(testRecipes)
+    });
+  });
+
   await page.goto('/');
   await clearAppState(page);
 });
 
 test.describe('Recipe Detail', () => {
   test('displays recipe content', async ({ page }) => {
-    await page.goto('/recipe.html?id=simple-lentil-curry');
+    await page.goto('/recipe.html?id=test-curry');
 
-    await expect(page.locator('.recipe-name')).toHaveText('Simple Lentil Curry');
-    await expect(page.locator('.recipe-description')).toContainText('Quick and flavorful');
+    await expect(page.locator('.recipe-name')).toHaveText('Test Curry');
+    await expect(page.locator('.recipe-description')).toContainText('simple test curry');
     await expect(page.locator('.ingredients')).toBeVisible();
     await expect(page.locator('.instructions')).toBeVisible();
     await expect(page.locator('.instructions ol li')).toHaveCount(5);
   });
 
   test('favourite toggle persists on reload', async ({ page }) => {
-    await page.goto('/recipe.html?id=simple-lentil-curry');
+    await page.goto('/recipe.html?id=test-curry');
 
     const heartBtn = page.locator('#favorite-btn');
     await expect(heartBtn).not.toHaveClass(/favorited/);
@@ -44,7 +54,7 @@ test.describe('Recipe Detail', () => {
   });
 
   test('add to shopping list', async ({ page }) => {
-    await page.goto('/recipe.html?id=simple-lentil-curry');
+    await page.goto('/recipe.html?id=test-curry');
 
     const cartBtn = page.locator('.add-to-cart').first();
     const badge = page.locator('#cart-count');
@@ -57,7 +67,7 @@ test.describe('Recipe Detail', () => {
   });
 
   test('remove from shopping list', async ({ page }) => {
-    await page.goto('/recipe.html?id=simple-lentil-curry');
+    await page.goto('/recipe.html?id=test-curry');
 
     const cartBtn = page.locator('.add-to-cart').first();
 
@@ -71,10 +81,10 @@ test.describe('Recipe Detail', () => {
   });
 
   test('start cooking navigates to cooking page', async ({ page }) => {
-    await page.goto('/recipe.html?id=simple-lentil-curry');
+    await page.goto('/recipe.html?id=test-curry');
 
     await page.locator('text=Start cooking').click();
-    await expect(page).toHaveURL(/cooking\.html\?id=simple-lentil-curry/);
+    await expect(page).toHaveURL(/cooking\.html\?id=test-curry/);
   });
 
   test('invalid recipe ID redirects to home', async ({ page }) => {

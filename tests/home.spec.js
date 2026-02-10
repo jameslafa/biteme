@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const testRecipes = require('./fixtures/recipes.test.json');
 
 async function clearAppState(page) {
   await page.evaluate(() => {
@@ -15,6 +16,15 @@ async function clearAppState(page) {
 }
 
 test.beforeEach(async ({ page }) => {
+  // Mock the recipes.json fetch to return test data
+  await page.route('**/recipes.json', route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(testRecipes)
+    });
+  });
+
   await page.goto('/');
   await clearAppState(page);
   await page.goto('/');
@@ -25,18 +35,18 @@ test.describe('Home Page', () => {
     const cards = page.locator('.recipe-card');
     await expect(cards).toHaveCount(3);
 
-    await expect(cards.nth(0).locator('.recipe-title')).toHaveText('Simple Lentil Curry');
-    await expect(cards.nth(1).locator('.recipe-title')).toHaveText('Overnight Oats');
-    await expect(cards.nth(2).locator('.recipe-title')).toHaveText('Classic Hummus');
+    await expect(cards.nth(0).locator('.recipe-title')).toHaveText('Test Curry');
+    await expect(cards.nth(1).locator('.recipe-title')).toHaveText('Test Salad');
+    await expect(cards.nth(2).locator('.recipe-title')).toHaveText('Test Toast');
   });
 
   test('search filters recipes', async ({ page }) => {
     const searchInput = page.locator('#search-input');
 
-    await searchInput.fill('lentil');
+    await searchInput.fill('curry');
     const cards = page.locator('.recipe-card');
     await expect(cards).toHaveCount(1);
-    await expect(cards.first().locator('.recipe-title')).toHaveText('Simple Lentil Curry');
+    await expect(cards.first().locator('.recipe-title')).toHaveText('Test Curry');
 
     await searchInput.clear();
     await expect(page.locator('.recipe-card')).toHaveCount(3);
@@ -76,7 +86,7 @@ test.describe('Home Page', () => {
     await page.locator('#favorites-filter').click();
     const cards = page.locator('.recipe-card');
     await expect(cards).toHaveCount(1);
-    await expect(cards.first().locator('.recipe-title')).toHaveText('Simple Lentil Curry');
+    await expect(cards.first().locator('.recipe-title')).toHaveText('Test Curry');
 
     // Toggle off
     await page.locator('#favorites-filter').click();
@@ -96,7 +106,7 @@ test.describe('Home Page', () => {
 
   test('navigate to recipe', async ({ page }) => {
     await page.locator('.recipe-card').first().click();
-    await expect(page).toHaveURL(/recipe\.html\?id=simple-lentil-curry/);
+    await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);
   });
 
   test('cart badge updates', async ({ page }) => {
@@ -104,7 +114,7 @@ test.describe('Home Page', () => {
     await expect(badge).toBeHidden();
 
     // Go to a recipe and add an ingredient to shopping list
-    await page.goto('/recipe.html?id=simple-lentil-curry');
+    await page.goto('/recipe.html?id=test-curry');
     await page.locator('.add-to-cart').first().click();
     await expect(page.locator('.add-to-cart').first()).toHaveClass(/in-cart/);
 

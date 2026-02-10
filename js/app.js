@@ -19,14 +19,14 @@ async function loadRecipes() {
   if (showFavoritesOnly) {
     await displayFavorites();
   } else {
-    const recipes = getRecipes();
+    const recipes = await getRecipes();
     await displayRecipes(recipes);
   }
 }
 
 // Display only favorited recipes
 async function displayFavorites() {
-  const allRecipes = getRecipes();
+  const allRecipes = await getRecipes();
   const favorites = await getAllFavorites();
   const favoriteIds = favorites.map(f => f.recipe_id);
   const favoriteRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
@@ -165,7 +165,7 @@ async function setupSearch() {
 
       if (showFavoritesOnly) {
         // Search within favorites
-        const allRecipes = getRecipes();
+        const allRecipes = await getRecipes();
         const favorites = await getAllFavorites();
         const favoriteIds = favorites.map(f => f.recipe_id);
         const favoriteRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
@@ -177,7 +177,7 @@ async function setupSearch() {
         await displayRecipes(results);
       } else {
         // Search all recipes
-        const results = searchRecipes(query);
+        const results = await searchRecipes(query);
         await displayRecipes(results);
       }
     });

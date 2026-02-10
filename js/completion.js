@@ -1,6 +1,6 @@
 // Completion page logic
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   const urlParams = new URLSearchParams(window.location.search);
   const recipeId = urlParams.get('id');
 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  const recipe = getRecipeById(recipeId);
+  const recipe = await getRecipeById(recipeId);
 
   if (!recipe) {
     window.location.href = 'index.html';

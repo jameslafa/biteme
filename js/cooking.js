@@ -3,7 +3,7 @@
 let currentStep = 0; // Start at first cooking step
 let recipe = null;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   const urlParams = new URLSearchParams(window.location.search);
   const recipeId = urlParams.get('id');
 
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  recipe = getRecipeById(recipeId);
+  recipe = await getRecipeById(recipeId);
 
   if (!recipe) {
     window.location.href = 'index.html';
