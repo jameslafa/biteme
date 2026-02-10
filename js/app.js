@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   loadRecipes();
   setupSearch();
   setupFavoritesFilter();
+  updateCartCount();
 });
 
 // Load and display all recipes
@@ -146,5 +147,20 @@ async function setupSearch() {
         await displayRecipes(results);
       }
     });
+  }
+}
+
+// Update shopping cart badge count
+async function updateCartCount() {
+  const count = await getShoppingListCount();
+  const badge = document.getElementById('cart-count');
+
+  if (badge) {
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
   }
 }

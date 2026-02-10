@@ -30,6 +30,50 @@ name: Pad Thai
 - Filename can be changed without breaking references
 - Favorites, notes, and ratings remain linked to ID
 
+## Ingredient ID Strategy
+
+**Decision:** Incremental IDs per recipe (1, 2, 3...)
+
+**Rationale:**
+- Simple and predictable
+- Easy to generate in Rust parser
+- Enables matching in shopping list
+- Allows showing shopping list state on recipe page
+
+**Implementation:**
+- Rust parser assigns IDs sequentially per recipe
+- IDs start at 1 for each recipe
+- Each ingredient gets a unique ID within its recipe
+
+**Structure in JSON:**
+```javascript
+{
+  "ingredients": {
+    "Fresh Produce": [
+      { "id": 1, "text": "2 tomatoes, diced" },
+      { "id": 2, "text": "1 onion, diced" }
+    ],
+    "Pantry": [
+      { "id": 3, "text": "1 cup rice" }
+    ]
+  }
+}
+```
+
+**Shopping List Reference:**
+- Stores `recipe_id + ingredient_id` pair
+- Looks up ingredient text from recipe for display
+- No text parsing or matching needed
+
+**Trade-offs:**
+- Changing ingredient order changes IDs (acceptable for simplicity)
+- No structured data (quantity, unit, name) - deferred for later
+- No normalization or aggregation across recipes
+
+**Future Considerations:**
+- Structured ingredients (quantity, unit, canonical name) when needed
+- For now, keep it simple with text + ID
+
 ## Data Storage
 
 **Decision:** IndexedDB for local storage with future backend sync support

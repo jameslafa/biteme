@@ -1,7 +1,7 @@
 // IndexedDB helper for BiteMe local storage
 
 const DB_NAME = 'biteme_db';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 let db = null;
 
 // Initialize database
@@ -21,9 +21,15 @@ function initDB() {
       // Create favorites object store
       if (!db.objectStoreNames.contains('favorites')) {
         const favStore = db.createObjectStore('favorites', { keyPath: 'recipe_id' });
-
-        // Add index for sorting by date
         favStore.createIndex('created_at', 'created_at', { unique: false });
+      }
+
+      // Create shopping list object store
+      if (!db.objectStoreNames.contains('shopping_list')) {
+        const shopStore = db.createObjectStore('shopping_list', { keyPath: 'id', autoIncrement: true });
+        shopStore.createIndex('recipe_id', 'recipe_id', { unique: false });
+        shopStore.createIndex('checked_at', 'checked_at', { unique: false });
+        shopStore.createIndex('created_at', 'created_at', { unique: false });
       }
     };
   });
@@ -109,4 +115,160 @@ async function toggleFavorite(recipeId) {
   } else {
     return await addFavorite(recipeId);
   }
+}
+
+// Shopping List Functions
+
+// Add item to shopping list
+async function addToShoppingList(recipeId, ingredientId) {
+  if (!db) await initDB();
+
+  // Check if already in list
+  const items = await getShoppingListByRecipe(recipeId);
+  const exists = items.find(item => item.ingredient_id === ingredientId);
+  if (exists) {
+    return; // Already in list
+  }
+
+  const transaction = db.transaction(['shopping_list'], 'readwrite');
+  const store = transaction.objectStore('shopping_list');
+
+  const item = {
+    recipe_id: recipeId,
+    ingredient_id: ingredientId,
+    checked_at: null,
+    created_at: Date.now()
+  };
+
+  return new Promise((resolve, reject) => {
+    const request = store.add(item);
+    request.onsuccess = () => resolve({ ...item, id: request.result });
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Remove item from shopping list
+async function removeFromShoppingList(recipeId, ingredientId) {
+  if (!db) await initDB();
+
+  const items = await getShoppingListByRecipe(recipeId);
+  const item = items.find(i => i.ingredient_id === ingredientId);
+
+  if (item) {
+    return await removeShoppingListItem(item.id);
+  }
+}
+
+// Get all shopping list items for a specific recipe
+async function getShoppingListByRecipe(recipeId) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['shopping_list'], 'readonly');
+  const store = transaction.objectStore('shopping_list');
+
+  return new Promise((resolve, reject) => {
+    const request = store.getAll();
+    request.onsuccess = () => {
+      const items = request.result || [];
+      const recipeItems = items.filter(item => item.recipe_id === recipeId);
+      resolve(recipeItems);
+    };
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Get all shopping list items
+async function getAllShoppingListItems() {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['shopping_list'], 'readonly');
+  const store = transaction.objectStore('shopping_list');
+
+  return new Promise((resolve, reject) => {
+    const request = store.getAll();
+    request.onsuccess = () => resolve(request.result || []);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Toggle item checked status
+async function toggleShoppingListItem(itemId) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['shopping_list'], 'readwrite');
+  const store = transaction.objectStore('shopping_list');
+
+  return new Promise((resolve, reject) => {
+    const getRequest = store.get(itemId);
+
+    getRequest.onsuccess = () => {
+      const item = getRequest.result;
+      if (!item) {
+        reject(new Error('Item not found'));
+        return;
+      }
+
+      // Toggle checked status
+      item.checked_at = item.checked_at ? null : Date.now();
+
+      const updateRequest = store.put(item);
+      updateRequest.onsuccess = () => resolve(item);
+      updateRequest.onerror = () => reject(updateRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+}
+
+// Remove item from shopping list
+async function removeShoppingListItem(itemId) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['shopping_list'], 'readwrite');
+  const store = transaction.objectStore('shopping_list');
+
+  return new Promise((resolve, reject) => {
+    const request = store.delete(itemId);
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Clean up checked items older than 1 hour
+async function cleanupShoppingList() {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['shopping_list'], 'readwrite');
+  const store = transaction.objectStore('shopping_list');
+  const index = store.index('checked_at');
+
+  const oneHourAgo = Date.now() - (60 * 60 * 1000);
+
+  return new Promise((resolve, reject) => {
+    const request = index.openCursor();
+    const deletedIds = [];
+
+    request.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor) {
+        const item = cursor.value;
+        // Delete if checked and older than 1 hour
+        if (item.checked_at && item.checked_at < oneHourAgo) {
+          cursor.delete();
+          deletedIds.push(item.id);
+        }
+        cursor.continue();
+      } else {
+        resolve(deletedIds);
+      }
+    };
+
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Get shopping list item count (unchecked only)
+async function getShoppingListCount() {
+  const items = await getAllShoppingListItems();
+  return items.filter(item => !item.checked_at).length;
 }

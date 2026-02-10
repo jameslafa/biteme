@@ -6,9 +6,9 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Database name:** `biteme_db`
 
-**Version:** 1
+**Version:** 2
 
-**Object stores:** favorites, notes, ratings, cooking_history
+**Object stores:** favorites, shopping_list, notes, ratings, cooking_history
 
 ## Favorites
 
@@ -40,7 +40,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Simplified for local-only use
 - Will be extended with sync fields when backend is added (see Future Schema below)
 
-**Future Schema (v2 - With Sync):**
+**Future Schema (v3 - With Sync):**
 ```typescript
 {
   recipe_id: string;
@@ -52,6 +52,48 @@ This document defines the data schemas used in BiteMe for local storage and futu
   device_id: string;
 }
 ```
+
+## Shopping List
+
+**Object store:** `shopping_list`
+
+**Primary key:** `id` (auto-increment)
+
+**Indexes:**
+- `recipe_id` - Query items by recipe
+- `checked_at` - Find checked items for cleanup
+- `created_at` - Sort by date added
+
+**Current Schema (v2 - Local Only):**
+```typescript
+{
+  id: number;              // Auto-increment primary key
+  recipe_id: string;       // References recipe (e.g., "pad-thai")
+  ingredient_id: number;   // References ingredient within recipe (1, 2, 3...)
+  checked_at: number | null; // Unix timestamp when checked, null if unchecked
+  created_at: number;      // Unix timestamp when added
+}
+```
+
+**Example:**
+```json
+{
+  "id": 1,
+  "recipe_id": "pad-thai",
+  "ingredient_id": 2,
+  "checked_at": null,
+  "created_at": 1707567890123
+}
+```
+
+**Notes:**
+- Stores `recipe_id + ingredient_id` pair (no text duplication)
+- Ingredient text looked up from recipe data for display
+- TTL cleanup: Items with `checked_at` older than 1 hour are auto-deleted
+- Provides 1-hour undo window for checked items
+- Grouped by recipe for better organization
+- Hard delete after TTL expiry
+- Simple matching: can show shopping list state on recipe page
 
 ## Notes
 

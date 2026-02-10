@@ -64,15 +64,8 @@ header {
   border-bottom: 1px solid var(--border);
 }
 
-header h1 {
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  color: var(--primary-color);
-}
-
-/* Navigation */
+/* Header layouts (shared between main-header and recipe-nav) */
+.main-header,
 .recipe-nav {
   display: flex;
   align-items: center;
@@ -81,27 +74,56 @@ header h1 {
   margin: 0 auto;
 }
 
-.recipe-nav h1 {
+header h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 300;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: lowercase;
   color: var(--primary-color);
+  flex: 1;
+  text-align: center;
 }
 
-.back-button {
+/* Icon buttons (shared styles for back-button and shopping-cart-link) */
+.back-button,
+.shopping-cart-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
   color: var(--primary-color);
   text-decoration: none;
-  font-size: 1rem;
-  font-weight: 300;
-  padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-sm);
-  transition: color 0.2s;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
 }
 
-.back-button:hover {
-  color: var(--primary-dark);
+.back-button:hover,
+.shopping-cart-link:hover {
+  background-color: var(--accent-light);
+}
+
+.shopping-cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: var(--primary-color);
+  color: var(--surface);
+  font-size: 0.7rem;
+  font-weight: 500;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.25rem;
 }
 
 /* Main Content */
@@ -396,10 +418,6 @@ footer a:hover {
 
   .recipe-grid {
     grid-template-columns: 1fr;
-  }
-
-  .recipe-nav h1 {
-    font-size: 1.25rem;
   }
 }
 

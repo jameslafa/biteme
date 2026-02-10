@@ -45,13 +45,15 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Show what they need to buy vs what they have
 - Store locally in IndexedDB
 
-### [ ] Shopping List Builder
+### [x] Shopping List Builder
 - Add basket/cart icon next to each ingredient in recipe view
 - Click to add ingredient to shopping list
-- Aggregated shopping list page showing all ingredients from multiple recipes
+- Shopping list page showing ingredients grouped by recipe
 - Check off items as you buy them in the supermarket
 - Store in IndexedDB, works offline
-- **Workflow**: Browse recipes → mark what to buy → view shopping list → check off in store
+- TTL-based cleanup: checked items auto-delete after 1 hour (undo window)
+- Header shopping cart icon with count badge for easy access
+- **Workflow**: Browse recipes → add ingredients → view shopping list → check off in store
 
 ### [ ] Personal Notes/Feedback
 - Allow users to add notes to recipes after cooking

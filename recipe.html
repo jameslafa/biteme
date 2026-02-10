@@ -14,8 +14,20 @@
 <body>
   <header>
     <nav class="recipe-nav">
-      <a href="index.html" class="back-button" aria-label="Back to recipes">← Back</a>
+      <a href="index.html" class="back-button" aria-label="Back to recipes">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
       <h1>biteme</h1>
+      <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+      </a>
     </nav>
   </header>
 
@@ -76,10 +88,21 @@
                 <div class="ingredient-category">
                   <h4>${category}</h4>
                   <ul>
-                    ${items.map((ingredient, index) => `
+                    ${items.map((ingredient) => `
                       <li>
-                        <input type="checkbox" id="ingredient-${category}-${index}" />
-                        <label for="ingredient-${category}-${index}">${ingredient}</label>
+                        <div class="ingredient-item">
+                          <div class="ingredient-checkbox">
+                            <input type="checkbox" id="ingredient-${ingredient.id}" />
+                            <label for="ingredient-${ingredient.id}">${ingredient.text}</label>
+                          </div>
+                          <button class="add-to-cart" data-ingredient-id="${ingredient.id}" aria-label="Add to shopping list">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <circle cx="9" cy="21" r="1"/>
+                              <circle cx="20" cy="21" r="1"/>
+                              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                            </svg>
+                          </button>
+                        </div>
                       </li>
                     `).join('')}
                   </ul>
@@ -99,7 +122,7 @@
           </section>
 
           <div class="action-buttons">
-            <button class="button button-primary" onclick="startCooking(${recipe.id})">
+            <button class="button button-primary" onclick="startCooking('${recipe.id}')">
               Start Cooking
             </button>
           </div>
@@ -108,6 +131,12 @@
 
       // Setup favorite button
       setupFavoriteButton(recipeId);
+
+      // Setup add to cart buttons
+      setupShoppingCartButtons(recipeId, recipe.name);
+
+      // Update cart count
+      updateCartCount();
     });
 
     async function setupFavoriteButton(recipeId) {
@@ -139,6 +168,74 @@
 
     function startCooking(id) {
       window.location.href = `cooking.html?id=${id}`;
+    }
+
+    async function setupShoppingCartButtons(recipeId, recipeName) {
+      await initDB();
+
+      const cartButtons = document.querySelectorAll('.add-to-cart');
+
+      // Load current shopping list state for this recipe
+      await updateCartButtonStates(recipeId);
+
+      cartButtons.forEach(button => {
+        button.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const ingredientId = parseInt(button.getAttribute('data-ingredient-id'));
+          const isAdded = button.classList.contains('in-cart');
+
+          try {
+            if (isAdded) {
+              // Remove from list
+              await removeFromShoppingList(recipeId, ingredientId);
+              button.classList.remove('in-cart');
+              button.setAttribute('aria-label', 'Add to shopping list');
+            } else {
+              // Add to list
+              await addToShoppingList(recipeId, ingredientId);
+              button.classList.add('in-cart');
+              button.setAttribute('aria-label', 'Remove from shopping list');
+            }
+
+            // Update cart count with animation
+            await updateCartCount();
+          } catch (error) {
+            console.error('Error updating shopping list:', error);
+          }
+        });
+      });
+    }
+
+    async function updateCartButtonStates(recipeId) {
+      const items = await getShoppingListByRecipe(recipeId);
+      const cartButtons = document.querySelectorAll('.add-to-cart');
+
+      cartButtons.forEach(button => {
+        const ingredientId = parseInt(button.getAttribute('data-ingredient-id'));
+        const inCart = items.some(item => item.ingredient_id === ingredientId);
+
+        if (inCart) {
+          button.classList.add('in-cart');
+          button.setAttribute('aria-label', 'Remove from shopping list');
+        } else {
+          button.classList.remove('in-cart');
+          button.setAttribute('aria-label', 'Add to shopping list');
+        }
+      });
+    }
+
+    async function updateCartCount() {
+      const count = await getShoppingListCount();
+      const badge = document.getElementById('cart-count');
+
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
     }
   </script>
 </body>

@@ -7,23 +7,23 @@ const mockRecipes = [
     tags: ["vegan", "dinner", "quick"],
     ingredients: {
       "Fresh Produce": [
-        "1 onion, diced",
-        "2 cloves garlic, minced",
-        "Fresh cilantro for garnish"
+        { id: 1, text: "1 onion, diced" },
+        { id: 2, text: "2 cloves garlic, minced" },
+        { id: 3, text: "Fresh cilantro for garnish" }
       ],
       "Refrigerated Items": [
-        "1 can (400ml) coconut milk"
+        { id: 4, text: "1 can (400ml) coconut milk" }
       ],
       "Pantry/Cupboard": [
-        "1 cup red lentils, rinsed",
-        "2 cups vegetable broth",
-        "2 tbsp curry paste"
+        { id: 5, text: "1 cup red lentils, rinsed" },
+        { id: 6, text: "2 cups vegetable broth" },
+        { id: 7, text: "2 tbsp curry paste" }
       ],
       "Spices & Dried Herbs": [
-        "Salt to taste"
+        { id: 8, text: "Salt to taste" }
       ],
       "Oils & Condiments": [
-        "1 tbsp oil"
+        { id: 9, text: "1 tbsp oil" }
       ]
     },
     steps: [
@@ -41,22 +41,22 @@ const mockRecipes = [
     tags: ["vegan", "breakfast", "no-cook"],
     ingredients: {
       "Fresh Produce": [
-        "Fresh berries for topping",
-        "Sliced banana for topping"
+        { id: 1, text: "Fresh berries for topping" },
+        { id: 2, text: "Sliced banana for topping" }
       ],
       "Refrigerated Items": [
-        "1/2 cup plant milk"
+        { id: 3, text: "1/2 cup plant milk" }
       ],
       "Pantry/Cupboard": [
-        "1/2 cup rolled oats",
-        "1 tbsp chia seeds"
+        { id: 4, text: "1/2 cup rolled oats" },
+        { id: 5, text: "1 tbsp chia seeds" }
       ],
       "Spices & Dried Herbs": [
-        "Pinch of cinnamon"
+        { id: 6, text: "Pinch of cinnamon" }
       ],
       "Oils & Condiments": [
-        "1 tbsp maple syrup",
-        "1/2 tsp vanilla extract"
+        { id: 7, text: "1 tbsp maple syrup" },
+        { id: 8, text: "1/2 tsp vanilla extract" }
       ]
     },
     steps: [
@@ -74,23 +74,23 @@ const mockRecipes = [
     tags: ["vegan", "snack", "mediterranean"],
     ingredients: {
       "Fresh Produce": [
-        "3 tbsp lemon juice",
-        "2 cloves garlic"
+        { id: 1, text: "3 tbsp lemon juice" },
+        { id: 2, text: "2 cloves garlic" }
       ],
       "Refrigerated Items": [],
       "Pantry/Cupboard": [
-        "1 can (400g) chickpeas, drained and rinsed",
-        "1/4 cup water"
+        { id: 3, text: "1 can (400g) chickpeas, drained and rinsed" },
+        { id: 4, text: "1/4 cup water" }
       ],
       "Spices & Dried Herbs": [
-        "1/2 tsp cumin",
-        "Salt to taste",
-        "Paprika for serving"
+        { id: 5, text: "1/2 tsp cumin" },
+        { id: 6, text: "Salt to taste" },
+        { id: 7, text: "Paprika for serving" }
       ],
       "Oils & Condiments": [
-        "1/4 cup tahini",
-        "2 tbsp olive oil",
-        "Olive oil for serving"
+        { id: 8, text: "1/4 cup tahini" },
+        { id: 9, text: "2 tbsp olive oil" },
+        { id: 10, text: "Olive oil for serving" }
       ]
     },
     steps: [
@@ -134,7 +134,7 @@ function parseStepText(stepText, ingredients, stepIndex) {
       const found = items.find(item => {
         // Use word boundary matching for precise matches
         const regex = new RegExp(`\\b${ingredientName}\\b`, 'i');
-        return regex.test(item);
+        return regex.test(item.text);
       });
 
       if (found) {
@@ -163,10 +163,10 @@ function getStepIngredients(stepText, ingredients) {
       const found = items.find(item => {
         // Use word boundary matching for precise matches
         const regex = new RegExp(`\\b${ingredientName}\\b`, 'i');
-        return regex.test(item);
+        return regex.test(item.text);
       });
 
-      if (found && !stepIngredients.includes(found)) {
+      if (found && !stepIngredients.some(i => i.id === found.id)) {
         stepIngredients.push(found);
       }
     }

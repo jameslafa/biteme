@@ -111,9 +111,6 @@
 .ingredients li {
   padding: var(--spacing-sm);
   margin-bottom: var(--spacing-xs);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
   border-left: 3px solid var(--accent-light);
   background-color: var(--accent-light-alpha-30);
   border-radius: var(--radius-sm);
@@ -122,6 +119,20 @@
 
 .ingredients li:hover {
   border-left-color: var(--accent-color);
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.ingredient-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
 }
 
 .ingredients input[type="checkbox"] {
@@ -142,6 +153,30 @@
   text-decoration: line-through;
   color: var(--text-secondary);
   opacity: 0.7;
+}
+
+.add-to-cart {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.add-to-cart.in-cart {
+  background-color: var(--accent-light);
+  color: var(--primary-color);
+}
+
+.add-to-cart.in-cart svg {
+  fill: var(--primary-color);
 }
 
 /* Instructions List */

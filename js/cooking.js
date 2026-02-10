@@ -63,7 +63,7 @@ function renderStep() {
         <h4>Ingredients for this step:</h4>
         <ul>
           ${stepIngredients.map(ingredient => `
-            <li>${ingredient}</li>
+            <li>${ingredient.text}</li>
           `).join('')}
         </ul>
       </div>
