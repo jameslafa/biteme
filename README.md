@@ -15,6 +15,7 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 - 🛒 **Shopping list builder** - Add ingredients and check them off as you shop
 - ⭐ **Save favorites** - Keep your go-to recipes at your fingertips
 - 🔒 **Privacy-first** - No accounts, no tracking, everything stored locally
+- 📴 **Works offline** - Full PWA support, use it anywhere without internet
 - 🤝 **Community-driven** - Open source project where anyone can contribute recipes or improve the app
 - 🆓 **Free forever** - No ads, no paywalls, no premium tiers
 
@@ -48,12 +49,12 @@ Simple features like checking off ingredients, building a shopping list, and hav
    npx playwright install chromium
    ```
 
-3. Start a local server:
+3. Start the development server:
    ```bash
-   python -m http.server 8000
+   npm run dev
    ```
 
-4. Open your browser to `http://localhost:8000`
+4. Open your browser to `http://localhost:8080`
 
 ## Testing
 

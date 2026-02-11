@@ -10,3 +10,4 @@ serde_yaml = "0.9"
 pulldown-cmark = "0.12"
 anyhow = "1.0"
 clap = { version = "4.5", features = ["derive"] }
+sha2 = "0.10"

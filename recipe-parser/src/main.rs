@@ -2,6 +2,7 @@ use anyhow::{bail, Context, Result};
 use clap::Parser as ClapParser;
 use pulldown_cmark::{Event, Parser as MarkdownParser, Tag, TagEnd};
 use serde::{Deserialize, Serialize, Serializer};
+use sha2::{Sha256, Digest};
 use std::collections::HashMap;
 use std::fs;
 use std::path::PathBuf;
@@ -56,6 +57,13 @@ struct Recipe {
     steps: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     serving_suggestions: Option<String>,
+}
+
+#[derive(Serialize)]
+struct Manifest {
+    version: String,
+    generated_at: String,
+    recipe_count: usize,
 }
 
 // Valid ingredient categories (also defines the output order)
@@ -398,10 +406,35 @@ fn main() -> Result<()> {
     let json = serde_json::to_string_pretty(&recipes)
         .context("Failed to serialize recipes to JSON")?;
 
-    fs::write(&cli.output, json)
+    fs::write(&cli.output, &json)
         .with_context(|| format!("Failed to write output file: {:?}", cli.output))?;
 
     println!("📝 Written to: {:?}", cli.output);
+
+    // Generate manifest with hash of recipes.json
+    let mut hasher = Sha256::new();
+    hasher.update(json.as_bytes());
+    let hash = format!("{:x}", hasher.finalize());
+
+    let manifest = Manifest {
+        version: hash,
+        generated_at: std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_secs()
+            .to_string(),
+        recipe_count: recipes.len(),
+    };
+
+    // Write manifest.json next to recipes.json
+    let manifest_path = cli.output.with_file_name("recipes-manifest.json");
+    let manifest_json = serde_json::to_string_pretty(&manifest)
+        .context("Failed to serialize manifest")?;
+
+    fs::write(&manifest_path, manifest_json)
+        .with_context(|| format!("Failed to write manifest file: {:?}", manifest_path))?;
+
+    println!("📦 Manifest written to: {:?}", manifest_path);
 
     if cli.lint {
         println!("🔬 Linting passed!");

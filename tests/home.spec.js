@@ -2,10 +2,13 @@ const { test, expect } = require('@playwright/test');
 const testRecipes = require('./fixtures/recipes.test.json');
 
 async function clearAppState(page) {
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
     localStorage.clear();
     // Close any open DB connection from the app
     if (typeof db !== 'undefined' && db) db.close();
+    // Unregister service workers so they don't intercept test requests
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    for (const reg of registrations) await reg.unregister();
     return new Promise((resolve) => {
       const req = indexedDB.deleteDatabase('biteme_db');
       req.onsuccess = resolve;
