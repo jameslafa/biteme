@@ -6,9 +6,9 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Database name:** `biteme_db`
 
-**Version:** 2
+**Version:** 3
 
-**Object stores:** favorites, shopping_list, notes, ratings, cooking_history
+**Object stores:** favorites, shopping_list, cooking_sessions
 
 ## Favorites
 
@@ -95,73 +95,51 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Hard delete after TTL expiry
 - Simple matching: can show shopping list state on recipe page
 
-## Notes
+## Cooking Sessions
 
-**Object store:** `notes`
+**Object store:** `cooking_sessions`
 
-**Primary key:** `[recipe_id, note_id]` (compound)
+**Primary key:** `id` (auto-increment)
 
-**Schema:**
+**Indexes:**
+- `recipe_id` - Query sessions by recipe
+
+**Current Schema (v3 - Local Only):**
 ```typescript
 {
-  note_id: string;          // UUID for the note
-  recipe_id: string;        // References recipe
-  user_id: string | null;   // null for local
-  note_text: string;        // User's note
-  created_at: number;       // Unix timestamp
-  updated_at: number;       // Unix timestamp
-  synced_at: number | null; // Sync status
-  device_id: string;        // Device identifier
+  id: number;              // Auto-increment primary key
+  recipe_id: string;       // References recipe (e.g., "pad-thai")
+  started_at: number;      // Unix timestamp when cooking started
+  completed_at: number | null; // Unix timestamp when finished, null if abandoned
 }
 ```
 
-## Ratings
-
-**Object store:** `ratings`
-
-**Primary key:** `recipe_id`
-
-**Schema:**
-```typescript
+**Example:**
+```json
 {
-  recipe_id: string;        // Primary key
-  user_id: string | null;   // null for local
-  rating: number;           // 1-5 stars
-  created_at: number;       // Unix timestamp
-  updated_at: number;       // Unix timestamp
-  synced_at: number | null; // Sync status
-  device_id: string;        // Device identifier
+  "id": 1,
+  "recipe_id": "pad-thai",
+  "started_at": 1707567890123,
+  "completed_at": 1707569400000
 }
 ```
 
-## Cooking History
-
-**Object store:** `cooking_history`
-
-**Primary key:** `history_id`
-
-**Schema:**
-```typescript
-{
-  history_id: string;       // UUID for history entry
-  recipe_id: string;        // References recipe
-  user_id: string | null;   // null for local
-  completed_at: number;     // Unix timestamp
-  time_taken: number;       // Seconds to complete
-  complexity_rating: string; // "easy" | "medium" | "hard"
-  synced_at: number | null; // Sync status
-  device_id: string;        // Device identifier
-}
-```
+**Notes:**
+- Session created when user enters cooking mode
+- `completed_at` set when user finishes all steps and reaches completion page
+- Sessions with null `completed_at` indicate abandoned cooking sessions
+- Duration can be calculated from `completed_at - started_at`
+- Used to gate the install prompt (only shown after first completed recipe)
+- Foundation for future cooking analytics (time tracking, history)
 
 ## Sync Strategy (Future)
 
 **Note:** Current implementation uses hard delete for simplicity. Sync strategy will be implemented when backend is added.
 
-### Migration to Sync (v1 → v2)
+### Migration to Sync (Future)
 
 When backend sync is added:
-1. Bump DB version from 1 to 2
+1. Bump DB version
 2. Add new fields to existing records
 3. Switch from hard delete to soft delete
 4. Migration runs automatically on user's device

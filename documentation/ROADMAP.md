@@ -4,25 +4,24 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 
 ## Infrastructure & Build System
 
-### [ ] Recipe Parser/Compiler (Rust)
-- Create a Rust program that parses individual recipe Markdown files
-- Generate a single `recipes.json` file with all recipes in the correct format
+### [x] Recipe Parser/Compiler (Rust)
+- Rust program that parses individual recipe Markdown files
+- Generates a single `recipes.json` file with all recipes in the correct format
 - App fetches this JSON via URL
-- Can run locally via command OR in GitHub Actions pipeline on push
+- Runs locally via command
+- [ ] GitHub Actions pipeline on push
 - **Goal**: Avoid backend, keep recipes as open-source MD files that can be submitted via PR
 
-### [ ] Recipe Linter
-- Extend the Rust tool to validate recipe structure
-- Check required fields, data types, ingredient format, markdown structure
-- Run in GitHub Actions when PRs are opened/updated
-- Blocks merging if recipe format is invalid
-- Makes community contributions easy with automatic validation
+### [x] Recipe Linter
+- Integrated into the Rust parser tool
+- Validates recipe structure, required fields, data types, ingredient format, markdown structure
+- [ ] Run in GitHub Actions when PRs are opened/updated
+- [ ] Block merging if recipe format is invalid
 
-### [ ] Versioning/Caching System
-- Add versioning so app can detect if recipes JSON has changed
-- Avoid re-fetching if nothing changed
-- Could use git commit hash, timestamp, or incremental version number
-- Consider manifest file approach: check small manifest first, only fetch full JSON if version changed
+### [x] Versioning/Caching System
+- Manifest-based approach: check small `recipes-manifest.json` first, only fetch full JSON if version changed
+- Cached recipes stored in localStorage for fast loading
+- Offline fallback: uses cached data when network unavailable
 
 ### [x] Better Ingredient Categorization System
 - **Solution**: Simplified from 7 categories to 4 clear categories
@@ -71,10 +70,9 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - **To explore**: Browser notification permissions, audio alerts, mobile vibration
 
 ### [ ] Cooking Time Tracking
-- Track how long user takes to complete a recipe
-- Start timer when entering cooking mode
-- Display total time on completion page
-- Store history in IndexedDB for personal reference
+- [x] Track cooking sessions (start/complete timestamps) in IndexedDB
+- [ ] Display total time on completion page
+- [ ] Store and browse cooking history for personal reference
 
 ### [ ] Post-Cooking Complexity Rating
 - After finishing a recipe, ask user to rate complexity

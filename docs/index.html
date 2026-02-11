@@ -60,11 +60,13 @@
   <!-- Install prompt banner -->
   <div id="install-banner" class="install-banner" style="display: none;">
     <div class="install-banner-content">
+      <img src="assets/icons/icon-192.png" alt="BiteMe" class="install-banner-icon">
       <div class="install-banner-text">
-        <span id="install-instructions">Install BiteMe to your homescreen for fullscreen and offline experience</span>
+        <strong>Add BiteMe to your home screen</strong>
+        <span id="install-instructions">Quick access, offline recipes</span>
       </div>
       <div class="install-banner-actions">
-        <button id="install-button" class="install-btn">Show me how</button>
+        <button id="install-button" class="install-btn">Install</button>
         <button id="install-close" class="install-close" aria-label="Close">×</button>
       </div>
     </div>
@@ -74,35 +76,25 @@
   <div id="install-modal" class="install-modal" style="display: none;">
     <div class="install-modal-overlay"></div>
     <div class="install-modal-content">
-      <h2>How to Install</h2>
+      <h2>Add to Home Screen</h2>
       <div class="install-steps">
         <div class="install-step">
           <span class="step-number">1</span>
-          <div class="step-content">
-            <p>Tap the Share button
-              <svg width="20" height="24" viewBox="0 0 50 60" style="display: inline-block; vertical-align: text-bottom; margin: 0 0.25rem;">
-                <rect x="10" y="28" width="30" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
-                <path d="M25 38 L25 17 M18 23 L25 17 L32 23" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
-              at the bottom
-            </p>
-          </div>
+          <p>Tap <strong>Share</strong>
+            <svg width="14" height="17" viewBox="0 0 50 60" style="display: inline-block; vertical-align: -0.2em; opacity: 0.6;">
+              <rect x="10" y="28" width="30" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+              <path d="M25 38 L25 17 M18 23 L25 17 L32 23" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            in the toolbar
+          </p>
         </div>
         <div class="install-step">
           <span class="step-number">2</span>
-          <div class="step-content">
-            <p>Scroll down and tap <strong>"Add to Home Screen"</strong></p>
-          </div>
+          <p>Tap <strong>"Add to Home Screen"</strong></p>
         </div>
         <div class="install-step">
           <span class="step-number">3</span>
-          <div class="step-content">
-            <p>Tap <strong>"Add"</strong> to confirm</p>
-          </div>
-        </div>
-        <div class="install-success">
-          <span class="success-icon">✨</span>
-          <p>Now you can launch the app directly from your home screen!</p>
+          <p>Tap <strong>"Add"</strong></p>
         </div>
       </div>
       <button id="modal-close" class="modal-close-btn">Got it</button>
