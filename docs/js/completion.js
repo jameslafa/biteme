@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     return;
   }
 
+  // Record cooking session completion
+  const sessionId = parseInt(urlParams.get('session'));
+  if (sessionId) {
+    saveCookingComplete(sessionId).catch(() => {});
+  }
+
   // Update page title and recipe name
   document.title = 'Bon appétit! - biteme';
   document.getElementById('recipe-name').textContent = recipe.name;

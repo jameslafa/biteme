@@ -81,7 +81,7 @@ test.describe('Cooking Mode', () => {
     await expect(nextBtn).toHaveText('Finish');
 
     await nextBtn.click();
-    await expect(page).toHaveURL(/completion\.html\?id=test-curry/);
+    await expect(page).toHaveURL(/completion\.html\?id=test-curry&session=\d+/);
   });
 
   test('step ingredients shown when relevant', async ({ page }) => {
@@ -102,5 +102,87 @@ test.describe('Cooking Mode', () => {
     await page.locator('#next-btn').click();
     await page.waitForTimeout(300);
     await expect(prevBtn).toHaveText('Previous');
+  });
+});
+
+test.describe('Cooking Analytics', () => {
+  test('cooking session is saved on start', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+    await expect(page.locator('#step-progress')).toHaveText('Step 1 of 5');
+
+    // Wait for IndexedDB write to complete
+    await page.waitForTimeout(500);
+
+    const session = await page.evaluate(async () => {
+      return new Promise((resolve) => {
+        const req = indexedDB.open('biteme_db');
+        req.onsuccess = () => {
+          const db = req.result;
+          const tx = db.transaction(['cooking_sessions'], 'readonly');
+          const store = tx.objectStore('cooking_sessions');
+          const getAll = store.getAll();
+          getAll.onsuccess = () => {
+            db.close();
+            resolve(getAll.result[0] || null);
+          };
+        };
+      });
+    });
+
+    expect(session).not.toBeNull();
+    expect(session.recipe_id).toBe('test-curry');
+    expect(session.started_at).toBeTruthy();
+    expect(session.completed_at).toBeNull();
+  });
+
+  test('session ID passed to completion URL', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    const nextBtn = page.locator('#next-btn');
+
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await nextBtn.click();
+    await expect(page).toHaveURL(/completion\.html\?id=test-curry&session=\d+/);
+  });
+
+  test('cooking completion is recorded', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    const nextBtn = page.locator('#next-btn');
+
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await nextBtn.click();
+    await expect(page).toHaveURL(/completion\.html/);
+
+    // Wait for IndexedDB write to complete
+    await page.waitForTimeout(500);
+
+    const session = await page.evaluate(async () => {
+      return new Promise((resolve) => {
+        const req = indexedDB.open('biteme_db');
+        req.onsuccess = () => {
+          const db = req.result;
+          const tx = db.transaction(['cooking_sessions'], 'readonly');
+          const store = tx.objectStore('cooking_sessions');
+          const getAll = store.getAll();
+          getAll.onsuccess = () => {
+            db.close();
+            resolve(getAll.result[0] || null);
+          };
+        };
+      });
+    });
+
+    expect(session).not.toBeNull();
+    expect(session.recipe_id).toBe('test-curry');
+    expect(session.completed_at).toBeTruthy();
   });
 });

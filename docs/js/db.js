@@ -1,7 +1,7 @@
 // IndexedDB helper for BiteMe local storage
 
 const DB_NAME = 'biteme_db';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 let db = null;
 
 // Initialize database
@@ -30,6 +30,12 @@ function initDB() {
         shopStore.createIndex('recipe_id', 'recipe_id', { unique: false });
         shopStore.createIndex('checked_at', 'checked_at', { unique: false });
         shopStore.createIndex('created_at', 'created_at', { unique: false });
+      }
+
+      // Create cooking sessions object store
+      if (!db.objectStoreNames.contains('cooking_sessions')) {
+        const cookStore = db.createObjectStore('cooking_sessions', { keyPath: 'id', autoIncrement: true });
+        cookStore.createIndex('recipe_id', 'recipe_id', { unique: false });
       }
     };
   });
@@ -271,4 +277,81 @@ async function cleanupShoppingList() {
 async function getShoppingListCount() {
   const items = await getAllShoppingListItems();
   return items.filter(item => !item.checked_at).length;
+}
+
+// Cooking Session Functions
+
+// Save a cooking session start
+async function saveCookingStart(recipeId) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['cooking_sessions'], 'readwrite');
+  const store = transaction.objectStore('cooking_sessions');
+
+  const session = {
+    recipe_id: recipeId,
+    started_at: Date.now(),
+    completed_at: null
+  };
+
+  return new Promise((resolve, reject) => {
+    const request = store.add(session);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Save a cooking session completion
+async function saveCookingComplete(sessionId) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['cooking_sessions'], 'readwrite');
+  const store = transaction.objectStore('cooking_sessions');
+
+  return new Promise((resolve, reject) => {
+    const getRequest = store.get(sessionId);
+
+    getRequest.onsuccess = () => {
+      const session = getRequest.result;
+      if (!session) {
+        reject(new Error('Session not found'));
+        return;
+      }
+
+      session.completed_at = Date.now();
+
+      const updateRequest = store.put(session);
+      updateRequest.onsuccess = () => resolve(session);
+      updateRequest.onerror = () => reject(updateRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+}
+
+// Check if user has completed at least one cooking session
+async function hasCompletedCooking() {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['cooking_sessions'], 'readonly');
+  const store = transaction.objectStore('cooking_sessions');
+
+  return new Promise((resolve, reject) => {
+    const request = store.openCursor();
+
+    request.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor) {
+        if (cursor.value.completed_at !== null) {
+          resolve(true);
+          return;
+        }
+        cursor.continue();
+      } else {
+        resolve(false);
+      }
+    };
+
+    request.onerror = () => reject(request.error);
+  });
 }

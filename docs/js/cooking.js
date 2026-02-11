@@ -2,6 +2,7 @@
 
 let currentStep = 0; // Start at first cooking step
 let recipe = null;
+let cookingSessionId = null;
 
 document.addEventListener('DOMContentLoaded', async function() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -23,6 +24,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.getElementById('recipe-name').textContent = recipe.name;
   initializeCookingMode();
   renderStep();
+
+  saveCookingStart(recipeId).then(id => {
+    cookingSessionId = id;
+  }).catch(() => {});
 });
 
 function initializeCookingMode() {
@@ -140,7 +145,9 @@ function exitCookingMode() {
 }
 
 function finishCookingMode() {
-  window.location.href = `completion.html?id=${recipe.id}`;
+  const params = new URLSearchParams({ id: recipe.id });
+  if (cookingSessionId) params.set('session', cookingSessionId);
+  window.location.href = `completion.html?${params}`;
 }
 
 function scrollToTop() {
