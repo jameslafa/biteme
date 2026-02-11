@@ -1,8 +1,50 @@
-const CACHE_NAME = 'biteme-v16';
+const CACHE_NAME = 'biteme-v17';
 
-// Install - just activate immediately, don't pre-cache
+const APP_SHELL = [
+  './',
+  'index.html',
+  'recipe.html',
+  'cooking.html',
+  'shopping.html',
+  'completion.html',
+  'css/style.css',
+  'css/recipe.css',
+  'css/cooking.css',
+  'css/shopping.css',
+  'css/completion.css',
+  'js/db.js',
+  'js/recipes.js',
+  'js/app.js',
+  'js/cooking.js',
+  'js/shopping.js',
+  'js/completion.js',
+  'js/install.js',
+  'assets/icons/favicon.svg',
+  'assets/icons/apple-touch-icon.png',
+  'assets/icons/icon-192.png',
+  'assets/icons/icon-512.png',
+  'assets/illustrations/finished.svg',
+  'assets/illustrations/empty_cart.svg',
+  'assets/illustrations/empty_favourite.svg',
+  'assets/illustrations/celebrate.svg',
+  'assets/illustrations/winners.svg',
+  'assets/illustrations/empty.svg',
+  'manifest.webmanifest',
+];
+
+// Install - pre-cache app shell
 self.addEventListener('install', (event) => {
   console.log('[SW] Installing...');
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      // Use allSettled so one failure doesn't block everything
+      return Promise.allSettled(
+        APP_SHELL.map((url) => cache.add(url).catch((err) => {
+          console.warn('[SW] Failed to cache:', url, err);
+        }))
+      );
+    })
+  );
   self.skipWaiting();
 });
 
@@ -10,59 +52,71 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   console.log('[SW] Activating...');
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('[SW] Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((name) => {
+            if (name !== CACHE_NAME) {
+              console.log('[SW] Deleting old cache:', name);
+              return caches.delete(name);
+            }
+          })
+        );
+      })
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Fetch - cache on demand
+// Fetch handler
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+
   // Skip non-http requests
-  if (!event.request.url.startsWith('http')) {
+  if (!url.protocol.startsWith('http')) return;
+
+  // Don't intercept recipe data — let recipes.js handle via localStorage
+  if (url.pathname.endsWith('recipes.json') || url.pathname.endsWith('recipes-manifest.json')) {
     return;
   }
 
-  event.respondWith(
-    caches.match(event.request, { ignoreSearch: true })
-      .then((cachedResponse) => {
-        if (cachedResponse) {
-          console.log('[SW] Cache hit:', event.request.url);
-          return cachedResponse;
-        }
-
-        // Not in cache, fetch from network
-        console.log('[SW] Fetching:', event.request.url);
-        return fetch(event.request)
-          .then((response) => {
-            // Cache successful responses
-            if (response && response.status === 200) {
-              const responseToCache = response.clone();
-              caches.open(CACHE_NAME).then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-            }
-            return response;
-          })
-          .catch((error) => {
-            console.error('[SW] Fetch failed:', event.request.url, error);
-            // Return a basic offline page for navigation
-            if (event.request.mode === 'navigate') {
-              return new Response(
-                '<h1>Offline</h1><p>No cached version available.</p>',
-                { headers: { 'Content-Type': 'text/html' } }
-              );
-            }
-            return new Response('Offline', { status: 503 });
+  // Navigation requests (HTML pages)
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          // Cache by pathname only (strip query string) so recipe.html?id=X doesn't create separate entries
+          const cacheKey = url.origin + url.pathname;
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(cacheKey, responseToCache);
           });
+          return response;
+        })
+        .catch(() => {
+          // Offline: try to match by pathname
+          const cacheKey = url.origin + url.pathname;
+          return caches.match(cacheKey).then((cached) => {
+            return cached || caches.match('index.html');
+          });
+        })
+    );
+    return;
+  }
+
+  // Static assets (CSS, JS, images) — network-first with cache fallback
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return response;
+      })
+      .catch(() => {
+        return caches.match(event.request);
       })
   );
 });
