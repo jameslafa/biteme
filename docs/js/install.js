@@ -2,15 +2,36 @@
 
 let deferredPrompt = null;
 
+const DISMISSAL_COUNT_KEY = 'install-prompt-dismissals';
+const DISMISSED_AT_KEY = 'install-prompt-dismissed-at';
+const MAX_DISMISSALS = 3;
+const COOLDOWN_DAYS = 30;
+
 // Check if app is already installed (running in standalone mode)
 function isInstalled() {
   return window.matchMedia('(display-mode: standalone)').matches ||
          window.navigator.standalone === true;
 }
 
-// Check if user previously dismissed the prompt
-function wasDismissed() {
-  return localStorage.getItem('install-prompt-dismissed') === 'true';
+// Check if install prompt should be suppressed
+function shouldSuppressPrompt() {
+  const dismissals = parseInt(localStorage.getItem(DISMISSAL_COUNT_KEY) || '0');
+  if (dismissals >= MAX_DISMISSALS) return true;
+
+  const dismissedAt = parseInt(localStorage.getItem(DISMISSED_AT_KEY) || '0');
+  if (dismissedAt) {
+    const daysSince = (Date.now() - dismissedAt) / (1000 * 60 * 60 * 24);
+    if (daysSince < COOLDOWN_DAYS) return true;
+  }
+
+  return false;
+}
+
+// Record a dismissal
+function recordDismissal() {
+  const dismissals = parseInt(localStorage.getItem(DISMISSAL_COUNT_KEY) || '0');
+  localStorage.setItem(DISMISSAL_COUNT_KEY, String(dismissals + 1));
+  localStorage.setItem(DISMISSED_AT_KEY, String(Date.now()));
 }
 
 // Detect iOS
@@ -35,9 +56,15 @@ function hideInstallBanner() {
 }
 
 // Initialize install prompt
-function initInstallPrompt() {
-  // Don't show if already installed or dismissed
-  if (isInstalled() || wasDismissed()) {
+async function initInstallPrompt() {
+  // Don't show if already installed or suppressed
+  if (isInstalled() || shouldSuppressPrompt()) return;
+
+  // Only show after user has completed at least one recipe
+  try {
+    const completed = await hasCompletedCooking();
+    if (!completed) return;
+  } catch {
     return;
   }
 
@@ -47,7 +74,7 @@ function initInstallPrompt() {
 
   // iOS-specific instructions
   if (isIOS()) {
-    instructionsText.textContent = 'Get fullscreen experience and offline access';
+    instructionsText.textContent = 'Quick access, offline recipes';
 
     const modal = document.getElementById('install-modal');
     const modalClose = document.getElementById('modal-close');
@@ -88,23 +115,20 @@ function initInstallPrompt() {
 
     // Handle install button click
     installButton.addEventListener('click', async () => {
-      if (!deferredPrompt) {
-        return;
-      }
+      if (!deferredPrompt) return;
 
       // Show browser's install prompt
       deferredPrompt.prompt();
 
       // Wait for user choice
       const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User ${outcome} the install prompt`);
 
       // Clear the prompt
       deferredPrompt = null;
       hideInstallBanner();
 
       if (outcome === 'accepted') {
-        localStorage.setItem('install-prompt-dismissed', 'true');
+        recordDismissal();
       }
     });
   }
@@ -112,7 +136,7 @@ function initInstallPrompt() {
   // Handle close button
   closeButton.addEventListener('click', () => {
     hideInstallBanner();
-    localStorage.setItem('install-prompt-dismissed', 'true');
+    recordDismissal();
   });
 }
 

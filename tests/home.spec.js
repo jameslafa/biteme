@@ -127,3 +127,78 @@ test.describe('Home Page', () => {
     await expect(badge).toHaveText('1');
   });
 });
+
+test.describe('Install Prompt', () => {
+  test('install banner not shown without completed recipe', async ({ page }) => {
+    // Dispatch beforeinstallprompt to simulate browser event
+    await page.evaluate(() => {
+      window.dispatchEvent(new Event('beforeinstallprompt'));
+    });
+
+    await page.waitForTimeout(2500);
+
+    const banner = page.locator('#install-banner');
+    await expect(banner).toBeHidden();
+  });
+
+  test('install banner shown after recipe completion', async ({ page }) => {
+    // Complete a cooking session
+    await page.goto('/cooking.html?id=test-curry');
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+    await nextBtn.click();
+    await expect(page).toHaveURL(/completion\.html/);
+    await page.waitForTimeout(500);
+
+    // Go to home page — initInstallPrompt will check hasCompletedCooking
+    await page.goto('/');
+    await page.waitForTimeout(500);
+
+    // Dispatch beforeinstallprompt to trigger the banner path
+    await page.evaluate(() => {
+      window.dispatchEvent(new Event('beforeinstallprompt'));
+    });
+
+    await page.waitForTimeout(2500);
+
+    const banner = page.locator('#install-banner');
+    await expect(banner).toBeVisible();
+  });
+
+  test('install banner respects dismissal', async ({ page }) => {
+    // Complete a cooking session
+    await page.goto('/cooking.html?id=test-curry');
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+    await nextBtn.click();
+    await expect(page).toHaveURL(/completion\.html/);
+    await page.waitForTimeout(500);
+
+    // Go home, trigger banner, dismiss it
+    await page.goto('/');
+    await page.waitForTimeout(500);
+    await page.evaluate(() => {
+      window.dispatchEvent(new Event('beforeinstallprompt'));
+    });
+    await page.waitForTimeout(2500);
+    await expect(page.locator('#install-banner')).toBeVisible();
+
+    await page.locator('#install-close').click();
+    await expect(page.locator('#install-banner')).toBeHidden();
+
+    // Reload and try again — banner should not reappear (within 30-day cooldown)
+    await page.goto('/');
+    await page.waitForTimeout(500);
+    await page.evaluate(() => {
+      window.dispatchEvent(new Event('beforeinstallprompt'));
+    });
+    await page.waitForTimeout(2500);
+    await expect(page.locator('#install-banner')).toBeHidden();
+  });
+});
