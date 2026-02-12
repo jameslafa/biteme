@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupSearch();
   setupFavoritesFilter();
   updateCartCount();
+
+  // Refresh recipes when returning to the app (e.g. PWA resume)
+  document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'visible') {
+      const updated = await checkForRecipeUpdates();
+      if (updated) {
+        loadRecipes();
+      }
+    }
+  });
 });
 
 // Load and display all recipes

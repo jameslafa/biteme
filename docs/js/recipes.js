@@ -1,6 +1,29 @@
 // Cache for loaded recipes
 let recipesCache = null;
 
+// Check manifest and refresh recipes if version changed
+// Returns true if recipes were updated
+async function checkForRecipeUpdates() {
+  try {
+    const response = await fetch('recipes-manifest.json');
+    if (!response.ok) return false;
+
+    const manifest = await response.json();
+    const cachedManifest = localStorage.getItem('recipes-manifest');
+
+    if (cachedManifest) {
+      const cached = JSON.parse(cachedManifest);
+      if (cached.version === manifest.version) return false;
+    }
+
+    // Version changed — clear in-memory cache so next load fetches fresh
+    recipesCache = null;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Load recipes from JSON file with manifest-based caching
 async function loadRecipesData() {
   if (recipesCache) {
