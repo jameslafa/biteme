@@ -134,14 +134,12 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Accessible from footer or about section
 - Simple, elegant design matching site aesthetic
 
-### [ ] SEO & Social Sharing (Open Graph)
-- Add proper meta tags for recipe pages to improve SEO
-- Implement Open Graph tags for rich link previews when shared
-- Include recipe name, description, image, cooking time in meta tags
-- Generate dynamic og:image with recipe photo (or placeholder illustration)
-- Ensure recipe URLs unfurl nicely in messaging apps (WhatsApp, Slack, iMessage)
-- Consider Twitter Card markup for enhanced Twitter sharing
-- Add JSON-LD structured data for Google recipe rich results
+### [~] SEO & Social Sharing (Open Graph)
+- [x] Static OG tags on homepage and recipe page (title, description, image)
+- [x] Shared links show app branding and description in previews
+- [ ] Per-recipe OG tags (requires generating individual HTML pages at build time)
+- [ ] JSON-LD structured data for Google recipe rich results
+- **Note:** Dynamic per-recipe previews not possible with current client-side architecture. Would require build-time HTML generation per recipe.
 
 ## UX Improvements
 
