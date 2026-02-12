@@ -160,6 +160,18 @@ name: Pad Thai
 - Toast notification on homepage when new SW is installed
 - Only on homepage to avoid interrupting cooking or other flows
 
+## Screen Wake Lock
+
+**Decision:** Auto-acquire wake lock in cooking mode, no user toggle
+
+**Rationale:**
+- Cooking mode is explicitly hands-free — users shouldn't need to touch their phone to keep the screen on
+- The Screen Wake Lock API (`navigator.wakeLock.request('screen')`) is well supported
+- Auto-releases on navigation or tab hide, so no battery drain risk
+- Silent no-op if API unavailable — no error state needed
+
+**Alternative considered:** Toggle button to enable/disable — Rejected because requiring interaction defeats the hands-free purpose
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements

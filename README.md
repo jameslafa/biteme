@@ -22,7 +22,7 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
     <td align="center"><img src="documentation/screenshots/shopping.png" width="200" alt="Shopping list"></td>
   </tr>
   <tr>
-    <td align="center"><b>Hands-free cooking</b><br><sub>Distraction-free step-by-step mode designed for messy hands and busy kitchens</sub></td>
+    <td align="center"><b>Hands-free cooking</b><br><sub>Step-by-step mode with screen wake lock — designed for messy hands and busy kitchens</sub></td>
     <td align="center"><b>Shop smart</b><br><sub>All your missing ingredients in one place — check them off as you walk the aisles</sub></td>
   </tr>
 </table>

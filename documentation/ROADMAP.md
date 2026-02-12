@@ -87,6 +87,11 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - **Personal ratings** (local, no backend) vs **community ratings** (requires backend)
 - Start with personal ratings to avoid backend complexity?
 
+### [x] Screen Wake Lock in Cooking Mode
+- Keeps screen awake during cooking mode using the Screen Wake Lock API
+- Auto-acquires on entering cooking mode, auto-releases on navigation
+- Silent fallback if API unavailable — no error state or UI needed
+
 ### [ ] Cooking Timers with Alerts
 - For steps that require timing, add countdown timers
 - Send browser notifications/audio alerts when time is up

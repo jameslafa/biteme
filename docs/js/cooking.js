@@ -28,7 +28,19 @@ document.addEventListener('DOMContentLoaded', async function() {
   saveCookingStart(recipeId).then(id => {
     cookingSessionId = id;
   }).catch(() => {});
+
+  requestWakeLock();
 });
+
+async function requestWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      await navigator.wakeLock.request('screen');
+    }
+  } catch {
+    // Wake lock not available or denied — no action needed
+  }
+}
 
 function initializeCookingMode() {
   // Setup navigation buttons
