@@ -36,12 +36,12 @@ If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2.
 
 # Instructions
 
-1. Heat oil in a large pot over medium heat. Add onion and cook for about 5 minutes until soft.
-2. Add garlic, ginger, curry paste, cumin, and turmeric. Stir and cook for another minute until fragrant.
-3. Add pumpkin and potato cubes and stir everything together so they're coated in the spices.
-4. Pour in coconut milk and vegetable stock. Give it a good stir and bring to a gentle boil.
-5. Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the pumpkin and potatoes are tender. The floury potatoes will start to break down and thicken the sauce beautifully.
-6. Season with salt and pepper, then serve over rice (or with naan) topped with fresh coriander and a squeeze of lime.
+1. Heat {oil} in a large pot over medium heat. Add {onion} and cook for about 5 minutes until soft.
+2. Add {garlic}, {ginger}, {curry paste}, {cumin}, and {turmeric}. Stir and cook for another minute until fragrant.
+3. Add {pumpkin} and {potato} cubes and stir everything together so they're coated in the spices.
+4. Pour in {coconut milk} and {vegetable stock}. Give it a good stir and bring to a gentle boil.
+5. Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the {pumpkin} and {potatoes} are tender. The floury {potatoes} will start to break down and thicken the sauce beautifully.
+6. Season with {salt} and {pepper}, then serve over rice (or with naan) topped with fresh {coriander} and a squeeze of {lime}.
 
 # Serving Suggestions
 

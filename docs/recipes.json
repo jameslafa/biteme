@@ -79,12 +79,12 @@
       ]
     },
     "steps": [
-      "Heat oil in a large pot over medium heat. Add onion and cook for about 5 minutes until soft.",
-      "Add garlic, ginger, curry paste, cumin, and turmeric. Stir and cook for another minute until fragrant.",
-      "Add pumpkin and potato cubes and stir everything together so they're coated in the spices.",
-      "Pour in coconut milk and vegetable stock. Give it a good stir and bring to a gentle boil.",
-      "Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the pumpkin and potatoes are tender. The floury potatoes will start to break down and thicken the sauce beautifully.",
-      "Season with salt and pepper, then serve over rice (or with naan) topped with fresh coriander and a squeeze of lime."
+      "Heat {oil} in a large pot over medium heat. Add {onion} and cook for about 5 minutes until soft.",
+      "Add {garlic}, {ginger}, {curry paste}, {cumin}, and {turmeric}. Stir and cook for another minute until fragrant.",
+      "Add {pumpkin} and {potato} cubes and stir everything together so they're coated in the spices.",
+      "Pour in {coconut milk} and {vegetable stock}. Give it a good stir and bring to a gentle boil.",
+      "Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the {pumpkin} and {potatoes} are tender. The floury {potatoes} will start to break down and thicken the sauce beautifully.",
+      "Season with {salt} and {pepper}, then serve over rice (or with naan) topped with fresh {coriander} and a squeeze of {lime}."
     ],
     "serving_suggestions": "Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime. Great for meal prep – portion into containers for easy weeknight dinners throughout the week."
   },
@@ -154,13 +154,13 @@
       ]
     },
     "steps": [
-      "Soak chickpeas overnight in plenty of water with 1 teaspoon of bicarbonate of soda.",
-      "Drain and rinse the chickpeas. Place them in a pan with the second teaspoon of bicarbonate of soda and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
-      "Drain chickpeas over a bowl, saving the cooking water.",
-      "While the chickpeas are still warm, put them into a food processor with tahini, garlic, lemon juice, ice cubes, 2 tablespoons of the reserved chickpea water, and a good pinch of salt.",
-      "Blitz until smooth, then taste and adjust. You might need more tahini, garlic, lemon, salt, or chickpea water. Don't be shy about adding more tahini. Blitz for a few minutes at least until it's really smooth and creamy.",
+      "Soak {chickpeas} overnight in plenty of water with 1 teaspoon of {bicarbonate of soda}.",
+      "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {bicarbonate of soda} and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+      "Drain {chickpeas} over a bowl, saving the cooking water.",
+      "While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, and a good pinch of {salt}.",
+      "Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy.",
       "Transfer to a bowl, cover the surface with cling film, and let it rest for at least 30 minutes.",
-      "Serve drizzled with good olive oil and a squeeze of lemon."
+      "Serve drizzled with good {olive oil} and a squeeze of {lemon}."
     ],
     "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter."
   },
@@ -217,12 +217,12 @@
     },
     "steps": [
       "Preheat the oven to 220°C / 200°C fan / Gas 7 and lightly grease a large baking tray.",
-      "Whisk together flour, baking powder, and salt so the raising agent is evenly distributed.",
-      "Using your fingertips, rub the cold margarine into the flour until the mixture resembles fine breadcrumbs.",
-      "Stir in sugar. Add most of the plant milk and mix to form a soft and slightly sticky dough. If it's a little dry, add more milk until you get the right consistency.",
+      "Whisk together {flour}, {baking powder}, and {salt} so the raising agent is evenly distributed.",
+      "Using your fingertips, rub the cold {margarine} into the {flour} until the mixture resembles fine breadcrumbs.",
+      "Stir in {sugar}. Add most of the {plant milk} and mix to form a soft and slightly sticky dough. If it's a little dry, add more {milk} until you get the right consistency.",
       "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick.",
       "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up.",
-      "Brush the tops with a little plant milk.",
+      "Brush the tops with a little {plant milk}.",
       "Bake for 12-15 minutes until well risen and golden.",
       "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
     ],
