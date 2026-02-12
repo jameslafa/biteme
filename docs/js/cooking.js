@@ -65,12 +65,13 @@ async function enableScreenLock() {
     // Not available or denied
   }
 
-  // Unmuted silent video (keeps iOS awake via audio session).
-  // This runs inside a user gesture (button click) so iOS allows it.
+  // Video-only loop (no audio track) keeps iOS awake via active media
+  // playback without interfering with audio routing (e.g. AirPods).
   if (!noSleepVideo) {
     const video = document.createElement('video');
     video.setAttribute('playsinline', '');
     video.setAttribute('loop', '');
+    video.muted = true;
     video.src = 'assets/silent.mp4';
     video.style.cssText = 'position:fixed;top:-1px;left:-1px;width:1px;height:1px;opacity:0.01;';
     document.body.appendChild(video);
