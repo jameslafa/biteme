@@ -93,6 +93,46 @@ test.describe('Cooking Mode', () => {
     await expect(ingredientsContainer.locator('.step-ingredients-cooking')).toBeVisible();
   });
 
+  test('ingredient links are parsed and displayed correctly', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Step 1: "Heat {oil} in a pot" - should show oil as an ingredient
+    await expect(page.locator('#step-content')).toContainText('Heat');
+    await expect(page.locator('#step-content')).toContainText('oil');
+
+    const step1Container = page.locator('#step-ingredients-container');
+    await expect(step1Container).toBeVisible();
+    await expect(step1Container.locator('li')).toContainText('1 tbsp oil');
+
+    // Move to Step 2: "Add {onion} and {garlic}"
+    await page.locator('#next-btn').click();
+    await page.waitForTimeout(300);
+
+    const step2Container = page.locator('#step-ingredients-container');
+    await expect(step2Container).toBeVisible();
+    const step2Items = step2Container.locator('li');
+    await expect(step2Items.first()).toContainText('onion');
+    await expect(step2Items.nth(1)).toContainText('garlic');
+  });
+
+  test('steps without ingredient links show no ingredients', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Navigate to Step 5: "Simmer for 20 minutes" - no ingredient links
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await expect(page.locator('#step-progress')).toHaveText('Step 5 of 5');
+    await expect(page.locator('#step-content')).toContainText('Simmer');
+
+    // Ingredients container should be hidden when no ingredients referenced
+    const ingredientsContainer = page.locator('#step-ingredients-container');
+    await expect(ingredientsContainer).toBeHidden();
+  });
+
   test('previous button text changes after step 1', async ({ page }) => {
     await page.goto('/cooking.html?id=test-curry');
 

@@ -247,6 +247,94 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
                 bail!("Empty instruction step found at position {}", idx + 1);
             }
         }
+
+        // Check for unreferenced ingredients
+        let all_steps_text = steps.join(" ").to_lowercase();
+        let mut unreferenced_ingredients = Vec::new();
+
+        for (category, items) in &ingredients {
+            for ingredient in items {
+                let ingredient_text = ingredient.text.to_lowercase();
+
+                // Remove parenthetical content (e.g., "(400ml)", "(for soaking)")
+                let without_parens = ingredient_text
+                    .split('(')
+                    .next()
+                    .unwrap_or(&ingredient_text)
+                    .trim();
+
+                // Take the text before the first comma (main ingredient part)
+                let main_part = without_parens.split(',').next().unwrap_or(without_parens);
+
+                // Split and filter out measurements, containers, and common descriptive words
+                let words: Vec<&str> = main_part
+                    .split_whitespace()
+                    .filter(|w| {
+                        // Check if it's a measurement like "400g" or "150ml"
+                        let is_measurement_value = w.chars().take_while(|c| c.is_numeric() || *c == '.').count() > 0
+                            && (w.ends_with("g") || w.ends_with("ml") || w.ends_with("kg") || w.ends_with("l"));
+
+                        // Filter out measurements, numbers, containers, and common non-ingredient words
+                        !w.chars().all(|c| c.is_numeric() || c == '.')
+                        && !is_measurement_value
+                        && !["g", "kg", "ml", "l", "tsp", "tbsp", "cup", "cups", "cloves", "clove",
+                             "tin", "can", "jar", "bottle", "pack", "packet",
+                             "pieces", "piece", "slices", "slice", "sliced", "diced", "minced", "chopped",
+                             "grated", "crushed", "peeled", "cubed", "rinsed", "dried",
+                             "to", "for", "and", "the", "a", "an", "or",
+                             "thumb-sized", "fresh", "good", "quality", "about", "extra", "little",
+                             "pinch", "optional:", "optional", "juice"].contains(w)
+                    })
+                    .collect();
+
+                // Build potential ingredient references to check (both single words and phrases)
+                let mut potential_refs = Vec::new();
+
+                // Add single words (except "of")
+                for word in &words {
+                    if *word != "of" {
+                        potential_refs.push(word.to_string());
+                        // Add plural forms
+                        potential_refs.push(format!("{}s", word));
+                        potential_refs.push(format!("{}es", word.trim_end_matches('s')));
+                    }
+                }
+
+                // Add multi-word phrases with "of" (e.g., "bicarbonate of soda")
+                for i in 0..words.len() {
+                    if i + 2 < words.len() && words[i + 1] == "of" {
+                        potential_refs.push(format!("{} {} {}", words[i], words[i + 1], words[i + 2]));
+                    }
+                }
+
+                // Add 2-word phrases
+                if words.len() >= 2 {
+                    potential_refs.push(words[..2].join(" "));
+                }
+                // Add 3-word phrases (if not already added via "of" check)
+                if words.len() >= 3 && words.get(1) != Some(&"of") {
+                    potential_refs.push(words[..3].join(" "));
+                }
+
+                // Check if any potential reference appears in {curly braces} in steps
+                let is_referenced = potential_refs.iter().any(|ref_name| {
+                    all_steps_text.contains(&format!("{{{}}}", ref_name))
+                });
+
+                if !is_referenced && !words.is_empty() {
+                    unreferenced_ingredients.push(format!("{} ({})", ingredient.text, category));
+                }
+            }
+        }
+
+        // Print warnings for unreferenced ingredients (non-blocking)
+        if !unreferenced_ingredients.is_empty() {
+            eprintln!("\n⚠️  WARNING: The following ingredients are not linked in any instruction step:");
+            for ingredient in &unreferenced_ingredients {
+                eprintln!("   - {}", ingredient);
+            }
+            eprintln!("   Consider adding {{ingredient}} references in your steps for better UX.\n");
+        }
     }
 
     Ok(Recipe {
@@ -937,6 +1025,89 @@ tags: [test]
         assert!(recipe.ingredients.contains_key("Fresh"));
         assert!(recipe.ingredients.contains_key("Pantry"));
         assert!(recipe.ingredients.contains_key("Spices"));
+    }
+
+    #[test]
+    fn test_lint_detects_unreferenced_ingredients() {
+        let test_recipe = r#"---
+id: lint-test
+name: Lint Test
+description: Test unreferenced ingredient detection
+servings: 2
+time: 10
+difficulty: easy
+tags: [test]
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup flour
+- 2 tbsp oil
+- 1 tsp salt
+
+# Instructions
+
+1. Mix {flour} and {salt}
+2. Done
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("lint-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        // This should not error in lint mode but should print warning about unreferenced oil
+        let result = parse_recipe_file(&test_file, true);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        // Oil is not referenced, so it should trigger a warning (but not fail)
+    }
+
+    #[test]
+    fn test_ingredient_links_preserved_in_steps() {
+        let test_recipe = r#"---
+id: ingredient-links-test
+name: Ingredient Links Test
+description: Test that ingredient links are preserved in steps
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup rice
+- 2 tbsp oil
+
+## Fresh
+- 1 onion, diced
+
+# Instructions
+
+1. Heat {oil} in a pot
+2. Add {onion} and cook until soft
+3. Add {rice} and {water}
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("ingredient-links-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+
+        // Check that ingredient links are preserved with curly braces
+        assert_eq!(recipe.steps.len(), 3);
+        assert!(recipe.steps[0].contains("{oil}"), "Step 1 should contain {{oil}}");
+        assert!(recipe.steps[1].contains("{onion}"), "Step 2 should contain {{onion}}");
+        assert!(recipe.steps[2].contains("{rice}"), "Step 3 should contain {{rice}}");
+        assert!(recipe.steps[2].contains("{water}"), "Step 3 should contain {{water}}");
     }
 
     #[test]
