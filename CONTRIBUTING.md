@@ -1,8 +1,34 @@
 # Contributing to BiteMe
 
-Thank you for your interest in contributing! This guide will help you add recipes to the project.
+Thank you for your interest in contributing! Whether you're a developer or just someone with a great recipe, there's a way for you to help.
 
-## Adding a New Recipe
+## Adding a Recipe (No Coding Required)
+
+You don't need to be a programmer to contribute a recipe. Here's how:
+
+### Step 1: Format your recipe with a chatbot
+
+Download the [recipe format guide](documentation/RECIPE_FORMAT.md) and give it to any AI chatbot (ChatGPT, Claude, Gemini, etc.) along with your recipe. Use a prompt like:
+
+> Here is a recipe format specification. Please convert my recipe into this exact format. My recipe is: [paste your recipe, or describe it, or attach a photo]
+
+The chatbot will give you a properly formatted `.md` file ready to go.
+
+### Step 2: Add it to GitHub
+
+1. Go to the [`recipes/`](https://github.com/jameslafa/biteme/tree/main/recipes) folder on GitHub
+2. Click **Add file** → **Create new file**
+3. Name the file `your-recipe-id.md` (using the `id` from the formatted recipe)
+4. Paste the formatted recipe
+5. Click **Propose new file** and follow the prompts to open a pull request
+
+That's it! We'll review it and get it added.
+
+---
+
+## Developer Guide
+
+### Adding a Recipe Manually
 
 1. **Create a new markdown file** in the `recipes/` folder
 2. **Choose a unique ID** (lowercase-with-dashes format)
@@ -10,7 +36,7 @@ Thank you for your interest in contributing! This guide will help you add recipe
 4. **Write your recipe** following the format below
 5. **Submit a pull request**
 
-## Recipe Format
+### Recipe Format
 
 Create a file like `recipes/your-recipe-name.md`:
 
@@ -25,64 +51,81 @@ difficulty: medium
 tags: [thai, curry, dinner]
 ---
 
-## Ingredients
+# Notes
 
-### Fresh
+Any tips or important notes for the cook (optional).
+
+# Ingredients
+
+## Fresh
 - 2 bell peppers, sliced
 - 1 onion, diced
 
-### Spices
+## Spices
 - 2 tbsp green curry paste
 - 1 tsp salt
 
-## Instructions
+# Instructions
 
 1. Heat {oil} in a large pan over medium heat
 2. Add {curry paste} and cook for 1 minute
 3. Add {bell peppers} and {onion}, cook until tender
 4. Serve hot with rice
 
-## Notes
-
-Any tips or important notes for the cook (optional).
-
-## Serving Suggestions
+# Serving Suggestions
 
 How to serve the dish, garnishes, side dishes (optional).
 ```
 
-## Recipe ID Guidelines
+### Recipe ID Guidelines
 
 **Good IDs:**
-- ✅ `thai-green-curry`
-- ✅ `vegan-chocolate-cake`
-- ✅ `quick-tomato-soup`
+- `thai-green-curry`
+- `vegan-chocolate-cake`
+- `quick-tomato-soup`
 
 **Avoid:**
-- ❌ `recipe1` (not descriptive)
-- ❌ `Thai_Green_Curry` (use lowercase-with-dashes)
-- ❌ `the-best-curry-ever` (keep it simple)
+- `recipe1` (not descriptive)
+- `Thai_Green_Curry` (use lowercase-with-dashes)
+- `the-best-curry-ever` (keep it simple)
 
-**Important:** The ID must be unique. The automated linter will check for duplicates when you submit your PR.
+**Important:** The ID must be unique across all recipes.
 
-## Required Fields
+### Required Fields
 
-- `id` - Unique identifier (lowercase-with-dashes)
-- `name` - Display name for the recipe
-- `description` - Short description shown on recipe cards
-- `servings` - Number of servings
-- `time` - Total time in minutes
-- `difficulty` - easy, medium, or hard
-- `tags` - Array of tags for filtering
+| Field | Type | Constraints |
+|-------|------|-------------|
+| `id` | string | Lowercase letters and dashes only. No leading/trailing/consecutive dashes. Max 100 characters. |
+| `name` | string | 3–200 characters. |
+| `description` | string | 10–500 characters. |
+| `servings` | integer | 1–100. |
+| `time` | integer | 1–1440 minutes. |
+| `difficulty` | string | `easy`, `medium`, or `hard`. |
+| `tags` | array | At least 1. Lowercase, no spaces, no duplicates. |
 
-## Optional Sections
+### Sections
 
-- **Notes** - Tips, variations, or important info (shown on first cooking step)
-- **Serving Suggestions** - How to serve, garnishes, sides (shown on last cooking step)
+Sections use `#` (H1) headings. Ingredient categories use `##` (H2) headings.
 
-## Ingredient Linking
+**Section order:** Notes (optional) → Ingredients → Instructions → Serving Suggestions (optional)
 
-Link ingredients in your instructions using `{ingredient name}` syntax. This highlights ingredients in cooking mode so users can see exactly what they need for each step.
+### Optional Sections
+
+- **Notes** — Tips, variations, or important info (shown before cooking starts)
+- **Serving Suggestions** — How to serve, garnishes, sides (shown on last cooking step)
+
+### Ingredient Categories
+
+Group ingredients under `##` headings. Valid categories:
+
+- `## Fresh` — produce, herbs
+- `## Fridge` — dairy, cream, fridge items
+- `## Spices` — dried spices and seasonings
+- `## Pantry` — oils, stock, canned/dried goods
+
+### Ingredient Linking
+
+Link ingredients in your instructions using `{ingredient name}` syntax. Use a short, recognizable name — not the full ingredient line. This highlights ingredients in cooking mode so users can see what they need for each step.
 
 ```markdown
 1. Heat {oil} in a large pan
@@ -91,25 +134,6 @@ Link ingredients in your instructions using `{ingredient name}` syntax. This hig
 ```
 
 The linter will warn you if any ingredients aren't referenced in the instructions.
-
-## Ingredient Categories
-
-Group ingredients by kitchen location for better organization:
-
-- Fresh
-- Fridge
-- Spices
-- Pantry
-
-## Automated Validation
-
-When you open a PR, GitHub Actions will automatically:
-- ✅ Validate recipe format
-- ✅ Check for duplicate IDs
-- ✅ Verify required fields
-- ✅ Ensure proper markdown structure
-
-If validation fails, the error message will tell you exactly what to fix.
 
 ## Questions?
 
