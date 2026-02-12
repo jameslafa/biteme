@@ -29,19 +29,60 @@ document.addEventListener('DOMContentLoaded', async function() {
     cookingSessionId = id;
   }).catch(() => {});
 
-  keepScreenAwake();
 });
 
-// Screen wake: uses Wake Lock API with a silent video fallback for iOS
+// Screen wake lock — toggled by user via header button.
+// Uses Wake Lock API + unmuted silent video (iOS needs a user gesture
+// to play unmuted audio, which is what actually prevents screen sleep).
+let screenLockActive = false;
 let wakeLockSentinel = null;
 let noSleepVideo = null;
 
-async function keepScreenAwake() {
-  await requestWakeLock();
-  startNoSleepVideo();
+function initScreenLockButton() {
+  const btn = document.getElementById('screen-lock-btn');
+  btn.addEventListener('click', () => {
+    if (screenLockActive) {
+      disableScreenLock();
+    } else {
+      enableScreenLock();
+    }
+  });
 }
 
-function releaseScreenAwake() {
+async function enableScreenLock() {
+  screenLockActive = true;
+  document.getElementById('screen-lock-btn').classList.add('active');
+
+  // Wake Lock API (works on Android/desktop Chrome)
+  try {
+    if ('wakeLock' in navigator) {
+      wakeLockSentinel = await navigator.wakeLock.request('screen');
+      wakeLockSentinel.addEventListener('release', () => {
+        wakeLockSentinel = null;
+      });
+    }
+  } catch {
+    // Not available or denied
+  }
+
+  // Unmuted silent video (keeps iOS awake via audio session).
+  // This runs inside a user gesture (button click) so iOS allows it.
+  if (!noSleepVideo) {
+    const video = document.createElement('video');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('loop', '');
+    video.src = 'assets/silent.mp4';
+    video.style.cssText = 'position:fixed;top:-1px;left:-1px;width:1px;height:1px;opacity:0.01;';
+    document.body.appendChild(video);
+    noSleepVideo = video;
+  }
+  noSleepVideo.play().catch(() => {});
+}
+
+function disableScreenLock() {
+  screenLockActive = false;
+  document.getElementById('screen-lock-btn').classList.remove('active');
+
   if (wakeLockSentinel) {
     wakeLockSentinel.release();
     wakeLockSentinel = null;
@@ -53,44 +94,22 @@ function releaseScreenAwake() {
   }
 }
 
-async function requestWakeLock() {
-  try {
-    if ('wakeLock' in navigator) {
-      wakeLockSentinel = await navigator.wakeLock.request('screen');
-      wakeLockSentinel.addEventListener('release', () => {
-        wakeLockSentinel = null;
-      });
-    }
-  } catch {
-    // Wake lock not available or denied — no action needed
-  }
-}
-
-function startNoSleepVideo() {
-  if (noSleepVideo) return;
-  const video = document.createElement('video');
-  video.setAttribute('playsinline', '');
-  video.setAttribute('loop', '');
-  video.muted = true;
-  video.src = 'assets/silent.mp4';
-  video.style.cssText = 'position:fixed;top:-1px;left:-1px;width:1px;height:1px;opacity:0.01;';
-  document.body.appendChild(video);
-  video.play().catch(() => {});
-  noSleepVideo = video;
-}
-
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    if (!wakeLockSentinel) requestWakeLock();
-    if (noSleepVideo) noSleepVideo.play().catch(() => {});
+  if (!screenLockActive || document.visibilityState !== 'visible') return;
+  if (!wakeLockSentinel) {
+    navigator.wakeLock?.request('screen').then(s => {
+      wakeLockSentinel = s;
+      s.addEventListener('release', () => { wakeLockSentinel = null; });
+    }).catch(() => {});
   }
+  if (noSleepVideo) noSleepVideo.play().catch(() => {});
 });
 
 function initializeCookingMode() {
-  // Setup navigation buttons
   document.getElementById('prev-btn').addEventListener('click', previousStep);
   document.getElementById('next-btn').addEventListener('click', nextStep);
   document.getElementById('exit-btn').addEventListener('click', exitCookingMode);
+  initScreenLockButton();
 }
 
 function updateProgressBar() {
@@ -219,12 +238,12 @@ function nextStep() {
 }
 
 function exitCookingMode() {
-  releaseScreenAwake();
+  disableScreenLock();
   window.location.href = `recipe.html?id=${recipe.id}`;
 }
 
 function finishCookingMode() {
-  releaseScreenAwake();
+  disableScreenLock();
   const params = new URLSearchParams({ id: recipe.id });
   if (cookingSessionId) params.set('session', cookingSessionId);
   window.location.href = `completion.html?${params}`;
