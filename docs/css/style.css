@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+html {
+  touch-action: manipulation;
+}
+
 :root {
   /* Color Palette - Balanced Elegance */
   --primary-color: #6B9080;
