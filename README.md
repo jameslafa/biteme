@@ -12,12 +12,16 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
   <tr>
     <td align="center"><img src="documentation/screenshots/home.png" width="200" alt="Browse recipes"></td>
     <td align="center"><img src="documentation/screenshots/recipe.png" width="200" alt="Recipe detail"></td>
-    <td align="center"><img src="documentation/screenshots/cooking.png" width="200" alt="Cooking mode"></td>
-    <td align="center"><img src="documentation/screenshots/shopping.png" width="200" alt="Shopping list"></td>
   </tr>
   <tr>
     <td align="center"><b>Browse & discover</b><br><sub>Search recipes, save your favourites, find what to cook tonight</sub></td>
     <td align="center"><b>Plan your cook</b><br><sub>Clear ingredient list — check off what you have, add the rest to your shopping list</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="documentation/screenshots/cooking.png" width="200" alt="Cooking mode"></td>
+    <td align="center"><img src="documentation/screenshots/shopping.png" width="200" alt="Shopping list"></td>
+  </tr>
+  <tr>
     <td align="center"><b>Hands-free cooking</b><br><sub>Distraction-free step-by-step mode designed for messy hands and busy kitchens</sub></td>
     <td align="center"><b>Shop smart</b><br><sub>All your missing ingredients in one place — check them off as you walk the aisles</sub></td>
   </tr>
