@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v17';
+const CACHE_NAME = 'biteme-v18';
 
 const APP_SHELL = [
   './',
@@ -19,6 +19,7 @@ const APP_SHELL = [
   'js/shopping.js',
   'js/completion.js',
   'js/install.js',
+  'js/sw-update.js',
   'assets/icons/favicon.svg',
   'assets/icons/apple-touch-icon.png',
   'assets/icons/icon-192.png',
