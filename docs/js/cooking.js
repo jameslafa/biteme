@@ -32,15 +32,26 @@ document.addEventListener('DOMContentLoaded', async function() {
   requestWakeLock();
 });
 
+let wakeLockSentinel = null;
+
 async function requestWakeLock() {
   try {
     if ('wakeLock' in navigator) {
-      await navigator.wakeLock.request('screen');
+      wakeLockSentinel = await navigator.wakeLock.request('screen');
+      wakeLockSentinel.addEventListener('release', () => {
+        wakeLockSentinel = null;
+      });
     }
   } catch {
     // Wake lock not available or denied — no action needed
   }
 }
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && !wakeLockSentinel) {
+    requestWakeLock();
+  }
+});
 
 function initializeCookingMode() {
   // Setup navigation buttons
