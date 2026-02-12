@@ -92,6 +92,22 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Auto-acquires on entering cooking mode, auto-releases on navigation
 - Silent fallback if API unavailable — no error state or UI needed
 
+### [ ] Recipe Author & Date
+- Add `author` and `date` fields to recipe frontmatter
+- Display author name and creation date on recipe detail page
+- Credit contributors directly on the recipes they submit
+
+### [ ] Unit System Toggle (Metric / Imperial)
+- Allow users to switch between metric and imperial measurements
+- Convert quantities in ingredient lists (g ↔ oz, ml ↔ fl oz, °C ↔ °F, etc.)
+- Store preference in IndexedDB, default based on locale
+- **To explore**: Handling imprecise conversions, recipe-specific edge cases
+
+### [ ] Adjustable Servings
+- Let users change the number of servings on a recipe
+- Automatically scale ingredient quantities proportionally
+- **To explore**: Parsing quantities from ingredient text, handling non-linear scaling (e.g. spices), displaying original vs adjusted amounts
+
 ### [ ] Cooking Timers with Alerts
 - For steps that require timing, add countdown timers
 - Send browser notifications/audio alerts when time is up
