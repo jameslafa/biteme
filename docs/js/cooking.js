@@ -57,7 +57,29 @@ function renderStep() {
 
   // Update step content
   const parsedStep = parseStepText(step, recipe.ingredients, currentStep);
-  document.getElementById('step-content').innerHTML = `<p>${parsedStep}</p>`;
+  let stepContentHTML = `<p>${parsedStep}</p>`;
+
+  // Add notes after step 1 instruction
+  if (currentStep === 0 && recipe.notes) {
+    stepContentHTML += `
+      <div class="step-notes">
+        <h4>Chef's Notes</h4>
+        <p>${recipe.notes}</p>
+      </div>
+    `;
+  }
+
+  // Add serving suggestions after last step instruction
+  if (currentStep === totalSteps - 1 && recipe.serving_suggestions) {
+    stepContentHTML += `
+      <div class="step-serving">
+        <h4>Serving Suggestions</h4>
+        <p>${recipe.serving_suggestions}</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('step-content').innerHTML = stepContentHTML;
 
   // Update step ingredients in separate container
   const stepIngredients = getStepIngredients(step, recipe.ingredients);

@@ -7,6 +7,7 @@
     "time": 30,
     "difficulty": "easy",
     "tags": ["vegan", "dinner", "curry"],
+    "notes": "Make sure to use fresh spices for best flavor. This curry tastes even better the next day.",
     "ingredients": {
       "Fresh": [
         { "id": 1, "text": "1 onion, diced" },
@@ -27,7 +28,8 @@
       "Add {curry powder}",
       "Add {lentils} and {broth}",
       "Simmer for 20 minutes"
-    ]
+    ],
+    "serving_suggestions": "Serve over rice with naan bread. Garnish with fresh cilantro."
   },
   {
     "id": "test-salad",

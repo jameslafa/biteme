@@ -94,4 +94,31 @@ test.describe('Recipe Detail', () => {
     await expect(page.locator('.error')).toBeVisible();
     await expect(page.locator('.error')).toContainText('Recipe not found');
   });
+
+  test('displays notes and serving suggestions when present', async ({ page }) => {
+    await page.goto('/recipe.html?id=test-curry');
+
+    // Check notes section is visible
+    const notesSection = page.locator('.recipe-notes');
+    await expect(notesSection).toBeVisible();
+    await expect(notesSection.locator('h3')).toHaveText('Notes');
+    await expect(notesSection.locator('p')).toContainText('Make sure to use fresh spices');
+
+    // Check serving suggestions section is visible
+    const servingSection = page.locator('.serving-suggestions');
+    await expect(servingSection).toBeVisible();
+    await expect(servingSection.locator('h3')).toHaveText('Serving Suggestions');
+    await expect(servingSection.locator('p')).toContainText('Serve over rice with naan bread');
+  });
+
+  test('hides notes and serving suggestions when not present', async ({ page }) => {
+    await page.goto('/recipe.html?id=test-salad');
+
+    // Test salad has no notes or serving suggestions
+    const notesSection = page.locator('.recipe-notes');
+    const servingSection = page.locator('.serving-suggestions');
+
+    await expect(notesSection).toBeHidden();
+    await expect(servingSection).toBeHidden();
+  });
 });

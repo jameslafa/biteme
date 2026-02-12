@@ -229,6 +229,29 @@
   justify-content: center;
 }
 
+/* Notes and Serving Suggestions */
+.recipe-notes,
+.serving-suggestions {
+  margin-top: var(--spacing-lg);
+  padding-left: var(--spacing-md);
+  border-left: 3px solid var(--accent-color);
+}
+
+.recipe-notes h3,
+.serving-suggestions h3 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+}
+
+.recipe-notes p,
+.serving-suggestions p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
 /* Action Buttons */
 .action-buttons {
   margin-top: var(--spacing-xl);

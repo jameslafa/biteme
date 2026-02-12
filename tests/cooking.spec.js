@@ -226,3 +226,85 @@ test.describe('Cooking Analytics', () => {
     expect(session.completed_at).toBeTruthy();
   });
 });
+
+test.describe('Recipe Notes and Serving Suggestions', () => {
+  test('displays notes on first step after instruction', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Should be on step 1
+    await expect(page.locator('#step-progress')).toHaveText('Step 1 of 5');
+
+    // Check that notes appear after the main step instruction
+    const stepContent = page.locator('#step-content');
+    await expect(stepContent).toContainText('Heat');
+
+    const notes = stepContent.locator('.step-notes');
+    await expect(notes).toBeVisible();
+    await expect(notes.locator('h4')).toHaveText("Chef's Notes");
+    await expect(notes.locator('p')).toContainText('Make sure to use fresh spices');
+  });
+
+  test('hides notes on steps other than first', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Move to step 2
+    await page.locator('#next-btn').click();
+    await page.waitForTimeout(300);
+
+    await expect(page.locator('#step-progress')).toHaveText('Step 2 of 5');
+
+    // Notes should not be visible
+    const notes = page.locator('.step-notes');
+    await expect(notes).toBeHidden();
+  });
+
+  test('displays serving suggestions on last step after instruction', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    const nextBtn = page.locator('#next-btn');
+
+    // Navigate to last step (step 5)
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await expect(page.locator('#step-progress')).toHaveText('Step 5 of 5');
+
+    // Check that serving suggestions appear after the main step instruction
+    const stepContent = page.locator('#step-content');
+    await expect(stepContent).toContainText('Simmer');
+
+    const serving = stepContent.locator('.step-serving');
+    await expect(serving).toBeVisible();
+    await expect(serving.locator('h4')).toHaveText('Serving Suggestions');
+    await expect(serving.locator('p')).toContainText('Serve over rice with naan bread');
+  });
+
+  test('hides serving suggestions on steps other than last', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // On step 1
+    await expect(page.locator('#step-progress')).toHaveText('Step 1 of 5');
+
+    // Serving suggestions should not be visible
+    const serving = page.locator('.step-serving');
+    await expect(serving).toBeHidden();
+  });
+
+  test('recipe without notes and serving suggestions works normally', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-salad');
+
+    // Step 1 - no notes
+    await expect(page.locator('.step-notes')).toBeHidden();
+
+    // Go to last step
+    await page.locator('#next-btn').click();
+    await page.waitForTimeout(300);
+    await page.locator('#next-btn').click();
+    await page.waitForTimeout(300);
+
+    // Last step - no serving suggestions
+    await expect(page.locator('.step-serving')).toBeHidden();
+  });
+});

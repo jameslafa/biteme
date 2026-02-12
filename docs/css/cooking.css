@@ -122,6 +122,37 @@
   margin: 0;
 }
 
+/* Step notes and serving suggestions in cooking mode */
+.step-notes,
+.step-serving {
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-md);
+  border-left: 3px solid var(--accent-color);
+}
+
+.step-notes h4,
+.step-serving h4 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.step-notes p,
+.step-serving p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  font-style: italic;
+}
+
 /* Ingredient references in steps */
 .step-content .ingredient-ref {
   color: var(--primary-color);
