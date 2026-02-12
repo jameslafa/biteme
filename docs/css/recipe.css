@@ -95,6 +95,17 @@
   transform: translateX(-50%) translateY(0);
 }
 
+/* Cooking Stats */
+.cooking-stats {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.cooking-stats:empty {
+  display: none;
+}
+
 /* Sections */
 .ingredients,
 .instructions {

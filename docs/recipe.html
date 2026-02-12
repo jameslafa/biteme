@@ -94,6 +94,8 @@
             </div>
           </div>
 
+          <div id="cooking-stats" class="cooking-stats"></div>
+
           <div class="recipe-tags">
             ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
           </div>
@@ -169,6 +171,9 @@
 
       // Setup add to cart buttons
       setupShoppingCartButtons(recipeId, recipe.name);
+
+      // Show cooking stats
+      showCookingStats(recipeId);
 
       // Update cart count
       updateCartCount();
@@ -300,6 +305,27 @@
           button.setAttribute('aria-label', 'Add to shopping list');
         }
       });
+    }
+
+    async function showCookingStats(recipeId) {
+      try {
+        const sessions = await getCookingSessionsByRecipe(recipeId);
+        if (sessions.length === 0) return;
+
+        const durations = sessions.map(s => s.completed_at - s.started_at);
+        const lastDuration = durations[durations.length - 1];
+
+        const statsEl = document.getElementById('cooking-stats');
+        if (!statsEl) return;
+
+        if (sessions.length === 1) {
+          statsEl.textContent = `Cooked once \u00B7 ${formatCookingDuration(lastDuration)}`;
+        } else {
+          statsEl.textContent = `Cooked ${sessions.length} times \u00B7 Last time: ${formatCookingDuration(lastDuration)}`;
+        }
+      } catch {
+        // Silently ignore
+      }
     }
 
     async function updateCartCount() {

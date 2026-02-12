@@ -323,6 +323,15 @@ main {
   margin-bottom: var(--spacing-sm);
 }
 
+/* Card Cooking Stats */
+.card-cooking-stats {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-top: var(--spacing-sm);
+  margin-bottom: 0;
+}
+
 /* Tags */
 .recipe-tags {
   display: flex;

@@ -119,6 +119,34 @@ test.describe('Home Page', () => {
     await expect(page.locator('.recipe-card')).toHaveCount(3);
   });
 
+  test('recipe card shows cooking stats when sessions exist', async ({ page }) => {
+    // Seed a completed cooking session for test-curry
+    await page.evaluate(async () => {
+      await initDB();
+      const tx = db.transaction(['cooking_sessions'], 'readwrite');
+      const store = tx.objectStore('cooking_sessions');
+      const now = Date.now();
+      store.add({ recipe_id: 'test-curry', started_at: now - 2100000, completed_at: now });
+      await new Promise(resolve => { tx.oncomplete = resolve; });
+    });
+
+    // Reload to pick up the seeded session
+    await page.goto('/');
+    await page.waitForTimeout(500);
+
+    const firstCard = page.locator('.recipe-card').first();
+    const stats = firstCard.locator('.card-cooking-stats');
+    await expect(stats).toBeVisible();
+    await expect(stats).toContainText('Cooked once');
+    await expect(stats).toContainText('35 minutes');
+  });
+
+  test('recipe card hides cooking stats when no sessions', async ({ page }) => {
+    const firstCard = page.locator('.recipe-card').first();
+    const stats = firstCard.locator('.card-cooking-stats');
+    await expect(stats).toHaveCount(0);
+  });
+
   test('navigate to recipe', async ({ page }) => {
     await page.locator('.recipe-card').first().click();
     await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);

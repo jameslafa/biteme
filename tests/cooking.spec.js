@@ -227,6 +227,39 @@ test.describe('Cooking Analytics', () => {
   });
 });
 
+test.describe('Cooking Time on Completion', () => {
+  test('shows cooking time after finishing', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    const nextBtn = page.locator('#next-btn');
+
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await nextBtn.click();
+    await expect(page).toHaveURL(/completion\.html/);
+
+    // Wait for session to be saved and time to render
+    await page.waitForTimeout(500);
+
+    const cookingTime = page.locator('#cooking-time');
+    await expect(cookingTime).toBeVisible();
+    await expect(cookingTime).toContainText('Cooked in');
+  });
+
+  test('hides cooking time when no session', async ({ page }) => {
+    // Navigate directly to completion without a session ID
+    await page.goto('/completion.html?id=test-curry');
+
+    await page.waitForTimeout(500);
+
+    const cookingTime = page.locator('#cooking-time');
+    await expect(cookingTime).toBeHidden();
+  });
+});
+
 test.describe('Recipe Notes and Serving Suggestions', () => {
   test('displays notes on first step after instruction', async ({ page }) => {
     await page.goto('/cooking.html?id=test-curry');

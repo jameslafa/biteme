@@ -44,6 +44,30 @@ async function displayFavorites() {
   await displayRecipes(favoriteRecipes);
 }
 
+// Build a map of recipe ID → { count, avgDuration } from completed sessions
+async function getCookingStatsMap() {
+  try {
+    const sessions = await getAllCompletedSessions();
+    const map = {};
+
+    for (const session of sessions) {
+      if (!map[session.recipe_id]) {
+        map[session.recipe_id] = { count: 0, totalDuration: 0 };
+      }
+      map[session.recipe_id].count++;
+      map[session.recipe_id].totalDuration += (session.completed_at - session.started_at);
+    }
+
+    for (const id of Object.keys(map)) {
+      map[id].avgDuration = map[id].totalDuration / map[id].count;
+    }
+
+    return map;
+  } catch {
+    return {};
+  }
+}
+
 // Display recipes in the grid
 async function displayRecipes(recipes) {
   const recipeGrid = document.getElementById('recipe-grid');
@@ -87,8 +111,22 @@ async function displayRecipes(recipes) {
     return;
   }
 
+  // Fetch cooking stats once for all cards
+  const cookingStats = await getCookingStatsMap();
+
   // Render cards
-  recipeGrid.innerHTML = recipes.map(recipe => `
+  recipeGrid.innerHTML = recipes.map(recipe => {
+    const stats = cookingStats[recipe.id];
+    let statsHtml = '';
+    if (stats) {
+      const timeStr = stats.count === 1
+        ? formatCookingDuration(stats.avgDuration)
+        : `~${formatCookingDuration(stats.avgDuration)}`;
+      const countStr = stats.count === 1 ? 'Cooked once' : `Cooked ${stats.count} times`;
+      statsHtml = `<p class="card-cooking-stats">${countStr} \u00B7 ${timeStr}</p>`;
+    }
+
+    return `
     <div class="recipe-card" onclick="viewRecipe('${recipe.id}')">
       <div class="recipe-card-header">
         <h3 class="recipe-title">${recipe.name}</h3>
@@ -102,8 +140,10 @@ async function displayRecipes(recipes) {
       <div class="recipe-tags">
         ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
       </div>
+      ${statsHtml}
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   // Update favorite states and setup click handlers
   for (const recipe of recipes) {

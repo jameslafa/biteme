@@ -92,10 +92,11 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Send browser notifications/audio alerts when time is up
 - **To explore**: Browser notification permissions, audio alerts, mobile vibration
 
-### [ ] Cooking Time Tracking
+### [x] Cooking Time Tracking
 - [x] Track cooking sessions (start/complete timestamps) in IndexedDB
-- [ ] Display total time on completion page
-- [ ] Store and browse cooking history for personal reference
+- [x] Display elapsed time on completion page ("Cooked in 32 minutes")
+- [x] Show cooking history on recipe detail page (times cooked, last duration)
+- [x] Show cooking indicator on homepage cards (times cooked, average duration)
 
 ### [ ] Post-Cooking Complexity Rating
 - After finishing a recipe, ask user to rate complexity

@@ -122,6 +122,36 @@ test.describe('Recipe Detail', () => {
     await expect(servingSection).toBeHidden();
   });
 
+  test('shows cooking stats when sessions exist', async ({ page }) => {
+    // Seed a completed cooking session
+    await page.goto('/recipe.html?id=test-curry');
+    await page.evaluate(async () => {
+      await initDB();
+      const tx = db.transaction(['cooking_sessions'], 'readwrite');
+      const store = tx.objectStore('cooking_sessions');
+      const now = Date.now();
+      store.add({ recipe_id: 'test-curry', started_at: now - 1800000, completed_at: now });
+      await new Promise(resolve => { tx.oncomplete = resolve; });
+    });
+
+    // Reload to pick up the seeded session
+    await page.goto('/recipe.html?id=test-curry');
+    await page.waitForTimeout(500);
+
+    const stats = page.locator('#cooking-stats');
+    await expect(stats).toBeVisible();
+    await expect(stats).toContainText('Cooked once');
+    await expect(stats).toContainText('30 minutes');
+  });
+
+  test('hides cooking stats when no sessions', async ({ page }) => {
+    await page.goto('/recipe.html?id=test-curry');
+    await page.waitForTimeout(500);
+
+    const stats = page.locator('#cooking-stats');
+    await expect(stats).toBeHidden();
+  });
+
   test('share button is visible', async ({ page }) => {
     await page.goto('/recipe.html?id=test-curry');
 

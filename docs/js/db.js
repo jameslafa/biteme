@@ -329,6 +329,60 @@ async function saveCookingComplete(sessionId) {
   });
 }
 
+// Get all completed cooking sessions for a recipe
+async function getCookingSessionsByRecipe(recipeId) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['cooking_sessions'], 'readonly');
+  const store = transaction.objectStore('cooking_sessions');
+  const index = store.index('recipe_id');
+
+  return new Promise((resolve, reject) => {
+    const request = index.getAll(recipeId);
+
+    request.onsuccess = () => {
+      const sessions = (request.result || []).filter(s => s.completed_at !== null);
+      resolve(sessions);
+    };
+
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Get all completed cooking sessions
+async function getAllCompletedSessions() {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['cooking_sessions'], 'readonly');
+  const store = transaction.objectStore('cooking_sessions');
+
+  return new Promise((resolve, reject) => {
+    const request = store.getAll();
+
+    request.onsuccess = () => {
+      const sessions = (request.result || []).filter(s => s.completed_at !== null);
+      resolve(sessions);
+    };
+
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Format cooking duration from milliseconds to human-readable string
+function formatCookingDuration(ms) {
+  const totalMinutes = Math.round(ms / 60000);
+
+  if (totalMinutes < 1) return 'Less than a minute';
+  if (totalMinutes === 1) return '1 minute';
+  if (totalMinutes < 60) return `${totalMinutes} minutes`;
+
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  if (minutes === 0) return `${hours} hr`;
+  return `${hours} hr ${minutes} min`;
+}
+
 // Check if user has completed at least one cooking session
 async function hasCompletedCooking() {
   if (!db) await initDB();

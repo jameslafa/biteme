@@ -59,6 +59,19 @@
   animation: fadeInUp 0.6s ease-out 0.35s backwards;
 }
 
+/* Cooking Time */
+.cooking-time {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+  animation: fadeInUp 0.6s ease-out 0.5s backwards;
+}
+
+.cooking-time:empty {
+  display: none;
+}
+
 /* Action Buttons */
 .completion-actions {
   display: flex;
