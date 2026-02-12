@@ -77,11 +77,21 @@
               <h2 class="recipe-name">${recipe.name}</h2>
               <p class="recipe-description">${recipe.description}</p>
             </div>
-            <button id="favorite-btn" class="favorite-button" aria-label="Add to favorites">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-            </button>
+            <div class="recipe-actions">
+              <button id="share-btn" class="icon-button" aria-label="Share recipe">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="18" cy="5" r="3"/>
+                  <circle cx="6" cy="12" r="3"/>
+                  <circle cx="18" cy="19" r="3"/>
+                  <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
+                </svg>
+              </button>
+              <button id="favorite-btn" class="icon-button favorite-button" aria-label="Add to favorites">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </button>
+            </div>
           </div>
 
           <div class="recipe-tags">
@@ -154,6 +164,9 @@
       // Setup favorite button
       setupFavoriteButton(recipeId);
 
+      // Setup share button
+      setupShareButton(recipe);
+
       // Setup add to cart buttons
       setupShoppingCartButtons(recipeId, recipe.name);
 
@@ -186,6 +199,49 @@
         button.classList.remove('favorited');
         button.setAttribute('aria-label', 'Add to favorites');
       }
+    }
+
+    function setupShareButton(recipe) {
+      const shareBtn = document.getElementById('share-btn');
+
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: `${recipe.name} - biteme`,
+          text: recipe.description,
+          url: window.location.href
+        };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+          } catch (err) {
+            // User cancelled or share failed — ignore
+          }
+        } else {
+          // Fallback: copy link to clipboard
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            showCopyToast();
+          } catch {
+            // Clipboard API not available — do nothing
+          }
+        }
+      });
+    }
+
+    function showCopyToast() {
+      const existing = document.querySelector('.copy-toast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.className = 'copy-toast';
+      toast.textContent = 'Link copied!';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
     }
 
     function startCooking(id) {
