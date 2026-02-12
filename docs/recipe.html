@@ -73,10 +73,7 @@
       document.getElementById('recipe-detail').innerHTML = `
         <article class="recipe">
           <div class="recipe-header">
-            <div>
-              <h2 class="recipe-name">${recipe.name}</h2>
-              <p class="recipe-description">${recipe.description}</p>
-            </div>
+            <h2 class="recipe-name">${recipe.name}</h2>
             <div class="recipe-actions">
               <button id="share-btn" class="icon-button" aria-label="Share recipe">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -93,6 +90,7 @@
               </button>
             </div>
           </div>
+          <p class="recipe-description">${recipe.description}</p>
 
           <div id="cooking-stats" class="cooking-stats"></div>
 
