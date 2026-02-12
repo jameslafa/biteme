@@ -6,19 +6,30 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 
 **https://jameslafa.github.io/biteme/**
 
+## What It Looks Like
+
+<table>
+  <tr>
+    <td align="center"><img src="documentation/screenshots/home.png" width="200" alt="Browse recipes"></td>
+    <td align="center"><img src="documentation/screenshots/recipe.png" width="200" alt="Recipe detail"></td>
+    <td align="center"><img src="documentation/screenshots/cooking.png" width="200" alt="Cooking mode"></td>
+    <td align="center"><img src="documentation/screenshots/shopping.png" width="200" alt="Shopping list"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Browse & discover</b><br><sub>Search recipes, save your favourites, find what to cook tonight</sub></td>
+    <td align="center"><b>Plan your cook</b><br><sub>Clear ingredient list — check off what you have, add the rest to your shopping list</sub></td>
+    <td align="center"><b>Hands-free cooking</b><br><sub>Distraction-free step-by-step mode designed for messy hands and busy kitchens</sub></td>
+    <td align="center"><b>Shop smart</b><br><sub>All your missing ingredients in one place — check them off as you walk the aisles</sub></td>
+  </tr>
+</table>
+
 ## Why BiteMe?
 
-- 🌱 **Plant-based focus** - Curated vegetarian and vegan recipes
-- 📱 **Cook-friendly design** - Clean interface that works while your hands are messy
-- 📋 **Smart ingredient prep** - Organized by where items are in your kitchen
-- 👨‍🍳 **Step-by-step guidance** - Track your progress as you cook
-- 🛒 **Shopping list builder** - Add ingredients and check them off as you shop
-- 📤 **Share recipes** - Send your favorite finds to friends with one tap
-- ⭐ **Save favorites** - Keep your go-to recipes at your fingertips
-- 🔒 **Privacy-first** - No accounts, no tracking, everything stored locally
-- 📴 **Works offline** - Full PWA support, use it anywhere without internet
-- 🤝 **Community-driven** - Open source project where anyone can contribute recipes or improve the app
-- 🆓 **Free forever** - No ads, no paywalls, no premium tiers
+- 🌱 **Plant-based focus** — Curated vegetarian and vegan recipes
+- 🔒 **Privacy-first** — No accounts, no tracking, everything stored on your device
+- 📴 **Works offline** — Install it as an app, use it anywhere without internet
+- 🤝 **Community-driven** — Anyone can contribute recipes via pull request
+- 🆓 **Free forever** — No ads, no paywalls, no premium tiers
 
 ## Why I Built This
 

@@ -12,7 +12,8 @@
     "test-parser": "~/.cargo/bin/cargo test --manifest-path recipe-parser/Cargo.toml",
     "test:all": "npm run test-parser && npm test",
     "parse-recipes": "~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release",
-    "lint-recipes": "~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release -- --lint"
+    "lint-recipes": "~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release -- --lint",
+    "screenshots": "node scripts/screenshots.js"
   },
   "repository": {
     "type": "git",
