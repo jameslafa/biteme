@@ -5,7 +5,7 @@ description: Silky smooth hummus with the perfect creamy texture
 servings: 6
 time: 90
 difficulty: medium
-tags: [vegan, middle-eastern, spread, snack, dip]
+tags: [vegan, middle-eastern, dip]
 ---
 
 # Notes
@@ -40,7 +40,7 @@ Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not
 4. While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, and a good pinch of {salt}.
 5. Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy.
 6. Transfer to a bowl, cover the surface with cling film, and let it rest for at least 30 minutes.
-7. Serve drizzled with good {olive oil} and a squeeze of {lemon}.
+7. Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour.
 
 # Serving Suggestions
 

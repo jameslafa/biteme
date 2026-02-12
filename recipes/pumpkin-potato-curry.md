@@ -5,7 +5,7 @@ description: Warming vegan curry perfect for batch cooking and meal prep
 servings: 4
 time: 40
 difficulty: easy
-tags: [vegan, curry, dinner, batch-cooking, comfort-food]
+tags: [vegan, curry, soup]
 ---
 
 # Notes
