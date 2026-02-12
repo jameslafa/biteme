@@ -243,6 +243,79 @@ test.describe('Install Prompt', () => {
   });
 });
 
+test.describe('What\'s New', () => {
+  test('no dot on first visit', async ({ page }) => {
+    const dot = page.locator('#whats-new-dot');
+    await expect(dot).toBeHidden();
+  });
+
+  test('button opens sheet with all entries', async ({ page }) => {
+    await page.locator('#whats-new-btn').click();
+
+    const sheet = page.locator('#whats-new-sheet');
+    await expect(sheet).toBeVisible();
+
+    const entries = sheet.locator('.whats-new-entry');
+    await expect(entries).toHaveCount(5);
+    await expect(entries.first().locator('.whats-new-text')).toContainText('screen lock');
+  });
+
+  test('sheet closes on overlay click', async ({ page }) => {
+    await page.locator('#whats-new-btn').click();
+    await expect(page.locator('#whats-new-sheet')).toBeVisible();
+
+    await page.locator('.whats-new-overlay').click({ position: { x: 10, y: 10 } });
+    await expect(page.locator('#whats-new-sheet')).toBeHidden();
+  });
+
+  test('sheet closes on close button', async ({ page }) => {
+    await page.locator('#whats-new-btn').click();
+    await expect(page.locator('#whats-new-sheet')).toBeVisible();
+
+    await page.locator('#whats-new-close').click();
+    await expect(page.locator('#whats-new-sheet')).toBeHidden();
+  });
+
+  test('dot appears when new entries are added after first visit', async ({ page }) => {
+    // First visit sets lastSeenChangelogId to latest (5), no dot
+    await expect(page.locator('#whats-new-dot')).toBeHidden();
+
+    // Simulate a new changelog entry by setting lastSeenChangelogId to an older value
+    await page.evaluate(async () => {
+      await setSetting('lastSeenChangelogId', 3);
+    });
+
+    // Reload — now there are entries with id > 3
+    await page.goto('/');
+    await expect(page.locator('#whats-new-dot')).toBeVisible();
+  });
+
+  test('dot disappears after opening sheet and stays gone on reload', async ({ page }) => {
+    // Set up unseen entries
+    await page.evaluate(async () => {
+      await setSetting('lastSeenChangelogId', 2);
+    });
+    await page.goto('/');
+    await expect(page.locator('#whats-new-dot')).toBeVisible();
+
+    // Open sheet — should mark as seen
+    await page.locator('#whats-new-btn').click();
+    await expect(page.locator('#whats-new-dot')).toBeHidden();
+
+    // Close and reload — dot should stay gone
+    await page.locator('#whats-new-close').click();
+    await page.goto('/');
+    await expect(page.locator('#whats-new-dot')).toBeHidden();
+  });
+
+  test('sheet contains feedback link', async ({ page }) => {
+    await page.locator('#whats-new-btn').click();
+    const link = page.locator('.whats-new-footer a');
+    await expect(link).toHaveText('Send feedback');
+    await expect(link).toHaveAttribute('href', 'mailto:freely-dole-yard@duck.com');
+  });
+});
+
 test.describe('Recipe Refresh on Resume', () => {
   const updatedRecipes = [
     ...testRecipes,

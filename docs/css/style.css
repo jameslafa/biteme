@@ -714,3 +714,155 @@ footer a:hover {
 .modal-close-btn:hover {
   background: var(--primary-dark);
 }
+
+/* What's New Button */
+.whats-new-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.whats-new-button:hover {
+  background-color: var(--accent-light);
+}
+
+.whats-new-button:active {
+  transform: scale(0.9);
+}
+
+.whats-new-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: #e74c3c;
+  border-radius: 50%;
+}
+
+/* What's New Sheet */
+.whats-new-sheet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.whats-new-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.whats-new-content {
+  position: relative;
+  background: var(--surface);
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 100%;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.15);
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+.whats-new-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 0.75rem;
+  flex-shrink: 0;
+}
+
+.whats-new-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.whats-new-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+  line-height: 1;
+}
+
+.whats-new-close-btn:hover {
+  background: var(--accent-light);
+}
+
+.whats-new-list {
+  overflow-y: auto;
+  padding: 0 1.5rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.whats-new-entry {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.whats-new-entry:last-child {
+  border-bottom: none;
+}
+
+.whats-new-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.whats-new-text {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.whats-new-footer {
+  padding: 0.75rem 1.5rem 1.25rem;
+  text-align: center;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+}
+
+.whats-new-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.whats-new-footer a:hover {
+  text-decoration: underline;
+}

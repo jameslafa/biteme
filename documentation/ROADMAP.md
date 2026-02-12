@@ -45,13 +45,13 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Filter state persists across sessions
 - Works on recipe cards and recipe detail page
 
-### [ ] What's New Section
-- Inform users about new features and improvements
-- Dismissible notification or dedicated page
-- Show on app load when new features are available
-- Version-based system to show updates only once per version
-- Store dismissed versions in IndexedDB
-- Helps users discover new functionality they might miss
+### [x] What's New Section
+- Bell icon button in header with notification dot for unseen entries
+- Bottom sheet overlay with changelog entries (date + description)
+- Incremental ID system: dot appears when new entries exist beyond last seen
+- First visit: no dot (marks all current entries as seen)
+- Last seen ID stored in IndexedDB `settings` store
+- Includes feedback email link in sheet footer
 
 ### [ ] First-Time User Onboarding
 - Interactive walkthrough for new users explaining key features

@@ -6,9 +6,9 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Database name:** `biteme_db`
 
-**Version:** 3
+**Version:** 4
 
-**Object stores:** favorites, shopping_list, cooking_sessions
+**Object stores:** favorites, shopping_list, cooking_sessions, settings
 
 ## Favorites
 
@@ -131,6 +131,33 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Duration can be calculated from `completed_at - started_at`
 - Used to gate the install prompt (only shown after first completed recipe)
 - Foundation for future cooking analytics (time tracking, history)
+
+## Settings
+
+**Object store:** `settings`
+
+**Primary key:** `key`
+
+**Current Schema (v4 - Local Only):**
+```typescript
+{
+  key: string;    // Setting name (e.g., "lastSeenChangelogId")
+  value: any;     // Setting value
+}
+```
+
+**Example:**
+```json
+{
+  "key": "lastSeenChangelogId",
+  "value": 5
+}
+```
+
+**Notes:**
+- Generic key-value store for app settings
+- Currently used by the What's New feature to track the last seen changelog entry
+- Designed for reuse by future features needing simple persistent settings
 
 ## Sync Strategy (Future)
 

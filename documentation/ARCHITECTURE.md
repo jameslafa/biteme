@@ -172,6 +172,26 @@ name: Pad Thai
 
 **Alternative considered:** Toggle button to enable/disable — Rejected because requiring interaction defeats the hands-free purpose
 
+## What's New / Changelog
+
+**Decision:** Client-side changelog with incremental IDs and IndexedDB tracking
+
+**How it works:**
+- `changelog.js` contains a simple array of entries, each with an incremental `id`, `date`, and `text`
+- On first visit, `lastSeenChangelogId` is set to the latest ID (no notification dot)
+- On subsequent visits, if the latest ID exceeds the stored value, a dot appears on the bell icon
+- Opening the sheet marks all entries as seen by storing the latest ID
+
+**Why incremental IDs (not semver or dates):**
+- Simple integer comparison to detect unseen entries
+- No coupling to app version — changelog entries are independent of releases
+- Easy to add entries: just prepend with `id: previous + 1`
+
+**Why a separate `changelog.js` file:**
+- Cached by service worker alongside app shell
+- Easy to edit without touching app logic
+- Clear separation of content from code
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements

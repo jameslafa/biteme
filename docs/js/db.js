@@ -1,7 +1,7 @@
 // IndexedDB helper for BiteMe local storage
 
 const DB_NAME = 'biteme_db';
-const DB_VERSION = 3;
+const DB_VERSION = 4;
 let db = null;
 
 // Initialize database
@@ -36,6 +36,11 @@ function initDB() {
       if (!db.objectStoreNames.contains('cooking_sessions')) {
         const cookStore = db.createObjectStore('cooking_sessions', { keyPath: 'id', autoIncrement: true });
         cookStore.createIndex('recipe_id', 'recipe_id', { unique: false });
+      }
+
+      // Create settings key-value store
+      if (!db.objectStoreNames.contains('settings')) {
+        db.createObjectStore('settings', { keyPath: 'key' });
       }
     };
   });
@@ -381,6 +386,36 @@ function formatCookingDuration(ms) {
 
   if (minutes === 0) return `${hours} hr`;
   return `${hours} hr ${minutes} min`;
+}
+
+// Settings Functions
+
+// Get a setting value by key
+async function getSetting(key) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['settings'], 'readonly');
+  const store = transaction.objectStore('settings');
+
+  return new Promise((resolve, reject) => {
+    const request = store.get(key);
+    request.onsuccess = () => resolve(request.result ? request.result.value : null);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Set a setting value by key
+async function setSetting(key, value) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['settings'], 'readwrite');
+  const store = transaction.objectStore('settings');
+
+  return new Promise((resolve, reject) => {
+    const request = store.put({ key, value });
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
 }
 
 // Check if user has completed at least one cooking session

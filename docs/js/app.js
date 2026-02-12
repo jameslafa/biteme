@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupSearch();
   setupFavoritesFilter();
   updateCartCount();
+  setupWhatsNew();
 
   // Refresh recipes when returning to the app (e.g. PWA resume)
   document.addEventListener('visibilitychange', async () => {
@@ -247,4 +248,56 @@ async function updateCartCount() {
       badge.style.display = 'none';
     }
   }
+}
+
+// What's New
+async function setupWhatsNew() {
+  const btn = document.getElementById('whats-new-btn');
+  const dot = document.getElementById('whats-new-dot');
+  const sheet = document.getElementById('whats-new-sheet');
+  const list = document.getElementById('whats-new-list');
+  const closeBtn = document.getElementById('whats-new-close');
+  const overlay = sheet.querySelector('.whats-new-overlay');
+
+  if (!btn || typeof CHANGELOG === 'undefined' || CHANGELOG.length === 0) return;
+
+  const latestId = CHANGELOG[0].id;
+  const lastSeenId = await getSetting('lastSeenChangelogId');
+
+  // First visit — mark all as seen, no dot
+  if (lastSeenId === null) {
+    await setSetting('lastSeenChangelogId', latestId);
+  } else if (latestId > lastSeenId) {
+    dot.style.display = '';
+  }
+
+  function openSheet() {
+    // Render entries
+    list.innerHTML = CHANGELOG.map(entry => `
+      <div class="whats-new-entry">
+        <div class="whats-new-date">${formatChangelogDate(entry.date)}</div>
+        <div class="whats-new-text">${entry.text}</div>
+      </div>
+    `).join('');
+
+    sheet.style.display = '';
+
+    // Mark as seen
+    setSetting('lastSeenChangelogId', latestId);
+    dot.style.display = 'none';
+  }
+
+  function closeSheet() {
+    sheet.style.display = 'none';
+  }
+
+  btn.addEventListener('click', openSheet);
+  closeBtn.addEventListener('click', closeSheet);
+  overlay.addEventListener('click', closeSheet);
+}
+
+function formatChangelogDate(dateStr) {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
