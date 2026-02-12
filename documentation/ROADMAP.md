@@ -38,6 +38,22 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Filter state persists across sessions
 - Works on recipe cards and recipe detail page
 
+### [ ] What's New Section
+- Inform users about new features and improvements
+- Dismissible notification or dedicated page
+- Show on app load when new features are available
+- Version-based system to show updates only once per version
+- Store dismissed versions in IndexedDB
+- Helps users discover new functionality they might miss
+
+### [ ] First-Time User Onboarding
+- Interactive walkthrough for new users explaining key features
+- Highlight main functionalities: browsing recipes, favorites, shopping list, cooking mode
+- Step-by-step tour with tooltips or overlay
+- Skippable but can be replayed from settings/help
+- Store onboarding completion status in IndexedDB
+- **Goal**: Reduce confusion, improve feature discoverability for first-time users
+
 ### [ ] My Pantry/Spices Inventory
 - Users can store a list of ingredients/spices they have at home
 - When viewing a recipe, pre-check items they already have
