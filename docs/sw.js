@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v20';
+const CACHE_NAME = 'biteme-v21';
 
 const APP_SHELL = [
   './',
@@ -30,6 +30,7 @@ const APP_SHELL = [
   'assets/illustrations/celebrate.svg',
   'assets/illustrations/winners.svg',
   'assets/illustrations/empty.svg',
+  'assets/silent.mp4',
   'manifest.webmanifest',
 ];
 

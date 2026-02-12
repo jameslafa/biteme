@@ -29,10 +29,29 @@ document.addEventListener('DOMContentLoaded', async function() {
     cookingSessionId = id;
   }).catch(() => {});
 
-  requestWakeLock();
+  keepScreenAwake();
 });
 
+// Screen wake: uses Wake Lock API with a silent video fallback for iOS
 let wakeLockSentinel = null;
+let noSleepVideo = null;
+
+async function keepScreenAwake() {
+  await requestWakeLock();
+  startNoSleepVideo();
+}
+
+function releaseScreenAwake() {
+  if (wakeLockSentinel) {
+    wakeLockSentinel.release();
+    wakeLockSentinel = null;
+  }
+  if (noSleepVideo) {
+    noSleepVideo.pause();
+    noSleepVideo.remove();
+    noSleepVideo = null;
+  }
+}
 
 async function requestWakeLock() {
   try {
@@ -47,9 +66,23 @@ async function requestWakeLock() {
   }
 }
 
+function startNoSleepVideo() {
+  if (noSleepVideo) return;
+  const video = document.createElement('video');
+  video.setAttribute('playsinline', '');
+  video.setAttribute('loop', '');
+  video.muted = true;
+  video.src = 'assets/silent.mp4';
+  video.style.cssText = 'position:fixed;top:-1px;left:-1px;width:1px;height:1px;opacity:0.01;';
+  document.body.appendChild(video);
+  video.play().catch(() => {});
+  noSleepVideo = video;
+}
+
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && !wakeLockSentinel) {
-    requestWakeLock();
+  if (document.visibilityState === 'visible') {
+    if (!wakeLockSentinel) requestWakeLock();
+    if (noSleepVideo) noSleepVideo.play().catch(() => {});
   }
 });
 
@@ -186,10 +219,12 @@ function nextStep() {
 }
 
 function exitCookingMode() {
+  releaseScreenAwake();
   window.location.href = `recipe.html?id=${recipe.id}`;
 }
 
 function finishCookingMode() {
+  releaseScreenAwake();
   const params = new URLSearchParams({ id: recipe.id });
   if (cookingSessionId) params.set('session', cookingSessionId);
   window.location.href = `completion.html?${params}`;
