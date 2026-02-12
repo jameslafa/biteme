@@ -104,6 +104,11 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Helps users remember which recipes are quick vs involved
 - Could display personal complexity rating on recipe cards
 
+### [x] Share Recipe
+- Share button on recipe detail page
+- Uses native Web Share API on mobile (opens share sheet)
+- Falls back to copy-to-clipboard on desktop with toast feedback
+
 ### [x] Recipe Notes & Serving Suggestions
 - Optional notes and serving suggestions in recipe markdown
 - Displayed on recipe detail page below instructions

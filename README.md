@@ -13,6 +13,7 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 - 📋 **Smart ingredient prep** - Organized by where items are in your kitchen
 - 👨‍🍳 **Step-by-step guidance** - Track your progress as you cook
 - 🛒 **Shopping list builder** - Add ingredients and check them off as you shop
+- 📤 **Share recipes** - Send your favorite finds to friends with one tap
 - ⭐ **Save favorites** - Keep your go-to recipes at your fingertips
 - 🔒 **Privacy-first** - No accounts, no tracking, everything stored locally
 - 📴 **Works offline** - Full PWA support, use it anywhere without internet

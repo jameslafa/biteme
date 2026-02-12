@@ -121,4 +121,36 @@ test.describe('Recipe Detail', () => {
     await expect(notesSection).toBeHidden();
     await expect(servingSection).toBeHidden();
   });
+
+  test('share button is visible', async ({ page }) => {
+    await page.goto('/recipe.html?id=test-curry');
+
+    const shareBtn = page.locator('#share-btn');
+    await expect(shareBtn).toBeVisible();
+    await expect(shareBtn).toHaveAttribute('aria-label', 'Share recipe');
+  });
+
+  test('share button copies link when Web Share API is unavailable', async ({ page }) => {
+    await page.goto('/recipe.html?id=test-curry');
+
+    // Ensure navigator.share is not available (Playwright doesn't support it)
+    const hasShare = await page.evaluate(() => !!navigator.share);
+    expect(hasShare).toBe(false);
+
+    // Grant clipboard permissions and click share
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.locator('#share-btn').click();
+
+    // Should show copy toast
+    const toast = page.locator('.copy-toast');
+    await expect(toast).toBeVisible();
+    await expect(toast).toHaveText('Link copied!');
+
+    // Verify clipboard content
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toContain('recipe.html?id=test-curry');
+
+    // Toast should disappear
+    await expect(toast).toBeHidden({ timeout: 5000 });
+  });
 });
