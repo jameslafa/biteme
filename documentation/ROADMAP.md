@@ -22,6 +22,13 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Manifest-based approach: check small `recipes-manifest.json` first, only fetch full JSON if version changed
 - Cached recipes stored in localStorage for fast loading
 - Offline fallback: uses cached data when network unavailable
+- Auto-refresh on app resume: checks manifest on `visibilitychange` and re-renders if stale
+
+### [x] Service Worker Update Detection
+- Detects when app code (HTML, CSS, JS) has been updated
+- Shows toast notification on homepage: "New recipes available" with Refresh button
+- Periodic check every 60 seconds + on navigation
+- Only shown on homepage to avoid interrupting cooking or other flows
 
 ### [x] Better Ingredient Categorization System
 - **Solution**: Simplified from 7 categories to 4 clear categories
@@ -96,6 +103,12 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Store in IndexedDB with cooking notes
 - Helps users remember which recipes are quick vs involved
 - Could display personal complexity rating on recipe cards
+
+### [x] Recipe Notes & Serving Suggestions
+- Optional notes and serving suggestions in recipe markdown
+- Displayed on recipe detail page below instructions
+- In cooking mode: notes shown on first step, serving suggestions on last step
+- Minimal styling with left border accent to avoid visual clutter
 
 ### [x] Completion Page with Animation
 - Dedicated completion page after finishing cooking

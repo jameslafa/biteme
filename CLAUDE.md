@@ -8,5 +8,5 @@
 - When defining a plan of action, do not provide timeline estimates.
 - When troubleshooting, investigate potential causes thoroughly. Do not jump to the first hypothesis.
 - Do not add yourself as a co-author in git commits.
-- When we make changes, update the relevant documentation (README, inline docs, etc.).
+- Update relevant documentation (README, CONTRIBUTING, ROADMAP, ARCHITECTURE, DATA_STRUCTURE) BEFORE committing, not after. Docs are part of the implementation, not an afterthought.
 - This is an open-source project. The README should clearly explain what the project is, why it's useful, and how people can contribute. Keep it focused. It's not a blog.

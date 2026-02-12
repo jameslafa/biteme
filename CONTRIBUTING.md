@@ -18,6 +18,7 @@ Create a file like `recipes/your-recipe-name.md`:
 ---
 id: thai-green-curry
 name: Thai Green Curry
+description: A fragrant and creamy Thai curry loaded with vegetables
 servings: 4
 time: 45
 difficulty: medium
@@ -36,10 +37,18 @@ tags: [thai, curry, dinner]
 
 ## Instructions
 
-1. Heat oil in a large pan over medium heat
-2. Add curry paste and cook for 1 minute
-3. Add vegetables and cook until tender
+1. Heat {oil} in a large pan over medium heat
+2. Add {curry paste} and cook for 1 minute
+3. Add {bell peppers} and {onion}, cook until tender
 4. Serve hot with rice
+
+## Notes
+
+Any tips or important notes for the cook (optional).
+
+## Serving Suggestions
+
+How to serve the dish, garnishes, side dishes (optional).
 ```
 
 ## Recipe ID Guidelines
@@ -60,10 +69,28 @@ tags: [thai, curry, dinner]
 
 - `id` - Unique identifier (lowercase-with-dashes)
 - `name` - Display name for the recipe
+- `description` - Short description shown on recipe cards
 - `servings` - Number of servings
 - `time` - Total time in minutes
 - `difficulty` - easy, medium, or hard
 - `tags` - Array of tags for filtering
+
+## Optional Sections
+
+- **Notes** - Tips, variations, or important info (shown on first cooking step)
+- **Serving Suggestions** - How to serve, garnishes, sides (shown on last cooking step)
+
+## Ingredient Linking
+
+Link ingredients in your instructions using `{ingredient name}` syntax. This highlights ingredients in cooking mode so users can see exactly what they need for each step.
+
+```markdown
+1. Heat {oil} in a large pan
+2. Add {onion} and {garlic}, cook until soft
+3. Stir in {curry paste} and {coconut milk}
+```
+
+The linter will warn you if any ingredients aren't referenced in the instructions.
 
 ## Ingredient Categories
 

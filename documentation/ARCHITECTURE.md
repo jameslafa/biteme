@@ -136,6 +136,30 @@ name: Pad Thai
 - No cross-device sync initially
 - Recipes must be bundled with the app
 
+## Recipe Caching & Freshness
+
+**Decision:** Three-layer caching with automatic refresh on app resume
+
+**Layers:**
+1. **In-memory cache** (`recipesCache` variable) — instant access during a session
+2. **localStorage** — persists across page reloads, keyed by manifest version
+3. **Network** — fetches fresh data when manifest version changes
+
+**Freshness strategy:**
+- On page load: check `recipes-manifest.json` version against localStorage, fetch fresh if different
+- On app resume (`visibilitychange`): re-check manifest, clear in-memory cache and re-render if stale
+- Recipe data (`recipes.json`, `recipes-manifest.json`) bypasses the service worker cache entirely
+
+**Why not service worker for recipes:**
+- Recipes change independently of app code
+- Manifest version check is lightweight and gives precise control
+- Service worker handles app shell (HTML, CSS, JS, icons) — different update cadence
+
+**Service worker update detection:**
+- Separate concern from recipe freshness
+- Toast notification on homepage when new SW is installed
+- Only on homepage to avoid interrupting cooking or other flows
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements
