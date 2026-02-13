@@ -347,7 +347,7 @@ test.describe('Recipe Refresh on Resume', () => {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ version: 'updated-version', generated_at: '9999999999', recipe_count: 4 })
+        body: JSON.stringify({ version: 'updated-version', recipe_count: 4 })
       });
     });
     await page.unroute('**/recipes.json');
@@ -380,7 +380,7 @@ test.describe('Recipe Refresh on Resume', () => {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ version: currentVersion, generated_at: '9999999999', recipe_count: 3 })
+        body: JSON.stringify({ version: currentVersion, recipe_count: 3 })
       });
     });
 

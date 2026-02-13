@@ -88,7 +88,6 @@ struct Recipe {
 #[derive(Serialize)]
 struct Manifest {
     version: String,
-    generated_at: String,
     recipe_count: usize,
 }
 
@@ -895,11 +894,6 @@ fn main() -> Result<()> {
 
     let manifest = Manifest {
         version: hash,
-        generated_at: std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
-            .as_secs()
-            .to_string(),
         recipe_count: recipes.len(),
     };
 

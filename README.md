@@ -15,7 +15,7 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
   </tr>
   <tr>
     <td align="center"><b>Browse & discover</b><br><sub>Search recipes, save your favourites, find what to cook tonight</sub></td>
-    <td align="center"><b>Plan your cook</b><br><sub>Clear ingredient list — check off what you have, add the rest to your shopping list</sub></td>
+    <td align="center"><b>Plan your cook</b><br><sub>Adjust servings, check off what you have, add the rest to your shopping list</sub></td>
   </tr>
   <tr>
     <td align="center"><img src="documentation/screenshots/cooking.png" width="200" alt="Cooking mode"></td>
