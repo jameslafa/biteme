@@ -21,7 +21,7 @@ For a deeper, more umami flavour, add a splash of dry white wine after cooking t
 - 1 medium onion, diced
 - 3 cloves garlic, minced
 - 1 medium floury potato (about 150 g), peeled and cubed
-- 1 tsp fresh thyme (or ½ tsp dried)
+- 1 tsp fresh thyme (or 1/2 tsp dried)
 - Lemon for juice
 - Fresh parsley for garnish
 

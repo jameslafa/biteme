@@ -35,12 +35,14 @@ async function loadShoppingList() {
       };
     }
 
-    // Find ingredient text from recipe
+    // Find ingredient text from recipe, scaled to saved servings
+    const savedServings = getServings(item.recipe_id, recipe.servings);
+    const ratio = savedServings / recipe.servings;
     let ingredientText = 'Unknown ingredient';
     for (const [category, ingredients] of Object.entries(recipe.ingredients)) {
       const found = ingredients.find(ing => ing.id === item.ingredient_id);
       if (found) {
-        ingredientText = found.text;
+        ingredientText = scaleIngredientText(found, ratio);
         break;
       }
     }

@@ -32,7 +32,7 @@ Use very ripe bananas with lots of brown spots for the best flavour and natural 
 
 ## Spices
 - 1 tsp cinnamon
-- ½ tsp salt
+- 1/2 tsp salt
 
 # Instructions
 

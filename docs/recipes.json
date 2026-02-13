@@ -17,65 +17,136 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "3-4 cloves garlic, minced"
+          "text": "3-4 cloves garlic, minced",
+          "quantity": {
+            "amount": 3.0,
+            "amount_max": 4.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
         },
         {
           "id": 2,
-          "text": "1/2 small onion, finely diced"
+          "text": "1/2 small onion, finely diced",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "small",
+            "item": "onion, finely diced"
+          }
         },
         {
           "id": 3,
-          "text": "60 g baby spinach, roughly chopped"
+          "text": "60 g baby spinach, roughly chopped",
+          "quantity": {
+            "amount": 60.0,
+            "unit": "g",
+            "item": "baby spinach, roughly chopped"
+          }
         },
         {
           "id": 4,
-          "text": "Juice of 1/2 lemon (optional)"
+          "text": "Juice of 1/2 lemon (optional)",
+          "quantity": {
+            "amount": 0.5,
+            "item": "lemon (optional)",
+            "prefix": "Juice of"
+          }
         }
       ],
       "Fridge": [
         {
           "id": 5,
-          "text": "1 tbsp vegan butter (or regular)"
+          "text": "1 tbsp vegan butter (or regular)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "vegan butter (or regular)"
+          }
         },
         {
           "id": 6,
-          "text": "240 g coconut cream"
+          "text": "240 g coconut cream",
+          "quantity": {
+            "amount": 240.0,
+            "unit": "g",
+            "item": "coconut cream"
+          }
         },
         {
           "id": 7,
-          "text": "2 tbsp cream cheese, vegan or regular"
+          "text": "2 tbsp cream cheese, vegan or regular",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "cream cheese, vegan or regular"
+          }
         }
       ],
       "Pantry": [
         {
           "id": 8,
-          "text": "1 tbsp olive oil"
+          "text": "1 tbsp olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
         },
         {
           "id": 9,
-          "text": "55 g sun-dried tomatoes, finely chopped (oil packed)"
+          "text": "55 g sun-dried tomatoes, finely chopped (oil packed)",
+          "quantity": {
+            "amount": 55.0,
+            "unit": "g",
+            "item": "sun-dried tomatoes, finely chopped (oil packed)"
+          }
         },
         {
           "id": 10,
-          "text": "450 g gnocchi"
+          "text": "450 g gnocchi",
+          "quantity": {
+            "amount": 450.0,
+            "unit": "g",
+            "item": "gnocchi"
+          }
         },
         {
           "id": 11,
-          "text": "120 ml water or vegetable broth"
+          "text": "120 ml water or vegetable broth",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "ml",
+            "item": "water or vegetable broth"
+          }
         },
         {
           "id": 12,
-          "text": "2 tbsp nutritional yeast (or finely grated parmesan)"
+          "text": "2 tbsp nutritional yeast (or finely grated parmesan)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "nutritional yeast (or finely grated parmesan)"
+          }
         }
       ],
       "Spices": [
         {
           "id": 13,
-          "text": "1 tsp Italian seasoning (or oregano)"
+          "text": "1 tsp Italian seasoning (or oregano)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "Italian seasoning (or oregano)"
+          }
         },
         {
           "id": 14,
-          "text": "1/2 tsp black pepper"
+          "text": "1/2 tsp black pepper",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "black pepper"
+          }
         },
         {
           "id": 15,
@@ -109,23 +180,51 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "500 g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced"
+          "text": "500 g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "g",
+            "item": "mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced"
+          }
         },
         {
           "id": 2,
-          "text": "1 medium onion, diced"
+          "text": "1 medium onion, diced",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "onion, diced"
+          }
         },
         {
           "id": 3,
-          "text": "3 cloves garlic, minced"
+          "text": "3 cloves garlic, minced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
         },
         {
           "id": 4,
-          "text": "1 medium floury potato (about 150 g), peeled and cubed"
+          "text": "1 medium floury potato (about 150 g), peeled and cubed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "floury potato, peeled and cubed",
+            "secondary_amount": 150.0,
+            "secondary_unit": "g",
+            "secondary_prefix": "about"
+          }
         },
         {
           "id": 5,
-          "text": "1 tsp fresh thyme (or ½ tsp dried)"
+          "text": "1 tsp fresh thyme (or 1/2 tsp dried)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "fresh thyme (or 1/2 tsp dried)"
+          }
         },
         {
           "id": 6,
@@ -139,21 +238,41 @@
       "Fridge": [
         {
           "id": 8,
-          "text": "200 ml oat cream (Hafer Cuisine)"
+          "text": "200 ml oat cream (Hafer Cuisine)",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "ml",
+            "item": "oat cream (Hafer Cuisine)"
+          }
         }
       ],
       "Pantry": [
         {
           "id": 9,
-          "text": "750 ml vegetable stock"
+          "text": "750 ml vegetable stock",
+          "quantity": {
+            "amount": 750.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
         },
         {
           "id": 10,
-          "text": "2 tbsp olive oil"
+          "text": "2 tbsp olive oil",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
         },
         {
           "id": 11,
-          "text": "1 tbsp soy sauce"
+          "text": "1 tbsp soy sauce",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          }
         }
       ],
       "Spices": [
@@ -194,35 +313,76 @@
       "Fridge": [
         {
           "id": 1,
-          "text": "250 ml (1 cup) milk"
+          "text": "250 ml (1 cup) milk",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "ml",
+            "item": "milk",
+            "secondary_amount": 1.0,
+            "secondary_unit": "cup"
+          }
         }
       ],
       "Pantry": [
         {
           "id": 2,
-          "text": "125 g (3/4 cup) brown sugar"
+          "text": "125 g (3/4 cup) brown sugar",
+          "quantity": {
+            "amount": 125.0,
+            "unit": "g",
+            "item": "brown sugar",
+            "secondary_amount": 0.75,
+            "secondary_unit": "cup"
+          }
         },
         {
           "id": 3,
-          "text": "250 g (1-3/4 cups) flour"
+          "text": "250 g (1-3/4 cups) flour",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "flour",
+            "secondary_amount": 1.75,
+            "secondary_unit": "cups"
+          }
         },
         {
           "id": 4,
-          "text": "3 tbsp honey"
+          "text": "3 tbsp honey",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "honey"
+          }
         },
         {
           "id": 5,
-          "text": "3 tsp baking soda (Natron)"
+          "text": "3 tsp baking soda (Natron)",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "baking soda (Natron)"
+          }
         },
         {
           "id": 6,
-          "text": "3 tsp orange blossom water"
+          "text": "3 tsp orange blossom water",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "orange blossom water"
+          }
         }
       ],
       "Spices": [
         {
           "id": 7,
-          "text": "2 tsp spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)"
+          "text": "2 tsp spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)"
+          }
         }
       ]
     },
@@ -254,19 +414,38 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "500 g pumpkin, peeled and cubed"
+          "text": "500 g pumpkin, peeled and cubed",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "g",
+            "item": "pumpkin, peeled and cubed"
+          }
         },
         {
           "id": 2,
-          "text": "500 g floury potatoes, peeled and cubed"
+          "text": "500 g floury potatoes, peeled and cubed",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "g",
+            "item": "floury potatoes, peeled and cubed"
+          }
         },
         {
           "id": 3,
-          "text": "1 onion, diced"
+          "text": "1 onion, diced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "onion, diced"
+          }
         },
         {
           "id": 4,
-          "text": "2 cloves garlic, minced"
+          "text": "2 cloves garlic, minced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
         },
         {
           "id": 5,
@@ -284,29 +463,61 @@
       "Pantry": [
         {
           "id": 11,
-          "text": "1 tin (400 ml) coconut milk"
+          "text": "1 tin (400 ml) coconut milk",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "coconut milk",
+            "secondary_amount": 400.0,
+            "secondary_unit": "ml"
+          }
         },
         {
           "id": 12,
-          "text": "200 ml vegetable stock"
+          "text": "200 ml vegetable stock",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
         },
         {
           "id": 13,
-          "text": "1 tbsp vegetable oil"
+          "text": "1 tbsp vegetable oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "vegetable oil"
+          }
         },
         {
           "id": 14,
-          "text": "2 tbsp curry paste (red or yellow)"
+          "text": "2 tbsp curry paste (red or yellow)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "curry paste (red or yellow)"
+          }
         }
       ],
       "Spices": [
         {
           "id": 8,
-          "text": "1 tsp ground cumin"
+          "text": "1 tsp ground cumin",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground cumin"
+          }
         },
         {
           "id": 9,
-          "text": "1 tsp ground turmeric"
+          "text": "1 tsp ground turmeric",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground turmeric"
+          }
         },
         {
           "id": 10,
@@ -343,35 +554,65 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "1 clove garlic, crushed"
+          "text": "1 clove garlic, crushed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "clove",
+            "item": "garlic, crushed"
+          }
         },
         {
           "id": 2,
-          "text": "Juice of 1 lemon"
+          "text": "Juice of 1 lemon",
+          "quantity": {
+            "amount": 1.0,
+            "item": "lemon",
+            "prefix": "Juice of"
+          }
         }
       ],
       "Fridge": [
         {
           "id": 3,
-          "text": "Ice cubes (about 25 g)"
+          "text": "Few ice cubes"
         }
       ],
       "Pantry": [
         {
           "id": 6,
-          "text": "250 g dried chickpeas"
+          "text": "250 g dried chickpeas",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "dried chickpeas"
+          }
         },
         {
           "id": 7,
-          "text": "1 tsp bicarbonate of soda (for soaking)"
+          "text": "1 tsp bicarbonate of soda (for soaking)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "bicarbonate of soda (for soaking)"
+          }
         },
         {
           "id": 8,
-          "text": "1 tsp bicarbonate of soda (for cooking)"
+          "text": "1 tsp bicarbonate of soda (for cooking)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "bicarbonate of soda (for cooking)"
+          }
         },
         {
           "id": 9,
-          "text": "120 g tahini (or more to taste)"
+          "text": "120 g tahini (or more to taste)",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "g",
+            "item": "tahini (or more to taste)"
+          }
         },
         {
           "id": 10,
@@ -419,11 +660,21 @@
       "Fridge": [
         {
           "id": 1,
-          "text": "55 g plant-based block margarine, cold"
+          "text": "55 g plant-based block margarine, cold",
+          "quantity": {
+            "amount": 55.0,
+            "unit": "g",
+            "item": "plant-based block margarine, cold"
+          }
         },
         {
           "id": 2,
-          "text": "150 ml plant milk (oat or soy work best)"
+          "text": "150 ml plant milk (oat or soy work best)",
+          "quantity": {
+            "amount": 150.0,
+            "unit": "ml",
+            "item": "plant milk (oat or soy work best)"
+          }
         },
         {
           "id": 3,
@@ -433,15 +684,30 @@
       "Pantry": [
         {
           "id": 5,
-          "text": "225 g plain flour (Type 405)"
+          "text": "225 g plain flour (Type 405)",
+          "quantity": {
+            "amount": 225.0,
+            "unit": "g",
+            "item": "plain flour (Type 405)"
+          }
         },
         {
           "id": 6,
-          "text": "3 tsp baking powder"
+          "text": "3 tsp baking powder",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "baking powder"
+          }
         },
         {
           "id": 7,
-          "text": "25 g caster sugar"
+          "text": "25 g caster sugar",
+          "quantity": {
+            "amount": 25.0,
+            "unit": "g",
+            "item": "caster sugar"
+          }
         }
       ],
       "Spices": [
@@ -483,7 +749,12 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "4 medium ripe bananas, mashed"
+          "text": "4 medium ripe bananas, mashed",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "medium",
+            "item": "ripe bananas, mashed"
+          }
         },
         {
           "id": 2,
@@ -493,39 +764,79 @@
       "Fridge": [
         {
           "id": 3,
-          "text": "60 ml unsweetened plant milk"
+          "text": "60 ml unsweetened plant milk",
+          "quantity": {
+            "amount": 60.0,
+            "unit": "ml",
+            "item": "unsweetened plant milk"
+          }
         }
       ],
       "Pantry": [
         {
           "id": 4,
-          "text": "100 g light brown sugar"
+          "text": "100 g light brown sugar",
+          "quantity": {
+            "amount": 100.0,
+            "unit": "g",
+            "item": "light brown sugar"
+          }
         },
         {
           "id": 5,
-          "text": "250 g all-purpose flour"
+          "text": "250 g all-purpose flour",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "all-purpose flour"
+          }
         },
         {
           "id": 6,
-          "text": "60 ml vegetable oil"
+          "text": "60 ml vegetable oil",
+          "quantity": {
+            "amount": 60.0,
+            "unit": "ml",
+            "item": "vegetable oil"
+          }
         },
         {
           "id": 7,
-          "text": "2 tsp pure vanilla extract"
+          "text": "2 tsp pure vanilla extract",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "pure vanilla extract"
+          }
         },
         {
           "id": 8,
-          "text": "1 tsp baking soda"
+          "text": "1 tsp baking soda",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking soda"
+          }
         }
       ],
       "Spices": [
         {
           "id": 9,
-          "text": "1 tsp cinnamon"
+          "text": "1 tsp cinnamon",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cinnamon"
+          }
         },
         {
           "id": 10,
-          "text": "½ tsp salt"
+          "text": "1/2 tsp salt",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "salt"
+          }
         }
       ]
     },

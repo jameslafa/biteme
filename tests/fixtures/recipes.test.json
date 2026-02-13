@@ -10,16 +10,16 @@
     "notes": "Make sure to use fresh spices for best flavor. This curry tastes even better the next day.",
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "1 onion, diced" },
-        { "id": 2, "text": "2 cloves garlic, minced" }
+        { "id": 1, "text": "1 onion, diced", "quantity": { "amount": 1, "item": "onion, diced" } },
+        { "id": 2, "text": "2 cloves garlic, minced", "quantity": { "amount": 2, "unit": "cloves", "item": "garlic, minced" } }
       ],
       "Spices": [
-        { "id": 3, "text": "1 tsp curry powder" }
+        { "id": 3, "text": "1 tsp curry powder", "quantity": { "amount": 1, "unit": "tsp", "item": "curry powder" } }
       ],
       "Pantry": [
-        { "id": 4, "text": "1 cup lentils" },
-        { "id": 5, "text": "2 cups vegetable broth" },
-        { "id": 6, "text": "1 tbsp oil" }
+        { "id": 4, "text": "1 cup lentils", "quantity": { "amount": 1, "unit": "cup", "item": "lentils" } },
+        { "id": 5, "text": "2 cups vegetable broth", "quantity": { "amount": 2, "unit": "cups", "item": "vegetable broth" } },
+        { "id": 6, "text": "1 tbsp oil", "quantity": { "amount": 1, "unit": "tbsp", "item": "oil" } }
       ]
     },
     "steps": [
@@ -41,11 +41,11 @@
     "tags": ["vegan", "lunch", "salad"],
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "2 cups lettuce" },
-        { "id": 2, "text": "1 tomato" }
+        { "id": 1, "text": "2 cups lettuce", "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
+        { "id": 2, "text": "1 tomato", "quantity": { "amount": 1, "item": "tomato" } }
       ],
       "Pantry": [
-        { "id": 3, "text": "2 tbsp olive oil" }
+        { "id": 3, "text": "2 tbsp olive oil", "quantity": { "amount": 2, "unit": "tbsp", "item": "olive oil" } }
       ]
     },
     "steps": [
@@ -64,8 +64,8 @@
     "tags": ["vegan", "breakfast", "quick"],
     "ingredients": {
       "Pantry": [
-        { "id": 1, "text": "2 slices bread" },
-        { "id": 2, "text": "1 tbsp butter" }
+        { "id": 1, "text": "2 slices bread", "quantity": { "amount": 2, "item": "slices bread" } },
+        { "id": 2, "text": "1 tbsp butter", "quantity": { "amount": 1, "unit": "tbsp", "item": "butter" } }
       ]
     },
     "steps": [

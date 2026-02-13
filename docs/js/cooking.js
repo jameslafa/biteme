@@ -3,6 +3,7 @@
 let currentStep = 0; // Start at first cooking step
 let recipe = null;
 let cookingSessionId = null;
+let servingRatio = 1;
 
 document.addEventListener('DOMContentLoaded', async function() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -20,8 +21,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     return;
   }
 
+  const savedServings = getServings(recipeId, recipe.servings);
+  servingRatio = savedServings / recipe.servings;
+
   document.title = `Cooking: ${recipe.name}`;
-  document.getElementById('recipe-name').textContent = recipe.name;
+  const headerText = savedServings !== recipe.servings
+    ? `${recipe.name} (${savedServings} servings)`
+    : recipe.name;
+  document.getElementById('recipe-name').textContent = headerText;
   initializeCookingMode();
   renderStep();
 
@@ -167,7 +174,7 @@ function renderStep() {
         <h4>Ingredients for this step:</h4>
         <ul>
           ${stepIngredients.map(ingredient => `
-            <li>${ingredient.text}</li>
+            <li>${scaleIngredientText(ingredient, servingRatio)}</li>
           `).join('')}
         </ul>
       </div>

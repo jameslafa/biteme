@@ -90,10 +90,14 @@ Not all categories are required — only use the ones that apply. Each ingredien
 - 1 tbsp vegetable oil
 ```
 
-**Important:** Per SI standards, always use a space between the number and unit:
+**Important:**
 
-- ✓ Correct: `500 g`, `200 ml`, `1 tsp`, `2 tbsp`
-- ✗ Wrong: `500g`, `200ml`
+- Per SI standards, always use a space between the number and unit:
+  - ✓ Correct: `500 g`, `200 ml`, `1 tsp`, `2 tbsp`
+  - ✗ Wrong: `500g`, `200ml`
+- Use text fractions (`1/2`, `3/4`) instead of unicode fractions (`½`, `¾`). They're easier to type in markdown and the parser handles both, but text fractions keep recipes consistent.
+  - ✓ Correct: `1/2 tsp salt`
+  - ✗ Wrong: `½ tsp salt`
 
 ### Instructions (required)
 
@@ -117,6 +121,39 @@ One or more paragraphs about how to serve, garnish, or pair the dish. Shown on t
 
 Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime.
 ```
+
+---
+
+## Ingredient Quantities & Scaling
+
+Ingredient quantities are automatically parsed at build time for the adjustable servings feature. The parser recognizes these patterns:
+
+- **Simple metric:** `500 g mushrooms, sliced`
+- **Volume:** `2 tbsp olive oil`
+- **Fractions:** `½ tsp salt` or `1/2 tsp salt`
+- **Ranges:** `3-4 cloves garlic, minced`
+- **Composite:** `1 tin (400 ml) coconut milk`
+- **Dual units:** `250 ml (1 cup) milk`
+- **About:** `1 medium potato (about 150 g)`
+- **Prefix:** `Juice of 1/2 lemon`
+- **Count:** `4 medium ripe bananas`
+- **Mixed numbers:** `250 g (1-3/4 cups) flour`
+
+Ingredients without a leading number (e.g., `Salt to taste`, `Fresh parsley for garnish`) are treated as non-scalable and displayed as-is regardless of serving adjustments.
+
+### `<!-- no-scale -->` annotation
+
+Add `<!-- no-scale -->` at the end of an ingredient line to explicitly exclude it from quantity parsing:
+
+```markdown
+- 1 large handful of spinach <!-- no-scale -->
+```
+
+Use this when:
+- An ingredient has a leading number but shouldn't be scaled
+- The parser produces an incorrect result for a particular pattern
+
+The annotation is stripped from the displayed text. The linter emits a non-blocking warning for ingredients that start with a number but fail to parse and don't have the annotation.
 
 ---
 

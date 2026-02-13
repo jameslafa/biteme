@@ -45,6 +45,7 @@
 
   <script src="js/db.js"></script>
   <script src="js/recipes.js"></script>
+  <script src="js/servings.js"></script>
   <script>
     // Load recipe detail
     document.addEventListener('DOMContentLoaded', async function() {
@@ -98,39 +99,19 @@
 
           <div id="cooking-stats" class="cooking-stats"></div>
 
+          <div class="serving-adjuster">
+            <button id="decrease-servings" aria-label="Decrease servings">&minus;</button>
+            <span><span id="current-servings">${recipe.servings}</span> servings</span>
+            <button id="increase-servings" aria-label="Increase servings">+</button>
+          </div>
+
           <div class="recipe-tags">
             ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
           </div>
 
           <section class="ingredients">
             <h3>Ingredients</h3>
-            ${Object.entries(recipe.ingredients).map(([category, items]) => {
-              if (items.length === 0) return '';
-              return `
-                <div class="ingredient-category">
-                  <h4>${category}</h4>
-                  <ul>
-                    ${items.map((ingredient) => `
-                      <li>
-                        <div class="ingredient-item">
-                          <div class="ingredient-checkbox">
-                            <input type="checkbox" id="ingredient-${ingredient.id}" />
-                            <label for="ingredient-${ingredient.id}">${ingredient.text}</label>
-                          </div>
-                          <button class="add-to-cart" data-ingredient-id="${ingredient.id}" aria-label="Add to shopping list">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <circle cx="9" cy="21" r="1"/>
-                              <circle cx="20" cy="21" r="1"/>
-                              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                            </svg>
-                          </button>
-                        </div>
-                      </li>
-                    `).join('')}
-                  </ul>
-                </div>
-              `;
-            }).join('')}
+            <div id="ingredients-list"></div>
           </section>
 
           <section class="instructions">
@@ -165,6 +146,29 @@
         </article>
       `;
 
+      // Render ingredients with current serving ratio
+      let currentServings = getServings(recipeId, recipe.servings);
+      document.getElementById('current-servings').textContent = currentServings;
+      renderIngredients(recipe, currentServings / recipe.servings);
+
+      // Setup serving adjuster
+      document.getElementById('decrease-servings').addEventListener('click', () => {
+        if (currentServings > 1) {
+          currentServings--;
+          document.getElementById('current-servings').textContent = currentServings;
+          setServings(recipeId, currentServings);
+          renderIngredients(recipe, currentServings / recipe.servings);
+          setupShoppingCartButtons(recipeId, recipe.name);
+        }
+      });
+      document.getElementById('increase-servings').addEventListener('click', () => {
+        currentServings++;
+        document.getElementById('current-servings').textContent = currentServings;
+        setServings(recipeId, currentServings);
+        renderIngredients(recipe, currentServings / recipe.servings);
+        setupShoppingCartButtons(recipeId, recipe.name);
+      });
+
       // Setup favorite button
       setupFavoriteButton(recipeId);
 
@@ -180,6 +184,38 @@
       // Update cart count
       updateCartCount();
     });
+
+    function renderIngredients(recipe, ratio) {
+      document.getElementById('ingredients-list').innerHTML = Object.entries(recipe.ingredients).map(([category, items]) => {
+        if (items.length === 0) return '';
+        return `
+          <div class="ingredient-category">
+            <h4>${category}</h4>
+            <ul>
+              ${items.map((ingredient) => {
+                const displayText = scaleIngredientText(ingredient, ratio);
+                return `
+                <li>
+                  <div class="ingredient-item">
+                    <div class="ingredient-checkbox">
+                      <input type="checkbox" id="ingredient-${ingredient.id}" />
+                      <label for="ingredient-${ingredient.id}">${displayText}</label>
+                    </div>
+                    <button class="add-to-cart" data-ingredient-id="${ingredient.id}" aria-label="Add to shopping list">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </li>`;
+              }).join('')}
+            </ul>
+          </div>
+        `;
+      }).join('');
+    }
 
     async function setupFavoriteButton(recipeId) {
       await initDB();

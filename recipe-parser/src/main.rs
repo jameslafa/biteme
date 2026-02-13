@@ -39,9 +39,29 @@ struct RecipeFrontmatter {
 }
 
 #[derive(Debug, Serialize)]
+struct ParsedQuantity {
+    amount: f64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    amount_max: Option<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    unit: Option<String>,
+    item: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    secondary_amount: Option<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    secondary_unit: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    secondary_prefix: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    prefix: Option<String>,
+}
+
+#[derive(Debug, Serialize)]
 struct Ingredient {
     id: u32,
     text: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    quantity: Option<ParsedQuantity>,
 }
 
 #[derive(Debug, Serialize)]
@@ -101,6 +121,278 @@ where
     map.end()
 }
 
+// Known units for ingredient quantity parsing (order matters: longer matches first)
+const KNOWN_UNITS: &[&str] = &[
+    "tbsp", "tsp", "cups", "cup", "cloves", "clove", "tins", "tin",
+    "cans", "can", "medium", "small", "large", "kg", "ml", "g", "l",
+];
+
+fn unicode_fraction_value(c: char) -> Option<f64> {
+    match c {
+        '½' => Some(0.5),
+        '⅓' => Some(1.0 / 3.0),
+        '¼' => Some(0.25),
+        '¾' => Some(0.75),
+        '⅔' => Some(2.0 / 3.0),
+        _ => None,
+    }
+}
+
+/// Parse a number from the start of a string. Returns (value, remaining_str).
+/// Handles: integers, decimals, unicode fractions, text fractions (1/2),
+/// mixed numbers with unicode (1½) and text fractions (1-3/4).
+fn parse_amount(s: &str) -> Option<(f64, &str)> {
+    let s = s.trim_start();
+    if s.is_empty() {
+        return None;
+    }
+
+    // Try unicode fraction first (e.g., "½ tsp")
+    let first_char = s.chars().next()?;
+    if let Some(val) = unicode_fraction_value(first_char) {
+        return Some((val, &s[first_char.len_utf8()..]));
+    }
+
+    // Must start with a digit
+    if !first_char.is_ascii_digit() {
+        return None;
+    }
+
+    // Parse integer/decimal part
+    let mut end = 0;
+    let mut has_dot = false;
+    for (i, c) in s.char_indices() {
+        if c.is_ascii_digit() {
+            end = i + 1;
+        } else if c == '.' && !has_dot && i > 0 {
+            has_dot = true;
+            end = i + 1;
+        } else {
+            break;
+        }
+    }
+
+    let num_str = &s[..end];
+    let rest = &s[end..];
+    let value: f64 = num_str.parse().ok()?;
+
+    // Check for text fraction: "1/2", "3/4"
+    if let Some(after_slash) = rest.strip_prefix('/') {
+        let mut denom_end = 0;
+        for (i, c) in after_slash.char_indices() {
+            if c.is_ascii_digit() {
+                denom_end = i + 1;
+            } else {
+                break;
+            }
+        }
+        if denom_end > 0 {
+            if let Ok(denom) = after_slash[..denom_end].parse::<f64>() {
+                if denom > 0.0 {
+                    return Some((value / denom, &after_slash[denom_end..]));
+                }
+            }
+        }
+    }
+
+    // Check for unicode fraction suffix: "1½"
+    if let Some(next_char) = rest.chars().next() {
+        if let Some(frac_val) = unicode_fraction_value(next_char) {
+            return Some((value + frac_val, &rest[next_char.len_utf8()..]));
+        }
+    }
+
+    // Check for mixed number with dash: "1-3/4"
+    if let Some(after_dash) = rest.strip_prefix('-') {
+        if let Some(slash_pos) = after_dash.find('/') {
+            let numerator_str = &after_dash[..slash_pos];
+            if numerator_str.chars().all(|c| c.is_ascii_digit()) && !numerator_str.is_empty() {
+                let after_slash = &after_dash[slash_pos + 1..];
+                let mut denom_end = 0;
+                for (i, c) in after_slash.char_indices() {
+                    if c.is_ascii_digit() {
+                        denom_end = i + 1;
+                    } else {
+                        break;
+                    }
+                }
+                if denom_end > 0 {
+                    if let (Ok(num), Ok(denom)) = (
+                        numerator_str.parse::<f64>(),
+                        after_slash[..denom_end].parse::<f64>(),
+                    ) {
+                        if denom > 0.0 {
+                            return Some((value + num / denom, &after_slash[denom_end..]));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Some((value, rest))
+}
+
+/// Try to parse a unit from the start of a string.
+fn parse_unit(s: &str) -> (Option<String>, &str) {
+    let s = s.trim_start();
+    for &unit in KNOWN_UNITS {
+        if let Some(after) = s.strip_prefix(unit) {
+            // Unit must be followed by whitespace, comma, paren, or end of string
+            if after.is_empty()
+                || after.starts_with(|c: char| c.is_whitespace() || c == ',' || c == '(')
+            {
+                return (Some(unit.to_string()), after);
+            }
+        }
+    }
+    (None, s)
+}
+
+/// Try to parse a parenthetical secondary quantity like "(400 ml)" or "(about 150 g)".
+fn try_parse_parenthetical(s: &str) -> Option<(f64, Option<String>, Option<String>, &str)> {
+    let s = s.trim_start();
+    if !s.starts_with('(') {
+        return None;
+    }
+
+    let close = s.find(')')?;
+    let inner = s[1..close].trim();
+    let rest = &s[close + 1..];
+
+    // Check for "about" prefix
+    let (prefix, inner) = if let Some(after_about) = inner.strip_prefix("about ") {
+        (Some("about".to_string()), after_about.trim())
+    } else {
+        (None, inner)
+    };
+
+    // Try to parse amount
+    let (amount, inner_rest) = parse_amount(inner)?;
+
+    // Try to parse unit
+    let (unit, leftover) = parse_unit(inner_rest);
+
+    // If there's leftover text, this isn't a clean secondary quantity
+    if !leftover.trim().is_empty() {
+        return None;
+    }
+
+    Some((amount, unit, prefix, rest))
+}
+
+/// Extract an embedded "(about N unit)" secondary quantity from item text.
+fn extract_embedded_secondary(item: &str) -> (Option<f64>, Option<String>, Option<String>, String) {
+    if let Some(open) = item.find("(about ") {
+        if let Some(rel_close) = item[open..].find(')') {
+            let close = open + rel_close;
+            let paren_content = &item[open..=close];
+            if let Some((amount, unit, prefix, _)) = try_parse_parenthetical(paren_content) {
+                let before = item[..open].trim_end();
+                let after = item[close + 1..].trim_start();
+                let new_item = if after.starts_with(',') {
+                    format!("{}{}", before, after)
+                } else if !after.is_empty() && !before.is_empty() {
+                    format!("{}, {}", before, after)
+                } else {
+                    format!("{}{}", before, after)
+                };
+                return (Some(amount), unit, prefix, new_item.trim().to_string());
+            }
+        }
+    }
+    (None, None, None, item.to_string())
+}
+
+/// Parse an ingredient text into a structured quantity.
+/// Returns None for non-scalable ingredients (no leading number).
+fn parse_ingredient_quantity(text: &str) -> Option<ParsedQuantity> {
+    let text = text.trim();
+    if text.is_empty() {
+        return None;
+    }
+
+    // Check for prefix patterns like "Juice of 1/2 lemon"
+    let prefixes = ["Juice of ", "Zest of "];
+    let (prefix, remaining) = {
+        let mut found_prefix = None;
+        let mut remaining = text;
+        for p in &prefixes {
+            if let Some(after) = text.strip_prefix(p) {
+                found_prefix = Some(text[..p.len()].trim_end().to_string());
+                remaining = after;
+                break;
+            }
+            // Also try lowercase
+            let lower_p = p.to_lowercase();
+            if let Some(after) = text.to_lowercase().strip_prefix(&lower_p) {
+                let _ = after; // just for the check
+                found_prefix = Some(text[..p.len()].trim_end().to_string());
+                remaining = &text[p.len()..];
+                break;
+            }
+        }
+        (found_prefix, remaining)
+    };
+
+    // Try to parse leading amount
+    let (amount, rest) = parse_amount(remaining)?;
+
+    // Check for range (e.g., "3-4 cloves")
+    let (amount_max, rest) = {
+        let rest_trimmed = rest;
+        if let Some(after_dash) = rest_trimmed
+            .strip_prefix('-')
+            .or_else(|| rest_trimmed.strip_prefix('\u{2013}'))
+        {
+            if let Some((max_val, rest2)) = parse_amount(after_dash) {
+                (Some(max_val), rest2)
+            } else {
+                (None, rest)
+            }
+        } else {
+            (None, rest)
+        }
+    };
+
+    // Try to parse unit
+    let (unit, rest) = parse_unit(rest);
+
+    // Check for immediate parenthetical secondary quantity
+    let (secondary_amount, secondary_unit, secondary_prefix, rest) =
+        if let Some((sec_amount, sec_unit, sec_prefix, rest2)) = try_parse_parenthetical(rest) {
+            (Some(sec_amount), sec_unit, sec_prefix, rest2)
+        } else {
+            (None, None, None, rest)
+        };
+
+    // Remaining text is the item
+    let mut item = rest.trim().to_string();
+    // Strip leading comma
+    if let Some(stripped) = item.strip_prefix(',') {
+        item = stripped.trim().to_string();
+    }
+
+    // If no immediate secondary was found, check for embedded "(about N unit)" in item
+    let (secondary_amount, secondary_unit, secondary_prefix, item) = if secondary_amount.is_none()
+    {
+        extract_embedded_secondary(&item)
+    } else {
+        (secondary_amount, secondary_unit, secondary_prefix, item)
+    };
+
+    Some(ParsedQuantity {
+        amount,
+        amount_max,
+        unit,
+        item,
+        secondary_amount,
+        secondary_unit,
+        secondary_prefix,
+        prefix,
+    })
+}
+
 fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
     let content = fs::read_to_string(path)
         .with_context(|| format!("Failed to read file: {:?}", path))?;
@@ -133,6 +425,7 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
 
     let mut in_list = false;
     let mut current_text = String::new();
+    let mut current_ingredient_no_scale = false;
 
     let mut current_heading_level = 0;
 
@@ -174,19 +467,37 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
             }
             Event::Start(Tag::Item) => {
                 current_text.clear();
+                current_ingredient_no_scale = false;
             }
             Event::End(TagEnd::Item) if in_list && current_section == "Ingredients" => {
-                let text = current_text.trim().to_string();
+                // Strip any no-scale annotation from text (in case parser included it)
+                let text = current_text.trim()
+                    .replace("<!-- no-scale -->", "").trim().to_string();
                 if !text.is_empty() && !current_category.is_empty() {
                     if let Some(category_items) = ingredients.get_mut(&current_category) {
+                        let quantity = if current_ingredient_no_scale {
+                            None
+                        } else {
+                            let q = parse_ingredient_quantity(&text);
+                            // Lint warning: ingredient looks scalable but failed to parse
+                            if lint && q.is_none() {
+                                let first_char = text.chars().next().unwrap_or(' ');
+                                if first_char.is_ascii_digit() || unicode_fraction_value(first_char).is_some() {
+                                    eprintln!("  \u{26a0}\u{fe0f}  WARNING: Ingredient '{}' (category '{}') starts with a number but could not be parsed for scaling. Add <!-- no-scale --> to suppress.", text, current_category);
+                                }
+                            }
+                            q
+                        };
                         category_items.push(Ingredient {
                             id: ingredient_id,
                             text,
+                            quantity,
                         });
                         ingredient_id += 1;
                     }
                 }
                 current_text.clear();
+                current_ingredient_no_scale = false;
             }
             Event::End(TagEnd::Item) if current_section == "Instructions" => {
                 let text = current_text.trim().to_string();
@@ -227,6 +538,11 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
             Event::SoftBreak | Event::HardBreak => {
                 current_text.push(' ');
             }
+            Event::Html(html) | Event::InlineHtml(html) => {
+                if in_list && current_section == "Ingredients" && html.contains("no-scale") {
+                    current_ingredient_no_scale = true;
+                }
+            }
             _ => {}
         }
     }
@@ -248,6 +564,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
                 }
                 // Check for improper spacing between numbers and units (SI standard)
                 validate_unit_spacing(&item.text, category)?;
+                // Check for unicode fractions (should use text fractions like 1/2 instead)
+                validate_no_unicode_fractions(&item.text, category)?;
             }
         }
         for (idx, step) in steps.iter().enumerate() {
@@ -278,13 +596,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
                 let words: Vec<&str> = main_part
                     .split_whitespace()
                     .filter(|w| {
-                        // Check if it's a measurement like "400g" or "150ml"
-                        let is_measurement_value = w.chars().take_while(|c| c.is_numeric() || *c == '.').count() > 0
-                            && (w.ends_with("g") || w.ends_with("ml") || w.ends_with("kg") || w.ends_with("l"));
-
                         // Filter out measurements, numbers, containers, and common non-ingredient words
                         !w.chars().all(|c| c.is_numeric() || c == '.')
-                        && !is_measurement_value
                         && !["g", "kg", "ml", "l", "tsp", "tbsp", "cup", "cups", "cloves", "clove",
                              "tin", "can", "jar", "bottle", "pack", "packet",
                              "pieces", "piece", "slices", "slice", "sliced", "diced", "minced", "chopped",
@@ -395,6 +708,18 @@ fn validate_unit_spacing(text: &str, category: &str) -> Result<()> {
         }
     }
 
+    Ok(())
+}
+
+fn validate_no_unicode_fractions(text: &str, category: &str) -> Result<()> {
+    for c in text.chars() {
+        if unicode_fraction_value(c).is_some() {
+            bail!(
+                "Unicode fraction '{}' in '{}' (category '{}'). Use text fractions instead (e.g., 1/2 not ½).",
+                c, text, category
+            );
+        }
+    }
     Ok(())
 }
 
@@ -1613,5 +1938,305 @@ date: 10-02-2026
 
         assert!(result.is_err());
         assert!(result.unwrap_err().to_string().contains("YYYY-MM-DD"));
+    }
+
+    // ── Quantity parsing tests ──
+
+    #[test]
+    fn test_quantity_simple_metric() {
+        let q = parse_ingredient_quantity("500 g mixed mushrooms, sliced").unwrap();
+        assert_eq!(q.amount, 500.0);
+        assert_eq!(q.unit.as_deref(), Some("g"));
+        assert_eq!(q.item, "mixed mushrooms, sliced");
+        assert!(q.amount_max.is_none());
+        assert!(q.prefix.is_none());
+    }
+
+    #[test]
+    fn test_quantity_volume() {
+        let q = parse_ingredient_quantity("2 tbsp olive oil").unwrap();
+        assert_eq!(q.amount, 2.0);
+        assert_eq!(q.unit.as_deref(), Some("tbsp"));
+        assert_eq!(q.item, "olive oil");
+    }
+
+    #[test]
+    fn test_quantity_unicode_fraction() {
+        let q = parse_ingredient_quantity("½ tsp salt").unwrap();
+        assert_eq!(q.amount, 0.5);
+        assert_eq!(q.unit.as_deref(), Some("tsp"));
+        assert_eq!(q.item, "salt");
+    }
+
+    #[test]
+    fn test_quantity_text_fraction() {
+        let q = parse_ingredient_quantity("1/2 tsp black pepper").unwrap();
+        assert_eq!(q.amount, 0.5);
+        assert_eq!(q.unit.as_deref(), Some("tsp"));
+        assert_eq!(q.item, "black pepper");
+    }
+
+    #[test]
+    fn test_quantity_range() {
+        let q = parse_ingredient_quantity("3-4 cloves garlic, minced").unwrap();
+        assert_eq!(q.amount, 3.0);
+        assert_eq!(q.amount_max, Some(4.0));
+        assert_eq!(q.unit.as_deref(), Some("cloves"));
+        assert_eq!(q.item, "garlic, minced");
+    }
+
+    #[test]
+    fn test_quantity_composite_tin() {
+        let q = parse_ingredient_quantity("1 tin (400 ml) coconut milk").unwrap();
+        assert_eq!(q.amount, 1.0);
+        assert_eq!(q.unit.as_deref(), Some("tin"));
+        assert_eq!(q.secondary_amount, Some(400.0));
+        assert_eq!(q.secondary_unit.as_deref(), Some("ml"));
+        assert_eq!(q.item, "coconut milk");
+    }
+
+    #[test]
+    fn test_quantity_metric_imperial() {
+        let q = parse_ingredient_quantity("250 ml (1 cup) milk").unwrap();
+        assert_eq!(q.amount, 250.0);
+        assert_eq!(q.unit.as_deref(), Some("ml"));
+        assert_eq!(q.secondary_amount, Some(1.0));
+        assert_eq!(q.secondary_unit.as_deref(), Some("cup"));
+        assert_eq!(q.item, "milk");
+    }
+
+    #[test]
+    fn test_quantity_about_secondary() {
+        let q = parse_ingredient_quantity("1 medium floury potato (about 150 g), peeled and cubed").unwrap();
+        assert_eq!(q.amount, 1.0);
+        assert_eq!(q.unit.as_deref(), Some("medium"));
+        assert_eq!(q.secondary_amount, Some(150.0));
+        assert_eq!(q.secondary_unit.as_deref(), Some("g"));
+        assert_eq!(q.secondary_prefix.as_deref(), Some("about"));
+        assert_eq!(q.item, "floury potato, peeled and cubed");
+    }
+
+    #[test]
+    fn test_quantity_prefix_juice_of() {
+        let q = parse_ingredient_quantity("Juice of 1/2 lemon (optional)").unwrap();
+        assert_eq!(q.prefix.as_deref(), Some("Juice of"));
+        assert_eq!(q.amount, 0.5);
+        assert!(q.unit.is_none());
+        assert_eq!(q.item, "lemon (optional)");
+    }
+
+    #[test]
+    fn test_quantity_count_based() {
+        let q = parse_ingredient_quantity("4 medium ripe bananas, mashed").unwrap();
+        assert_eq!(q.amount, 4.0);
+        assert_eq!(q.unit.as_deref(), Some("medium"));
+        assert_eq!(q.item, "ripe bananas, mashed");
+    }
+
+    #[test]
+    fn test_quantity_mixed_number() {
+        let q = parse_ingredient_quantity("250 g (1-3/4 cups) flour").unwrap();
+        assert_eq!(q.amount, 250.0);
+        assert_eq!(q.unit.as_deref(), Some("g"));
+        assert_eq!(q.secondary_amount, Some(1.75));
+        assert_eq!(q.secondary_unit.as_deref(), Some("cups"));
+        assert_eq!(q.item, "flour");
+    }
+
+    #[test]
+    fn test_quantity_fraction_secondary() {
+        let q = parse_ingredient_quantity("125 g (3/4 cup) brown sugar").unwrap();
+        assert_eq!(q.amount, 125.0);
+        assert_eq!(q.unit.as_deref(), Some("g"));
+        assert_eq!(q.secondary_amount, Some(0.75));
+        assert_eq!(q.secondary_unit.as_deref(), Some("cup"));
+        assert_eq!(q.item, "brown sugar");
+    }
+
+    #[test]
+    fn test_quantity_no_unit() {
+        let q = parse_ingredient_quantity("1 onion, diced").unwrap();
+        assert_eq!(q.amount, 1.0);
+        assert!(q.unit.is_none());
+        assert_eq!(q.item, "onion, diced");
+    }
+
+    #[test]
+    fn test_quantity_parenthetical_not_secondary() {
+        let q = parse_ingredient_quantity("3 tsp baking soda (Natron)").unwrap();
+        assert_eq!(q.amount, 3.0);
+        assert_eq!(q.unit.as_deref(), Some("tsp"));
+        assert_eq!(q.item, "baking soda (Natron)");
+        assert!(q.secondary_amount.is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_salt() {
+        assert!(parse_ingredient_quantity("Salt to taste").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_pinch() {
+        assert!(parse_ingredient_quantity("Pinch of salt").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_fresh() {
+        assert!(parse_ingredient_quantity("Fresh parsley for garnish").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_ice_cubes() {
+        assert!(parse_ingredient_quantity("Ice cubes (about 25 g)").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_extra() {
+        assert!(parse_ingredient_quantity("Extra banana slices for topping").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_good_quality() {
+        assert!(parse_ingredient_quantity("Good quality olive oil (for serving)").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_optional() {
+        assert!(parse_ingredient_quantity("Optional: pinch of cumin, paprika, sumac, or za'atar").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_thumb_sized() {
+        assert!(parse_ingredient_quantity("Thumb-sized piece of ginger, grated").is_none());
+    }
+
+    #[test]
+    fn test_quantity_non_scalable_little() {
+        assert!(parse_ingredient_quantity("A little extra plant milk for glazing").is_none());
+    }
+
+    #[test]
+    fn test_no_scale_annotation_in_recipe() {
+        let test_recipe = r#"---
+id: no-scale-test
+name: No Scale Test
+description: Test no-scale annotation handling
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 large handful of spinach <!-- no-scale -->
+- 500 g flour
+
+# Instructions
+
+1. Mix {flour} and {spinach}
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("no-scale-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+        let pantry = recipe.ingredients.get("Pantry").unwrap();
+
+        // First ingredient has no-scale annotation: quantity should be None
+        assert!(pantry[0].quantity.is_none());
+        // Text should not contain the annotation
+        assert!(!pantry[0].text.contains("no-scale"));
+
+        // Second ingredient should have quantity parsed
+        assert!(pantry[1].quantity.is_some());
+        assert_eq!(pantry[1].quantity.as_ref().unwrap().amount, 500.0);
+    }
+
+    #[test]
+    fn test_quantity_in_parsed_recipe() {
+        let test_recipe = r#"---
+id: quantity-test
+name: Quantity Test
+description: Test quantity parsing in full recipe
+servings: 4
+time: 30
+difficulty: easy
+tags: [test]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Fresh
+- 3-4 cloves garlic, minced
+- Juice of 1/2 lemon
+
+## Pantry
+- 1 tin (400 ml) coconut milk
+- Salt to taste
+
+# Instructions
+
+1. Use {garlic}, {lemon}, {coconut milk}, and {salt}
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("quantity-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+
+        let fresh = recipe.ingredients.get("Fresh").unwrap();
+        // 3-4 cloves garlic
+        let garlic = &fresh[0];
+        let gq = garlic.quantity.as_ref().unwrap();
+        assert_eq!(gq.amount, 3.0);
+        assert_eq!(gq.amount_max, Some(4.0));
+        assert_eq!(gq.unit.as_deref(), Some("cloves"));
+
+        // Juice of 1/2 lemon
+        let lemon = &fresh[1];
+        let lq = lemon.quantity.as_ref().unwrap();
+        assert_eq!(lq.prefix.as_deref(), Some("Juice of"));
+        assert_eq!(lq.amount, 0.5);
+
+        let pantry = recipe.ingredients.get("Pantry").unwrap();
+        // 1 tin (400 ml) coconut milk
+        let coconut = &pantry[0];
+        let cq = coconut.quantity.as_ref().unwrap();
+        assert_eq!(cq.amount, 1.0);
+        assert_eq!(cq.unit.as_deref(), Some("tin"));
+        assert_eq!(cq.secondary_amount, Some(400.0));
+
+        // Salt to taste — non-scalable
+        assert!(pantry[1].quantity.is_none());
+    }
+
+    #[test]
+    fn test_parse_amount_helper() {
+        // Integer
+        assert_eq!(parse_amount("500 g").map(|(v, _)| v), Some(500.0));
+        // Decimal
+        assert_eq!(parse_amount("1.5 tsp").map(|(v, _)| v), Some(1.5));
+        // Unicode fraction
+        assert_eq!(parse_amount("½ tsp").map(|(v, _)| v), Some(0.5));
+        // Text fraction
+        assert_eq!(parse_amount("3/4 cup").map(|(v, _)| v), Some(0.75));
+        // Mixed with dash
+        assert_eq!(parse_amount("1-3/4 cups").map(|(v, _)| v), Some(1.75));
+        // Non-number
+        assert!(parse_amount("Salt").is_none());
     }
 }

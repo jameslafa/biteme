@@ -103,10 +103,13 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Store preference in IndexedDB, default based on locale
 - **To explore**: Handling imprecise conversions, recipe-specific edge cases
 
-### [ ] Adjustable Servings
-- Let users change the number of servings on a recipe
-- Automatically scale ingredient quantities proportionally
-- **To explore**: Parsing quantities from ingredient text, handling non-linear scaling (e.g. spices), displaying original vs adjusted amounts
+### [x] Adjustable Servings
+- [x] Rust parser extracts structured quantity data (amount, unit, item, secondary quantities) into `recipes.json` at build time
+- [x] JavaScript reads parsed data, scales by ratio, and formats for display with smart rounding
+- [x] +/- buttons on recipe detail page to adjust serving count
+- [x] Preference persisted in localStorage, applied in cooking mode and shopping list
+- [x] `<!-- no-scale -->` annotation for ingredients that shouldn't be scaled
+- [x] Non-blocking lint warning for ingredients with leading numbers that fail to parse
 
 ### [ ] Cooking Timers with Alerts
 - For steps that require timing, add countdown timers
