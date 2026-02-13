@@ -92,6 +92,10 @@
           </div>
           <p class="recipe-description">${recipe.description}</p>
 
+          <p class="recipe-meta">
+            ${recipe.author ? `Recipe by ${recipe.author} \u00B7 ` : ''}${new Date(recipe.date + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+
           <div id="cooking-stats" class="cooking-stats"></div>
 
           <div class="recipe-tags">

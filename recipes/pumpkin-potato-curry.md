@@ -6,6 +6,8 @@ servings: 4
 time: 40
 difficulty: easy
 tags: [vegan, curry, soup]
+author: James
+date: 2026-02-10
 ---
 
 # Notes

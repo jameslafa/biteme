@@ -6,6 +6,8 @@ servings: 2
 time: 20
 difficulty: easy
 tags: [vegan, pasta, one-pot]
+author: Kimberley
+date: 2026-02-12
 ---
 
 # Ingredients

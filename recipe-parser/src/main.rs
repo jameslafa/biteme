@@ -33,6 +33,9 @@ struct RecipeFrontmatter {
     time: u32,
     difficulty: String,
     tags: Vec<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    author: Option<String>,
+    date: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -50,6 +53,9 @@ struct Recipe {
     time: u32,
     difficulty: String,
     tags: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    author: Option<String>,
+    date: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     notes: Option<String>,
     #[serde(serialize_with = "serialize_ingredients_ordered")]
@@ -345,6 +351,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
         time: frontmatter.time,
         difficulty: frontmatter.difficulty,
         tags: frontmatter.tags,
+        author: frontmatter.author,
+        date: frontmatter.date,
         notes,
         ingredients,
         steps,
@@ -398,6 +406,21 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
     }
     if fm.time == 0 {
         bail!("Time must be greater than 0");
+    }
+
+    // Validate optional fields (always, not just lint mode)
+    if let Some(ref author) = fm.author {
+        if author.is_empty() || author.len() > 100 {
+            bail!("Author must be 1–100 characters, got {}", author.len());
+        }
+    }
+    let valid_date = fm.date.len() == 10
+        && fm.date.chars().enumerate().all(|(i, c)| match i {
+            4 | 7 => c == '-',
+            _ => c.is_ascii_digit(),
+        });
+    if !valid_date {
+        bail!("Date must be in YYYY-MM-DD format, got '{}'", fm.date);
     }
 
     if lint {
@@ -488,6 +511,9 @@ fn main() -> Result<()> {
         bail!("No valid recipes found in {:?}", cli.input);
     }
 
+    // Sort by date descending (newest first)
+    recipes.sort_by(|a, b| b.date.cmp(&a.date));
+
     println!("\n✅ Successfully parsed {} recipe(s)", recipes.len());
 
     // Write JSON output
@@ -546,6 +572,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test, vegan]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -584,6 +611,7 @@ servings: 2
 time: 15
 difficulty: super-hard
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -617,6 +645,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -650,6 +679,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -683,6 +713,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: []
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -716,6 +747,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Notes
@@ -760,6 +792,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -793,6 +826,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -826,6 +860,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Instructions
@@ -854,6 +889,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -883,6 +919,7 @@ servings: 0
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -916,6 +953,7 @@ servings: 2
 time: 0
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -949,6 +987,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -994,6 +1033,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1037,6 +1077,7 @@ servings: 2
 time: 10
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1074,6 +1115,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1122,6 +1164,7 @@ servings: 2
 time: 10
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1198,6 +1241,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [Vegan, test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1231,6 +1275,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [vegan food, test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1264,6 +1309,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [vegan, test, vegan]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1298,6 +1344,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1332,6 +1379,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1366,6 +1414,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1399,6 +1448,7 @@ servings: 150
 time: 15
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1432,6 +1482,7 @@ servings: 2
 time: 2000
 difficulty: easy
 tags: [test]
+date: 2026-01-01
 ---
 
 # Ingredients
@@ -1453,5 +1504,76 @@ tags: [test]
 
         assert!(result.is_err());
         assert!(result.unwrap_err().to_string().contains("unreasonably long"));
+    }
+
+    #[test]
+    fn test_recipe_with_author_and_date() {
+        let test_recipe = r#"---
+id: author-date-test
+name: Author Date Test
+description: Recipe with author and date fields
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+author: James
+date: 2026-02-10
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup ingredient
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("author-date-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+        assert_eq!(recipe.author, Some("James".to_string()));
+        assert_eq!(recipe.date, "2026-02-10");
+    }
+
+    #[test]
+    fn test_invalid_date_format() {
+        let test_recipe = r#"---
+id: bad-date
+name: Bad Date Test
+description: Recipe with invalid date format
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+date: 10-02-2026
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup ingredient
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("bad-date.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_err());
+        assert!(result.unwrap_err().to_string().contains("YYYY-MM-DD"));
     }
 }

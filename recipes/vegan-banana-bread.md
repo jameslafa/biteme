@@ -6,6 +6,8 @@ servings: 10
 time: 65
 difficulty: easy
 tags: [vegan, baking, dessert]
+author: James
+date: 2026-02-10
 ---
 
 # Notes

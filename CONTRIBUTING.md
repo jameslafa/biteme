@@ -49,6 +49,8 @@ servings: 4
 time: 45
 difficulty: medium
 tags: [thai, curry, dinner]
+author: Your Name
+date: 2026-02-10
 ---
 
 # Notes
@@ -102,6 +104,8 @@ How to serve the dish, garnishes, side dishes (optional).
 | `time` | integer | 1–1440 minutes. |
 | `difficulty` | string | `easy`, `medium`, or `hard`. |
 | `tags` | array | At least 1. Lowercase, no spaces, no duplicates. |
+| `author` | string | **Optional.** 1–100 characters. Your name. |
+| `date` | string | `YYYY-MM-DD` format. Date recipe was added. |
 
 ### Sections
 

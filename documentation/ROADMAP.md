@@ -92,10 +92,10 @@ This document tracks feature ideas and improvements for BiteMe. Mark items as co
 - Auto-acquires on entering cooking mode, auto-releases on navigation
 - Silent fallback if API unavailable — no error state or UI needed
 
-### [ ] Recipe Author & Date
-- Add `author` and `date` fields to recipe frontmatter
-- Display author name and creation date on recipe detail page
-- Credit contributors directly on the recipes they submit
+### [x] Recipe Author & Date
+- Optional `author` and `date` fields in recipe frontmatter
+- Displayed on recipe detail page ("Recipe by James · 12 February 2026")
+- Validated by parser: date must be YYYY-MM-DD, author 1–100 chars
 
 ### [ ] Unit System Toggle (Metric / Imperial)
 - Allow users to switch between metric and imperial measurements

@@ -17,6 +17,8 @@ servings: 4
 time: 45
 difficulty: medium
 tags: [tag-one, tag-two, tag-three]
+author: Your Name
+date: 2026-02-10
 ---
 ```
 
@@ -31,6 +33,8 @@ tags: [tag-one, tag-two, tag-three]
 | `time` | integer | 1–1440. Total time in minutes (1440 = 24 hours). |
 | `difficulty` | string | Exactly one of: `easy`, `medium`, `hard`. Lowercase only. |
 | `tags` | array | At least 1 tag. All lowercase, no spaces within tags. No duplicates. |
+| `author` | string | **Optional.** 1–100 characters. Name of the recipe contributor. |
+| `date` | string | Format: `YYYY-MM-DD`. Date the recipe was added. |
 
 ---
 
@@ -139,6 +143,8 @@ servings: 4
 time: 40
 difficulty: easy
 tags: [vegan, soup]
+author: James
+date: 2026-02-12
 ---
 
 # Notes
@@ -189,7 +195,7 @@ Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzl
 
 Before outputting the recipe, verify:
 
-- [ ] Frontmatter has all 7 required fields (`id`, `name`, `description`, `servings`, `time`, `difficulty`, `tags`)
+- [ ] Frontmatter has all 8 required fields (`id`, `name`, `description`, `servings`, `time`, `difficulty`, `tags`, `date`) plus optional `author`
 - [ ] `id` is lowercase-and-dashes only, no leading/trailing/consecutive dashes, max 100 chars
 - [ ] `name` is 3–200 characters
 - [ ] `description` is 10–500 characters

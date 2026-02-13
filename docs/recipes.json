@@ -1,5 +1,97 @@
 [
   {
+    "id": "creamy-one-pan-spinach-gnocchi",
+    "name": "Creamy One Pan Spinach Gnocchi",
+    "description": "Quick and creamy one-pan gnocchi in a coconut cream sauce with sun-dried tomatoes, garlic, and spinach — completely vegan and ready in 20 minutes",
+    "servings": 2,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "vegan",
+      "pasta",
+      "one-pot"
+    ],
+    "author": "Kimberley",
+    "date": "2026-02-12",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "3-4 cloves garlic, minced"
+        },
+        {
+          "id": 2,
+          "text": "1/2 small onion, finely diced"
+        },
+        {
+          "id": 3,
+          "text": "60 g baby spinach, roughly chopped"
+        },
+        {
+          "id": 4,
+          "text": "Juice of 1/2 lemon (optional)"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 5,
+          "text": "1 tbsp vegan butter (or regular)"
+        },
+        {
+          "id": 6,
+          "text": "240 g coconut cream"
+        },
+        {
+          "id": 7,
+          "text": "2 tbsp cream cheese, vegan or regular"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 8,
+          "text": "1 tbsp olive oil"
+        },
+        {
+          "id": 9,
+          "text": "55 g sun-dried tomatoes, finely chopped (oil packed)"
+        },
+        {
+          "id": 10,
+          "text": "450 g gnocchi"
+        },
+        {
+          "id": 11,
+          "text": "120 ml water or vegetable broth"
+        },
+        {
+          "id": 12,
+          "text": "2 tbsp nutritional yeast (or finely grated parmesan)"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 13,
+          "text": "1 tsp Italian seasoning (or oregano)"
+        },
+        {
+          "id": 14,
+          "text": "1/2 tsp black pepper"
+        },
+        {
+          "id": 15,
+          "text": "Salt to taste"
+        }
+      ]
+    },
+    "steps": [
+      "Warm {olive oil} and {butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for 2-3 minutes until fragrant.",
+      "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer 2-3 minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {pepper}, and a pinch of {salt}.",
+      "Add {gnocchi} and stir well. Cover and cook 3-4 minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken.",
+      "Stir in {spinach} until wilted. Mix in {lemon} juice if using. Taste and adjust seasoning."
+    ],
+    "serving_suggestions": "Serve with a drizzle of oil from the sun-dried tomatoes."
+  },
+  {
     "id": "creamy-mushroom-soup",
     "name": "Creamy Vegan Mushroom Soup",
     "description": "Rich and creamy mushroom soup perfect for batch cooking and freezing",
@@ -10,6 +102,8 @@
       "vegan",
       "soup"
     ],
+    "author": "James",
+    "date": "2026-02-10",
     "notes": "For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini (Steinpilze), soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.",
     "ingredients": {
       "Fresh": [
@@ -93,6 +187,8 @@
       "baking",
       "dessert"
     ],
+    "author": "James",
+    "date": "2026-02-10",
     "notes": "This delicious French spice bread is best enjoyed the next day when the flavours have had time to develop. It keeps well wrapped in foil for up to a week. The spice mix typically includes cinnamon, green aniseed, star anise, nutmeg, coriander seeds, cloves and ground ginger, but you can also use a pre-made pain d'épices spice blend if available.",
     "ingredients": {
       "Fridge": [
@@ -151,6 +247,8 @@
       "curry",
       "soup"
     ],
+    "author": "James",
+    "date": "2026-02-10",
     "notes": "If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2. A handful of spinach stirred in at the end is a nice addition. Keeps well in the fridge for 3–4 days and actually tastes even better the next day!",
     "ingredients": {
       "Fresh": [
@@ -238,6 +336,8 @@
       "middle-eastern",
       "dip"
     ],
+    "author": "James",
+    "date": "2026-02-10",
     "notes": "Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not optional! The cold shock against the warm chickpeas aerates the hummus beautifully. Don't add olive oil to the base mixture. The tahini has plenty of fat. Olive oil goes on top when serving. The hummus keeps well in the fridge for up to 3 days.",
     "ingredients": {
       "Fresh": [
@@ -301,96 +401,6 @@
     "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter."
   },
   {
-    "id": "creamy-one-pan-spinach-gnocchi",
-    "name": "Creamy One Pan Spinach Gnocchi",
-    "description": "Quick and creamy one-pan gnocchi in a coconut cream sauce with sun-dried tomatoes, garlic, and spinach — completely vegan and ready in 20 minutes",
-    "servings": 2,
-    "time": 20,
-    "difficulty": "easy",
-    "tags": [
-      "vegan",
-      "pasta",
-      "one-pot"
-    ],
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "3-4 cloves garlic, minced"
-        },
-        {
-          "id": 2,
-          "text": "1/2 small onion, finely diced"
-        },
-        {
-          "id": 3,
-          "text": "60 g baby spinach, roughly chopped"
-        },
-        {
-          "id": 4,
-          "text": "Juice of 1/2 lemon (optional)"
-        }
-      ],
-      "Fridge": [
-        {
-          "id": 5,
-          "text": "1 tbsp vegan butter (or regular)"
-        },
-        {
-          "id": 6,
-          "text": "240 g coconut cream"
-        },
-        {
-          "id": 7,
-          "text": "2 tbsp cream cheese, vegan or regular"
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 8,
-          "text": "1 tbsp olive oil"
-        },
-        {
-          "id": 9,
-          "text": "55 g sun-dried tomatoes, finely chopped (oil packed)"
-        },
-        {
-          "id": 10,
-          "text": "450 g gnocchi"
-        },
-        {
-          "id": 11,
-          "text": "120 ml water or vegetable broth"
-        },
-        {
-          "id": 12,
-          "text": "2 tbsp nutritional yeast (or finely grated parmesan)"
-        }
-      ],
-      "Spices": [
-        {
-          "id": 13,
-          "text": "1 tsp Italian seasoning (or oregano)"
-        },
-        {
-          "id": 14,
-          "text": "1/2 tsp black pepper"
-        },
-        {
-          "id": 15,
-          "text": "Salt to taste"
-        }
-      ]
-    },
-    "steps": [
-      "Warm {olive oil} and {butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for 2-3 minutes until fragrant.",
-      "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer 2-3 minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {pepper}, and a pinch of {salt}.",
-      "Add {gnocchi} and stir well. Cover and cook 3-4 minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken.",
-      "Stir in {spinach} until wilted. Mix in {lemon} juice if using. Taste and adjust seasoning."
-    ],
-    "serving_suggestions": "Serve with a drizzle of oil from the sun-dried tomatoes."
-  },
-  {
     "id": "classic-british-scones",
     "name": "Classic British Scones",
     "description": "Light and fluffy vegan scones perfect for afternoon tea",
@@ -402,6 +412,8 @@
       "baking",
       "british"
     ],
+    "author": "James",
+    "date": "2026-02-10",
     "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
     "ingredients": {
       "Fridge": [
@@ -464,6 +476,8 @@
       "baking",
       "dessert"
     ],
+    "author": "James",
+    "date": "2026-02-10",
     "notes": "Use very ripe bananas with lots of brown spots for the best flavour and natural sweetness. The banana bread keeps well wrapped in foil for 3-4 days at room temperature, or can be frozen for up to 3 months. For extra indulgence, fold in some chocolate chips or chopped walnuts before baking.",
     "ingredients": {
       "Fresh": [

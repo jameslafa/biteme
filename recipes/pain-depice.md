@@ -6,6 +6,8 @@ servings: 8
 time: 50
 difficulty: easy
 tags: [french, baking, dessert]
+author: James
+date: 2026-02-10
 ---
 
 # Notes

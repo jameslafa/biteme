@@ -6,6 +6,8 @@ servings: 10
 time: 30
 difficulty: easy
 tags: [vegan, baking, british]
+author: James
+date: 2026-02-10
 ---
 
 # Notes

@@ -6,6 +6,8 @@ servings: 6
 time: 90
 difficulty: medium
 tags: [vegan, middle-eastern, dip]
+author: James
+date: 2026-02-10
 ---
 
 # Notes
