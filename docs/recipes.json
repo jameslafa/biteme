@@ -109,7 +109,7 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "500g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced"
+          "text": "500 g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced"
         },
         {
           "id": 2,
@@ -121,7 +121,7 @@
         },
         {
           "id": 4,
-          "text": "1 medium floury potato (about 150g), peeled and cubed"
+          "text": "1 medium floury potato (about 150 g), peeled and cubed"
         },
         {
           "id": 5,
@@ -139,13 +139,13 @@
       "Fridge": [
         {
           "id": 8,
-          "text": "200ml oat cream (Hafer Cuisine)"
+          "text": "200 ml oat cream (Hafer Cuisine)"
         }
       ],
       "Pantry": [
         {
           "id": 9,
-          "text": "750ml vegetable stock"
+          "text": "750 ml vegetable stock"
         },
         {
           "id": 10,
@@ -194,17 +194,17 @@
       "Fridge": [
         {
           "id": 1,
-          "text": "250ml (1 cup) milk"
+          "text": "250 ml (1 cup) milk"
         }
       ],
       "Pantry": [
         {
           "id": 2,
-          "text": "125g (3/4 cup) brown sugar"
+          "text": "125 g (3/4 cup) brown sugar"
         },
         {
           "id": 3,
-          "text": "250g (1-3/4 cups) flour"
+          "text": "250 g (1-3/4 cups) flour"
         },
         {
           "id": 4,
@@ -254,11 +254,11 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "500g pumpkin, peeled and cubed"
+          "text": "500 g pumpkin, peeled and cubed"
         },
         {
           "id": 2,
-          "text": "500g floury potatoes, peeled and cubed"
+          "text": "500 g floury potatoes, peeled and cubed"
         },
         {
           "id": 3,
@@ -284,11 +284,11 @@
       "Pantry": [
         {
           "id": 11,
-          "text": "1 tin (400ml) coconut milk"
+          "text": "1 tin (400 ml) coconut milk"
         },
         {
           "id": 12,
-          "text": "200ml vegetable stock"
+          "text": "200 ml vegetable stock"
         },
         {
           "id": 13,
@@ -353,13 +353,13 @@
       "Fridge": [
         {
           "id": 3,
-          "text": "Ice cubes (about 25g)"
+          "text": "Ice cubes (about 25 g)"
         }
       ],
       "Pantry": [
         {
           "id": 6,
-          "text": "250g dried chickpeas"
+          "text": "250 g dried chickpeas"
         },
         {
           "id": 7,
@@ -371,7 +371,7 @@
         },
         {
           "id": 9,
-          "text": "120g tahini (or more to taste)"
+          "text": "120 g tahini (or more to taste)"
         },
         {
           "id": 10,
@@ -419,11 +419,11 @@
       "Fridge": [
         {
           "id": 1,
-          "text": "55g plant-based block margarine, cold"
+          "text": "55 g plant-based block margarine, cold"
         },
         {
           "id": 2,
-          "text": "150ml plant milk (oat or soy work best)"
+          "text": "150 ml plant milk (oat or soy work best)"
         },
         {
           "id": 3,
@@ -433,7 +433,7 @@
       "Pantry": [
         {
           "id": 5,
-          "text": "225g plain flour (Type 405)"
+          "text": "225 g plain flour (Type 405)"
         },
         {
           "id": 6,
@@ -441,7 +441,7 @@
         },
         {
           "id": 7,
-          "text": "25g caster sugar"
+          "text": "25 g caster sugar"
         }
       ],
       "Spices": [
@@ -493,21 +493,21 @@
       "Fridge": [
         {
           "id": 3,
-          "text": "60ml unsweetened plant milk"
+          "text": "60 ml unsweetened plant milk"
         }
       ],
       "Pantry": [
         {
           "id": 4,
-          "text": "100g light brown sugar"
+          "text": "100 g light brown sugar"
         },
         {
           "id": 5,
-          "text": "250g all-purpose flour"
+          "text": "250 g all-purpose flour"
         },
         {
           "id": 6,
-          "text": "60ml vegetable oil"
+          "text": "60 ml vegetable oil"
         },
         {
           "id": 7,

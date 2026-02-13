@@ -17,8 +17,8 @@ If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2.
 # Ingredients
 
 ## Fresh
-- 500g pumpkin, peeled and cubed
-- 500g floury potatoes, peeled and cubed
+- 500 g pumpkin, peeled and cubed
+- 500 g floury potatoes, peeled and cubed
 - 1 onion, diced
 - 2 cloves garlic, minced
 - Thumb-sized piece of ginger, grated
@@ -31,8 +31,8 @@ If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2.
 - Salt and pepper to taste
 
 ## Pantry
-- 1 tin (400ml) coconut milk
-- 200ml vegetable stock
+- 1 tin (400 ml) coconut milk
+- 200 ml vegetable stock
 - 1 tbsp vegetable oil
 - 2 tbsp curry paste (red or yellow)
 

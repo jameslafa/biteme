@@ -17,11 +17,11 @@ This delicious French spice bread is best enjoyed the next day when the flavours
 # Ingredients
 
 ## Fridge
-- 250ml (1 cup) milk
+- 250 ml (1 cup) milk
 
 ## Pantry
-- 125g (3/4 cup) brown sugar
-- 250g (1-3/4 cups) flour
+- 125 g (3/4 cup) brown sugar
+- 250 g (1-3/4 cups) flour
 - 3 tbsp honey
 - 3 tsp baking soda (Natron)
 - 3 tsp orange blossom water

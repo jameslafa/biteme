@@ -246,6 +246,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
                 if item.text.trim().is_empty() {
                     bail!("Empty ingredient found in category '{}'", category);
                 }
+                // Check for improper spacing between numbers and units (SI standard)
+                validate_unit_spacing(&item.text, category)?;
             }
         }
         for (idx, step) in steps.iter().enumerate() {
@@ -358,6 +360,42 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
         steps,
         serving_suggestions,
     })
+}
+
+fn validate_unit_spacing(text: &str, category: &str) -> Result<()> {
+    // Check for numbers directly followed by metric units without space
+    // Matches patterns like: 500g, 200ml, 1.5kg, 25l
+    let metric_units = ["g", "kg", "ml", "l"];
+    let words: Vec<&str> = text.split_whitespace().collect();
+
+    for word in words {
+        // Remove trailing punctuation and parentheses for checking
+        let cleaned = word.trim_end_matches(|c: char| !c.is_alphanumeric());
+
+        // Check if word contains a digit followed immediately by a metric unit
+        for unit in &metric_units {
+            // Look for patterns like "500g" or "1.5kg" (number directly followed by unit)
+            if cleaned.ends_with(unit) && cleaned.len() > unit.len() {
+                let before_unit = &cleaned[..cleaned.len() - unit.len()];
+                // Check if the character right before the unit is a digit
+                if let Some(last_char) = before_unit.chars().last() {
+                    if last_char.is_ascii_digit() {
+                        // Check if the whole prefix is a valid number (including decimals)
+                        let is_number = before_unit.chars().all(|c| c.is_ascii_digit() || c == '.');
+                        if is_number {
+                            bail!(
+                                "Improper unit spacing in '{}' (category '{}'): '{}' should be '{} {}'. \
+                                Per UK/SI standards, there must be a space between the number and unit.",
+                                text, category, cleaned, before_unit, unit
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Ok(())
 }
 
 fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {

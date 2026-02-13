@@ -21,12 +21,12 @@ Use very ripe bananas with lots of brown spots for the best flavour and natural 
 - Extra banana slices for topping
 
 ## Fridge
-- 60ml unsweetened plant milk
+- 60 ml unsweetened plant milk
 
 ## Pantry
-- 100g light brown sugar
-- 250g all-purpose flour
-- 60ml vegetable oil
+- 100 g light brown sugar
+- 250 g all-purpose flour
+- 60 ml vegetable oil
 - 2 tsp pure vanilla extract
 - 1 tsp baking soda
 

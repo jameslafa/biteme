@@ -24,17 +24,17 @@ date: 2026-02-10
 
 ### Field rules
 
-| Field | Type | Constraints |
-|-------|------|-------------|
-| `id` | string | Lowercase letters and dashes only. No spaces, underscores, or uppercase. Cannot start/end with a dash. No consecutive dashes (`--`). Max 100 characters. Must be descriptive (e.g. `thai-green-curry`, not `recipe1`). |
-| `name` | string | 3–200 characters. The human-readable recipe title. |
-| `description` | string | 10–500 characters. A short summary shown on recipe cards. |
-| `servings` | integer | 1–100. |
-| `time` | integer | 1–1440. Total time in minutes (1440 = 24 hours). |
-| `difficulty` | string | Exactly one of: `easy`, `medium`, `hard`. Lowercase only. |
-| `tags` | array | At least 1 tag. All lowercase, no spaces within tags. No duplicates. |
-| `author` | string | **Optional.** 1–100 characters. Name of the recipe contributor. |
-| `date` | string | Format: `YYYY-MM-DD`. Date the recipe was added. |
+| Field         | Type    | Constraints                                                                                                                                                                                                            |
+| ------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | string  | Lowercase letters and dashes only. No spaces, underscores, or uppercase. Cannot start/end with a dash. No consecutive dashes (`--`). Max 100 characters. Must be descriptive (e.g. `thai-green-curry`, not `recipe1`). |
+| `name`        | string  | 3–200 characters. The human-readable recipe title.                                                                                                                                                                     |
+| `description` | string  | 10–500 characters. A short summary shown on recipe cards.                                                                                                                                                              |
+| `servings`    | integer | 1–100.                                                                                                                                                                                                                 |
+| `time`        | integer | 1–1440. Total time in minutes (1440 = 24 hours).                                                                                                                                                                       |
+| `difficulty`  | string  | Exactly one of: `easy`, `medium`, `hard`. Lowercase only.                                                                                                                                                              |
+| `tags`        | array   | At least 1 tag. All lowercase, no spaces within tags. No duplicates.                                                                                                                                                   |
+| `author`      | string  | **Optional.** 1–100 characters. Name of the recipe contributor.                                                                                                                                                        |
+| `date`        | string  | Format: `YYYY-MM-DD`. Date the recipe was added.                                                                                                                                                                       |
 
 ---
 
@@ -74,18 +74,26 @@ Not all categories are required — only use the ones that apply. Each ingredien
 # Ingredients
 
 ## Fresh
-- 500g pumpkin, peeled and cubed
+
+- 500 g pumpkin, peeled and cubed
 - 1 onion, diced
 - 2 cloves garlic, minced
 
 ## Spices
+
 - 1 tsp ground cumin
 - Salt and pepper to taste
 
 ## Pantry
-- 1 tin (400ml) coconut milk
+
+- 1 tin (400 ml) coconut milk
 - 1 tbsp vegetable oil
 ```
+
+**Important:** Per SI standards, always use a space between the number and unit:
+
+- ✓ Correct: `500 g`, `200 ml`, `1 tsp`, `2 tbsp`
+- ✗ Wrong: `500g`, `200ml`
 
 ### Instructions (required)
 
@@ -117,18 +125,19 @@ Serve over basmati rice or with warm naan bread. Top with fresh coriander and a 
 When you mention an ingredient in the instructions, wrap a short recognizable name in `{curly braces}`. This highlights ingredients in cooking mode so the cook can see exactly what they need for each step.
 
 **Rules:**
+
 - Use a short, recognizable name from the ingredient line (not the full line)
 - Every ingredient should be referenced at least once in the instructions
 - The name inside braces should be obvious enough that a cook can match it to the ingredient list
 
 **Examples:**
 
-| Ingredient line | Good reference | Bad reference |
-|----------------|---------------|---------------|
-| `1 tin (400ml) coconut milk` | `{coconut milk}` | `{1 tin (400ml) coconut milk}` |
-| `2 cloves garlic, minced` | `{garlic}` | `{2 cloves garlic}` |
-| `Salt and pepper to taste` | `{salt}` and `{pepper}` | `{salt and pepper to taste}` |
-| `1 tbsp vegetable oil` | `{oil}` | `{1 tbsp vegetable oil}` |
+| Ingredient line               | Good reference          | Bad reference                   |
+| ----------------------------- | ----------------------- | ------------------------------- |
+| `1 tin (400 ml) coconut milk` | `{coconut milk}`        | `{1 tin (400 ml) coconut milk}` |
+| `2 cloves garlic, minced`     | `{garlic}`              | `{2 cloves garlic}`             |
+| `Salt and pepper to taste`    | `{salt}` and `{pepper}` | `{salt and pepper to taste}`    |
+| `1 tbsp vegetable oil`        | `{oil}`                 | `{1 tbsp vegetable oil}`        |
 
 ---
 
@@ -154,23 +163,27 @@ For a deeper flavour, add a splash of dry white wine after cooking the onions an
 # Ingredients
 
 ## Fresh
-- 500g mixed mushrooms (champignons, oyster, shiitake), sliced
+
+- 500 g mixed mushrooms (champignons, oyster, shiitake), sliced
 - 1 medium onion, diced
 - 3 cloves garlic, minced
-- 1 medium floury potato (about 150g), peeled and cubed
+- 1 medium floury potato (about 150 g), peeled and cubed
 - 1 tsp fresh thyme (or half tsp dried)
 - Lemon for juice
 - Fresh parsley for garnish
 
 ## Fridge
-- 200ml oat cream
+
+- 200 ml oat cream
 
 ## Pantry
-- 750ml vegetable stock
+
+- 750 ml vegetable stock
 - 2 tbsp olive oil
 - 1 tbsp soy sauce
 
 ## Spices
+
 - Salt and pepper to taste
 
 # Instructions
