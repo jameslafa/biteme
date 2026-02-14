@@ -392,6 +392,44 @@ fn parse_ingredient_quantity(text: &str) -> Option<ParsedQuantity> {
     })
 }
 
+/// Extract all `{reference}` names from step text (lowercased).
+fn extract_step_refs(steps_text: &str) -> Vec<String> {
+    let mut refs = Vec::new();
+    let mut rest = steps_text;
+    while let Some(open) = rest.find('{') {
+        rest = &rest[open + 1..];
+        if let Some(close) = rest.find('}') {
+            let inner = &rest[..close];
+            if !inner.is_empty() {
+                refs.push(inner.to_string());
+            }
+            rest = &rest[close + 1..];
+        } else {
+            break;
+        }
+    }
+    refs
+}
+
+/// Find ingredients not matched by any step reference.
+/// A reference matches an ingredient if it appears as a substring of the ingredient text.
+fn find_unreferenced_ingredients(
+    ingredients: &HashMap<String, Vec<Ingredient>>,
+    step_refs: &[String],
+) -> Vec<String> {
+    let mut unreferenced = Vec::new();
+    for (category, items) in ingredients {
+        for ingredient in items {
+            let text = ingredient.text.to_lowercase();
+            let is_referenced = step_refs.iter().any(|r| text.contains(r));
+            if !is_referenced {
+                unreferenced.push(format!("{} ({})", ingredient.text, category));
+            }
+        }
+    }
+    unreferenced
+}
+
 fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
     let content = fs::read_to_string(path)
         .with_context(|| format!("Failed to read file: {:?}", path))?;
@@ -575,77 +613,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
 
         // Check for unreferenced ingredients
         let all_steps_text = steps.join(" ").to_lowercase();
-        let mut unreferenced_ingredients = Vec::new();
-
-        for (category, items) in &ingredients {
-            for ingredient in items {
-                let ingredient_text = ingredient.text.to_lowercase();
-
-                // Remove parenthetical content (e.g., "(400ml)", "(for soaking)")
-                let without_parens = ingredient_text
-                    .split('(')
-                    .next()
-                    .unwrap_or(&ingredient_text)
-                    .trim();
-
-                // Take the text before the first comma (main ingredient part)
-                let main_part = without_parens.split(',').next().unwrap_or(without_parens);
-
-                // Split and filter out measurements, containers, and common descriptive words
-                let words: Vec<&str> = main_part
-                    .split_whitespace()
-                    .filter(|w| {
-                        // Filter out measurements, numbers, containers, and common non-ingredient words
-                        !w.chars().all(|c| c.is_numeric() || c == '.')
-                        && !["g", "kg", "ml", "l", "tsp", "tbsp", "cup", "cups", "cloves", "clove",
-                             "tin", "can", "jar", "bottle", "pack", "packet",
-                             "pieces", "piece", "slices", "slice", "sliced", "diced", "minced", "chopped",
-                             "grated", "crushed", "peeled", "cubed", "rinsed", "dried",
-                             "to", "for", "and", "the", "a", "an", "or",
-                             "thumb-sized", "fresh", "good", "quality", "about", "extra", "little",
-                             "pinch", "optional:", "optional", "juice"].contains(w)
-                    })
-                    .collect();
-
-                // Build potential ingredient references to check (both single words and phrases)
-                let mut potential_refs = Vec::new();
-
-                // Add single words (except "of")
-                for word in &words {
-                    if *word != "of" {
-                        potential_refs.push(word.to_string());
-                        // Add plural forms
-                        potential_refs.push(format!("{}s", word));
-                        potential_refs.push(format!("{}es", word.trim_end_matches('s')));
-                    }
-                }
-
-                // Add multi-word phrases with "of" (e.g., "bicarbonate of soda")
-                for i in 0..words.len() {
-                    if i + 2 < words.len() && words[i + 1] == "of" {
-                        potential_refs.push(format!("{} {} {}", words[i], words[i + 1], words[i + 2]));
-                    }
-                }
-
-                // Add 2-word phrases
-                if words.len() >= 2 {
-                    potential_refs.push(words[..2].join(" "));
-                }
-                // Add 3-word phrases (if not already added via "of" check)
-                if words.len() >= 3 && words.get(1) != Some(&"of") {
-                    potential_refs.push(words[..3].join(" "));
-                }
-
-                // Check if any potential reference appears in {curly braces} in steps
-                let is_referenced = potential_refs.iter().any(|ref_name| {
-                    all_steps_text.contains(&format!("{{{}}}", ref_name))
-                });
-
-                if !is_referenced && !words.is_empty() {
-                    unreferenced_ingredients.push(format!("{} ({})", ingredient.text, category));
-                }
-            }
-        }
+        let step_refs = extract_step_refs(&all_steps_text);
+        let unreferenced_ingredients = find_unreferenced_ingredients(&ingredients, &step_refs);
 
         // Print warnings for unreferenced ingredients (non-blocking)
         if !unreferenced_ingredients.is_empty() {
@@ -2232,5 +2201,62 @@ date: 2026-01-01
         assert_eq!(parse_amount("1-3/4 cups").map(|(v, _)| v), Some(1.75));
         // Non-number
         assert!(parse_amount("Salt").is_none());
+    }
+
+    #[test]
+    fn test_extract_step_refs() {
+        let text = "heat {oil} then add {garlic} and {lemon} juice";
+        let refs = extract_step_refs(text);
+        assert_eq!(refs, vec!["oil", "garlic", "lemon"]);
+    }
+
+    #[test]
+    fn test_extract_step_refs_multi_word() {
+        let text = "add {ice cubes} and {bicarbonate of soda}";
+        let refs = extract_step_refs(text);
+        assert_eq!(refs, vec!["ice cubes", "bicarbonate of soda"]);
+    }
+
+    #[test]
+    fn test_extract_step_refs_empty_braces() {
+        let text = "nothing {} here {valid}";
+        let refs = extract_step_refs(text);
+        assert_eq!(refs, vec!["valid"]);
+    }
+
+    #[test]
+    fn test_unreferenced_matches_substring() {
+        let mut ingredients = HashMap::new();
+        ingredients.insert("Fresh".to_string(), vec![
+            Ingredient { id: 1, text: "Few ice cubes".to_string(), quantity: None },
+            Ingredient { id: 2, text: "Juice of 1 lemon".to_string(), quantity: None },
+            Ingredient { id: 3, text: "2 tbsp olive oil".to_string(), quantity: None },
+        ]);
+        let refs = vec!["ice cubes".to_string(), "lemon".to_string()];
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        assert_eq!(unreferenced, vec!["2 tbsp olive oil (Fresh)"]);
+    }
+
+    #[test]
+    fn test_unreferenced_all_matched() {
+        let mut ingredients = HashMap::new();
+        ingredients.insert("Pantry".to_string(), vec![
+            Ingredient { id: 1, text: "250 g dried chickpeas".to_string(), quantity: None },
+            Ingredient { id: 2, text: "120 g tahini".to_string(), quantity: None },
+        ]);
+        let refs = vec!["chickpeas".to_string(), "tahini".to_string()];
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        assert!(unreferenced.is_empty());
+    }
+
+    #[test]
+    fn test_unreferenced_none_matched() {
+        let mut ingredients = HashMap::new();
+        ingredients.insert("Spices".to_string(), vec![
+            Ingredient { id: 1, text: "Salt to taste".to_string(), quantity: None },
+        ]);
+        let refs = vec!["oil".to_string()];
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        assert_eq!(unreferenced, vec!["Salt to taste (Spices)"]);
     }
 }
