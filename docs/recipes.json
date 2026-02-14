@@ -1,5 +1,112 @@
 [
   {
+    "id": "vegan-crepes",
+    "name": "Vegan Crêpes",
+    "description": "A proper French recipe, no eggs, no dairy, all delicious",
+    "servings": 8,
+    "time": 60,
+    "difficulty": "easy",
+    "tags": [
+      "vegan",
+      "french",
+      "dessert"
+    ],
+    "author": "James",
+    "date": "2026-02-14",
+    "notes": "The resting time is important. It lets the flour fully hydrate and the gluten relax, which makes the crêpes easier to spread thinly and less likely to tear. The first crêpe is almost always a disaster. Consider it a test run and adjust the heat accordingly. La première est pour le chien! Corn starch will give slightly crispier crêpes, potato starch will give softer, more flexible ones.",
+    "ingredients": {
+      "Fridge": [
+        {
+          "id": 6,
+          "text": "500 ml oat milk (or soy milk)",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "ml",
+            "item": "oat milk (or soy milk)"
+          }
+        },
+        {
+          "id": 7,
+          "text": "50 ml sparkling water",
+          "quantity": {
+            "amount": 50.0,
+            "unit": "ml",
+            "item": "sparkling water"
+          }
+        },
+        {
+          "id": 8,
+          "text": "A little vegan butter for the pan"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 1,
+          "text": "220 g plain flour",
+          "quantity": {
+            "amount": 220.0,
+            "unit": "g",
+            "item": "plain flour"
+          }
+        },
+        {
+          "id": 2,
+          "text": "30 g corn starch or potato starch",
+          "quantity": {
+            "amount": 30.0,
+            "unit": "g",
+            "item": "corn starch or potato starch"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 tbsp sugar (optional, for sweet crêpes)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "sugar (optional, for sweet crêpes)"
+          }
+        },
+        {
+          "id": 4,
+          "text": "2 tbsp rapeseed oil",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "rapeseed oil"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 tbsp of vanilla extract or orange blossom water (optional, for sweet crêpes)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "of vanilla extract or orange blossom water (optional, for sweet crêpes)"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 9,
+          "text": "Pinch of salt"
+        }
+      ]
+    },
+    "steps": [
+      "Sift the {flour} and {starch} into a large bowl. Add the {sugar} and {salt}.",
+      "Make a well in the centre and gradually pour in the {oat milk} while whisking from the centre outward, incorporating the flour slowly. This avoids lumps.",
+      "Add the {rapeseed oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth.",
+      "Add the {sparkling water} and give it a final mix.",
+      "Let the batter rest for an hour. It should have the consistency of liquid cream. If it's too thick after resting, add a splash of oat milk or water to thin it out.",
+      "Heat a crêpe pan (or flat non-stick pan) on medium-high heat. Melt a small knob of {vegan butter} on the pan.",
+      "Pour a thin layer of batter, swirling quickly to cover the whole surface.",
+      "Cook for about 1-2 minutes per side until lightly golden.",
+      "Repeat, adding a little {vegan butter} to the pan between crêpes."
+    ],
+    "serving_suggestions": "Spread with Nutella (ideally a version without palm oil), lemon and sugar, or fresh fruit and whipped coconut cream. For savoury crêpes, skip the sugar and fill with sautéed mushrooms, spinach, or ratatouille."
+  },
+  {
     "id": "creamy-one-pan-spinach-gnocchi",
     "name": "Creamy One Pan Spinach Gnocchi",
     "description": "Quick and creamy one-pan gnocchi in a coconut cream sauce with sun-dried tomatoes, garlic, and spinach — completely vegan and ready in 20 minutes",
