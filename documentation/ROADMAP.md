@@ -12,12 +12,6 @@ This document tracks feature ideas and improvements for BiteMe.
 
 ## User Features
 
-### [ ] Cooking Notes
-
-- Free-text note field on the completion page ("Anything to remember for next time?")
-- Saved per recipe in IndexedDB, displayed on recipe detail page with date
-- Editable on revisit
-
 ### [ ] Post-Meal Feedback & Rating
 
 - Banner at top of recipe list on next app visit after cooking: "How was [recipe]?"
@@ -77,6 +71,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Cooking Time Tracking** — Session tracking, elapsed time on completion, history on detail page
 - **Share Recipe** — Web Share API on mobile, copy-to-clipboard fallback
 - **Recipe Notes & Serving Suggestions** — Optional markdown sections, shown in detail and cooking mode
+- **Cooking Notes** — Free-text notes on completion page, auto-saved per recipe, displayed/editable on detail page
 - **Completion Page** — Bon appétit animation, cooking time display
 - **Progress Bar** — Gradient bar in cooking mode showing step progress
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action

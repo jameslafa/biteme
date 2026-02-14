@@ -256,8 +256,8 @@ test.describe('What\'s New', () => {
     await expect(sheet).toBeVisible();
 
     const entries = sheet.locator('.whats-new-entry');
-    await expect(entries).toHaveCount(5);
-    await expect(entries.first().locator('.whats-new-text')).toContainText('screen lock');
+    await expect(entries).toHaveCount(7);
+    await expect(entries.first().locator('.whats-new-text')).toContainText('cooking notes');
   });
 
   test('sheet closes on overlay click', async ({ page }) => {

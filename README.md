@@ -39,7 +39,7 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 
 I haven't found a cooking app I truly enjoyed using. Most are cluttered with ads, tracking, paywalls, or endless content you don't need. I wanted something different—a community-driven, open-source recipe app that's private, safe, and focused on what matters: cooking great food.
 
-Simple features like checking off ingredients, building a shopping list, and having a distraction-free focus mode while cooking make all the difference. BiteMe is built for people who want a clean, functional tool without the noise.
+Simple features like checking off ingredients, building a shopping list, saving personal cooking notes, and having a distraction-free focus mode while cooking make all the difference. BiteMe is built for people who want a clean, functional tool without the noise.
 
 **Want to contribute?** Share your favorite recipes by opening a pull request. Help make this the recipe app we all wish existed.
 

@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 7, date: '2026-02-14', text: 'Save personal cooking notes after finishing a recipe — substitutions, timing tweaks, anything to remember next time' },
   { id: 6, date: '2026-02-13', text: 'Adjust servings on any recipe and watch ingredient quantities scale automatically' },
   { id: 5, date: '2026-02-12', text: 'Keep your screen on while cooking with the new screen lock button' },
   { id: 4, date: '2026-02-11', text: 'See how many times you\'ve cooked a recipe and your average cooking time' },

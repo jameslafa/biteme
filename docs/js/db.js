@@ -1,7 +1,7 @@
 // IndexedDB helper for BiteMe local storage
 
 const DB_NAME = 'biteme_db';
-const DB_VERSION = 4;
+const DB_VERSION = 5;
 let db = null;
 
 // Initialize database
@@ -41,6 +41,11 @@ function initDB() {
       // Create settings key-value store
       if (!db.objectStoreNames.contains('settings')) {
         db.createObjectStore('settings', { keyPath: 'key' });
+      }
+
+      // Create cooking notes store
+      if (!db.objectStoreNames.contains('cooking_notes')) {
+        db.createObjectStore('cooking_notes', { keyPath: 'recipe_id' });
       }
     };
   });

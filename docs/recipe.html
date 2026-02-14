@@ -46,6 +46,7 @@
   <script src="js/db.js"></script>
   <script src="js/recipes.js"></script>
   <script src="js/servings.js"></script>
+  <script src="js/notes.js"></script>
   <script>
     // Load recipe detail
     document.addEventListener('DOMContentLoaded', async function() {
@@ -108,6 +109,8 @@
           <div class="recipe-tags">
             ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
           </div>
+
+          <div id="cooking-notes-display"></div>
 
           <section class="ingredients">
             <h3>Ingredients</h3>
@@ -180,6 +183,9 @@
 
       // Show cooking stats
       showCookingStats(recipeId);
+
+      // Show cooking notes
+      showCookingNotes(recipeId);
 
       // Update cart count
       updateCartCount();
@@ -378,6 +384,71 @@
           badge.style.display = 'none';
         }
       }
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/</g, '&lt;');
+    }
+
+    async function showCookingNotes(recipeId) {
+      try {
+        const note = await getCookingNote(recipeId);
+        const container = document.getElementById('cooking-notes-display');
+        if (!container) return;
+
+        if (!note) {
+          container.innerHTML = '';
+          return;
+        }
+
+        container.innerHTML = `
+          <section class="personal-notes">
+            <div class="personal-notes-header">
+              <h3>Personal Notes</h3>
+              <button class="cooking-note-edit-btn" aria-label="Edit note">Edit</button>
+            </div>
+            <p class="cooking-note-text">${escapeHtml(note.text)}</p>
+          </section>
+        `;
+
+        container.querySelector('.cooking-note-edit-btn').addEventListener('click', () => {
+          enterNoteEditMode(recipeId, note.text);
+        });
+      } catch {
+        // Silent fail
+      }
+    }
+
+    function enterNoteEditMode(recipeId, text) {
+      const container = document.getElementById('cooking-notes-display');
+      if (!container) return;
+
+      container.innerHTML = `
+        <section class="personal-notes">
+          <h3>Personal Notes</h3>
+          <textarea class="cooking-note-textarea" rows="3">${escapeHtml(text)}</textarea>
+          <div class="cooking-note-actions">
+            <button class="cooking-note-save-btn">Save</button>
+            <button class="cooking-note-cancel-btn">Cancel</button>
+          </div>
+        </section>
+      `;
+
+      const textarea = container.querySelector('.cooking-note-textarea');
+      textarea.focus();
+
+      container.querySelector('.cooking-note-save-btn').addEventListener('click', async () => {
+        try {
+          await saveCookingNote(recipeId, textarea.value);
+          showCookingNotes(recipeId);
+        } catch {
+          // Silent fail
+        }
+      });
+
+      container.querySelector('.cooking-note-cancel-btn').addEventListener('click', () => {
+        showCookingNotes(recipeId);
+      });
     }
   </script>
 </body>

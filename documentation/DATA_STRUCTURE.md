@@ -6,9 +6,9 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Database name:** `biteme_db`
 
-**Version:** 4
+**Version:** 5
 
-**Object stores:** favorites, shopping_list, cooking_sessions, settings
+**Object stores:** favorites, shopping_list, cooking_sessions, settings, cooking_notes
 
 ## Favorites
 
@@ -131,6 +131,36 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Duration can be calculated from `completed_at - started_at`
 - Used to gate the install prompt (only shown after first completed recipe)
 - Foundation for future cooking analytics (time tracking, history)
+
+## Cooking Notes
+
+**Object store:** `cooking_notes`
+
+**Primary key:** `recipe_id`
+
+**Current Schema (v5 - Local Only):**
+```typescript
+{
+  recipe_id: string;     // Primary key (e.g., "pad-thai")
+  text: string;          // Free-text note content
+  updated_at: number;    // Unix timestamp (milliseconds)
+}
+```
+
+**Example:**
+```json
+{
+  "recipe_id": "pad-thai",
+  "text": "Used tamari instead of soy sauce. Needed 2 extra minutes on the noodles.",
+  "updated_at": 1707567890123
+}
+```
+
+**Notes:**
+- One note per recipe — users refine over time, no history
+- Hard delete when text is cleared (empty string)
+- Created on the completion page after finishing cooking
+- Displayed on the recipe detail page with edit capability
 
 ## Settings
 

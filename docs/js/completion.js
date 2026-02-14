@@ -43,4 +43,32 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.getElementById('back-to-home-btn').addEventListener('click', function() {
     window.location.href = 'index.html';
   });
+
+  // Cooking notes
+  const notesInput = document.getElementById('cooking-notes-input');
+  const notesStatus = document.getElementById('notes-status');
+  let debounceTimer = null;
+
+  try {
+    const existing = await getCookingNote(recipeId);
+    if (existing) {
+      notesInput.value = existing.text;
+    }
+  } catch {
+    // DB not available — textarea still works, just won't load existing
+  }
+
+  notesInput.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(async () => {
+      try {
+        await saveCookingNote(recipeId, notesInput.value);
+        notesStatus.textContent = 'Saved';
+        notesStatus.classList.add('visible');
+        setTimeout(() => notesStatus.classList.remove('visible'), 1500);
+      } catch {
+        // Silent fail
+      }
+    }, 800);
+  });
 });

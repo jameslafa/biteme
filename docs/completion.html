@@ -23,6 +23,11 @@
       <h1 class="completion-title">Bon appétit!</h1>
       <p id="cooking-time" class="cooking-time"></p>
     </div>
+    <div class="completion-notes">
+      <label for="cooking-notes-input" class="notes-label">Anything to remember for next time?</label>
+      <textarea id="cooking-notes-input" class="notes-textarea" placeholder="Substitutions, timing, seasoning..." rows="3"></textarea>
+      <span id="notes-status" class="notes-status"></span>
+    </div>
     <div class="completion-actions">
       <button id="back-to-home-btn" class="action-button primary-button">Browse more recipes</button>
       <button id="back-to-recipe-btn" class="action-button secondary-button">Back to recipe</button>
@@ -31,6 +36,7 @@
 
   <script src="js/db.js"></script>
   <script src="js/recipes.js"></script>
+  <script src="js/notes.js"></script>
   <script src="js/completion.js"></script>
 </body>
 </html>
