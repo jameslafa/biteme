@@ -5,6 +5,15 @@ let recipe = null;
 let cookingSessionId = null;
 let servingRatio = 1;
 
+// Timer state
+let timerSeconds = 0;
+let timerRemaining = 0;
+let timerInterval = null;
+let timerRunning = false;
+let timerFinished = false;
+let timerDismissed = false;
+let timerAudio = null;
+
 document.addEventListener('DOMContentLoaded', async function() {
   const urlParams = new URLSearchParams(window.location.search);
   const recipeId = urlParams.get('id');
@@ -118,6 +127,31 @@ function initializeCookingMode() {
   document.getElementById('next-btn').addEventListener('click', nextStep);
   document.getElementById('exit-btn').addEventListener('click', exitCookingMode);
   initScreenLockButton();
+  initTimerToggleButton();
+}
+
+function initTimerToggleButton() {
+  document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimerBar);
+}
+
+function toggleTimerBar() {
+  const bar = document.getElementById('timer-bar');
+  if (!bar.hidden && !timerRunning) {
+    // Hide the timer bar
+    timerDismissed = true;
+    timerSeconds = 0;
+    timerRemaining = 0;
+    renderTimerBar();
+  } else if (bar.hidden) {
+    // Show the timer bar
+    timerFinished = false;
+    timerDismissed = false;
+    const step = recipe.steps[currentStep];
+    const durations = step.durations || [];
+    timerSeconds = durations.length > 0 ? durations[0].seconds : 60;
+    timerRemaining = timerSeconds;
+    renderTimerBar();
+  }
 }
 
 function updateProgressBar() {
@@ -139,8 +173,8 @@ function renderStep() {
   updateProgressBar();
 
   // Update step content
-  const parsedStep = parseStepText(step, recipe.ingredients, currentStep);
-  let stepContentHTML = `<p>${parsedStep}</p>`;
+  const parsedStep = parseStepText(step.text, recipe.ingredients, currentStep);
+  let stepContentHTML = `<p>${wrapTimeBadges(parsedStep, step.durations || [])}</p>`;
 
   // Add notes after step 1 instruction
   if (currentStep === 0 && recipe.notes) {
@@ -165,7 +199,7 @@ function renderStep() {
   document.getElementById('step-content').innerHTML = stepContentHTML;
 
   // Update step ingredients in separate container
-  const stepIngredients = getStepIngredients(step, recipe.ingredients);
+  const stepIngredients = getStepIngredients(step.text, recipe.ingredients);
   const stepIngredientsContainer = document.getElementById('step-ingredients-container');
 
   if (stepIngredients.length > 0) {
@@ -199,6 +233,8 @@ function renderStep() {
   } else {
     prevBtn.textContent = 'Previous';
   }
+
+  suggestTimerForStep();
 }
 
 function transitionStep(callback) {
@@ -259,4 +295,208 @@ function finishCookingMode() {
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// --- Timer ---
+
+const ICON_TRI_UP = `<svg viewBox="0 0 24 24"><polygon points="12,6 4,18 20,18"/></svg>`;
+const ICON_TRI_DOWN = `<svg viewBox="0 0 24 24"><polygon points="12,18 4,6 20,6"/></svg>`;
+const ICON_PLAY = `<svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>`;
+const ICON_PAUSE = `<svg viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/></svg>`;
+const ICON_STOP = `<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>`;
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+function suggestTimerForStep() {
+  if (timerRunning || timerFinished) return;
+  timerDismissed = false;
+  const step = recipe.steps[currentStep];
+  const durations = step.durations || [];
+  if (durations.length > 0) {
+    timerSeconds = durations[0].seconds;
+    timerRemaining = durations[0].seconds;
+  } else {
+    timerSeconds = 0;
+    timerRemaining = 0;
+  }
+  renderTimerBar();
+}
+
+function renderTimerBar() {
+  const bar = document.getElementById('timer-bar');
+  const toggleBtn = document.getElementById('timer-toggle-btn');
+
+  // Toggle button is always visible; active when timer bar is showing
+  toggleBtn.hidden = false;
+
+  if (timerRunning) {
+    // During ticks, only update the time text to avoid DOM rebuild flicker
+    const existingDisplay = bar.querySelector('.timer-display');
+    if (bar.className === 'timer-bar timer-running' && existingDisplay) {
+      existingDisplay.textContent = formatTime(timerRemaining);
+      updateToggleActive(true);
+      return;
+    }
+    bar.hidden = false;
+    bar.className = 'timer-bar timer-running';
+    bar.innerHTML = `
+      <span></span>
+      <span class="timer-display">${formatTime(timerRemaining)}</span>
+      <span class="timer-controls">
+        <button class="timer-media-btn" onclick="pauseTimer()" aria-label="Pause">${ICON_PAUSE}</button>
+        <button class="timer-media-btn timer-media-btn-stop" onclick="stopTimer()" aria-label="Stop">${ICON_STOP}</button>
+      </span>
+    `;
+    updateToggleActive(true);
+    return;
+  }
+
+  // Paused (was running, now paused)
+  if (timerInterval === null && timerRemaining > 0 && timerRemaining < timerSeconds) {
+    bar.hidden = false;
+    bar.className = 'timer-bar timer-paused';
+    bar.innerHTML = `
+      <span></span>
+      <span class="timer-display">${formatTime(timerRemaining)}</span>
+      <span class="timer-controls">
+        <button class="timer-media-btn timer-media-btn-play" onclick="startTimer()" aria-label="Resume">${ICON_PLAY}</button>
+        <button class="timer-media-btn timer-media-btn-stop" onclick="stopTimer()" aria-label="Stop">${ICON_STOP}</button>
+      </span>
+    `;
+    updateToggleActive(true);
+    return;
+  }
+
+  // Suggestion mode
+  if (timerSeconds > 0 && !timerDismissed) {
+    bar.hidden = false;
+    bar.className = 'timer-bar';
+    bar.innerHTML = `
+      <span></span>
+      <span class="timer-center">
+        <span class="timer-adjuster">
+          <button class="timer-arrow" onclick="adjustTimer(60)" aria-label="Add 1 minute">${ICON_TRI_UP}</button>
+          <span class="timer-adjuster-label">min</span>
+          <button class="timer-arrow" onclick="adjustTimer(-60)" aria-label="Subtract 1 minute">${ICON_TRI_DOWN}</button>
+        </span>
+        <span class="timer-display">${formatTime(timerSeconds)}</span>
+        <span class="timer-adjuster">
+          <button class="timer-arrow" onclick="adjustTimer(5)" aria-label="Add 5 seconds">${ICON_TRI_UP}</button>
+          <span class="timer-adjuster-label">sec</span>
+          <button class="timer-arrow" onclick="adjustTimer(-5)" aria-label="Subtract 5 seconds">${ICON_TRI_DOWN}</button>
+        </span>
+      </span>
+      <span class="timer-right">
+        <button class="timer-media-btn timer-media-btn-play" onclick="startTimer()" aria-label="Start">${ICON_PLAY}</button>
+      </span>
+    `;
+    updateToggleActive(true);
+    return;
+  }
+
+  // No timer to show
+  bar.hidden = true;
+  bar.className = 'timer-bar';
+  updateToggleActive(false);
+}
+
+function updateToggleActive(active) {
+  document.getElementById('timer-toggle-btn').classList.toggle('active', active);
+}
+
+function adjustTimer(delta) {
+  timerSeconds = Math.max(5, timerSeconds + delta);
+  timerRemaining = timerSeconds;
+  renderTimerBar();
+}
+
+function ensureTimerAudio() {
+  if (!timerAudio) {
+    timerAudio = new Audio('assets/timer-beep.mp3');
+  }
+  // Unlock audio on iOS by playing muted from a user gesture.
+  // iOS ignores volume=0 but respects the muted property.
+  timerAudio.muted = true;
+  timerAudio.play().then(() => {
+    timerAudio.pause();
+    timerAudio.currentTime = 0;
+    timerAudio.muted = false;
+  }).catch(() => {
+    timerAudio.muted = false;
+  });
+}
+
+function startTimer() {
+  ensureTimerAudio();
+  // Keep screen on so the timer can ring
+  if (!screenLockActive) enableScreenLock();
+  timerRunning = true;
+  timerFinished = false;
+  timerInterval = setInterval(() => {
+    timerRemaining--;
+    if (timerRemaining <= 0) {
+      timerRemaining = 0;
+      timerRunning = false;
+      timerFinished = true;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      onTimerComplete();
+    }
+    renderTimerBar();
+  }, 1000);
+  renderTimerBar();
+}
+
+function pauseTimer() {
+  timerRunning = false;
+  clearInterval(timerInterval);
+  timerInterval = null;
+  renderTimerBar();
+}
+
+function stopTimer() {
+  timerRunning = false;
+  timerFinished = false;
+  clearInterval(timerInterval);
+  timerInterval = null;
+  // Re-suggest from current step
+  suggestTimerForStep();
+}
+
+function onTimerComplete() {
+  playTimerBeep();
+  if (navigator.vibrate) {
+    navigator.vibrate([200, 100, 200]);
+  }
+  // Auto-reset: go back to suggestion for current step
+  timerFinished = false;
+  suggestTimerForStep();
+}
+
+function playTimerBeep() {
+  if (!timerAudio) return;
+  timerAudio.currentTime = 0;
+  timerAudio.play().catch(() => {});
+}
+
+function prefillTimer(seconds) {
+  if (timerRunning) return;
+  timerFinished = false;
+  timerDismissed = false;
+  timerSeconds = seconds;
+  timerRemaining = seconds;
+  renderTimerBar();
+  document.getElementById('timer-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function wrapTimeBadges(html, durations) {
+  for (const d of durations) {
+    const escaped = d.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    html = html.replace(new RegExp(escaped), `<span class="time-badge" onclick="prefillTimer(${d.seconds})">${d.text}</span>`);
+  }
+  return html;
 }

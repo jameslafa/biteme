@@ -23,11 +23,11 @@
       ]
     },
     "steps": [
-      "Heat {oil} in a pot",
-      "Add {onion} and {garlic}",
-      "Add {curry powder}",
-      "Add {lentils} and {broth}",
-      "Simmer for 20 minutes"
+      { "text": "Heat {oil} in a pot" },
+      { "text": "Add {onion} and {garlic}" },
+      { "text": "Add {curry powder}" },
+      { "text": "Add {lentils} and {broth}" },
+      { "text": "Simmer for 20 minutes", "durations": [{ "seconds": 1200, "text": "20 minutes" }] }
     ],
     "serving_suggestions": "Serve over rice with naan bread. Garnish with fresh cilantro."
   },
@@ -49,9 +49,9 @@
       ]
     },
     "steps": [
-      "Chop lettuce",
-      "Slice tomato",
-      "Mix and add oil"
+      { "text": "Chop lettuce" },
+      { "text": "Slice tomato" },
+      { "text": "Mix and add oil" }
     ]
   },
   {
@@ -69,8 +69,8 @@
       ]
     },
     "steps": [
-      "Toast the bread",
-      "Spread butter"
+      { "text": "Toast the bread" },
+      { "text": "Spread butter" }
     ]
   }
 ]

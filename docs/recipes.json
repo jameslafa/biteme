@@ -228,14 +228,54 @@
       ]
     },
     "steps": [
-      "Heat {olive oil} in a large pot over medium heat. Add the {onion} and cook for about 5 minutes until softened.",
-      "Add the {garlic}, {red pepper}, {yellow pepper}, {carrots}, and {celery}. Cook for another 5 minutes, stirring occasionally.",
-      "Stir in the {cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for 1 minute to toast the spices.",
-      "Add the {tomato puree} and stir well.",
-      "Pour in the {chopped tomatoes} and {vegetable stock}. Add the {kidney beans}, {black beans}, {red lentils}, and {sweetcorn}.",
-      "Bring to a boil, then reduce to a low simmer. Cover and cook for 25 to 30 minutes, stirring occasionally, until the lentils are soft and the chilli has thickened.",
-      "Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt} and {pepper}.",
-      "Taste and adjust the spices as needed. Let it sit for a few minutes before serving."
+      {
+        "text": "Heat {olive oil} in a large pot over medium heat. Add the {onion} and cook for about 5 minutes until softened.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {garlic}, {red pepper}, {yellow pepper}, {carrots}, and {celery}. Cook for another 5 minutes, stirring occasionally.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in the {cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for 1 minute to toast the spices.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          }
+        ]
+      },
+      {
+        "text": "Add the {tomato puree} and stir well."
+      },
+      {
+        "text": "Pour in the {chopped tomatoes} and {vegetable stock}. Add the {kidney beans}, {black beans}, {red lentils}, and {sweetcorn}."
+      },
+      {
+        "text": "Bring to a boil, then reduce to a low simmer. Cover and cook for 25 to 30 minutes, stirring occasionally, until the lentils are soft and the chilli has thickened.",
+        "durations": [
+          {
+            "seconds": 1800,
+            "text": "for 25 to 30 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt} and {pepper}."
+      },
+      {
+        "text": "Taste and adjust the spices as needed. Let it sit for a few minutes before serving."
+      }
     ],
     "serving_suggestions": "Serve over rice, with baked potatoes, or with tortilla chips and guacamole. Top with vegan sour cream, fresh coriander, diced avocado, sliced spring onions, or a squeeze of lime."
   },
@@ -386,12 +426,42 @@
       ]
     },
     "steps": [
-      "Heat the {olive oil} in a large pot over medium heat. Add the {onion}, {carrot}, and {celery}, and cook for about 5 to 7 minutes until softened.",
-      "Add the {garlic}, {smoked paprika}, {cumin}, and {chilli flakes}. Stir for about a minute until fragrant.",
-      "Pour in the {chopped tomatoes} and {vegetable broth}. Give it a good stir and bring to a simmer.",
-      "Add the {white beans} and let it simmer for about 10 minutes so the flavours come together.",
-      "Toss in the {kale} and stir it through. Let it cook for another 5 to 7 minutes until the kale is tender but still has a bit of bite.",
-      "Season with {salt}, {pepper}, and the {lemon} juice. Taste and adjust as needed."
+      {
+        "text": "Heat the {olive oil} in a large pot over medium heat. Add the {onion}, {carrot}, and {celery}, and cook for about 5 to 7 minutes until softened.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "for about 5 to 7 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {garlic}, {smoked paprika}, {cumin}, and {chilli flakes}. Stir for about a minute until fragrant."
+      },
+      {
+        "text": "Pour in the {chopped tomatoes} and {vegetable broth}. Give it a good stir and bring to a simmer."
+      },
+      {
+        "text": "Add the {white beans} and let it simmer for about 10 minutes so the flavours come together.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for about 10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Toss in the {kale} and stir it through. Let it cook for another 5 to 7 minutes until the kale is tender but still has a bit of bite.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "5 to 7 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Season with {salt}, {pepper}, and the {lemon} juice. Taste and adjust as needed."
+      }
     ],
     "serving_suggestions": "Serve with a chunk of crusty bread for dipping. Drizzle with good olive oil and a sprinkle of nutritional yeast for a savoury, cheesy flavour."
   },
@@ -490,15 +560,39 @@
       ]
     },
     "steps": [
-      "Sift the {flour} and {starch} into a large bowl. Add the {sugar} and {salt}.",
-      "Make a well in the centre and gradually pour in the {oat milk} while whisking from the centre outward, incorporating the flour slowly. This avoids lumps.",
-      "Add the {rapeseed oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth.",
-      "Add the {sparkling water} and give it a final mix.",
-      "Let the batter rest for an hour. It should have the consistency of liquid cream. If it's too thick after resting, add a splash of oat milk or water to thin it out.",
-      "Heat a crêpe pan (or flat non-stick pan) on medium-high heat. Melt a small knob of {vegan butter} on the pan.",
-      "Pour a thin layer of batter, swirling quickly to cover the whole surface.",
-      "Cook for about 1-2 minutes per side until lightly golden.",
-      "Repeat, adding a little {vegan butter} to the pan between crêpes."
+      {
+        "text": "Sift the {flour} and {starch} into a large bowl. Add the {sugar} and {salt}."
+      },
+      {
+        "text": "Make a well in the centre and gradually pour in the {oat milk} while whisking from the centre outward, incorporating the flour slowly. This avoids lumps."
+      },
+      {
+        "text": "Add the {rapeseed oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth."
+      },
+      {
+        "text": "Add the {sparkling water} and give it a final mix."
+      },
+      {
+        "text": "Let the batter rest for an hour. It should have the consistency of liquid cream. If it's too thick after resting, add a splash of oat milk or water to thin it out."
+      },
+      {
+        "text": "Heat a crêpe pan (or flat non-stick pan) on medium-high heat. Melt a small knob of {vegan butter} on the pan."
+      },
+      {
+        "text": "Pour a thin layer of batter, swirling quickly to cover the whole surface."
+      },
+      {
+        "text": "Cook for about 1-2 minutes per side until lightly golden.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for about 1-2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Repeat, adding a little {vegan butter} to the pan between crêpes."
+      }
     ],
     "serving_suggestions": "Spread with Nutella (ideally a version without palm oil), lemon and sugar, or fresh fruit and whipped coconut cream. For savoury crêpes, skip the sugar and fill with sautéed mushrooms, spinach, or ratatouille."
   },
@@ -658,10 +752,36 @@
       ]
     },
     "steps": [
-      "Warm {olive oil} and {butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for 2-3 minutes until fragrant.",
-      "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer 2-3 minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {pepper}, and a pinch of {salt}.",
-      "Add {gnocchi} and stir well. Cover and cook 3-4 minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken.",
-      "Stir in {spinach} until wilted. Mix in {lemon} juice if using. Taste and adjust seasoning."
+      {
+        "text": "Warm {olive oil} and {butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for 2-3 minutes until fragrant.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for 2-3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer 2-3 minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {pepper}, and a pinch of {salt}.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "2-3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {gnocchi} and stir well. Cover and cook 3-4 minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken.",
+        "durations": [
+          {
+            "seconds": 240,
+            "text": "3-4 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in {spinach} until wilted. Mix in {lemon} juice if using. Taste and adjust seasoning."
+      }
     ],
     "serving_suggestions": "Serve with a drizzle of oil from the sun-dried tomatoes."
   },
@@ -787,14 +907,48 @@
       ]
     },
     "steps": [
-      "Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.",
-      "Lower the heat to medium, add a little more oil if needed, and cook {onion} for about 5 minutes until soft and translucent.",
-      "Add {garlic} and {thyme}, stir for about a minute until fragrant.",
-      "Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about 15 minutes, until the potato is completely tender.",
-      "Stir in {oat cream} and {soy sauce}.",
-      "Blend the soup using a stick blender until smooth and creamy. If you set some {mushrooms} aside earlier, stir them back in now for a bit of texture.",
-      "Season with {salt}, {pepper}, and a squeeze of {lemon} juice. The lemon really lifts the flavour.",
-      "Serve with fresh {parsley} on top and some crusty bread on the side."
+      {
+        "text": "Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "for about 8 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Lower the heat to medium, add a little more oil if needed, and cook {onion} for about 5 minutes until soft and translucent.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {garlic} and {thyme}, stir for about a minute until fragrant."
+      },
+      {
+        "text": "Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about 15 minutes, until the potato is completely tender.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for about 15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in {oat cream} and {soy sauce}."
+      },
+      {
+        "text": "Blend the soup using a stick blender until smooth and creamy. If you set some {mushrooms} aside earlier, stir them back in now for a bit of texture."
+      },
+      {
+        "text": "Season with {salt}, {pepper}, and a squeeze of {lemon} juice. The lemon really lifts the flavour."
+      },
+      {
+        "text": "Serve with fresh {parsley} on top and some crusty bread on the side."
+      }
     ],
     "serving_suggestions": "Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzle of truffle oil for a fancy touch. Great with a side salad for a complete meal."
   },
@@ -891,11 +1045,33 @@
       ]
     },
     "steps": [
-      "Preheat the oven to 180°C (160°C fan).",
-      "In a large bowl, mix together {brown sugar}, {flour}, {honey}, {baking soda}, {orange blossom water}, {spice mix}, and {milk} until well combined and smooth.",
-      "Pour the batter into a greased rectangular baking tin (about 20cm x 10cm).",
-      "Bake for 45 minutes, or until a skewer inserted into the center comes out clean.",
-      "Let cool in the tin for 10 minutes, then turn out onto a wire rack to cool completely."
+      {
+        "text": "Preheat the oven to 180°C (160°C fan)."
+      },
+      {
+        "text": "In a large bowl, mix together {brown sugar}, {flour}, {honey}, {baking soda}, {orange blossom water}, {spice mix}, and {milk} until well combined and smooth."
+      },
+      {
+        "text": "Pour the batter into a greased rectangular baking tin (about 20cm x 10cm)."
+      },
+      {
+        "text": "Bake for 45 minutes, or until a skewer inserted into the center comes out clean.",
+        "durations": [
+          {
+            "seconds": 2700,
+            "text": "for 45 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Let cool in the tin for 10 minutes, then turn out onto a wire rack to cool completely.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for 10 minutes"
+          }
+        ]
+      }
     ],
     "serving_suggestions": "Slice and enjoy with butter, or serve with tea or coffee. Even better the next day when the flavours have mellowed and the texture becomes more moist. Store wrapped in foil to keep fresh."
   },
@@ -1031,12 +1207,36 @@
       ]
     },
     "steps": [
-      "Heat {oil} in a large pot over medium heat. Add {onion} and cook for about 5 minutes until soft.",
-      "Add {garlic}, {ginger}, {curry paste}, {cumin}, and {turmeric}. Stir and cook for another minute until fragrant.",
-      "Add {pumpkin} and {potato} cubes and stir everything together so they're coated in the spices.",
-      "Pour in {coconut milk} and {vegetable stock}. Give it a good stir and bring to a gentle boil.",
-      "Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the {pumpkin} and {potatoes} are tender. The floury {potatoes} will start to break down and thicken the sauce beautifully.",
-      "Season with {salt} and {pepper}, then serve over rice (or with naan) topped with fresh {coriander} and a squeeze of {lime}."
+      {
+        "text": "Heat {oil} in a large pot over medium heat. Add {onion} and cook for about 5 minutes until soft.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {garlic}, {ginger}, {curry paste}, {cumin}, and {turmeric}. Stir and cook for another minute until fragrant."
+      },
+      {
+        "text": "Add {pumpkin} and {potato} cubes and stir everything together so they're coated in the spices."
+      },
+      {
+        "text": "Pour in {coconut milk} and {vegetable stock}. Give it a good stir and bring to a gentle boil."
+      },
+      {
+        "text": "Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the {pumpkin} and {potatoes} are tender. The floury {potatoes} will start to break down and thicken the sauce beautifully.",
+        "durations": [
+          {
+            "seconds": 1500,
+            "text": "for about 20–25 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Season with {salt} and {pepper}, then serve over rice (or with naan) topped with fresh {coriander} and a squeeze of {lime}."
+      }
     ],
     "serving_suggestions": "Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime. Great for meal prep – portion into containers for easy weeknight dinners throughout the week."
   },
@@ -1137,13 +1337,39 @@
       ]
     },
     "steps": [
-      "Soak {chickpeas} overnight in plenty of water with 1 teaspoon of {bicarbonate of soda}.",
-      "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {bicarbonate of soda} and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
-      "Drain {chickpeas} over a bowl, saving the cooking water.",
-      "While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, a good pinch of {salt}, and a couple of {ice cubes}.",
-      "Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy.",
-      "Transfer to a bowl, cover the surface with cling film, and let it rest for at least 30 minutes.",
-      "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
+      {
+        "text": "Soak {chickpeas} overnight in plenty of water with 1 teaspoon of {bicarbonate of soda}."
+      },
+      {
+        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {bicarbonate of soda} and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+        "durations": [
+          {
+            "seconds": 2400,
+            "text": "for 20 to 40 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Drain {chickpeas} over a bowl, saving the cooking water."
+      },
+      {
+        "text": "While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, a good pinch of {salt}, and a couple of {ice cubes}."
+      },
+      {
+        "text": "Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy."
+      },
+      {
+        "text": "Transfer to a bowl, cover the surface with cling film, and let it rest for at least 30 minutes.",
+        "durations": [
+          {
+            "seconds": 1800,
+            "text": "30 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
+      }
     ],
     "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter."
   },
@@ -1224,15 +1450,39 @@
       ]
     },
     "steps": [
-      "Preheat the oven to 220°C / 200°C fan / Gas 7 and lightly grease a large baking tray.",
-      "Whisk together {flour}, {baking powder}, and {salt} so the raising agent is evenly distributed.",
-      "Using your fingertips, rub the cold {margarine} into the {flour} until the mixture resembles fine breadcrumbs.",
-      "Stir in {sugar}. Add most of the {plant milk} and mix to form a soft and slightly sticky dough. If it's a little dry, add more {milk} until you get the right consistency.",
-      "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick.",
-      "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up.",
-      "Brush the tops with a little {plant milk}.",
-      "Bake for 12-15 minutes until well risen and golden.",
-      "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
+      {
+        "text": "Preheat the oven to 220°C / 200°C fan / Gas 7 and lightly grease a large baking tray."
+      },
+      {
+        "text": "Whisk together {flour}, {baking powder}, and {salt} so the raising agent is evenly distributed."
+      },
+      {
+        "text": "Using your fingertips, rub the cold {margarine} into the {flour} until the mixture resembles fine breadcrumbs."
+      },
+      {
+        "text": "Stir in {sugar}. Add most of the {plant milk} and mix to form a soft and slightly sticky dough. If it's a little dry, add more {milk} until you get the right consistency."
+      },
+      {
+        "text": "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick."
+      },
+      {
+        "text": "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up."
+      },
+      {
+        "text": "Brush the tops with a little {plant milk}."
+      },
+      {
+        "text": "Bake for 12-15 minutes until well risen and golden.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for 12-15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
+      }
     ],
     "serving_suggestions": "Serve warm with jam and vegan butter. For a traditional cream tea, add vegan whipped cream. Try adding dried fruit or a pinch of cinnamon to the dough for a twist."
   },
@@ -1347,12 +1597,40 @@
       ]
     },
     "steps": [
-      "Preheat the oven to 180°C (160°C fan). Spray a 9×5 inch (23×13cm) loaf pan with nonstick spray, then dust with flour.",
-      "In a large mixing bowl, roughly mash {bananas}. Add {light brown sugar}, {oil}, {vanilla}, and {unsweetened plant milk}, and whisk to incorporate.",
-      "Sift in {flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix.",
-      "Transfer the batter to your prepared pan, and top with extra {banana} slices.",
-      "Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.",
-      "Let cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing."
+      {
+        "text": "Preheat the oven to 180°C (160°C fan). Spray a 9×5 inch (23×13cm) loaf pan with nonstick spray, then dust with flour."
+      },
+      {
+        "text": "In a large mixing bowl, roughly mash {bananas}. Add {light brown sugar}, {oil}, {vanilla}, and {unsweetened plant milk}, and whisk to incorporate."
+      },
+      {
+        "text": "Sift in {flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix."
+      },
+      {
+        "text": "Transfer the batter to your prepared pan, and top with extra {banana} slices."
+      },
+      {
+        "text": "Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.",
+        "durations": [
+          {
+            "seconds": 2700,
+            "text": "for about 45 minutes"
+          },
+          {
+            "seconds": 900,
+            "text": "for 10-15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Let cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for 10 minutes"
+          }
+        ]
+      }
     ],
     "serving_suggestions": "Enjoy warm with vegan butter, or toasted the next day. Delicious for breakfast with coffee or as an afternoon snack. Try spreading with peanut butter or almond butter for extra protein."
   }

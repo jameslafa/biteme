@@ -112,7 +112,7 @@
             <h3>Instructions</h3>
             <ol>
               ${recipe.steps.map((step, index) => {
-                const parsedStep = parseStepText(step, recipe.ingredients, index);
+                const parsedStep = parseStepText(step.text, recipe.ingredients, index);
                 return `<li>${parsedStep}</li>`;
               }).join('')}
             </ol>

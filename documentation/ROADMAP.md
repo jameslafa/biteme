@@ -44,11 +44,6 @@ Two-phase rollout: local-first, community later.
 - Store preference in IndexedDB, default based on locale
 - **On hold**: low demand, and g→cups conversion requires ingredient density tables
 
-### [ ] Cooking Timers with Alerts
-
-- Countdown timers for steps that require timing
-- Browser notifications/audio alerts when time is up
-
 ### [ ] Post-Cooking Complexity Rating
 
 - Rate complexity after cooking (Easy / Medium / Hard)
@@ -83,6 +78,7 @@ Two-phase rollout: local-first, community later.
 - **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
 - **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
 - **Tag Filtering** — Filter recipes by tag via dropdown in search bar, clickable tags on cards and detail page, URL param support for shareable links
+- **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
 
 ---
 

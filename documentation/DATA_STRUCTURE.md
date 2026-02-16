@@ -221,6 +221,27 @@ Each ingredient in the JSON includes a `text` field (original text) and an optio
 - `Juice of 1/2 lemon` → `{ amount: 0.5, item: "lemon", prefix: "Juice of" }`
 - `Salt to taste` → no `quantity` field (non-scalable)
 
+### Step Schema
+
+Steps are stored as objects with the original text and any durations extracted by the Rust parser:
+
+```typescript
+{
+  text: string;              // Step instruction text
+  durations?: [              // Omitted if no durations detected
+    {
+      seconds: number;       // Duration in seconds (uses higher value for ranges)
+      text: string;          // Original text that matched (e.g., "25 to 30 minutes")
+    }
+  ]
+}
+```
+
+**Examples:**
+- `"Cook for 5 minutes"` → `{ text: "Cook for 5 minutes", durations: [{ seconds: 300, text: "5 minutes" }] }`
+- `"Simmer for 25 to 30 minutes"` → `{ ..., durations: [{ seconds: 1800, text: "25 to 30 minutes" }] }`
+- `"Stir well"` → `{ text: "Stir well" }` (no durations field)
+
 ### Serving Preferences (localStorage)
 
 Stored per recipe as `servings_{recipeId}` in localStorage. Read by the recipe detail page, cooking mode, and shopping list to scale ingredient quantities.

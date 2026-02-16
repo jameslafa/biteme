@@ -341,3 +341,224 @@ test.describe('Recipe Notes and Serving Suggestions', () => {
     await expect(page.locator('.step-serving')).toBeHidden();
   });
 });
+
+test.describe('Cooking Timer', () => {
+  test('timer bar appears on step with duration', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Step 1 has no duration — timer bar should be hidden
+    await expect(page.locator('#timer-bar')).toBeHidden();
+
+    // Navigate to step 5 ("Simmer for 20 minutes" — has duration)
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await expect(page.locator('#step-progress')).toHaveText('Step 5 of 5');
+    await expect(page.locator('#timer-bar')).toBeVisible();
+    await expect(page.locator('.timer-display')).toHaveText('20:00');
+  });
+
+  test('timer bar hidden on step without duration', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-salad');
+
+    // All salad steps have no duration
+    await expect(page.locator('#timer-bar')).toBeHidden();
+
+    await page.locator('#next-btn').click();
+    await page.waitForTimeout(300);
+    await expect(page.locator('#timer-bar')).toBeHidden();
+  });
+
+  test('toggle button shows and hides timer bar', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-salad');
+
+    // No duration — timer bar hidden
+    await expect(page.locator('#timer-bar')).toBeHidden();
+
+    // Click toggle to show timer with default 1:00
+    await page.locator('#timer-toggle-btn').click();
+    await expect(page.locator('#timer-bar')).toBeVisible();
+    await expect(page.locator('.timer-display')).toHaveText('1:00');
+
+    // Click toggle again to hide
+    await page.locator('#timer-toggle-btn').click();
+    await expect(page.locator('#timer-bar')).toBeHidden();
+  });
+
+  test('toggle button has active state when timer bar is visible', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    const toggleBtn = page.locator('#timer-toggle-btn');
+
+    // Step 1 — no duration, toggle inactive
+    await expect(toggleBtn).not.toHaveClass(/active/);
+
+    // Navigate to step 5 — has duration, toggle active
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+    await expect(toggleBtn).toHaveClass(/active/);
+  });
+
+  test('adjust timer with arrow buttons', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Go to step 5 (20:00)
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await expect(page.locator('.timer-display')).toHaveText('20:00');
+
+    // Add 1 minute
+    await page.locator('.timer-arrow[aria-label="Add 1 minute"]').click();
+    await expect(page.locator('.timer-display')).toHaveText('21:00');
+
+    // Subtract 1 minute
+    await page.locator('.timer-arrow[aria-label="Subtract 1 minute"]').click();
+    await expect(page.locator('.timer-display')).toHaveText('20:00');
+
+    // Add 5 seconds
+    await page.locator('.timer-arrow[aria-label="Add 5 seconds"]').click();
+    await expect(page.locator('.timer-display')).toHaveText('20:05');
+  });
+
+  test('start timer and verify countdown', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Go to step 5 (20:00)
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    // Start the timer
+    await page.locator('.timer-media-btn-play').click();
+
+    // Should show pause and stop buttons
+    await expect(page.locator('[aria-label="Pause"]')).toBeVisible();
+    await expect(page.locator('[aria-label="Stop"]')).toBeVisible();
+
+    // Wait 2 seconds and check countdown
+    await page.waitForTimeout(2100);
+    const timeText = await page.locator('.timer-display').textContent();
+    expect(timeText).toMatch(/19:5[0-9]/);
+  });
+
+  test('pause and resume timer', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    // Start
+    await page.locator('.timer-media-btn-play').click();
+    await page.waitForTimeout(1100);
+
+    // Pause
+    await page.locator('[aria-label="Pause"]').click();
+    const pausedTime = await page.locator('.timer-display').textContent();
+
+    // Should show resume button
+    await expect(page.locator('[aria-label="Resume"]')).toBeVisible();
+
+    // Wait and verify time didn't change
+    await page.waitForTimeout(1500);
+    await expect(page.locator('.timer-display')).toHaveText(pausedTime);
+  });
+
+  test('stop timer resets to suggestion', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    // Start then stop
+    await page.locator('.timer-media-btn-play').click();
+    await page.waitForTimeout(1100);
+    await page.locator('[aria-label="Stop"]').click();
+
+    // Should reset to suggestion mode with original time
+    await expect(page.locator('.timer-display')).toHaveText('20:00');
+    await expect(page.locator('[aria-label="Start"]')).toBeVisible();
+  });
+
+  test('timer persists across step navigation', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Go to step 5 and start timer
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await page.locator('.timer-media-btn-play').click();
+    await page.waitForTimeout(1100);
+
+    // Navigate back to step 4
+    await page.locator('#prev-btn').click();
+    await page.waitForTimeout(300);
+
+    await expect(page.locator('#step-progress')).toHaveText('Step 4 of 5');
+
+    // Timer should still be running
+    await expect(page.locator('#timer-bar')).toBeVisible();
+    await expect(page.locator('[aria-label="Pause"]')).toBeVisible();
+    const timeText = await page.locator('.timer-display').textContent();
+    expect(timeText).toMatch(/19:5[0-9]/);
+  });
+
+  test('time badge in step text prefills timer', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Go to step 5 which has "20 minutes" time badge
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    // Adjust timer to a different value first
+    await page.locator('.timer-arrow[aria-label="Add 1 minute"]').click();
+    await expect(page.locator('.timer-display')).toHaveText('21:00');
+
+    // Click the time badge in step text
+    await page.locator('.time-badge').click();
+
+    // Should reset to the badge's value
+    await expect(page.locator('.timer-display')).toHaveText('20:00');
+  });
+
+  test('toggle shows timer with step duration when available', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Go to step 5 (has 20min duration), dismiss via toggle
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 4; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    await page.locator('#timer-toggle-btn').click();
+    await expect(page.locator('#timer-bar')).toBeHidden();
+
+    // Re-open — should use step duration, not default 1:00
+    await page.locator('#timer-toggle-btn').click();
+    await expect(page.locator('.timer-display')).toHaveText('20:00');
+  });
+});

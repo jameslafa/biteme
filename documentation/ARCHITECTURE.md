@@ -162,15 +162,40 @@ name: Pad Thai
 
 ## Screen Wake Lock
 
-**Decision:** Auto-acquire wake lock in cooking mode, no user toggle
+**Decision:** User-toggled wake lock in cooking mode, auto-enabled when timer starts
 
-**Rationale:**
-- Cooking mode is explicitly hands-free — users shouldn't need to touch their phone to keep the screen on
-- The Screen Wake Lock API (`navigator.wakeLock.request('screen')`) is well supported
-- Auto-releases on navigation or tab hide, so no battery drain risk
-- Silent no-op if API unavailable — no error state needed
+**Implementation:**
+- Toggle button in cooking header (lightbulb icon) with active/inactive visual states
+- Wake Lock API (`navigator.wakeLock.request('screen')`) for Android/desktop Chrome
+- Silent looping video (`silent.mp4`) for iOS — video playback keeps the screen awake without interfering with audio routing (e.g. AirPods)
+- Re-acquires on `visibilitychange` when returning to the tab
+- Auto-enabled when a cooking timer starts (screen must stay on for the alarm)
 
-**Alternative considered:** Toggle button to enable/disable — Rejected because requiring interaction defeats the hands-free purpose
+## Cooking Timer
+
+**Decision:** In-memory countdown timer with durations parsed at build time by the Rust parser
+
+**Duration parsing:**
+- Rust regex extracts durations from step text (e.g. "cook for 5 minutes", "simmer for 25 to 30 minutes")
+- Supports ranges with `-`, `to`, and en-dash `–` — uses the higher value
+- Stored in `recipes.json` as `step.durations[]` with `seconds` and `text` fields
+- Step text durations are wrapped as clickable time badges in cooking mode
+
+**Timer behavior:**
+- One timer at a time, persists across step navigation
+- Never auto-starts — user presses play manually
+- Pre-filled from the first duration in the current step, adjustable with ±1min/±5sec arrows
+- Toggle button in header (clock icon) to show/hide timer bar on any step
+- Audio alert (MP3) + vibration on completion, then auto-resets to suggestion
+
+**iOS audio unlock:**
+- `<audio>` element created on first Start press (user gesture)
+- Muted play/pause cycle unlocks the element for later unmuted playback
+- iOS ignores `volume=0` but respects `muted` property
+
+**Flicker prevention:**
+- During countdown ticks, only the time text is updated (not the full innerHTML)
+- Prevents DOM rebuild that causes button flash on every second
 
 ## What's New / Changelog
 

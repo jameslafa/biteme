@@ -65,6 +65,19 @@ struct Ingredient {
 }
 
 #[derive(Debug, Serialize)]
+struct StepDuration {
+    seconds: u32,
+    text: String,
+}
+
+#[derive(Debug, Serialize)]
+struct Step {
+    text: String,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    durations: Vec<StepDuration>,
+}
+
+#[derive(Debug, Serialize)]
 struct Recipe {
     id: String,
     name: String,
@@ -80,7 +93,7 @@ struct Recipe {
     notes: Option<String>,
     #[serde(serialize_with = "serialize_ingredients_ordered")]
     ingredients: HashMap<String, Vec<Ingredient>>,
-    steps: Vec<String>,
+    steps: Vec<Step>,
     #[serde(skip_serializing_if = "Option::is_none")]
     serving_suggestions: Option<String>,
 }
@@ -392,6 +405,35 @@ fn parse_ingredient_quantity(text: &str) -> Option<ParsedQuantity> {
     })
 }
 
+/// Parse duration mentions from step text (e.g. "cook for 5 minutes", "simmer for 25 to 30 minutes").
+/// Returns a list of durations found. For ranges, uses the higher value.
+fn parse_step_durations(text: &str) -> Vec<StepDuration> {
+    let re = regex::Regex::new(
+        r"(?i)(?:for\s+)?(?:about\s+)?(\d+)(?:\s*(?:to|-|–)\s*(\d+))?\s*(minutes?|mins?|seconds?|secs?|hours?|hrs?)"
+    ).unwrap();
+
+    re.captures_iter(text).map(|cap| {
+        let value: u32 = cap.get(2)
+            .or(cap.get(1))
+            .unwrap()
+            .as_str()
+            .parse()
+            .unwrap();
+        let unit = cap.get(3).unwrap().as_str().to_lowercase();
+        let seconds = if unit.starts_with('h') {
+            value * 3600
+        } else if unit.starts_with('s') {
+            value
+        } else {
+            value * 60
+        };
+        StepDuration {
+            seconds,
+            text: cap.get(0).unwrap().as_str().to_string(),
+        }
+    }).collect()
+}
+
 /// Extract all `{reference}` names from step text (lowercased).
 fn extract_step_refs(steps_text: &str) -> Vec<String> {
     let mut refs = Vec::new();
@@ -478,7 +520,7 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
     let mut current_section = String::new();
     let mut current_category = String::new();
     let mut ingredients: HashMap<String, Vec<Ingredient>> = HashMap::new();
-    let mut steps: Vec<String> = Vec::new();
+    let mut steps: Vec<Step> = Vec::new();
     let mut notes: Option<String> = None;
     let mut serving_suggestions: Option<String> = None;
     let mut ingredient_id = 1u32;
@@ -562,7 +604,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
             Event::End(TagEnd::Item) if current_section == "Instructions" => {
                 let text = current_text.trim().to_string();
                 if !text.is_empty() {
-                    steps.push(text);
+                    let durations = parse_step_durations(&text);
+                    steps.push(Step { text, durations });
                 }
                 current_text.clear();
             }
@@ -629,13 +672,13 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
             }
         }
         for (idx, step) in steps.iter().enumerate() {
-            if step.trim().is_empty() {
+            if step.text.trim().is_empty() {
                 bail!("Empty instruction step found at position {}", idx + 1);
             }
         }
 
         // Check for unreferenced ingredients
-        let all_steps_text = steps.join(" ").to_lowercase();
+        let all_steps_text = steps.iter().map(|s| s.text.as_str()).collect::<Vec<_>>().join(" ").to_lowercase();
         let step_refs = extract_step_refs(&all_steps_text);
         let unreferenced_ingredients = find_unreferenced_ingredients(&ingredients, &step_refs);
 
@@ -1616,10 +1659,10 @@ date: 2026-01-01
 
         // Check that ingredient links are preserved with curly braces
         assert_eq!(recipe.steps.len(), 3);
-        assert!(recipe.steps[0].contains("{oil}"), "Step 1 should contain {{oil}}");
-        assert!(recipe.steps[1].contains("{onion}"), "Step 2 should contain {{onion}}");
-        assert!(recipe.steps[2].contains("{rice}"), "Step 3 should contain {{rice}}");
-        assert!(recipe.steps[2].contains("{water}"), "Step 3 should contain {{water}}");
+        assert!(recipe.steps[0].text.contains("{oil}"), "Step 1 should contain {{oil}}");
+        assert!(recipe.steps[1].text.contains("{onion}"), "Step 2 should contain {{onion}}");
+        assert!(recipe.steps[2].text.contains("{rice}"), "Step 3 should contain {{rice}}");
+        assert!(recipe.steps[2].text.contains("{water}"), "Step 3 should contain {{water}}");
     }
 
     #[test]
@@ -2402,5 +2445,107 @@ date: 2026-01-01
         let refs = vec!["oil".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
         assert_eq!(unreferenced, vec!["Salt to taste (Spices)"]);
+    }
+
+    // ── Step duration parsing tests ──
+
+    #[test]
+    fn test_duration_minutes() {
+        let durations = parse_step_durations("cook for about 5 minutes");
+        assert_eq!(durations.len(), 1);
+        assert_eq!(durations[0].seconds, 300);
+    }
+
+    #[test]
+    fn test_duration_range_to() {
+        let durations = parse_step_durations("simmer for 25 to 30 minutes");
+        assert_eq!(durations.len(), 1);
+        assert_eq!(durations[0].seconds, 1800);
+    }
+
+    #[test]
+    fn test_duration_range_dash() {
+        let durations = parse_step_durations("cook 3-4 minutes");
+        assert_eq!(durations.len(), 1);
+        assert_eq!(durations[0].seconds, 240);
+    }
+
+    #[test]
+    fn test_duration_seconds() {
+        let durations = parse_step_durations("microwave for 30 seconds");
+        assert_eq!(durations.len(), 1);
+        assert_eq!(durations[0].seconds, 30);
+    }
+
+    #[test]
+    fn test_duration_hours() {
+        let durations = parse_step_durations("slow cook for 2 hours");
+        assert_eq!(durations.len(), 1);
+        assert_eq!(durations[0].seconds, 7200);
+    }
+
+    #[test]
+    fn test_duration_none() {
+        let durations = parse_step_durations("mix the ingredients together");
+        assert!(durations.is_empty());
+    }
+
+    #[test]
+    fn test_duration_bake() {
+        let durations = parse_step_durations("Bake for 45 minutes");
+        assert_eq!(durations.len(), 1);
+        assert_eq!(durations[0].seconds, 2700);
+        assert_eq!(durations[0].text, "for 45 minutes");
+    }
+
+    #[test]
+    fn test_duration_range_en_dash() {
+        let durations = parse_step_durations("simmer for about 20\u{2013}25 minutes");
+        assert_eq!(durations.len(), 1);
+        assert_eq!(durations[0].seconds, 1500);
+    }
+
+    #[test]
+    fn test_duration_in_recipe_step() {
+        let test_recipe = r#"---
+id: timer-test
+name: Timer Test
+description: Test duration extraction from steps
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup rice
+
+# Instructions
+
+1. Boil {rice} for 10 minutes
+2. Let it rest for 5 to 7 minutes
+3. Serve immediately
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("timer-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+
+        assert_eq!(recipe.steps[0].durations.len(), 1);
+        assert_eq!(recipe.steps[0].durations[0].seconds, 600);
+
+        assert_eq!(recipe.steps[1].durations.len(), 1);
+        assert_eq!(recipe.steps[1].durations[0].seconds, 420);
+
+        assert!(recipe.steps[2].durations.is_empty());
     }
 }
