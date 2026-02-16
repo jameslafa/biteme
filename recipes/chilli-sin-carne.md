@@ -1,5 +1,6 @@
 ---
   id: chilli-sin-carne
+  name: Chilli Sin Carne
   description: A hearty vegan chilli packed with beans, lentils, and spices that tastes even better the next day
   servings: 4
   time: 50
