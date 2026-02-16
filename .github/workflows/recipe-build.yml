@@ -1,6 +1,7 @@
 name: Recipe Build
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths: ['recipes/**']
@@ -39,5 +40,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Build recipes from source"
+            git pull --rebase
             git push
           fi
