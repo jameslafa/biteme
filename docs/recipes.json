@@ -10,7 +10,7 @@
       "vegan",
       "chilli",
       "one-pot",
-      "batch-cooking"
+      "gluten-free"
     ],
     "date": "2026-02-16",
     "notes": "The cocoa powder adds a lovely depth without making it taste chocolatey. Add the chilli powder gradually and taste as you go if you're not sure about heat levels. For a smoky twist, add a finely chopped chipotle pepper or a teaspoon of chipotle paste. Freezes brilliantly in portions for easy weeknight dinners.",
@@ -249,7 +249,8 @@
     "tags": [
       "vegan",
       "stew",
-      "one-pot"
+      "one-pot",
+      "gluten-free"
     ],
     "author": "James",
     "date": "2026-02-14",
@@ -396,7 +397,7 @@
   },
   {
     "id": "vegan-crepes",
-    "name": "Vegan Crêpes",
+    "name": "French Crêpes",
     "description": "A proper French recipe, no eggs, no dairy, all delicious",
     "servings": 8,
     "time": 60,
@@ -511,8 +512,7 @@
     "tags": [
       "vegan",
       "pasta",
-      "one-pot",
-      "main-course"
+      "one-pot"
     ],
     "author": "Kimberley",
     "date": "2026-02-12",
@@ -675,7 +675,8 @@
     "tags": [
       "vegan",
       "curry",
-      "soup"
+      "one-pot",
+      "gluten-free"
     ],
     "author": "James",
     "date": "2026-02-10",
@@ -807,7 +808,7 @@
   },
   {
     "id": "vegan-banana-bread",
-    "name": "Vegan Banana Bread",
+    "name": "Banana Bread",
     "description": "Moist and delicious banana bread made with simple plant-based ingredients",
     "servings": 10,
     "time": 65,
@@ -927,14 +928,15 @@
   },
   {
     "id": "creamy-mushroom-soup",
-    "name": "Creamy Vegan Mushroom Soup",
+    "name": "Creamy Mushroom Soup",
     "description": "Rich and creamy mushroom soup perfect for batch cooking and freezing",
     "servings": 4,
     "time": 40,
     "difficulty": "easy",
     "tags": [
       "vegan",
-      "soup"
+      "soup",
+      "one-pot"
     ],
     "author": "James",
     "date": "2026-02-10",
@@ -1067,7 +1069,8 @@
     "tags": [
       "vegan",
       "middle-eastern",
-      "dip"
+      "dip",
+      "gluten-free"
     ],
     "author": "James",
     "date": "2026-02-10",
@@ -1271,11 +1274,11 @@
       "Fridge": [
         {
           "id": 1,
-          "text": "250 ml (1 cup) milk",
+          "text": "250 ml (1 cup) milk (or plant milk for a vegan version)",
           "quantity": {
             "amount": 250.0,
             "unit": "ml",
-            "item": "milk",
+            "item": "milk (or plant milk for a vegan version)",
             "secondary_amount": 1.0,
             "secondary_unit": "cup"
           }
@@ -1306,11 +1309,11 @@
         },
         {
           "id": 4,
-          "text": "3 tbsp honey",
+          "text": "3 tbsp honey (or jam for a vegan version)",
           "quantity": {
             "amount": 3.0,
             "unit": "tbsp",
-            "item": "honey"
+            "item": "honey (or jam for a vegan version)"
           }
         },
         {
