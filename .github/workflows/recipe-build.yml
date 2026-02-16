@@ -1,0 +1,41 @@
+name: Recipe Build
+
+on:
+  push:
+    branches: [main]
+    paths: ['recipes/**']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            recipe-parser/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('recipe-parser/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+
+      - name: Parse recipes
+        run: cargo run --manifest-path recipe-parser/Cargo.toml --release
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/recipes.json docs/recipes-manifest.json docs/r/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Build recipes from source"
+            git push
+          fi

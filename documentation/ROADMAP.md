@@ -2,14 +2,6 @@
 
 This document tracks feature ideas and improvements for BiteMe.
 
-## Infrastructure & Build System
-
-### [ ] CI/CD Pipeline
-
-- GitHub Actions: run parser + linter on PRs
-- Block merging if recipe format is invalid
-- Run parser on push to main
-
 ## User Features
 
 ### [ ] Recipe Rating
@@ -89,6 +81,7 @@ Two-phase rollout: local-first, community later.
 - **Progress Bar** — Gradient bar in cooking mode showing step progress
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action
 - **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
+- **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
 
 ---
 

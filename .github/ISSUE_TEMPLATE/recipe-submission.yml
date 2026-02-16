@@ -1,0 +1,43 @@
+name: Recipe Submission
+description: Submit a new recipe for BiteMe
+labels: ['new-recipe']
+body:
+  - type: input
+    id: recipe-name
+    attributes:
+      label: Recipe name
+      placeholder: e.g. Thai Green Curry
+    validations:
+      required: true
+
+  - type: textarea
+    id: recipe-content
+    attributes:
+      label: Recipe content
+      description: >
+        Paste your formatted markdown recipe here. See the
+        [recipe format guide](https://github.com/jameslafa/biteme/blob/main/documentation/RECIPE_FORMAT.md)
+        or use an AI chatbot to convert your recipe into the right format.
+      placeholder: |
+        ---
+        id: your-recipe-id
+        name: Your Recipe Name
+        ...
+        ---
+
+        # Ingredients
+        ...
+
+        # Instructions
+        ...
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes for reviewers
+      description: Anything you'd like to mention about this recipe (optional).
+    validations:
+      required: false

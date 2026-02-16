@@ -1,0 +1,26 @@
+name: Recipe Lint
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ['recipes/**']
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            recipe-parser/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('recipe-parser/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+
+      - name: Lint recipes
+        run: cargo run --manifest-path recipe-parser/Cargo.toml --release -- --lint
