@@ -12,12 +12,27 @@ This document tracks feature ideas and improvements for BiteMe.
 
 ## User Features
 
-### [ ] Post-Meal Feedback & Rating
+### [ ] Recipe Rating
+
+Two-phase rollout: local-first, community later.
+
+**Phase 1 — Local ratings (now)**
 
 - Banner at top of recipe list on next app visit after cooking: "How was [recipe]?"
 - Quick star rating (1–5) + link to view/edit cooking notes
 - Dismiss (x) or "Don't ask me again" option
 - Only shown once per cook session
+- Stored in IndexedDB, personal and private
+- Display personal rating on recipe cards and detail page
+
+**Phase 2 — Community ratings (later, when user base justifies it)**
+
+- Firebase backend with anonymous auth (no account required)
+- One-time opt-in prompt: "Share your ratings to help others discover the best recipes?"
+- Users who opt in: upload existing local ratings + future ones
+- Users who decline: everything stays local, app works the same
+- Display average community rating alongside personal rating
+- Rate-limit: 1 rating per recipe per anonymous UID
 
 ### [ ] First-Time User Onboarding
 
@@ -50,7 +65,11 @@ This document tracks feature ideas and improvements for BiteMe.
 ### [~] SEO & Social Sharing (Open Graph)
 
 - [x] Static OG tags on homepage and recipe page
-- [ ] Per-recipe OG tags (requires build-time HTML generation)
+- [ ] Per-recipe OG tags via static HTML files
+  - Rust parser generates `/r/{recipe-id}.html` for each recipe
+  - Minimal HTML: just `<head>` with OG tags (title, description, url) + `<meta http-equiv="refresh">` redirect to `/recipe.html?id={recipe-id}`
+  - Crawlers (Telegram, Slack, iMessage) read OG tags; real users get instant redirect
+  - Shared URLs use `/r/thai-green-curry.html` format
 - [ ] JSON-LD structured data for Google recipe rich results
 
 ---
@@ -80,6 +99,6 @@ This document tracks feature ideas and improvements for BiteMe.
 
 ## Principles
 
-- No backend — local storage (IndexedDB) for user data
+- Local-first — IndexedDB for user data, optional backend sync later
 - Open-source recipes via PR + automated validation
 - Simple, maintainable solutions that scale to 100–500 recipes

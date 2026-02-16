@@ -4,7 +4,7 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 
 ## Live Demo
 
-**https://jameslafa.github.io/biteme/**
+**https://biteme.ovh**
 
 ## What It Looks Like
 
