@@ -1,6 +1,6 @@
 ---
 id: vegan-banana-bread
-name: Vegan Banana Bread
+name: Banana Bread
 description: Moist and delicious banana bread made with simple plant-based ingredients
 servings: 10
 time: 65

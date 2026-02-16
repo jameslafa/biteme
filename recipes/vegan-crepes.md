@@ -1,6 +1,6 @@
 ---
 id: vegan-crepes
-name: Vegan Crêpes
+name: French Crêpes
 description: A proper French recipe, no eggs, no dairy, all delicious
 servings: 8
 time: 60

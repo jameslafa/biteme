@@ -1,11 +1,11 @@
 ---
 id: creamy-mushroom-soup
-name: Creamy Vegan Mushroom Soup
+name: Creamy Mushroom Soup
 description: Rich and creamy mushroom soup perfect for batch cooking and freezing
 servings: 4
 time: 40
 difficulty: easy
-tags: [vegan, soup]
+tags: [vegan, soup, one-pot]
 author: James
 date: 2026-02-10
 ---

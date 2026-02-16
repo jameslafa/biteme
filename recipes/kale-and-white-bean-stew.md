@@ -5,7 +5,7 @@ description: A hearty, comforting stew with smoky spices, tender kale, and cream
 servings: 4
 time: 30
 difficulty: easy
-tags: [vegan, stew, one-pot]
+tags: [vegan, stew, one-pot, gluten-free]
 author: James
 date: 2026-02-14
 ---

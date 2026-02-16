@@ -5,7 +5,7 @@ description: Warming vegan curry perfect for batch cooking and meal prep
 servings: 4
 time: 40
 difficulty: easy
-tags: [vegan, curry, soup]
+tags: [vegan, curry, one-pot, gluten-free]
 author: James
 date: 2026-02-10
 ---

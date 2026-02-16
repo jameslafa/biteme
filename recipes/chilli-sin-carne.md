@@ -5,7 +5,7 @@ description: A hearty vegan chilli packed with beans, lentils, and spices that t
 servings: 4
 time: 50
 difficulty: easy
-tags: [vegan, chilli, one-pot, batch-cooking]
+tags: [vegan, chilli, one-pot, gluten-free]
 date: 2026-02-16
 ---
 
