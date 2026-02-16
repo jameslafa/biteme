@@ -82,6 +82,7 @@ Two-phase rollout: local-first, community later.
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action
 - **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
 - **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
+- **Tag Filtering** — Filter recipes by tag via dropdown in search bar, clickable tags on cards and detail page, URL param support for shareable links
 
 ---
 

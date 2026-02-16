@@ -666,6 +666,240 @@
     "serving_suggestions": "Serve with a drizzle of oil from the sun-dried tomatoes."
   },
   {
+    "id": "creamy-mushroom-soup",
+    "name": "Creamy Mushroom Soup",
+    "description": "Rich and creamy mushroom soup perfect for batch cooking and freezing",
+    "servings": 4,
+    "time": 40,
+    "difficulty": "easy",
+    "tags": [
+      "vegan",
+      "soup",
+      "one-pot"
+    ],
+    "author": "James",
+    "date": "2026-02-10",
+    "notes": "For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini (Steinpilze), soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "500 g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "g",
+            "item": "mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 medium onion, diced",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "onion, diced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "3 cloves garlic, minced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 medium floury potato (about 150 g), peeled and cubed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "floury potato, peeled and cubed",
+            "secondary_amount": 150.0,
+            "secondary_unit": "g",
+            "secondary_prefix": "about"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 tsp fresh thyme (or 1/2 tsp dried)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "fresh thyme (or 1/2 tsp dried)"
+          }
+        },
+        {
+          "id": 6,
+          "text": "Lemon for juice"
+        },
+        {
+          "id": 7,
+          "text": "Fresh parsley for garnish"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 8,
+          "text": "200 ml oat cream (Hafer Cuisine)",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "ml",
+            "item": "oat cream (Hafer Cuisine)"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 9,
+          "text": "750 ml vegetable stock",
+          "quantity": {
+            "amount": 750.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 10,
+          "text": "2 tbsp olive oil",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1 tbsp soy sauce",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 12,
+          "text": "Salt and pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      "Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.",
+      "Lower the heat to medium, add a little more oil if needed, and cook {onion} for about 5 minutes until soft and translucent.",
+      "Add {garlic} and {thyme}, stir for about a minute until fragrant.",
+      "Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about 15 minutes, until the potato is completely tender.",
+      "Stir in {oat cream} and {soy sauce}.",
+      "Blend the soup using a stick blender until smooth and creamy. If you set some {mushrooms} aside earlier, stir them back in now for a bit of texture.",
+      "Season with {salt}, {pepper}, and a squeeze of {lemon} juice. The lemon really lifts the flavour.",
+      "Serve with fresh {parsley} on top and some crusty bread on the side."
+    ],
+    "serving_suggestions": "Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzle of truffle oil for a fancy touch. Great with a side salad for a complete meal."
+  },
+  {
+    "id": "pain-depice",
+    "name": "Pain d'Épice",
+    "description": "Traditional French spiced honey cake with warming spices",
+    "servings": 8,
+    "time": 50,
+    "difficulty": "easy",
+    "tags": [
+      "french",
+      "baking",
+      "dessert"
+    ],
+    "author": "James",
+    "date": "2026-02-10",
+    "notes": "This delicious French spice bread is best enjoyed the next day when the flavours have had time to develop. It keeps well wrapped in foil for up to a week. The spice mix typically includes cinnamon, green aniseed, star anise, nutmeg, coriander seeds, cloves and ground ginger, but you can also use a pre-made pain d'épices spice blend if available.",
+    "ingredients": {
+      "Fridge": [
+        {
+          "id": 1,
+          "text": "250 ml (1 cup) milk (or plant milk for a vegan version)",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "ml",
+            "item": "milk (or plant milk for a vegan version)",
+            "secondary_amount": 1.0,
+            "secondary_unit": "cup"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 2,
+          "text": "125 g (3/4 cup) brown sugar",
+          "quantity": {
+            "amount": 125.0,
+            "unit": "g",
+            "item": "brown sugar",
+            "secondary_amount": 0.75,
+            "secondary_unit": "cup"
+          }
+        },
+        {
+          "id": 3,
+          "text": "250 g (1-3/4 cups) flour",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "flour",
+            "secondary_amount": 1.75,
+            "secondary_unit": "cups"
+          }
+        },
+        {
+          "id": 4,
+          "text": "3 tbsp honey (or jam for a vegan version)",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "honey (or jam for a vegan version)"
+          }
+        },
+        {
+          "id": 5,
+          "text": "3 tsp baking soda (Natron)",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "baking soda (Natron)"
+          }
+        },
+        {
+          "id": 6,
+          "text": "3 tsp orange blossom water",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "orange blossom water"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 7,
+          "text": "2 tsp spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)"
+          }
+        }
+      ]
+    },
+    "steps": [
+      "Preheat the oven to 180°C (160°C fan).",
+      "In a large bowl, mix together {brown sugar}, {flour}, {honey}, {baking soda}, {orange blossom water}, {spice mix}, and {milk} until well combined and smooth.",
+      "Pour the batter into a greased rectangular baking tin (about 20cm x 10cm).",
+      "Bake for 45 minutes, or until a skewer inserted into the center comes out clean.",
+      "Let cool in the tin for 10 minutes, then turn out onto a wire rack to cool completely."
+    ],
+    "serving_suggestions": "Slice and enjoy with butter, or serve with tea or coffee. Even better the next day when the flavours have mellowed and the texture becomes more moist. Store wrapped in foil to keep fresh."
+  },
+  {
     "id": "pumpkin-potato-curry",
     "name": "Creamy Pumpkin & Potato Curry",
     "description": "Warming vegan curry perfect for batch cooking and meal prep",
@@ -805,259 +1039,6 @@
       "Season with {salt} and {pepper}, then serve over rice (or with naan) topped with fresh {coriander} and a squeeze of {lime}."
     ],
     "serving_suggestions": "Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime. Great for meal prep – portion into containers for easy weeknight dinners throughout the week."
-  },
-  {
-    "id": "vegan-banana-bread",
-    "name": "Banana Bread",
-    "description": "Moist and delicious banana bread made with simple plant-based ingredients",
-    "servings": 10,
-    "time": 65,
-    "difficulty": "easy",
-    "tags": [
-      "vegan",
-      "baking",
-      "dessert"
-    ],
-    "author": "James",
-    "date": "2026-02-10",
-    "notes": "Use very ripe bananas with lots of brown spots for the best flavour and natural sweetness. The banana bread keeps well wrapped in foil for 3-4 days at room temperature, or can be frozen for up to 3 months. For extra indulgence, fold in some chocolate chips or chopped walnuts before baking.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "4 medium ripe bananas, mashed",
-          "quantity": {
-            "amount": 4.0,
-            "unit": "medium",
-            "item": "ripe bananas, mashed"
-          }
-        },
-        {
-          "id": 2,
-          "text": "Extra banana slices for topping"
-        }
-      ],
-      "Fridge": [
-        {
-          "id": 3,
-          "text": "60 ml unsweetened plant milk",
-          "quantity": {
-            "amount": 60.0,
-            "unit": "ml",
-            "item": "unsweetened plant milk"
-          }
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 4,
-          "text": "100 g light brown sugar",
-          "quantity": {
-            "amount": 100.0,
-            "unit": "g",
-            "item": "light brown sugar"
-          }
-        },
-        {
-          "id": 5,
-          "text": "250 g all-purpose flour",
-          "quantity": {
-            "amount": 250.0,
-            "unit": "g",
-            "item": "all-purpose flour"
-          }
-        },
-        {
-          "id": 6,
-          "text": "60 ml vegetable oil",
-          "quantity": {
-            "amount": 60.0,
-            "unit": "ml",
-            "item": "vegetable oil"
-          }
-        },
-        {
-          "id": 7,
-          "text": "2 tsp pure vanilla extract",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tsp",
-            "item": "pure vanilla extract"
-          }
-        },
-        {
-          "id": 8,
-          "text": "1 tsp baking soda",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "baking soda"
-          }
-        }
-      ],
-      "Spices": [
-        {
-          "id": 9,
-          "text": "1 tsp cinnamon",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "cinnamon"
-          }
-        },
-        {
-          "id": 10,
-          "text": "1/2 tsp salt",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tsp",
-            "item": "salt"
-          }
-        }
-      ]
-    },
-    "steps": [
-      "Preheat the oven to 180°C (160°C fan). Spray a 9×5 inch (23×13cm) loaf pan with nonstick spray, then dust with flour.",
-      "In a large mixing bowl, roughly mash {bananas}. Add {light brown sugar}, {oil}, {vanilla}, and {unsweetened plant milk}, and whisk to incorporate.",
-      "Sift in {flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix.",
-      "Transfer the batter to your prepared pan, and top with extra {banana} slices.",
-      "Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.",
-      "Let cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing."
-    ],
-    "serving_suggestions": "Enjoy warm with vegan butter, or toasted the next day. Delicious for breakfast with coffee or as an afternoon snack. Try spreading with peanut butter or almond butter for extra protein."
-  },
-  {
-    "id": "creamy-mushroom-soup",
-    "name": "Creamy Mushroom Soup",
-    "description": "Rich and creamy mushroom soup perfect for batch cooking and freezing",
-    "servings": 4,
-    "time": 40,
-    "difficulty": "easy",
-    "tags": [
-      "vegan",
-      "soup",
-      "one-pot"
-    ],
-    "author": "James",
-    "date": "2026-02-10",
-    "notes": "For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini (Steinpilze), soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "500 g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced",
-          "quantity": {
-            "amount": 500.0,
-            "unit": "g",
-            "item": "mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced"
-          }
-        },
-        {
-          "id": 2,
-          "text": "1 medium onion, diced",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "medium",
-            "item": "onion, diced"
-          }
-        },
-        {
-          "id": 3,
-          "text": "3 cloves garlic, minced",
-          "quantity": {
-            "amount": 3.0,
-            "unit": "cloves",
-            "item": "garlic, minced"
-          }
-        },
-        {
-          "id": 4,
-          "text": "1 medium floury potato (about 150 g), peeled and cubed",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "medium",
-            "item": "floury potato, peeled and cubed",
-            "secondary_amount": 150.0,
-            "secondary_unit": "g",
-            "secondary_prefix": "about"
-          }
-        },
-        {
-          "id": 5,
-          "text": "1 tsp fresh thyme (or 1/2 tsp dried)",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "fresh thyme (or 1/2 tsp dried)"
-          }
-        },
-        {
-          "id": 6,
-          "text": "Lemon for juice"
-        },
-        {
-          "id": 7,
-          "text": "Fresh parsley for garnish"
-        }
-      ],
-      "Fridge": [
-        {
-          "id": 8,
-          "text": "200 ml oat cream (Hafer Cuisine)",
-          "quantity": {
-            "amount": 200.0,
-            "unit": "ml",
-            "item": "oat cream (Hafer Cuisine)"
-          }
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 9,
-          "text": "750 ml vegetable stock",
-          "quantity": {
-            "amount": 750.0,
-            "unit": "ml",
-            "item": "vegetable stock"
-          }
-        },
-        {
-          "id": 10,
-          "text": "2 tbsp olive oil",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "olive oil"
-          }
-        },
-        {
-          "id": 11,
-          "text": "1 tbsp soy sauce",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "soy sauce"
-          }
-        }
-      ],
-      "Spices": [
-        {
-          "id": 12,
-          "text": "Salt and pepper to taste"
-        }
-      ]
-    },
-    "steps": [
-      "Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.",
-      "Lower the heat to medium, add a little more oil if needed, and cook {onion} for about 5 minutes until soft and translucent.",
-      "Add {garlic} and {thyme}, stir for about a minute until fragrant.",
-      "Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about 15 minutes, until the potato is completely tender.",
-      "Stir in {oat cream} and {soy sauce}.",
-      "Blend the soup using a stick blender until smooth and creamy. If you set some {mushrooms} aside earlier, stir them back in now for a bit of texture.",
-      "Season with {salt}, {pepper}, and a squeeze of {lemon} juice. The lemon really lifts the flavour.",
-      "Serve with fresh {parsley} on top and some crusty bread on the side."
-    ],
-    "serving_suggestions": "Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzle of truffle oil for a fancy touch. Great with a side salad for a complete meal."
   },
   {
     "id": "creamy-hummus",
@@ -1256,104 +1237,123 @@
     "serving_suggestions": "Serve warm with jam and vegan butter. For a traditional cream tea, add vegan whipped cream. Try adding dried fruit or a pinch of cinnamon to the dough for a twist."
   },
   {
-    "id": "pain-depice",
-    "name": "Pain d'Épice",
-    "description": "Traditional French spiced honey cake with warming spices",
-    "servings": 8,
-    "time": 50,
+    "id": "vegan-banana-bread",
+    "name": "Banana Bread",
+    "description": "Moist and delicious banana bread made with simple plant-based ingredients",
+    "servings": 10,
+    "time": 65,
     "difficulty": "easy",
     "tags": [
-      "french",
+      "vegan",
       "baking",
       "dessert"
     ],
     "author": "James",
     "date": "2026-02-10",
-    "notes": "This delicious French spice bread is best enjoyed the next day when the flavours have had time to develop. It keeps well wrapped in foil for up to a week. The spice mix typically includes cinnamon, green aniseed, star anise, nutmeg, coriander seeds, cloves and ground ginger, but you can also use a pre-made pain d'épices spice blend if available.",
+    "notes": "Use very ripe bananas with lots of brown spots for the best flavour and natural sweetness. The banana bread keeps well wrapped in foil for 3-4 days at room temperature, or can be frozen for up to 3 months. For extra indulgence, fold in some chocolate chips or chopped walnuts before baking.",
     "ingredients": {
-      "Fridge": [
+      "Fresh": [
         {
           "id": 1,
-          "text": "250 ml (1 cup) milk (or plant milk for a vegan version)",
+          "text": "4 medium ripe bananas, mashed",
           "quantity": {
-            "amount": 250.0,
+            "amount": 4.0,
+            "unit": "medium",
+            "item": "ripe bananas, mashed"
+          }
+        },
+        {
+          "id": 2,
+          "text": "Extra banana slices for topping"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 3,
+          "text": "60 ml unsweetened plant milk",
+          "quantity": {
+            "amount": 60.0,
             "unit": "ml",
-            "item": "milk (or plant milk for a vegan version)",
-            "secondary_amount": 1.0,
-            "secondary_unit": "cup"
+            "item": "unsweetened plant milk"
           }
         }
       ],
       "Pantry": [
         {
-          "id": 2,
-          "text": "125 g (3/4 cup) brown sugar",
-          "quantity": {
-            "amount": 125.0,
-            "unit": "g",
-            "item": "brown sugar",
-            "secondary_amount": 0.75,
-            "secondary_unit": "cup"
-          }
-        },
-        {
-          "id": 3,
-          "text": "250 g (1-3/4 cups) flour",
-          "quantity": {
-            "amount": 250.0,
-            "unit": "g",
-            "item": "flour",
-            "secondary_amount": 1.75,
-            "secondary_unit": "cups"
-          }
-        },
-        {
           "id": 4,
-          "text": "3 tbsp honey (or jam for a vegan version)",
+          "text": "100 g light brown sugar",
           "quantity": {
-            "amount": 3.0,
-            "unit": "tbsp",
-            "item": "honey (or jam for a vegan version)"
+            "amount": 100.0,
+            "unit": "g",
+            "item": "light brown sugar"
           }
         },
         {
           "id": 5,
-          "text": "3 tsp baking soda (Natron)",
+          "text": "250 g all-purpose flour",
           "quantity": {
-            "amount": 3.0,
-            "unit": "tsp",
-            "item": "baking soda (Natron)"
+            "amount": 250.0,
+            "unit": "g",
+            "item": "all-purpose flour"
           }
         },
         {
           "id": 6,
-          "text": "3 tsp orange blossom water",
+          "text": "60 ml vegetable oil",
           "quantity": {
-            "amount": 3.0,
+            "amount": 60.0,
+            "unit": "ml",
+            "item": "vegetable oil"
+          }
+        },
+        {
+          "id": 7,
+          "text": "2 tsp pure vanilla extract",
+          "quantity": {
+            "amount": 2.0,
             "unit": "tsp",
-            "item": "orange blossom water"
+            "item": "pure vanilla extract"
+          }
+        },
+        {
+          "id": 8,
+          "text": "1 tsp baking soda",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking soda"
           }
         }
       ],
       "Spices": [
         {
-          "id": 7,
-          "text": "2 tsp spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)",
+          "id": 9,
+          "text": "1 tsp cinnamon",
           "quantity": {
-            "amount": 2.0,
+            "amount": 1.0,
             "unit": "tsp",
-            "item": "spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)"
+            "item": "cinnamon"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1/2 tsp salt",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "salt"
           }
         }
       ]
     },
     "steps": [
-      "Preheat the oven to 180°C (160°C fan).",
-      "In a large bowl, mix together {brown sugar}, {flour}, {honey}, {baking soda}, {orange blossom water}, {spice mix}, and {milk} until well combined and smooth.",
-      "Pour the batter into a greased rectangular baking tin (about 20cm x 10cm).",
-      "Bake for 45 minutes, or until a skewer inserted into the center comes out clean.",
-      "Let cool in the tin for 10 minutes, then turn out onto a wire rack to cool completely."
+      "Preheat the oven to 180°C (160°C fan). Spray a 9×5 inch (23×13cm) loaf pan with nonstick spray, then dust with flour.",
+      "In a large mixing bowl, roughly mash {bananas}. Add {light brown sugar}, {oil}, {vanilla}, and {unsweetened plant milk}, and whisk to incorporate.",
+      "Sift in {flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix.",
+      "Transfer the batter to your prepared pan, and top with extra {banana} slices.",
+      "Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.",
+      "Let cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing."
     ],
-    "serving_suggestions": "Slice and enjoy with butter, or serve with tea or coffee. Even better the next day when the flavours have mellowed and the texture becomes more moist. Store wrapped in foil to keep fresh."
+    "serving_suggestions": "Enjoy warm with vegan butter, or toasted the next day. Delicious for breakfast with coffee or as an afternoon snack. Try spreading with peanut butter or almond butter for extra protein."
   }
 ]

@@ -1,6 +1,7 @@
 // Main app logic for recipe list page
 
 let showFavoritesOnly = false;
+let activeTag = null;
 
 document.addEventListener('DOMContentLoaded', async function() {
   await initDB();
@@ -8,11 +9,26 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Restore filter state from localStorage
   showFavoritesOnly = localStorage.getItem('showFavoritesOnly') === 'true';
 
+  // Read tag filter from URL param
+  const urlParams = new URLSearchParams(window.location.search);
+  activeTag = urlParams.get('tag') || null;
+
   loadRecipes();
   setupSearch();
   setupFavoritesFilter();
   updateCartCount();
   setupWhatsNew();
+
+  // Tag filter dropdown: toggle and outside-click-to-close
+  document.getElementById('tag-filter-btn').addEventListener('click', () => {
+    document.getElementById('tag-dropdown').classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('tag-dropdown');
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
 
   // Refresh recipes when returning to the app (e.g. PWA resume)
   document.addEventListener('visibilitychange', async () => {
@@ -25,24 +41,70 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 });
 
-// Load and display all recipes
+// Load and display all recipes, applying current filters
 async function loadRecipes() {
+  const allRecipes = await getRecipes();
+  let recipes = allRecipes;
+
   if (showFavoritesOnly) {
-    await displayFavorites();
-  } else {
-    const recipes = await getRecipes();
-    await displayRecipes(recipes);
+    const favorites = await getAllFavorites();
+    const favoriteIds = favorites.map(f => f.recipe_id);
+    recipes = recipes.filter(r => favoriteIds.includes(r.id));
   }
+
+  const searchQuery = document.getElementById('search-input').value;
+  if (searchQuery) {
+    const lowerQuery = searchQuery.toLowerCase();
+    recipes = recipes.filter(recipe =>
+      recipe.name.toLowerCase().includes(lowerQuery) ||
+      recipe.description.toLowerCase().includes(lowerQuery) ||
+      recipe.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+    );
+  }
+
+  if (activeTag) {
+    recipes = recipes.filter(r => r.tags.includes(activeTag));
+  }
+
+  renderTagBar(allRecipes);
+  await displayRecipes(recipes);
 }
 
-// Display only favorited recipes
-async function displayFavorites() {
-  const allRecipes = await getRecipes();
-  const favorites = await getAllFavorites();
-  const favoriteIds = favorites.map(f => f.recipe_id);
-  const favoriteRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
+// Render the tag filter dropdown popover contents
+function renderTagBar(recipes) {
+  const container = document.getElementById('tag-dropdown');
+  const popover = container.querySelector('.tag-dropdown-popover');
+  const toggle = document.getElementById('tag-filter-btn');
+  const tags = [...new Set(recipes.flatMap(r => r.tags))].sort();
 
-  await displayRecipes(favoriteRecipes);
+  popover.innerHTML = tags.map(tag =>
+    `<button class="tag tag-filter${activeTag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`
+  ).join('');
+
+  // Update toggle active state
+  toggle.classList.toggle('active', !!activeTag);
+
+  popover.querySelectorAll('.tag-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      container.classList.remove('open');
+      setActiveTag(btn.dataset.tag === activeTag ? null : btn.dataset.tag);
+    });
+  });
+}
+
+// Set active tag, update URL, and reload
+function setActiveTag(tag) {
+  activeTag = tag;
+
+  const url = new URL(window.location);
+  if (tag) {
+    url.searchParams.set('tag', tag);
+  } else {
+    url.searchParams.delete('tag');
+  }
+  history.replaceState(null, '', url);
+
+  loadRecipes();
 }
 
 // Build a map of recipe ID → { count, avgDuration } from completed sessions
@@ -91,7 +153,7 @@ async function displayRecipes(recipes) {
         const filterBtn = document.getElementById('favorites-filter');
         filterBtn.classList.remove('active');
         filterBtn.setAttribute('aria-label', 'Show favourites only');
-        loadRecipes();
+        setActiveTag(null);
       });
     } else {
       recipeGrid.innerHTML = `
@@ -106,7 +168,7 @@ async function displayRecipes(recipes) {
       `;
       document.getElementById('clear-search-btn').addEventListener('click', () => {
         document.getElementById('search-input').value = '';
-        loadRecipes();
+        setActiveTag(null);
       });
     }
     return;
@@ -139,7 +201,7 @@ async function displayRecipes(recipes) {
       </div>
       <p class="recipe-description">${recipe.description}</p>
       <div class="recipe-tags">
-        ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        ${recipe.tags.map(tag => `<button class="tag tag-filter${activeTag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`).join('')}
       </div>
       ${statsHtml}
     </div>
@@ -159,6 +221,14 @@ async function displayRecipes(recipes) {
       updateFavoriteButtonSmall(btn, newState);
     });
   }
+
+  // Setup tag click handlers on cards
+  recipeGrid.querySelectorAll('.recipe-card .tag-filter').forEach(tagBtn => {
+    tagBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent card navigation
+      setActiveTag(tagBtn.dataset.tag === activeTag ? null : tagBtn.dataset.tag);
+    });
+  });
 }
 
 function updateFavoriteButtonSmall(button, favorited) {
@@ -201,37 +271,15 @@ function setupFavoritesFilter() {
       filterBtn.setAttribute('aria-label', 'Show favorites only');
     }
 
-    // Reload recipes with filter
-    await loadRecipes();
+    loadRecipes();
   });
 }
 
 // Setup search functionality
-async function setupSearch() {
+function setupSearch() {
   const searchInput = document.getElementById('search-input');
-
   if (searchInput) {
-    searchInput.addEventListener('input', async function(e) {
-      const query = e.target.value;
-
-      if (showFavoritesOnly) {
-        // Search within favorites
-        const allRecipes = await getRecipes();
-        const favorites = await getAllFavorites();
-        const favoriteIds = favorites.map(f => f.recipe_id);
-        const favoriteRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
-        const results = favoriteRecipes.filter(recipe =>
-          recipe.name.toLowerCase().includes(query.toLowerCase()) ||
-          recipe.description.toLowerCase().includes(query.toLowerCase()) ||
-          recipe.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
-        );
-        await displayRecipes(results);
-      } else {
-        // Search all recipes
-        const results = await searchRecipes(query);
-        await displayRecipes(results);
-      }
-    });
+    searchInput.addEventListener('input', () => loadRecipes());
   }
 }
 

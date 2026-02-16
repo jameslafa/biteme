@@ -98,7 +98,7 @@
           </div>
 
           <div class="recipe-tags">
-            ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            ${recipe.tags.map(tag => `<a href="index.html?tag=${encodeURIComponent(tag)}" class="tag tag-filter">${tag}</a>`).join('')}
           </div>
 
           <div id="cooking-notes-display"></div>

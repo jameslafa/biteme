@@ -158,15 +158,14 @@ main {
 
 /* Search */
 .search-container {
+  position: relative;
   margin-bottom: var(--spacing-md);
-  display: flex;
-  gap: var(--spacing-sm);
-  align-items: center;
 }
 
 #search-input {
-  flex: 1;
+  width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
+  padding-right: 5.5rem;
   font-size: 0.95rem;
   font-weight: 300;
   border: 1px solid var(--border);
@@ -186,44 +185,53 @@ main {
   font-weight: 300;
 }
 
-.favorites-filter {
+#search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237F8C8D' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E") center/contain no-repeat;
+  cursor: pointer;
+}
+
+.search-actions {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.search-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm);
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 1px solid var(--border);
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
   border-radius: var(--radius-sm);
-  background-color: var(--surface);
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s;
-  flex-shrink: 0;
 }
 
-.favorites-filter:hover {
+.search-action-btn:hover {
   background-color: var(--accent-light);
-  border-color: var(--accent-color);
   color: var(--primary-color);
 }
 
-.favorites-filter:active {
-  transform: scale(0.95);
+.search-action-btn:active {
+  transform: scale(0.9);
 }
 
-.favorites-filter.active {
-  background-color: var(--accent-light);
-  border-color: var(--primary-color);
+.search-action-btn.active {
   color: var(--primary-color);
 }
 
-.favorites-filter.active svg {
+.search-action-btn.active svg {
   fill: var(--primary-color);
-}
-
-.favorites-filter svg {
-  flex-shrink: 0;
 }
 
 /* Recipe Grid */
@@ -354,6 +362,51 @@ main {
   font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.02em;
+}
+
+a.tag-filter {
+  text-decoration: none;
+}
+
+.tag-filter {
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s;
+}
+
+.tag-filter:hover {
+  background-color: var(--accent-color);
+}
+
+.tag-filter.active {
+  background-color: var(--primary-color);
+  color: var(--surface);
+  border-color: var(--primary-color);
+}
+
+/* Tag Filter Dropdown */
+.tag-dropdown {
+  position: relative;
+}
+
+.tag-dropdown-popover {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.tag-dropdown.open .tag-dropdown-popover {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
 }
 
 /* Buttons */
