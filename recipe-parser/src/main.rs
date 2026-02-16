@@ -442,7 +442,7 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
 
     // Parse frontmatter
     let frontmatter: RecipeFrontmatter = serde_yaml::from_str(parts[1].trim())
-        .context("Failed to parse frontmatter")?;
+        .map_err(|e| friendly_frontmatter_error(&e))?;
 
     // Validate frontmatter
     validate_frontmatter(&frontmatter, lint)?;
@@ -691,6 +691,75 @@ fn validate_no_unicode_fractions(text: &str, category: &str) -> Result<()> {
     Ok(())
 }
 
+fn friendly_frontmatter_error(err: &serde_yaml::Error) -> anyhow::Error {
+    let msg = err.to_string();
+
+    // Missing required field: "missing field `name`"
+    if let Some(field) = msg.strip_prefix("missing field `").and_then(|s| s.strip_suffix('`')) {
+        let hint = match field {
+            "id" => "Add a line like: id: my-recipe-name",
+            "name" => "Add a line like: name: My Recipe Name",
+            "description" => "Add a line like: description: A short description of your recipe",
+            "servings" => "Add a line like: servings: 4",
+            "time" => "Add a line like: time: 30 (total minutes)",
+            "difficulty" => "Add a line like: difficulty: easy (easy, medium, or hard)",
+            "tags" => "Add a line like: tags: [pasta, italian, dinner]",
+            "date" => "Add a line like: date: 2026-01-15",
+            _ => "",
+        };
+        return if hint.is_empty() {
+            anyhow::anyhow!("Missing required field: '{}'\nMake sure your recipe header includes this field.", field)
+        } else {
+            anyhow::anyhow!("Missing required field: '{}'\n  {}", field, hint)
+        };
+    }
+
+    // Wrong type: "tags: invalid type: string \"dinner\", expected a sequence"
+    if msg.contains("invalid type") {
+        if msg.contains("expected a sequence") {
+            return anyhow::anyhow!("'tags' should be a list, not a single value.\n  Use square brackets: tags: [dinner, pasta]");
+        }
+        if msg.contains("expected u32") || msg.contains("expected an integer") {
+            let field = if msg.contains("servings") || msg.starts_with("servings") {
+                "servings"
+            } else if msg.contains("time") || msg.starts_with("time") {
+                "time"
+            } else {
+                "servings/time"
+            };
+            return anyhow::anyhow!("'{}' should be a number without quotes.\n  Example: {}: 4", field, field);
+        }
+    }
+
+    // Unknown field
+    if msg.contains("unknown field") {
+        if let Some(rest) = msg.strip_prefix("unknown field `") {
+            if let Some(field) = rest.split('`').next() {
+                return anyhow::anyhow!(
+                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, date",
+                    field
+                );
+            }
+        }
+    }
+
+    // YAML syntax errors — the really cryptic ones
+    if msg.contains("mapping values are not allowed") || msg.contains("did not find expected")
+        || msg.contains("found unexpected") || msg.contains("block sequence")
+        || msg.contains("could not find expected")
+    {
+        return anyhow::anyhow!(
+            "There's a formatting error in the recipe header.\n  \
+            Make sure each field is on its own line as 'key: value' (with a space after the colon).\n  \
+            Check for missing colons, extra spaces at the start of lines, or unclosed brackets.\n  \
+            YAML detail: {}", msg
+        );
+    }
+
+    // Fallback
+    anyhow::anyhow!("Could not read the recipe header: {}", msg)
+}
+
 fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
     // Validate ID format and length
     if fm.id.is_empty() {
@@ -700,7 +769,7 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
         bail!("Recipe ID too long (max 100 characters): '{}'", fm.id);
     }
     if !fm.id.chars().all(|c| c.is_ascii_lowercase() || c == '-') {
-        bail!("Recipe ID must be lowercase with dashes only: '{}'", fm.id);
+        bail!("Recipe ID can only contain lowercase letters and dashes: '{}'\n  Example: thai-green-curry", fm.id);
     }
     if fm.id.starts_with('-') || fm.id.ends_with('-') {
         bail!("Recipe ID cannot start or end with a dash: '{}'", fm.id);
@@ -728,7 +797,7 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
     // Validate difficulty
     let valid_difficulties = ["easy", "medium", "hard"];
     if !valid_difficulties.contains(&fm.difficulty.as_str()) {
-        bail!("Difficulty must be one of: {:?}, got '{}'", valid_difficulties, fm.difficulty);
+        bail!("Difficulty '{}' is not valid. Use one of: easy, medium, or hard", fm.difficulty);
     }
 
     // Validate numeric fields
@@ -868,9 +937,9 @@ fn main() -> Result<()> {
                     recipes.push(recipe);
                 }
                 Err(e) => {
-                    eprintln!("  ❌ Error parsing {:?}: {}", path, e);
+                    eprintln!("  ❌ Error in {:?}:\n  {}", path.file_name().unwrap_or_default(), e);
                     if cli.lint {
-                        return Err(e);
+                        std::process::exit(1);
                     }
                 }
             }
@@ -1010,7 +1079,7 @@ date: 2026-01-01
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("Difficulty must be one of"));
+        assert!(result.unwrap_err().to_string().contains("is not valid. Use one of: easy, medium, or hard"));
     }
 
     #[test]
@@ -1191,7 +1260,7 @@ date: 2026-01-01
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("must be lowercase with dashes only"));
+        assert!(result.unwrap_err().to_string().contains("can only contain lowercase letters and dashes"));
     }
 
     #[test]
@@ -1225,7 +1294,7 @@ date: 2026-01-01
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("must be lowercase with dashes only"));
+        assert!(result.unwrap_err().to_string().contains("can only contain lowercase letters and dashes"));
     }
 
     #[test]
