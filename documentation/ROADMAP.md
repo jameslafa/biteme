@@ -62,14 +62,8 @@ Two-phase rollout: local-first, community later.
 - Rate complexity after cooking (Easy / Medium / Hard)
 - Display on recipe cards to help pick recipes by effort
 
-### [~] SEO & Social Sharing (Open Graph)
+### [ ] SEO & Social Sharing
 
-- [x] Static OG tags on homepage and recipe page
-- [ ] Per-recipe OG tags via static HTML files
-  - Rust parser generates `/r/{recipe-id}.html` for each recipe
-  - Minimal HTML: just `<head>` with OG tags (title, description, url) + `<meta http-equiv="refresh">` redirect to `/recipe.html?id={recipe-id}`
-  - Crawlers (Telegram, Slack, iMessage) read OG tags; real users get instant redirect
-  - Shared URLs use `/r/thai-green-curry.html` format
 - [ ] JSON-LD structured data for Google recipe rich results
 
 ---
@@ -94,6 +88,7 @@ Two-phase rollout: local-first, community later.
 - **Completion Page** — Bon appétit animation, cooking time display
 - **Progress Bar** — Gradient bar in cooking mode showing step progress
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action
+- **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
 
 ---
 

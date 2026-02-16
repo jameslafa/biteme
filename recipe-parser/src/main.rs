@@ -796,6 +796,45 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
     Ok(())
 }
 
+fn escape_html(s: &str) -> String {
+    s.replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+        .replace('"', "&quot;")
+}
+
+fn generate_og_html(recipe: &Recipe) -> String {
+    let name = escape_html(&recipe.name);
+    let description = escape_html(&recipe.description);
+    let id = &recipe.id;
+    format!(
+        r#"<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{description}">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="BiteMe">
+  <meta property="og:title" content="{name} — BiteMe">
+  <meta property="og:description" content="{description}">
+  <meta property="og:image" content="https://biteme.ovh/assets/icons/icon-512.png">
+  <meta property="og:url" content="https://biteme.ovh/r/{id}.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{name} — BiteMe">
+  <meta name="twitter:description" content="{description}">
+  <meta name="twitter:image" content="https://biteme.ovh/assets/icons/icon-512.png">
+  <title>{name} — BiteMe</title>
+</head>
+<body>
+  <p>{name} — {description}</p>
+  <script>window.location.replace('/recipe.html?id={id}');</script>
+</body>
+</html>
+"#
+    )
+}
+
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
@@ -875,6 +914,19 @@ fn main() -> Result<()> {
         .with_context(|| format!("Failed to write manifest file: {:?}", manifest_path))?;
 
     println!("📦 Manifest written to: {:?}", manifest_path);
+
+    // Generate per-recipe OG HTML files
+    let og_dir = cli.output.parent().unwrap_or_else(|| std::path::Path::new(".")).join("r");
+    fs::create_dir_all(&og_dir)
+        .with_context(|| format!("Failed to create OG directory: {:?}", og_dir))?;
+
+    for recipe in &recipes {
+        let og_path = og_dir.join(format!("{}.html", recipe.id));
+        fs::write(&og_path, generate_og_html(recipe))
+            .with_context(|| format!("Failed to write OG file: {:?}", og_path))?;
+    }
+
+    println!("🔗 Generated {} OG HTML file(s) in {:?}", recipes.len(), og_dir);
 
     if cli.lint {
         println!("🔬 Linting passed!");

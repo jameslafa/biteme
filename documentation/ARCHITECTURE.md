@@ -192,6 +192,29 @@ name: Pad Thai
 - Easy to edit without touching app logic
 - Clear separation of content from code
 
+## Per-Recipe OG HTML
+
+**Decision:** Generate static HTML files with Open Graph and Twitter Card meta tags for each recipe
+
+**Problem:** Sharing a recipe link on Telegram/Slack/iMessage showed generic app info because crawlers can't execute JavaScript to read recipe data from the SPA.
+
+**Solution:** The Rust parser generates `docs/r/{recipe-id}.html` for each recipe alongside `recipes.json`. Each file contains:
+- OG tags (`og:title`, `og:description`, `og:image`, `og:url`, `og:site_name`)
+- Twitter Card tags (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`)
+- `<meta name="description">` for basic SEO
+- Body text with recipe name and description (required by some crawlers)
+- JavaScript redirect to `/recipe.html?id={recipe-id}`
+
+**Why JS redirect, not meta refresh or canonical:**
+Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="canonical">`, reading OG tags from the destination page instead of the current one. Since the SPA recipe page has no OG tags, Telegram would show no preview. A JS redirect is invisible to crawlers (they don't execute JavaScript) but works instantly for real users.
+
+**Why static files, not server-side rendering:**
+- Consistent with the no-backend architecture
+- No new dependencies — just string formatting in Rust
+- Crawlers read the meta tags; real users get redirected via JS
+
+**Share URL format:** `https://biteme.ovh/r/{recipe-id}.html`
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements
