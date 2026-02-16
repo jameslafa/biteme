@@ -430,9 +430,32 @@ fn find_unreferenced_ingredients(
     unreferenced
 }
 
+fn check_indentation(content: &str) -> Result<()> {
+    let indented_lines = content.lines()
+        .filter(|line| !line.trim().is_empty())
+        .filter(|line| !line.starts_with("---"))
+        .filter(|line| line.starts_with(' '))
+        .count();
+    let total_lines = content.lines()
+        .filter(|line| !line.trim().is_empty())
+        .filter(|line| !line.starts_with("---"))
+        .count();
+    if total_lines > 0 && indented_lines == total_lines {
+        bail!(
+            "Every line in your recipe starts with extra spaces.\n  \
+            This usually happens when copy-pasting from a website or editor.\n  \
+            Please remove the leading spaces from all lines and try again."
+        );
+    }
+    Ok(())
+}
+
 fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
     let content = fs::read_to_string(path)
         .with_context(|| format!("Failed to read file: {:?}", path))?;
+
+    // Check for copy-paste indentation before parsing
+    check_indentation(&content)?;
 
     // Split frontmatter and content
     let parts: Vec<&str> = content.splitn(3, "---").collect();
