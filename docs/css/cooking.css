@@ -70,8 +70,22 @@
   transform: scale(0.95);
 }
 
+.screen-lock-button .ray {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
 .screen-lock-button.active {
   color: var(--primary-color);
+}
+
+.screen-lock-button.active .bulb {
+  fill: #fbbf24;
+  fill-opacity: 0.4;
+}
+
+.screen-lock-button.active .ray {
+  opacity: 1;
 }
 
 .cooking-header-center {
