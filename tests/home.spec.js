@@ -312,13 +312,11 @@ test.describe('Drawer', () => {
     await page.goto('/');
     await expect(page.locator('#drawer-dot')).toBeVisible();
 
-    // Open drawer, then click What's New
-    await page.locator('#drawer-btn').click();
-    await page.locator('#drawer-whats-new').click();
-    await expect(page.locator('#drawer-dot')).toBeHidden();
+    // Visit the What's New page to mark as seen
+    await page.goto('/whats-new.html');
+    await page.waitForTimeout(500);
 
-    // Close sheet, reload — dot should stay gone
-    await page.locator('#whats-new-close').click();
+    // Go back — dot should be gone
     await page.goto('/');
     await expect(page.locator('#drawer-dot')).toBeHidden();
   });
@@ -340,34 +338,10 @@ test.describe('What\'s New', () => {
     await expect(page.locator('#drawer-whats-new-dot')).toBeHidden();
   });
 
-  test('opens sheet from drawer with all entries', async ({ page }) => {
+  test('drawer link navigates to whats-new.html', async ({ page }) => {
     await page.locator('#drawer-btn').click();
     await page.locator('#drawer-whats-new').click();
-
-    const sheet = page.locator('#whats-new-sheet');
-    await expect(sheet).toBeVisible();
-
-    const entries = sheet.locator('.whats-new-entry');
-    await expect(entries).toHaveCount(12);
-    await expect(entries.first().locator('.whats-new-text')).toContainText('Search now matches ingredients');
-  });
-
-  test('sheet closes on overlay click', async ({ page }) => {
-    await page.locator('#drawer-btn').click();
-    await page.locator('#drawer-whats-new').click();
-    await expect(page.locator('#whats-new-sheet')).toBeVisible();
-
-    await page.locator('.whats-new-overlay').click({ position: { x: 10, y: 10 } });
-    await expect(page.locator('#whats-new-sheet')).toBeHidden();
-  });
-
-  test('sheet closes on close button', async ({ page }) => {
-    await page.locator('#drawer-btn').click();
-    await page.locator('#drawer-whats-new').click();
-    await expect(page.locator('#whats-new-sheet')).toBeVisible();
-
-    await page.locator('#whats-new-close').click();
-    await expect(page.locator('#whats-new-sheet')).toBeHidden();
+    await expect(page).toHaveURL(/whats-new\.html/);
   });
 
   test('dot appears when new entries are added after first visit', async ({ page }) => {
@@ -385,20 +359,22 @@ test.describe('What\'s New', () => {
     await expect(page.locator('#drawer-whats-new-dot')).toBeVisible();
   });
 
-  test('dot disappears after opening sheet and stays gone on reload', async ({ page }) => {
+  test('dot disappears after visiting whats-new page and stays gone on reload', async ({ page }) => {
     await page.evaluate(async () => {
       await setSetting('lastSeenChangelogId', 2);
     });
     await page.goto('/');
     await expect(page.locator('#drawer-dot')).toBeVisible();
 
-    // Open drawer → click What's New → should mark as seen
-    await page.locator('#drawer-btn').click();
-    await page.locator('#drawer-whats-new').click();
+    // Visit the What's New page to mark as seen
+    await page.goto('/whats-new.html');
+    await page.waitForTimeout(500);
+
+    // Go back to home — dot should be gone
+    await page.goto('/');
     await expect(page.locator('#drawer-dot')).toBeHidden();
 
-    // Close and reload — dot should stay gone
-    await page.locator('#whats-new-close').click();
+    // Reload — dot should stay gone
     await page.goto('/');
     await expect(page.locator('#drawer-dot')).toBeHidden();
   });

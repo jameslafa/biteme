@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cooking log">
+  <meta name="theme-color" content="#6B9080">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
+  <title>Cooking Log - biteme</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cooking-log.css">
+</head>
+<body>
+  <header>
+    <nav class="recipe-nav">
+      <a href="index.html" class="back-button" aria-label="Back to recipes">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <h1 class="logo">bite<span class="logo-accent">me</span></h1>
+      <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h2>Cooking Log</h2>
+    </div>
+
+    <div id="stats-section" class="stats-section" style="display: none;">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value" id="stat-times-cooked">0</span>
+          <span class="stat-label">Times cooked</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-time">0 min</span>
+          <span class="stat-label">Total time</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-streak">0</span>
+          <span class="stat-label">Week streak</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="most-made-section" class="most-made-section" style="display: none;">
+      <h3 class="section-title">Most Made</h3>
+      <div id="most-made-list" class="most-made-list"></div>
+    </div>
+
+    <div id="timeline-section" class="timeline-section" style="display: none;">
+      <h3 class="section-title">Timeline</h3>
+      <div id="timeline-list" class="timeline-list"></div>
+    </div>
+
+    <div id="empty-state" class="empty-state" style="display: none;">
+      <div class="empty-state-icon">
+        <img src="assets/illustrations/empty.svg" alt="No cooking sessions" />
+      </div>
+      <p>No cooking sessions yet</p>
+      <p class="empty-subtitle">Complete a recipe in cooking mode to start tracking your history.</p>
+      <a href="index.html" class="button">Browse recipes</a>
+    </div>
+  </main>
+
+  <script src="js/db.js"></script>
+  <script src="js/recipes.js"></script>
+  <script src="js/cooking-log.js"></script>
+</body>
+</html>

@@ -490,7 +490,7 @@ function setupDrawer() {
     }
   });
 
-  setupWhatsNew(closeDrawer);
+  checkWhatsNewDot();
 }
 
 function updateDrawerDot() {
@@ -499,15 +499,8 @@ function updateDrawerDot() {
   document.getElementById('drawer-dot').style.display = hasAny ? '' : 'none';
 }
 
-// What's New (inside drawer)
-async function setupWhatsNew(closeDrawer) {
-  const drawerItem = document.getElementById('drawer-whats-new');
-  const itemDot = document.getElementById('drawer-whats-new-dot');
-  const sheet = document.getElementById('whats-new-sheet');
-  const list = document.getElementById('whats-new-list');
-  const closeBtn = document.getElementById('whats-new-close');
-  const overlay = sheet.querySelector('.whats-new-overlay');
-
+// Check if there are unseen changelog entries and show dot
+async function checkWhatsNewDot() {
   if (typeof CHANGELOG === 'undefined' || CHANGELOG.length === 0) return;
 
   const latestId = CHANGELOG[0].id;
@@ -517,39 +510,7 @@ async function setupWhatsNew(closeDrawer) {
   if (lastSeenId === null) {
     await setSetting('lastSeenChangelogId', latestId);
   } else if (latestId > lastSeenId) {
-    itemDot.style.display = '';
+    document.getElementById('drawer-whats-new-dot').style.display = '';
     updateDrawerDot();
   }
-
-  function openSheet() {
-    closeDrawer();
-
-    list.innerHTML = CHANGELOG.map(entry => `
-      <div class="whats-new-entry">
-        <div class="whats-new-date">${formatChangelogDate(entry.date)}</div>
-        <div class="whats-new-text">${entry.text}</div>
-      </div>
-    `).join('');
-
-    sheet.style.display = '';
-
-    // Mark as seen
-    setSetting('lastSeenChangelogId', latestId);
-    itemDot.style.display = 'none';
-    updateDrawerDot();
-  }
-
-  function closeSheet() {
-    sheet.style.display = 'none';
-  }
-
-  drawerItem.addEventListener('click', openSheet);
-  closeBtn.addEventListener('click', closeSheet);
-  overlay.addEventListener('click', closeSheet);
-}
-
-function formatChangelogDate(dateStr) {
-  const [year, month, day] = dateStr.split('-').map(Number);
-  const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }

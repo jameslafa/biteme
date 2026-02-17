@@ -204,8 +204,9 @@ name: Pad Thai
 **How it works:**
 - `changelog.js` contains a simple array of entries, each with an incremental `id`, `date`, and `text`
 - On first visit, `lastSeenChangelogId` is set to the latest ID (no notification dot)
-- On subsequent visits, if the latest ID exceeds the stored value, a dot appears on the bell icon
-- Opening the sheet marks all entries as seen by storing the latest ID
+- On subsequent visits, if the latest ID exceeds the stored value, a dot appears on the bell icon in the drawer
+- The drawer "What's New" link navigates to `whats-new.html`, a standalone page that renders entries in a timeline layout (shared with Cooking Log) grouped by month
+- Loading the page marks all entries as seen by storing the latest ID
 
 **Why incremental IDs (not semver or dates):**
 - Simple integer comparison to detect unseen entries

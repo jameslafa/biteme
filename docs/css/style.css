@@ -658,7 +658,18 @@ footer a:hover {
   border-color: var(--primary-color);
 }
 
-/* Update Toast */
+/* Page Header — shared across sub-pages (Cooking Log, What's New) */
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.page-header h2 {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--primary-color);
+  letter-spacing: 0.02em;
+}
 
 /* Placeholder (for Phase 2 pages) */
 .placeholder {
@@ -681,6 +692,10 @@ footer a:hover {
     font-size: 1.75rem;
   }
 
+  .page-header h2 {
+    font-size: 1.75rem;
+  }
+
   .recipe-grid {
     grid-template-columns: 1fr;
   }
@@ -694,6 +709,10 @@ footer a:hover {
   }
 
   header h1 {
+    font-size: 1.5rem;
+  }
+
+  .page-header h2 {
     font-size: 1.5rem;
   }
 
@@ -1170,6 +1189,7 @@ footer a:hover {
   cursor: pointer;
   transition: background 0.15s;
   text-align: left;
+  text-decoration: none;
   position: relative;
 }
 
@@ -1235,102 +1255,85 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* What's New Sheet */
-.whats-new-sheet {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 1rem;
+/* Timeline — shared between Cooking Log and What's New */
+.timeline-section {
+  max-width: 800px;
+  margin: 0 auto var(--spacing-lg);
 }
 
-.whats-new-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
-}
-
-.whats-new-content {
-  position: relative;
-  background: var(--surface);
-  border-radius: 1rem;
-  max-width: 400px;
-  width: 100%;
-  max-height: 70vh;
+.timeline-list {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.15);
-  animation: modalSlideUp 0.3s ease-out;
+  gap: var(--spacing-lg);
 }
 
-.whats-new-header {
+.timeline-month {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-month-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--spacing-sm);
+}
+
+.timeline-entries {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid var(--primary-color);
+  margin-left: 1rem;
+  padding-left: 0;
+}
+
+.timeline-entry {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem 0.75rem;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
+  position: relative;
+  padding-left: calc(var(--spacing-md) + 0.5rem);
+}
+
+.timeline-day {
+  position: absolute;
+  left: -1.1rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.whats-new-header h2 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: var(--text-primary);
-}
-
-.whats-new-close-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background 0.2s;
-  line-height: 1;
-}
-
-.whats-new-close-btn:hover {
-  background: var(--accent-light);
-}
-
-.whats-new-list {
-  overflow-y: auto;
-  padding: 0 1.5rem;
-  flex: 1;
-  min-height: 0;
-}
-
-.whats-new-entry {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.whats-new-entry:last-child {
-  border-bottom: none;
-}
-
-.whats-new-date {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  margin-bottom: 0.25rem;
-}
-
-.whats-new-text {
+.timeline-entry-text {
   font-size: 0.9rem;
   color: var(--text-primary);
   line-height: 1.4;
 }
+
+.timeline-entry-link {
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.timeline-entry-link:hover {
+  background: var(--accent-light);
+}
+
+.timeline-chevron {
+  margin-left: auto;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
 
