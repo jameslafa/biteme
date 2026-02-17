@@ -66,7 +66,26 @@
           </svg>
         </button>
       </div>
-      <div class="tag-dropdown-popover"></div>
+      <div class="filter-popover">
+        <div class="filter-row">
+          <label class="filter-label">Tag</label>
+          <div class="filter-select" id="tag-select">
+            <button class="filter-select-btn" id="tag-select-btn">All</button>
+            <div class="filter-select-options" id="tag-options"></div>
+          </div>
+        </div>
+        <div class="filter-row">
+          <label class="filter-label">Rating</label>
+          <div class="filter-select" id="rating-select">
+            <button class="filter-select-btn" id="rating-select-btn">Any</button>
+            <div class="filter-select-options" id="rating-options"></div>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="filter-reset-btn" id="filter-reset-btn" style="display: none;">Reset</button>
+          <button class="filter-apply-btn" id="filter-apply-btn">Filter</button>
+        </div>
+      </div>
     </div>
 
     <div id="recipe-grid" class="recipe-grid">

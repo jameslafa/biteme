@@ -256,8 +256,8 @@ test.describe('What\'s New', () => {
     await expect(sheet).toBeVisible();
 
     const entries = sheet.locator('.whats-new-entry');
-    await expect(entries).toHaveCount(10);
-    await expect(entries.first().locator('.whats-new-text')).toContainText('Rate recipes');
+    await expect(entries).toHaveCount(11);
+    await expect(entries.first().locator('.whats-new-text')).toContainText('Filter recipes by rating');
   });
 
   test('sheet closes on overlay click', async ({ page }) => {
@@ -313,6 +313,224 @@ test.describe('What\'s New', () => {
     const link = page.locator('.whats-new-footer a');
     await expect(link).toHaveText('Send feedback');
     await expect(link).toHaveAttribute('href', 'mailto:freely-dole-yard@duck.com');
+  });
+});
+
+test.describe('Filter Panel', () => {
+  // Helper: open the filter popover
+  async function openFilterPanel(page) {
+    await page.locator('#tag-filter-btn').click();
+    await expect(page.locator('.filter-popover')).toBeVisible();
+  }
+
+  // Helper: select a value from a custom dropdown
+  async function selectFilterOption(page, selectBtnId, value) {
+    await page.locator(`#${selectBtnId}`).click();
+    const option = page.locator(`.filter-select.open .filter-option[data-value="${value}"]`);
+    await option.click();
+  }
+
+  // Helper: seed a rating for a recipe
+  async function seedRating(page, recipeId, rating) {
+    await page.evaluate(async ({ recipeId, rating }) => {
+      await initDB();
+      await saveRating(recipeId, rating);
+    }, { recipeId, rating });
+  }
+
+  test('filter icon opens and closes popover', async ({ page }) => {
+    const popover = page.locator('.filter-popover');
+    await expect(popover).toBeHidden();
+
+    await page.locator('#tag-filter-btn').click();
+    await expect(popover).toBeVisible();
+
+    await page.locator('#tag-filter-btn').click();
+    await expect(popover).toBeHidden();
+  });
+
+  test('popover closes on outside click', async ({ page }) => {
+    await openFilterPanel(page);
+    await page.locator('h1').click(); // click header (outside)
+    await expect(page.locator('.filter-popover')).toBeHidden();
+  });
+
+  test('tag dropdown lists all tags sorted', async ({ page }) => {
+    await openFilterPanel(page);
+    await page.locator('#tag-select-btn').click();
+
+    const options = page.locator('#tag-options .filter-option');
+    // "All" + 7 unique tags: breakfast, curry, dinner, lunch, quick, salad, vegan
+    await expect(options).toHaveCount(8);
+    await expect(options.nth(0)).toHaveText('All');
+    await expect(options.nth(1)).toHaveText('breakfast');
+    await expect(options.nth(7)).toHaveText('vegan');
+  });
+
+  test('apply button shows live result count', async ({ page }) => {
+    await openFilterPanel(page);
+    const applyBtn = page.locator('#filter-apply-btn');
+
+    // No filters — all 3 recipes
+    await expect(applyBtn).toHaveText('Show 3 recipes');
+
+    // Select tag "curry" — 1 recipe
+    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await expect(applyBtn).toHaveText('Show 1 recipe');
+
+    // Select tag "vegan" — all 3
+    await selectFilterOption(page, 'tag-select-btn', 'vegan');
+    await expect(applyBtn).toHaveText('Show 3 recipes');
+  });
+
+  test('selecting tag and clicking Filter applies it', async ({ page }) => {
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    await page.locator('#filter-apply-btn').click();
+
+    // Popover closed, only dinner recipes shown
+    await expect(page.locator('.filter-popover')).toBeHidden();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
+  });
+
+  test('filter does not apply until Filter button is clicked', async ({ page }) => {
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+
+    // List should still show all 3 recipes (pending, not applied)
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+  });
+
+  test('outside click discards pending filter changes', async ({ page }) => {
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+
+    // Close by clicking outside (discard)
+    await page.locator('h1').click();
+
+    // Reopen — should show "All" again, not "dinner"
+    await openFilterPanel(page);
+    await expect(page.locator('#tag-select-btn')).toHaveText('All');
+    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 3 recipes');
+  });
+
+  test('reset clears active filters', async ({ page }) => {
+    // Apply a tag filter first
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    await page.locator('#filter-apply-btn').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+
+    // Open and reset
+    await openFilterPanel(page);
+    await expect(page.locator('#filter-reset-btn')).toBeVisible();
+    await page.locator('#filter-reset-btn').click();
+
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+    await expect(page.locator('.filter-popover')).toBeHidden();
+  });
+
+  test('reset button hidden when no filters active', async ({ page }) => {
+    await openFilterPanel(page);
+    await expect(page.locator('#filter-reset-btn')).toBeHidden();
+  });
+
+  test('filter icon shows active state when filters applied', async ({ page }) => {
+    const filterIcon = page.locator('#tag-filter-btn');
+    await expect(filterIcon).not.toHaveClass(/active/);
+
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await page.locator('#filter-apply-btn').click();
+
+    await expect(filterIcon).toHaveClass(/active/);
+  });
+
+  test('rating filter works', async ({ page }) => {
+    // Seed ratings: curry=4, salad=2
+    await seedRating(page, 'test-curry', 4);
+    await seedRating(page, 'test-salad', 2);
+    await page.goto('/');
+
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'rating-select-btn', '3');
+    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
+
+    await page.locator('#filter-apply-btn').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
+  });
+
+  test('combined tag and rating filter', async ({ page }) => {
+    await seedRating(page, 'test-curry', 5);
+    await seedRating(page, 'test-salad', 5);
+    await page.goto('/');
+
+    await openFilterPanel(page);
+    // Filter by tag "dinner" AND rating 4+ — only curry matches both
+    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    await selectFilterOption(page, 'rating-select-btn', '4');
+    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
+
+    await page.locator('#filter-apply-btn').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
+  });
+
+  test('apply button disabled when no recipes match', async ({ page }) => {
+    // No ratings exist, so filtering by 3+ should show 0
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'rating-select-btn', '3');
+
+    const applyBtn = page.locator('#filter-apply-btn');
+    await expect(applyBtn).toHaveText('No recipes match');
+    await expect(applyBtn).toBeDisabled();
+  });
+
+  test('live count accounts for favorites filter', async ({ page }) => {
+    // Favourite only curry
+    const firstHeart = page.locator('.recipe-card').first().locator('.favorite-button-small');
+    await firstHeart.click();
+    await expect(firstHeart).toHaveClass(/favorited/);
+
+    // Enable favorites filter
+    await page.locator('#favorites-filter').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+
+    // Open filter panel — count should reflect favorites (1 recipe)
+    await openFilterPanel(page);
+    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
+
+    // Select a tag that doesn't match the favourite — should be 0
+    await selectFilterOption(page, 'tag-select-btn', 'breakfast');
+    await expect(page.locator('#filter-apply-btn')).toHaveText('No recipes match');
+  });
+
+  test('clicking tag on card applies filter directly', async ({ page }) => {
+    // Click "dinner" tag on curry card
+    await page.locator('.recipe-card').first().locator('.tag-filter[data-tag="dinner"]').click();
+
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
+
+    // Filter icon should be active
+    await expect(page.locator('#tag-filter-btn')).toHaveClass(/active/);
+  });
+
+  test('tag filter persists in URL', async ({ page }) => {
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await page.locator('#filter-apply-btn').click();
+
+    await expect(page).toHaveURL(/tag=curry/);
+
+    // Reload — filter should still be applied
+    await page.goto(page.url());
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
   });
 });
 

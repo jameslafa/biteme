@@ -2,6 +2,12 @@
 
 let showFavoritesOnly = false;
 let activeTag = null;
+let activeMinRating = null;
+let pendingTag = null;
+let pendingMinRating = null;
+let cachedAllRecipes = [];
+let cachedRatingsMap = {};
+let cachedFavoriteIds = new Set();
 
 document.addEventListener('DOMContentLoaded', async function() {
   await initDB();
@@ -16,20 +22,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   loadRecipes();
   setupSearch();
   setupFavoritesFilter();
+  setupFilterPanel();
   updateCartCount();
   setupWhatsNew();
   showRatingBannerIfNeeded();
-
-  // Tag filter dropdown: toggle and outside-click-to-close
-  document.getElementById('tag-filter-btn').addEventListener('click', () => {
-    document.getElementById('tag-dropdown').classList.toggle('open');
-  });
-  document.addEventListener('click', (e) => {
-    const dropdown = document.getElementById('tag-dropdown');
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove('open');
-    }
-  });
 
   // Refresh recipes when returning to the app (e.g. PWA resume)
   document.addEventListener('visibilitychange', async () => {
@@ -42,70 +38,224 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 });
 
-// Load and display all recipes, applying current filters
-async function loadRecipes() {
-  const allRecipes = await getRecipes();
-  let recipes = allRecipes;
+// Single filter function used by both loadRecipes (applied) and live count (pending)
+function filterRecipes({ tag, minRating, favoritesOnly, searchQuery }) {
+  let recipes = cachedAllRecipes;
 
-  if (showFavoritesOnly) {
-    const favorites = await getAllFavorites();
-    const favoriteIds = favorites.map(f => f.recipe_id);
-    recipes = recipes.filter(r => favoriteIds.includes(r.id));
+  if (favoritesOnly) {
+    recipes = recipes.filter(r => cachedFavoriteIds.has(r.id));
   }
 
-  const searchQuery = document.getElementById('search-input').value;
   if (searchQuery) {
     const lowerQuery = searchQuery.toLowerCase();
     recipes = recipes.filter(recipe =>
       recipe.name.toLowerCase().includes(lowerQuery) ||
       recipe.description.toLowerCase().includes(lowerQuery) ||
-      recipe.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+      recipe.tags.some(t => t.toLowerCase().includes(lowerQuery))
     );
   }
 
-  if (activeTag) {
-    recipes = recipes.filter(r => r.tags.includes(activeTag));
+  if (tag) {
+    recipes = recipes.filter(r => r.tags.includes(tag));
   }
 
-  renderTagBar(allRecipes);
+  if (minRating) {
+    recipes = recipes.filter(r => (cachedRatingsMap[r.id] || 0) >= minRating);
+  }
+
+  return recipes;
+}
+
+// Load and display all recipes, applying current filters
+async function loadRecipes() {
+  cachedAllRecipes = await getRecipes();
+
+  const allRatings = await getAllRatings();
+  cachedRatingsMap = {};
+  for (const r of allRatings) cachedRatingsMap[r.recipe_id] = r.rating;
+
+  const favorites = await getAllFavorites();
+  cachedFavoriteIds = new Set(favorites.map(f => f.recipe_id));
+
+  const recipes = filterRecipes({
+    tag: activeTag,
+    minRating: activeMinRating,
+    favoritesOnly: showFavoritesOnly,
+    searchQuery: document.getElementById('search-input').value,
+  });
+
+  // Update filter icon state
+  const filterBtn = document.getElementById('tag-filter-btn');
+  filterBtn.classList.toggle('active', !!activeTag || !!activeMinRating);
+
   await displayRecipes(recipes);
 }
 
-// Render the tag filter dropdown popover contents
-function renderTagBar(recipes) {
+// Setup the filter panel: toggle popover, outside-click-to-close, custom dropdowns
+function setupFilterPanel() {
   const container = document.getElementById('tag-dropdown');
-  const popover = container.querySelector('.tag-dropdown-popover');
-  const toggle = document.getElementById('tag-filter-btn');
-  const tags = [...new Set(recipes.flatMap(r => r.tags))].sort();
+  const filterBtn = document.getElementById('tag-filter-btn');
 
-  popover.innerHTML = tags.map(tag =>
-    `<button class="tag tag-filter${activeTag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`
-  ).join('');
+  // Toggle popover — initialize pending state from active when opening
+  filterBtn.addEventListener('click', () => {
+    const wasOpen = container.classList.contains('open');
+    if (!wasOpen) {
+      pendingTag = activeTag;
+      pendingMinRating = activeMinRating;
+      renderFilterDropdowns();
+    }
+    container.classList.toggle('open');
+    closeAllFilterSelects();
+  });
 
-  // Update toggle active state
-  toggle.classList.toggle('active', !!activeTag);
-
-  popover.querySelectorAll('.tag-filter').forEach(btn => {
-    btn.addEventListener('click', () => {
+  // Close popover on outside click (discard pending changes)
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
       container.classList.remove('open');
-      setActiveTag(btn.dataset.tag === activeTag ? null : btn.dataset.tag);
+      closeAllFilterSelects();
+    }
+  });
+
+  // Setup tag dropdown
+  document.getElementById('tag-select-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleFilterSelect('tag-select', 'rating-select');
+  });
+
+  // Setup rating dropdown
+  document.getElementById('rating-select-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleFilterSelect('rating-select', 'tag-select');
+  });
+
+  // Filter (apply) button — commit pending → active
+  document.getElementById('filter-apply-btn').addEventListener('click', () => {
+    activeTag = pendingTag;
+    activeMinRating = pendingMinRating;
+    updateFilterURL();
+    container.classList.remove('open');
+    closeAllFilterSelects();
+    loadRecipes();
+  });
+
+  // Reset button
+  document.getElementById('filter-reset-btn').addEventListener('click', () => {
+    pendingTag = null;
+    pendingMinRating = null;
+    activeTag = null;
+    activeMinRating = null;
+    updateFilterURL();
+    container.classList.remove('open');
+    closeAllFilterSelects();
+    loadRecipes();
+  });
+}
+
+function toggleFilterSelect(openId, closeId) {
+  document.getElementById(closeId).classList.remove('open');
+  document.getElementById(openId).classList.toggle('open');
+}
+
+function closeAllFilterSelects() {
+  document.querySelectorAll('.filter-select').forEach(el => el.classList.remove('open'));
+}
+
+// Count how many recipes match the pending filters (for live preview in popover)
+function countPendingFilterResults() {
+  return filterRecipes({
+    tag: pendingTag,
+    minRating: pendingMinRating,
+    favoritesOnly: showFavoritesOnly,
+    searchQuery: document.getElementById('search-input').value,
+  }).length;
+}
+
+// Render tag and rating dropdown options using pending state
+function renderFilterDropdowns() {
+  const filterBtn = document.getElementById('tag-filter-btn');
+  const resetBtn = document.getElementById('filter-reset-btn');
+  const applyBtn = document.getElementById('filter-apply-btn');
+
+  // Tag dropdown
+  const tags = [...new Set(cachedAllRecipes.flatMap(r => r.tags))].sort();
+  const tagOptions = document.getElementById('tag-options');
+  const tagBtn = document.getElementById('tag-select-btn');
+
+  tagOptions.innerHTML = `<button class="filter-option${!pendingTag ? ' active' : ''}" data-value="">All</button>`
+    + tags.map(tag =>
+      `<button class="filter-option${pendingTag === tag ? ' active' : ''}" data-value="${tag}">${tag}</button>`
+    ).join('');
+
+  tagBtn.textContent = pendingTag || 'All';
+  tagBtn.classList.toggle('has-value', !!pendingTag);
+
+  tagOptions.querySelectorAll('.filter-option').forEach(opt => {
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      pendingTag = opt.dataset.value || null;
+      document.getElementById('tag-select').classList.remove('open');
+      renderFilterDropdowns();
     });
   });
+
+  // Rating dropdown
+  const ratingOptions = document.getElementById('rating-options');
+  const ratingBtn = document.getElementById('rating-select-btn');
+  const ratingChoices = [
+    { value: '', label: 'Any' },
+    { value: '3', label: '3+ stars' },
+    { value: '4', label: '4+ stars' },
+    { value: '5', label: '5 stars' },
+  ];
+
+  ratingOptions.innerHTML = ratingChoices.map(c =>
+    `<button class="filter-option${String(pendingMinRating || '') === c.value ? ' active' : ''}" data-value="${c.value}">${c.label}</button>`
+  ).join('');
+
+  ratingBtn.textContent = pendingMinRating ? `${pendingMinRating}+ stars` : 'Any';
+  if (pendingMinRating === 5) ratingBtn.textContent = '5 stars';
+  ratingBtn.classList.toggle('has-value', !!pendingMinRating);
+
+  ratingOptions.querySelectorAll('.filter-option').forEach(opt => {
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      pendingMinRating = opt.dataset.value ? parseInt(opt.dataset.value) : null;
+      document.getElementById('rating-select').classList.remove('open');
+      renderFilterDropdowns();
+    });
+  });
+
+  // Show/hide reset button
+  const hasPendingFilters = !!pendingTag || !!pendingMinRating;
+  resetBtn.style.display = hasPendingFilters ? '' : 'none';
+
+  // Update filter icon active state based on applied filters
+  const hasActiveFilters = !!activeTag || !!activeMinRating;
+  filterBtn.classList.toggle('active', hasActiveFilters);
+
+  // Live result count on the apply button
+  const count = countPendingFilterResults();
+  applyBtn.textContent = count === 0
+    ? 'No recipes match'
+    : `Show ${count} recipe${count !== 1 ? 's' : ''}`;
+  applyBtn.disabled = count === 0;
 }
 
 // Set active tag, update URL, and reload
 function setActiveTag(tag) {
   activeTag = tag;
+  updateFilterURL();
+  loadRecipes();
+}
 
+function updateFilterURL() {
   const url = new URL(window.location);
-  if (tag) {
-    url.searchParams.set('tag', tag);
+  if (activeTag) {
+    url.searchParams.set('tag', activeTag);
   } else {
     url.searchParams.delete('tag');
   }
   history.replaceState(null, '', url);
-
-  loadRecipes();
 }
 
 // Build a map of recipe ID → { count, avgDuration } from completed sessions
@@ -175,11 +325,9 @@ async function displayRecipes(recipes) {
     return;
   }
 
-  // Fetch cooking stats and ratings once for all cards
+  // Fetch cooking stats for all cards (ratings already cached)
   const cookingStats = await getCookingStatsMap();
-  const allRatings = await getAllRatings();
-  const ratingsMap = {};
-  for (const r of allRatings) ratingsMap[r.recipe_id] = r.rating;
+  const ratingsMap = cachedRatingsMap;
 
   // Render cards
   recipeGrid.innerHTML = recipes.map(recipe => {
@@ -227,6 +375,9 @@ async function displayRecipes(recipes) {
       await toggleFavorite(recipe.id);
       const newState = await isFavorited(recipe.id);
       updateFavoriteButtonSmall(btn, newState);
+      // Keep cached favorites in sync
+      if (newState) cachedFavoriteIds.add(recipe.id);
+      else cachedFavoriteIds.delete(recipe.id);
     });
   }
 
