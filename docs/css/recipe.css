@@ -253,6 +253,7 @@
   font-size: 0.85rem;
   color: var(--text-secondary);
   font-weight: 300;
+  margin-top: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
 }
 

@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupFavoritesFilter();
   updateCartCount();
   setupWhatsNew();
+  showRatingBannerIfNeeded();
 
   // Tag filter dropdown: toggle and outside-click-to-close
   document.getElementById('tag-filter-btn').addEventListener('click', () => {
@@ -174,8 +175,11 @@ async function displayRecipes(recipes) {
     return;
   }
 
-  // Fetch cooking stats once for all cards
+  // Fetch cooking stats and ratings once for all cards
   const cookingStats = await getCookingStatsMap();
+  const allRatings = await getAllRatings();
+  const ratingsMap = {};
+  for (const r of allRatings) ratingsMap[r.recipe_id] = r.rating;
 
   // Render cards
   recipeGrid.innerHTML = recipes.map(recipe => {
@@ -186,7 +190,11 @@ async function displayRecipes(recipes) {
         ? formatCookingDuration(stats.avgDuration)
         : `~${formatCookingDuration(stats.avgDuration)}`;
       const countStr = stats.count === 1 ? 'Cooked once' : `Cooked ${stats.count} times`;
-      statsHtml = `<p class="card-cooking-stats">${countStr} \u00B7 ${timeStr}</p>`;
+      const ratingVal = ratingsMap[recipe.id];
+      const ratingHtml = ratingVal
+        ? ` <span class="card-rating">\u00B7 ${'★'.repeat(ratingVal)}${'☆'.repeat(5 - ratingVal)}</span>`
+        : '';
+      statsHtml = `<p class="card-cooking-stats">${countStr} \u00B7 ${timeStr}${ratingHtml}</p>`;
     }
 
     return `

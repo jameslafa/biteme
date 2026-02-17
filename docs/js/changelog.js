@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 10, date: '2026-02-17', text: 'Rate recipes after cooking — a quick star rating prompt appears on your next visit, and you can update it anytime from the recipe page' },
   { id: 9, date: '2026-02-16', text: 'Built-in cooking timer — durations detected from step text, adjustable, with sound alert when done' },
   { id: 8, date: '2026-02-16', text: 'Filter recipes by tag — tap the filter icon in the search bar to browse by category' },
   { id: 7, date: '2026-02-14', text: 'Save personal cooking notes after finishing a recipe — substitutions, timing tweaks, anything to remember next time' },

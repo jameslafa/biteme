@@ -4,20 +4,7 @@ This document tracks feature ideas and improvements for BiteMe.
 
 ## User Features
 
-### [ ] Recipe Rating
-
-Two-phase rollout: local-first, community later.
-
-**Phase 1 — Local ratings (now)**
-
-- Banner at top of recipe list on next app visit after cooking: "How was [recipe]?"
-- Quick star rating (1–5) + link to view/edit cooking notes
-- Dismiss (x) or "Don't ask me again" option
-- Only shown once per cook session
-- Stored in IndexedDB, personal and private
-- Display personal rating on recipe cards and detail page
-
-**Phase 2 — Community ratings (later, when user base justifies it)**
+### [ ] Recipe Rating — Phase 2 (Community)
 
 - Firebase backend with anonymous auth (no account required)
 - One-time opt-in prompt: "Share your ratings to help others discover the best recipes?"
@@ -79,6 +66,7 @@ Two-phase rollout: local-first, community later.
 - **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
 - **Tag Filtering** — Filter recipes by tag via dropdown in search bar, clickable tags on cards and detail page, URL param support for shareable links
 - **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
+- **Recipe Rating (Phase 1)** — Local star ratings (1–5), post-cooking banner prompt, displayed on cards and detail page, editable from detail page, IndexedDB storage
 
 ---
 

@@ -562,6 +562,130 @@ footer a:hover {
   }
 }
 
+/* Star Rating Component */
+.star-rating {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.star-rating button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--border);
+  transition: color 0.15s, transform 0.15s;
+}
+
+.star-rating button:active {
+  transform: scale(0.9);
+}
+
+.star-rating button.filled {
+  color: #e8a317;
+}
+
+.star-rating button:hover {
+  transform: scale(1.15);
+}
+
+.star-rating.inline {
+  vertical-align: middle;
+}
+
+.star-rating.inline button {
+  font-size: 1rem;
+}
+
+/* Card rating (inline, read-only) */
+.card-rating {
+  display: inline;
+  color: #e8a317;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* Rating Banner */
+.rating-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  animation: slideDown 0.3s ease-out;
+}
+
+.rating-banner-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.rating-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.rating-banner-text strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating-banner-text span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.rating-banner .star-rating button {
+  font-size: 1.25rem;
+}
+
+.rating-banner-close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.rating-banner-close:hover {
+  background: var(--accent-light);
+}
+
+.rating-banner-thanks {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  text-align: center;
+  padding: 0.25rem 0;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Install Banner */
 .install-banner {
   position: fixed;

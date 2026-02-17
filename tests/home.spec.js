@@ -138,7 +138,7 @@ test.describe('Home Page', () => {
     const stats = firstCard.locator('.card-cooking-stats');
     await expect(stats).toBeVisible();
     await expect(stats).toContainText('Cooked once');
-    await expect(stats).toContainText('35 minutes');
+    await expect(stats).toContainText('35 min');
   });
 
   test('recipe card hides cooking stats when no sessions', async ({ page }) => {
@@ -256,8 +256,8 @@ test.describe('What\'s New', () => {
     await expect(sheet).toBeVisible();
 
     const entries = sheet.locator('.whats-new-entry');
-    await expect(entries).toHaveCount(7);
-    await expect(entries.first().locator('.whats-new-text')).toContainText('cooking notes');
+    await expect(entries).toHaveCount(10);
+    await expect(entries.first().locator('.whats-new-text')).toContainText('Rate recipes');
   });
 
   test('sheet closes on overlay click', async ({ page }) => {

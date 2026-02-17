@@ -141,7 +141,7 @@ test.describe('Recipe Detail', () => {
     const stats = page.locator('#cooking-stats');
     await expect(stats).toBeVisible();
     await expect(stats).toContainText('Cooked once');
-    await expect(stats).toContainText('30 minutes');
+    await expect(stats).toContainText('30 min');
   });
 
   test('hides cooking stats when no sessions', async ({ page }) => {
@@ -178,7 +178,7 @@ test.describe('Recipe Detail', () => {
 
     // Verify clipboard content
     const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
-    expect(clipboardText).toContain('recipe.html?id=test-curry');
+    expect(clipboardText).toContain('/r/test-curry.html');
 
     // Toast should disappear
     await expect(toast).toBeHidden({ timeout: 5000 });

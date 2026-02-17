@@ -38,6 +38,7 @@
   <script src="js/recipes.js"></script>
   <script src="js/servings.js"></script>
   <script src="js/notes.js"></script>
+  <script src="js/rating.js"></script>
   <script>
     // Load recipe detail
     document.addEventListener('DOMContentLoaded', async function() {
@@ -85,26 +86,25 @@
           </div>
           <p class="recipe-description">${recipe.description}</p>
 
-          <p class="recipe-meta">
-            ${recipe.author ? `Recipe by ${recipe.author} \u00B7 ` : ''}${new Date(recipe.date + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
-          </p>
-
           <div id="cooking-stats" class="cooking-stats"></div>
-
-          <div class="serving-adjuster">
-            <button id="decrease-servings" aria-label="Decrease servings">&minus;</button>
-            <span><span id="current-servings">${recipe.servings}</span> servings</span>
-            <button id="increase-servings" aria-label="Increase servings">+</button>
-          </div>
 
           <div class="recipe-tags">
             ${recipe.tags.map(tag => `<a href="index.html?tag=${encodeURIComponent(tag)}" class="tag tag-filter">${tag}</a>`).join('')}
           </div>
 
+          <p class="recipe-meta">
+            ${recipe.author ? `Recipe by ${recipe.author} \u00B7 ` : ''}${new Date(recipe.date + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+
           <div id="cooking-notes-display"></div>
 
           <section class="ingredients">
             <h3>Ingredients</h3>
+            <div class="serving-adjuster">
+              <button id="decrease-servings" aria-label="Decrease servings">&minus;</button>
+              <span><span id="current-servings">${recipe.servings}</span> servings</span>
+              <button id="increase-servings" aria-label="Increase servings">+</button>
+            </div>
             <div id="ingredients-list"></div>
           </section>
 
@@ -172,7 +172,7 @@
       // Setup add to cart buttons
       setupShoppingCartButtons(recipeId, recipe.name);
 
-      // Show cooking stats
+      // Show cooking stats + rating
       showCookingStats(recipeId);
 
       // Show cooking notes
@@ -354,11 +354,20 @@
         const statsEl = document.getElementById('cooking-stats');
         if (!statsEl) return;
 
-        if (sessions.length === 1) {
-          statsEl.textContent = `Cooked once \u00B7 ${formatCookingDuration(lastDuration)}`;
-        } else {
-          statsEl.textContent = `Cooked ${sessions.length} times \u00B7 Last time: ${formatCookingDuration(lastDuration)}`;
-        }
+        const statsText = sessions.length === 1
+          ? `Cooked once \u00B7 ${formatCookingDuration(lastDuration)}`
+          : `Cooked ${sessions.length} times \u00B7 Last time: ${formatCookingDuration(lastDuration)}`;
+
+        const existing = await getRating(recipeId);
+
+        statsEl.textContent = '';
+        statsEl.appendChild(document.createTextNode(statsText + (existing ? ' \u00B7 ' : ' ')));
+
+        const stars = createStarRating(async (rating) => {
+          await saveRating(recipeId, rating);
+        }, existing ? existing.rating : 0);
+        stars.classList.add('inline');
+        statsEl.appendChild(stars);
       } catch {
         // Silently ignore
       }

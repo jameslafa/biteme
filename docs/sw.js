@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v25';
+const CACHE_NAME = 'biteme-v26';
 
 const APP_SHELL = [
   './',
@@ -20,6 +20,7 @@ const APP_SHELL = [
   'js/shopping.js',
   'js/servings.js',
   'js/notes.js',
+  'js/rating.js',
   'js/completion.js',
   'js/install.js',
   'js/sw-update.js',

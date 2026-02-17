@@ -107,6 +107,9 @@ test.describe('Cooking Notes — Recipe Detail Page', () => {
     await seedCookingNote(page, 'test-curry', 'Some note');
     await page.goto('/recipe.html?id=test-curry');
 
+    // Wait for async note rendering
+    await expect(page.locator('.personal-notes h3')).toBeVisible();
+
     // Personal Notes h3 should come before Ingredients h3 in the DOM
     const headings = await page.locator('.recipe h3').allTextContents();
     const notesIdx = headings.indexOf('Personal Notes');

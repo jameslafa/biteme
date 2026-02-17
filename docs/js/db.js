@@ -1,7 +1,7 @@
 // IndexedDB helper for BiteMe local storage
 
 const DB_NAME = 'biteme_db';
-const DB_VERSION = 5;
+const DB_VERSION = 6;
 let db = null;
 
 // Initialize database
@@ -46,6 +46,11 @@ function initDB() {
       // Create cooking notes store
       if (!db.objectStoreNames.contains('cooking_notes')) {
         db.createObjectStore('cooking_notes', { keyPath: 'recipe_id' });
+      }
+
+      // Create ratings store
+      if (!db.objectStoreNames.contains('ratings')) {
+        db.createObjectStore('ratings', { keyPath: 'recipe_id' });
       }
     };
   });
@@ -301,7 +306,9 @@ async function saveCookingStart(recipeId) {
   const session = {
     recipe_id: recipeId,
     started_at: Date.now(),
-    completed_at: null
+    completed_at: null,
+    rated_at: null,
+    rating_dismissed_at: null
   };
 
   return new Promise((resolve, reject) => {
@@ -329,6 +336,34 @@ async function saveCookingComplete(sessionId) {
       }
 
       session.completed_at = Date.now();
+
+      const updateRequest = store.put(session);
+      updateRequest.onsuccess = () => resolve(session);
+      updateRequest.onerror = () => reject(updateRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+}
+
+// Mark a cooking session as rated or dismissed
+async function updateSessionRatingStatus(sessionId, field) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['cooking_sessions'], 'readwrite');
+  const store = transaction.objectStore('cooking_sessions');
+
+  return new Promise((resolve, reject) => {
+    const getRequest = store.get(sessionId);
+
+    getRequest.onsuccess = () => {
+      const session = getRequest.result;
+      if (!session) {
+        reject(new Error('Session not found'));
+        return;
+      }
+
+      session[field] = Date.now();
 
       const updateRequest = store.put(session);
       updateRequest.onsuccess = () => resolve(session);
@@ -382,9 +417,8 @@ async function getAllCompletedSessions() {
 function formatCookingDuration(ms) {
   const totalMinutes = Math.round(ms / 60000);
 
-  if (totalMinutes < 1) return 'Less than a minute';
-  if (totalMinutes === 1) return '1 minute';
-  if (totalMinutes < 60) return `${totalMinutes} minutes`;
+  if (totalMinutes < 1) return '< 1 min';
+  if (totalMinutes < 60) return `${totalMinutes} min`;
 
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
@@ -419,6 +453,66 @@ async function setSetting(key, value) {
   return new Promise((resolve, reject) => {
     const request = store.put({ key, value });
     request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Rating Functions
+
+// Save or update a rating for a recipe
+async function saveRating(recipeId, rating) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['ratings'], 'readwrite');
+  const store = transaction.objectStore('ratings');
+  const now = Date.now();
+
+  return new Promise((resolve, reject) => {
+    // Read then write in the same transaction to avoid it auto-committing
+    const getRequest = store.get(recipeId);
+
+    getRequest.onsuccess = () => {
+      const existing = getRequest.result;
+      const record = {
+        recipe_id: recipeId,
+        rating,
+        created_at: existing ? existing.created_at : now,
+        updated_at: now
+      };
+
+      const putRequest = store.put(record);
+      putRequest.onsuccess = () => resolve(record);
+      putRequest.onerror = () => reject(putRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+}
+
+// Get rating for a specific recipe
+async function getRating(recipeId) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['ratings'], 'readonly');
+  const store = transaction.objectStore('ratings');
+
+  return new Promise((resolve, reject) => {
+    const request = store.get(recipeId);
+    request.onsuccess = () => resolve(request.result || null);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Get all ratings
+async function getAllRatings() {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['ratings'], 'readonly');
+  const store = transaction.objectStore('ratings');
+
+  return new Promise((resolve, reject) => {
+    const request = store.getAll();
+    request.onsuccess = () => resolve(request.result || []);
     request.onerror = () => reject(request.error);
   });
 }

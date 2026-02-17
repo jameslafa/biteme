@@ -6,9 +6,9 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Database name:** `biteme_db`
 
-**Version:** 5
+**Version:** 6
 
-**Object stores:** favorites, shopping_list, cooking_sessions, settings, cooking_notes
+**Object stores:** favorites, shopping_list, cooking_sessions, settings, cooking_notes, ratings
 
 ## Favorites
 
@@ -104,13 +104,15 @@ This document defines the data schemas used in BiteMe for local storage and futu
 **Indexes:**
 - `recipe_id` - Query sessions by recipe
 
-**Current Schema (v3 - Local Only):**
+**Current Schema (v6 - Local Only):**
 ```typescript
 {
   id: number;              // Auto-increment primary key
   recipe_id: string;       // References recipe (e.g., "pad-thai")
   started_at: number;      // Unix timestamp when cooking started
   completed_at: number | null; // Unix timestamp when finished, null if abandoned
+  rated_at: number | null;           // Unix timestamp when user rated via banner
+  rating_dismissed_at: number | null; // Unix timestamp when user dismissed rating banner
 }
 ```
 
@@ -120,7 +122,9 @@ This document defines the data schemas used in BiteMe for local storage and futu
   "id": 1,
   "recipe_id": "pad-thai",
   "started_at": 1707567890123,
-  "completed_at": 1707569400000
+  "completed_at": 1707569400000,
+  "rated_at": 1707570000000,
+  "rating_dismissed_at": null
 }
 ```
 
@@ -130,6 +134,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Sessions with null `completed_at` indicate abandoned cooking sessions
 - Duration can be calculated from `completed_at - started_at`
 - Used to gate the install prompt (only shown after first completed recipe)
+- `rated_at` / `rating_dismissed_at` track whether the rating banner was handled for this session
 - Foundation for future cooking analytics (time tracking, history)
 
 ## Cooking Notes
@@ -162,6 +167,39 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Created on the completion page after finishing cooking
 - Displayed on the recipe detail page with edit capability
 
+## Ratings
+
+**Object store:** `ratings`
+
+**Primary key:** `recipe_id`
+
+**Current Schema (v6 - Local Only):**
+```typescript
+{
+  recipe_id: string;     // Primary key (e.g., "pad-thai")
+  rating: number;        // 1-5 star rating
+  created_at: number;    // Unix timestamp (milliseconds)
+  updated_at: number;    // Unix timestamp (milliseconds)
+}
+```
+
+**Example:**
+```json
+{
+  "recipe_id": "pad-thai",
+  "rating": 4,
+  "created_at": 1707567890123,
+  "updated_at": 1707567890123
+}
+```
+
+**Notes:**
+- One rating per recipe (overwritten on re-rate)
+- Prompted via banner on index page after completing a cooking session
+- Editable from the recipe detail page
+- Displayed on recipe cards alongside cooking stats
+- Rating prompt state tracked on cooking sessions (`rated_at`, `rating_dismissed_at`)
+
 ## Settings
 
 **Object store:** `settings`
@@ -186,7 +224,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Notes:**
 - Generic key-value store for app settings
-- Currently used by the What's New feature to track the last seen changelog entry
+- Used by the What's New feature to track the last seen changelog entry (`lastSeenChangelogId`)
 - Designed for reuse by future features needing simple persistent settings
 
 ## Recipe JSON (`recipes.json`)
