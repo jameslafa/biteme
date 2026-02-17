@@ -121,14 +121,14 @@
           ${recipe.notes ? `
           <section class="recipe-notes">
             <h3>Notes</h3>
-            <p>${recipe.notes}</p>
+            ${recipe.notes.split('\n\n').map(p => `<p>${p}</p>`).join('')}
           </section>
           ` : ''}
 
           ${recipe.serving_suggestions ? `
           <section class="serving-suggestions">
             <h3>Serving Suggestions</h3>
-            <p>${recipe.serving_suggestions}</p>
+            ${recipe.serving_suggestions.split('\n\n').map(p => `<p>${p}</p>`).join('')}
           </section>
           ` : ''}
 

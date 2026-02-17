@@ -181,7 +181,7 @@ function renderStep() {
     stepContentHTML += `
       <div class="step-notes">
         <h4>Chef's Notes</h4>
-        <p>${recipe.notes}</p>
+        ${recipe.notes.split('\n\n').map(p => `<p>${p}</p>`).join('')}
       </div>
     `;
   }
@@ -191,7 +191,7 @@ function renderStep() {
     stepContentHTML += `
       <div class="step-serving">
         <h4>Serving Suggestions</h4>
-        <p>${recipe.serving_suggestions}</p>
+        ${recipe.serving_suggestions.split('\n\n').map(p => `<p>${p}</p>`).join('')}
       </div>
     `;
   }

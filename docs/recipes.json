@@ -1,5 +1,141 @@
 [
   {
+    "id": "galettes-bretonnes",
+    "name": "Galettes Bretonnes",
+    "description": "Traditional Breton buckwheat crêpes with sautéed mushrooms — naturally vegan and gluten-free",
+    "servings": 4,
+    "time": 35,
+    "difficulty": "easy",
+    "tags": [
+      "vegan",
+      "french",
+      "gluten-free"
+    ],
+    "author": "James",
+    "date": "2026-02-17",
+    "notes": "The batter needs at least 2 hours of resting in the fridge, ideally overnight — plan ahead. The first galette is almost always a throwaway (la galette de test!) so don't worry about it. Good buckwheat flour is key — look for farine de sarrasin or blé noir. Stack cooked galettes under a tea towel to keep them warm and pliable. Leftovers keep well in the fridge for 2–3 days; reheat in a dry pan.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "200 g mixed mushrooms (chestnut, oyster, or shiitake), sliced",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "g",
+            "item": "mixed mushrooms (chestnut, oyster, or shiitake), sliced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 cloves garlic, minced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "Fresh thyme, a few sprigs"
+        },
+        {
+          "id": 4,
+          "text": "Fresh parsley, chopped"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "250 g buckwheat flour",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "buckwheat flour"
+          }
+        },
+        {
+          "id": 6,
+          "text": "500-750 ml water",
+          "quantity": {
+            "amount": 500.0,
+            "amount_max": 750.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        },
+        {
+          "id": 7,
+          "text": "5 g fine salt",
+          "quantity": {
+            "amount": 5.0,
+            "unit": "g",
+            "item": "fine salt"
+          }
+        },
+        {
+          "id": 8,
+          "text": "1 tbsp neutral oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "neutral oil"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 tbsp soy sauce",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Sift the {buckwheat flour} into a large bowl and add the {salt}. Gradually pour in the {water} while whisking continuously until the batter is smooth and thin, like single cream. Cover and rest in the fridge for at least 2 hours, ideally overnight.",
+        "durations": [
+          {
+            "seconds": 7200,
+            "text": "2 hours"
+          }
+        ]
+      },
+      {
+        "text": "When ready to cook, check the batter consistency and add a splash of water if needed."
+      },
+      {
+        "text": "Heat a drizzle of {neutral oil} in a pan over medium heat. Add the {mushrooms} and cook for 5 minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Heat a large flat pan over medium-high heat. Lightly grease with {neutral oil}."
+      },
+      {
+        "text": "Pour a ladleful of batter and quickly spread it as thinly as possible."
+      },
+      {
+        "text": "Cook for about 2 minutes until the edges lift and turn crispy. Flip and cook for 1 more minute.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for about 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Spoon the mushroom filling onto the galette, fold the edges in, sprinkle with fresh {parsley}, and serve immediately."
+      }
+    ],
+    "serving_suggestions": "Serve with a bowl of cidre breton for the full Breton experience. Other vegan filling ideas: creamy leeks with oat cream and nutmeg; ratatouille; caramelised onion and spinach with vegan cheese; roasted butternut squash with cumin, hummus, and toasted pumpkin seeds; or vegan pesto with sun-dried tomatoes, pine nuts, and rocket.\n\nFor vegetarian fillings: a fried egg with grated Comté (the classic complète); goat cheese with honey and walnuts; sautéed mushrooms with egg and Gruyère; or wilted spinach with ricotta, lemon zest, and black pepper."
+  },
+  {
     "id": "tofu-scramble",
     "name": "Tofu Scramble",
     "description": "A spiced, eggy tofu scramble with kala namak and chipotle",
@@ -163,6 +299,233 @@
         "text": "Finish with a few shakes of {kala namak}. Taste and add a pinch of {salt} and {black pepper} if needed."
       }
     ]
+  },
+  {
+    "id": "sesame-tantanmen-ramen",
+    "name": "Sesame Tantanmen Ramen",
+    "description": "Creamy sesame broth with spicy tofu crumbles and fresh vegetables",
+    "servings": 2,
+    "time": 45,
+    "difficulty": "medium",
+    "tags": [
+      "vegan",
+      "ramen",
+      "japanese"
+    ],
+    "author": "James",
+    "date": "2026-02-17",
+    "notes": "Tantanmen is the Japanese take on Sichuan dan dan noodles. The key is the sesame paste — use Asian sesame paste (not tahini), which is made from toasted seeds and has a much deeper flavour. If you can't find rayu (Japanese chilli oil), any chilli oil works. Press the tofu well before crumbling for crispier results.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1/4 small cabbage, shredded",
+          "quantity": {
+            "amount": 0.25,
+            "unit": "small",
+            "item": "cabbage, shredded"
+          }
+        },
+        {
+          "id": 2,
+          "text": "100 g bean sprouts",
+          "quantity": {
+            "amount": 100.0,
+            "unit": "g",
+            "item": "bean sprouts"
+          }
+        },
+        {
+          "id": 3,
+          "text": "2 spring onions, sliced",
+          "quantity": {
+            "amount": 2.0,
+            "item": "spring onions, sliced"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 clove garlic, minced",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "clove",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 tsp fresh ginger, minced",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "fresh ginger, minced"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 6,
+          "text": "200 g firm tofu, drained and crumbled",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "g",
+            "item": "firm tofu, drained and crumbled"
+          }
+        },
+        {
+          "id": 7,
+          "text": "250 ml soy milk",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "ml",
+            "item": "soy milk"
+          }
+        },
+        {
+          "id": 8,
+          "text": "1/2 tbsp miso paste",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tbsp",
+            "item": "miso paste"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 9,
+          "text": "2 portions ramen noodles",
+          "quantity": {
+            "amount": 2.0,
+            "item": "portions ramen noodles"
+          }
+        },
+        {
+          "id": 10,
+          "text": "3 tbsp Asian sesame paste",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "Asian sesame paste"
+          }
+        },
+        {
+          "id": 11,
+          "text": "2 tbsp soy sauce",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1/2 tbsp rice vinegar",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tbsp",
+            "item": "rice vinegar"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1 tbsp sesame oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "sesame oil"
+          }
+        },
+        {
+          "id": 14,
+          "text": "1 tsp rayu (Japanese chilli oil)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "rayu (Japanese chilli oil)"
+          }
+        },
+        {
+          "id": 15,
+          "text": "300 ml vegetable stock",
+          "quantity": {
+            "amount": 300.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 16,
+          "text": "80 g sweetcorn",
+          "quantity": {
+            "amount": 80.0,
+            "unit": "g",
+            "item": "sweetcorn"
+          }
+        },
+        {
+          "id": 17,
+          "text": "Crushed peanuts to serve"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 18,
+          "text": "1 tsp chilli oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "chilli oil"
+          }
+        },
+        {
+          "id": 19,
+          "text": "Sesame seeds to serve"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Heat a drizzle of {sesame oil} in a skillet over medium heat. Add {garlic} and {ginger}, stir for 30 seconds until fragrant.",
+        "durations": [
+          {
+            "seconds": 30,
+            "text": "for 30 seconds"
+          }
+        ]
+      },
+      {
+        "text": "Add the crumbled {tofu}, {soy sauce} (1/2 tbsp), {miso paste}, and {chilli oil}. Fry for 3 to 5 minutes, stirring often, until the tofu is golden and crispy. Set aside.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 3 to 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Steam or blanch the {cabbage} and {bean sprouts} for about 3 minutes until just tender. Set aside.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for about 3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "In a small bowl, mix the {sesame paste}, remaining {soy sauce} (1 1/2 tbsp), {rice vinegar}, 1 tsp {sesame oil}, and {rayu} into a smooth paste."
+      },
+      {
+        "text": "In a saucepan, heat the {soy milk} and {vegetable stock} over medium-low heat. When it starts to bubble, reduce the heat to low and whisk in the sesame paste mixture until fully dissolved."
+      },
+      {
+        "text": "Cook the {ramen noodles} according to the package instructions. Drain and divide between two bowls."
+      },
+      {
+        "text": "Pour the hot broth over the noodles. Top with the spicy tofu crumbles, steamed vegetables, {sweetcorn}, {spring onions}, {crushed peanuts}, and {sesame seeds}. Finish with extra {rayu} to taste."
+      }
+    ],
+    "serving_suggestions": "Serve immediately while piping hot. For extra heat, add more rayu or a drizzle of chilli oil on top. A squeeze of lime on the side is a nice addition. If you want a richer broth, stir in an extra tablespoon of sesame paste."
   },
   {
     "id": "chilli-sin-carne",
