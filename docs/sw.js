@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v27';
+const CACHE_NAME = 'biteme-v28';
 
 const APP_SHELL = [
   './',

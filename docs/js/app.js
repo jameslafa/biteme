@@ -48,11 +48,20 @@ function filterRecipes({ tag, minRating, favoritesOnly, searchQuery }) {
 
   if (searchQuery) {
     const lowerQuery = searchQuery.toLowerCase();
-    recipes = recipes.filter(recipe =>
-      recipe.name.toLowerCase().includes(lowerQuery) ||
-      recipe.description.toLowerCase().includes(lowerQuery) ||
-      recipe.tags.some(t => t.toLowerCase().includes(lowerQuery))
-    );
+    recipes = recipes
+      .map(recipe => {
+        let score = 0;
+        if (recipe.name.toLowerCase().includes(lowerQuery)) score += 3;
+        if (recipe.description.toLowerCase().includes(lowerQuery)) score += 2;
+        if (recipe.tags.some(t => t.toLowerCase().includes(lowerQuery))) score += 2;
+        if (Object.values(recipe.ingredients).some(group =>
+          group.some(ing => ing.text.toLowerCase().includes(lowerQuery))
+        )) score += 1;
+        return { recipe, score };
+      })
+      .filter(r => r.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(r => r.recipe);
   }
 
   if (tag) {

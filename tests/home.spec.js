@@ -67,6 +67,29 @@ test.describe('Home Page', () => {
     await expect(page.locator('.recipe-card')).toHaveCount(3);
   });
 
+  test('search by ingredient returns matching recipes', async ({ page }) => {
+    const searchInput = page.locator('#search-input');
+
+    await searchInput.fill('lentils');
+    const cards = page.locator('.recipe-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first().locator('.recipe-title')).toHaveText('Test Curry');
+
+    await searchInput.clear();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+  });
+
+  test('title matches rank above ingredient-only matches', async ({ page }) => {
+    const searchInput = page.locator('#search-input');
+
+    // "curry" matches Test Curry by name (score 3) + tag (2) + ingredient "curry powder" (1) = 6
+    // Other recipes with curry powder but no name/tag match would score 1
+    await searchInput.fill('curry');
+    const cards = page.locator('.recipe-card');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first().locator('.recipe-title')).toHaveText('Test Curry');
+  });
+
   test('search with no results shows empty state', async ({ page }) => {
     const searchInput = page.locator('#search-input');
 
@@ -256,8 +279,8 @@ test.describe('What\'s New', () => {
     await expect(sheet).toBeVisible();
 
     const entries = sheet.locator('.whats-new-entry');
-    await expect(entries).toHaveCount(11);
-    await expect(entries.first().locator('.whats-new-text')).toContainText('Filter recipes by rating');
+    await expect(entries).toHaveCount(12);
+    await expect(entries.first().locator('.whats-new-text')).toContainText('Search now matches ingredients');
   });
 
   test('sheet closes on overlay click', async ({ page }) => {

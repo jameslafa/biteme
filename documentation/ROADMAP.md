@@ -19,22 +19,29 @@ This document tracks feature ideas and improvements for BiteMe.
 - Step-by-step tour with tooltips or overlay
 - Skippable, can be replayed from settings/help
 
-### [ ] My Pantry/Spices Inventory
+### [ ] Ingredient Search — Phase 2 ("What Can I Cook?")
 
-- Store ingredients/spices you have at home
-- Pre-check owned items when viewing a recipe
-- Store locally in IndexedDB
+- Select multiple ingredients you have on hand
+- Show recipes ranked by ingredient coverage
+- Lightweight — no persistence needed, just a search UI
+
+### [ ] Meal Planning + Aggregated Shopping List
+
+- Pick recipes for the week on a planner view
+- Auto-generate combined shopping list with quantities merged across recipes
+- Connects recipes → shopping list in a meaningful weekly workflow
+
+### [ ] Cooking History Page
+
+- Dedicated page showing timeline of cooked recipes
+- Most-made recipes, stats, streaks
+- Data already exists in cooking_sessions IndexedDB store
 
 ### [ ] Unit System Toggle (Metric / Imperial)
 
 - Convert quantities in ingredient lists (g ↔ oz, ml ↔ fl oz, °C ↔ °F)
 - Store preference in IndexedDB, default based on locale
 - **On hold**: low demand, and g→cups conversion requires ingredient density tables
-
-### [ ] Post-Cooking Complexity Rating
-
-- Rate complexity after cooking (Easy / Medium / Hard)
-- Display on recipe cards to help pick recipes by effort
 
 ### [ ] SEO & Social Sharing
 
@@ -64,9 +71,10 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action
 - **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
 - **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
-- **Tag Filtering** — Filter recipes by tag via dropdown in search bar, clickable tags on cards and detail page, URL param support for shareable links
+- **Tag & Rating Filtering** — Filter panel with tag and rating dropdowns, live result count, clickable tags on cards, URL param support
 - **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
 - **Recipe Rating (Phase 1)** — Local star ratings (1–5), post-cooking banner prompt, displayed on cards and detail page, editable from detail page, IndexedDB storage
+- **Ingredient Search (Phase 1)** — Search bar matches ingredient text, relevance-scored results (name > tag/description > ingredient)
 
 ---
 
