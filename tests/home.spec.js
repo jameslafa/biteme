@@ -266,14 +266,83 @@ test.describe('Install Prompt', () => {
   });
 });
 
-test.describe('What\'s New', () => {
-  test('no dot on first visit', async ({ page }) => {
-    const dot = page.locator('#whats-new-dot');
-    await expect(dot).toBeHidden();
+test.describe('Drawer', () => {
+  test('opens on hamburger click', async ({ page }) => {
+    await page.locator('#drawer-btn').click();
+    await expect(page.locator('.drawer-panel')).toBeVisible();
   });
 
-  test('button opens sheet with all entries', async ({ page }) => {
-    await page.locator('#whats-new-btn').click();
+  test('closes on overlay click', async ({ page }) => {
+    await page.locator('#drawer-btn').click();
+    await expect(page.locator('.drawer-panel')).toBeVisible();
+
+    await page.locator('.drawer-overlay').click({ position: { x: 290, y: 10 } });
+    await expect(page.locator('#drawer')).toBeHidden();
+  });
+
+  test('closes on close button', async ({ page }) => {
+    await page.locator('#drawer-btn').click();
+    await expect(page.locator('.drawer-panel')).toBeVisible();
+
+    await page.locator('#drawer-close').click();
+    await expect(page.locator('#drawer')).toBeHidden();
+  });
+
+  test('closes on Escape key', async ({ page }) => {
+    await page.locator('#drawer-btn').click();
+    await expect(page.locator('.drawer-panel')).toBeVisible();
+
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#drawer')).toBeHidden();
+  });
+
+  test('shows notification dot when What\'s New has updates', async ({ page }) => {
+    await page.evaluate(async () => {
+      await setSetting('lastSeenChangelogId', 3);
+    });
+    await page.goto('/');
+
+    await expect(page.locator('#drawer-dot')).toBeVisible();
+  });
+
+  test('dot clears after viewing What\'s New', async ({ page }) => {
+    await page.evaluate(async () => {
+      await setSetting('lastSeenChangelogId', 2);
+    });
+    await page.goto('/');
+    await expect(page.locator('#drawer-dot')).toBeVisible();
+
+    // Open drawer, then click What's New
+    await page.locator('#drawer-btn').click();
+    await page.locator('#drawer-whats-new').click();
+    await expect(page.locator('#drawer-dot')).toBeHidden();
+
+    // Close sheet, reload — dot should stay gone
+    await page.locator('#whats-new-close').click();
+    await page.goto('/');
+    await expect(page.locator('#drawer-dot')).toBeHidden();
+  });
+
+  test('contains feedback link and GitHub link in footer', async ({ page }) => {
+    await page.locator('#drawer-btn').click();
+
+    const feedbackLink = page.locator('.drawer-footer-link[href="mailto:freely-dole-yard@duck.com"]');
+    await expect(feedbackLink).toBeVisible();
+    await expect(feedbackLink).toContainText('Send feedback');
+
+    await expect(page.locator('.drawer-footer-meta')).toContainText('GitHub');
+  });
+});
+
+test.describe('What\'s New', () => {
+  test('no dot on first visit', async ({ page }) => {
+    await expect(page.locator('#drawer-dot')).toBeHidden();
+    await expect(page.locator('#drawer-whats-new-dot')).toBeHidden();
+  });
+
+  test('opens sheet from drawer with all entries', async ({ page }) => {
+    await page.locator('#drawer-btn').click();
+    await page.locator('#drawer-whats-new').click();
 
     const sheet = page.locator('#whats-new-sheet');
     await expect(sheet).toBeVisible();
@@ -284,7 +353,8 @@ test.describe('What\'s New', () => {
   });
 
   test('sheet closes on overlay click', async ({ page }) => {
-    await page.locator('#whats-new-btn').click();
+    await page.locator('#drawer-btn').click();
+    await page.locator('#drawer-whats-new').click();
     await expect(page.locator('#whats-new-sheet')).toBeVisible();
 
     await page.locator('.whats-new-overlay').click({ position: { x: 10, y: 10 } });
@@ -292,7 +362,8 @@ test.describe('What\'s New', () => {
   });
 
   test('sheet closes on close button', async ({ page }) => {
-    await page.locator('#whats-new-btn').click();
+    await page.locator('#drawer-btn').click();
+    await page.locator('#drawer-whats-new').click();
     await expect(page.locator('#whats-new-sheet')).toBeVisible();
 
     await page.locator('#whats-new-close').click();
@@ -300,42 +371,36 @@ test.describe('What\'s New', () => {
   });
 
   test('dot appears when new entries are added after first visit', async ({ page }) => {
-    // First visit sets lastSeenChangelogId to latest (5), no dot
-    await expect(page.locator('#whats-new-dot')).toBeHidden();
+    await expect(page.locator('#drawer-dot')).toBeHidden();
 
-    // Simulate a new changelog entry by setting lastSeenChangelogId to an older value
     await page.evaluate(async () => {
       await setSetting('lastSeenChangelogId', 3);
     });
 
-    // Reload — now there are entries with id > 3
     await page.goto('/');
-    await expect(page.locator('#whats-new-dot')).toBeVisible();
+    await expect(page.locator('#drawer-dot')).toBeVisible();
+
+    // Open drawer to check item dot too
+    await page.locator('#drawer-btn').click();
+    await expect(page.locator('#drawer-whats-new-dot')).toBeVisible();
   });
 
   test('dot disappears after opening sheet and stays gone on reload', async ({ page }) => {
-    // Set up unseen entries
     await page.evaluate(async () => {
       await setSetting('lastSeenChangelogId', 2);
     });
     await page.goto('/');
-    await expect(page.locator('#whats-new-dot')).toBeVisible();
+    await expect(page.locator('#drawer-dot')).toBeVisible();
 
-    // Open sheet — should mark as seen
-    await page.locator('#whats-new-btn').click();
-    await expect(page.locator('#whats-new-dot')).toBeHidden();
+    // Open drawer → click What's New → should mark as seen
+    await page.locator('#drawer-btn').click();
+    await page.locator('#drawer-whats-new').click();
+    await expect(page.locator('#drawer-dot')).toBeHidden();
 
     // Close and reload — dot should stay gone
     await page.locator('#whats-new-close').click();
     await page.goto('/');
-    await expect(page.locator('#whats-new-dot')).toBeHidden();
-  });
-
-  test('sheet contains feedback link', async ({ page }) => {
-    await page.locator('#whats-new-btn').click();
-    const link = page.locator('.whats-new-footer a');
-    await expect(link).toHaveText('Send feedback');
-    await expect(link).toHaveAttribute('href', 'mailto:freely-dole-yard@duck.com');
+    await expect(page.locator('#drawer-dot')).toBeHidden();
   });
 });
 

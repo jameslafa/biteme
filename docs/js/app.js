@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupFavoritesFilter();
   setupFilterPanel();
   updateCartCount();
-  setupWhatsNew();
+  setupDrawer();
   showRatingBannerIfNeeded();
 
   // Refresh recipes when returning to the app (e.g. PWA resume)
@@ -466,16 +466,49 @@ async function updateCartCount() {
   }
 }
 
-// What's New
-async function setupWhatsNew() {
-  const btn = document.getElementById('whats-new-btn');
-  const dot = document.getElementById('whats-new-dot');
+// Side Drawer
+function setupDrawer() {
+  const drawer = document.getElementById('drawer');
+  const drawerBtn = document.getElementById('drawer-btn');
+  const closeBtn = document.getElementById('drawer-close');
+  const overlay = drawer.querySelector('.drawer-overlay');
+
+  function openDrawer() {
+    drawer.style.display = '';
+  }
+
+  function closeDrawer() {
+    drawer.style.display = 'none';
+  }
+
+  drawerBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.style.display !== 'none') {
+      closeDrawer();
+    }
+  });
+
+  setupWhatsNew(closeDrawer);
+}
+
+function updateDrawerDot() {
+  const dots = document.querySelectorAll('.drawer-item-dot');
+  const hasAny = [...dots].some(dot => dot.style.display !== 'none');
+  document.getElementById('drawer-dot').style.display = hasAny ? '' : 'none';
+}
+
+// What's New (inside drawer)
+async function setupWhatsNew(closeDrawer) {
+  const drawerItem = document.getElementById('drawer-whats-new');
+  const itemDot = document.getElementById('drawer-whats-new-dot');
   const sheet = document.getElementById('whats-new-sheet');
   const list = document.getElementById('whats-new-list');
   const closeBtn = document.getElementById('whats-new-close');
   const overlay = sheet.querySelector('.whats-new-overlay');
 
-  if (!btn || typeof CHANGELOG === 'undefined' || CHANGELOG.length === 0) return;
+  if (typeof CHANGELOG === 'undefined' || CHANGELOG.length === 0) return;
 
   const latestId = CHANGELOG[0].id;
   const lastSeenId = await getSetting('lastSeenChangelogId');
@@ -484,11 +517,13 @@ async function setupWhatsNew() {
   if (lastSeenId === null) {
     await setSetting('lastSeenChangelogId', latestId);
   } else if (latestId > lastSeenId) {
-    dot.style.display = '';
+    itemDot.style.display = '';
+    updateDrawerDot();
   }
 
   function openSheet() {
-    // Render entries
+    closeDrawer();
+
     list.innerHTML = CHANGELOG.map(entry => `
       <div class="whats-new-entry">
         <div class="whats-new-date">${formatChangelogDate(entry.date)}</div>
@@ -500,14 +535,15 @@ async function setupWhatsNew() {
 
     // Mark as seen
     setSetting('lastSeenChangelogId', latestId);
-    dot.style.display = 'none';
+    itemDot.style.display = 'none';
+    updateDrawerDot();
   }
 
   function closeSheet() {
     sheet.style.display = 'none';
   }
 
-  btn.addEventListener('click', openSheet);
+  drawerItem.addEventListener('click', openSheet);
   closeBtn.addEventListener('click', closeSheet);
   overlay.addEventListener('click', closeSheet);
 }

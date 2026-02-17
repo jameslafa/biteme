@@ -27,12 +27,13 @@
 <body>
   <header>
     <div class="main-header">
-      <button id="whats-new-btn" class="whats-new-button" aria-label="What's new">
+      <button id="drawer-btn" class="drawer-button" aria-label="Open menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
         </svg>
-        <span id="whats-new-dot" class="whats-new-dot" style="display: none;"></span>
+        <span id="drawer-dot" class="drawer-dot" style="display: none;"></span>
       </button>
       <h1 class="logo">bite<span class="logo-accent">me</span></h1>
       <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
@@ -97,6 +98,39 @@
     <p>Open source on <a href="https://github.com/jameslafa/biteme" target="_blank" rel="noopener">GitHub</a></p>
   </footer>
 
+  <!-- Side drawer -->
+  <div id="drawer" class="drawer" style="display: none;">
+    <div class="drawer-overlay"></div>
+    <nav class="drawer-panel">
+      <div class="drawer-header">
+        <h2 class="logo">bite<span class="logo-accent">me</span></h2>
+        <button id="drawer-close" class="drawer-close-btn" aria-label="Close menu">&times;</button>
+      </div>
+      <div class="drawer-items">
+        <button id="drawer-whats-new" class="drawer-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span>What's New</span>
+          <span id="drawer-whats-new-dot" class="drawer-item-dot" style="display: none;"></span>
+        </button>
+      </div>
+      <div class="drawer-footer">
+        <a href="mailto:freely-dole-yard@duck.com" class="drawer-footer-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Send feedback
+        </a>
+        <div class="drawer-footer-meta">
+          Open source on <a href="https://github.com/jameslafa/biteme" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
   <!-- What's New sheet -->
   <div id="whats-new-sheet" class="whats-new-sheet" style="display: none;">
     <div class="whats-new-overlay"></div>
@@ -106,9 +140,6 @@
         <button id="whats-new-close" class="whats-new-close-btn" aria-label="Close">&times;</button>
       </div>
       <div id="whats-new-list" class="whats-new-list"></div>
-      <div class="whats-new-footer">
-        <a href="mailto:freely-dole-yard@duck.com">Send feedback</a>
-      </div>
     </div>
   </div>
 

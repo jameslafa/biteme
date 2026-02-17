@@ -57,7 +57,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Service Worker Updates** — Toast notification on homepage when app code changes
 - **Ingredient Categories** — 4 categories (Fresh, Fridge, Pantry, Spices), validated by parser
 - **Favorites** — Heart icon, IndexedDB, filter view, persisted state
-- **What's New** — Bell icon with notification dot, changelog bottom sheet
+- **What's New** — Changelog bottom sheet, notification dot, accessible from side drawer
 - **Shopping List** — Add ingredients from recipe, grouped list, check off in store, TTL cleanup
 - **Screen Wake Lock** — Keeps screen awake in cooking mode
 - **Recipe Author & Date** — Optional frontmatter fields, displayed on detail page
@@ -75,6 +75,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
 - **Recipe Rating (Phase 1)** — Local star ratings (1–5), post-cooking banner prompt, displayed on cards and detail page, editable from detail page, IndexedDB storage
 - **Ingredient Search (Phase 1)** — Search bar matches ingredient text, relevance-scored results (name > tag/description > ingredient)
+- **Side Drawer (Hamburger Menu)** — Navigation drawer on home page, houses What's New and footer links, notification dot aggregation
 
 ---
 
