@@ -2,8 +2,9 @@ name: Recipe Build
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
     branches: [main]
+    types: [closed]
     paths: ['recipes/**']
 
 permissions:
@@ -11,6 +12,7 @@ permissions:
 
 jobs:
   build:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
