@@ -138,7 +138,7 @@
   {
     "id": "tofu-scramble",
     "name": "Tofu Scramble",
-    "description": "A spiced, eggy tofu scramble with kala namak and chipotle",
+    "description": "The perfect egg-free scramble — spiced with kala namak and chipotle, creamy on the inside, crispy on the outside",
     "servings": 2,
     "time": 20,
     "difficulty": "easy",
@@ -265,17 +265,13 @@
         },
         {
           "id": 13,
-          "text": "Freshly cracked black pepper"
-        },
-        {
-          "id": 14,
-          "text": "Salt"
+          "text": "Freshly cracked black pepper (optional)"
         }
       ]
     },
     "steps": [
       {
-        "text": "Make the eggy sauce. In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, 1/2 tsp {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth."
+        "text": "Make the eggy sauce. In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth."
       },
       {
         "text": "Crumble the pressed {tofu} with your hands into chunks — not too big, not too small."
@@ -290,15 +286,16 @@
         ]
       },
       {
-        "text": "Pour in the eggy sauce and continue frying until you reach your desired texture and consistency."
+        "text": "Pour in the eggy sauce and continue frying until the scramble is as moist or dry as you like — pull it off the heat early for a soft, creamy scramble, or keep going for firmer, drier curds."
       },
       {
         "text": "For extra creaminess, stir in the {plant-based yogurt} and mix through."
       },
       {
-        "text": "Finish with a few shakes of {kala namak}. Taste and add a pinch of {salt} and {black pepper} if needed."
+        "text": "Taste and add a pinch {kala namak} and {black pepper} if needed."
       }
-    ]
+    ],
+    "serving_suggestions": "Serve with halved cherry tomatoes, sliced cucumber, bell pepper strips, and toasted crusty bread."
   },
   {
     "id": "sesame-tantanmen-ramen",

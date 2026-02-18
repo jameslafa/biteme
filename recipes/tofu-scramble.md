@@ -1,7 +1,7 @@
 ---
 id: tofu-scramble
 name: Tofu Scramble
-description: A spiced, eggy tofu scramble with kala namak and chipotle
+description: The perfect egg-free scramble — spiced with kala namak and chipotle, creamy on the inside, crispy on the outside
 servings: 2
 time: 20
 difficulty: easy
@@ -36,14 +36,17 @@ Press the tofu for at least 24 hours to extract all the water. The drier the tof
 - 1/2 tsp paprika
 - 1/2 tsp chipotle chile flakes
 - 1 tsp kala namak (Indian black salt)
-- Freshly cracked black pepper
-- Salt
+- Freshly cracked black pepper (optional)
 
 # Instructions
 
-1. **Make the eggy sauce.** In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, 1/2 tsp {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth.
+1. **Make the eggy sauce.** In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth.
 2. Crumble the pressed {tofu} with your hands into chunks — not too big, not too small.
 3. Heat a large nonstick frying pan over medium-high heat with the {olive oil}. Once hot, add the tofu and fry until lightly browned, 5 to 7 minutes. Stir occasionally but not too often to let the exterior crisp up.
-4. Pour in the eggy sauce and continue frying until you reach your desired texture and consistency.
+4. Pour in the eggy sauce and continue frying until the scramble is as moist or dry as you like — pull it off the heat early for a soft, creamy scramble, or keep going for firmer, drier curds.
 5. For extra creaminess, stir in the {plant-based yogurt} and mix through.
-6. Finish with a few shakes of {kala namak}. Taste and add a pinch of {salt} and {black pepper} if needed.
+6. Taste and add a pinch {kala namak} and {black pepper} if needed.
+
+# Serving Suggestions
+
+Serve with halved cherry tomatoes, sliced cucumber, bell pepper strips, and toasted crusty bread.
