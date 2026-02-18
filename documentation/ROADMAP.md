@@ -13,12 +13,6 @@ This document tracks feature ideas and improvements for BiteMe.
 - Display average community rating alongside personal rating
 - Rate-limit: 1 rating per recipe per anonymous UID
 
-### [ ] First-Time User Onboarding
-
-- Interactive walkthrough for new users explaining key features
-- Step-by-step tour with tooltips or overlay
-- Skippable, can be replayed from settings/help
-
 ### [ ] Ingredient Search — Phase 2 ("What Can I Cook?")
 
 - Select multiple ingredients you have on hand
@@ -71,6 +65,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Ingredient Search (Phase 1)** — Search bar matches ingredient text, relevance-scored results (name > tag/description > ingredient)
 - **Side Drawer (Hamburger Menu)** — Navigation drawer on home page, houses What's New and footer links, notification dot aggregation
 - **Cooking Log** — Dedicated page with stats (recipes cooked, sessions, total time, week streak), most-made recipes, and monthly timeline of all completed cooks
+- **How It Works** — Feature guide page with real UI mockups, 8 walkthrough sections, deep-linkable anchors, first-visit nudge on home page
 
 ---
 

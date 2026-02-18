@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how BiteMe works — find recipes, cook step by step, and track your cooking">
+  <meta name="theme-color" content="#6B9080">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
+  <title>How It Works - biteme</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/recipe.css">
+  <link rel="stylesheet" href="css/cooking.css">
+  <link rel="stylesheet" href="css/shopping.css">
+  <link rel="stylesheet" href="css/completion.css">
+  <link rel="stylesheet" href="css/cooking-log.css">
+  <link rel="stylesheet" href="css/how-it-works.css">
+</head>
+<body>
+  <header>
+    <nav class="recipe-nav">
+      <a href="index.html" class="back-button" aria-label="Back to recipes">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <h1 class="logo">bite<span class="logo-accent">me</span></h1>
+      <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h2>How It Works</h2>
+    </div>
+    <div id="features-list"></div>
+  </main>
+
+  <script src="js/db.js"></script>
+  <script src="js/how-it-works.js"></script>
+</body>
+</html>

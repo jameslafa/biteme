@@ -1,0 +1,72 @@
+/* How It Works — Feature Guide */
+
+.feature-section {
+  max-width: 600px;
+  margin: 0 auto var(--spacing-xl);
+  scroll-margin-top: 5rem;
+}
+
+.feature-title {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.02em;
+}
+
+.feature-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.feature-mockup-label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-bottom: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+
+.feature-description + .feature-mockup-label {
+  margin-top: 0;
+}
+
+.feature-mockup {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  background: var(--surface);
+  box-shadow: 0 2px 8px var(--shadow);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.feature-cta {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--spacing-xl);
+}
+
+.feature-cta .button {
+  display: inline-block;
+  width: auto;
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 480px) {
+  .feature-section {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .feature-title {
+    font-size: 1.25rem;
+  }
+
+  .feature-mockup {
+    padding: var(--spacing-sm);
+  }
+}

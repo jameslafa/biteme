@@ -241,6 +241,27 @@ Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="ca
 
 **Share URL format:** `https://biteme.ovh/r/{recipe-id}.html`
 
+## How It Works (Feature Guide)
+
+**Decision:** Static feature guide page with real UI mockups rendered from actual CSS classes
+
+**How it works:**
+- `how-it-works.js` defines 8 feature sections, each with an `id`, `title`, `description`, and mockup HTML (single or multiple per section)
+- Mockup HTML uses the same CSS classes as the real app (`.recipe-card`, `.timer-bar`, `.star-rating`, etc.)
+- The page imports `style.css`, `recipe.css`, `cooking.css`, `shopping.css`, `completion.css`, and `cooking-log.css` so mockups render with real styles
+- `.feature-mockup` container has `pointer-events: none` to prevent interaction
+- Each section has a deep-linkable anchor ID (e.g. `#timer`, `#cook`)
+- On load, sets `hasSeenHowItWorks` in IndexedDB settings
+
+**First-visit nudge:**
+- On the home page, `checkFirstVisitNudge()` checks `hasSeenHowItWorks` setting
+- If null (first visit), a dismissible banner links to the How It Works page
+- Dismissing the nudge or visiting the page sets the flag
+
+**Why real CSS classes for mockups:**
+- Mockups stay visually correct when styles change — no separate screenshots or static images to maintain
+- Zero maintenance cost as the design evolves
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements

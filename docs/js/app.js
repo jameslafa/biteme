@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupFilterPanel();
   updateCartCount();
   setupDrawer();
+  checkFirstVisitNudge();
   showRatingBannerIfNeeded();
 
   // Refresh recipes when returning to the app (e.g. PWA resume)
@@ -513,4 +514,20 @@ async function checkWhatsNewDot() {
     document.getElementById('drawer-whats-new-dot').style.display = '';
     updateDrawerDot();
   }
+}
+
+// Show a nudge for first-time visitors pointing to the How It Works page
+async function checkFirstVisitNudge() {
+  const hasSeen = await getSetting('hasSeenHowItWorks');
+  if (hasSeen) return;
+
+  const nudge = document.getElementById('first-visit-nudge');
+  if (!nudge) return;
+
+  nudge.style.display = '';
+
+  document.getElementById('nudge-dismiss').addEventListener('click', async () => {
+    nudge.style.display = 'none';
+    await setSetting('hasSeenHowItWorks', true);
+  });
 }

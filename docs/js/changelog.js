@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 14, date: '2026-02-18', text: 'How It Works — a new guide page walking you through all features, accessible from the side drawer' },
   { id: 13, date: '2026-02-17', text: 'Cooking Log — see your stats, most-made recipes, and full cooking timeline from the side drawer' },
   { id: 12, date: '2026-02-17', text: 'Search now matches ingredients — find recipes by what you have on hand' },
   { id: 11, date: '2026-02-17', text: 'Filter recipes by rating — use the filter panel to find your highest-rated dishes' },

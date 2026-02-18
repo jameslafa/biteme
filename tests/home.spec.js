@@ -689,3 +689,35 @@ test.describe('Recipe Refresh on Resume', () => {
     expect(recipesFetched).toBe(false);
   });
 });
+
+test.describe('First Visit Nudge', () => {
+  test('shows nudge when hasSeenHowItWorks is not set', async ({ page }) => {
+    const nudge = page.locator('#first-visit-nudge');
+    await expect(nudge).toBeVisible();
+    await expect(nudge.locator('.nudge-text')).toContainText('everything you can do with BiteMe');
+    await expect(nudge.locator('.nudge-btn')).toContainText('Take the tour');
+  });
+
+  test('nudge disappears after dismiss and sets flag', async ({ page }) => {
+    const nudge = page.locator('#first-visit-nudge');
+    await expect(nudge).toBeVisible();
+
+    await page.locator('#nudge-dismiss').click();
+    await expect(nudge).toBeHidden();
+
+    const hasSeen = await page.evaluate(async () => {
+      return await getSetting('hasSeenHowItWorks');
+    });
+    expect(hasSeen).toBe(true);
+  });
+
+  test('nudge hidden on repeat visits', async ({ page }) => {
+    // Set the flag as if user already visited
+    await page.evaluate(async () => {
+      await setSetting('hasSeenHowItWorks', true);
+    });
+    await page.goto('/');
+
+    await expect(page.locator('#first-visit-nudge')).toBeHidden();
+  });
+});
