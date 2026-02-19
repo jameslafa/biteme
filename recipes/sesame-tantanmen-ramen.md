@@ -37,7 +37,7 @@ Tantanmen is the Japanese take on Sichuan dan dan noodles. The key is the sesame
 - 2 tbsp soy sauce
 - 1/2 tbsp rice vinegar
 - 1 tbsp sesame oil
-- 1 tsp rayu (Japanese chilli oil)
+- 1 tsp rayu (Japanese-style)
 - 300 ml vegetable stock
 - 80 g sweetcorn
 - Crushed peanuts to serve

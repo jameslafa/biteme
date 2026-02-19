@@ -435,11 +435,11 @@
         },
         {
           "id": 14,
-          "text": "1 tsp rayu (Japanese chilli oil)",
+          "text": "1 tsp rayu (Japanese-style)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "rayu (Japanese chilli oil)"
+            "item": "rayu (Japanese-style)"
           }
         },
         {
@@ -796,7 +796,7 @@
         ]
       },
       {
-        "text": "Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt} and {pepper}."
+        "text": "Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt and pepper}."
       },
       {
         "text": "Taste and adjust the spices as needed. Let it sit for a few minutes before serving."
@@ -1820,20 +1820,20 @@
         },
         {
           "id": 7,
-          "text": "1 tsp baking soda (for soaking)",
+          "text": "1 tsp baking soda for soaking",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "baking soda (for soaking)"
+            "item": "baking soda for soaking"
           }
         },
         {
           "id": 8,
-          "text": "1 tsp baking soda (for cooking)",
+          "text": "1 tsp baking soda for cooking",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "baking soda (for cooking)"
+            "item": "baking soda for cooking"
           }
         },
         {
@@ -1863,10 +1863,10 @@
     },
     "steps": [
       {
-        "text": "Soak {chickpeas} overnight in plenty of water with 1 teaspoon of {baking soda}."
+        "text": "Cover {chickpeas} with plenty of water, add 1 teaspoon of {baking soda for soaking}, and leave overnight."
       },
       {
-        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda} and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda for cooking} and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
         "durations": [
           {
             "seconds": 2400,
@@ -1926,16 +1926,16 @@
         },
         {
           "id": 2,
-          "text": "150 ml plant milk (oat or soy work best)",
+          "text": "150 ml plant milk for the dough",
           "quantity": {
             "amount": 150.0,
             "unit": "ml",
-            "item": "plant milk (oat or soy work best)"
+            "item": "plant milk for the dough"
           }
         },
         {
           "id": 3,
-          "text": "A little extra plant milk for glazing"
+          "text": "A splash of plant milk for brushing"
         }
       ],
       "Pantry": [
@@ -1985,7 +1985,7 @@
         "text": "Using your fingertips, rub the cold {margarine} into the {flour} until the mixture resembles fine breadcrumbs."
       },
       {
-        "text": "Stir in {sugar}. Add most of the {plant milk} and mix to form a soft and slightly sticky dough. If it's a little dry, add more {milk} until you get the right consistency."
+        "text": "Stir in {sugar}. Add most of the {plant milk for the dough} and mix to form a soft and slightly sticky dough. If it's a little dry, add more milk until you get the right consistency."
       },
       {
         "text": "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick."
@@ -1994,7 +1994,7 @@
         "text": "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up."
       },
       {
-        "text": "Brush the tops with a little {plant milk}."
+        "text": "Brush the tops with a little {plant milk for brushing}."
       },
       {
         "text": "Bake for 12-15 minutes until well risen and golden.",
@@ -2132,7 +2132,7 @@
         "text": "Sift in {flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix."
       },
       {
-        "text": "Transfer the batter to your prepared pan, and top with extra {banana} slices."
+        "text": "Transfer the batter to your prepared pan, and top with {extra banana slices}."
       },
       {
         "text": "Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.",

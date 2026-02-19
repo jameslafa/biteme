@@ -472,6 +472,31 @@ fn find_unreferenced_ingredients(
     unreferenced
 }
 
+/// Find step refs that match more than one ingredient line (ambiguous references).
+/// Returns a list of (ref, matching ingredient texts) for each ambiguous ref.
+fn find_ambiguous_refs(
+    ingredients: &HashMap<String, Vec<Ingredient>>,
+    step_refs: &[String],
+) -> Vec<(String, Vec<String>)> {
+    let mut ambiguous = Vec::new();
+    let mut seen = std::collections::HashSet::new();
+    for r in step_refs {
+        if !seen.insert(r) {
+            continue;
+        }
+        let matches: Vec<String> = ingredients
+            .values()
+            .flat_map(|items| items.iter())
+            .filter(|ing| ing.text.to_lowercase().contains(r.as_str()))
+            .map(|ing| ing.text.clone())
+            .collect();
+        if matches.len() > 1 {
+            ambiguous.push((r.clone(), matches));
+        }
+    }
+    ambiguous
+}
+
 fn check_indentation(content: &str) -> Result<()> {
     let indented_lines = content.lines()
         .filter(|line| !line.trim().is_empty())
@@ -689,6 +714,19 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
                 eprintln!("   - {}", ingredient);
             }
             eprintln!("   Consider adding {{ingredient}} references in your steps for better UX.\n");
+        }
+
+        // Check for ambiguous refs (blocking)
+        let ambiguous_refs = find_ambiguous_refs(&ingredients, &step_refs);
+        if !ambiguous_refs.is_empty() {
+            let details: Vec<String> = ambiguous_refs
+                .iter()
+                .map(|(r, matches)| format!("  {{{}}} matches: {}", r, matches.join(", ")))
+                .collect();
+            bail!(
+                "Ambiguous ingredient references found:\n{}",
+                details.join("\n")
+            );
         }
     }
 
@@ -2445,6 +2483,34 @@ date: 2026-01-01
         let refs = vec!["oil".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
         assert_eq!(unreferenced, vec!["Salt to taste (Spices)"]);
+    }
+
+    // ── Ambiguous ref tests ──
+
+    #[test]
+    fn test_ambiguous_ref_oil_matches_multiple() {
+        let mut ingredients = HashMap::new();
+        ingredients.insert("Pantry".to_string(), vec![
+            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), quantity: None },
+            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), quantity: None },
+        ]);
+        let refs = vec!["oil".to_string()];
+        let ambiguous = find_ambiguous_refs(&ingredients, &refs);
+        assert_eq!(ambiguous.len(), 1);
+        assert_eq!(ambiguous[0].0, "oil");
+        assert_eq!(ambiguous[0].1.len(), 2);
+    }
+
+    #[test]
+    fn test_specific_ref_not_ambiguous() {
+        let mut ingredients = HashMap::new();
+        ingredients.insert("Pantry".to_string(), vec![
+            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), quantity: None },
+            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), quantity: None },
+        ]);
+        let refs = vec!["olive oil".to_string()];
+        let ambiguous = find_ambiguous_refs(&ingredients, &refs);
+        assert!(ambiguous.is_empty());
     }
 
     // ── Step duration parsing tests ──

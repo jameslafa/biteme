@@ -33,15 +33,15 @@ Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not
 ## Pantry
 
 - 250 g dried chickpeas
-- 1 tsp baking soda (for soaking)
-- 1 tsp baking soda (for cooking)
+- 1 tsp baking soda for soaking
+- 1 tsp baking soda for cooking
 - 120 g tahini (or more to taste)
 - Good quality olive oil (for serving)
 
 # Instructions
 
-1. Soak {chickpeas} overnight in plenty of water with 1 teaspoon of {baking soda}.
-2. Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda} and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.
+1. Cover {chickpeas} with plenty of water, add 1 teaspoon of {baking soda for soaking}, and leave overnight.
+2. Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda for cooking} and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.
 3. Drain {chickpeas} over a bowl, saving the cooking water.
 4. While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, a good pinch of {salt}, and a couple of {ice cubes}.
 5. Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy.
