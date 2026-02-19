@@ -21,9 +21,9 @@ This delicious French spice bread is best enjoyed the next day when the flavours
 
 ## Pantry
 - 125 g (3/4 cup) brown sugar
-- 250 g (1-3/4 cups) flour
+- 250 g (1-3/4 cups) plain flour (T45 / Type 405 / Tipo 00)
 - 3 tbsp honey (or jam for a vegan version)
-- 3 tsp baking soda (Natron)
+- 3 tsp baking soda
 - 3 tsp orange blossom water
 
 ## Spices

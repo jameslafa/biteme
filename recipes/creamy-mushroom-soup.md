@@ -12,12 +12,13 @@ date: 2026-02-10
 
 # Notes
 
-For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini (Steinpilze), soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.
+For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini, soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.
 
 # Ingredients
 
 ## Fresh
-- 500 g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced
+
+- 500 g mixed mushrooms (champignon, king oyster, shiitake), sliced
 - 1 medium onion, diced
 - 3 cloves garlic, minced
 - 1 medium floury potato (about 150 g), peeled and cubed
@@ -26,14 +27,17 @@ For a deeper, more umami flavour, add a splash of dry white wine after cooking t
 - Fresh parsley for garnish
 
 ## Fridge
-- 200 ml oat cream (Hafer Cuisine)
+
+- 200 ml oat cream
 
 ## Pantry
+
 - 750 ml vegetable stock
 - 2 tbsp olive oil
-- 1 tbsp soy sauce
+- 2 tbsp soy sauce
 
 ## Spices
+
 - Salt and pepper to taste
 
 # Instructions

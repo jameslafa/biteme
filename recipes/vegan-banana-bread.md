@@ -25,8 +25,8 @@ Use very ripe bananas with lots of brown spots for the best flavour and natural 
 
 ## Pantry
 - 100 g light brown sugar
-- 250 g all-purpose flour
-- 60 ml vegetable oil
+- 250 g plain flour (T45 / Type 405 / Tipo 00)
+- 60 ml vegetable oil (e.g. rapeseed, sunflower, canola)
 - 2 tsp pure vanilla extract
 - 1 tsp baking soda
 

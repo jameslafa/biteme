@@ -74,11 +74,11 @@
         },
         {
           "id": 8,
-          "text": "1 tbsp neutral oil",
+          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "neutral oil"
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
           }
         },
         {
@@ -106,7 +106,7 @@
         "text": "When ready to cook, check the batter consistency and add a splash of water if needed."
       },
       {
-        "text": "Heat a drizzle of {neutral oil} in a pan over medium heat. Add the {mushrooms} and cook for 5 minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.",
+        "text": "Heat a drizzle of {oil} in a pan over medium heat. Add the {mushrooms} and cook for 5 minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.",
         "durations": [
           {
             "seconds": 300,
@@ -115,7 +115,7 @@
         ]
       },
       {
-        "text": "Heat a large flat pan over medium-high heat. Lightly grease with {neutral oil}."
+        "text": "Heat a large flat pan over medium-high heat. Lightly grease with {oil}."
       },
       {
         "text": "Pour a ladleful of batter and quickly spread it as thinly as possible."
@@ -1033,11 +1033,11 @@
       "Pantry": [
         {
           "id": 1,
-          "text": "220 g plain flour",
+          "text": "220 g plain flour (T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 220.0,
             "unit": "g",
-            "item": "plain flour"
+            "item": "plain flour (T45 / Type 405 / Tipo 00)"
           }
         },
         {
@@ -1060,11 +1060,11 @@
         },
         {
           "id": 4,
-          "text": "2 tbsp rapeseed oil",
+          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "rapeseed oil"
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
           }
         },
         {
@@ -1092,7 +1092,7 @@
         "text": "Make a well in the centre and gradually pour in the {oat milk} while whisking from the centre outward, incorporating the flour slowly. This avoids lumps."
       },
       {
-        "text": "Add the {rapeseed oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth."
+        "text": "Add the {oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth."
       },
       {
         "text": "Add the {sparkling water} and give it a final mix."
@@ -1324,16 +1324,16 @@
     ],
     "author": "James",
     "date": "2026-02-10",
-    "notes": "For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini (Steinpilze), soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.",
+    "notes": "For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini, soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.",
     "ingredients": {
       "Fresh": [
         {
           "id": 1,
-          "text": "500 g mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced",
+          "text": "500 g mixed mushrooms (champignon, king oyster, shiitake), sliced",
           "quantity": {
             "amount": 500.0,
             "unit": "g",
-            "item": "mixed mushrooms (champignons, Kräuterseitlinge, Shiitake), sliced"
+            "item": "mixed mushrooms (champignon, king oyster, shiitake), sliced"
           }
         },
         {
@@ -1387,11 +1387,11 @@
       "Fridge": [
         {
           "id": 8,
-          "text": "200 ml oat cream (Hafer Cuisine)",
+          "text": "200 ml oat cream",
           "quantity": {
             "amount": 200.0,
             "unit": "ml",
-            "item": "oat cream (Hafer Cuisine)"
+            "item": "oat cream"
           }
         }
       ],
@@ -1416,9 +1416,9 @@
         },
         {
           "id": 11,
-          "text": "1 tbsp soy sauce",
+          "text": "2 tbsp soy sauce",
           "quantity": {
-            "amount": 1.0,
+            "amount": 2.0,
             "unit": "tbsp",
             "item": "soy sauce"
           }
@@ -1520,11 +1520,11 @@
         },
         {
           "id": 3,
-          "text": "250 g (1-3/4 cups) flour",
+          "text": "250 g (1-3/4 cups) plain flour (T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
-            "item": "flour",
+            "item": "plain flour (T45 / Type 405 / Tipo 00)",
             "secondary_amount": 1.75,
             "secondary_unit": "cups"
           }
@@ -1540,11 +1540,11 @@
         },
         {
           "id": 5,
-          "text": "3 tsp baking soda (Natron)",
+          "text": "3 tsp baking soda",
           "quantity": {
             "amount": 3.0,
             "unit": "tsp",
-            "item": "baking soda (Natron)"
+            "item": "baking soda"
           }
         },
         {
@@ -1689,11 +1689,11 @@
         },
         {
           "id": 13,
-          "text": "1 tbsp vegetable oil",
+          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "vegetable oil"
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
           }
         },
         {
@@ -1820,20 +1820,20 @@
         },
         {
           "id": 7,
-          "text": "1 tsp bicarbonate of soda (for soaking)",
+          "text": "1 tsp baking soda (for soaking)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "bicarbonate of soda (for soaking)"
+            "item": "baking soda (for soaking)"
           }
         },
         {
           "id": 8,
-          "text": "1 tsp bicarbonate of soda (for cooking)",
+          "text": "1 tsp baking soda (for cooking)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "bicarbonate of soda (for cooking)"
+            "item": "baking soda (for cooking)"
           }
         },
         {
@@ -1863,10 +1863,10 @@
     },
     "steps": [
       {
-        "text": "Soak {chickpeas} overnight in plenty of water with 1 teaspoon of {bicarbonate of soda}."
+        "text": "Soak {chickpeas} overnight in plenty of water with 1 teaspoon of {baking soda}."
       },
       {
-        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {bicarbonate of soda} and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda} and cook on medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and cook for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
         "durations": [
           {
             "seconds": 2400,
@@ -1941,11 +1941,11 @@
       "Pantry": [
         {
           "id": 5,
-          "text": "225 g plain flour (Type 405)",
+          "text": "225 g plain flour (T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 225.0,
             "unit": "g",
-            "item": "plain flour (Type 405)"
+            "item": "plain flour (T45 / Type 405 / Tipo 00)"
           }
         },
         {
@@ -2065,20 +2065,20 @@
         },
         {
           "id": 5,
-          "text": "250 g all-purpose flour",
+          "text": "250 g plain flour (T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
-            "item": "all-purpose flour"
+            "item": "plain flour (T45 / Type 405 / Tipo 00)"
           }
         },
         {
           "id": 6,
-          "text": "60 ml vegetable oil",
+          "text": "60 ml vegetable oil (e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 60.0,
             "unit": "ml",
-            "item": "vegetable oil"
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
           }
         },
         {

@@ -25,7 +25,7 @@ Keep the margarine cold – this helps create a flaky texture. Don't overwork th
 - Pinch of salt
 
 ## Pantry
-- 225 g plain flour (Type 405)
+- 225 g plain flour (T45 / Type 405 / Tipo 00)
 - 3 tsp baking powder
 - 25 g caster sugar
 

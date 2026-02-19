@@ -28,15 +28,15 @@ The batter needs at least 2 hours of resting in the fridge, ideally overnight â€
 - 250 g buckwheat flour
 - 500-750 ml water
 - 5 g fine salt
-- 1 tbsp neutral oil
+- 1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)
 - 1 tbsp soy sauce
 
 # Instructions
 
 1. Sift the {buckwheat flour} into a large bowl and add the {salt}. Gradually pour in the {water} while whisking continuously until the batter is smooth and thin, like single cream. Cover and rest in the fridge for at least 2 hours, ideally overnight.
 2. When ready to cook, check the batter consistency and add a splash of water if needed.
-3. Heat a drizzle of {neutral oil} in a pan over medium heat. Add the {mushrooms} and cook for 5 minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.
-4. Heat a large flat pan over medium-high heat. Lightly grease with {neutral oil}.
+3. Heat a drizzle of {oil} in a pan over medium heat. Add the {mushrooms} and cook for 5 minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.
+4. Heat a large flat pan over medium-high heat. Lightly grease with {oil}.
 5. Pour a ladleful of batter and quickly spread it as thinly as possible.
 6. Cook for about 2 minutes until the edges lift and turn crispy. Flip and cook for 1 more minute.
 7. Spoon the mushroom filling onto the galette, fold the edges in, sprinkle with fresh {parsley}, and serve immediately.

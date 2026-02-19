@@ -157,6 +157,22 @@ The annotation is stripped from the displayed text. The linter emits a non-block
 
 ---
 
+## Ingredient Naming Conventions
+
+Use consistent names for common ingredients across all recipes:
+
+| Ingredient | Standard name | Notes |
+| --- | --- | --- |
+| Plain wheat flour | `plain flour (T45 / Type 405 / Tipo 00)` | Not "all-purpose flour" or just "flour" |
+| Neutral cooking oil | `vegetable oil (e.g. rapeseed, sunflower, canola)` | Not "neutral oil" or "rapeseed oil" |
+| Sodium bicarbonate | `baking soda` | Not "bicarbonate of soda" or "Natron" |
+
+Flavoured oils (olive oil, sesame oil, chilli oil) should use their specific names.
+
+Avoid brand names or country-specific product names (e.g. "Hafer Cuisine", "Natron"). Use the generic English name instead.
+
+---
+
 ## Ingredient Linking
 
 When you mention an ingredient in the instructions, wrap a short recognizable name in `{curly braces}`. This highlights ingredients in cooking mode so the cook can see exactly what they need for each step.

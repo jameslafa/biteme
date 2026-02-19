@@ -33,7 +33,7 @@ If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2.
 ## Pantry
 - 1 tin (400 ml) coconut milk
 - 200 ml vegetable stock
-- 1 tbsp vegetable oil
+- 1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)
 - 2 tbsp curry paste (red or yellow)
 
 # Instructions

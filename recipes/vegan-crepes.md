@@ -18,10 +18,10 @@ The resting time is important. It lets the flour fully hydrate and the gluten re
 
 ## Pantry
 
-- 220 g plain flour
+- 220 g plain flour (T45 / Type 405 / Tipo 00)
 - 30 g corn starch or potato starch
 - 1 tbsp sugar (optional, for sweet crêpes)
-- 2 tbsp rapeseed oil
+- 2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)
 - 1 tbsp of vanilla extract or orange blossom water (optional, for sweet crêpes)
 
 ## Fridge
@@ -38,7 +38,7 @@ The resting time is important. It lets the flour fully hydrate and the gluten re
 
 1. Sift the {flour} and {starch} into a large bowl. Add the {sugar} and {salt}.
 2. Make a well in the centre and gradually pour in the {oat milk} while whisking from the centre outward, incorporating the flour slowly. This avoids lumps.
-3. Add the {rapeseed oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth.
+3. Add the {oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth.
 4. Add the {sparkling water} and give it a final mix.
 5. Let the batter rest for an hour. It should have the consistency of liquid cream. If it's too thick after resting, add a splash of oat milk or water to thin it out.
 6. Heat a crêpe pan (or flat non-stick pan) on medium-high heat. Melt a small knob of {vegan butter} on the pan.
