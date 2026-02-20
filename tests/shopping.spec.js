@@ -135,4 +135,35 @@ test.describe('Shopping List', () => {
     await page.locator('.shopping-item').nth(1).locator('input[type="checkbox"]').check();
     await expect(progress).toHaveText('2 of 3 items');
   });
+
+  test('remove recipe clears all items for that recipe', async ({ page }) => {
+    await addIngredientsToCart(page, 'test-curry', 3);
+    await addIngredientsToCart(page, 'test-salad', 2);
+    await page.goto('/shopping.html');
+
+    await expect(page.locator('.recipe-group')).toHaveCount(2);
+    await expect(page.locator('.shopping-item')).toHaveCount(5);
+
+    // Remove the curry recipe group
+    await page.locator('.remove-recipe[data-recipe-id="test-curry"]').click();
+
+    // Only salad items should remain
+    await expect(page.locator('.recipe-group')).toHaveCount(1);
+    await expect(page.locator('.recipe-group-title')).toHaveText('Test Salad');
+    await expect(page.locator('.shopping-item')).toHaveCount(2);
+  });
+
+  test('clear all removes entire shopping list', async ({ page }) => {
+    await addIngredientsToCart(page, 'test-curry', 2);
+    await addIngredientsToCart(page, 'test-salad', 2);
+    await page.goto('/shopping.html');
+
+    await expect(page.locator('.shopping-item')).toHaveCount(4);
+
+    await page.locator('.clear-all').click();
+
+    // Should show empty state
+    await expect(page.locator('#empty-state')).toBeVisible();
+    await expect(page.locator('#shopping-list')).toBeHidden();
+  });
 });

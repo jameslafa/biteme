@@ -15,6 +15,7 @@ async function loadShoppingList() {
   if (items.length === 0) {
     shoppingListContainer.style.display = 'none';
     emptyState.style.display = 'block';
+    document.getElementById('clear-all').style.display = 'none';
     return;
   }
 
@@ -56,9 +57,10 @@ async function loadShoppingList() {
   // Render grouped items
   shoppingListContainer.innerHTML = Object.entries(groupedItems)
     .map(([recipeId, group]) => `
-      <div class="recipe-group">
+      <div class="recipe-group" data-recipe-id="${recipeId}">
         <div class="recipe-group-header">
           <h3 class="recipe-group-title">${group.recipe_name}</h3>
+          <button class="remove-recipe" data-recipe-id="${recipeId}" aria-label="Remove ${group.recipe_name} from shopping list">Remove recipe</button>
         </div>
         <ul class="shopping-items">
           ${group.items.map(item => `
@@ -83,6 +85,9 @@ async function loadShoppingList() {
         </ul>
       </div>
     `).join('');
+
+  // Show clear-all button in header
+  document.getElementById('clear-all').style.display = '';
 
   // Setup event listeners
   setupEventListeners();
@@ -150,6 +155,41 @@ function setupEventListeners() {
       }
     });
   });
+
+  // Handle per-recipe remove buttons
+  const removeRecipeButtons = document.querySelectorAll('.remove-recipe');
+  removeRecipeButtons.forEach(button => {
+    button.addEventListener('click', async () => {
+      const recipeId = button.getAttribute('data-recipe-id');
+      const group = button.closest('.recipe-group');
+
+      try {
+        await removeShoppingListByRecipe(recipeId);
+
+        group.style.opacity = '0';
+        setTimeout(async () => {
+          await loadShoppingList();
+          await updateCartCount();
+        }, 200);
+      } catch (error) {
+        console.error('Error removing recipe items:', error);
+      }
+    });
+  });
+
+  // Handle clear-all button
+  const clearAllBtn = document.getElementById('clear-all');
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener('click', async () => {
+      try {
+        await clearShoppingList();
+        await loadShoppingList();
+        await updateCartCount();
+      } catch (error) {
+        console.error('Error clearing shopping list:', error);
+      }
+    });
+  }
 }
 
 function updateProgress() {

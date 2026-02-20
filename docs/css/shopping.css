@@ -3,6 +3,17 @@
 .shopping-header {
   text-align: center;
   margin-bottom: var(--spacing-xl);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shopping-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  position: relative;
 }
 
 .shopping-header h2 {
@@ -48,6 +59,27 @@
   color: var(--primary-color);
   letter-spacing: 0.01em;
   flex: 1;
+}
+
+.remove-recipe {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.remove-recipe:hover {
+  color: #e74c3c;
+  background-color: var(--accent-light);
+}
+
+.remove-recipe:active {
+  transform: scale(0.95);
 }
 
 /* Shopping Items */
@@ -148,6 +180,31 @@
 }
 
 .remove-item:active {
+  transform: scale(0.95);
+}
+
+/* Clear All Button */
+.clear-all {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.clear-all:hover {
+  color: #e74c3c;
+  border-color: #e74c3c;
+  background-color: var(--accent-light);
+}
+
+.clear-all:active {
   transform: scale(0.95);
 }
 

@@ -255,6 +255,40 @@ async function removeShoppingListItem(itemId) {
   });
 }
 
+// Remove all shopping list items for a given recipe
+async function removeShoppingListByRecipe(recipeId) {
+  if (!db) await initDB();
+
+  const items = await getShoppingListByRecipe(recipeId);
+  const transaction = db.transaction(['shopping_list'], 'readwrite');
+  const store = transaction.objectStore('shopping_list');
+
+  return new Promise((resolve, reject) => {
+    let remaining = items.length;
+    if (remaining === 0) { resolve(); return; }
+
+    for (const item of items) {
+      const request = store.delete(item.id);
+      request.onsuccess = () => { if (--remaining === 0) resolve(); };
+      request.onerror = () => reject(request.error);
+    }
+  });
+}
+
+// Remove all shopping list items
+async function clearShoppingList() {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['shopping_list'], 'readwrite');
+  const store = transaction.objectStore('shopping_list');
+
+  return new Promise((resolve, reject) => {
+    const request = store.clear();
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
 // Clean up checked items older than 1 hour
 async function cleanupShoppingList() {
   if (!db) await initDB();
