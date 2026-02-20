@@ -5,7 +5,8 @@ description: Moist and delicious banana bread made with simple plant-based ingre
 servings: 10
 time: 65
 difficulty: easy
-tags: [vegan, baking, dessert]
+tags: [baking, dessert]
+diet: [vegan]
 author: James
 date: 2026-02-10
 ---

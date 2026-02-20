@@ -17,6 +17,7 @@ servings: 4
 time: 45
 difficulty: medium
 tags: [tag-one, tag-two, tag-three]
+diet: [vegan, gluten-free]
 author: Your Name
 date: 2026-02-10
 ---
@@ -32,7 +33,8 @@ date: 2026-02-10
 | `servings`    | integer | 1–100.                                                                                                                                                                                                                 |
 | `time`        | integer | 1–1440. Total time in minutes (1440 = 24 hours).                                                                                                                                                                       |
 | `difficulty`  | string  | Exactly one of: `easy`, `medium`, `hard`. Lowercase only.                                                                                                                                                              |
-| `tags`        | array   | At least 1 tag. All lowercase, no spaces within tags. No duplicates.                                                                                                                                                   |
+| `tags`        | array   | At least 1 tag. All lowercase, no spaces within tags. No duplicates. Meal-type/cuisine only — dietary info goes in `diet`.                                                                                             |
+| `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`.                                                                                                                                                   |
 | `author`      | string  | **Optional.** 1–100 characters. Name of the recipe contributor.                                                                                                                                                        |
 | `date`        | string  | Format: `YYYY-MM-DD`. Date the recipe was added.                                                                                                                                                                       |
 
@@ -204,7 +206,8 @@ description: Rich and creamy mushroom soup perfect for batch cooking and freezin
 servings: 4
 time: 40
 difficulty: easy
-tags: [vegan, soup]
+tags: [soup]
+diet: [vegan]
 author: James
 date: 2026-02-12
 ---
@@ -261,13 +264,14 @@ Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzl
 
 Before outputting the recipe, verify:
 
-- [ ] Frontmatter has all 8 required fields (`id`, `name`, `description`, `servings`, `time`, `difficulty`, `tags`, `date`) plus optional `author`
+- [ ] Frontmatter has all 8 required fields (`id`, `name`, `description`, `servings`, `time`, `difficulty`, `tags`, `date`) plus optional `diet` and `author`
 - [ ] `id` is lowercase-and-dashes only, no leading/trailing/consecutive dashes, max 100 chars
 - [ ] `name` is 3–200 characters
 - [ ] `description` is 10–500 characters
 - [ ] `servings` is 1–100, `time` is 1–1440
 - [ ] `difficulty` is exactly `easy`, `medium`, or `hard`
-- [ ] `tags` are all lowercase, no spaces, no duplicates, at least 1
+- [ ] `tags` are all lowercase, no spaces, no duplicates, at least 1. No dietary values (use `diet` instead)
+- [ ] `diet` values (if present) are only `vegan`, `vegetarian`, or `gluten-free`
 - [ ] Sections use `#` (H1) headings: `# Notes`, `# Ingredients`, `# Instructions`, `# Serving Suggestions`
 - [ ] Ingredient categories use `##` (H2) headings: `## Fresh`, `## Fridge`, `## Spices`, `## Pantry`
 - [ ] Category names are exactly one of: Fresh, Fridge, Spices, Pantry

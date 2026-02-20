@@ -6,7 +6,8 @@
     "servings": 2,
     "time": 30,
     "difficulty": "easy",
-    "tags": ["vegan", "dinner", "curry"],
+    "tags": ["dinner", "curry"],
+    "diet": ["vegan"],
     "notes": "Make sure to use fresh spices for best flavor. This curry tastes even better the next day.",
     "ingredients": {
       "Fresh": [
@@ -29,7 +30,8 @@
       { "text": "Add {lentils} and {broth}" },
       { "text": "Simmer for 20 minutes", "durations": [{ "seconds": 1200, "text": "20 minutes" }] }
     ],
-    "serving_suggestions": "Serve over rice with naan bread. Garnish with fresh cilantro."
+    "serving_suggestions": "Serve over rice with naan bread. Garnish with fresh cilantro.",
+    "tested": true
   },
   {
     "id": "test-salad",
@@ -38,7 +40,8 @@
     "servings": 2,
     "time": 10,
     "difficulty": "easy",
-    "tags": ["vegan", "lunch", "salad"],
+    "tags": ["lunch", "salad"],
+    "diet": ["vegan"],
     "ingredients": {
       "Fresh": [
         { "id": 1, "text": "2 cups lettuce", "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
@@ -52,7 +55,8 @@
       { "text": "Chop lettuce" },
       { "text": "Slice tomato" },
       { "text": "Mix and add oil" }
-    ]
+    ],
+    "tested": true
   },
   {
     "id": "test-toast",
@@ -61,7 +65,8 @@
     "servings": 1,
     "time": 5,
     "difficulty": "easy",
-    "tags": ["vegan", "breakfast", "quick"],
+    "tags": ["breakfast", "quick"],
+    "diet": ["vegan"],
     "ingredients": {
       "Pantry": [
         { "id": 1, "text": "2 slices bread", "quantity": { "amount": 2, "item": "slices bread" } },
@@ -71,6 +76,7 @@
     "steps": [
       { "text": "Toast the bread" },
       { "text": "Spread butter" }
-    ]
+    ],
+    "tested": true
   }
 ]

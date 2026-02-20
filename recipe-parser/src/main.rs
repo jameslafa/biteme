@@ -33,9 +33,12 @@ struct RecipeFrontmatter {
     time: u32,
     difficulty: String,
     tags: Vec<String>,
+    diet: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     author: Option<String>,
     date: String,
+    #[serde(default)]
+    tested: Option<bool>,
 }
 
 #[derive(Debug, Serialize)]
@@ -86,6 +89,7 @@ struct Recipe {
     time: u32,
     difficulty: String,
     tags: Vec<String>,
+    diet: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     author: Option<String>,
     date: String,
@@ -96,6 +100,7 @@ struct Recipe {
     steps: Vec<Step>,
     #[serde(skip_serializing_if = "Option::is_none")]
     serving_suggestions: Option<String>,
+    tested: bool,
 }
 
 #[derive(Serialize)]
@@ -738,12 +743,14 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
         time: frontmatter.time,
         difficulty: frontmatter.difficulty,
         tags: frontmatter.tags,
+        diet: frontmatter.diet,
         author: frontmatter.author,
         date: frontmatter.date,
         notes,
         ingredients,
         steps,
         serving_suggestions,
+        tested: frontmatter.tested.unwrap_or(true),
     })
 }
 
@@ -840,7 +847,7 @@ fn friendly_frontmatter_error(err: &serde_yaml::Error) -> anyhow::Error {
         if let Some(rest) = msg.strip_prefix("unknown field `") {
             if let Some(field) = rest.split('`').next() {
                 return anyhow::anyhow!(
-                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, date",
+                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, date. Optional: diet, author, tested",
                     field
                 );
             }
@@ -925,6 +932,17 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
         });
     if !valid_date {
         bail!("Date must be in YYYY-MM-DD format, got '{}'", fm.date);
+    }
+
+    // Validate diet values (always, not just lint mode)
+    if fm.diet.is_empty() {
+        bail!("Diet must have at least one value. Valid values: vegan, vegetarian, gluten-free");
+    }
+    let valid_diets = ["vegan", "vegetarian", "gluten-free"];
+    for d in &fm.diet {
+        if !valid_diets.contains(&d.as_str()) {
+            bail!("Invalid diet value: '{}'. Valid values: {:?}", d, valid_diets);
+        }
     }
 
     if lint {
@@ -1123,6 +1141,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test, vegan]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1162,6 +1181,7 @@ servings: 2
 time: 15
 difficulty: super-hard
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1196,6 +1216,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1230,6 +1251,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1264,6 +1286,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: []
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1298,6 +1321,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1343,6 +1367,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1377,6 +1402,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1411,6 +1437,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1440,6 +1467,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1470,6 +1498,7 @@ servings: 0
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1504,6 +1533,7 @@ servings: 2
 time: 0
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1538,6 +1568,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1584,6 +1615,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1628,6 +1660,7 @@ servings: 2
 time: 10
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1666,6 +1699,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1715,6 +1749,7 @@ servings: 2
 time: 10
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1792,6 +1827,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [Vegan, test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1826,6 +1862,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [vegan food, test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1860,6 +1897,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [vegan, test, vegan]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1895,6 +1933,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1930,6 +1969,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1965,6 +2005,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -1999,6 +2040,7 @@ servings: 150
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -2033,6 +2075,7 @@ servings: 2
 time: 2000
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -2067,6 +2110,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 author: James
 date: 2026-02-10
 ---
@@ -2104,6 +2148,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 10-02-2026
 ---
 
@@ -2126,6 +2171,151 @@ date: 10-02-2026
 
         assert!(result.is_err());
         assert!(result.unwrap_err().to_string().contains("YYYY-MM-DD"));
+    }
+
+    // ── Diet field validation tests ──
+
+    #[test]
+    fn test_diet_required() {
+        let test_recipe = r#"---
+id: no-diet
+name: No Diet
+description: Recipe without diet field
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup ingredient
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("no-diet.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_err());
+        let err_msg = result.unwrap_err().to_string();
+        assert!(err_msg.contains("diet"), "Expected error about missing diet field, got: {}", err_msg);
+    }
+
+    #[test]
+    fn test_diet_empty_rejected() {
+        let test_recipe = r#"---
+id: empty-diet
+name: Empty Diet
+description: Recipe with empty diet list
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+diet: []
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup ingredient
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("empty-diet.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_err());
+        assert!(result.unwrap_err().to_string().contains("Diet must have at least one value"));
+    }
+
+    #[test]
+    fn test_diet_invalid_value() {
+        let test_recipe = r#"---
+id: bad-diet
+name: Bad Diet
+description: Recipe with invalid diet value
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+diet: [keto]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup ingredient
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("bad-diet.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_err());
+        assert!(result.unwrap_err().to_string().contains("Invalid diet value"));
+    }
+
+    #[test]
+    fn test_diet_valid_multiple() {
+        let test_recipe = r#"---
+id: multi-diet
+name: Multi Diet
+description: Recipe with multiple valid diet values
+servings: 2
+time: 15
+difficulty: easy
+tags: [test]
+diet: [vegan, gluten-free]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 cup ingredient
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("multi-diet.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false);
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+        assert_eq!(recipe.diet.len(), 2);
+        assert!(recipe.diet.contains(&"vegan".to_string()));
+        assert!(recipe.diet.contains(&"gluten-free".to_string()));
     }
 
     // ── Quantity parsing tests ──
@@ -2313,6 +2503,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -2358,6 +2549,7 @@ servings: 4
 time: 30
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 
@@ -2581,6 +2773,7 @@ servings: 2
 time: 15
 difficulty: easy
 tags: [test]
+diet: [vegan]
 date: 2026-01-01
 ---
 

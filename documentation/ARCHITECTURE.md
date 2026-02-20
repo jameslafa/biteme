@@ -262,6 +262,22 @@ Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="ca
 - Mockups stay visually correct when styles change — no separate screenshots or static images to maintain
 - Zero maintenance cost as the design evolves
 
+## Settings Page
+
+**Decision:** Dedicated settings page accessible from the side drawer
+
+**How it works:**
+- `settings.html` with a simple toggle-based UI
+- Uses `getSetting()` / `setSetting()` from `db.js` for persistent preferences
+- Dietary filters: "Vegan only" and "Gluten-free only" toggles filter recipes by their `diet` field. Stored as `dietaryFilters` array in IndexedDB settings. Applied on home page load alongside other filters.
+- "Show untested recipes" toggle controls visibility of recipes marked with `tested: false` in frontmatter
+- Toggle state is read on home page load to filter the recipe list
+
+**Why a separate page (not inline in drawer):**
+- Clean separation — settings will grow over time
+- Consistent with other sub-pages (Cooking Log, What's New)
+- Avoids cluttering the drawer with controls
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements

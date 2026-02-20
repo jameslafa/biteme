@@ -5,7 +5,8 @@ description: The perfect egg-free scramble — spiced with kala namak and chipot
 servings: 2
 time: 20
 difficulty: easy
-tags: [vegan, breakfast]
+tags: [breakfast]
+diet: [vegan]
 author: James
 date: 2026-02-17
 ---

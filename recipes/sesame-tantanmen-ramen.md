@@ -5,7 +5,8 @@ description: Creamy sesame broth with spicy tofu crumbles and fresh vegetables
 servings: 2
 time: 45
 difficulty: medium
-tags: [vegan, ramen, japanese]
+tags: [ramen, japanese]
+diet: [vegan]
 author: James
 date: 2026-02-17
 ---

@@ -7,8 +7,10 @@
     "time": 35,
     "difficulty": "easy",
     "tags": [
+      "french"
+    ],
+    "diet": [
       "vegan",
-      "french",
       "gluten-free"
     ],
     "author": "James",
@@ -133,7 +135,8 @@
         "text": "Spoon the mushroom filling onto the galette, fold the edges in, sprinkle with fresh {parsley}, and serve immediately."
       }
     ],
-    "serving_suggestions": "Serve with a bowl of cidre breton for the full Breton experience. Other vegan filling ideas: creamy leeks with oat cream and nutmeg; ratatouille; caramelised onion and spinach with vegan cheese; roasted butternut squash with cumin, hummus, and toasted pumpkin seeds; or vegan pesto with sun-dried tomatoes, pine nuts, and rocket.\n\nFor vegetarian fillings: a fried egg with grated Comté (the classic complète); goat cheese with honey and walnuts; sautéed mushrooms with egg and Gruyère; or wilted spinach with ricotta, lemon zest, and black pepper."
+    "serving_suggestions": "Serve with a bowl of cidre breton for the full Breton experience. Other vegan filling ideas: creamy leeks with oat cream and nutmeg; ratatouille; caramelised onion and spinach with vegan cheese; roasted butternut squash with cumin, hummus, and toasted pumpkin seeds; or vegan pesto with sun-dried tomatoes, pine nuts, and rocket.\n\nFor vegetarian fillings: a fried egg with grated Comté (the classic complète); goat cheese with honey and walnuts; sautéed mushrooms with egg and Gruyère; or wilted spinach with ricotta, lemon zest, and black pepper.",
+    "tested": true
   },
   {
     "id": "tofu-scramble",
@@ -143,8 +146,10 @@
     "time": 20,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "breakfast"
+    ],
+    "diet": [
+      "vegan"
     ],
     "author": "James",
     "date": "2026-02-17",
@@ -295,7 +300,8 @@
         "text": "Taste and add a pinch {kala namak} and {black pepper} if needed."
       }
     ],
-    "serving_suggestions": "Serve with halved cherry tomatoes, sliced cucumber, bell pepper strips, and toasted crusty bread."
+    "serving_suggestions": "Serve with halved cherry tomatoes, sliced cucumber, bell pepper strips, and toasted crusty bread.",
+    "tested": true
   },
   {
     "id": "sesame-tantanmen-ramen",
@@ -305,9 +311,11 @@
     "time": 45,
     "difficulty": "medium",
     "tags": [
-      "vegan",
       "ramen",
       "japanese"
+    ],
+    "diet": [
+      "vegan"
     ],
     "author": "James",
     "date": "2026-02-17",
@@ -522,7 +530,8 @@
         "text": "Pour the hot broth over the noodles. Top with the spicy tofu crumbles, steamed vegetables, {sweetcorn}, {spring onions}, {crushed peanuts}, and {sesame seeds}. Finish with extra {rayu} to taste."
       }
     ],
-    "serving_suggestions": "Serve immediately while piping hot. For extra heat, add more rayu or a drizzle of chilli oil on top. A squeeze of lime on the side is a nice addition. If you want a richer broth, stir in an extra tablespoon of sesame paste."
+    "serving_suggestions": "Serve immediately while piping hot. For extra heat, add more rayu or a drizzle of chilli oil on top. A squeeze of lime on the side is a nice addition. If you want a richer broth, stir in an extra tablespoon of sesame paste.",
+    "tested": true
   },
   {
     "id": "chilli-sin-carne",
@@ -532,9 +541,11 @@
     "time": 50,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "chilli",
-      "one-pot",
+      "one-pot"
+    ],
+    "diet": [
+      "vegan",
       "gluten-free"
     ],
     "date": "2026-02-16",
@@ -802,7 +813,8 @@
         "text": "Taste and adjust the spices as needed. Let it sit for a few minutes before serving."
       }
     ],
-    "serving_suggestions": "Serve over rice, with baked potatoes, or with tortilla chips and guacamole. Top with vegan sour cream, fresh coriander, diced avocado, sliced spring onions, or a squeeze of lime."
+    "serving_suggestions": "Serve over rice, with baked potatoes, or with tortilla chips and guacamole. Top with vegan sour cream, fresh coriander, diced avocado, sliced spring onions, or a squeeze of lime.",
+    "tested": true
   },
   {
     "id": "kale-and-white-bean-stew",
@@ -812,9 +824,11 @@
     "time": 30,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "stew",
-      "one-pot",
+      "one-pot"
+    ],
+    "diet": [
+      "vegan",
       "gluten-free"
     ],
     "author": "James",
@@ -988,7 +1002,8 @@
         "text": "Season with {salt}, {pepper}, and the {lemon} juice. Taste and adjust as needed."
       }
     ],
-    "serving_suggestions": "Serve with a chunk of crusty bread for dipping. Drizzle with good olive oil and a sprinkle of nutritional yeast for a savoury, cheesy flavour."
+    "serving_suggestions": "Serve with a chunk of crusty bread for dipping. Drizzle with good olive oil and a sprinkle of nutritional yeast for a savoury, cheesy flavour.",
+    "tested": true
   },
   {
     "id": "vegan-crepes",
@@ -998,9 +1013,11 @@
     "time": 60,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "french",
       "dessert"
+    ],
+    "diet": [
+      "vegan"
     ],
     "author": "James",
     "date": "2026-02-14",
@@ -1119,7 +1136,8 @@
         "text": "Repeat, adding a little {vegan butter} to the pan between crêpes."
       }
     ],
-    "serving_suggestions": "Spread with Nutella (ideally a version without palm oil), lemon and sugar, or fresh fruit and whipped coconut cream. For savoury crêpes, skip the sugar and fill with sautéed mushrooms, spinach, or ratatouille."
+    "serving_suggestions": "Spread with Nutella (ideally a version without palm oil), lemon and sugar, or fresh fruit and whipped coconut cream. For savoury crêpes, skip the sugar and fill with sautéed mushrooms, spinach, or ratatouille.",
+    "tested": true
   },
   {
     "id": "creamy-one-pan-spinach-gnocchi",
@@ -1129,9 +1147,11 @@
     "time": 20,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "pasta",
       "one-pot"
+    ],
+    "diet": [
+      "vegan"
     ],
     "author": "Kimberley",
     "date": "2026-02-12",
@@ -1308,7 +1328,8 @@
         "text": "Stir in {spinach} until wilted. Mix in {lemon} juice if using. Taste and adjust seasoning."
       }
     ],
-    "serving_suggestions": "Serve with a drizzle of oil from the sun-dried tomatoes."
+    "serving_suggestions": "Serve with a drizzle of oil from the sun-dried tomatoes.",
+    "tested": true
   },
   {
     "id": "creamy-mushroom-soup",
@@ -1318,9 +1339,11 @@
     "time": 40,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "soup",
       "one-pot"
+    ],
+    "diet": [
+      "vegan"
     ],
     "author": "James",
     "date": "2026-02-10",
@@ -1475,7 +1498,8 @@
         "text": "Serve with fresh {parsley} on top and some crusty bread on the side."
       }
     ],
-    "serving_suggestions": "Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzle of truffle oil for a fancy touch. Great with a side salad for a complete meal."
+    "serving_suggestions": "Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzle of truffle oil for a fancy touch. Great with a side salad for a complete meal.",
+    "tested": true
   },
   {
     "id": "pain-depice",
@@ -1488,6 +1512,9 @@
       "french",
       "baking",
       "dessert"
+    ],
+    "diet": [
+      "vegetarian"
     ],
     "author": "James",
     "date": "2026-02-10",
@@ -1598,7 +1625,8 @@
         ]
       }
     ],
-    "serving_suggestions": "Slice and enjoy with butter, or serve with tea or coffee. Even better the next day when the flavours have mellowed and the texture becomes more moist. Store wrapped in foil to keep fresh."
+    "serving_suggestions": "Slice and enjoy with butter, or serve with tea or coffee. Even better the next day when the flavours have mellowed and the texture becomes more moist. Store wrapped in foil to keep fresh.",
+    "tested": true
   },
   {
     "id": "pumpkin-potato-curry",
@@ -1608,9 +1636,11 @@
     "time": 40,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "curry",
-      "one-pot",
+      "one-pot"
+    ],
+    "diet": [
+      "vegan",
       "gluten-free"
     ],
     "author": "James",
@@ -1763,7 +1793,8 @@
         "text": "Season with {salt} and {pepper}, then serve over rice (or with naan) topped with fresh {coriander} and a squeeze of {lime}."
       }
     ],
-    "serving_suggestions": "Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime. Great for meal prep – portion into containers for easy weeknight dinners throughout the week."
+    "serving_suggestions": "Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime. Great for meal prep – portion into containers for easy weeknight dinners throughout the week.",
+    "tested": true
   },
   {
     "id": "creamy-hummus",
@@ -1773,9 +1804,11 @@
     "time": 90,
     "difficulty": "medium",
     "tags": [
-      "vegan",
       "middle-eastern",
-      "dip",
+      "dip"
+    ],
+    "diet": [
+      "vegan",
       "gluten-free"
     ],
     "author": "James",
@@ -1896,7 +1929,8 @@
         "text": "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
       }
     ],
-    "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter."
+    "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter.",
+    "tested": true
   },
   {
     "id": "classic-british-scones",
@@ -1906,9 +1940,11 @@
     "time": 30,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "baking",
       "british"
+    ],
+    "diet": [
+      "vegan"
     ],
     "author": "James",
     "date": "2026-02-10",
@@ -2009,7 +2045,8 @@
         "text": "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
       }
     ],
-    "serving_suggestions": "Serve warm with jam and vegan butter. For a traditional cream tea, add vegan whipped cream. Try adding dried fruit or a pinch of cinnamon to the dough for a twist."
+    "serving_suggestions": "Serve warm with jam and vegan butter. For a traditional cream tea, add vegan whipped cream. Try adding dried fruit or a pinch of cinnamon to the dough for a twist.",
+    "tested": true
   },
   {
     "id": "vegan-banana-bread",
@@ -2019,9 +2056,11 @@
     "time": 65,
     "difficulty": "easy",
     "tags": [
-      "vegan",
       "baking",
       "dessert"
+    ],
+    "diet": [
+      "vegan"
     ],
     "author": "James",
     "date": "2026-02-10",
@@ -2157,6 +2196,7 @@
         ]
       }
     ],
-    "serving_suggestions": "Enjoy warm with vegan butter, or toasted the next day. Delicious for breakfast with coffee or as an afternoon snack. Try spreading with peanut butter or almond butter for extra protein."
+    "serving_suggestions": "Enjoy warm with vegan butter, or toasted the next day. Delicious for breakfast with coffee or as an afternoon snack. Try spreading with peanut butter or almond butter for extra protein.",
+    "tested": true
   }
 ]

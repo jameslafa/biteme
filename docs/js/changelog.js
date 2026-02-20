@@ -1,5 +1,7 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 16, date: '2026-02-20', text: 'Feeling adventurous? Enable experimental recipes in Settings — untested creations for the brave cook' },
+  { id: 15, date: '2026-02-20', text: 'Dietary preferences — set vegan or gluten-free filters in Settings so you only see recipes that match your diet' },
   { id: 14, date: '2026-02-18', text: 'How It Works — a new guide page walking you through all features, accessible from the side drawer' },
   { id: 13, date: '2026-02-17', text: 'Cooking Log — see your stats, most-made recipes, and full cooking timeline from the side drawer' },
   { id: 12, date: '2026-02-17', text: 'Search now matches ingredients — find recipes by what you have on hand' },

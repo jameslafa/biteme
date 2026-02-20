@@ -26,13 +26,13 @@ test.describe('How It Works Page', () => {
     await expect(page).toHaveTitle('How It Works - biteme');
   });
 
-  test('renders all 8 feature sections', async ({ page }) => {
+  test('renders all 9 feature sections', async ({ page }) => {
     const sections = page.locator('.feature-section');
-    await expect(sections).toHaveCount(8);
+    await expect(sections).toHaveCount(9);
   });
 
   test('sections have correct anchor IDs', async ({ page }) => {
-    const expectedIds = ['find', 'prepare', 'cook', 'timer', 'after-cooking', 'share', 'offline', 'cooking-log'];
+    const expectedIds = ['find', 'diet', 'prepare', 'cook', 'timer', 'after-cooking', 'share', 'offline', 'cooking-log'];
     for (const id of expectedIds) {
       await expect(page.locator(`#${id}`)).toBeVisible();
     }

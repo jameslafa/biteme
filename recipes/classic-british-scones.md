@@ -5,7 +5,8 @@ description: Light and fluffy vegan scones perfect for afternoon tea
 servings: 10
 time: 30
 difficulty: easy
-tags: [vegan, baking, british]
+tags: [baking, british]
+diet: [vegan]
 author: James
 date: 2026-02-10
 ---

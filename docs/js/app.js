@@ -1,6 +1,7 @@
 // Main app logic for recipe list page
 
 let showFavoritesOnly = false;
+let showUntestedRecipes = false;
 let activeTag = null;
 let activeMinRating = null;
 let pendingTag = null;
@@ -8,12 +9,19 @@ let pendingMinRating = null;
 let cachedAllRecipes = [];
 let cachedRatingsMap = {};
 let cachedFavoriteIds = new Set();
+let activeDietaryFilters = [];
 
 document.addEventListener('DOMContentLoaded', async function() {
   await initDB();
 
   // Restore filter state from localStorage
   showFavoritesOnly = localStorage.getItem('showFavoritesOnly') === 'true';
+
+  // Load untested setting from IndexedDB
+  showUntestedRecipes = !!(await getSetting('showUntestedRecipes'));
+
+  // Load dietary filters from IndexedDB
+  activeDietaryFilters = (await getSetting('dietaryFilters')) || [];
 
   // Read tag filter from URL param
   const urlParams = new URLSearchParams(window.location.search);
@@ -42,6 +50,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Single filter function used by both loadRecipes (applied) and live count (pending)
 function filterRecipes({ tag, minRating, favoritesOnly, searchQuery }) {
   let recipes = cachedAllRecipes;
+
+  if (!showUntestedRecipes) {
+    recipes = recipes.filter(r => r.tested !== false);
+  }
+
+  if (activeDietaryFilters.length > 0) {
+    recipes = recipes.filter(r => activeDietaryFilters.every(d => (r.diet || []).includes(d)));
+  }
 
   if (favoritesOnly) {
     recipes = recipes.filter(r => cachedFavoriteIds.has(r.id));
@@ -292,6 +308,25 @@ async function getCookingStatsMap() {
   }
 }
 
+// Diet badge config: letter(s) in a circle
+const DIET_BADGES = {
+  vegan: { label: 'V', title: 'Vegan', color: '#6B9080' },
+  vegetarian: { label: 'Vg', title: 'Vegetarian', color: '#b8860b' },
+  'gluten-free': { label: 'GF', title: 'Gluten-free', color: '#C4A882' },
+};
+
+function renderDietIcons(diet) {
+  if (!diet || diet.length === 0) return '';
+  const badges = diet
+    .filter(d => DIET_BADGES[d])
+    .map(d => {
+      const b = DIET_BADGES[d];
+      return `<span class="diet-badge" title="${b.title}" style="--diet-color:${b.color}">${b.label}</span>`;
+    })
+    .join('');
+  return badges ? `<span class="diet-icons">${badges}</span>` : '';
+}
+
 // Display recipes in the grid
 async function displayRecipes(recipes) {
   const recipeGrid = document.getElementById('recipe-grid');
@@ -367,7 +402,11 @@ async function displayRecipes(recipes) {
       </div>
       <p class="recipe-description">${recipe.description}</p>
       <div class="recipe-tags">
-        ${recipe.tags.map(tag => `<button class="tag tag-filter${activeTag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`).join('')}
+        <div class="recipe-tags-left">
+          ${recipe.tested === false ? '<span class="tag tag-untested">untested</span>' : ''}
+          ${recipe.tags.map(tag => `<button class="tag tag-filter${activeTag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`).join('')}
+        </div>
+        ${renderDietIcons(recipe.diet || [])}
       </div>
       ${statsHtml}
     </div>

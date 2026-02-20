@@ -24,7 +24,7 @@ test.beforeEach(async ({ page }) => {
 test.describe('What\'s New Page', () => {
   test('displays all changelog entries', async ({ page }) => {
     const entries = page.locator('.timeline-entry');
-    await expect(entries).toHaveCount(14);
+    await expect(entries).toHaveCount(16);
   });
 
   test('entries are grouped by month with labels', async ({ page }) => {
@@ -36,7 +36,7 @@ test.describe('What\'s New Page', () => {
     const firstEntry = page.locator('.timeline-entry').first();
     await expect(firstEntry.locator('.timeline-day')).toBeVisible();
     await expect(firstEntry.locator('.timeline-entry-text')).toBeVisible();
-    await expect(firstEntry.locator('.timeline-entry-text')).toContainText('How It Works');
+    await expect(firstEntry.locator('.timeline-entry-text')).toContainText('adventurous');
   });
 
   test('newest entry is first', async ({ page }) => {
@@ -44,7 +44,7 @@ test.describe('What\'s New Page', () => {
     const lastText = await page.locator('.timeline-entry-text').last().textContent();
 
     // First entry should be the newest changelog item
-    expect(firstText).toContain('How It Works');
+    expect(firstText).toContain('adventurous');
     // Last entry should be the oldest
     expect(lastText).toContain('Install BiteMe');
   });
@@ -54,7 +54,7 @@ test.describe('What\'s New Page', () => {
       return await getSetting('lastSeenChangelogId');
     });
 
-    expect(lastSeenId).toBe(14);
+    expect(lastSeenId).toBe(16);
   });
 
   test('back button navigates to home', async ({ page }) => {

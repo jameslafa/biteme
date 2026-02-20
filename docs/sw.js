@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v33';
+const CACHE_NAME = 'biteme-v35';
 
 const APP_SHELL = [
   './',
@@ -9,6 +9,7 @@ const APP_SHELL = [
   'cooking-log.html',
   'whats-new.html',
   'how-it-works.html',
+  'settings.html',
   'completion.html',
   'css/style.css',
   'css/recipe.css',
@@ -16,6 +17,7 @@ const APP_SHELL = [
   'css/shopping.css',
   'css/cooking-log.css',
   'css/how-it-works.css',
+  'css/settings.css',
   'css/completion.css',
   'js/changelog.js',
   'js/db.js',
@@ -26,6 +28,7 @@ const APP_SHELL = [
   'js/cooking-log.js',
   'js/whats-new.js',
   'js/how-it-works.js',
+  'js/settings.js',
   'js/servings.js',
   'js/notes.js',
   'js/rating.js',

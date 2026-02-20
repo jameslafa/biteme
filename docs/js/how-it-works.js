@@ -87,6 +87,39 @@ const FEATURES = [
     ]
   },
   {
+    id: 'diet',
+    title: 'Cook your way',
+    description: 'Vegan? Gluten-free? Head to Settings and toggle your dietary preferences — the recipe list will only show what fits. You\'ll also spot small badges on each card so you know at a glance what\'s what.',
+    mockupHTML: `
+      <div class="settings-list" style="max-width:none;">
+        <div class="settings-item">
+          <div class="settings-item-text">
+            <span class="settings-item-label" style="display:flex;align-items:center;gap:0.4rem;">
+              <span class="diet-badge" style="--diet-color:#6B9080">V</span> Vegan only
+            </span>
+            <span class="settings-item-description">Only show recipes marked as vegan</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked tabindex="-1">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-item" style="margin-top:var(--spacing-xs);">
+          <div class="settings-item-text">
+            <span class="settings-item-label" style="display:flex;align-items:center;gap:0.4rem;">
+              <span class="diet-badge" style="--diet-color:#C4A882">GF</span> Gluten-free only
+            </span>
+            <span class="settings-item-description">Only show recipes marked as gluten-free</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" tabindex="-1">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    `
+  },
+  {
     id: 'prepare',
     title: 'Get ready',
     description: 'Cooking for two instead of four? Just change the servings and all the quantities adjust on their own. Before you start, go through the ingredient list and check off what you already have. Anything missing? Tap the cart icon to add it to your shopping list.',

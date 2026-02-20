@@ -5,7 +5,8 @@ description: Rich and creamy mushroom soup perfect for batch cooking and freezin
 servings: 4
 time: 40
 difficulty: easy
-tags: [vegan, soup, one-pot]
+tags: [soup, one-pot]
+diet: [vegan]
 author: James
 date: 2026-02-10
 ---

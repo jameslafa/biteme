@@ -424,11 +424,11 @@ test.describe('Filter Panel', () => {
     await page.locator('#tag-select-btn').click();
 
     const options = page.locator('#tag-options .filter-option');
-    // "All" + 7 unique tags: breakfast, curry, dinner, lunch, quick, salad, vegan
-    await expect(options).toHaveCount(8);
+    // "All" + 6 unique tags: breakfast, curry, dinner, lunch, quick, salad
+    await expect(options).toHaveCount(7);
     await expect(options.nth(0)).toHaveText('All');
     await expect(options.nth(1)).toHaveText('breakfast');
-    await expect(options.nth(7)).toHaveText('vegan');
+    await expect(options.nth(6)).toHaveText('salad');
   });
 
   test('apply button shows live result count', async ({ page }) => {
@@ -442,9 +442,9 @@ test.describe('Filter Panel', () => {
     await selectFilterOption(page, 'tag-select-btn', 'curry');
     await expect(applyBtn).toHaveText('Show 1 recipe');
 
-    // Select tag "vegan" — all 3
-    await selectFilterOption(page, 'tag-select-btn', 'vegan');
-    await expect(applyBtn).toHaveText('Show 3 recipes');
+    // Select tag "breakfast" — 1 recipe (test-toast)
+    await selectFilterOption(page, 'tag-select-btn', 'breakfast');
+    await expect(applyBtn).toHaveText('Show 1 recipe');
   });
 
   test('selecting tag and clicking Filter applies it', async ({ page }) => {

@@ -347,9 +347,16 @@ main {
 /* Tags */
 .recipe-tags {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-xs);
   margin-top: var(--spacing-sm);
+}
+
+.recipe-tags-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
 }
 
 .tag {
@@ -382,6 +389,35 @@ a.tag-filter {
   background-color: var(--primary-color);
   color: var(--surface);
   border-color: var(--primary-color);
+}
+
+/* Diet Badges */
+.diet-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-right: 0.25rem;
+}
+
+.diet-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background-color: var(--diet-color);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 600;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tag-untested {
+  background-color: #fff3e0;
+  color: #e65100;
+  border-color: #ffcc80;
 }
 
 /* Filter Dropdown Panel */
