@@ -1,5 +1,733 @@
 [
   {
+    "id": "palak-tofu",
+    "name": "Palak Tofu",
+    "description": "Vegan saag paneer — crispy tofu in a creamy spiced spinach sauce",
+    "servings": 4,
+    "time": 45,
+    "difficulty": "medium",
+    "tags": [
+      "indian",
+      "curry"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-02-20",
+    "notes": "Press the tofu well — at least 15 minutes with a cloth or kitchen paper — for crispier results. Fresh spinach gives a brighter colour but frozen works fine if well drained.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "500 g fresh spinach",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "g",
+            "item": "fresh spinach"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 medium onions, roughly chopped",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "medium",
+            "item": "onions, roughly chopped"
+          }
+        },
+        {
+          "id": 3,
+          "text": "4 cloves garlic",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 thumb fresh ginger",
+          "quantity": {
+            "amount": 1.0,
+            "item": "thumb fresh ginger"
+          }
+        },
+        {
+          "id": 5,
+          "text": "Lemon for juice"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 6,
+          "text": "400 g firm tofu",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "g",
+            "item": "firm tofu"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tin (400 ml) coconut cream",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "coconut cream",
+            "secondary_amount": 400.0,
+            "secondary_unit": "ml"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 8,
+          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 9,
+          "text": "2 tsp cumin seeds",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tsp coriander powder",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "coriander powder"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1 tsp garam masala",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "garam masala"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1/2 tsp turmeric",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "turmeric"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1/4 tsp nutmeg",
+          "quantity": {
+            "amount": 0.25,
+            "unit": "tsp",
+            "item": "nutmeg"
+          }
+        },
+        {
+          "id": 14,
+          "text": "1 tsp chilli flakes, adjust to taste",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "chilli flakes, adjust to taste"
+          }
+        },
+        {
+          "id": 15,
+          "text": "Salt to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Press {tofu} with a cloth or kitchen paper for at least 15 minutes to remove excess moisture, then cut into 2 cm cubes.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Heat {oil} in a pan over high heat. Pan-fry the tofu until golden and crispy on all sides. Set aside."
+      },
+      {
+        "text": "In the same pan, fry the {cumin seeds} until they pop, then add {onions} and cook until deeply golden, about 10 minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "about 10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {garlic} and {ginger}, cook for 2 minutes, then add {turmeric}, {coriander powder} and {chilli flakes}. Stir well.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {spinach} and let it wilt completely."
+      },
+      {
+        "text": "Blend everything into a smooth sauce using a hand blender."
+      },
+      {
+        "text": "Stir in the {coconut cream} and simmer for 5 minutes.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the tofu back in, season with {garam masala}, {nutmeg} and {salt}, and simmer for another 5 minutes. Finish with a squeeze of {lemon} juice.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "5 minutes"
+          }
+        ]
+      }
+    ],
+    "serving_suggestions": "Serve with basmati rice or naan. A squeeze of lemon at the end brightens it up nicely.",
+    "tested": false
+  },
+  {
+    "id": "teriyaki-soba-noodles",
+    "name": "Teriyaki Soba Noodles",
+    "description": "Quick stir-fried soba noodles with mushrooms, bok choy and teriyaki sauce",
+    "servings": 4,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "japanese",
+      "stir-fry"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-20",
+    "notes": "This comes together in 20 minutes — prep the vegetables while the water boils. If the noodles start sticking after draining, rinse them with cold water. Add teriyaki sauce gradually to taste — different brands vary in sweetness and saltiness.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "3 bunches bok choy, chopped, whites and greens separated",
+          "quantity": {
+            "amount": 3.0,
+            "item": "bunches bok choy, chopped, whites and greens separated"
+          }
+        },
+        {
+          "id": 2,
+          "text": "4 cloves garlic, diced",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic, diced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 bunch spring onions, chopped, whites and greens separated",
+          "quantity": {
+            "amount": 1.0,
+            "item": "bunch spring onions, chopped, whites and greens separated"
+          }
+        },
+        {
+          "id": 4,
+          "text": "225 g mushrooms, chopped small",
+          "quantity": {
+            "amount": 225.0,
+            "unit": "g",
+            "item": "mushrooms, chopped small"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "2 bundles soba noodles",
+          "quantity": {
+            "amount": 2.0,
+            "item": "bundles soba noodles"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tbsp sesame oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "sesame oil"
+          }
+        },
+        {
+          "id": 7,
+          "text": "80 ml teriyaki sauce, or to taste",
+          "quantity": {
+            "amount": 80.0,
+            "unit": "ml",
+            "item": "teriyaki sauce, or to taste"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 8,
+          "text": "1/4 tsp white pepper",
+          "quantity": {
+            "amount": 0.25,
+            "unit": "tsp",
+            "item": "white pepper"
+          }
+        },
+        {
+          "id": 9,
+          "text": "Red pepper flakes to taste"
+        },
+        {
+          "id": 10,
+          "text": "Sesame seeds for serving"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Bring a pot of water to a boil. While waiting, prep the vegetables. Add {soba noodles} and cook for 3–5 minutes until tender. Drain and rinse with cold water.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 3–5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Meanwhile, heat {sesame oil} in a skillet over medium heat. Add {garlic}, {mushrooms}, whites of the {bok choy}, whites of the {spring onions}, {white pepper} and {red pepper flakes}. Cook for about 5 minutes until the mushrooms have released their liquid and it has cooked off.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add 2 tablespoons of {teriyaki sauce} and cook for 1 more minute."
+      },
+      {
+        "text": "Add the soba noodles, greens of the {bok choy} and the rest of the {teriyaki sauce}. Toss until everything is coated and heated through."
+      },
+      {
+        "text": "Serve topped with remaining {spring onions} and {sesame seeds}."
+      }
+    ],
+    "tested": false
+  },
+  {
+    "id": "dal-tadka",
+    "name": "Dal Tadka",
+    "description": "Classic hearty lentil curry with a tempered spice topping",
+    "servings": 4,
+    "time": 35,
+    "difficulty": "easy",
+    "tags": [
+      "indian",
+      "curry"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-02-20",
+    "notes": "Red lentils break down into a creamy texture, yellow lentils hold their shape a bit more — both work well. Lentils are easy to find in any German supermarket or Asian shop.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 onion, finely diced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "onion, finely diced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "3 cloves garlic, minced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 thumb fresh ginger, grated",
+          "quantity": {
+            "amount": 1.0,
+            "item": "thumb fresh ginger, grated"
+          }
+        },
+        {
+          "id": 4,
+          "text": "Lemon for juice"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "250 g red or yellow lentils",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "red or yellow lentils"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 8,
+          "text": "1 tsp cumin seeds",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 tsp turmeric",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "turmeric"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tsp garam masala",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "garam masala"
+          }
+        },
+        {
+          "id": 11,
+          "text": "Chilli to taste"
+        },
+        {
+          "id": 12,
+          "text": "Salt to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Rinse {lentils} and cook in water until soft, about 15 minutes. Drain any excess water.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "about 15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "In a pan, heat {oil} and fry the {cumin seeds} until they start to pop, then add {onion} and cook until golden."
+      },
+      {
+        "text": "Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for 2 minutes, stirring often.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {tomatoes} and cook for 5 minutes.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in the cooked lentils and simmer together for 10 minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for 10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Season with {salt} and finish with a squeeze of {lemon} juice."
+      }
+    ],
+    "serving_suggestions": "Serve with basmati rice or naan bread. A dollop of coconut yoghurt and fresh coriander on top works nicely.",
+    "tested": false
+  },
+  {
+    "id": "rajma",
+    "name": "Rajma",
+    "description": "Rich red kidney bean curry — even better the next day",
+    "servings": 4,
+    "time": 55,
+    "difficulty": "easy",
+    "tags": [
+      "indian",
+      "curry"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-02-20",
+    "notes": "Don't rush the onions — cooking them until deep golden brown is key to the richness of the dish. Like most curries, this one is even better the next day once the flavours have had time to develop.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "2 medium onions, finely diced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "medium",
+            "item": "onions, finely diced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "4 cloves garlic, minced",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 thumb fresh ginger, grated",
+          "quantity": {
+            "amount": 1.0,
+            "item": "thumb fresh ginger, grated"
+          }
+        },
+        {
+          "id": 4,
+          "text": "Fresh coriander to finish"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "2 tins (400 g each) red kidney beans, drained and rinsed",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tins",
+            "item": "(400 g each) red kidney beans, drained and rinsed"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tbsp tomato purée",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "tomato purée"
+          }
+        },
+        {
+          "id": 8,
+          "text": "250 ml vegetable stock",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 10,
+          "text": "1 tsp cumin seeds",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1 tsp coriander powder",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "coriander powder"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1 tsp garam masala",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "garam masala"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1 tsp smoked paprika",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "smoked paprika"
+          }
+        },
+        {
+          "id": 14,
+          "text": "1/2 tsp turmeric",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "turmeric"
+          }
+        },
+        {
+          "id": 15,
+          "text": "1/2 tsp chilli powder, adjust to taste",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "chilli powder, adjust to taste"
+          }
+        },
+        {
+          "id": 16,
+          "text": "Salt to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Heat {oil} in a heavy-bottomed pan and fry the {cumin seeds} until they pop."
+      },
+      {
+        "text": "Add the {onions} and cook on medium heat for 12–15 minutes until deep golden brown.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for 12–15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {garlic} and {ginger}, cook for 2 minutes.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {turmeric}, {coriander powder}, {smoked paprika}, {chilli powder} and {tomato purée}. Stir well and cook for 2 minutes.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {tomatoes} and cook for 8–10 minutes until the sauce thickens and the oil starts to separate slightly.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for 8–10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {kidney beans} and {vegetable stock}, stir well, cover and simmer on low heat for 20–25 minutes.",
+        "durations": [
+          {
+            "seconds": 1500,
+            "text": "for 20–25 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Lightly mash a few beans with the back of a spoon to thicken the sauce further."
+      },
+      {
+        "text": "Season with {salt}, finish with {garam masala} and fresh {fresh coriander}."
+      }
+    ],
+    "serving_suggestions": "Serve with basmati rice. A squeeze of lemon and a dollop of coconut yoghurt work well on top.",
+    "tested": false
+  },
+  {
     "id": "galettes-bretonnes",
     "name": "Galettes Bretonnes",
     "description": "Traditional Breton buckwheat crêpes with sautéed mushrooms — naturally vegan and gluten-free",
