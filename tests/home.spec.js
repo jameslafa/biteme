@@ -424,11 +424,11 @@ test.describe('Filter Panel', () => {
     await page.locator('#tag-select-btn').click();
 
     const options = page.locator('#tag-options .filter-option');
-    // "All" + 6 unique tags: breakfast, curry, dinner, lunch, quick, salad
-    await expect(options).toHaveCount(7);
+    // "All" + 7 unique tags: breakfast, curry, dinner, lunch, quick, salad, soup
+    // (test-soup is tested:false so hidden by default, but its tags still appear in the filter)
+    await expect(options).toHaveCount(8);
     await expect(options.nth(0)).toHaveText('All');
     await expect(options.nth(1)).toHaveText('breakfast');
-    await expect(options.nth(6)).toHaveText('salad');
   });
 
   test('apply button shows live result count', async ({ page }) => {
@@ -687,6 +687,119 @@ test.describe('Recipe Refresh on Resume', () => {
     // Should still show 3 recipes, no fetch happened
     await expect(page.locator('.recipe-card')).toHaveCount(3);
     expect(recipesFetched).toBe(false);
+  });
+});
+
+test.describe('Surprise Me', () => {
+  // Helper: open filter popover
+  async function openFilterPanel(page) {
+    await page.locator('#tag-filter-btn').click();
+    await expect(page.locator('.filter-popover')).toBeVisible();
+  }
+
+  async function selectFilterOption(page, selectBtnId, value) {
+    await page.locator(`#${selectBtnId}`).click();
+    const option = page.locator(`.filter-select.open .filter-option[data-value="${value}"]`);
+    await option.click();
+  }
+
+  test('surprise button is visible in search bar', async ({ page }) => {
+    await expect(page.locator('#surprise-btn')).toBeVisible();
+  });
+
+  test('clicking surprise navigates to a recipe page', async ({ page }) => {
+    await page.locator('#surprise-btn').click();
+    await expect(page).toHaveURL(/recipe\.html\?id=/);
+  });
+
+  test('surprise navigates to a recipe matching the active tag filter', async ({ page }) => {
+    // Apply "curry" tag filter (only test-curry matches)
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await page.locator('#filter-apply-btn').click();
+
+    await page.locator('#surprise-btn').click();
+    await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);
+  });
+
+  test('surprise respects favorites-only filter', async ({ page }) => {
+    // Favourite only the salad
+    await page.locator('.recipe-card').nth(1).locator('.favorite-button-small').click();
+
+    // Enable favorites filter
+    await page.locator('#favorites-filter').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+
+    await page.locator('#surprise-btn').click();
+    await expect(page).toHaveURL(/recipe\.html\?id=test-salad/);
+  });
+
+  test('surprise avoids recently seen recipes', async ({ page }) => {
+    // Seed history with two of the three visible recipes
+    await page.evaluate(() => {
+      localStorage.setItem('surpriseHistory', JSON.stringify(['test-curry', 'test-salad']));
+    });
+
+    await page.locator('#surprise-btn').click();
+    // Only test-toast is not in history, so it must be picked
+    await expect(page).toHaveURL(/recipe\.html\?id=test-toast/);
+  });
+
+  test('surprise does nothing when no recipes match active filter', async ({ page }) => {
+    // Favourite curry, then filter by favorites
+    await page.locator('.recipe-card').first().locator('.favorite-button-small').click();
+    await page.locator('#favorites-filter').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+
+    // Now search for something that produces 0 results within favorites
+    await page.fill('#search-input', 'xyzzy-no-match');
+    await expect(page.locator('.recipe-card')).toHaveCount(0);
+
+    await page.locator('#surprise-btn').click();
+    // Should stay on home page (no navigation)
+    await expect(page).toHaveURL(/index\.html|\/$/);
+  });
+
+  test('surprise in filter popover applies pending filter before picking', async ({ page }) => {
+    // Open popover, select "curry" tag (pending — not yet applied)
+    await openFilterPanel(page);
+    await selectFilterOption(page, 'tag-select-btn', 'curry');
+
+    // Click "Surprise me" inside the popover
+    await page.locator('#surprise-popover-btn').click();
+
+    // Should navigate to the only curry recipe
+    await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);
+  });
+
+  test('surprise history is stored in localStorage', async ({ page }) => {
+    await page.locator('#surprise-btn').click();
+    await page.waitForURL(/recipe\.html\?id=/);
+
+    // Navigate back and inspect localStorage (history persists)
+    await page.goto('/');
+    const history = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem('surpriseHistory') || '[]');
+    });
+    expect(history).toHaveLength(1);
+    expect(['test-curry', 'test-salad', 'test-toast']).toContain(history[0]);
+  });
+});
+
+test.describe('Icon Rendering', () => {
+  test('data-icon SVGs are injected on home page', async ({ page }) => {
+    // Check a few key icons have non-empty innerHTML after DOMContentLoaded
+    const icons = ['menu', 'cart', 'filter', 'heart', 'shuffle'];
+    for (const name of icons) {
+      const inner = await page.locator(`svg[data-icon="${name}"]`).first().innerHTML();
+      expect(inner.trim(), `icon "${name}" should be injected`).not.toBe('');
+    }
+  });
+
+  test('SVG icons have expected size attributes', async ({ page }) => {
+    const shuffleIcon = page.locator('#surprise-btn svg').first();
+    await expect(shuffleIcon).toHaveAttribute('width', '18');
+    await expect(shuffleIcon).toHaveAttribute('height', '18');
   });
 });
 

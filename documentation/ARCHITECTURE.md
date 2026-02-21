@@ -278,6 +278,42 @@ Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="ca
 - Consistent with other sub-pages (Cooking Log, What's New)
 - Avoids cluttering the drawer with controls
 
+## SVG Icon System
+
+**Decision:** Centralise all icons in a single `icons.js` file rather than duplicating inline SVGs across HTML and JS files.
+
+**How it works:**
+- `docs/js/icons.js` exports an `ICONS` object keyed by name; values are either a plain inner-SVG string (standard stroke icons) or a metadata object `{inner, viewBox?, solid?}` for icons with non-default viewBox or fill-based rendering
+- `icon(name, size=24, cls='')` helper builds a complete `<svg>` string — used in JS-generated HTML (e.g. recipe cards, timer controls)
+- Static HTML uses `<svg data-icon="name" …></svg>` shells; a `DOMContentLoaded` listener in `icons.js` injects `innerHTML` and updates `viewBox` for special icons
+
+**Special icon categories:**
+- *Special viewBox* (`timer-clock`, `bulb`): stored as `{viewBox, inner}` — injector overrides the default `viewBox="0 0 24 24"` on the shell element
+- *Solid/fill icons* (`tri-up`, `tri-down`, `play`, `pause`, `stop`): stored as `{solid: true, inner}` — no `fill="none"` or stroke attributes added to the wrapper
+
+**Why `icons.js` over an SVG sprite file:**
+- Icons are used both in static HTML (via `data-icon`) and in JS-generated HTML strings (via `icon()`); a sprite file only serves `<use>` references, not string interpolation
+- Single source of truth — one definition covers both usage patterns
+
+## Surprise Me
+
+**Decision:** A shuffle button that picks a random recipe using a 4-tier algorithm that prioritises variety and discovery.
+
+**Entry points:** search bar button and filter popover button.
+
+**Algorithm (4 tiers, pick highest non-empty tier, random within it):**
+1. Not yet cooked AND not in recent history
+2. `tested: false` AND not in recent history
+3. Not in recent history
+4. Entire filtered set (fallback if history blocks everything)
+
+**History:** `localStorage` key `surpriseHistory`, JSON array of up to 10 recipe IDs (rolling window). Ephemeral — fine to lose on cache clear. No manual reset needed.
+
+**Filter integration:**
+- Search bar button uses the current active filters (tag, rating, favorites, dietary, search query)
+- Popover button commits pending tag/rating to active state before picking (same outcome as clicking Filter then Surprise)
+- `filterRecipes()` is called with current state — no special casing needed
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements

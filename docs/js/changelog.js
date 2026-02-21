@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 17, date: '2026-02-21', text: 'Surprise me — pick a random recipe respecting your active filters, with smart prioritisation' },
   { id: 16, date: '2026-02-20', text: 'Feeling adventurous? Enable experimental recipes in Settings — untested creations for the brave cook' },
   { id: 15, date: '2026-02-20', text: 'Dietary preferences — set vegan or gluten-free filters in Settings so you only see recipes that match your diet' },
   { id: 14, date: '2026-02-18', text: 'How It Works — a new guide page walking you through all features, accessible from the side drawer' },

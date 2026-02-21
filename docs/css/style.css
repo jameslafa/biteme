@@ -589,6 +589,23 @@ a.tag-filter {
   cursor: not-allowed;
 }
 
+.surprise-popover-btn {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-family: var(--font-family);
+  color: var(--text-secondary);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.surprise-popover-btn:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
 /* Buttons */
 .button {
   display: inline-block;

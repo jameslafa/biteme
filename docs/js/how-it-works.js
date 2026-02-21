@@ -14,9 +14,7 @@ const FEATURES = [
               <div class="recipe-card-header">
                 <h3 class="recipe-title">Thai Green Curry</h3>
                 <button class="favorite-button-small favorited" tabindex="-1" aria-label="Favourited">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                  </svg>
+                  ${icon('heart', 20)}
                 </button>
               </div>
               <p class="recipe-description">A fragrant coconut curry with seasonal vegetables</p>
@@ -30,9 +28,7 @@ const FEATURES = [
               <div class="recipe-card-header">
                 <h3 class="recipe-title">Pad Thai</h3>
                 <button class="favorite-button-small" tabindex="-1" aria-label="Add to favourites">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                  </svg>
+                  ${icon('heart', 20)}
                 </button>
               </div>
               <p class="recipe-description">Classic stir-fried noodles with tofu and peanuts</p>
@@ -52,14 +48,13 @@ const FEATURES = [
               <input type="search" value="curry" aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5.5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
               <div class="search-actions">
                 <button class="search-action-btn active" tabindex="-1" aria-label="Filter by tag">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-                  </svg>
+                  ${icon('filter', 18)}
                 </button>
                 <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                  </svg>
+                  ${icon('heart', 18)}
+                </button>
+                <button class="search-action-btn" tabindex="-1" aria-label="Surprise me">
+                  ${icon('shuffle', 18)}
                 </button>
               </div>
             </div>
@@ -80,6 +75,55 @@ const FEATURES = [
             <div class="filter-actions">
               <button class="filter-reset-btn" tabindex="-1">Reset</button>
               <button class="filter-apply-btn" tabindex="-1">Show 2 recipes</button>
+            </div>
+          </div>
+        `
+      }
+    ]
+  },
+  {
+    id: 'surprise',
+    title: 'Can\'t decide? Let us pick',
+    description: 'Hit the shuffle button next to the search bar and we\'ll pick a random recipe for you. It respects whatever filters you have active, and it\'s smart enough to favour recipes you haven\'t cooked yet — so you\'re more likely to discover something new. You can also use it directly from the filter panel to pick a surprise within a specific tag or rating.',
+    mockups: [
+      {
+        label: 'Tap the shuffle button in the search bar for an instant pick:',
+        html: `
+          <div class="search-container tag-dropdown" style="margin-bottom:0;">
+            <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:6.5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
+            <div class="search-actions">
+              <button class="search-action-btn" tabindex="-1" aria-label="Filter by tag">
+                ${icon('filter', 18)}
+              </button>
+              <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
+                ${icon('heart', 18)}
+              </button>
+              <button class="search-action-btn" tabindex="-1" aria-label="Surprise me">
+                ${icon('shuffle', 18)}
+              </button>
+            </div>
+          </div>
+        `
+      },
+      {
+        label: 'Or pick a surprise within a specific tag or rating from the filter panel:',
+        html: `
+          <div class="filter-popover" style="display:flex;position:static;flex-direction:column;gap:var(--spacing-xs);">
+            <div class="filter-row">
+              <label class="filter-label">Tag</label>
+              <div class="filter-select" style="position:relative;">
+                <button class="filter-select-btn has-value" tabindex="-1">dinner</button>
+              </div>
+            </div>
+            <div class="filter-row">
+              <label class="filter-label">Rating</label>
+              <div class="filter-select" style="position:relative;">
+                <button class="filter-select-btn" tabindex="-1">Any</button>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button class="surprise-popover-btn" tabindex="-1">🎲 Surprise me</button>
+              <button class="filter-apply-btn" tabindex="-1">Show 4 recipes</button>
             </div>
           </div>
         `
@@ -141,10 +185,7 @@ const FEATURES = [
                     <label style="text-decoration:line-through;color:var(--text-secondary);opacity:0.7;">400ml coconut milk</label>
                   </div>
                   <button class="add-to-cart" tabindex="-1" aria-label="Add to shopping list">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                    </svg>
+                    ${icon('cart', 16)}
                   </button>
                 </div>
               </div>
@@ -155,10 +196,7 @@ const FEATURES = [
                     <label>3 tbsp green curry paste</label>
                   </div>
                   <button class="add-to-cart in-cart" tabindex="-1" aria-label="In shopping list">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                    </svg>
+                    ${icon('cart', 16)}
                   </button>
                 </div>
               </div>
@@ -199,18 +237,7 @@ const FEATURES = [
     mockupHTML: `
       <div style="display:flex;align-items:center;justify-content:flex-end;padding:var(--spacing-xs) var(--spacing-sm);border-bottom:1px solid var(--border);margin-bottom:var(--spacing-sm);">
         <button class="screen-lock-button active" tabindex="-1" style="width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--primary-color);">
-          <svg viewBox="-2 -5 28 29" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18h6"/>
-            <path d="M10 22h4"/>
-            <path class="bulb" d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5" style="fill:#fbbf24;fill-opacity:0.4;"/>
-            <line class="ray" x1="12" y1="-4" x2="12" y2="-2" stroke-width="2"/>
-            <line class="ray" x1="1.5" y1="1.5" x2="3.5" y2="3.5" stroke-width="2"/>
-            <line class="ray" x1="-4" y1="8" x2="-2" y2="8" stroke-width="2"/>
-            <line class="ray" x1="1.5" y1="14.5" x2="3.5" y2="12.5" stroke-width="2"/>
-            <line class="ray" x1="22.5" y1="1.5" x2="20.5" y2="3.5" stroke-width="2"/>
-            <line class="ray" x1="28" y1="8" x2="26" y2="8" stroke-width="2"/>
-            <line class="ray" x1="22.5" y1="14.5" x2="20.5" y2="12.5" stroke-width="2"/>
-          </svg>
+          ${icon('bulb', 30)}
         </button>
       </div>
       <div class="step-container" style="min-height:auto;">
@@ -237,21 +264,21 @@ const FEATURES = [
         <span></span>
         <span class="timer-center">
           <span class="timer-adjuster">
-            <button class="timer-arrow" tabindex="-1"><svg viewBox="0 0 24 24"><polygon points="12,6 4,18 20,18"/></svg></button>
+            <button class="timer-arrow" tabindex="-1">${icon('tri-up')}</button>
             <span class="timer-adjuster-label">min</span>
-            <button class="timer-arrow" tabindex="-1"><svg viewBox="0 0 24 24"><polygon points="12,18 4,6 20,6"/></svg></button>
+            <button class="timer-arrow" tabindex="-1">${icon('tri-down')}</button>
           </span>
           <span class="timer-display">5:00</span>
           <span class="timer-adjuster">
-            <button class="timer-arrow" tabindex="-1"><svg viewBox="0 0 24 24"><polygon points="12,6 4,18 20,18"/></svg></button>
+            <button class="timer-arrow" tabindex="-1">${icon('tri-up')}</button>
             <span class="timer-adjuster-label">sec</span>
-            <button class="timer-arrow" tabindex="-1"><svg viewBox="0 0 24 24"><polygon points="12,18 4,6 20,6"/></svg></button>
+            <button class="timer-arrow" tabindex="-1">${icon('tri-down')}</button>
           </span>
         </span>
         <span class="timer-right">
           <span class="timer-controls">
             <button class="timer-media-btn timer-media-btn-play" tabindex="-1">
-              <svg viewBox="0 0 24 24"><polygon points="8,5 8,19 19,12"/></svg>
+              ${icon('play')}
             </button>
           </span>
         </span>
@@ -305,17 +332,10 @@ const FEATURES = [
           <h2 class="recipe-name" style="font-size:1.5rem;">Galettes Bretonnes</h2>
           <div class="recipe-actions">
             <button class="icon-button" tabindex="-1" aria-label="Share recipe">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="18" cy="5" r="3"/>
-                <circle cx="6" cy="12" r="3"/>
-                <circle cx="18" cy="19" r="3"/>
-                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
-              </svg>
+              ${icon('share', 24)}
             </button>
             <button class="icon-button" tabindex="-1" aria-label="Add to favourites">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
+              ${icon('heart', 24)}
             </button>
           </div>
         </div>
@@ -354,17 +374,17 @@ const FEATURES = [
               <div class="timeline-entry timeline-entry-link" style="text-decoration:none;color:inherit;">
                 <span class="timeline-day">18</span>
                 <span class="timeline-recipe-name">Tofu Scramble</span>
-                <svg class="timeline-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                ${icon('chevron-right', 16, 'timeline-chevron')}
               </div>
               <div class="timeline-entry timeline-entry-link" style="text-decoration:none;color:inherit;">
                 <span class="timeline-day">17</span>
                 <span class="timeline-recipe-name">French Cr\u00EApes</span>
-                <svg class="timeline-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                ${icon('chevron-right', 16, 'timeline-chevron')}
               </div>
               <div class="timeline-entry timeline-entry-link" style="text-decoration:none;color:inherit;">
                 <span class="timeline-day">17</span>
                 <span class="timeline-recipe-name">Chilli Sin Carne</span>
-                <svg class="timeline-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                ${icon('chevron-right', 16, 'timeline-chevron')}
               </div>
             </div>
           </div>

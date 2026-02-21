@@ -299,11 +299,6 @@ function scrollToTop() {
 
 // --- Timer ---
 
-const ICON_TRI_UP = `<svg viewBox="0 0 24 24"><polygon points="12,6 4,18 20,18"/></svg>`;
-const ICON_TRI_DOWN = `<svg viewBox="0 0 24 24"><polygon points="12,18 4,6 20,6"/></svg>`;
-const ICON_PLAY = `<svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>`;
-const ICON_PAUSE = `<svg viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/></svg>`;
-const ICON_STOP = `<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>`;
 
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60);
@@ -347,8 +342,8 @@ function renderTimerBar() {
       <span></span>
       <span class="timer-display">${formatTime(timerRemaining)}</span>
       <span class="timer-controls">
-        <button class="timer-media-btn" onclick="pauseTimer()" aria-label="Pause">${ICON_PAUSE}</button>
-        <button class="timer-media-btn timer-media-btn-stop" onclick="stopTimer()" aria-label="Stop">${ICON_STOP}</button>
+        <button class="timer-media-btn" onclick="pauseTimer()" aria-label="Pause">${icon('pause')}</button>
+        <button class="timer-media-btn timer-media-btn-stop" onclick="stopTimer()" aria-label="Stop">${icon('stop')}</button>
       </span>
     `;
     updateToggleActive(true);
@@ -363,8 +358,8 @@ function renderTimerBar() {
       <span></span>
       <span class="timer-display">${formatTime(timerRemaining)}</span>
       <span class="timer-controls">
-        <button class="timer-media-btn timer-media-btn-play" onclick="startTimer()" aria-label="Resume">${ICON_PLAY}</button>
-        <button class="timer-media-btn timer-media-btn-stop" onclick="stopTimer()" aria-label="Stop">${ICON_STOP}</button>
+        <button class="timer-media-btn timer-media-btn-play" onclick="startTimer()" aria-label="Resume">${icon('play')}</button>
+        <button class="timer-media-btn timer-media-btn-stop" onclick="stopTimer()" aria-label="Stop">${icon('stop')}</button>
       </span>
     `;
     updateToggleActive(true);
@@ -379,19 +374,19 @@ function renderTimerBar() {
       <span></span>
       <span class="timer-center">
         <span class="timer-adjuster">
-          <button class="timer-arrow" onclick="adjustTimer(60)" aria-label="Add 1 minute">${ICON_TRI_UP}</button>
+          <button class="timer-arrow" onclick="adjustTimer(60)" aria-label="Add 1 minute">${icon('tri-up')}</button>
           <span class="timer-adjuster-label">min</span>
-          <button class="timer-arrow" onclick="adjustTimer(-60)" aria-label="Subtract 1 minute">${ICON_TRI_DOWN}</button>
+          <button class="timer-arrow" onclick="adjustTimer(-60)" aria-label="Subtract 1 minute">${icon('tri-down')}</button>
         </span>
         <span class="timer-display">${formatTime(timerSeconds)}</span>
         <span class="timer-adjuster">
-          <button class="timer-arrow" onclick="adjustTimer(5)" aria-label="Add 5 seconds">${ICON_TRI_UP}</button>
+          <button class="timer-arrow" onclick="adjustTimer(5)" aria-label="Add 5 seconds">${icon('tri-up')}</button>
           <span class="timer-adjuster-label">sec</span>
-          <button class="timer-arrow" onclick="adjustTimer(-5)" aria-label="Subtract 5 seconds">${ICON_TRI_DOWN}</button>
+          <button class="timer-arrow" onclick="adjustTimer(-5)" aria-label="Subtract 5 seconds">${icon('tri-down')}</button>
         </span>
       </span>
       <span class="timer-right">
-        <button class="timer-media-btn timer-media-btn-play" onclick="startTimer()" aria-label="Start">${ICON_PLAY}</button>
+        <button class="timer-media-btn timer-media-btn-play" onclick="startTimer()" aria-label="Start">${icon('play')}</button>
       </span>
     `;
     updateToggleActive(true);

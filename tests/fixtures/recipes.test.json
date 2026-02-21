@@ -78,5 +78,28 @@
       { "text": "Spread butter" }
     ],
     "tested": true
+  },
+  {
+    "id": "test-soup",
+    "name": "Test Soup",
+    "description": "An experimental soup recipe not yet tested",
+    "servings": 2,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": ["dinner", "soup"],
+    "diet": ["vegan"],
+    "ingredients": {
+      "Fresh": [
+        { "id": 1, "text": "2 carrots, chopped", "quantity": { "amount": 2, "item": "carrots, chopped" } }
+      ],
+      "Pantry": [
+        { "id": 2, "text": "4 cups vegetable broth", "quantity": { "amount": 4, "unit": "cups", "item": "vegetable broth" } }
+      ]
+    },
+    "steps": [
+      { "text": "Chop the carrots" },
+      { "text": "Add broth and simmer for 15 minutes", "durations": [{ "seconds": 900, "text": "15 minutes" }] }
+    ],
+    "tested": false
   }
 ]
