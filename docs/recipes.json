@@ -1,5 +1,403 @@
 [
   {
+    "id": "chickpea-tikka-masala",
+    "name": "Chickpea Tikka Masala",
+    "description": "Chickpeas simmered in a creamy, spiced tomato and coconut milk sauce",
+    "servings": 4,
+    "time": 35,
+    "difficulty": "easy",
+    "tags": [
+      "indian",
+      "curry"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-02-26",
+    "notes": "US recipes often call this \"tomato puree\" — in European terms that's passata (sieved tomatoes), not the concentrated paste. A standard 400 g carton works perfectly. Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 medium onion, diced",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "onion, diced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 cloves garlic, minced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "Handful fresh coriander, to serve"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 4,
+          "text": "1 tbsp olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 5,
+          "text": "2 tins (400 g) chickpeas, drained and rinsed",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tins",
+            "item": "chickpeas, drained and rinsed",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tin (400 g) passata",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "passata",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 7,
+          "text": "120 ml water",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        },
+        {
+          "id": 8,
+          "text": "250 ml full-fat coconut milk",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "ml",
+            "item": "full-fat coconut milk"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 tsp ginger paste",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ginger paste"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tsp brown sugar",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "brown sugar"
+          }
+        },
+        {
+          "id": 11,
+          "text": "Salt to taste"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 12,
+          "text": "1 1/2 tsp garam masala",
+          "quantity": {
+            "amount": 1.0,
+            "item": "1/2 tsp garam masala"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1 tsp ground cumin",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground cumin"
+          }
+        },
+        {
+          "id": 14,
+          "text": "1/2 tsp turmeric",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "turmeric"
+          }
+        },
+        {
+          "id": 15,
+          "text": "1/2 tsp ground coriander (optional)",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "ground coriander (optional)"
+          }
+        },
+        {
+          "id": 16,
+          "text": "Black pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about 3-4 minutes.",
+        "durations": [
+          {
+            "seconds": 240,
+            "text": "about 3-4 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {pepper}. Fry for 30 seconds, stirring constantly.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          },
+          {
+            "seconds": 30,
+            "text": "for 30 seconds"
+          }
+        ]
+      },
+      {
+        "text": "Pour in {passata}, {water}, {chickpeas}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for 20 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in {coconut milk} and {brown sugar}. Simmer for a further 2-3 minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "2-3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Taste and adjust seasoning. Garnish with {fresh coriander}."
+      }
+    ],
+    "serving_suggestions": "Serve with basmati rice and naan. A dollop of coconut yoghurt on top works well.",
+    "tested": false
+  },
+  {
+    "id": "persian-celery-stew",
+    "name": "Persian Celery Stew (Khoresht-e-Karafs)",
+    "description": "A fragrant Iranian stew with celery, butter beans, fried herbs, saffron, and lime — traditionally served over steamed basmati rice.",
+    "servings": 6,
+    "time": 75,
+    "difficulty": "medium",
+    "tags": [
+      "stew",
+      "persian",
+      "iranian"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-02-26",
+    "notes": "A dish from northern Iran where butter beans are a common plant-based swap for the traditional lamb. Don't rush the herb frying step — the parsley and mint need to darken and concentrate to develop the characteristic deep flavour. The stew should have some liquid remaining when done; don't let it dry out.\n\nCheck your stock cube label if you need this to be strictly gluten-free — most are, but not all.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "2 large onions, thinly sliced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "large",
+            "item": "onions, thinly sliced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "3 cloves garlic, minced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "6-8 celery stalks, cut into 3 cm pieces",
+          "quantity": {
+            "amount": 6.0,
+            "amount_max": 8.0,
+            "item": "celery stalks, cut into 3 cm pieces"
+          }
+        },
+        {
+          "id": 4,
+          "text": "250 g fresh parsley, roughly chopped",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "fresh parsley, roughly chopped"
+          }
+        },
+        {
+          "id": 5,
+          "text": "50 g fresh mint (or 2 1/2 tbsp dried)",
+          "quantity": {
+            "amount": 50.0,
+            "unit": "g",
+            "item": "fresh mint (or 2 1/2 tbsp dried)"
+          }
+        },
+        {
+          "id": 6,
+          "text": "130 ml lime juice (about 4-5 limes)",
+          "quantity": {
+            "amount": 130.0,
+            "unit": "ml",
+            "item": "lime juice (about 4-5 limes)"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 7,
+          "text": "1 tin (400 g) butter beans, drained and rinsed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "butter beans, drained and rinsed",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 8,
+          "text": "5 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 5.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 vegetable stock cube",
+          "quantity": {
+            "amount": 1.0,
+            "item": "vegetable stock cube"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 10,
+          "text": "1/2 tsp saffron threads",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "saffron threads"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1 tsp ground turmeric",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground turmeric"
+          }
+        },
+        {
+          "id": 12,
+          "text": "Salt and black pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Dissolve {saffron} in 60 ml boiling water and set aside to bloom."
+      },
+      {
+        "text": "Heat 3 tbsp {oil} in a frying pan over medium heat. Add {parsley} and {mint} and fry for 10-15 minutes, stirring often, until darkened and fragrant. Set aside.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for 10-15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Heat the remaining {oil} in a large pot over medium heat. Add {onions} and cook for about 10 minutes until translucent.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for about 10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {turmeric} and {garlic}, stir for 1 minute, then add {celery} and cook for another 5 minutes.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          },
+          {
+            "seconds": 300,
+            "text": "5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {butter beans} and the fried herbs. Stir together for 1 minute.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          }
+        ]
+      },
+      {
+        "text": "Pour in 700 ml boiling water, then add the {stock cube}, {lime juice}, and the bloomed saffron water. Stir to combine."
+      },
+      {
+        "text": "Cover and simmer on low heat for 45-60 minutes, until the celery is tender. The stew should retain some liquid.",
+        "durations": [
+          {
+            "seconds": 3600,
+            "text": "for 45-60 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Taste and season with {salt} and {black pepper}."
+      }
+    ],
+    "serving_suggestions": "Serve hot over steamed basmati rice. A dollop of vegan yoghurt on the side works well.",
+    "tested": false
+  },
+  {
     "id": "palak-tofu",
     "name": "Palak Tofu",
     "description": "Vegan saag paneer — crispy tofu in a creamy spiced spinach sauce",
@@ -341,7 +739,7 @@
         "text": "Serve topped with remaining {spring onions} and {sesame seeds}."
       }
     ],
-    "tested": false
+    "tested": true
   },
   {
     "id": "dal-tadka",
