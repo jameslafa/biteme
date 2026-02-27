@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupDrawer();
   checkFirstVisitNudge();
   showRatingBannerIfNeeded();
+  setupPullToRefresh();
 
   // Refresh recipes when returning to the app (e.g. PWA resume)
   document.addEventListener('visibilitychange', async () => {
@@ -637,4 +638,96 @@ function setupSurpriseBtn() {
   document.getElementById('surprise-btn').addEventListener('click', () => {
     triggerSurprise(false);
   });
+}
+
+// Pull-to-refresh: swipe down from the top to force-fetch latest recipes
+function setupPullToRefresh() {
+  const THRESHOLD = 80;        // pull distance (px) needed to trigger refresh
+  const INDICATOR_HEIGHT = 52; // must match CSS
+
+  const indicator = document.createElement('div');
+  indicator.id = 'ptr-indicator';
+  indicator.setAttribute('aria-hidden', 'true');
+  indicator.innerHTML = `
+    <svg class="ptr-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="1 4 1 10 7 10"></polyline>
+      <polyline points="23 20 23 14 17 14"></polyline>
+      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+    </svg>
+    <span class="ptr-label">Pull to refresh</span>
+  `;
+
+  const main = document.querySelector('main');
+  main.insertBefore(indicator, main.firstChild);
+
+  let startY = 0;
+  let isPulling = false;
+  let isRefreshing = false;
+
+  function setHeight(px, animated) {
+    indicator.style.transition = animated ? 'height 0.25s ease' : 'none';
+    indicator.style.height = `${px}px`;
+  }
+
+  function reset() {
+    setHeight(0, true);
+    indicator.classList.remove('ptr-ready', 'ptr-refreshing');
+    isRefreshing = false;
+  }
+
+  document.addEventListener('touchstart', (e) => {
+    if (isRefreshing || window.scrollY !== 0) return;
+    startY = e.touches[0].clientY;
+    isPulling = true;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isPulling || isRefreshing) return;
+
+    const distance = e.touches[0].clientY - startY;
+    if (distance <= 0) {
+      isPulling = false;
+      return;
+    }
+
+    e.preventDefault(); // prevent native pull-to-refresh
+    const height = Math.min((distance / THRESHOLD) * INDICATOR_HEIGHT, INDICATOR_HEIGHT);
+    setHeight(height, false);
+    indicator.classList.toggle('ptr-ready', distance >= THRESHOLD);
+    indicator.querySelector('.ptr-label').textContent = distance >= THRESHOLD ? 'Release to refresh' : 'Pull to refresh';
+  }, { passive: false });
+
+  document.addEventListener('touchend', async (e) => {
+    if (!isPulling || isRefreshing) return;
+    isPulling = false;
+
+    const distance = e.changedTouches[0].clientY - startY;
+    if (distance < THRESHOLD) {
+      reset();
+      return;
+    }
+
+    // Snap to full height and show spinner
+    isRefreshing = true;
+    setHeight(INDICATOR_HEIGHT, true);
+    indicator.classList.remove('ptr-ready');
+    indicator.classList.add('ptr-refreshing');
+
+    const label = indicator.querySelector('.ptr-label');
+
+    if (!navigator.onLine) {
+      label.textContent = 'No connection';
+    } else {
+      label.textContent = 'Refreshing…';
+      const ok = await forceRefreshRecipes();
+      if (ok) {
+        await loadRecipes();
+        label.textContent = 'Up to date';
+      } else {
+        label.textContent = 'Could not refresh';
+      }
+    }
+
+    setTimeout(reset, 1200);
+  }, { passive: true });
 }

@@ -690,6 +690,104 @@ test.describe('Recipe Refresh on Resume', () => {
   });
 });
 
+test.describe('Pull to Refresh', () => {
+  const updatedRecipes = [
+    ...testRecipes,
+    {
+      id: 'test-pasta',
+      name: 'Test Pasta',
+      description: 'A new pasta recipe added after initial load',
+      servings: 2,
+      time: 20,
+      difficulty: 'easy',
+      tags: ['vegan', 'dinner'],
+      diet: ['vegan'],
+      tested: true,
+      ingredients: {
+        Pantry: [
+          { id: 1, text: '200 g pasta' },
+          { id: 2, text: '1 tbsp olive oil' }
+        ]
+      },
+      steps: ['Cook {pasta}', 'Toss with {olive oil}']
+    }
+  ];
+
+  // Dispatch touchstart → touchmove → touchend on document
+  async function simulatePullGesture(page, pullDistance) {
+    await page.evaluate((distance) => {
+      const startY = 300;
+      const endY = startY + distance;
+      function makeTouch(type, clientY) {
+        const touch = new Touch({ identifier: 1, target: document.body, clientX: 200, clientY });
+        return new TouchEvent(type, {
+          touches: type === 'touchend' ? [] : [touch],
+          changedTouches: [touch],
+          bubbles: true,
+          cancelable: true,
+        });
+      }
+      document.dispatchEvent(makeTouch('touchstart', startY));
+      document.dispatchEvent(makeTouch('touchmove', endY));
+      document.dispatchEvent(makeTouch('touchend', endY));
+    }, pullDistance);
+  }
+
+  test('ptr indicator is present in the DOM', async ({ page }) => {
+    await expect(page.locator('#ptr-indicator')).toBeAttached();
+  });
+
+  test('force-fetches recipes even when manifest version is unchanged', async ({ page }) => {
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    // Get the version that was cached on initial load
+    const currentVersion = await page.evaluate(() => {
+      const manifest = localStorage.getItem('recipes-manifest');
+      return manifest ? JSON.parse(manifest).version : 'test-version';
+    });
+
+    // Same version, but new recipe list — proves version check is bypassed
+    await page.route('**/recipes-manifest.json', route => {
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ version: currentVersion, recipe_count: 4 }),
+      });
+    });
+    await page.unroute('**/recipes.json');
+    await page.route('**/recipes.json', route => {
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(updatedRecipes),
+      });
+    });
+
+    await simulatePullGesture(page, 100); // 100 px > 80 px threshold
+    await expect(page.locator('.recipe-card')).toHaveCount(4);
+    await expect(page.locator('.recipe-card').last().locator('.recipe-title')).toHaveText('Test Pasta');
+  });
+
+  test('does not refresh on a pull shorter than the threshold', async ({ page }) => {
+    let recipesFetched = false;
+    await page.unroute('**/recipes.json');
+    await page.route('**/recipes.json', route => {
+      recipesFetched = true;
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(testRecipes),
+      });
+    });
+
+    await simulatePullGesture(page, 40); // 40 px < 80 px threshold
+    await page.waitForTimeout(200);
+
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+    expect(recipesFetched).toBe(false);
+  });
+});
+
 test.describe('Surprise Me', () => {
   // Helper: open filter popover
   async function openFilterPanel(page) {

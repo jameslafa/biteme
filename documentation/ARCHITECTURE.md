@@ -148,6 +148,7 @@ name: Pad Thai
 **Freshness strategy:**
 - On page load: check `recipes-manifest.json` version against localStorage, fetch fresh if different
 - On app resume (`visibilitychange`): re-check manifest, clear in-memory cache and re-render if stale
+- On pull-to-refresh (swipe down from top): force-fetch both `recipes-manifest.json` and `recipes.json` with `cache: 'no-cache'`, bypassing the version check entirely — ensures the user always gets the latest recipes on demand
 - Recipe data (`recipes.json`, `recipes-manifest.json`) bypasses the service worker cache entirely
 
 **Why not service worker for recipes:**

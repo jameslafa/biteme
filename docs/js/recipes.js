@@ -1,6 +1,26 @@
 // Cache for loaded recipes
 let recipesCache = null;
 
+// Force a fresh fetch from the network, bypassing version check and localStorage cache
+// Returns true on success, false on failure
+async function forceRefreshRecipes() {
+  try {
+    const [manifestResponse, recipesResponse] = await Promise.all([
+      fetch('recipes-manifest.json', { cache: 'no-cache' }),
+      fetch('recipes.json', { cache: 'no-cache' }),
+    ]);
+    if (!manifestResponse.ok || !recipesResponse.ok) return false;
+
+    const manifest = await manifestResponse.json();
+    recipesCache = await recipesResponse.json();
+    localStorage.setItem('recipes-manifest', JSON.stringify(manifest));
+    localStorage.setItem('recipes-cache', JSON.stringify(recipesCache));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Check manifest and refresh recipes if version changed
 // Returns true if recipes were updated
 async function checkForRecipeUpdates() {

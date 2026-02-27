@@ -57,6 +57,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overscroll-behavior-y: none;
 }
 
 /* Header */
@@ -1444,3 +1445,35 @@ footer a:hover {
 }
 
 
+
+/* Pull to Refresh */
+#ptr-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.ptr-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+#ptr-indicator.ptr-ready .ptr-icon {
+  color: var(--primary-color);
+  transform: rotate(180deg);
+}
+
+#ptr-indicator.ptr-refreshing .ptr-icon {
+  animation: ptr-spin 0.7s linear infinite;
+}
+
+@keyframes ptr-spin {
+  to { transform: rotate(360deg); }
+}
