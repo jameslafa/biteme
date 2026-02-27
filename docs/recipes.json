@@ -222,6 +222,345 @@
     "tested": false
   },
   {
+    "id": "one-pot-spag-bol",
+    "name": "One-Pot Spag Bol",
+    "description": "A quick vegan take on spaghetti bolognese with lentils — pasta and sauce cooked together in one pot for a rich, satisfying result",
+    "servings": 4,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "pasta",
+      "italian"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-27",
+    "notes": "Nutritional yeast has a savoury, cheesy flavour and is available in most health food stores and online. Use tamari instead of soy sauce to make this gluten-free.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 red onion, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "red onion, finely chopped"
+          }
+        },
+        {
+          "id": 2,
+          "text": "4 cloves garlic, minced",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 carrot, grated",
+          "quantity": {
+            "amount": 1.0,
+            "item": "carrot, grated"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 stick celery, thinly sliced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "stick celery, thinly sliced"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 fresh green chilli, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "fresh green chilli, finely chopped"
+          }
+        },
+        {
+          "id": 6,
+          "text": "A handful of cherry tomatoes, halved"
+        },
+        {
+          "id": 7,
+          "text": "A bunch of fresh basil"
+        },
+        {
+          "id": 8,
+          "text": "Lemon for juice"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 9,
+          "text": "1 tin (400 g) cooked lentils, drained and rinsed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "cooked lentils, drained and rinsed",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 11,
+          "text": "400 g wholemeal spaghetti",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "g",
+            "item": "wholemeal spaghetti"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1 tbsp olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1.2 litres vegetable stock",
+          "quantity": {
+            "amount": 1.2,
+            "item": "litres vegetable stock"
+          }
+        },
+        {
+          "id": 14,
+          "text": "2 tbsp tamari or soy sauce",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "tamari or soy sauce"
+          }
+        },
+        {
+          "id": 15,
+          "text": "Nutritional yeast to serve"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 16,
+          "text": "Salt to taste"
+        },
+        {
+          "id": 17,
+          "text": "Freshly ground black pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Finely chop {onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomatoes}. Drain and rinse {lentils}."
+      },
+      {
+        "text": "Heat {olive oil} in a large pot over high heat. Add {onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for 3 minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for 3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {chopped tomatoes}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomatoes}. Bring to the boil, then simmer until the pasta is cooked, about 9-11 minutes. Remove from the heat.",
+        "durations": [
+          {
+            "seconds": 660,
+            "text": "about 9-11 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Pluck {basil} leaves and set aside. Finely chop the stalks and stir into the pot. Season with {black pepper} and a squeeze of {lemon} juice."
+      },
+      {
+        "text": "Serve topped with the basil leaves and {nutritional yeast}."
+      }
+    ],
+    "tested": false
+  },
+  {
+    "id": "one-pot-creamy-mushroom-pasta",
+    "name": "One-Pot Creamy Mushroom Pasta",
+    "description": "A quick one-pot wonder where spaghetti cooks directly in the sauce for a creamy, cheesy result — no cream or cheese required",
+    "servings": 4,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "pasta",
+      "italian"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-27",
+    "notes": "If you don't want to use wine, replace it with the same amount of vegetable stock.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 medium red onion, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "red onion, finely chopped"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 cloves garlic, minced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "400 g mushrooms, finely chopped",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "g",
+            "item": "mushrooms, finely chopped"
+          }
+        },
+        {
+          "id": 4,
+          "text": "A small handful fresh thyme sprigs"
+        },
+        {
+          "id": 5,
+          "text": "Lemon for juice"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 6,
+          "text": "800 ml oat milk (or other non-dairy milk)",
+          "quantity": {
+            "amount": 800.0,
+            "unit": "ml",
+            "item": "oat milk (or other non-dairy milk)"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 7,
+          "text": "500 g wholemeal or spelt spaghetti",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "g",
+            "item": "wholemeal or spelt spaghetti"
+          }
+        },
+        {
+          "id": 8,
+          "text": "200 ml white wine",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "ml",
+            "item": "white wine"
+          }
+        },
+        {
+          "id": 9,
+          "text": "500 ml vegetable stock",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 10,
+          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        },
+        {
+          "id": 11,
+          "text": "2 tbsp nutritional yeast, plus extra for garnish",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "nutritional yeast, plus extra for garnish"
+          }
+        },
+        {
+          "id": 12,
+          "text": "Chilli flakes for garnish (optional)"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 13,
+          "text": "2 tsp sea salt",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "sea salt"
+          }
+        },
+        {
+          "id": 14,
+          "text": "Freshly ground black pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Finely chop {onion} and {garlic}. Chop {mushrooms} reasonably finely."
+      },
+      {
+        "text": "Heat {oil} in a large pan over high heat. Add {onion} and {garlic} and cook until they start to brown, about 2-3 minutes, stirring continuously. Add {mushrooms} and cook for 2 minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "about 2-3 minutes"
+          },
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {white wine} and most of the {thyme} leaves, and cook for another minute."
+      },
+      {
+        "text": "Break {spaghetti} into the pan and add {oat milk}, {vegetable stock} and {salt}. Turn the heat up high and cover with a lid. Once boiling, remove the lid to let the liquid evaporate. Stir occasionally to prevent sticking. When the sauce has reduced and the pasta is cooked, stir in {nutritional yeast} and a squeeze of {lemon} juice."
+      },
+      {
+        "text": "Season with {black pepper} and more salt if needed. Top each serving with the reserved {thyme} sprigs, extra nutritional yeast and {chilli flakes} if desired."
+      }
+    ],
+    "serving_suggestions": "Serve straight from the pan. A green salad on the side keeps it fresh and light.",
+    "tested": false
+  },
+  {
     "id": "indonesian-satay",
     "name": "Indonesian Satay",
     "description": "Rich and nutty peanut sauce with chickpeas and crunchy vegetables, ready in 15 minutes",
