@@ -749,6 +749,219 @@
     "tested": false
   },
   {
+    "id": "express-tantanmen-ramen",
+    "name": "Express Tantanmen Ramen",
+    "description": "Quick Japanese ramen with a rich peanut-tahini broth, crispy smoked tofu crumbles and soy-marinated eggs",
+    "servings": 2,
+    "time": 35,
+    "difficulty": "medium",
+    "tags": [
+      "ramen",
+      "japanese"
+    ],
+    "diet": [
+      "vegetarian"
+    ],
+    "date": "2026-02-27",
+    "notes": "Start the marinated eggs the evening before — they need at least one night in the fridge. Everything else comes together in about 35 minutes. The nutty base and tofu can be prepped simultaneously while the broth heats.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 4,
+          "text": "2 tbsp fresh chives, finely chopped",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "fresh chives, finely chopped"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 1,
+          "text": "2 eggs",
+          "quantity": {
+            "amount": 2.0,
+            "item": "eggs"
+          }
+        },
+        {
+          "id": 2,
+          "text": "300 ml oat milk or soy milk",
+          "quantity": {
+            "amount": 300.0,
+            "unit": "ml",
+            "item": "oat milk or soy milk"
+          }
+        },
+        {
+          "id": 3,
+          "text": "180 g smoked tofu",
+          "quantity": {
+            "amount": 180.0,
+            "unit": "g",
+            "item": "smoked tofu"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "300 ml vegetable stock",
+          "quantity": {
+            "amount": 300.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 6,
+          "text": "100 g ramen noodles",
+          "quantity": {
+            "amount": 100.0,
+            "unit": "g",
+            "item": "ramen noodles"
+          }
+        },
+        {
+          "id": 7,
+          "text": "2 sheets nori",
+          "quantity": {
+            "amount": 2.0,
+            "item": "sheets nori"
+          }
+        },
+        {
+          "id": 8,
+          "text": "5 g sesame seeds",
+          "quantity": {
+            "amount": 5.0,
+            "unit": "g",
+            "item": "sesame seeds"
+          }
+        },
+        {
+          "id": 9,
+          "text": "12 tbsp soy sauce (6 for marinade, 2 each for broth, tofu and nutty base)",
+          "quantity": {
+            "amount": 12.0,
+            "unit": "tbsp",
+            "item": "soy sauce (6 for marinade, 2 each for broth, tofu and nutty base)"
+          }
+        },
+        {
+          "id": 10,
+          "text": "150 ml cold water",
+          "quantity": {
+            "amount": 150.0,
+            "unit": "ml",
+            "item": "cold water"
+          }
+        },
+        {
+          "id": 11,
+          "text": "10 g sugar",
+          "quantity": {
+            "amount": 10.0,
+            "unit": "g",
+            "item": "sugar"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1 tbsp rice vinegar",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "rice vinegar"
+          }
+        },
+        {
+          "id": 13,
+          "text": "20 g peanut butter (100%)",
+          "quantity": {
+            "amount": 20.0,
+            "unit": "g",
+            "item": "peanut butter (100%)"
+          }
+        },
+        {
+          "id": 14,
+          "text": "20 g tahini",
+          "quantity": {
+            "amount": 20.0,
+            "unit": "g",
+            "item": "tahini"
+          }
+        },
+        {
+          "id": 15,
+          "text": "1 tsp sesame oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "sesame oil"
+          }
+        },
+        {
+          "id": 16,
+          "text": "3 tsp crispy chili oil (1 for tofu, 2 for nutty base)",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "crispy chili oil (1 for tofu, 2 for nutty base)"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 17,
+          "text": "1 tsp ground ginger",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground ginger"
+          }
+        },
+        {
+          "id": 18,
+          "text": "Salt to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "One day ahead — marinate the eggs: Soft-boil the {eggs} in salted water for 6-7 minutes, then transfer to cold water and peel. Mix 150 ml {cold water}, 6 tbsp {soy sauce}, {sugar} and {rice vinegar} in a jar. Submerge the eggs, seal and refrigerate overnight.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "for 6-7 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Crispy tofu: Pat the {smoked tofu} dry and crumble into small pieces. Heat {sesame oil} in a pan over medium-high heat. Add the tofu with 2 tbsp {soy sauce}, {ginger} and 1 tsp {chili oil}. Fry for 15-20 minutes, stirring occasionally, until golden and crispy. Set aside.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for 15-20 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Nutty base: Whisk together {peanut butter}, {tahini}, 2 tbsp {soy sauce} and 2 tsp {chili oil}. Thin with a small splash of water until pourable. Set aside."
+      },
+      {
+        "text": "Broth and noodles: Bring {vegetable stock} and {oat milk} to a gentle simmer with 2 tbsp {soy sauce}. Cook the {ramen noodles} separately according to the packet instructions."
+      },
+      {
+        "text": "Assemble: Spoon the nutty base into two bowls. Pour the hot broth over and stir to combine. Divide the noodles between the bowls, then top with the crispy tofu, {nori}, {chives} and {sesame seeds}. Halve the marinated eggs and nestle them in. Season with {salt} to taste."
+      }
+    ],
+    "serving_suggestions": "Serve immediately while piping hot. Add extra crispy chili oil on top for more heat.",
+    "tested": false
+  },
+  {
     "id": "chickpea-tikka-masala",
     "name": "Chickpea Tikka Masala",
     "description": "Chickpeas simmered in a creamy, spiced tomato and coconut milk sauce",
