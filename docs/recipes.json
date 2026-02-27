@@ -222,533 +222,6 @@
     "tested": false
   },
   {
-    "id": "one-pot-spag-bol",
-    "name": "One-Pot Spag Bol",
-    "description": "A quick vegan take on spaghetti bolognese with lentils — pasta and sauce cooked together in one pot for a rich, satisfying result",
-    "servings": 4,
-    "time": 20,
-    "difficulty": "easy",
-    "tags": [
-      "pasta",
-      "italian"
-    ],
-    "diet": [
-      "vegan"
-    ],
-    "date": "2026-02-27",
-    "notes": "Nutritional yeast has a savoury, cheesy flavour and is available in most health food stores and online. Use tamari instead of soy sauce to make this gluten-free.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "1 red onion, finely chopped",
-          "quantity": {
-            "amount": 1.0,
-            "item": "red onion, finely chopped"
-          }
-        },
-        {
-          "id": 2,
-          "text": "4 cloves garlic, minced",
-          "quantity": {
-            "amount": 4.0,
-            "unit": "cloves",
-            "item": "garlic, minced"
-          }
-        },
-        {
-          "id": 3,
-          "text": "1 carrot, grated",
-          "quantity": {
-            "amount": 1.0,
-            "item": "carrot, grated"
-          }
-        },
-        {
-          "id": 4,
-          "text": "1 stick celery, thinly sliced",
-          "quantity": {
-            "amount": 1.0,
-            "item": "stick celery, thinly sliced"
-          }
-        },
-        {
-          "id": 5,
-          "text": "1 fresh green chilli, finely chopped",
-          "quantity": {
-            "amount": 1.0,
-            "item": "fresh green chilli, finely chopped"
-          }
-        },
-        {
-          "id": 6,
-          "text": "A handful of cherry tomatoes, halved"
-        },
-        {
-          "id": 7,
-          "text": "A bunch of fresh basil"
-        },
-        {
-          "id": 8,
-          "text": "Lemon for juice"
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 9,
-          "text": "1 tin (400 g) cooked lentils, drained and rinsed",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tin",
-            "item": "cooked lentils, drained and rinsed",
-            "secondary_amount": 400.0,
-            "secondary_unit": "g"
-          }
-        },
-        {
-          "id": 10,
-          "text": "1 tin (400 g) chopped tomatoes",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tin",
-            "item": "chopped tomatoes",
-            "secondary_amount": 400.0,
-            "secondary_unit": "g"
-          }
-        },
-        {
-          "id": 11,
-          "text": "400 g wholemeal spaghetti",
-          "quantity": {
-            "amount": 400.0,
-            "unit": "g",
-            "item": "wholemeal spaghetti"
-          }
-        },
-        {
-          "id": 12,
-          "text": "1 tbsp olive oil",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "olive oil"
-          }
-        },
-        {
-          "id": 13,
-          "text": "1.2 litres vegetable stock",
-          "quantity": {
-            "amount": 1.2,
-            "item": "litres vegetable stock"
-          }
-        },
-        {
-          "id": 14,
-          "text": "2 tbsp tamari or soy sauce",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "tamari or soy sauce"
-          }
-        },
-        {
-          "id": 15,
-          "text": "Nutritional yeast to serve"
-        }
-      ],
-      "Spices": [
-        {
-          "id": 16,
-          "text": "Salt to taste"
-        },
-        {
-          "id": 17,
-          "text": "Freshly ground black pepper to taste"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Finely chop {onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomatoes}. Drain and rinse {lentils}."
-      },
-      {
-        "text": "Heat {olive oil} in a large pot over high heat. Add {onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for 3 minutes, stirring regularly.",
-        "durations": [
-          {
-            "seconds": 180,
-            "text": "for 3 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Add {chopped tomatoes}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomatoes}. Bring to the boil, then simmer until the pasta is cooked, about 9-11 minutes. Remove from the heat.",
-        "durations": [
-          {
-            "seconds": 660,
-            "text": "about 9-11 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Pluck {basil} leaves and set aside. Finely chop the stalks and stir into the pot. Season with {black pepper} and a squeeze of {lemon} juice."
-      },
-      {
-        "text": "Serve topped with the basil leaves and {nutritional yeast}."
-      }
-    ],
-    "tested": false
-  },
-  {
-    "id": "one-pot-creamy-mushroom-pasta",
-    "name": "One-Pot Creamy Mushroom Pasta",
-    "description": "A quick one-pot wonder where spaghetti cooks directly in the sauce for a creamy, cheesy result — no cream or cheese required",
-    "servings": 4,
-    "time": 20,
-    "difficulty": "easy",
-    "tags": [
-      "pasta",
-      "italian"
-    ],
-    "diet": [
-      "vegan"
-    ],
-    "date": "2026-02-27",
-    "notes": "If you don't want to use wine, replace it with the same amount of vegetable stock.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "1 medium red onion, finely chopped",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "medium",
-            "item": "red onion, finely chopped"
-          }
-        },
-        {
-          "id": 2,
-          "text": "2 cloves garlic, minced",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "cloves",
-            "item": "garlic, minced"
-          }
-        },
-        {
-          "id": 3,
-          "text": "400 g mushrooms, finely chopped",
-          "quantity": {
-            "amount": 400.0,
-            "unit": "g",
-            "item": "mushrooms, finely chopped"
-          }
-        },
-        {
-          "id": 4,
-          "text": "A small handful fresh thyme sprigs"
-        },
-        {
-          "id": 5,
-          "text": "Lemon for juice"
-        }
-      ],
-      "Fridge": [
-        {
-          "id": 6,
-          "text": "800 ml oat milk (or other non-dairy milk)",
-          "quantity": {
-            "amount": 800.0,
-            "unit": "ml",
-            "item": "oat milk (or other non-dairy milk)"
-          }
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 7,
-          "text": "500 g wholemeal or spelt spaghetti",
-          "quantity": {
-            "amount": 500.0,
-            "unit": "g",
-            "item": "wholemeal or spelt spaghetti"
-          }
-        },
-        {
-          "id": 8,
-          "text": "200 ml white wine",
-          "quantity": {
-            "amount": 200.0,
-            "unit": "ml",
-            "item": "white wine"
-          }
-        },
-        {
-          "id": 9,
-          "text": "500 ml vegetable stock",
-          "quantity": {
-            "amount": 500.0,
-            "unit": "ml",
-            "item": "vegetable stock"
-          }
-        },
-        {
-          "id": 10,
-          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
-          }
-        },
-        {
-          "id": 11,
-          "text": "2 tbsp nutritional yeast, plus extra for garnish",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "nutritional yeast, plus extra for garnish"
-          }
-        },
-        {
-          "id": 12,
-          "text": "Chilli flakes for garnish (optional)"
-        }
-      ],
-      "Spices": [
-        {
-          "id": 13,
-          "text": "2 tsp sea salt",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tsp",
-            "item": "sea salt"
-          }
-        },
-        {
-          "id": 14,
-          "text": "Freshly ground black pepper to taste"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Finely chop {onion} and {garlic}. Chop {mushrooms} reasonably finely."
-      },
-      {
-        "text": "Heat {oil} in a large pan over high heat. Add {onion} and {garlic} and cook until they start to brown, about 2-3 minutes, stirring continuously. Add {mushrooms} and cook for 2 minutes.",
-        "durations": [
-          {
-            "seconds": 180,
-            "text": "about 2-3 minutes"
-          },
-          {
-            "seconds": 120,
-            "text": "for 2 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Add {white wine} and most of the {thyme} leaves, and cook for another minute."
-      },
-      {
-        "text": "Break {spaghetti} into the pan and add {oat milk}, {vegetable stock} and {salt}. Turn the heat up high and cover with a lid. Once boiling, remove the lid to let the liquid evaporate. Stir occasionally to prevent sticking. When the sauce has reduced and the pasta is cooked, stir in {nutritional yeast} and a squeeze of {lemon} juice."
-      },
-      {
-        "text": "Season with {black pepper} and more salt if needed. Top each serving with the reserved {thyme} sprigs, extra nutritional yeast and {chilli flakes} if desired."
-      }
-    ],
-    "serving_suggestions": "Serve straight from the pan. A green salad on the side keeps it fresh and light.",
-    "tested": false
-  },
-  {
-    "id": "indonesian-satay",
-    "name": "Indonesian Satay",
-    "description": "Rich and nutty peanut sauce with chickpeas and crunchy vegetables, ready in 15 minutes",
-    "servings": 4,
-    "time": 15,
-    "difficulty": "easy",
-    "tags": [
-      "asian",
-      "indonesian"
-    ],
-    "diet": [
-      "vegan"
-    ],
-    "date": "2026-02-27",
-    "notes": "Use tamari instead of soy sauce to make this gluten-free. You can swap the courgette and red pepper for any fast-cooking veg — mushrooms, sugarsnap peas or spinach all work well.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "1/2 thumb fresh ginger, finely chopped",
-          "quantity": {
-            "amount": 0.5,
-            "item": "thumb fresh ginger, finely chopped"
-          }
-        },
-        {
-          "id": 2,
-          "text": "2 cloves garlic, minced",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "cloves",
-            "item": "garlic, minced"
-          }
-        },
-        {
-          "id": 3,
-          "text": "4 spring onions, finely sliced",
-          "quantity": {
-            "amount": 4.0,
-            "item": "spring onions, finely sliced"
-          }
-        },
-        {
-          "id": 4,
-          "text": "1/2 fresh red chilli, deseeded and finely sliced",
-          "quantity": {
-            "amount": 0.5,
-            "item": "fresh red chilli, deseeded and finely sliced"
-          }
-        },
-        {
-          "id": 5,
-          "text": "1 red pepper, deseeded and finely sliced",
-          "quantity": {
-            "amount": 1.0,
-            "item": "red pepper, deseeded and finely sliced"
-          }
-        },
-        {
-          "id": 6,
-          "text": "1 courgette, finely chopped",
-          "quantity": {
-            "amount": 1.0,
-            "item": "courgette, finely chopped"
-          }
-        },
-        {
-          "id": 7,
-          "text": "Fresh coriander or basil for garnish"
-        },
-        {
-          "id": 8,
-          "text": "Beansprouts for garnish"
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 9,
-          "text": "1 tin (400 g) chickpeas, drained and rinsed",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tin",
-            "item": "chickpeas, drained and rinsed",
-            "secondary_amount": 400.0,
-            "secondary_unit": "g"
-          }
-        },
-        {
-          "id": 10,
-          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
-          }
-        },
-        {
-          "id": 11,
-          "text": "2 tbsp tamari or soy sauce",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "tamari or soy sauce"
-          }
-        },
-        {
-          "id": 12,
-          "text": "4 tbsp peanut butter",
-          "quantity": {
-            "amount": 4.0,
-            "unit": "tbsp",
-            "item": "peanut butter"
-          }
-        },
-        {
-          "id": 13,
-          "text": "2 tbsp apple cider vinegar",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "apple cider vinegar"
-          }
-        },
-        {
-          "id": 14,
-          "text": "2 tbsp maple syrup",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "maple syrup"
-          }
-        },
-        {
-          "id": 15,
-          "text": "350 ml warm water",
-          "quantity": {
-            "amount": 350.0,
-            "unit": "ml",
-            "item": "warm water"
-          }
-        },
-        {
-          "id": 16,
-          "text": "A handful of toasted nuts for garnish"
-        }
-      ],
-      "Spices": [
-        {
-          "id": 17,
-          "text": "Salt and pepper to taste"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Heat {oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {chilli} and {spring onions}. Cook for 1 1/2 minutes, stirring regularly.",
-        "durations": [
-          {
-            "seconds": 120,
-            "text": "2 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Add {courgette} and {red pepper}. Cook for 1 minute, then add {tamari} and cook for another minute. Reduce heat to medium.",
-        "durations": [
-          {
-            "seconds": 60,
-            "text": "for 1 minute"
-          }
-        ]
-      },
-      {
-        "text": "In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and 150 ml of the {warm water}. Blend or whisk until smooth, then add to the pan."
-      },
-      {
-        "text": "Pour in the remaining water along with the {chickpeas}. Turn the heat back up to high and bring to the boil, then remove from the heat."
-      },
-      {
-        "text": "Season with {salt and pepper} to taste."
-      },
-      {
-        "text": "Divide between four bowls and top with {coriander}, {beansprouts} and {toasted nuts}."
-      }
-    ],
-    "tested": false
-  },
-  {
     "id": "express-tantanmen-ramen",
     "name": "Express Tantanmen Ramen",
     "description": "Quick Japanese ramen with a rich peanut-tahini broth, crispy smoked tofu crumbles and soy-marinated eggs",
@@ -959,6 +432,533 @@
       }
     ],
     "serving_suggestions": "Serve immediately while piping hot. Add extra crispy chili oil on top for more heat.",
+    "tested": false
+  },
+  {
+    "id": "indonesian-satay",
+    "name": "Indonesian Satay",
+    "description": "Rich and nutty peanut sauce with chickpeas and crunchy vegetables, ready in 15 minutes",
+    "servings": 4,
+    "time": 15,
+    "difficulty": "easy",
+    "tags": [
+      "asian",
+      "indonesian"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-27",
+    "notes": "Use tamari instead of soy sauce to make this gluten-free. You can swap the courgette and red pepper for any fast-cooking veg — mushrooms, sugarsnap peas or spinach all work well.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1/2 thumb fresh ginger, finely chopped",
+          "quantity": {
+            "amount": 0.5,
+            "item": "thumb fresh ginger, finely chopped"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 cloves garlic, minced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "4 spring onions, finely sliced",
+          "quantity": {
+            "amount": 4.0,
+            "item": "spring onions, finely sliced"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1/2 fresh red chilli, deseeded and finely sliced",
+          "quantity": {
+            "amount": 0.5,
+            "item": "fresh red chilli, deseeded and finely sliced"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 red pepper, deseeded and finely sliced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "red pepper, deseeded and finely sliced"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 courgette, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "courgette, finely chopped"
+          }
+        },
+        {
+          "id": 7,
+          "text": "Fresh coriander or basil for garnish"
+        },
+        {
+          "id": 8,
+          "text": "Beansprouts for garnish"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 9,
+          "text": "1 tin (400 g) chickpeas, drained and rinsed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chickpeas, drained and rinsed",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        },
+        {
+          "id": 11,
+          "text": "2 tbsp tamari or soy sauce",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "tamari or soy sauce"
+          }
+        },
+        {
+          "id": 12,
+          "text": "4 tbsp peanut butter",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "tbsp",
+            "item": "peanut butter"
+          }
+        },
+        {
+          "id": 13,
+          "text": "2 tbsp apple cider vinegar",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "apple cider vinegar"
+          }
+        },
+        {
+          "id": 14,
+          "text": "2 tbsp maple syrup",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "maple syrup"
+          }
+        },
+        {
+          "id": 15,
+          "text": "350 ml warm water",
+          "quantity": {
+            "amount": 350.0,
+            "unit": "ml",
+            "item": "warm water"
+          }
+        },
+        {
+          "id": 16,
+          "text": "A handful of toasted nuts for garnish"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 17,
+          "text": "Salt and pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Heat {oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {chilli} and {spring onions}. Cook for 1 1/2 minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {courgette} and {red pepper}. Cook for 1 minute, then add {tamari} and cook for another minute. Reduce heat to medium.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          }
+        ]
+      },
+      {
+        "text": "In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and 150 ml of the {warm water}. Blend or whisk until smooth, then add to the pan."
+      },
+      {
+        "text": "Pour in the remaining water along with the {chickpeas}. Turn the heat back up to high and bring to the boil, then remove from the heat."
+      },
+      {
+        "text": "Season with {salt and pepper} to taste."
+      },
+      {
+        "text": "Divide between four bowls and top with {coriander}, {beansprouts} and {toasted nuts}."
+      }
+    ],
+    "tested": false
+  },
+  {
+    "id": "one-pot-creamy-mushroom-pasta",
+    "name": "One-Pot Creamy Mushroom Pasta",
+    "description": "A quick one-pot wonder where spaghetti cooks directly in the sauce for a creamy, cheesy result — no cream or cheese required",
+    "servings": 4,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "pasta",
+      "italian"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-27",
+    "notes": "If you don't want to use wine, replace it with the same amount of vegetable stock.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 medium red onion, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "red onion, finely chopped"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 cloves garlic, minced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "400 g mushrooms, finely chopped",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "g",
+            "item": "mushrooms, finely chopped"
+          }
+        },
+        {
+          "id": 4,
+          "text": "A small handful fresh thyme sprigs"
+        },
+        {
+          "id": 5,
+          "text": "Lemon for juice"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 6,
+          "text": "800 ml oat milk (or other non-dairy milk)",
+          "quantity": {
+            "amount": 800.0,
+            "unit": "ml",
+            "item": "oat milk (or other non-dairy milk)"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 7,
+          "text": "500 g wholemeal or spelt spaghetti",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "g",
+            "item": "wholemeal or spelt spaghetti"
+          }
+        },
+        {
+          "id": 8,
+          "text": "200 ml white wine",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "ml",
+            "item": "white wine"
+          }
+        },
+        {
+          "id": 9,
+          "text": "500 ml vegetable stock",
+          "quantity": {
+            "amount": 500.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 10,
+          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        },
+        {
+          "id": 11,
+          "text": "2 tbsp nutritional yeast, plus extra for garnish",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "nutritional yeast, plus extra for garnish"
+          }
+        },
+        {
+          "id": 12,
+          "text": "Chilli flakes for garnish (optional)"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 13,
+          "text": "2 tsp sea salt",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "sea salt"
+          }
+        },
+        {
+          "id": 14,
+          "text": "Freshly ground black pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Finely chop {onion} and {garlic}. Chop {mushrooms} reasonably finely."
+      },
+      {
+        "text": "Heat {oil} in a large pan over high heat. Add {onion} and {garlic} and cook until they start to brown, about 2-3 minutes, stirring continuously. Add {mushrooms} and cook for 2 minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "about 2-3 minutes"
+          },
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {white wine} and most of the {thyme} leaves, and cook for another minute."
+      },
+      {
+        "text": "Break {spaghetti} into the pan and add {oat milk}, {vegetable stock} and {salt}. Turn the heat up high and cover with a lid. Once boiling, remove the lid to let the liquid evaporate. Stir occasionally to prevent sticking. When the sauce has reduced and the pasta is cooked, stir in {nutritional yeast} and a squeeze of {lemon} juice."
+      },
+      {
+        "text": "Season with {black pepper} and more salt if needed. Top each serving with the reserved {thyme} sprigs, extra nutritional yeast and {chilli flakes} if desired."
+      }
+    ],
+    "serving_suggestions": "Serve straight from the pan. A green salad on the side keeps it fresh and light.",
+    "tested": false
+  },
+  {
+    "id": "one-pot-spag-bol",
+    "name": "One-Pot Spag Bol",
+    "description": "A quick vegan take on spaghetti bolognese with lentils — pasta and sauce cooked together in one pot for a rich, satisfying result",
+    "servings": 4,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "pasta",
+      "italian"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-27",
+    "notes": "Nutritional yeast has a savoury, cheesy flavour and is available in most health food stores and online. Use tamari instead of soy sauce to make this gluten-free.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 red onion, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "red onion, finely chopped"
+          }
+        },
+        {
+          "id": 2,
+          "text": "4 cloves garlic, minced",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 carrot, grated",
+          "quantity": {
+            "amount": 1.0,
+            "item": "carrot, grated"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 stick celery, thinly sliced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "stick celery, thinly sliced"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 fresh green chilli, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "fresh green chilli, finely chopped"
+          }
+        },
+        {
+          "id": 6,
+          "text": "A handful of cherry tomatoes, halved"
+        },
+        {
+          "id": 7,
+          "text": "A bunch of fresh basil"
+        },
+        {
+          "id": 8,
+          "text": "Lemon for juice"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 9,
+          "text": "1 tin (400 g) cooked lentils, drained and rinsed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "cooked lentils, drained and rinsed",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 11,
+          "text": "400 g wholemeal spaghetti",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "g",
+            "item": "wholemeal spaghetti"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1 tbsp olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1.2 litres vegetable stock",
+          "quantity": {
+            "amount": 1.2,
+            "item": "litres vegetable stock"
+          }
+        },
+        {
+          "id": 14,
+          "text": "2 tbsp tamari or soy sauce",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "tamari or soy sauce"
+          }
+        },
+        {
+          "id": 15,
+          "text": "Nutritional yeast to serve"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 16,
+          "text": "Salt to taste"
+        },
+        {
+          "id": 17,
+          "text": "Freshly ground black pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Finely chop {onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomatoes}. Drain and rinse {lentils}."
+      },
+      {
+        "text": "Heat {olive oil} in a large pot over high heat. Add {onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for 3 minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for 3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {chopped tomatoes}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomatoes}. Bring to the boil, then simmer until the pasta is cooked, about 9-11 minutes. Remove from the heat.",
+        "durations": [
+          {
+            "seconds": 660,
+            "text": "about 9-11 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Pluck {basil} leaves and set aside. Finely chop the stalks and stir into the pot. Season with {black pepper} and a squeeze of {lemon} juice."
+      },
+      {
+        "text": "Serve topped with the basil leaves and {nutritional yeast}."
+      }
+    ],
     "tested": false
   },
   {
@@ -1360,6 +1360,171 @@
     "tested": false
   },
   {
+    "id": "dal-tadka",
+    "name": "Dal Tadka",
+    "description": "Classic hearty lentil curry with a tempered spice topping",
+    "servings": 4,
+    "time": 35,
+    "difficulty": "easy",
+    "tags": [
+      "indian",
+      "curry"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-02-20",
+    "notes": "Red lentils break down into a creamy texture, yellow lentils hold their shape a bit more — both work well. Lentils are easy to find in any German supermarket or Asian shop.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 onion, finely diced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "onion, finely diced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "3 cloves garlic, minced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 thumb fresh ginger, grated",
+          "quantity": {
+            "amount": 1.0,
+            "item": "thumb fresh ginger, grated"
+          }
+        },
+        {
+          "id": 4,
+          "text": "Lemon for juice"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "250 g red or yellow lentils",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "red or yellow lentils"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 8,
+          "text": "1 tsp cumin seeds",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 tsp turmeric",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "turmeric"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tsp garam masala",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "garam masala"
+          }
+        },
+        {
+          "id": 11,
+          "text": "Chilli to taste"
+        },
+        {
+          "id": 12,
+          "text": "Salt to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Rinse {lentils} and cook in water until soft, about 15 minutes. Drain any excess water.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "about 15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "In a pan, heat {oil} and fry the {cumin seeds} until they start to pop, then add {onion} and cook until golden."
+      },
+      {
+        "text": "Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for 2 minutes, stirring often.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {tomatoes} and cook for 5 minutes.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in the cooked lentils and simmer together for 10 minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for 10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Season with {salt} and finish with a squeeze of {lemon} juice."
+      }
+    ],
+    "serving_suggestions": "Serve with basmati rice or naan bread. A dollop of coconut yoghurt and fresh coriander on top works nicely.",
+    "tested": false
+  },
+  {
     "id": "palak-tofu",
     "name": "Palak Tofu",
     "description": "Vegan saag paneer — crispy tofu in a creamy spiced spinach sauce",
@@ -1569,303 +1734,6 @@
       }
     ],
     "serving_suggestions": "Serve with basmati rice or naan. A squeeze of lemon at the end brightens it up nicely.",
-    "tested": false
-  },
-  {
-    "id": "teriyaki-soba-noodles",
-    "name": "Teriyaki Soba Noodles",
-    "description": "Quick stir-fried soba noodles with mushrooms, bok choy and teriyaki sauce",
-    "servings": 4,
-    "time": 20,
-    "difficulty": "easy",
-    "tags": [
-      "japanese",
-      "stir-fry"
-    ],
-    "diet": [
-      "vegan"
-    ],
-    "date": "2026-02-20",
-    "notes": "This comes together in 20 minutes — prep the vegetables while the water boils. If the noodles start sticking after draining, rinse them with cold water. Add teriyaki sauce gradually to taste — different brands vary in sweetness and saltiness.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "3 bunches bok choy, chopped, whites and greens separated",
-          "quantity": {
-            "amount": 3.0,
-            "item": "bunches bok choy, chopped, whites and greens separated"
-          }
-        },
-        {
-          "id": 2,
-          "text": "4 cloves garlic, diced",
-          "quantity": {
-            "amount": 4.0,
-            "unit": "cloves",
-            "item": "garlic, diced"
-          }
-        },
-        {
-          "id": 3,
-          "text": "1 bunch spring onions, chopped, whites and greens separated",
-          "quantity": {
-            "amount": 1.0,
-            "item": "bunch spring onions, chopped, whites and greens separated"
-          }
-        },
-        {
-          "id": 4,
-          "text": "225 g mushrooms, chopped small",
-          "quantity": {
-            "amount": 225.0,
-            "unit": "g",
-            "item": "mushrooms, chopped small"
-          }
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 5,
-          "text": "2 bundles soba noodles",
-          "quantity": {
-            "amount": 2.0,
-            "item": "bundles soba noodles"
-          }
-        },
-        {
-          "id": 6,
-          "text": "1 tbsp sesame oil",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "sesame oil"
-          }
-        },
-        {
-          "id": 7,
-          "text": "80 ml teriyaki sauce, or to taste",
-          "quantity": {
-            "amount": 80.0,
-            "unit": "ml",
-            "item": "teriyaki sauce, or to taste"
-          }
-        }
-      ],
-      "Spices": [
-        {
-          "id": 8,
-          "text": "1/4 tsp white pepper",
-          "quantity": {
-            "amount": 0.25,
-            "unit": "tsp",
-            "item": "white pepper"
-          }
-        },
-        {
-          "id": 9,
-          "text": "Red pepper flakes to taste"
-        },
-        {
-          "id": 10,
-          "text": "Sesame seeds for serving"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Bring a pot of water to a boil. While waiting, prep the vegetables. Add {soba noodles} and cook for 3–5 minutes until tender. Drain and rinse with cold water.",
-        "durations": [
-          {
-            "seconds": 300,
-            "text": "for 3–5 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Meanwhile, heat {sesame oil} in a skillet over medium heat. Add {garlic}, {mushrooms}, whites of the {bok choy}, whites of the {spring onions}, {white pepper} and {red pepper flakes}. Cook for about 5 minutes until the mushrooms have released their liquid and it has cooked off.",
-        "durations": [
-          {
-            "seconds": 300,
-            "text": "for about 5 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Add 2 tablespoons of {teriyaki sauce} and cook for 1 more minute."
-      },
-      {
-        "text": "Add the soba noodles, greens of the {bok choy} and the rest of the {teriyaki sauce}. Toss until everything is coated and heated through."
-      },
-      {
-        "text": "Serve topped with remaining {spring onions} and {sesame seeds}."
-      }
-    ],
-    "tested": true
-  },
-  {
-    "id": "dal-tadka",
-    "name": "Dal Tadka",
-    "description": "Classic hearty lentil curry with a tempered spice topping",
-    "servings": 4,
-    "time": 35,
-    "difficulty": "easy",
-    "tags": [
-      "indian",
-      "curry"
-    ],
-    "diet": [
-      "vegan",
-      "gluten-free"
-    ],
-    "date": "2026-02-20",
-    "notes": "Red lentils break down into a creamy texture, yellow lentils hold their shape a bit more — both work well. Lentils are easy to find in any German supermarket or Asian shop.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "1 onion, finely diced",
-          "quantity": {
-            "amount": 1.0,
-            "item": "onion, finely diced"
-          }
-        },
-        {
-          "id": 2,
-          "text": "3 cloves garlic, minced",
-          "quantity": {
-            "amount": 3.0,
-            "unit": "cloves",
-            "item": "garlic, minced"
-          }
-        },
-        {
-          "id": 3,
-          "text": "1 thumb fresh ginger, grated",
-          "quantity": {
-            "amount": 1.0,
-            "item": "thumb fresh ginger, grated"
-          }
-        },
-        {
-          "id": 4,
-          "text": "Lemon for juice"
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 5,
-          "text": "250 g red or yellow lentils",
-          "quantity": {
-            "amount": 250.0,
-            "unit": "g",
-            "item": "red or yellow lentils"
-          }
-        },
-        {
-          "id": 6,
-          "text": "1 tin (400 g) chopped tomatoes",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tin",
-            "item": "chopped tomatoes",
-            "secondary_amount": 400.0,
-            "secondary_unit": "g"
-          }
-        },
-        {
-          "id": 7,
-          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
-          }
-        }
-      ],
-      "Spices": [
-        {
-          "id": 8,
-          "text": "1 tsp cumin seeds",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "cumin seeds"
-          }
-        },
-        {
-          "id": 9,
-          "text": "1 tsp turmeric",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "turmeric"
-          }
-        },
-        {
-          "id": 10,
-          "text": "1 tsp garam masala",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "garam masala"
-          }
-        },
-        {
-          "id": 11,
-          "text": "Chilli to taste"
-        },
-        {
-          "id": 12,
-          "text": "Salt to taste"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Rinse {lentils} and cook in water until soft, about 15 minutes. Drain any excess water.",
-        "durations": [
-          {
-            "seconds": 900,
-            "text": "about 15 minutes"
-          }
-        ]
-      },
-      {
-        "text": "In a pan, heat {oil} and fry the {cumin seeds} until they start to pop, then add {onion} and cook until golden."
-      },
-      {
-        "text": "Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for 2 minutes, stirring often.",
-        "durations": [
-          {
-            "seconds": 120,
-            "text": "for 2 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Add the {tomatoes} and cook for 5 minutes.",
-        "durations": [
-          {
-            "seconds": 300,
-            "text": "for 5 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Stir in the cooked lentils and simmer together for 10 minutes.",
-        "durations": [
-          {
-            "seconds": 600,
-            "text": "for 10 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Season with {salt} and finish with a squeeze of {lemon} juice."
-      }
-    ],
-    "serving_suggestions": "Serve with basmati rice or naan bread. A dollop of coconut yoghurt and fresh coriander on top works nicely.",
     "tested": false
   },
   {
@@ -2088,6 +1956,138 @@
     "tested": false
   },
   {
+    "id": "teriyaki-soba-noodles",
+    "name": "Teriyaki Soba Noodles",
+    "description": "Quick stir-fried soba noodles with mushrooms, bok choy and teriyaki sauce",
+    "servings": 4,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "japanese",
+      "stir-fry"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-20",
+    "notes": "This comes together in 20 minutes — prep the vegetables while the water boils. If the noodles start sticking after draining, rinse them with cold water. Add teriyaki sauce gradually to taste — different brands vary in sweetness and saltiness.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "3 bunches bok choy, chopped, whites and greens separated",
+          "quantity": {
+            "amount": 3.0,
+            "item": "bunches bok choy, chopped, whites and greens separated"
+          }
+        },
+        {
+          "id": 2,
+          "text": "4 cloves garlic, diced",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic, diced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 bunch spring onions, chopped, whites and greens separated",
+          "quantity": {
+            "amount": 1.0,
+            "item": "bunch spring onions, chopped, whites and greens separated"
+          }
+        },
+        {
+          "id": 4,
+          "text": "225 g mushrooms, chopped small",
+          "quantity": {
+            "amount": 225.0,
+            "unit": "g",
+            "item": "mushrooms, chopped small"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "2 bundles soba noodles",
+          "quantity": {
+            "amount": 2.0,
+            "item": "bundles soba noodles"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tbsp sesame oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "sesame oil"
+          }
+        },
+        {
+          "id": 7,
+          "text": "80 ml teriyaki sauce, or to taste",
+          "quantity": {
+            "amount": 80.0,
+            "unit": "ml",
+            "item": "teriyaki sauce, or to taste"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 8,
+          "text": "1/4 tsp white pepper",
+          "quantity": {
+            "amount": 0.25,
+            "unit": "tsp",
+            "item": "white pepper"
+          }
+        },
+        {
+          "id": 9,
+          "text": "Red pepper flakes to taste"
+        },
+        {
+          "id": 10,
+          "text": "Sesame seeds for serving"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Bring a pot of water to a boil. While waiting, prep the vegetables. Add {soba noodles} and cook for 3–5 minutes until tender. Drain and rinse with cold water.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 3–5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Meanwhile, heat {sesame oil} in a skillet over medium heat. Add {garlic}, {mushrooms}, whites of the {bok choy}, whites of the {spring onions}, {white pepper} and {red pepper flakes}. Cook for about 5 minutes until the mushrooms have released their liquid and it has cooked off.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add 2 tablespoons of {teriyaki sauce} and cook for 1 more minute."
+      },
+      {
+        "text": "Add the soba noodles, greens of the {bok choy} and the rest of the {teriyaki sauce}. Toss until everything is coated and heated through."
+      },
+      {
+        "text": "Serve topped with remaining {spring onions} and {sesame seeds}."
+      }
+    ],
+    "tested": true
+  },
+  {
     "id": "galettes-bretonnes",
     "name": "Galettes Bretonnes",
     "description": "Traditional Breton buckwheat crêpes with sautéed mushrooms — naturally vegan and gluten-free",
@@ -2224,171 +2224,6 @@
       }
     ],
     "serving_suggestions": "Serve with a bowl of cidre breton for the full Breton experience. Other vegan filling ideas: creamy leeks with oat cream and nutmeg; ratatouille; caramelised onion and spinach with vegan cheese; roasted butternut squash with cumin, hummus, and toasted pumpkin seeds; or vegan pesto with sun-dried tomatoes, pine nuts, and rocket.\n\nFor vegetarian fillings: a fried egg with grated Comté (the classic complète); goat cheese with honey and walnuts; sautéed mushrooms with egg and Gruyère; or wilted spinach with ricotta, lemon zest, and black pepper.",
-    "tested": true
-  },
-  {
-    "id": "tofu-scramble",
-    "name": "Tofu Scramble",
-    "description": "The perfect egg-free scramble — spiced with kala namak and chipotle, creamy on the inside, crispy on the outside",
-    "servings": 2,
-    "time": 20,
-    "difficulty": "easy",
-    "tags": [
-      "breakfast"
-    ],
-    "diet": [
-      "vegan"
-    ],
-    "author": "James",
-    "date": "2026-02-17",
-    "notes": "Press the tofu for at least 24 hours to extract all the water. The drier the tofu, the better it will brown. Kala namak (Indian black salt) is the secret ingredient — it gives the scramble its eggy flavour. You can find it at Indian grocery stores or online.",
-    "ingredients": {
-      "Fridge": [
-        {
-          "id": 4,
-          "text": "400 g firm tofu (pressed for 24h)",
-          "quantity": {
-            "amount": 400.0,
-            "unit": "g",
-            "item": "firm tofu (pressed for 24h)"
-          }
-        },
-        {
-          "id": 5,
-          "text": "120 ml full-fat oat milk (or creamy plant milk)",
-          "quantity": {
-            "amount": 120.0,
-            "unit": "ml",
-            "item": "full-fat oat milk (or creamy plant milk)"
-          }
-        },
-        {
-          "id": 6,
-          "text": "1 tbsp plant-based yogurt (optional)",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "plant-based yogurt (optional)"
-          }
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 1,
-          "text": "1 tbsp olive oil",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "olive oil"
-          }
-        },
-        {
-          "id": 2,
-          "text": "2 tbsp nutritional yeast",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "nutritional yeast"
-          }
-        },
-        {
-          "id": 3,
-          "text": "1 tbsp tahini",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "tahini"
-          }
-        }
-      ],
-      "Spices": [
-        {
-          "id": 7,
-          "text": "1/2 tsp ground turmeric",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tsp",
-            "item": "ground turmeric"
-          }
-        },
-        {
-          "id": 8,
-          "text": "1/2 tsp garlic powder",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tsp",
-            "item": "garlic powder"
-          }
-        },
-        {
-          "id": 9,
-          "text": "1/2 tsp onion powder",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tsp",
-            "item": "onion powder"
-          }
-        },
-        {
-          "id": 10,
-          "text": "1/2 tsp paprika",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tsp",
-            "item": "paprika"
-          }
-        },
-        {
-          "id": 11,
-          "text": "1/2 tsp chipotle chile flakes",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tsp",
-            "item": "chipotle chile flakes"
-          }
-        },
-        {
-          "id": 12,
-          "text": "1 tsp kala namak (Indian black salt)",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "kala namak (Indian black salt)"
-          }
-        },
-        {
-          "id": 13,
-          "text": "Freshly cracked black pepper (optional)"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Make the eggy sauce. In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth."
-      },
-      {
-        "text": "Crumble the pressed {tofu} with your hands into chunks — not too big, not too small."
-      },
-      {
-        "text": "Heat a large nonstick frying pan over medium-high heat with the {olive oil}. Once hot, add the tofu and fry until lightly browned, 5 to 7 minutes. Stir occasionally but not too often to let the exterior crisp up.",
-        "durations": [
-          {
-            "seconds": 420,
-            "text": "5 to 7 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Pour in the eggy sauce and continue frying until the scramble is as moist or dry as you like — pull it off the heat early for a soft, creamy scramble, or keep going for firmer, drier curds."
-      },
-      {
-        "text": "For extra creaminess, stir in the {plant-based yogurt} and mix through."
-      },
-      {
-        "text": "Taste and add a pinch {kala namak} and {black pepper} if needed."
-      }
-    ],
-    "serving_suggestions": "Serve with halved cherry tomatoes, sliced cucumber, bell pepper strips, and toasted crusty bread.",
     "tested": true
   },
   {
@@ -2619,6 +2454,171 @@
       }
     ],
     "serving_suggestions": "Serve immediately while piping hot. For extra heat, add more rayu or a drizzle of chilli oil on top. A squeeze of lime on the side is a nice addition. If you want a richer broth, stir in an extra tablespoon of sesame paste.",
+    "tested": true
+  },
+  {
+    "id": "tofu-scramble",
+    "name": "Tofu Scramble",
+    "description": "The perfect egg-free scramble — spiced with kala namak and chipotle, creamy on the inside, crispy on the outside",
+    "servings": 2,
+    "time": 20,
+    "difficulty": "easy",
+    "tags": [
+      "breakfast"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "author": "James",
+    "date": "2026-02-17",
+    "notes": "Press the tofu for at least 24 hours to extract all the water. The drier the tofu, the better it will brown. Kala namak (Indian black salt) is the secret ingredient — it gives the scramble its eggy flavour. You can find it at Indian grocery stores or online.",
+    "ingredients": {
+      "Fridge": [
+        {
+          "id": 4,
+          "text": "400 g firm tofu (pressed for 24h)",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "g",
+            "item": "firm tofu (pressed for 24h)"
+          }
+        },
+        {
+          "id": 5,
+          "text": "120 ml full-fat oat milk (or creamy plant milk)",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "ml",
+            "item": "full-fat oat milk (or creamy plant milk)"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tbsp plant-based yogurt (optional)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "plant-based yogurt (optional)"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 1,
+          "text": "1 tbsp olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 tbsp nutritional yeast",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "nutritional yeast"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 tbsp tahini",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "tahini"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 7,
+          "text": "1/2 tsp ground turmeric",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "ground turmeric"
+          }
+        },
+        {
+          "id": 8,
+          "text": "1/2 tsp garlic powder",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "garlic powder"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1/2 tsp onion powder",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "onion powder"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1/2 tsp paprika",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "paprika"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1/2 tsp chipotle chile flakes",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "chipotle chile flakes"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1 tsp kala namak (Indian black salt)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "kala namak (Indian black salt)"
+          }
+        },
+        {
+          "id": 13,
+          "text": "Freshly cracked black pepper (optional)"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Make the eggy sauce. In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth."
+      },
+      {
+        "text": "Crumble the pressed {tofu} with your hands into chunks — not too big, not too small."
+      },
+      {
+        "text": "Heat a large nonstick frying pan over medium-high heat with the {olive oil}. Once hot, add the tofu and fry until lightly browned, 5 to 7 minutes. Stir occasionally but not too often to let the exterior crisp up.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "5 to 7 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Pour in the eggy sauce and continue frying until the scramble is as moist or dry as you like — pull it off the heat early for a soft, creamy scramble, or keep going for firmer, drier curds."
+      },
+      {
+        "text": "For extra creaminess, stir in the {plant-based yogurt} and mix through."
+      },
+      {
+        "text": "Taste and add a pinch {kala namak} and {black pepper} if needed."
+      }
+    ],
+    "serving_suggestions": "Serve with halved cherry tomatoes, sliced cucumber, bell pepper strips, and toasted crusty bread.",
     "tested": true
   },
   {
@@ -3420,6 +3420,258 @@
     "tested": true
   },
   {
+    "id": "classic-british-scones",
+    "name": "Classic British Scones",
+    "description": "Light and fluffy vegan scones perfect for afternoon tea",
+    "servings": 10,
+    "time": 30,
+    "difficulty": "easy",
+    "tags": [
+      "baking",
+      "british"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "author": "James",
+    "date": "2026-02-10",
+    "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
+    "ingredients": {
+      "Fridge": [
+        {
+          "id": 1,
+          "text": "55 g plant-based block margarine, cold",
+          "quantity": {
+            "amount": 55.0,
+            "unit": "g",
+            "item": "plant-based block margarine, cold"
+          }
+        },
+        {
+          "id": 2,
+          "text": "150 ml plant milk for the dough",
+          "quantity": {
+            "amount": 150.0,
+            "unit": "ml",
+            "item": "plant milk for the dough"
+          }
+        },
+        {
+          "id": 3,
+          "text": "A splash of plant milk for brushing"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 5,
+          "text": "225 g plain flour (T45 / Type 405 / Tipo 00)",
+          "quantity": {
+            "amount": 225.0,
+            "unit": "g",
+            "item": "plain flour (T45 / Type 405 / Tipo 00)"
+          }
+        },
+        {
+          "id": 6,
+          "text": "3 tsp baking powder",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "baking powder"
+          }
+        },
+        {
+          "id": 7,
+          "text": "25 g caster sugar",
+          "quantity": {
+            "amount": 25.0,
+            "unit": "g",
+            "item": "caster sugar"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 4,
+          "text": "Pinch of salt"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Preheat the oven to 220°C / 200°C fan / Gas 7 and lightly grease a large baking tray."
+      },
+      {
+        "text": "Whisk together {flour}, {baking powder}, and {salt} so the raising agent is evenly distributed."
+      },
+      {
+        "text": "Using your fingertips, rub the cold {margarine} into the {flour} until the mixture resembles fine breadcrumbs."
+      },
+      {
+        "text": "Stir in {sugar}. Add most of the {plant milk for the dough} and mix to form a soft and slightly sticky dough. If it's a little dry, add more milk until you get the right consistency."
+      },
+      {
+        "text": "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick."
+      },
+      {
+        "text": "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up."
+      },
+      {
+        "text": "Brush the tops with a little {plant milk for brushing}."
+      },
+      {
+        "text": "Bake for 12-15 minutes until well risen and golden.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for 12-15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
+      }
+    ],
+    "serving_suggestions": "Serve warm with jam and vegan butter. For a traditional cream tea, add vegan whipped cream. Try adding dried fruit or a pinch of cinnamon to the dough for a twist.",
+    "tested": true
+  },
+  {
+    "id": "creamy-hummus",
+    "name": "Silky Smooth Hummus",
+    "description": "Silky smooth hummus with the perfect creamy texture",
+    "servings": 6,
+    "time": 90,
+    "difficulty": "medium",
+    "tags": [
+      "middle-eastern",
+      "dip"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "author": "James",
+    "date": "2026-02-10",
+    "notes": "Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not optional! The cold shock against the warm chickpeas aerates the hummus beautifully. Don't add olive oil to the base mixture. The tahini has plenty of fat. Olive oil goes on top when serving. The hummus keeps well in the fridge for up to 3 days.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 clove garlic, crushed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "clove",
+            "item": "garlic, crushed"
+          }
+        },
+        {
+          "id": 2,
+          "text": "Juice of 1 lemon",
+          "quantity": {
+            "amount": 1.0,
+            "item": "lemon",
+            "prefix": "Juice of"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 3,
+          "text": "Few ice cubes"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 6,
+          "text": "250 g dried chickpeas",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "dried chickpeas"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tsp baking soda for soaking",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking soda for soaking"
+          }
+        },
+        {
+          "id": 8,
+          "text": "1 tsp baking soda for cooking",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking soda for cooking"
+          }
+        },
+        {
+          "id": 9,
+          "text": "120 g tahini (or more to taste)",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "g",
+            "item": "tahini (or more to taste)"
+          }
+        },
+        {
+          "id": 10,
+          "text": "Good quality olive oil (for serving)"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 4,
+          "text": "Salt to taste"
+        },
+        {
+          "id": 5,
+          "text": "Optional: pinch of cumin, paprika, sumac, or za'atar"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Cover {chickpeas} with plenty of water, add 1 teaspoon of {baking soda for soaking}, and leave overnight."
+      },
+      {
+        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda for cooking} and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+        "durations": [
+          {
+            "seconds": 2400,
+            "text": "for 20 to 40 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Drain {chickpeas} over a bowl, saving the cooking water."
+      },
+      {
+        "text": "While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, a good pinch of {salt}, and a couple of {ice cubes}."
+      },
+      {
+        "text": "Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy."
+      },
+      {
+        "text": "Transfer to a bowl, cover the surface with cling film, and let it rest for at least 30 minutes.",
+        "durations": [
+          {
+            "seconds": 1800,
+            "text": "30 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
+      }
+    ],
+    "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter.",
+    "tested": true
+  },
+  {
     "id": "creamy-mushroom-soup",
     "name": "Creamy Mushroom Soup",
     "description": "Rich and creamy mushroom soup perfect for batch cooking and freezing",
@@ -3882,258 +4134,6 @@
       }
     ],
     "serving_suggestions": "Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime. Great for meal prep – portion into containers for easy weeknight dinners throughout the week.",
-    "tested": true
-  },
-  {
-    "id": "creamy-hummus",
-    "name": "Silky Smooth Hummus",
-    "description": "Silky smooth hummus with the perfect creamy texture",
-    "servings": 6,
-    "time": 90,
-    "difficulty": "medium",
-    "tags": [
-      "middle-eastern",
-      "dip"
-    ],
-    "diet": [
-      "vegan",
-      "gluten-free"
-    ],
-    "author": "James",
-    "date": "2026-02-10",
-    "notes": "Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not optional! The cold shock against the warm chickpeas aerates the hummus beautifully. Don't add olive oil to the base mixture. The tahini has plenty of fat. Olive oil goes on top when serving. The hummus keeps well in the fridge for up to 3 days.",
-    "ingredients": {
-      "Fresh": [
-        {
-          "id": 1,
-          "text": "1 clove garlic, crushed",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "clove",
-            "item": "garlic, crushed"
-          }
-        },
-        {
-          "id": 2,
-          "text": "Juice of 1 lemon",
-          "quantity": {
-            "amount": 1.0,
-            "item": "lemon",
-            "prefix": "Juice of"
-          }
-        }
-      ],
-      "Fridge": [
-        {
-          "id": 3,
-          "text": "Few ice cubes"
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 6,
-          "text": "250 g dried chickpeas",
-          "quantity": {
-            "amount": 250.0,
-            "unit": "g",
-            "item": "dried chickpeas"
-          }
-        },
-        {
-          "id": 7,
-          "text": "1 tsp baking soda for soaking",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "baking soda for soaking"
-          }
-        },
-        {
-          "id": 8,
-          "text": "1 tsp baking soda for cooking",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "baking soda for cooking"
-          }
-        },
-        {
-          "id": 9,
-          "text": "120 g tahini (or more to taste)",
-          "quantity": {
-            "amount": 120.0,
-            "unit": "g",
-            "item": "tahini (or more to taste)"
-          }
-        },
-        {
-          "id": 10,
-          "text": "Good quality olive oil (for serving)"
-        }
-      ],
-      "Spices": [
-        {
-          "id": 4,
-          "text": "Salt to taste"
-        },
-        {
-          "id": 5,
-          "text": "Optional: pinch of cumin, paprika, sumac, or za'atar"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Cover {chickpeas} with plenty of water, add 1 teaspoon of {baking soda for soaking}, and leave overnight."
-      },
-      {
-        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda for cooking} and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
-        "durations": [
-          {
-            "seconds": 2400,
-            "text": "for 20 to 40 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Drain {chickpeas} over a bowl, saving the cooking water."
-      },
-      {
-        "text": "While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, a good pinch of {salt}, and a couple of {ice cubes}."
-      },
-      {
-        "text": "Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy."
-      },
-      {
-        "text": "Transfer to a bowl, cover the surface with cling film, and let it rest for at least 30 minutes.",
-        "durations": [
-          {
-            "seconds": 1800,
-            "text": "30 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
-      }
-    ],
-    "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter.",
-    "tested": true
-  },
-  {
-    "id": "classic-british-scones",
-    "name": "Classic British Scones",
-    "description": "Light and fluffy vegan scones perfect for afternoon tea",
-    "servings": 10,
-    "time": 30,
-    "difficulty": "easy",
-    "tags": [
-      "baking",
-      "british"
-    ],
-    "diet": [
-      "vegan"
-    ],
-    "author": "James",
-    "date": "2026-02-10",
-    "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
-    "ingredients": {
-      "Fridge": [
-        {
-          "id": 1,
-          "text": "55 g plant-based block margarine, cold",
-          "quantity": {
-            "amount": 55.0,
-            "unit": "g",
-            "item": "plant-based block margarine, cold"
-          }
-        },
-        {
-          "id": 2,
-          "text": "150 ml plant milk for the dough",
-          "quantity": {
-            "amount": 150.0,
-            "unit": "ml",
-            "item": "plant milk for the dough"
-          }
-        },
-        {
-          "id": 3,
-          "text": "A splash of plant milk for brushing"
-        }
-      ],
-      "Pantry": [
-        {
-          "id": 5,
-          "text": "225 g plain flour (T45 / Type 405 / Tipo 00)",
-          "quantity": {
-            "amount": 225.0,
-            "unit": "g",
-            "item": "plain flour (T45 / Type 405 / Tipo 00)"
-          }
-        },
-        {
-          "id": 6,
-          "text": "3 tsp baking powder",
-          "quantity": {
-            "amount": 3.0,
-            "unit": "tsp",
-            "item": "baking powder"
-          }
-        },
-        {
-          "id": 7,
-          "text": "25 g caster sugar",
-          "quantity": {
-            "amount": 25.0,
-            "unit": "g",
-            "item": "caster sugar"
-          }
-        }
-      ],
-      "Spices": [
-        {
-          "id": 4,
-          "text": "Pinch of salt"
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Preheat the oven to 220°C / 200°C fan / Gas 7 and lightly grease a large baking tray."
-      },
-      {
-        "text": "Whisk together {flour}, {baking powder}, and {salt} so the raising agent is evenly distributed."
-      },
-      {
-        "text": "Using your fingertips, rub the cold {margarine} into the {flour} until the mixture resembles fine breadcrumbs."
-      },
-      {
-        "text": "Stir in {sugar}. Add most of the {plant milk for the dough} and mix to form a soft and slightly sticky dough. If it's a little dry, add more milk until you get the right consistency."
-      },
-      {
-        "text": "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick."
-      },
-      {
-        "text": "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up."
-      },
-      {
-        "text": "Brush the tops with a little {plant milk for brushing}."
-      },
-      {
-        "text": "Bake for 12-15 minutes until well risen and golden.",
-        "durations": [
-          {
-            "seconds": 900,
-            "text": "for 12-15 minutes"
-          }
-        ]
-      },
-      {
-        "text": "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
-      }
-    ],
-    "serving_suggestions": "Serve warm with jam and vegan butter. For a traditional cream tea, add vegan whipped cream. Try adding dried fruit or a pinch of cinnamon to the dough for a twist.",
     "tested": true
   },
   {

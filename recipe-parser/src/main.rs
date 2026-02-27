@@ -1072,8 +1072,8 @@ fn main() -> Result<()> {
         bail!("No valid recipes found in {:?}", cli.input);
     }
 
-    // Sort by date descending (newest first)
-    recipes.sort_by(|a, b| b.date.cmp(&a.date));
+    // Sort by date descending (newest first), then by ID alphabetically for stable ordering
+    recipes.sort_by(|a, b| b.date.cmp(&a.date).then_with(|| a.id.cmp(&b.id)));
 
     println!("\n✅ Successfully parsed {} recipe(s)", recipes.len());
 
