@@ -1,5 +1,415 @@
 [
   {
+    "id": "cauliflower-pea-korma",
+    "name": "Cauliflower & Pea Korma",
+    "description": "Creamy, fragrant korma with tender cauliflower florets and sweet peas in a rich coconut tomato sauce",
+    "servings": 3,
+    "time": 25,
+    "difficulty": "easy",
+    "tags": [
+      "indian",
+      "curry"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-02-27",
+    "notes": "You can substitute broccoli for the cauliflower if you prefer. Remove the chilli seeds for a milder dish.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 head cauliflower (about 600 g), cut into small florets",
+          "quantity": {
+            "amount": 1.0,
+            "item": "head cauliflower, cut into small florets",
+            "secondary_amount": 600.0,
+            "secondary_unit": "g",
+            "secondary_prefix": "about"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 large red pepper, deseeded and finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "large",
+            "item": "red pepper, deseeded and finely chopped"
+          }
+        },
+        {
+          "id": 3,
+          "text": "4 spring onions, finely sliced",
+          "quantity": {
+            "amount": 4.0,
+            "item": "spring onions, finely sliced"
+          }
+        },
+        {
+          "id": 4,
+          "text": "3 cloves garlic, minced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 thumb fresh ginger, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "thumb fresh ginger, finely chopped"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1/2 fresh red chilli, finely sliced",
+          "quantity": {
+            "amount": 0.5,
+            "item": "fresh red chilli, finely sliced"
+          }
+        },
+        {
+          "id": 7,
+          "text": "Fresh coriander for garnish"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 8,
+          "text": "250 g frozen peas",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "frozen peas"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 tin (400 ml) coconut milk",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "coconut milk",
+            "secondary_amount": 400.0,
+            "secondary_unit": "ml"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1 1/2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 1.0,
+            "item": "1/2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        },
+        {
+          "id": 12,
+          "text": "1 tbsp maple syrup",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "maple syrup"
+          }
+        },
+        {
+          "id": 13,
+          "text": "Juice of 1/2 lime",
+          "quantity": {
+            "amount": 0.5,
+            "item": "lime",
+            "prefix": "Juice of"
+          }
+        },
+        {
+          "id": 14,
+          "text": "Flaked almonds for garnish"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 15,
+          "text": "1 tsp cumin seeds",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        },
+        {
+          "id": 16,
+          "text": "1 1/2 tbsp curry powder",
+          "quantity": {
+            "amount": 1.0,
+            "item": "1/2 tbsp curry powder"
+          }
+        },
+        {
+          "id": 17,
+          "text": "1/2 tsp freshly ground black pepper",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "freshly ground black pepper"
+          }
+        },
+        {
+          "id": 18,
+          "text": "1 1/2 tsp sea salt",
+          "quantity": {
+            "amount": 1.0,
+            "item": "1/2 tsp sea salt"
+          }
+        },
+        {
+          "id": 19,
+          "text": "Chilli flakes for garnish"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Place {frozen peas} in a bowl of boiling water to thaw."
+      },
+      {
+        "text": "Heat {oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for 1 1/2 minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {cauliflower} florets, {red pepper} and {cumin seeds}. Cook for 2 minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Drain the peas. Add the peas along with {coconut milk}, {chopped tomatoes}, {curry powder}, {black pepper}, {salt} and {maple syrup}. Bring to the boil, then reduce to a simmer for 2 minutes.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Remove from the heat and stir in the {lime} juice."
+      },
+      {
+        "text": "Serve topped with {coriander}, {flaked almonds} and {chilli flakes}."
+      }
+    ],
+    "serving_suggestions": "Serve with basmati or brown rice and warm naan bread.",
+    "tested": false
+  },
+  {
+    "id": "indonesian-satay",
+    "name": "Indonesian Satay",
+    "description": "Rich and nutty peanut sauce with chickpeas and crunchy vegetables, ready in 15 minutes",
+    "servings": 4,
+    "time": 15,
+    "difficulty": "easy",
+    "tags": [
+      "asian",
+      "indonesian"
+    ],
+    "diet": [
+      "vegan"
+    ],
+    "date": "2026-02-27",
+    "notes": "Use tamari instead of soy sauce to make this gluten-free. You can swap the courgette and red pepper for any fast-cooking veg — mushrooms, sugarsnap peas or spinach all work well.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1/2 thumb fresh ginger, finely chopped",
+          "quantity": {
+            "amount": 0.5,
+            "item": "thumb fresh ginger, finely chopped"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 cloves garlic, minced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        },
+        {
+          "id": 3,
+          "text": "4 spring onions, finely sliced",
+          "quantity": {
+            "amount": 4.0,
+            "item": "spring onions, finely sliced"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1/2 fresh red chilli, deseeded and finely sliced",
+          "quantity": {
+            "amount": 0.5,
+            "item": "fresh red chilli, deseeded and finely sliced"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 red pepper, deseeded and finely sliced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "red pepper, deseeded and finely sliced"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 courgette, finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "courgette, finely chopped"
+          }
+        },
+        {
+          "id": 7,
+          "text": "Fresh coriander or basil for garnish"
+        },
+        {
+          "id": 8,
+          "text": "Beansprouts for garnish"
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 9,
+          "text": "1 tin (400 g) chickpeas, drained and rinsed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chickpeas, drained and rinsed",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+          }
+        },
+        {
+          "id": 11,
+          "text": "2 tbsp tamari or soy sauce",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "tamari or soy sauce"
+          }
+        },
+        {
+          "id": 12,
+          "text": "4 tbsp peanut butter",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "tbsp",
+            "item": "peanut butter"
+          }
+        },
+        {
+          "id": 13,
+          "text": "2 tbsp apple cider vinegar",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "apple cider vinegar"
+          }
+        },
+        {
+          "id": 14,
+          "text": "2 tbsp maple syrup",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "maple syrup"
+          }
+        },
+        {
+          "id": 15,
+          "text": "350 ml warm water",
+          "quantity": {
+            "amount": 350.0,
+            "unit": "ml",
+            "item": "warm water"
+          }
+        },
+        {
+          "id": 16,
+          "text": "A handful of toasted nuts for garnish"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 17,
+          "text": "Salt and pepper to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Heat {oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {chilli} and {spring onions}. Cook for 1 1/2 minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {courgette} and {red pepper}. Cook for 1 minute, then add {tamari} and cook for another minute. Reduce heat to medium.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          }
+        ]
+      },
+      {
+        "text": "In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and 150 ml of the {warm water}. Blend or whisk until smooth, then add to the pan."
+      },
+      {
+        "text": "Pour in the remaining water along with the {chickpeas}. Turn the heat back up to high and bring to the boil, then remove from the heat."
+      },
+      {
+        "text": "Season with {salt and pepper} to taste."
+      },
+      {
+        "text": "Divide between four bowls and top with {coriander}, {beansprouts} and {toasted nuts}."
+      }
+    ],
+    "tested": false
+  },
+  {
     "id": "chickpea-tikka-masala",
     "name": "Chickpea Tikka Masala",
     "description": "Chickpeas simmered in a creamy, spiced tomato and coconut milk sauce",
@@ -221,7 +631,7 @@
       "gluten-free"
     ],
     "date": "2026-02-26",
-    "notes": "A dish from northern Iran where butter beans are a common plant-based swap for the traditional lamb. Don't rush the herb frying step — the parsley and mint need to darken and concentrate to develop the characteristic deep flavour. The stew should have some liquid remaining when done; don't let it dry out.\n\nCheck your stock cube label if you need this to be strictly gluten-free — most are, but not all.",
+    "notes": "A dish from northern Iran where butter beans are a common plant-based swap for the traditional lamb. Don't rush the herb frying step — the parsley and mint need to darken and concentrate to develop the characteristic deep flavour. The stew should have some liquid remaining when done; don't let it dry out.",
     "ingredients": {
       "Fresh": [
         {
