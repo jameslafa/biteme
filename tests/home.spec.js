@@ -424,11 +424,39 @@ test.describe('Filter Panel', () => {
     await page.locator('#tag-select-btn').click();
 
     const options = page.locator('#tag-options .filter-option');
-    // "All" + 7 unique tags: breakfast, curry, dinner, lunch, quick, salad, soup
-    // (test-soup is tested:false so hidden by default, but its tags still appear in the filter)
-    await expect(options).toHaveCount(8);
+    // "All" + 6 unique tags from tested recipes: breakfast, curry, dinner, lunch, quick, salad
+    // (test-soup is tested:false so it and its tags are excluded)
+    await expect(options).toHaveCount(7);
     await expect(options.nth(0)).toHaveText('All');
     await expect(options.nth(1)).toHaveText('breakfast');
+  });
+
+  test('tag dropdown narrows to tags from search-matching recipes', async ({ page }) => {
+    await page.locator('#search-input').fill('curry');
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+
+    await openFilterPanel(page);
+    await page.locator('#tag-select-btn').click();
+
+    const options = page.locator('#tag-options .filter-option');
+    // Only test-curry matches: tags are "curry" and "dinner"
+    await expect(options).toHaveCount(3); // "All" + curry + dinner
+    const texts = await options.allTextContents();
+    expect(texts).toEqual(['All', 'curry', 'dinner']);
+  });
+
+  test('tag dropdown restores all tags when search is cleared', async ({ page }) => {
+    await page.locator('#search-input').fill('toast');
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+
+    await page.locator('#search-input').clear();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    await openFilterPanel(page);
+    await page.locator('#tag-select-btn').click();
+
+    const options = page.locator('#tag-options .filter-option');
+    await expect(options).toHaveCount(7); // All + 6 tags
   });
 
   test('apply button shows live result count', async ({ page }) => {
@@ -568,9 +596,12 @@ test.describe('Filter Panel', () => {
     await openFilterPanel(page);
     await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
 
-    // Select a tag that doesn't match the favourite — should be 0
-    await selectFilterOption(page, 'tag-select-btn', 'breakfast');
-    await expect(page.locator('#filter-apply-btn')).toHaveText('No recipes match');
+    // Tag dropdown should only show tags from the favourited recipe (curry, dinner)
+    await page.locator('#tag-select-btn').click();
+    const tagOptions = page.locator('#tag-options .filter-option');
+    await expect(tagOptions).toHaveCount(3); // All + curry + dinner
+    const texts = await tagOptions.allTextContents();
+    expect(texts).toEqual(['All', 'curry', 'dinner']);
   });
 
   test('clicking tag on card applies filter directly', async ({ page }) => {

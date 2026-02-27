@@ -209,8 +209,14 @@ function renderFilterDropdowns() {
   const resetBtn = document.getElementById('filter-reset-btn');
   const applyBtn = document.getElementById('filter-apply-btn');
 
-  // Tag dropdown
-  const tags = [...new Set(cachedAllRecipes.flatMap(r => r.tags))].sort();
+  // Tag dropdown — only show tags present in recipes matching current search/filters
+  const baseRecipes = filterRecipes({
+    tag: null,
+    minRating: pendingMinRating,
+    favoritesOnly: showFavoritesOnly,
+    searchQuery: document.getElementById('search-input').value,
+  });
+  const tags = [...new Set(baseRecipes.flatMap(r => r.tags))].sort();
   const tagOptions = document.getElementById('tag-options');
   const tagBtn = document.getElementById('tag-select-btn');
 
