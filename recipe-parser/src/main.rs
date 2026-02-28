@@ -64,6 +64,10 @@ struct Ingredient {
     id: u32,
     text: String,
     #[serde(skip_serializing_if = "Option::is_none")]
+    canonical: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    preparation: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     quantity: Option<ParsedQuantity>,
 }
 
@@ -109,6 +113,72 @@ struct Manifest {
     recipe_count: usize,
 }
 
+#[derive(Deserialize)]
+struct CanonicalJson {
+    ingredients: HashMap<String, Option<String>>,
+    units: HashMap<String, Option<String>>,
+}
+
+/// Canonical vocabulary loaded from docs/canonical.json.
+struct CanonicalData {
+    /// Maps any form (singular or plural, lowercase) → singular canonical (lowercase).
+    ingredients: HashMap<String, String>,
+    /// All known unit forms (both singular and plural), sorted by length descending.
+    units: Vec<String>,
+}
+
+impl CanonicalData {
+    fn load(path: &std::path::Path) -> Result<Self> {
+        let content = fs::read_to_string(path)
+            .with_context(|| format!("Failed to read canonical vocabulary: {:?}", path))?;
+        let json: CanonicalJson = serde_json::from_str(&content)
+            .context("Failed to parse canonical.json")?;
+
+        let mut ingredients = HashMap::new();
+        for (key, plural_opt) in &json.ingredients {
+            if key == "comment" {
+                continue;
+            }
+            let canonical = key.to_lowercase();
+            ingredients.insert(canonical.clone(), canonical.clone());
+            if let Some(plural) = plural_opt {
+                ingredients.insert(plural.to_lowercase(), canonical);
+            }
+        }
+
+        let mut units: Vec<String> = Vec::new();
+        for (singular, plural_opt) in &json.units {
+            if singular == "comment" {
+                continue;
+            }
+            units.push(singular.to_lowercase());
+            if let Some(plural) = plural_opt {
+                units.push(plural.to_lowercase());
+            }
+        }
+        // Sort by length descending so longer units are tried first (avoids prefix collisions).
+        units.sort_by(|a, b| b.len().cmp(&a.len()).then(a.cmp(b)));
+        units.dedup();
+
+        Ok(Self { ingredients, units })
+    }
+
+    /// Empty canonical data for use in unit tests; falls back to hardcoded units.
+    fn empty() -> Self {
+        let units = vec![
+            "tbsp".to_string(), "tsp".to_string(), "cups".to_string(), "cup".to_string(),
+            "cloves".to_string(), "clove".to_string(), "tins".to_string(), "tin".to_string(),
+            "cans".to_string(), "can".to_string(), "medium".to_string(), "small".to_string(),
+            "large".to_string(), "kg".to_string(), "ml".to_string(), "g".to_string(), "l".to_string(),
+        ];
+        Self { ingredients: HashMap::new(), units }
+    }
+
+    fn lookup_ingredient(&self, raw: &str) -> Option<&str> {
+        self.ingredients.get(raw).map(|s| s.as_str())
+    }
+}
+
 // Valid ingredient categories (also defines the output order)
 const VALID_CATEGORIES: &[&str] = &[
     "Fresh",
@@ -137,12 +207,6 @@ where
 
     map.end()
 }
-
-// Known units for ingredient quantity parsing (order matters: longer matches first)
-const KNOWN_UNITS: &[&str] = &[
-    "tbsp", "tsp", "cups", "cup", "cloves", "clove", "tins", "tin",
-    "cans", "can", "medium", "small", "large", "kg", "ml", "g", "l",
-];
 
 fn unicode_fraction_value(c: char) -> Option<f64> {
     match c {
@@ -251,15 +315,15 @@ fn parse_amount(s: &str) -> Option<(f64, &str)> {
 }
 
 /// Try to parse a unit from the start of a string.
-fn parse_unit(s: &str) -> (Option<String>, &str) {
+fn parse_unit<'a>(s: &'a str, known_units: &[String]) -> (Option<String>, &'a str) {
     let s = s.trim_start();
-    for &unit in KNOWN_UNITS {
-        if let Some(after) = s.strip_prefix(unit) {
+    for unit in known_units {
+        if let Some(after) = s.strip_prefix(unit.as_str()) {
             // Unit must be followed by whitespace, comma, paren, or end of string
             if after.is_empty()
                 || after.starts_with(|c: char| c.is_whitespace() || c == ',' || c == '(')
             {
-                return (Some(unit.to_string()), after);
+                return (Some(unit.clone()), after);
             }
         }
     }
@@ -267,7 +331,7 @@ fn parse_unit(s: &str) -> (Option<String>, &str) {
 }
 
 /// Try to parse a parenthetical secondary quantity like "(400 ml)" or "(about 150 g)".
-fn try_parse_parenthetical(s: &str) -> Option<(f64, Option<String>, Option<String>, &str)> {
+fn try_parse_parenthetical<'a>(s: &'a str, known_units: &[String]) -> Option<(f64, Option<String>, Option<String>, &'a str)> {
     let s = s.trim_start();
     if !s.starts_with('(') {
         return None;
@@ -288,7 +352,7 @@ fn try_parse_parenthetical(s: &str) -> Option<(f64, Option<String>, Option<Strin
     let (amount, inner_rest) = parse_amount(inner)?;
 
     // Try to parse unit
-    let (unit, leftover) = parse_unit(inner_rest);
+    let (unit, leftover) = parse_unit(inner_rest, known_units);
 
     // If there's leftover text, this isn't a clean secondary quantity
     if !leftover.trim().is_empty() {
@@ -299,12 +363,12 @@ fn try_parse_parenthetical(s: &str) -> Option<(f64, Option<String>, Option<Strin
 }
 
 /// Extract an embedded "(about N unit)" secondary quantity from item text.
-fn extract_embedded_secondary(item: &str) -> (Option<f64>, Option<String>, Option<String>, String) {
+fn extract_embedded_secondary(item: &str, known_units: &[String]) -> (Option<f64>, Option<String>, Option<String>, String) {
     if let Some(open) = item.find("(about ") {
         if let Some(rel_close) = item[open..].find(')') {
             let close = open + rel_close;
             let paren_content = &item[open..=close];
-            if let Some((amount, unit, prefix, _)) = try_parse_parenthetical(paren_content) {
+            if let Some((amount, unit, prefix, _)) = try_parse_parenthetical(paren_content, known_units) {
                 let before = item[..open].trim_end();
                 let after = item[close + 1..].trim_start();
                 let new_item = if after.starts_with(',') {
@@ -323,7 +387,7 @@ fn extract_embedded_secondary(item: &str) -> (Option<f64>, Option<String>, Optio
 
 /// Parse an ingredient text into a structured quantity.
 /// Returns None for non-scalable ingredients (no leading number).
-fn parse_ingredient_quantity(text: &str) -> Option<ParsedQuantity> {
+fn parse_ingredient_quantity(text: &str, known_units: &[String]) -> Option<ParsedQuantity> {
     let text = text.trim();
     if text.is_empty() {
         return None;
@@ -373,11 +437,11 @@ fn parse_ingredient_quantity(text: &str) -> Option<ParsedQuantity> {
     };
 
     // Try to parse unit
-    let (unit, rest) = parse_unit(rest);
+    let (unit, rest) = parse_unit(rest, known_units);
 
     // Check for immediate parenthetical secondary quantity
     let (secondary_amount, secondary_unit, secondary_prefix, rest) =
-        if let Some((sec_amount, sec_unit, sec_prefix, rest2)) = try_parse_parenthetical(rest) {
+        if let Some((sec_amount, sec_unit, sec_prefix, rest2)) = try_parse_parenthetical(rest, known_units) {
             (Some(sec_amount), sec_unit, sec_prefix, rest2)
         } else {
             (None, None, None, rest)
@@ -393,7 +457,7 @@ fn parse_ingredient_quantity(text: &str) -> Option<ParsedQuantity> {
     // If no immediate secondary was found, check for embedded "(about N unit)" in item
     let (secondary_amount, secondary_unit, secondary_prefix, item) = if secondary_amount.is_none()
     {
-        extract_embedded_secondary(&item)
+        extract_embedded_secondary(&item, known_units)
     } else {
         (secondary_amount, secondary_unit, secondary_prefix, item)
     };
@@ -408,6 +472,37 @@ fn parse_ingredient_quantity(text: &str) -> Option<ParsedQuantity> {
         secondary_prefix,
         prefix,
     })
+}
+
+/// Strip `[canonical]` from an ingredient line and return:
+/// (clean_text, canonical_lowercase_raw, preparation)
+fn strip_canonical(text: &str) -> (String, Option<String>, Option<String>) {
+    if let Some(open) = text.find('[') {
+        if let Some(rel_close) = text[open..].find(']') {
+            let close = open + rel_close;
+            let inner_raw = text[open + 1..close].trim();
+            if inner_raw.is_empty() {
+                return (text.to_string(), None, None);
+            }
+            let inner_lower = inner_raw.to_lowercase();
+            let before = &text[..open];
+            let after = &text[close + 1..];
+
+            // Preparation: everything after ], stripped of leading ", "
+            let prep_raw = after.trim_start_matches(',').trim();
+            let preparation = if prep_raw.is_empty() {
+                None
+            } else {
+                Some(prep_raw.to_string())
+            };
+
+            // Display text preserves original case of the inner word(s)
+            let clean_text = format!("{}{}{}", before, inner_raw, after);
+
+            return (clean_text, Some(inner_lower), preparation);
+        }
+    }
+    (text.to_string(), None, None)
 }
 
 /// Parse duration mentions from step text (e.g. "cook for 5 minutes", "simmer for 25 to 30 minutes").
@@ -459,7 +554,8 @@ fn extract_step_refs(steps_text: &str) -> Vec<String> {
 }
 
 /// Find ingredients not matched by any step reference.
-/// A reference matches an ingredient if it appears as a substring of the ingredient text.
+/// If the ingredient has a canonical tag, matches exactly on canonical; otherwise falls back
+/// to substring of ingredient text.
 fn find_unreferenced_ingredients(
     ingredients: &HashMap<String, Vec<Ingredient>>,
     step_refs: &[String],
@@ -467,8 +563,12 @@ fn find_unreferenced_ingredients(
     let mut unreferenced = Vec::new();
     for (category, items) in ingredients {
         for ingredient in items {
-            let text = ingredient.text.to_lowercase();
-            let is_referenced = step_refs.iter().any(|r| text.contains(r));
+            let is_referenced = if let Some(canonical) = &ingredient.canonical {
+                step_refs.iter().any(|r| r == canonical)
+            } else {
+                let text = ingredient.text.to_lowercase();
+                step_refs.iter().any(|r| text.contains(r.as_str()))
+            };
             if !is_referenced {
                 unreferenced.push(format!("{} ({})", ingredient.text, category));
             }
@@ -492,7 +592,13 @@ fn find_ambiguous_refs(
         let matches: Vec<String> = ingredients
             .values()
             .flat_map(|items| items.iter())
-            .filter(|ing| ing.text.to_lowercase().contains(r.as_str()))
+            .filter(|ing| {
+                if let Some(canonical) = &ing.canonical {
+                    canonical == r
+                } else {
+                    ing.text.to_lowercase().contains(r.as_str())
+                }
+            })
             .map(|ing| ing.text.clone())
             .collect();
         if matches.len() > 1 {
@@ -522,7 +628,7 @@ fn check_indentation(content: &str) -> Result<()> {
     Ok(())
 }
 
-fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
+fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> Result<Recipe> {
     let content = fs::read_to_string(path)
         .with_context(|| format!("Failed to read file: {:?}", path))?;
 
@@ -603,26 +709,62 @@ fn parse_recipe_file(path: &PathBuf, lint: bool) -> Result<Recipe> {
             }
             Event::End(TagEnd::Item) if in_list && current_section == "Ingredients" => {
                 // Strip any no-scale annotation from text (in case parser included it)
-                let text = current_text.trim()
+                let raw_text = current_text.trim()
                     .replace("<!-- no-scale -->", "").trim().to_string();
-                if !text.is_empty() && !current_category.is_empty() {
+                if !raw_text.is_empty() && !current_category.is_empty() {
                     if let Some(category_items) = ingredients.get_mut(&current_category) {
+                        // Extract [canonical] tag and preparation from text
+                        let (clean_text, raw_canonical, preparation) = strip_canonical(&raw_text);
+
+                        // Lint: error if no [canonical] tag present
+                        if lint && raw_canonical.is_none() {
+                            bail!(
+                                "Ingredient '{}' (category '{}') is missing a [canonical] tag. \
+                                Wrap the ingredient name in brackets, e.g. [garlic].",
+                                raw_text, current_category
+                            );
+                        }
+
+                        // Resolve canonical to singular form via vocabulary
+                        let canonical_resolved = raw_canonical.as_deref().and_then(|raw| {
+                            canonical.lookup_ingredient(raw).map(|s| s.to_string())
+                        }).or_else(|| raw_canonical.clone());
+
+                        // Lint: error if [canonical] is not in the vocabulary
+                        if lint {
+                            if let Some(raw) = &raw_canonical {
+                                if canonical.lookup_ingredient(raw).is_none() && !canonical.ingredients.is_empty() {
+                                    bail!(
+                                        "Ingredient '{}' (category '{}'): [{}] is not in canonical.json. \
+                                        Add it to docs/canonical.json before linting.",
+                                        raw_text, current_category, raw
+                                    );
+                                }
+                            }
+                        }
+
                         let quantity = if current_ingredient_no_scale {
                             None
                         } else {
-                            let q = parse_ingredient_quantity(&text);
+                            let mut q = parse_ingredient_quantity(&clean_text, &canonical.units);
+                            // Override quantity.item with the bracket text the author wrote
+                            if let (Some(ref mut qty), Some(ref raw)) = (&mut q, &raw_canonical) {
+                                qty.item = raw.clone();
+                            }
                             // Lint warning: ingredient looks scalable but failed to parse
                             if lint && q.is_none() {
-                                let first_char = text.chars().next().unwrap_or(' ');
+                                let first_char = clean_text.chars().next().unwrap_or(' ');
                                 if first_char.is_ascii_digit() || unicode_fraction_value(first_char).is_some() {
-                                    eprintln!("  \u{26a0}\u{fe0f}  WARNING: Ingredient '{}' (category '{}') starts with a number but could not be parsed for scaling. Add <!-- no-scale --> to suppress.", text, current_category);
+                                    eprintln!("  \u{26a0}\u{fe0f}  WARNING: Ingredient '{}' (category '{}') starts with a number but could not be parsed for scaling. Add <!-- no-scale --> to suppress.", clean_text, current_category);
                                 }
                             }
                             q
                         };
                         category_items.push(Ingredient {
                             id: ingredient_id,
-                            text,
+                            text: clean_text,
+                            canonical: canonical_resolved,
+                            preparation,
                             quantity,
                         });
                         ingredient_id += 1;
@@ -1035,6 +1177,15 @@ fn main() -> Result<()> {
         bail!("Input directory does not exist: {:?}", cli.input);
     }
 
+    // Load canonical vocabulary
+    let canonical_path = std::path::Path::new("docs/canonical.json");
+    let canonical = if canonical_path.exists() {
+        CanonicalData::load(canonical_path)?
+    } else {
+        eprintln!("⚠️  WARNING: docs/canonical.json not found; canonical validation disabled.");
+        CanonicalData::empty()
+    };
+
     let mut recipes = Vec::new();
     let mut seen_ids = HashMap::new();
 
@@ -1048,7 +1199,7 @@ fn main() -> Result<()> {
         if path.extension().and_then(|s| s.to_str()) == Some("md") {
             println!("  📄 Parsing: {}", path.file_name().unwrap().to_string_lossy());
 
-            match parse_recipe_file(&path, cli.lint) {
+            match parse_recipe_file(&path, cli.lint, &canonical) {
                 Ok(recipe) => {
                     // Check for duplicate IDs
                     if let Some(existing_path) = seen_ids.get(&recipe.id) {
@@ -1160,7 +1311,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("test-recipe.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -1199,7 +1350,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("bad-difficulty.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1234,7 +1385,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("bad-category.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1269,7 +1420,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("short-desc.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1304,7 +1455,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("no-tags.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1347,7 +1498,7 @@ Serve with test garnish.
         let test_file = temp_dir.join("with-notes.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -1385,7 +1536,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("bad-id.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1420,7 +1571,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("bad-id-spaces.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1450,7 +1601,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("no-ingredients.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1481,7 +1632,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("no-instructions.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1516,7 +1667,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("zero-servings.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1551,7 +1702,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("zero-time.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1590,7 +1741,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("id-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -1639,7 +1790,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("multi-category.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -1667,9 +1818,9 @@ date: 2026-01-01
 # Ingredients
 
 ## Pantry
-- 1 cup flour
-- 2 tbsp oil
-- 1 tsp salt
+- 1 cup [flour]
+- 2 tbsp [oil]
+- 1 tsp [salt]
 
 # Instructions
 
@@ -1682,7 +1833,7 @@ date: 2026-01-01
         fs::write(&test_file, test_recipe).unwrap();
 
         // This should not error in lint mode but should print warning about unreferenced oil
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -1723,7 +1874,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("ingredient-links-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -1776,7 +1927,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("order-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -1810,7 +1961,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("no-frontmatter.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1845,7 +1996,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("uppercase-tag.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1880,7 +2031,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("tag-spaces.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1915,7 +2066,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("dup-tags.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1951,7 +2102,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("long-id.md");
         fs::write(&test_file, &test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -1987,7 +2138,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("long-name.md");
         fs::write(&test_file, &test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2023,7 +2174,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("long-desc.md");
         fs::write(&test_file, &test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2058,7 +2209,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("many-servings.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2093,7 +2244,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("long-time.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, true);
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2129,7 +2280,7 @@ date: 2026-02-10
         let test_file = temp_dir.join("author-date-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -2166,7 +2317,7 @@ date: 10-02-2026
         let test_file = temp_dir.join("bad-date.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2202,7 +2353,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("no-diet.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2238,7 +2389,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("empty-diet.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2273,7 +2424,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("bad-diet.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
@@ -2308,7 +2459,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("multi-diet.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -2322,7 +2473,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_simple_metric() {
-        let q = parse_ingredient_quantity("500 g mixed mushrooms, sliced").unwrap();
+        let q = parse_ingredient_quantity("500 g mixed mushrooms, sliced", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 500.0);
         assert_eq!(q.unit.as_deref(), Some("g"));
         assert_eq!(q.item, "mixed mushrooms, sliced");
@@ -2332,7 +2483,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_volume() {
-        let q = parse_ingredient_quantity("2 tbsp olive oil").unwrap();
+        let q = parse_ingredient_quantity("2 tbsp olive oil", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 2.0);
         assert_eq!(q.unit.as_deref(), Some("tbsp"));
         assert_eq!(q.item, "olive oil");
@@ -2340,7 +2491,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_unicode_fraction() {
-        let q = parse_ingredient_quantity("½ tsp salt").unwrap();
+        let q = parse_ingredient_quantity("½ tsp salt", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 0.5);
         assert_eq!(q.unit.as_deref(), Some("tsp"));
         assert_eq!(q.item, "salt");
@@ -2348,7 +2499,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_text_fraction() {
-        let q = parse_ingredient_quantity("1/2 tsp black pepper").unwrap();
+        let q = parse_ingredient_quantity("1/2 tsp black pepper", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 0.5);
         assert_eq!(q.unit.as_deref(), Some("tsp"));
         assert_eq!(q.item, "black pepper");
@@ -2356,7 +2507,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_range() {
-        let q = parse_ingredient_quantity("3-4 cloves garlic, minced").unwrap();
+        let q = parse_ingredient_quantity("3-4 cloves garlic, minced", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 3.0);
         assert_eq!(q.amount_max, Some(4.0));
         assert_eq!(q.unit.as_deref(), Some("cloves"));
@@ -2365,7 +2516,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_composite_tin() {
-        let q = parse_ingredient_quantity("1 tin (400 ml) coconut milk").unwrap();
+        let q = parse_ingredient_quantity("1 tin (400 ml) coconut milk", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 1.0);
         assert_eq!(q.unit.as_deref(), Some("tin"));
         assert_eq!(q.secondary_amount, Some(400.0));
@@ -2375,7 +2526,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_metric_imperial() {
-        let q = parse_ingredient_quantity("250 ml (1 cup) milk").unwrap();
+        let q = parse_ingredient_quantity("250 ml (1 cup) milk", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 250.0);
         assert_eq!(q.unit.as_deref(), Some("ml"));
         assert_eq!(q.secondary_amount, Some(1.0));
@@ -2385,7 +2536,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_about_secondary() {
-        let q = parse_ingredient_quantity("1 medium floury potato (about 150 g), peeled and cubed").unwrap();
+        let q = parse_ingredient_quantity("1 medium floury potato (about 150 g), peeled and cubed", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 1.0);
         assert_eq!(q.unit.as_deref(), Some("medium"));
         assert_eq!(q.secondary_amount, Some(150.0));
@@ -2396,7 +2547,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_prefix_juice_of() {
-        let q = parse_ingredient_quantity("Juice of 1/2 lemon (optional)").unwrap();
+        let q = parse_ingredient_quantity("Juice of 1/2 lemon (optional)", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.prefix.as_deref(), Some("Juice of"));
         assert_eq!(q.amount, 0.5);
         assert!(q.unit.is_none());
@@ -2405,7 +2556,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_count_based() {
-        let q = parse_ingredient_quantity("4 medium ripe bananas, mashed").unwrap();
+        let q = parse_ingredient_quantity("4 medium ripe bananas, mashed", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 4.0);
         assert_eq!(q.unit.as_deref(), Some("medium"));
         assert_eq!(q.item, "ripe bananas, mashed");
@@ -2413,7 +2564,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_mixed_number() {
-        let q = parse_ingredient_quantity("250 g (1-3/4 cups) flour").unwrap();
+        let q = parse_ingredient_quantity("250 g (1-3/4 cups) flour", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 250.0);
         assert_eq!(q.unit.as_deref(), Some("g"));
         assert_eq!(q.secondary_amount, Some(1.75));
@@ -2423,7 +2574,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_fraction_secondary() {
-        let q = parse_ingredient_quantity("125 g (3/4 cup) brown sugar").unwrap();
+        let q = parse_ingredient_quantity("125 g (3/4 cup) brown sugar", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 125.0);
         assert_eq!(q.unit.as_deref(), Some("g"));
         assert_eq!(q.secondary_amount, Some(0.75));
@@ -2433,7 +2584,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_no_unit() {
-        let q = parse_ingredient_quantity("1 onion, diced").unwrap();
+        let q = parse_ingredient_quantity("1 onion, diced", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 1.0);
         assert!(q.unit.is_none());
         assert_eq!(q.item, "onion, diced");
@@ -2441,7 +2592,7 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_parenthetical_not_secondary() {
-        let q = parse_ingredient_quantity("3 tsp baking soda (Natron)").unwrap();
+        let q = parse_ingredient_quantity("3 tsp baking soda (Natron)", &CanonicalData::empty().units).unwrap();
         assert_eq!(q.amount, 3.0);
         assert_eq!(q.unit.as_deref(), Some("tsp"));
         assert_eq!(q.item, "baking soda (Natron)");
@@ -2450,47 +2601,47 @@ date: 2026-01-01
 
     #[test]
     fn test_quantity_non_scalable_salt() {
-        assert!(parse_ingredient_quantity("Salt to taste").is_none());
+        assert!(parse_ingredient_quantity("Salt to taste", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_pinch() {
-        assert!(parse_ingredient_quantity("Pinch of salt").is_none());
+        assert!(parse_ingredient_quantity("Pinch of salt", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_fresh() {
-        assert!(parse_ingredient_quantity("Fresh parsley for garnish").is_none());
+        assert!(parse_ingredient_quantity("Fresh parsley for garnish", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_ice_cubes() {
-        assert!(parse_ingredient_quantity("Ice cubes (about 25 g)").is_none());
+        assert!(parse_ingredient_quantity("Ice cubes (about 25 g)", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_extra() {
-        assert!(parse_ingredient_quantity("Extra banana slices for topping").is_none());
+        assert!(parse_ingredient_quantity("Extra banana slices for topping", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_good_quality() {
-        assert!(parse_ingredient_quantity("Good quality olive oil (for serving)").is_none());
+        assert!(parse_ingredient_quantity("Good quality olive oil (for serving)", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_optional() {
-        assert!(parse_ingredient_quantity("Optional: pinch of cumin, paprika, sumac, or za'atar").is_none());
+        assert!(parse_ingredient_quantity("Optional: pinch of cumin, paprika, sumac, or za'atar", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_thumb_sized() {
-        assert!(parse_ingredient_quantity("Thumb-sized piece of ginger, grated").is_none());
+        assert!(parse_ingredient_quantity("Thumb-sized piece of ginger, grated", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
     fn test_quantity_non_scalable_little() {
-        assert!(parse_ingredient_quantity("A little extra plant milk for glazing").is_none());
+        assert!(parse_ingredient_quantity("A little extra plant milk for glazing", &CanonicalData::empty().units).is_none());
     }
 
     #[test]
@@ -2522,7 +2673,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("no-scale-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -2572,7 +2723,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("quantity-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -2645,9 +2796,9 @@ date: 2026-01-01
     fn test_unreferenced_matches_substring() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Fresh".to_string(), vec![
-            Ingredient { id: 1, text: "Few ice cubes".to_string(), quantity: None },
-            Ingredient { id: 2, text: "Juice of 1 lemon".to_string(), quantity: None },
-            Ingredient { id: 3, text: "2 tbsp olive oil".to_string(), quantity: None },
+            Ingredient { id: 1, text: "Few ice cubes".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 2, text: "Juice of 1 lemon".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 3, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["ice cubes".to_string(), "lemon".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
@@ -2658,8 +2809,8 @@ date: 2026-01-01
     fn test_unreferenced_all_matched() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Pantry".to_string(), vec![
-            Ingredient { id: 1, text: "250 g dried chickpeas".to_string(), quantity: None },
-            Ingredient { id: 2, text: "120 g tahini".to_string(), quantity: None },
+            Ingredient { id: 1, text: "250 g dried chickpeas".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 2, text: "120 g tahini".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["chickpeas".to_string(), "tahini".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
@@ -2670,7 +2821,7 @@ date: 2026-01-01
     fn test_unreferenced_none_matched() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Spices".to_string(), vec![
-            Ingredient { id: 1, text: "Salt to taste".to_string(), quantity: None },
+            Ingredient { id: 1, text: "Salt to taste".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["oil".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
@@ -2683,8 +2834,8 @@ date: 2026-01-01
     fn test_ambiguous_ref_oil_matches_multiple() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Pantry".to_string(), vec![
-            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), quantity: None },
-            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), quantity: None },
+            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["oil".to_string()];
         let ambiguous = find_ambiguous_refs(&ingredients, &refs);
@@ -2697,8 +2848,8 @@ date: 2026-01-01
     fn test_specific_ref_not_ambiguous() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Pantry".to_string(), vec![
-            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), quantity: None },
-            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), quantity: None },
+            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["olive oil".to_string()];
         let ambiguous = find_ambiguous_refs(&ingredients, &refs);
@@ -2793,7 +2944,7 @@ date: 2026-01-01
         let test_file = temp_dir.join("timer-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false);
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
@@ -2806,5 +2957,308 @@ date: 2026-01-01
         assert_eq!(recipe.steps[1].durations[0].seconds, 420);
 
         assert!(recipe.steps[2].durations.is_empty());
+    }
+
+    // ── strip_canonical tests ──
+
+    #[test]
+    fn test_strip_canonical_basic() {
+        let (text, canonical, prep) = strip_canonical("2 cloves [garlic], minced");
+        assert_eq!(text, "2 cloves garlic, minced");
+        assert_eq!(canonical, Some("garlic".to_string()));
+        assert_eq!(prep, Some("minced".to_string()));
+    }
+
+    #[test]
+    fn test_strip_canonical_no_prep() {
+        let (text, canonical, prep) = strip_canonical("1 tbsp [olive oil]");
+        assert_eq!(text, "1 tbsp olive oil");
+        assert_eq!(canonical, Some("olive oil".to_string()));
+        assert_eq!(prep, None);
+    }
+
+    #[test]
+    fn test_strip_canonical_mass_noun_with_text() {
+        let (text, canonical, prep) = strip_canonical("[salt] to taste");
+        assert_eq!(text, "salt to taste");
+        assert_eq!(canonical, Some("salt".to_string()));
+        assert_eq!(prep, Some("to taste".to_string()));
+    }
+
+    #[test]
+    fn test_strip_canonical_no_brackets() {
+        let (text, canonical, prep) = strip_canonical("2 cloves garlic, minced");
+        assert_eq!(text, "2 cloves garlic, minced");
+        assert_eq!(canonical, None);
+        assert_eq!(prep, None);
+    }
+
+    #[test]
+    fn test_strip_canonical_plural_form() {
+        let (text, canonical, prep) = strip_canonical("2 [eggs]");
+        assert_eq!(text, "2 eggs");
+        assert_eq!(canonical, Some("eggs".to_string()));
+        assert_eq!(prep, None);
+    }
+
+    // ── Canonical fields in parsed recipe ──
+
+    fn make_canonical_data() -> CanonicalData {
+        let mut ingredients = HashMap::new();
+        // singular entries
+        for key in &["garlic", "olive oil", "salt", "egg", "chickpea", "mushroom"] {
+            ingredients.insert(key.to_string(), key.to_string());
+        }
+        // plural entries
+        ingredients.insert("eggs".to_string(), "egg".to_string());
+        ingredients.insert("chickpeas".to_string(), "chickpea".to_string());
+        ingredients.insert("mushrooms".to_string(), "mushroom".to_string());
+        let units = vec![
+            "cloves".to_string(), "clove".to_string(),
+            "tbsp".to_string(), "tsp".to_string(),
+            "g".to_string(), "ml".to_string(),
+        ];
+        CanonicalData { ingredients, units }
+    }
+
+    #[test]
+    fn test_canonical_and_preparation_fields() {
+        let test_recipe = r#"---
+id: canonical-fields-test
+name: Canonical Fields Test
+description: Test that canonical and preparation fields are populated
+servings: 2
+time: 10
+difficulty: easy
+tags: [test]
+diet: [vegan]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 2 cloves [garlic], minced
+- 1 tbsp [olive oil]
+- [salt] to taste
+
+# Instructions
+
+1. Heat {olive oil}, add {garlic} and {salt}
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("canonical-fields-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false, &make_canonical_data());
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+        let pantry = recipe.ingredients.get("Pantry").unwrap();
+
+        // garlic: canonical = "garlic", preparation = "minced"
+        assert_eq!(pantry[0].canonical.as_deref(), Some("garlic"));
+        assert_eq!(pantry[0].preparation.as_deref(), Some("minced"));
+        assert_eq!(pantry[0].text, "2 cloves garlic, minced");
+
+        // olive oil: canonical = "olive oil", no preparation
+        assert_eq!(pantry[1].canonical.as_deref(), Some("olive oil"));
+        assert_eq!(pantry[1].preparation, None);
+
+        // salt to taste: canonical = "salt", preparation = "to taste", no quantity
+        assert_eq!(pantry[2].canonical.as_deref(), Some("salt"));
+        assert_eq!(pantry[2].preparation.as_deref(), Some("to taste"));
+        assert!(pantry[2].quantity.is_none());
+    }
+
+    #[test]
+    fn test_plural_normalises_canonical_keeps_item() {
+        // [eggs] → canonical "egg" (singular), quantity.item "eggs" (as written)
+        let test_recipe = r#"---
+id: plural-test
+name: Plural Test
+description: Test that plural forms normalise canonical but preserve item text
+servings: 2
+time: 10
+difficulty: easy
+tags: [test]
+diet: [vegan]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Fridge
+- 2 [eggs]
+
+# Instructions
+
+1. Boil {egg}
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("plural-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false, &make_canonical_data());
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+        let fridge = recipe.ingredients.get("Fridge").unwrap();
+
+        assert_eq!(fridge[0].canonical.as_deref(), Some("egg")); // normalised to singular
+        let q = fridge[0].quantity.as_ref().unwrap();
+        assert_eq!(q.item, "eggs"); // bracket text preserved
+        assert_eq!(q.amount, 2.0);
+    }
+
+    #[test]
+    fn test_quantity_item_is_bracket_text_not_canonical() {
+        // [chickpeas] → quantity.item = "chickpeas", canonical = "chickpea"
+        let test_recipe = r#"---
+id: item-text-test
+name: Item Text Test
+description: Test that quantity item uses bracket text not canonical
+servings: 2
+time: 10
+difficulty: easy
+tags: [test]
+diet: [vegan]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 tin (400 g) [chickpeas], drained
+
+# Instructions
+
+1. Add {chickpea}
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("item-text-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false, &make_canonical_data());
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_ok());
+        let recipe = result.unwrap();
+        let pantry = recipe.ingredients.get("Pantry").unwrap();
+
+        assert_eq!(pantry[0].canonical.as_deref(), Some("chickpea"));
+        let q = pantry[0].quantity.as_ref().unwrap();
+        assert_eq!(q.item, "chickpeas"); // bracket text, not "chickpea"
+    }
+
+    #[test]
+    fn test_lint_errors_on_missing_canonical_tag() {
+        let test_recipe = r#"---
+id: no-canonical-test
+name: No Canonical Test
+description: Test that lint errors when canonical tag is missing
+servings: 2
+time: 10
+difficulty: easy
+tags: [test]
+diet: [vegan]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 tbsp olive oil
+
+# Instructions
+
+1. Heat the oil
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("no-canonical-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, true, &make_canonical_data());
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_err());
+        assert!(result.unwrap_err().to_string().contains("canonical"));
+    }
+
+    #[test]
+    fn test_lint_errors_on_unknown_canonical() {
+        let test_recipe = r#"---
+id: unknown-canonical-test
+name: Unknown Canonical Test
+description: Test that lint errors when canonical is not in vocabulary
+servings: 2
+time: 10
+difficulty: easy
+tags: [test]
+diet: [vegan]
+date: 2026-01-01
+---
+
+# Ingredients
+
+## Pantry
+- 1 tbsp [dragon-fruit-extract]
+
+# Instructions
+
+1. Add the extract
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("unknown-canonical-test.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, true, &make_canonical_data());
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_err());
+        assert!(result.unwrap_err().to_string().contains("dragon-fruit-extract"));
+    }
+
+    #[test]
+    fn test_ref_matches_canonical_exactly() {
+        // {olive oil} matches canonical "olive oil", {oil} does not
+        let mut ingredients = HashMap::new();
+        ingredients.insert("Pantry".to_string(), vec![
+            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(),
+                canonical: Some("olive oil".to_string()), preparation: None, quantity: None },
+            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(),
+                canonical: Some("vegetable oil".to_string()), preparation: None, quantity: None },
+        ]);
+
+        // {olive oil} — exact match, not ambiguous
+        let refs = vec!["olive oil".to_string()];
+        let ambiguous = find_ambiguous_refs(&ingredients, &refs);
+        assert!(ambiguous.is_empty());
+
+        // {oil} — does not match either canonical exactly
+        let refs = vec!["oil".to_string()];
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        assert_eq!(unreferenced.len(), 2); // both are unreferenced
+    }
+
+    #[test]
+    fn test_ref_matches_singular_canonical_for_plural_ingredient() {
+        // [eggs] → canonical "egg"; step ref {egg} should match
+        let mut ingredients = HashMap::new();
+        ingredients.insert("Fridge".to_string(), vec![
+            Ingredient { id: 1, text: "2 eggs".to_string(),
+                canonical: Some("egg".to_string()), preparation: None, quantity: None },
+        ]);
+
+        let refs = vec!["egg".to_string()];
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        assert!(unreferenced.is_empty()); // {egg} matches canonical "egg"
     }
 }

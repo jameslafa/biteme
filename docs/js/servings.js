@@ -109,6 +109,11 @@ function scaleIngredientText(ingredient, ratio) {
     result += ' ' + q.item;
   }
 
+  // Preparation (now stored separately on the ingredient)
+  if (ingredient.preparation) {
+    result += ', ' + ingredient.preparation;
+  }
+
   return result;
 }
 

@@ -70,58 +70,89 @@ Group ingredients under **`##` (H2) category headings**. Valid categories are:
 - `## Spices` — dried spices and seasonings
 - `## Pantry` — oils, stock, canned goods, dried goods
 
-Not all categories are required — only use the ones that apply. Each ingredient is a bullet point:
+Not all categories are required — only use the ones that apply. Each ingredient is a bullet point.
+
+---
+
+## Canonical Ingredient Tags
+
+Every ingredient line **must** tag the ingredient name in `[square brackets]`. This identifies the canonical ingredient for shopping list merging and ingredient highlighting.
 
 ```markdown
-# Ingredients
-
-## Fresh
-
-- 500 g pumpkin, peeled and cubed
-- 1 onion, diced
-- 2 cloves garlic, minced
-
-## Spices
-
-- 1 tsp ground cumin
-- Salt and pepper to taste
-
-## Pantry
-
-- 1 tin (400 ml) coconut milk
-- 1 tbsp vegetable oil
+- 500 g [mushrooms], sliced
+- 2 cloves [garlic], minced
+- 1 tbsp [olive oil]
+- [salt] to taste
 ```
 
-**Important:**
+The tagged name must exist in `docs/canonical.json`. If it doesn't, add it before committing. The linter will error on unknown or missing tags.
 
-- Per SI standards, always use a space between the number and unit:
-  - ✓ Correct: `500 g`, `200 ml`, `1 tsp`, `2 tbsp`
-  - ✗ Wrong: `500g`, `200ml`
-- Use text fractions (`1/2`, `3/4`) instead of unicode fractions (`½`, `¾`). They're easier to type in markdown and the parser handles both, but text fractions keep recipes consistent.
-  - ✓ Correct: `1/2 tsp salt`
-  - ✗ Wrong: `½ tsp salt`
+### Natural plural/singular form
 
-### Instructions (required)
-
-A numbered list of steps. Link ingredients using `{curly braces}` (see Ingredient Linking below).
+Write the form that's natural for the quantity:
 
 ```markdown
-# Instructions
-
-1. Heat {oil} in a large pot over medium heat.
-2. Add {onion} and cook for 5 minutes until soft.
-3. Add {garlic} and {cumin}, stir for one minute.
-4. Add {pumpkin} and {coconut milk}. Simmer for 20 minutes.
+- 2 [eggs]              ✓  (2 is plural)
+- 1 [egg]               ✓  (1 is singular)
+- 4 [spring onions]     ✓
+- 250 g [mushrooms]     ✓  (mass with g: plural is natural)
+- 1 tbsp [olive oil]    ✓  (mass noun: no plural needed)
+- [salt] to taste       ✓  (mass noun)
 ```
 
-### Serving Suggestions (optional)
+The parser normalises to singular for matching; the tag preserves what's displayed.
 
-One or more paragraphs about how to serve, garnish, or pair the dish. Shown on the final cooking step.
+### Units vs ingredients
+
+Some words are **units** — they belong before the bracket, not inside it. A word is a unit if it measures a count of something that's the actual ingredient:
+
+| Unit word | Example |
+|---|---|
+| `clove` / `cloves` | `2 cloves [garlic]` |
+| `stick` / `sticks` | `1 stick [celery]` |
+| `stalk` / `stalks` | `6-8 stalks [celery]` |
+| `sheet` / `sheets` | `2 sheets [nori]` |
+| `bunch` / `bunches` | `1 bunch [spring onions]` |
+| `head` / `heads` | `1 head [cauliflower]` |
+| `thumb` / `thumbs` | `1 thumb [ginger]` |
+| `tin` / `tins` | `1 tin (400 g) [chickpeas]` |
+| `can` / `cans` | `1 can (400 ml) [coconut milk]` |
+
+Do **not** bake the unit into the ingredient name:
 
 ```markdown
-# Serving Suggestions
+- 2 cloves [garlic]         ✓
+- 2 [garlic cloves]         ✗
 
-Serve over basmati rice or with warm naan bread. Top with fresh coriander and a squeeze of lime.
+- 1 stick [celery]          ✓
+- 1 [celery stick]          ✗
+
+- 2 sheets [nori]           ✓
+- 2 [nori sheets]           ✗
+```
+
+The same rule applies to spoon/weight/volume units: `tbsp`, `tsp`, `g`, `ml`, `kg` — these are always outside the bracket.
+
+### Preparation text
+
+Everything after `]` is the preparation note and is stored separately:
+
+```markdown
+- 2 cloves [garlic], minced       → ingredient: garlic, preparation: minced
+- 500 g [mushrooms], finely sliced → ingredient: mushrooms, preparation: finely sliced
+- 1 tin (400 g) [chickpeas], drained and rinsed
+```
+
+The comma after `]` is conventional but not required.
+
+### Non-scalable ingredients
+
+Ingredients without a leading number (e.g., `[salt] to taste`, `[coriander] for garnish`) are treated as non-scalable and displayed as-is regardless of serving adjustments.
+
+Add `<!-- no-scale -->` to explicitly exclude a numbered ingredient from scaling:
+
+```markdown
+- 1 large handful [spinach] <!-- no-scale -->
 ```
 
 ---
@@ -130,32 +161,23 @@ Serve over basmati rice or with warm naan bread. Top with fresh coriander and a 
 
 Ingredient quantities are automatically parsed at build time for the adjustable servings feature. The parser recognizes these patterns:
 
-- **Simple metric:** `500 g mushrooms, sliced`
-- **Volume:** `2 tbsp olive oil`
-- **Fractions:** `½ tsp salt` or `1/2 tsp salt`
-- **Ranges:** `3-4 cloves garlic, minced`
-- **Composite:** `1 tin (400 ml) coconut milk`
-- **Dual units:** `250 ml (1 cup) milk`
-- **About:** `1 medium potato (about 150 g)`
-- **Prefix:** `Juice of 1/2 lemon`
-- **Count:** `4 medium ripe bananas`
-- **Mixed numbers:** `250 g (1-3/4 cups) flour`
+- **Simple metric:** `500 g [mushrooms], sliced`
+- **Volume:** `2 tbsp [olive oil]`
+- **Fractions:** `1/2 tsp [salt]`
+- **Ranges:** `3-4 cloves [garlic], minced`
+- **Composite:** `1 tin (400 ml) [coconut milk]`
+- **About:** `1 medium [potato] (about 150 g), peeled and cubed`
+- **Prefix:** `Juice of 1/2 [lemon]`
+- **Count:** `4 medium [bananas], mashed`
 
-Ingredients without a leading number (e.g., `Salt to taste`, `Fresh parsley for garnish`) are treated as non-scalable and displayed as-is regardless of serving adjustments.
+**Important:**
 
-### `<!-- no-scale -->` annotation
-
-Add `<!-- no-scale -->` at the end of an ingredient line to explicitly exclude it from quantity parsing:
-
-```markdown
-- 1 large handful of spinach <!-- no-scale -->
-```
-
-Use this when:
-- An ingredient has a leading number but shouldn't be scaled
-- The parser produces an incorrect result for a particular pattern
-
-The annotation is stripped from the displayed text. The linter emits a non-blocking warning for ingredients that start with a number but fail to parse and don't have the annotation.
+- Per SI standards, always use a space between the number and unit:
+  - ✓ Correct: `500 g`, `200 ml`, `1 tsp`, `2 tbsp`
+  - ✗ Wrong: `500g`, `200ml`
+- Use text fractions (`1/2`, `3/4`) instead of unicode fractions (`½`, `¾`). They're easier to type in markdown and the parser handles both, but text fractions keep recipes consistent.
+  - ✓ Correct: `1/2 tsp [salt]`
+  - ✗ Wrong: `½ tsp salt`
 
 ---
 
@@ -177,22 +199,37 @@ Avoid brand names or country-specific product names (e.g. "Hafer Cuisine", "Natr
 
 ## Ingredient Linking
 
-When you mention an ingredient in the instructions, wrap a short recognizable name in `{curly braces}`. This highlights ingredients in cooking mode so the cook can see exactly what they need for each step.
+When you mention an ingredient in the instructions, wrap its **canonical name** in `{curly braces}`. This highlights the ingredient in cooking mode.
+
+The canonical name is the singular form as listed in `docs/canonical.json`. It must match exactly — step refs are not fuzzy-matched.
+
+```markdown
+# Instructions
+
+1. Heat {olive oil} in a large pot over medium heat.
+2. Add {onion} and {garlic}, cook for 5 minutes.
+3. Add {ground cumin} and {smoked paprika}, stir for 1 minute.
+4. Add {chickpeas} and {passata}. Simmer for 20 minutes.
+```
 
 **Rules:**
 
-- Use a short, recognizable name from the ingredient line (not the full line)
-- Every ingredient should be referenced at least once in the instructions
-- The name inside braces should be obvious enough that a cook can match it to the ingredient list
+- Use the singular canonical name, even if the ingredient line uses a plural (`2 [eggs]` → `{egg}`)
+- Every ingredient should be referenced at least once (linter warns on unreferenced ingredients)
+- Do not reference preparation text — `{garlic}` not `{garlic, minced}`
+- Do not include the unit — `{garlic}` not `{2 cloves garlic}`
 
 **Examples:**
 
-| Ingredient line               | Good reference          | Bad reference                   |
-| ----------------------------- | ----------------------- | ------------------------------- |
-| `1 tin (400 ml) coconut milk` | `{coconut milk}`        | `{1 tin (400 ml) coconut milk}` |
-| `2 cloves garlic, minced`     | `{garlic}`              | `{2 cloves garlic}`             |
-| `Salt and pepper to taste`    | `{salt}` and `{pepper}` | `{salt and pepper to taste}`    |
-| `1 tbsp vegetable oil`        | `{oil}`                 | `{1 tbsp vegetable oil}`        |
+| Ingredient line | Step ref | Notes |
+|---|---|---|
+| `2 cloves [garlic], minced` | `{garlic}` | Canonical is "garlic" |
+| `2 [eggs]` | `{egg}` | Ref uses singular canonical |
+| `250 g [mushrooms], sliced` | `{mushroom}` | Ref uses singular canonical |
+| `1 tin (400 g) [chickpeas], drained` | `{chickpea}` | Ref uses singular canonical |
+| `1 tbsp [olive oil]` | `{olive oil}` | Full canonical name, not just "oil" |
+| `[salt] to taste` | `{salt}` | |
+| `[black pepper] to taste` | `{black pepper}` | |
 
 ---
 
@@ -200,62 +237,60 @@ When you mention an ingredient in the instructions, wrap a short recognizable na
 
 ```markdown
 ---
-id: creamy-mushroom-soup
-name: Creamy Vegan Mushroom Soup
-description: Rich and creamy mushroom soup perfect for batch cooking and freezing
+id: chickpea-tikka-masala
+name: Chickpea Tikka Masala
+description: Chickpeas simmered in a creamy, spiced tomato and coconut milk sauce
 servings: 4
-time: 40
+time: 35
 difficulty: easy
-tags: [soup]
-diet: [vegan]
+tags: [indian, curry]
+diet: [vegan, gluten-free]
 author: James
-date: 2026-02-12
+date: 2026-02-26
 ---
 
 # Notes
 
-For a deeper flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.
+Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.
 
 # Ingredients
 
 ## Fresh
 
-- 500 g mixed mushrooms (champignons, oyster, shiitake), sliced
-- 1 medium onion, diced
-- 3 cloves garlic, minced
-- 1 medium floury potato (about 150 g), peeled and cubed
-- 1 tsp fresh thyme (or half tsp dried)
-- Lemon for juice
-- Fresh parsley for garnish
-
-## Fridge
-
-- 200 ml oat cream
+- 1 medium [onion], diced
+- 2 cloves [garlic], minced
+- Handful [coriander], to serve
 
 ## Pantry
 
-- 750 ml vegetable stock
-- 2 tbsp olive oil
-- 1 tbsp soy sauce
+- 1 tbsp [olive oil]
+- 2 tins (400 g) [chickpeas], drained and rinsed
+- 1 tin (400 g) [passata]
+- 120 ml [water]
+- 250 ml [coconut milk]
+- 1 tsp [ginger paste]
+- 1 tsp [brown sugar]
+- [salt] to taste
 
 ## Spices
 
-- Salt and pepper to taste
+- 1 1/2 tsp [garam masala]
+- 1 tsp [ground cumin]
+- 1/2 tsp [turmeric]
+- 1/2 tsp [ground coriander] (optional)
+- [black pepper] to taste
 
 # Instructions
 
-1. Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about 8 minutes until golden brown.
-2. Lower the heat to medium, add {onion} and cook for about 5 minutes until soft.
-3. Add {garlic} and {thyme}, stir for about a minute until fragrant.
-4. Add {potato} cubes and {vegetable stock}. Bring to a boil, then simmer for about 15 minutes until the potato is tender.
-5. Stir in {oat cream} and {soy sauce}.
-6. Blend the soup until smooth and creamy.
-7. Season with {salt}, {pepper}, and a squeeze of {lemon} juice.
-8. Serve with fresh {parsley} on top and crusty bread on the side.
+1. Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about 3-4 minutes.
+2. Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for 30 seconds, stirring constantly.
+3. Pour in {passata}, {water}, {chickpea}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.
+4. Stir in {coconut milk} and {brown sugar}. Simmer for a further 2-3 minutes.
+5. Taste and adjust seasoning. Garnish with {coriander}.
 
 # Serving Suggestions
 
-Serve with crusty bread for dipping. Add a swirl of extra oat cream and a drizzle of truffle oil for a fancy touch.
+Serve with basmati rice and naan. A dollop of coconut yoghurt on top works well.
 ```
 
 ---
@@ -278,5 +313,10 @@ Before outputting the recipe, verify:
 - [ ] Section order is: Notes (optional) → Ingredients → Instructions → Serving Suggestions (optional)
 - [ ] At least one ingredient category with at least one ingredient
 - [ ] Instructions are a numbered list with at least one step
-- [ ] Every ingredient is referenced at least once in the instructions using `{short name}` syntax
+- [ ] Every ingredient line has a `[canonical]` tag
+- [ ] Tagged name exists in `docs/canonical.json` (add it if missing)
+- [ ] Unit words (`cloves`, `sticks`, `stalks`, `sheets`, `bunch`, `head`, `thumb`, `tin`, `can`, etc.) appear **before** the bracket, not inside it
+- [ ] Plural/singular form inside `[]` matches what's natural for the quantity
+- [ ] Every ingredient is referenced at least once in the instructions using `{canonical}` syntax
+- [ ] Step refs use the singular canonical name (e.g. `{egg}` not `{eggs}`, `{chickpea}` not `{chickpeas}`)
 - [ ] The filename would be `recipes/{id}.md`

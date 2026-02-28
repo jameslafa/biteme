@@ -11,16 +11,16 @@
     "notes": "Make sure to use fresh spices for best flavor. This curry tastes even better the next day.",
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "1 onion, diced", "quantity": { "amount": 1, "item": "onion, diced" } },
-        { "id": 2, "text": "2 cloves garlic, minced", "quantity": { "amount": 2, "unit": "cloves", "item": "garlic, minced" } }
+        { "id": 1, "text": "1 onion, diced", "canonical": null, "preparation": null, "quantity": { "amount": 1, "item": "onion, diced" } },
+        { "id": 2, "text": "2 cloves garlic, minced", "canonical": null, "preparation": null, "quantity": { "amount": 2, "unit": "cloves", "item": "garlic, minced" } }
       ],
       "Spices": [
-        { "id": 3, "text": "1 tsp curry powder", "quantity": { "amount": 1, "unit": "tsp", "item": "curry powder" } }
+        { "id": 3, "text": "1 tsp curry powder", "canonical": null, "preparation": null, "quantity": { "amount": 1, "unit": "tsp", "item": "curry powder" } }
       ],
       "Pantry": [
-        { "id": 4, "text": "1 cup lentils", "quantity": { "amount": 1, "unit": "cup", "item": "lentils" } },
-        { "id": 5, "text": "2 cups vegetable broth", "quantity": { "amount": 2, "unit": "cups", "item": "vegetable broth" } },
-        { "id": 6, "text": "1 tbsp oil", "quantity": { "amount": 1, "unit": "tbsp", "item": "oil" } }
+        { "id": 4, "text": "1 cup lentils", "canonical": null, "preparation": null, "quantity": { "amount": 1, "unit": "cup", "item": "lentils" } },
+        { "id": 5, "text": "2 cups vegetable broth", "canonical": null, "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "vegetable broth" } },
+        { "id": 6, "text": "1 tbsp oil", "canonical": null, "preparation": null, "quantity": { "amount": 1, "unit": "tbsp", "item": "oil" } }
       ]
     },
     "steps": [
@@ -44,11 +44,11 @@
     "diet": ["vegan"],
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "2 cups lettuce", "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
-        { "id": 2, "text": "1 tomato", "quantity": { "amount": 1, "item": "tomato" } }
+        { "id": 1, "text": "2 cups lettuce", "canonical": null, "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
+        { "id": 2, "text": "1 tomato", "canonical": null, "preparation": null, "quantity": { "amount": 1, "item": "tomato" } }
       ],
       "Pantry": [
-        { "id": 3, "text": "2 tbsp olive oil", "quantity": { "amount": 2, "unit": "tbsp", "item": "olive oil" } }
+        { "id": 3, "text": "2 tbsp olive oil", "canonical": null, "preparation": null, "quantity": { "amount": 2, "unit": "tbsp", "item": "olive oil" } }
       ]
     },
     "steps": [
@@ -69,8 +69,8 @@
     "diet": ["vegan"],
     "ingredients": {
       "Pantry": [
-        { "id": 1, "text": "2 slices bread", "quantity": { "amount": 2, "item": "slices bread" } },
-        { "id": 2, "text": "1 tbsp butter", "quantity": { "amount": 1, "unit": "tbsp", "item": "butter" } }
+        { "id": 1, "text": "2 slices bread", "canonical": null, "preparation": null, "quantity": { "amount": 2, "item": "slices bread" } },
+        { "id": 2, "text": "1 tbsp butter", "canonical": null, "preparation": null, "quantity": { "amount": 1, "unit": "tbsp", "item": "butter" } }
       ]
     },
     "steps": [
@@ -90,10 +90,10 @@
     "diet": ["vegan"],
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "2 carrots, chopped", "quantity": { "amount": 2, "item": "carrots, chopped" } }
+        { "id": 1, "text": "2 carrots, chopped", "canonical": null, "preparation": null, "quantity": { "amount": 2, "item": "carrots, chopped" } }
       ],
       "Pantry": [
-        { "id": 2, "text": "4 cups vegetable broth", "quantity": { "amount": 4, "unit": "cups", "item": "vegetable broth" } }
+        { "id": 2, "text": "4 cups vegetable broth", "canonical": null, "preparation": null, "quantity": { "amount": 4, "unit": "cups", "item": "vegetable broth" } }
       ]
     },
     "steps": [

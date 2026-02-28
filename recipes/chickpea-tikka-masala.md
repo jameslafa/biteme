@@ -19,36 +19,36 @@ US recipes often call this "tomato puree" — in European terms that's passata (
 
 ## Fresh
 
-- 1 medium onion, diced
-- 2 cloves garlic, minced
-- Handful fresh coriander, to serve
+- 1 medium [onion], diced
+- 2 cloves [garlic], minced
+- Handful [coriander], to serve
 
 ## Pantry
 
-- 1 tbsp olive oil
-- 2 tins (400 g) chickpeas, drained and rinsed
-- 1 tin (400 g) passata
-- 120 ml water
-- 250 ml full-fat coconut milk
-- 1 tsp ginger paste
-- 1 tsp brown sugar
-- Salt to taste
+- 1 tbsp [olive oil]
+- 2 tins (400 g) [chickpeas], drained and rinsed
+- 1 tin (400 g) [passata]
+- 120 ml [water]
+- 250 ml [coconut milk]
+- 1 tsp [ginger paste]
+- 1 tsp [brown sugar]
+- [salt] to taste
 
 ## Spices
 
-- 1 1/2 tsp garam masala
-- 1 tsp ground cumin
-- 1/2 tsp turmeric
-- 1/2 tsp ground coriander (optional)
-- Black pepper to taste
+- 1 1/2 tsp [garam masala]
+- 1 tsp [ground cumin]
+- 1/2 tsp [turmeric]
+- 1/2 tsp [ground coriander] (optional)
+- [black pepper] to taste
 
 # Instructions
 
 1. Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about 3-4 minutes.
-2. Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {pepper}. Fry for 30 seconds, stirring constantly.
-3. Pour in {passata}, {water}, {chickpeas}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.
+2. Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for 30 seconds, stirring constantly.
+3. Pour in {passata}, {water}, {chickpea}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.
 4. Stir in {coconut milk} and {brown sugar}. Simmer for a further 2-3 minutes.
-5. Taste and adjust seasoning. Garnish with {fresh coriander}.
+5. Taste and adjust seasoning. Garnish with {coriander}.
 
 # Serving Suggestions
 

@@ -19,36 +19,37 @@ For a deeper, more umami flavour, add a splash of dry white wine after cooking t
 
 ## Fresh
 
-- 500 g mixed mushrooms (champignon, king oyster, shiitake), sliced
-- 1 medium onion, diced
-- 3 cloves garlic, minced
-- 1 medium floury potato (about 150 g), peeled and cubed
-- 1 tsp fresh thyme (or 1/2 tsp dried)
-- Lemon for juice
-- Fresh parsley for garnish
+- 500 g [mushrooms] (champignon, king oyster, shiitake), sliced
+- 1 medium [onion], diced
+- 3 cloves [garlic], minced
+- 1 medium [potato] (about 150 g), peeled and cubed
+- 1 tsp [thyme] (or 1/2 tsp dried)
+- [Lemon] for juice
+- Fresh [parsley] for garnish
 
 ## Fridge
 
-- 200 ml oat cream
+- 200 ml [oat cream]
 
 ## Pantry
 
-- 750 ml vegetable stock
-- 2 tbsp olive oil
-- 2 tbsp soy sauce
+- 750 ml [vegetable stock]
+- 2 tbsp [olive oil]
+- 2 tbsp [soy sauce]
 
 ## Spices
 
-- Salt and pepper to taste
+- [salt] to taste
+- [pepper] to taste
 
 # Instructions
 
-1. Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.
+1. Heat {olive oil} in a large pot over medium-high heat. Add {mushroom} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.
 2. Lower the heat to medium, add a little more oil if needed, and cook {onion} for about 5 minutes until soft and translucent.
 3. Add {garlic} and {thyme}, stir for about a minute until fragrant.
 4. Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about 15 minutes, until the potato is completely tender.
 5. Stir in {oat cream} and {soy sauce}.
-6. Blend the soup using a stick blender until smooth and creamy. If you set some {mushrooms} aside earlier, stir them back in now for a bit of texture.
+6. Blend the soup using a stick blender until smooth and creamy. If you set some mushrooms aside earlier, stir them back in now for a bit of texture.
 7. Season with {salt}, {pepper}, and a squeeze of {lemon} juice. The lemon really lifts the flavour.
 8. Serve with fresh {parsley} on top and some crusty bread on the side.
 

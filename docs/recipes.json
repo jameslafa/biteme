@@ -21,9 +21,12 @@
         {
           "id": 1,
           "text": "1 head cauliflower (about 600 g), cut into small florets",
+          "canonical": "cauliflower",
+          "preparation": "(about 600 g), cut into small florets",
           "quantity": {
             "amount": 1.0,
-            "item": "head cauliflower, cut into small florets",
+            "unit": "head",
+            "item": "cauliflower",
             "secondary_amount": 600.0,
             "secondary_unit": "g",
             "secondary_prefix": "about"
@@ -32,54 +35,68 @@
         {
           "id": 2,
           "text": "1 large red pepper, deseeded and finely chopped",
+          "canonical": "red pepper",
+          "preparation": "deseeded and finely chopped",
           "quantity": {
             "amount": 1.0,
             "unit": "large",
-            "item": "red pepper, deseeded and finely chopped"
+            "item": "red pepper"
           }
         },
         {
           "id": 3,
           "text": "4 spring onions, finely sliced",
+          "canonical": "spring onion",
+          "preparation": "finely sliced",
           "quantity": {
             "amount": 4.0,
-            "item": "spring onions, finely sliced"
+            "item": "spring onions"
           }
         },
         {
           "id": 4,
           "text": "3 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 3.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 5,
-          "text": "1 thumb fresh ginger, finely chopped",
+          "text": "1 thumb ginger, finely chopped",
+          "canonical": "ginger",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 1.0,
-            "item": "thumb fresh ginger, finely chopped"
+            "unit": "thumb",
+            "item": "ginger"
           }
         },
         {
           "id": 6,
           "text": "1/2 fresh red chilli, finely sliced",
+          "canonical": "red chilli",
+          "preparation": "finely sliced",
           "quantity": {
             "amount": 0.5,
-            "item": "fresh red chilli, finely sliced"
+            "item": "red chilli"
           }
         },
         {
           "id": 7,
-          "text": "Fresh coriander for garnish"
+          "text": "coriander for garnish",
+          "canonical": "coriander",
+          "preparation": "for garnish"
         }
       ],
       "Pantry": [
         {
           "id": 8,
           "text": "250 g frozen peas",
+          "canonical": "frozen pea",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
@@ -89,6 +106,7 @@
         {
           "id": 9,
           "text": "1 tin (400 ml) coconut milk",
+          "canonical": "coconut milk",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -100,6 +118,7 @@
         {
           "id": 10,
           "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -111,14 +130,17 @@
         {
           "id": 11,
           "text": "1 1/2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
-            "item": "1/2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         },
         {
           "id": 12,
           "text": "1 tbsp maple syrup",
+          "canonical": "maple syrup",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -128,6 +150,7 @@
         {
           "id": 13,
           "text": "Juice of 1/2 lime",
+          "canonical": "lime",
           "quantity": {
             "amount": 0.5,
             "item": "lime",
@@ -136,13 +159,16 @@
         },
         {
           "id": 14,
-          "text": "Flaked almonds for garnish"
+          "text": "flaked almonds for garnish",
+          "canonical": "flaked almond",
+          "preparation": "for garnish"
         }
       ],
       "Spices": [
         {
           "id": 15,
           "text": "1 tsp cumin seeds",
+          "canonical": "cumin seed",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -152,40 +178,45 @@
         {
           "id": 16,
           "text": "1 1/2 tbsp curry powder",
+          "canonical": "curry powder",
           "quantity": {
             "amount": 1.0,
-            "item": "1/2 tbsp curry powder"
+            "item": "curry powder"
           }
         },
         {
           "id": 17,
-          "text": "1/2 tsp freshly ground black pepper",
+          "text": "1/2 tsp black pepper",
+          "canonical": "black pepper",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
-            "item": "freshly ground black pepper"
+            "item": "black pepper"
           }
         },
         {
           "id": 18,
-          "text": "1 1/2 tsp sea salt",
+          "text": "1 1/2 tsp salt",
+          "canonical": "salt",
           "quantity": {
             "amount": 1.0,
-            "item": "1/2 tsp sea salt"
+            "item": "salt"
           }
         },
         {
           "id": 19,
-          "text": "Chilli flakes for garnish"
+          "text": "chilli flakes for garnish",
+          "canonical": "chilli flakes",
+          "preparation": "for garnish"
         }
       ]
     },
     "steps": [
       {
-        "text": "Place {frozen peas} in a bowl of boiling water to thaw."
+        "text": "Place {frozen pea} in a bowl of boiling water to thaw."
       },
       {
-        "text": "Heat {oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for 1 1/2 minutes, stirring regularly.",
+        "text": "Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onion}. Cook for 1 1/2 minutes, stirring regularly.",
         "durations": [
           {
             "seconds": 120,
@@ -194,7 +225,7 @@
         ]
       },
       {
-        "text": "Add {cauliflower} florets, {red pepper} and {cumin seeds}. Cook for 2 minutes, stirring regularly.",
+        "text": "Add {cauliflower} florets, {red pepper} and {cumin seed}. Cook for 2 minutes, stirring regularly.",
         "durations": [
           {
             "seconds": 120,
@@ -203,7 +234,7 @@
         ]
       },
       {
-        "text": "Drain the peas. Add the peas along with {coconut milk}, {chopped tomatoes}, {curry powder}, {black pepper}, {salt} and {maple syrup}. Bring to the boil, then reduce to a simmer for 2 minutes.",
+        "text": "Drain the peas. Add the peas along with {coconut milk}, {chopped tomato}, {curry powder}, {black pepper}, {salt} and {maple syrup}. Bring to the boil, then reduce to a simmer for 2 minutes.",
         "durations": [
           {
             "seconds": 120,
@@ -215,7 +246,7 @@
         "text": "Remove from the heat and stir in the {lime} juice."
       },
       {
-        "text": "Serve topped with {coriander}, {flaked almonds} and {chilli flakes}."
+        "text": "Serve topped with {coriander}, {flaked almond} and {chilli flakes}."
       }
     ],
     "serving_suggestions": "Serve with basmati or brown rice and warm naan bread.",
@@ -241,11 +272,13 @@
       "Fresh": [
         {
           "id": 4,
-          "text": "2 tbsp fresh chives, finely chopped",
+          "text": "2 tbsp chive, finely chopped",
+          "canonical": "chive",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "fresh chives, finely chopped"
+            "item": "chive"
           }
         }
       ],
@@ -253,6 +286,7 @@
         {
           "id": 1,
           "text": "2 eggs",
+          "canonical": "egg",
           "quantity": {
             "amount": 2.0,
             "item": "eggs"
@@ -261,15 +295,18 @@
         {
           "id": 2,
           "text": "300 ml oat milk or soy milk",
+          "canonical": "oat milk",
+          "preparation": "or soy milk",
           "quantity": {
             "amount": 300.0,
             "unit": "ml",
-            "item": "oat milk or soy milk"
+            "item": "oat milk"
           }
         },
         {
           "id": 3,
           "text": "180 g smoked tofu",
+          "canonical": "smoked tofu",
           "quantity": {
             "amount": 180.0,
             "unit": "g",
@@ -281,6 +318,7 @@
         {
           "id": 5,
           "text": "300 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 300.0,
             "unit": "ml",
@@ -290,6 +328,7 @@
         {
           "id": 6,
           "text": "100 g ramen noodles",
+          "canonical": "ramen noodle",
           "quantity": {
             "amount": 100.0,
             "unit": "g",
@@ -299,14 +338,17 @@
         {
           "id": 7,
           "text": "2 sheets nori",
+          "canonical": "nori",
           "quantity": {
             "amount": 2.0,
-            "item": "sheets nori"
+            "unit": "sheets",
+            "item": "nori"
           }
         },
         {
           "id": 8,
           "text": "5 g sesame seeds",
+          "canonical": "sesame seed",
           "quantity": {
             "amount": 5.0,
             "unit": "g",
@@ -316,15 +358,18 @@
         {
           "id": 9,
           "text": "12 tbsp soy sauce (6 for marinade, 2 each for broth, tofu and nutty base)",
+          "canonical": "soy sauce",
+          "preparation": "(6 for marinade, 2 each for broth, tofu and nutty base)",
           "quantity": {
             "amount": 12.0,
             "unit": "tbsp",
-            "item": "soy sauce (6 for marinade, 2 each for broth, tofu and nutty base)"
+            "item": "soy sauce"
           }
         },
         {
           "id": 10,
           "text": "150 ml cold water",
+          "canonical": "cold water",
           "quantity": {
             "amount": 150.0,
             "unit": "ml",
@@ -334,6 +379,7 @@
         {
           "id": 11,
           "text": "10 g sugar",
+          "canonical": "sugar",
           "quantity": {
             "amount": 10.0,
             "unit": "g",
@@ -343,6 +389,7 @@
         {
           "id": 12,
           "text": "1 tbsp rice vinegar",
+          "canonical": "rice vinegar",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -352,15 +399,18 @@
         {
           "id": 13,
           "text": "20 g peanut butter (100%)",
+          "canonical": "peanut butter",
+          "preparation": "(100%)",
           "quantity": {
             "amount": 20.0,
             "unit": "g",
-            "item": "peanut butter (100%)"
+            "item": "peanut butter"
           }
         },
         {
           "id": 14,
           "text": "20 g tahini",
+          "canonical": "tahini",
           "quantity": {
             "amount": 20.0,
             "unit": "g",
@@ -370,6 +420,7 @@
         {
           "id": 15,
           "text": "1 tsp sesame oil",
+          "canonical": "sesame oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -379,10 +430,12 @@
         {
           "id": 16,
           "text": "3 tsp crispy chili oil (1 for tofu, 2 for nutty base)",
+          "canonical": "crispy chili oil",
+          "preparation": "(1 for tofu, 2 for nutty base)",
           "quantity": {
             "amount": 3.0,
             "unit": "tsp",
-            "item": "crispy chili oil (1 for tofu, 2 for nutty base)"
+            "item": "crispy chili oil"
           }
         }
       ],
@@ -390,6 +443,7 @@
         {
           "id": 17,
           "text": "1 tsp ground ginger",
+          "canonical": "ground ginger",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -398,13 +452,15 @@
         },
         {
           "id": 18,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "One day ahead — marinate the eggs: Soft-boil the {eggs} in salted water for 6-7 minutes, then transfer to cold water and peel. Mix 150 ml {cold water}, 6 tbsp {soy sauce}, {sugar} and {rice vinegar} in a jar. Submerge the eggs, seal and refrigerate overnight.",
+        "text": "One day ahead — marinate the eggs: Soft-boil the {egg} in salted water for 6-7 minutes, then transfer to cold water and peel. Mix 150 ml {cold water}, 6 tbsp {soy sauce}, {sugar} and {rice vinegar} in a jar. Submerge the eggs, seal and refrigerate overnight.",
         "durations": [
           {
             "seconds": 420,
@@ -413,7 +469,7 @@
         ]
       },
       {
-        "text": "Crispy tofu: Pat the {smoked tofu} dry and crumble into small pieces. Heat {sesame oil} in a pan over medium-high heat. Add the tofu with 2 tbsp {soy sauce}, {ginger} and 1 tsp {chili oil}. Fry for 15-20 minutes, stirring occasionally, until golden and crispy. Set aside.",
+        "text": "Crispy tofu: Pat the {smoked tofu} dry and crumble into small pieces. Heat {sesame oil} in a pan over medium-high heat. Add the tofu with 2 tbsp {soy sauce}, {ground ginger} and 1 tsp {crispy chili oil}. Fry for 15-20 minutes, stirring occasionally, until golden and crispy. Set aside.",
         "durations": [
           {
             "seconds": 1200,
@@ -422,13 +478,13 @@
         ]
       },
       {
-        "text": "Nutty base: Whisk together {peanut butter}, {tahini}, 2 tbsp {soy sauce} and 2 tsp {chili oil}. Thin with a small splash of water until pourable. Set aside."
+        "text": "Nutty base: Whisk together {peanut butter}, {tahini}, 2 tbsp {soy sauce} and 2 tsp {crispy chili oil}. Thin with a small splash of water until pourable. Set aside."
       },
       {
-        "text": "Broth and noodles: Bring {vegetable stock} and {oat milk} to a gentle simmer with 2 tbsp {soy sauce}. Cook the {ramen noodles} separately according to the packet instructions."
+        "text": "Broth and noodles: Bring {vegetable stock} and {oat milk} to a gentle simmer with 2 tbsp {soy sauce}. Cook the {ramen noodle} separately according to the packet instructions."
       },
       {
-        "text": "Assemble: Spoon the nutty base into two bowls. Pour the hot broth over and stir to combine. Divide the noodles between the bowls, then top with the crispy tofu, {nori}, {chives} and {sesame seeds}. Halve the marinated eggs and nestle them in. Season with {salt} to taste."
+        "text": "Assemble: Spoon the nutty base into two bowls. Pour the hot broth over and stir to combine. Divide the noodles between the bowls, then top with the crispy tofu, {nori}, {chive} and {sesame seed}. Halve the marinated eggs and nestle them in. Season with {salt} to taste."
       }
     ],
     "serving_suggestions": "Serve immediately while piping hot. Add extra crispy chili oil on top for more heat.",
@@ -454,95 +510,125 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "1/2 thumb fresh ginger, finely chopped",
+          "text": "1/2 thumb ginger, finely chopped",
+          "canonical": "ginger",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 0.5,
-            "item": "thumb fresh ginger, finely chopped"
+            "unit": "thumb",
+            "item": "ginger"
           }
         },
         {
           "id": 2,
           "text": "2 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 2.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
           "text": "4 spring onions, finely sliced",
+          "canonical": "spring onion",
+          "preparation": "finely sliced",
           "quantity": {
             "amount": 4.0,
-            "item": "spring onions, finely sliced"
+            "item": "spring onions"
           }
         },
         {
           "id": 4,
           "text": "1/2 fresh red chilli, deseeded and finely sliced",
+          "canonical": "red chilli",
+          "preparation": "deseeded and finely sliced",
           "quantity": {
             "amount": 0.5,
-            "item": "fresh red chilli, deseeded and finely sliced"
+            "item": "red chilli"
           }
         },
         {
           "id": 5,
           "text": "1 red pepper, deseeded and finely sliced",
+          "canonical": "red pepper",
+          "preparation": "deseeded and finely sliced",
           "quantity": {
             "amount": 1.0,
-            "item": "red pepper, deseeded and finely sliced"
+            "item": "red pepper"
           }
         },
         {
           "id": 6,
           "text": "1 courgette, finely chopped",
+          "canonical": "courgette",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 1.0,
-            "item": "courgette, finely chopped"
+            "item": "courgette"
           }
         },
         {
           "id": 7,
-          "text": "Fresh coriander or basil for garnish"
+          "text": "coriander for garnish",
+          "canonical": "coriander",
+          "preparation": "for garnish"
         },
         {
           "id": 8,
-          "text": "Beansprouts for garnish"
+          "text": "basil for garnish",
+          "canonical": "basil",
+          "preparation": "for garnish"
+        },
+        {
+          "id": 9,
+          "text": "bean sprouts for garnish",
+          "canonical": "bean sprout",
+          "preparation": "for garnish"
         }
       ],
       "Pantry": [
         {
-          "id": 9,
+          "id": 10,
           "text": "1 tin (400 g) chickpeas, drained and rinsed",
+          "canonical": "chickpea",
+          "preparation": "drained and rinsed",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
-            "item": "chickpeas, drained and rinsed",
+            "item": "chickpeas",
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
         },
         {
-          "id": 10,
+          "id": 11,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
-          }
-        },
-        {
-          "id": 11,
-          "text": "2 tbsp tamari or soy sauce",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "tamari or soy sauce"
+            "item": "vegetable oil"
           }
         },
         {
           "id": 12,
+          "text": "2 tbsp tamari or soy sauce",
+          "canonical": "tamari",
+          "preparation": "or soy sauce",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "tamari"
+          }
+        },
+        {
+          "id": 13,
           "text": "4 tbsp peanut butter",
+          "canonical": "peanut butter",
           "quantity": {
             "amount": 4.0,
             "unit": "tbsp",
@@ -550,8 +636,9 @@
           }
         },
         {
-          "id": 13,
+          "id": 14,
           "text": "2 tbsp apple cider vinegar",
+          "canonical": "apple cider vinegar",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
@@ -559,8 +646,9 @@
           }
         },
         {
-          "id": 14,
+          "id": 15,
           "text": "2 tbsp maple syrup",
+          "canonical": "maple syrup",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
@@ -568,29 +656,40 @@
           }
         },
         {
-          "id": 15,
+          "id": 16,
           "text": "350 ml warm water",
+          "canonical": "water",
           "quantity": {
             "amount": 350.0,
             "unit": "ml",
-            "item": "warm water"
+            "item": "water"
           }
         },
         {
-          "id": 16,
-          "text": "A handful of toasted nuts for garnish"
+          "id": 17,
+          "text": "A handful of toasted nuts for garnish",
+          "canonical": "toasted nut",
+          "preparation": "for garnish"
         }
       ],
       "Spices": [
         {
-          "id": 17,
-          "text": "Salt and pepper to taste"
+          "id": 18,
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
+        },
+        {
+          "id": 19,
+          "text": "pepper to taste",
+          "canonical": "pepper",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Heat {oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {chilli} and {spring onions}. Cook for 1 1/2 minutes, stirring regularly.",
+        "text": "Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onion}. Cook for 1 1/2 minutes, stirring regularly.",
         "durations": [
           {
             "seconds": 120,
@@ -608,16 +707,16 @@
         ]
       },
       {
-        "text": "In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and 150 ml of the {warm water}. Blend or whisk until smooth, then add to the pan."
+        "text": "In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and 150 ml of the {water}. Blend or whisk until smooth, then add to the pan."
       },
       {
-        "text": "Pour in the remaining water along with the {chickpeas}. Turn the heat back up to high and bring to the boil, then remove from the heat."
+        "text": "Pour in the remaining water along with the {chickpea}. Turn the heat back up to high and bring to the boil, then remove from the heat."
       },
       {
-        "text": "Season with {salt and pepper} to taste."
+        "text": "Season with {salt} and {pepper} to taste."
       },
       {
-        "text": "Divide between four bowls and top with {coriander}, {beansprouts} and {toasted nuts}."
+        "text": "Divide between four bowls and top with {coriander}, {bean sprout} and {toasted nut}."
       }
     ],
     "tested": false
@@ -643,47 +742,59 @@
         {
           "id": 1,
           "text": "1 medium red onion, finely chopped",
+          "canonical": "red onion",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 1.0,
             "unit": "medium",
-            "item": "red onion, finely chopped"
+            "item": "red onion"
           }
         },
         {
           "id": 2,
           "text": "2 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 2.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
           "text": "400 g mushrooms, finely chopped",
+          "canonical": "mushroom",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 400.0,
             "unit": "g",
-            "item": "mushrooms, finely chopped"
+            "item": "mushrooms"
           }
         },
         {
           "id": 4,
-          "text": "A small handful fresh thyme sprigs"
+          "text": "A small handful thyme sprigs",
+          "canonical": "thyme",
+          "preparation": "sprigs"
         },
         {
           "id": 5,
-          "text": "Lemon for juice"
+          "text": "lemon for juice",
+          "canonical": "lemon",
+          "preparation": "for juice"
         }
       ],
       "Fridge": [
         {
           "id": 6,
           "text": "800 ml oat milk (or other non-dairy milk)",
+          "canonical": "oat milk",
+          "preparation": "(or other non-dairy milk)",
           "quantity": {
             "amount": 800.0,
             "unit": "ml",
-            "item": "oat milk (or other non-dairy milk)"
+            "item": "oat milk"
           }
         }
       ],
@@ -691,15 +802,17 @@
         {
           "id": 7,
           "text": "500 g wholemeal or spelt spaghetti",
+          "canonical": "spaghetti",
           "quantity": {
             "amount": 500.0,
             "unit": "g",
-            "item": "wholemeal or spelt spaghetti"
+            "item": "spaghetti"
           }
         },
         {
           "id": 8,
           "text": "200 ml white wine",
+          "canonical": "white wine",
           "quantity": {
             "amount": 200.0,
             "unit": "ml",
@@ -709,6 +822,7 @@
         {
           "id": 9,
           "text": "500 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 500.0,
             "unit": "ml",
@@ -718,48 +832,57 @@
         {
           "id": 10,
           "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         },
         {
           "id": 11,
           "text": "2 tbsp nutritional yeast, plus extra for garnish",
+          "canonical": "nutritional yeast",
+          "preparation": "plus extra for garnish",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "nutritional yeast, plus extra for garnish"
+            "item": "nutritional yeast"
           }
         },
         {
           "id": 12,
-          "text": "Chilli flakes for garnish (optional)"
+          "text": "chilli flakes for garnish (optional)",
+          "canonical": "chilli flakes",
+          "preparation": "for garnish (optional)"
         }
       ],
       "Spices": [
         {
           "id": 13,
-          "text": "2 tsp sea salt",
+          "text": "2 tsp salt",
+          "canonical": "salt",
           "quantity": {
             "amount": 2.0,
             "unit": "tsp",
-            "item": "sea salt"
+            "item": "salt"
           }
         },
         {
           "id": 14,
-          "text": "Freshly ground black pepper to taste"
+          "text": "black pepper to taste",
+          "canonical": "black pepper",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Finely chop {onion} and {garlic}. Chop {mushrooms} reasonably finely."
+        "text": "Finely chop {red onion} and {garlic}. Chop {mushroom} reasonably finely."
       },
       {
-        "text": "Heat {oil} in a large pan over high heat. Add {onion} and {garlic} and cook until they start to brown, about 2-3 minutes, stirring continuously. Add {mushrooms} and cook for 2 minutes.",
+        "text": "Heat {vegetable oil} in a large pan over high heat. Add {red onion} and {garlic} and cook until they start to brown, about 2-3 minutes, stirring continuously. Add {mushroom} and cook for 2 minutes.",
         "durations": [
           {
             "seconds": 180,
@@ -805,65 +928,83 @@
         {
           "id": 1,
           "text": "1 red onion, finely chopped",
+          "canonical": "red onion",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 1.0,
-            "item": "red onion, finely chopped"
+            "item": "red onion"
           }
         },
         {
           "id": 2,
           "text": "4 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 4.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
           "text": "1 carrot, grated",
+          "canonical": "carrot",
+          "preparation": "grated",
           "quantity": {
             "amount": 1.0,
-            "item": "carrot, grated"
+            "item": "carrot"
           }
         },
         {
           "id": 4,
           "text": "1 stick celery, thinly sliced",
+          "canonical": "celery",
+          "preparation": "thinly sliced",
           "quantity": {
             "amount": 1.0,
-            "item": "stick celery, thinly sliced"
+            "unit": "stick",
+            "item": "celery"
           }
         },
         {
           "id": 5,
           "text": "1 fresh green chilli, finely chopped",
+          "canonical": "chilli",
+          "preparation": "finely chopped",
           "quantity": {
             "amount": 1.0,
-            "item": "fresh green chilli, finely chopped"
+            "item": "chilli"
           }
         },
         {
           "id": 6,
-          "text": "A handful of cherry tomatoes, halved"
+          "text": "A handful of cherry tomatoes, halved",
+          "canonical": "cherry tomato",
+          "preparation": "halved"
         },
         {
           "id": 7,
-          "text": "A bunch of fresh basil"
+          "text": "A bunch of basil",
+          "canonical": "basil"
         },
         {
           "id": 8,
-          "text": "Lemon for juice"
+          "text": "lemon for juice",
+          "canonical": "lemon",
+          "preparation": "for juice"
         }
       ],
       "Pantry": [
         {
           "id": 9,
-          "text": "1 tin (400 g) cooked lentils, drained and rinsed",
+          "text": "1 tin (400 g) lentils, drained and rinsed",
+          "canonical": "lentil",
+          "preparation": "drained and rinsed",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
-            "item": "cooked lentils, drained and rinsed",
+            "item": "lentils",
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
@@ -871,6 +1012,7 @@
         {
           "id": 10,
           "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -882,15 +1024,17 @@
         {
           "id": 11,
           "text": "400 g wholemeal spaghetti",
+          "canonical": "spaghetti",
           "quantity": {
             "amount": 400.0,
             "unit": "g",
-            "item": "wholemeal spaghetti"
+            "item": "spaghetti"
           }
         },
         {
           "id": 12,
           "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -900,42 +1044,51 @@
         {
           "id": 13,
           "text": "1.2 litres vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 1.2,
-            "item": "litres vegetable stock"
+            "item": "vegetable stock"
           }
         },
         {
           "id": 14,
           "text": "2 tbsp tamari or soy sauce",
+          "canonical": "tamari",
+          "preparation": "or soy sauce",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "tamari or soy sauce"
+            "item": "tamari"
           }
         },
         {
           "id": 15,
-          "text": "Nutritional yeast to serve"
+          "text": "nutritional yeast to serve",
+          "canonical": "nutritional yeast",
+          "preparation": "to serve"
         }
       ],
       "Spices": [
         {
           "id": 16,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         },
         {
           "id": 17,
-          "text": "Freshly ground black pepper to taste"
+          "text": "black pepper to taste",
+          "canonical": "black pepper",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Finely chop {onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomatoes}. Drain and rinse {lentils}."
+        "text": "Finely chop {red onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomato}. Drain and rinse {lentil}."
       },
       {
-        "text": "Heat {olive oil} in a large pot over high heat. Add {onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for 3 minutes, stirring regularly.",
+        "text": "Heat {olive oil} in a large pot over high heat. Add {red onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for 3 minutes, stirring regularly.",
         "durations": [
           {
             "seconds": 180,
@@ -944,7 +1097,7 @@
         ]
       },
       {
-        "text": "Add {chopped tomatoes}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomatoes}. Bring to the boil, then simmer until the pasta is cooked, about 9-11 minutes. Remove from the heat.",
+        "text": "Add {chopped tomato}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomato}. Bring to the boil, then simmer until the pasta is cooked, about 9-11 minutes. Remove from the heat.",
         "durations": [
           {
             "seconds": 660,
@@ -983,30 +1136,37 @@
         {
           "id": 1,
           "text": "1 medium onion, diced",
+          "canonical": "onion",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
             "unit": "medium",
-            "item": "onion, diced"
+            "item": "onion"
           }
         },
         {
           "id": 2,
           "text": "2 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 2.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
-          "text": "Handful fresh coriander, to serve"
+          "text": "Handful coriander, to serve",
+          "canonical": "coriander",
+          "preparation": "to serve"
         }
       ],
       "Pantry": [
         {
           "id": 4,
           "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -1016,10 +1176,12 @@
         {
           "id": 5,
           "text": "2 tins (400 g) chickpeas, drained and rinsed",
+          "canonical": "chickpea",
+          "preparation": "drained and rinsed",
           "quantity": {
             "amount": 2.0,
             "unit": "tins",
-            "item": "chickpeas, drained and rinsed",
+            "item": "chickpeas",
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
@@ -1027,6 +1189,7 @@
         {
           "id": 6,
           "text": "1 tin (400 g) passata",
+          "canonical": "passata",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -1038,6 +1201,7 @@
         {
           "id": 7,
           "text": "120 ml water",
+          "canonical": "water",
           "quantity": {
             "amount": 120.0,
             "unit": "ml",
@@ -1046,16 +1210,18 @@
         },
         {
           "id": 8,
-          "text": "250 ml full-fat coconut milk",
+          "text": "250 ml coconut milk",
+          "canonical": "coconut milk",
           "quantity": {
             "amount": 250.0,
             "unit": "ml",
-            "item": "full-fat coconut milk"
+            "item": "coconut milk"
           }
         },
         {
           "id": 9,
           "text": "1 tsp ginger paste",
+          "canonical": "ginger paste",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1065,6 +1231,7 @@
         {
           "id": 10,
           "text": "1 tsp brown sugar",
+          "canonical": "brown sugar",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1073,21 +1240,25 @@
         },
         {
           "id": 11,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         }
       ],
       "Spices": [
         {
           "id": 12,
           "text": "1 1/2 tsp garam masala",
+          "canonical": "garam masala",
           "quantity": {
             "amount": 1.0,
-            "item": "1/2 tsp garam masala"
+            "item": "garam masala"
           }
         },
         {
           "id": 13,
           "text": "1 tsp ground cumin",
+          "canonical": "ground cumin",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1097,6 +1268,7 @@
         {
           "id": 14,
           "text": "1/2 tsp turmeric",
+          "canonical": "turmeric",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -1106,15 +1278,19 @@
         {
           "id": 15,
           "text": "1/2 tsp ground coriander (optional)",
+          "canonical": "ground coriander",
+          "preparation": "(optional)",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
-            "item": "ground coriander (optional)"
+            "item": "ground coriander"
           }
         },
         {
           "id": 16,
-          "text": "Black pepper to taste"
+          "text": "black pepper to taste",
+          "canonical": "black pepper",
+          "preparation": "to taste"
         }
       ]
     },
@@ -1129,7 +1305,7 @@
         ]
       },
       {
-        "text": "Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {pepper}. Fry for 30 seconds, stirring constantly.",
+        "text": "Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for 30 seconds, stirring constantly.",
         "durations": [
           {
             "seconds": 60,
@@ -1142,7 +1318,7 @@
         ]
       },
       {
-        "text": "Pour in {passata}, {water}, {chickpeas}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.",
+        "text": "Pour in {passata}, {water}, {chickpea}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.",
         "durations": [
           {
             "seconds": 1200,
@@ -1160,7 +1336,7 @@
         ]
       },
       {
-        "text": "Taste and adjust seasoning. Garnish with {fresh coriander}."
+        "text": "Taste and adjust seasoning. Garnish with {coriander}."
       }
     ],
     "serving_suggestions": "Serve with basmati rice and naan. A dollop of coconut yoghurt on top works well.",
@@ -1189,55 +1365,68 @@
         {
           "id": 1,
           "text": "2 large onions, thinly sliced",
+          "canonical": "onion",
+          "preparation": "thinly sliced",
           "quantity": {
             "amount": 2.0,
             "unit": "large",
-            "item": "onions, thinly sliced"
+            "item": "onions"
           }
         },
         {
           "id": 2,
           "text": "3 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 3.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
-          "text": "6-8 celery stalks, cut into 3 cm pieces",
+          "text": "6-8 stalks celery, cut into 3 cm pieces",
+          "canonical": "celery",
+          "preparation": "cut into 3 cm pieces",
           "quantity": {
             "amount": 6.0,
             "amount_max": 8.0,
-            "item": "celery stalks, cut into 3 cm pieces"
+            "unit": "stalks",
+            "item": "celery"
           }
         },
         {
           "id": 4,
-          "text": "250 g fresh parsley, roughly chopped",
+          "text": "250 g parsley, roughly chopped",
+          "canonical": "parsley",
+          "preparation": "roughly chopped",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
-            "item": "fresh parsley, roughly chopped"
+            "item": "parsley"
           }
         },
         {
           "id": 5,
-          "text": "50 g fresh mint (or 2 1/2 tbsp dried)",
+          "text": "50 g mint (or 2 1/2 tbsp dried)",
+          "canonical": "mint",
+          "preparation": "(or 2 1/2 tbsp dried)",
           "quantity": {
             "amount": 50.0,
             "unit": "g",
-            "item": "fresh mint (or 2 1/2 tbsp dried)"
+            "item": "mint"
           }
         },
         {
           "id": 6,
           "text": "130 ml lime juice (about 4-5 limes)",
+          "canonical": "lime juice",
+          "preparation": "(about 4-5 limes)",
           "quantity": {
             "amount": 130.0,
             "unit": "ml",
-            "item": "lime juice (about 4-5 limes)"
+            "item": "lime juice"
           }
         }
       ],
@@ -1245,10 +1434,12 @@
         {
           "id": 7,
           "text": "1 tin (400 g) butter beans, drained and rinsed",
+          "canonical": "butter bean",
+          "preparation": "drained and rinsed",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
-            "item": "butter beans, drained and rinsed",
+            "item": "butter beans",
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
@@ -1256,18 +1447,22 @@
         {
           "id": 8,
           "text": "5 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 5.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         },
         {
           "id": 9,
           "text": "1 vegetable stock cube",
+          "canonical": "vegetable stock",
+          "preparation": "cube",
           "quantity": {
             "amount": 1.0,
-            "item": "vegetable stock cube"
+            "item": "vegetable stock"
           }
         }
       ],
@@ -1275,15 +1470,18 @@
         {
           "id": 10,
           "text": "1/2 tsp saffron threads",
+          "canonical": "saffron",
+          "preparation": "threads",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
-            "item": "saffron threads"
+            "item": "saffron"
           }
         },
         {
           "id": 11,
           "text": "1 tsp ground turmeric",
+          "canonical": "ground turmeric",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1292,7 +1490,15 @@
         },
         {
           "id": 12,
-          "text": "Salt and black pepper to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
+        },
+        {
+          "id": 13,
+          "text": "black pepper to taste",
+          "canonical": "black pepper",
+          "preparation": "to taste"
         }
       ]
     },
@@ -1301,7 +1507,7 @@
         "text": "Dissolve {saffron} in 60 ml boiling water and set aside to bloom."
       },
       {
-        "text": "Heat 3 tbsp {oil} in a frying pan over medium heat. Add {parsley} and {mint} and fry for 10-15 minutes, stirring often, until darkened and fragrant. Set aside.",
+        "text": "Heat 3 tbsp {vegetable oil} in a frying pan over medium heat. Add {parsley} and {mint} and fry for 10-15 minutes, stirring often, until darkened and fragrant. Set aside.",
         "durations": [
           {
             "seconds": 900,
@@ -1310,7 +1516,7 @@
         ]
       },
       {
-        "text": "Heat the remaining {oil} in a large pot over medium heat. Add {onions} and cook for about 10 minutes until translucent.",
+        "text": "Heat the remaining {vegetable oil} in a large pot over medium heat. Add {onion} and cook for about 10 minutes until translucent.",
         "durations": [
           {
             "seconds": 600,
@@ -1319,7 +1525,7 @@
         ]
       },
       {
-        "text": "Add {turmeric} and {garlic}, stir for 1 minute, then add {celery} and cook for another 5 minutes.",
+        "text": "Add {ground turmeric} and {garlic}, stir for 1 minute, then add {celery} and cook for another 5 minutes.",
         "durations": [
           {
             "seconds": 60,
@@ -1332,7 +1538,7 @@
         ]
       },
       {
-        "text": "Add {butter beans} and the fried herbs. Stir together for 1 minute.",
+        "text": "Add {butter bean} and the fried herbs. Stir together for 1 minute.",
         "durations": [
           {
             "seconds": 60,
@@ -1341,7 +1547,7 @@
         ]
       },
       {
-        "text": "Pour in 700 ml boiling water, then add the {stock cube}, {lime juice}, and the bloomed saffron water. Stir to combine."
+        "text": "Pour in 700 ml boiling water, then add the {vegetable stock} cube, {lime juice}, and the bloomed saffron water. Stir to combine."
       },
       {
         "text": "Cover and simmer on low heat for 45-60 minutes, until the celery is tender. The stew should retain some liquid.",
@@ -1381,46 +1587,57 @@
         {
           "id": 1,
           "text": "1 onion, finely diced",
+          "canonical": "onion",
+          "preparation": "finely diced",
           "quantity": {
             "amount": 1.0,
-            "item": "onion, finely diced"
+            "item": "onion"
           }
         },
         {
           "id": 2,
           "text": "3 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 3.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
-          "text": "1 thumb fresh ginger, grated",
+          "text": "1 thumb ginger, grated",
+          "canonical": "ginger",
+          "preparation": "grated",
           "quantity": {
             "amount": 1.0,
-            "item": "thumb fresh ginger, grated"
+            "unit": "thumb",
+            "item": "ginger"
           }
         },
         {
           "id": 4,
-          "text": "Lemon for juice"
+          "text": "Lemon for juice",
+          "canonical": "lemon",
+          "preparation": "for juice"
         }
       ],
       "Pantry": [
         {
           "id": 5,
-          "text": "250 g red or yellow lentils",
+          "text": "250 g lentils",
+          "canonical": "lentil",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
-            "item": "red or yellow lentils"
+            "item": "lentils"
           }
         },
         {
           "id": 6,
           "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -1432,10 +1649,12 @@
         {
           "id": 7,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         }
       ],
@@ -1443,6 +1662,7 @@
         {
           "id": 8,
           "text": "1 tsp cumin seeds",
+          "canonical": "cumin seed",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1452,6 +1672,7 @@
         {
           "id": 9,
           "text": "1 tsp turmeric",
+          "canonical": "turmeric",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1461,6 +1682,7 @@
         {
           "id": 10,
           "text": "1 tsp garam masala",
+          "canonical": "garam masala",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1469,17 +1691,21 @@
         },
         {
           "id": 11,
-          "text": "Chilli to taste"
+          "text": "chilli to taste",
+          "canonical": "chilli",
+          "preparation": "to taste"
         },
         {
           "id": 12,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Rinse {lentils} and cook in water until soft, about 15 minutes. Drain any excess water.",
+        "text": "Rinse {lentil} and cook in water until soft, about 15 minutes. Drain any excess water.",
         "durations": [
           {
             "seconds": 900,
@@ -1488,7 +1714,7 @@
         ]
       },
       {
-        "text": "In a pan, heat {oil} and fry the {cumin seeds} until they start to pop, then add {onion} and cook until golden."
+        "text": "In a pan, heat {vegetable oil} and fry the {cumin seed} until they start to pop, then add {onion} and cook until golden."
       },
       {
         "text": "Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for 2 minutes, stirring often.",
@@ -1500,7 +1726,7 @@
         ]
       },
       {
-        "text": "Add the {tomatoes} and cook for 5 minutes.",
+        "text": "Add the {chopped tomato} and cook for 5 minutes.",
         "durations": [
           {
             "seconds": 300,
@@ -1545,25 +1771,29 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "500 g fresh spinach",
+          "text": "500 g spinach",
+          "canonical": "spinach",
           "quantity": {
             "amount": 500.0,
             "unit": "g",
-            "item": "fresh spinach"
+            "item": "spinach"
           }
         },
         {
           "id": 2,
           "text": "2 medium onions, roughly chopped",
+          "canonical": "onion",
+          "preparation": "roughly chopped",
           "quantity": {
             "amount": 2.0,
             "unit": "medium",
-            "item": "onions, roughly chopped"
+            "item": "onions"
           }
         },
         {
           "id": 3,
           "text": "4 cloves garlic",
+          "canonical": "garlic",
           "quantity": {
             "amount": 4.0,
             "unit": "cloves",
@@ -1572,30 +1802,36 @@
         },
         {
           "id": 4,
-          "text": "1 thumb fresh ginger",
+          "text": "1 thumb ginger",
+          "canonical": "ginger",
           "quantity": {
             "amount": 1.0,
-            "item": "thumb fresh ginger"
+            "unit": "thumb",
+            "item": "ginger"
           }
         },
         {
           "id": 5,
-          "text": "Lemon for juice"
+          "text": "Lemon for juice",
+          "canonical": "lemon",
+          "preparation": "for juice"
         }
       ],
       "Fridge": [
         {
           "id": 6,
-          "text": "400 g firm tofu",
+          "text": "400 g tofu",
+          "canonical": "tofu",
           "quantity": {
             "amount": 400.0,
             "unit": "g",
-            "item": "firm tofu"
+            "item": "tofu"
           }
         },
         {
           "id": 7,
           "text": "1 tin (400 ml) coconut cream",
+          "canonical": "coconut cream",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -1609,10 +1845,12 @@
         {
           "id": 8,
           "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         }
       ],
@@ -1620,6 +1858,7 @@
         {
           "id": 9,
           "text": "2 tsp cumin seeds",
+          "canonical": "cumin seed",
           "quantity": {
             "amount": 2.0,
             "unit": "tsp",
@@ -1628,16 +1867,18 @@
         },
         {
           "id": 10,
-          "text": "1 tsp coriander powder",
+          "text": "1 tsp ground coriander",
+          "canonical": "ground coriander",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "coriander powder"
+            "item": "ground coriander"
           }
         },
         {
           "id": 11,
           "text": "1 tsp garam masala",
+          "canonical": "garam masala",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1647,6 +1888,7 @@
         {
           "id": 12,
           "text": "1/2 tsp turmeric",
+          "canonical": "turmeric",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -1656,6 +1898,7 @@
         {
           "id": 13,
           "text": "1/4 tsp nutmeg",
+          "canonical": "nutmeg",
           "quantity": {
             "amount": 0.25,
             "unit": "tsp",
@@ -1665,15 +1908,19 @@
         {
           "id": 14,
           "text": "1 tsp chilli flakes, adjust to taste",
+          "canonical": "chilli flakes",
+          "preparation": "adjust to taste",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "chilli flakes, adjust to taste"
+            "item": "chilli flakes"
           }
         },
         {
           "id": 15,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         }
       ]
     },
@@ -1688,10 +1935,10 @@
         ]
       },
       {
-        "text": "Heat {oil} in a pan over high heat. Pan-fry the tofu until golden and crispy on all sides. Set aside."
+        "text": "Heat {vegetable oil} in a pan over high heat. Pan-fry the tofu until golden and crispy on all sides. Set aside."
       },
       {
-        "text": "In the same pan, fry the {cumin seeds} until they pop, then add {onions} and cook until deeply golden, about 10 minutes.",
+        "text": "In the same pan, fry the {cumin seed} until they pop, then add {onion} and cook until deeply golden, about 10 minutes.",
         "durations": [
           {
             "seconds": 600,
@@ -1700,7 +1947,7 @@
         ]
       },
       {
-        "text": "Add {garlic} and {ginger}, cook for 2 minutes, then add {turmeric}, {coriander powder} and {chilli flakes}. Stir well.",
+        "text": "Add {garlic} and {ginger}, cook for 2 minutes, then add {turmeric}, {ground coriander} and {chilli flakes}. Stir well.",
         "durations": [
           {
             "seconds": 120,
@@ -1758,47 +2005,59 @@
         {
           "id": 1,
           "text": "2 medium onions, finely diced",
+          "canonical": "onion",
+          "preparation": "finely diced",
           "quantity": {
             "amount": 2.0,
             "unit": "medium",
-            "item": "onions, finely diced"
+            "item": "onions"
           }
         },
         {
           "id": 2,
           "text": "4 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 4.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
-          "text": "1 thumb fresh ginger, grated",
+          "text": "1 thumb ginger, grated",
+          "canonical": "ginger",
+          "preparation": "grated",
           "quantity": {
             "amount": 1.0,
-            "item": "thumb fresh ginger, grated"
+            "unit": "thumb",
+            "item": "ginger"
           }
         },
         {
           "id": 4,
-          "text": "Fresh coriander to finish"
+          "text": "Fresh coriander to finish",
+          "canonical": "coriander",
+          "preparation": "to finish"
         }
       ],
       "Pantry": [
         {
           "id": 5,
-          "text": "2 tins (400 g each) red kidney beans, drained and rinsed",
+          "text": "2 tins (400 g each) kidney beans, drained and rinsed",
+          "canonical": "kidney bean",
+          "preparation": "drained and rinsed",
           "quantity": {
             "amount": 2.0,
             "unit": "tins",
-            "item": "(400 g each) red kidney beans, drained and rinsed"
+            "item": "kidney beans"
           }
         },
         {
           "id": 6,
           "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -1809,16 +2068,18 @@
         },
         {
           "id": 7,
-          "text": "1 tbsp tomato purée",
+          "text": "1 tbsp tomato puree",
+          "canonical": "tomato puree",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "tomato purée"
+            "item": "tomato puree"
           }
         },
         {
           "id": 8,
           "text": "250 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 250.0,
             "unit": "ml",
@@ -1828,10 +2089,12 @@
         {
           "id": 9,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         }
       ],
@@ -1839,6 +2102,7 @@
         {
           "id": 10,
           "text": "1 tsp cumin seeds",
+          "canonical": "cumin seed",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1847,16 +2111,18 @@
         },
         {
           "id": 11,
-          "text": "1 tsp coriander powder",
+          "text": "1 tsp ground coriander",
+          "canonical": "ground coriander",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "coriander powder"
+            "item": "ground coriander"
           }
         },
         {
           "id": 12,
           "text": "1 tsp garam masala",
+          "canonical": "garam masala",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1866,6 +2132,7 @@
         {
           "id": 13,
           "text": "1 tsp smoked paprika",
+          "canonical": "smoked paprika",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -1875,6 +2142,7 @@
         {
           "id": 14,
           "text": "1/2 tsp turmeric",
+          "canonical": "turmeric",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -1884,24 +2152,28 @@
         {
           "id": 15,
           "text": "1/2 tsp chilli powder, adjust to taste",
+          "canonical": "chilli powder",
+          "preparation": "adjust to taste",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
-            "item": "chilli powder, adjust to taste"
+            "item": "chilli powder"
           }
         },
         {
           "id": 16,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Heat {oil} in a heavy-bottomed pan and fry the {cumin seeds} until they pop."
+        "text": "Heat {vegetable oil} in a heavy-bottomed pan and fry the {cumin seed} until they pop."
       },
       {
-        "text": "Add the {onions} and cook on medium heat for 12–15 minutes until deep golden brown.",
+        "text": "Add the {onion} and cook on medium heat for 12–15 minutes until deep golden brown.",
         "durations": [
           {
             "seconds": 900,
@@ -1919,7 +2191,7 @@
         ]
       },
       {
-        "text": "Add {turmeric}, {coriander powder}, {smoked paprika}, {chilli powder} and {tomato purée}. Stir well and cook for 2 minutes.",
+        "text": "Add {turmeric}, {ground coriander}, {smoked paprika}, {chilli powder} and {tomato puree}. Stir well and cook for 2 minutes.",
         "durations": [
           {
             "seconds": 120,
@@ -1928,7 +2200,7 @@
         ]
       },
       {
-        "text": "Add the {tomatoes} and cook for 8–10 minutes until the sauce thickens and the oil starts to separate slightly.",
+        "text": "Add the {chopped tomato} and cook for 8–10 minutes until the sauce thickens and the oil starts to separate slightly.",
         "durations": [
           {
             "seconds": 600,
@@ -1937,7 +2209,7 @@
         ]
       },
       {
-        "text": "Add the {kidney beans} and {vegetable stock}, stir well, cover and simmer on low heat for 20–25 minutes.",
+        "text": "Add the {kidney bean} and {vegetable stock}, stir well, cover and simmer on low heat for 20–25 minutes.",
         "durations": [
           {
             "seconds": 1500,
@@ -1949,7 +2221,7 @@
         "text": "Lightly mash a few beans with the back of a spoon to thicken the sauce further."
       },
       {
-        "text": "Season with {salt}, finish with {garam masala} and fresh {fresh coriander}."
+        "text": "Season with {salt}, finish with {garam masala} and fresh {coriander}."
       }
     ],
     "serving_suggestions": "Serve with basmati rice. A squeeze of lemon and a dollop of coconut yoghurt work well on top.",
@@ -1976,35 +2248,45 @@
         {
           "id": 1,
           "text": "3 bunches bok choy, chopped, whites and greens separated",
+          "canonical": "bok choy",
+          "preparation": "chopped, whites and greens separated",
           "quantity": {
             "amount": 3.0,
-            "item": "bunches bok choy, chopped, whites and greens separated"
+            "unit": "bunches",
+            "item": "bok choy"
           }
         },
         {
           "id": 2,
           "text": "4 cloves garlic, diced",
+          "canonical": "garlic",
+          "preparation": "diced",
           "quantity": {
             "amount": 4.0,
             "unit": "cloves",
-            "item": "garlic, diced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
           "text": "1 bunch spring onions, chopped, whites and greens separated",
+          "canonical": "spring onion",
+          "preparation": "chopped, whites and greens separated",
           "quantity": {
             "amount": 1.0,
-            "item": "bunch spring onions, chopped, whites and greens separated"
+            "unit": "bunch",
+            "item": "spring onions"
           }
         },
         {
           "id": 4,
           "text": "225 g mushrooms, chopped small",
+          "canonical": "mushroom",
+          "preparation": "chopped small",
           "quantity": {
             "amount": 225.0,
             "unit": "g",
-            "item": "mushrooms, chopped small"
+            "item": "mushrooms"
           }
         }
       ],
@@ -2012,14 +2294,17 @@
         {
           "id": 5,
           "text": "2 bundles soba noodles",
+          "canonical": "soba noodle",
           "quantity": {
             "amount": 2.0,
-            "item": "bundles soba noodles"
+            "unit": "bundles",
+            "item": "soba noodles"
           }
         },
         {
           "id": 6,
           "text": "1 tbsp sesame oil",
+          "canonical": "sesame oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -2029,10 +2314,12 @@
         {
           "id": 7,
           "text": "80 ml teriyaki sauce, or to taste",
+          "canonical": "teriyaki sauce",
+          "preparation": "or to taste",
           "quantity": {
             "amount": 80.0,
             "unit": "ml",
-            "item": "teriyaki sauce, or to taste"
+            "item": "teriyaki sauce"
           }
         }
       ],
@@ -2040,6 +2327,7 @@
         {
           "id": 8,
           "text": "1/4 tsp white pepper",
+          "canonical": "white pepper",
           "quantity": {
             "amount": 0.25,
             "unit": "tsp",
@@ -2048,17 +2336,21 @@
         },
         {
           "id": 9,
-          "text": "Red pepper flakes to taste"
+          "text": "chilli flakes to taste",
+          "canonical": "chilli flakes",
+          "preparation": "to taste"
         },
         {
           "id": 10,
-          "text": "Sesame seeds for serving"
+          "text": "sesame seeds for serving",
+          "canonical": "sesame seed",
+          "preparation": "for serving"
         }
       ]
     },
     "steps": [
       {
-        "text": "Bring a pot of water to a boil. While waiting, prep the vegetables. Add {soba noodles} and cook for 3–5 minutes until tender. Drain and rinse with cold water.",
+        "text": "Bring a pot of water to a boil. While waiting, prep the vegetables. Add {soba noodle} and cook for 3–5 minutes until tender. Drain and rinse with cold water.",
         "durations": [
           {
             "seconds": 300,
@@ -2067,7 +2359,7 @@
         ]
       },
       {
-        "text": "Meanwhile, heat {sesame oil} in a skillet over medium heat. Add {garlic}, {mushrooms}, whites of the {bok choy}, whites of the {spring onions}, {white pepper} and {red pepper flakes}. Cook for about 5 minutes until the mushrooms have released their liquid and it has cooked off.",
+        "text": "Meanwhile, heat {sesame oil} in a skillet over medium heat. Add {garlic}, {mushroom}, whites of the {bok choy}, whites of the {spring onion}, {white pepper} and {chilli flakes}. Cook for about 5 minutes until the mushrooms have released their liquid and it has cooked off.",
         "durations": [
           {
             "seconds": 300,
@@ -2082,7 +2374,7 @@
         "text": "Add the soba noodles, greens of the {bok choy} and the rest of the {teriyaki sauce}. Toss until everything is coated and heated through."
       },
       {
-        "text": "Serve topped with remaining {spring onions} and {sesame seeds}."
+        "text": "Serve topped with remaining {spring onion} and {sesame seed}."
       }
     ],
     "tested": true
@@ -2108,35 +2400,44 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "200 g mixed mushrooms (chestnut, oyster, or shiitake), sliced",
+          "text": "200 g mushrooms (chestnut, oyster, or shiitake), sliced",
+          "canonical": "mushroom",
+          "preparation": "(chestnut, oyster, or shiitake), sliced",
           "quantity": {
             "amount": 200.0,
             "unit": "g",
-            "item": "mixed mushrooms (chestnut, oyster, or shiitake), sliced"
+            "item": "mushrooms"
           }
         },
         {
           "id": 2,
           "text": "2 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 2.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
-          "text": "Fresh thyme, a few sprigs"
+          "text": "Fresh thyme, a few sprigs",
+          "canonical": "thyme",
+          "preparation": "a few sprigs"
         },
         {
           "id": 4,
-          "text": "Fresh parsley, chopped"
+          "text": "Fresh parsley, chopped",
+          "canonical": "parsley",
+          "preparation": "chopped"
         }
       ],
       "Pantry": [
         {
           "id": 5,
           "text": "250 g buckwheat flour",
+          "canonical": "buckwheat flour",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
@@ -2146,6 +2447,7 @@
         {
           "id": 6,
           "text": "500-750 ml water",
+          "canonical": "water",
           "quantity": {
             "amount": 500.0,
             "amount_max": 750.0,
@@ -2156,24 +2458,28 @@
         {
           "id": 7,
           "text": "5 g fine salt",
+          "canonical": "salt",
           "quantity": {
             "amount": 5.0,
             "unit": "g",
-            "item": "fine salt"
+            "item": "salt"
           }
         },
         {
           "id": 8,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         },
         {
           "id": 9,
           "text": "1 tbsp soy sauce",
+          "canonical": "soy sauce",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -2196,7 +2502,7 @@
         "text": "When ready to cook, check the batter consistency and add a splash of water if needed."
       },
       {
-        "text": "Heat a drizzle of {oil} in a pan over medium heat. Add the {mushrooms} and cook for 5 minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.",
+        "text": "Heat a drizzle of {vegetable oil} in a pan over medium heat. Add the {mushroom} and cook for 5 minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.",
         "durations": [
           {
             "seconds": 300,
@@ -2205,7 +2511,7 @@
         ]
       },
       {
-        "text": "Heat a large flat pan over medium-high heat. Lightly grease with {oil}."
+        "text": "Heat a large flat pan over medium-high heat. Lightly grease with {vegetable oil}."
       },
       {
         "text": "Pour a ladleful of batter and quickly spread it as thinly as possible."
@@ -2248,15 +2554,18 @@
         {
           "id": 1,
           "text": "1/4 small cabbage, shredded",
+          "canonical": "cabbage",
+          "preparation": "shredded",
           "quantity": {
             "amount": 0.25,
             "unit": "small",
-            "item": "cabbage, shredded"
+            "item": "cabbage"
           }
         },
         {
           "id": 2,
           "text": "100 g bean sprouts",
+          "canonical": "bean sprout",
           "quantity": {
             "amount": 100.0,
             "unit": "g",
@@ -2266,43 +2575,52 @@
         {
           "id": 3,
           "text": "2 spring onions, sliced",
+          "canonical": "spring onion",
+          "preparation": "sliced",
           "quantity": {
             "amount": 2.0,
-            "item": "spring onions, sliced"
+            "item": "spring onions"
           }
         },
         {
           "id": 4,
           "text": "1 clove garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 1.0,
             "unit": "clove",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 5,
-          "text": "1 tsp fresh ginger, minced",
+          "text": "1 tsp ginger, minced",
+          "canonical": "ginger",
+          "preparation": "minced",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "fresh ginger, minced"
+            "item": "ginger"
           }
         }
       ],
       "Fridge": [
         {
           "id": 6,
-          "text": "200 g firm tofu, drained and crumbled",
+          "text": "200 g tofu, drained and crumbled",
+          "canonical": "tofu",
+          "preparation": "drained and crumbled",
           "quantity": {
             "amount": 200.0,
             "unit": "g",
-            "item": "firm tofu, drained and crumbled"
+            "item": "tofu"
           }
         },
         {
           "id": 7,
           "text": "250 ml soy milk",
+          "canonical": "soy milk",
           "quantity": {
             "amount": 250.0,
             "unit": "ml",
@@ -2312,6 +2630,7 @@
         {
           "id": 8,
           "text": "1/2 tbsp miso paste",
+          "canonical": "miso paste",
           "quantity": {
             "amount": 0.5,
             "unit": "tbsp",
@@ -2323,23 +2642,27 @@
         {
           "id": 9,
           "text": "2 portions ramen noodles",
+          "canonical": "ramen noodle",
           "quantity": {
             "amount": 2.0,
-            "item": "portions ramen noodles"
+            "unit": "portions",
+            "item": "ramen noodles"
           }
         },
         {
           "id": 10,
           "text": "3 tbsp Asian sesame paste",
+          "canonical": "asian sesame paste",
           "quantity": {
             "amount": 3.0,
             "unit": "tbsp",
-            "item": "Asian sesame paste"
+            "item": "asian sesame paste"
           }
         },
         {
           "id": 11,
           "text": "2 tbsp soy sauce",
+          "canonical": "soy sauce",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
@@ -2349,6 +2672,7 @@
         {
           "id": 12,
           "text": "1/2 tbsp rice vinegar",
+          "canonical": "rice vinegar",
           "quantity": {
             "amount": 0.5,
             "unit": "tbsp",
@@ -2358,6 +2682,7 @@
         {
           "id": 13,
           "text": "1 tbsp sesame oil",
+          "canonical": "sesame oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -2367,15 +2692,18 @@
         {
           "id": 14,
           "text": "1 tsp rayu (Japanese-style)",
+          "canonical": "rayu",
+          "preparation": "(Japanese-style)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "rayu (Japanese-style)"
+            "item": "rayu"
           }
         },
         {
           "id": 15,
           "text": "300 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 300.0,
             "unit": "ml",
@@ -2385,6 +2713,7 @@
         {
           "id": 16,
           "text": "80 g sweetcorn",
+          "canonical": "sweetcorn",
           "quantity": {
             "amount": 80.0,
             "unit": "g",
@@ -2393,13 +2722,16 @@
         },
         {
           "id": 17,
-          "text": "Crushed peanuts to serve"
+          "text": "Crushed peanuts to serve",
+          "canonical": "peanut",
+          "preparation": "to serve"
         }
       ],
       "Spices": [
         {
           "id": 18,
           "text": "1 tsp chilli oil",
+          "canonical": "chilli oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -2408,7 +2740,9 @@
         },
         {
           "id": 19,
-          "text": "Sesame seeds to serve"
+          "text": "Sesame seeds to serve",
+          "canonical": "sesame seed",
+          "preparation": "to serve"
         }
       ]
     },
@@ -2432,7 +2766,7 @@
         ]
       },
       {
-        "text": "Steam or blanch the {cabbage} and {bean sprouts} for about 3 minutes until just tender. Set aside.",
+        "text": "Steam or blanch the {cabbage} and {bean sprout} for about 3 minutes until just tender. Set aside.",
         "durations": [
           {
             "seconds": 180,
@@ -2441,16 +2775,16 @@
         ]
       },
       {
-        "text": "In a small bowl, mix the {sesame paste}, remaining {soy sauce} (1 1/2 tbsp), {rice vinegar}, 1 tsp {sesame oil}, and {rayu} into a smooth paste."
+        "text": "In a small bowl, mix the {Asian sesame paste}, remaining {soy sauce} (1 1/2 tbsp), {rice vinegar}, 1 tsp {sesame oil}, and {rayu} into a smooth paste."
       },
       {
         "text": "In a saucepan, heat the {soy milk} and {vegetable stock} over medium-low heat. When it starts to bubble, reduce the heat to low and whisk in the sesame paste mixture until fully dissolved."
       },
       {
-        "text": "Cook the {ramen noodles} according to the package instructions. Drain and divide between two bowls."
+        "text": "Cook the {ramen noodle} according to the package instructions. Drain and divide between two bowls."
       },
       {
-        "text": "Pour the hot broth over the noodles. Top with the spicy tofu crumbles, steamed vegetables, {sweetcorn}, {spring onions}, {crushed peanuts}, and {sesame seeds}. Finish with extra {rayu} to taste."
+        "text": "Pour the hot broth over the noodles. Top with the spicy tofu crumbles, steamed vegetables, {sweetcorn}, {spring onion}, {peanut}, and {sesame seed}. Finish with extra {rayu} to taste."
       }
     ],
     "serving_suggestions": "Serve immediately while piping hot. For extra heat, add more rayu or a drizzle of chilli oil on top. A squeeze of lime on the side is a nice addition. If you want a richer broth, stir in an extra tablespoon of sesame paste.",
@@ -2476,29 +2810,35 @@
       "Fridge": [
         {
           "id": 4,
-          "text": "400 g firm tofu (pressed for 24h)",
+          "text": "400 g tofu (pressed for 24h)",
+          "canonical": "tofu",
+          "preparation": "(pressed for 24h)",
           "quantity": {
             "amount": 400.0,
             "unit": "g",
-            "item": "firm tofu (pressed for 24h)"
+            "item": "tofu"
           }
         },
         {
           "id": 5,
-          "text": "120 ml full-fat oat milk (or creamy plant milk)",
+          "text": "120 ml oat milk (or creamy plant milk)",
+          "canonical": "oat milk",
+          "preparation": "(or creamy plant milk)",
           "quantity": {
             "amount": 120.0,
             "unit": "ml",
-            "item": "full-fat oat milk (or creamy plant milk)"
+            "item": "oat milk"
           }
         },
         {
           "id": 6,
-          "text": "1 tbsp plant-based yogurt (optional)",
+          "text": "1 tbsp vegan yogurt (plant-based yogurt, optional)",
+          "canonical": "vegan yogurt",
+          "preparation": "(plant-based yogurt, optional)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "plant-based yogurt (optional)"
+            "item": "vegan yogurt"
           }
         }
       ],
@@ -2506,6 +2846,7 @@
         {
           "id": 1,
           "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -2515,6 +2856,7 @@
         {
           "id": 2,
           "text": "2 tbsp nutritional yeast",
+          "canonical": "nutritional yeast",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
@@ -2524,6 +2866,7 @@
         {
           "id": 3,
           "text": "1 tbsp tahini",
+          "canonical": "tahini",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -2535,6 +2878,7 @@
         {
           "id": 7,
           "text": "1/2 tsp ground turmeric",
+          "canonical": "ground turmeric",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -2544,6 +2888,7 @@
         {
           "id": 8,
           "text": "1/2 tsp garlic powder",
+          "canonical": "garlic powder",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -2553,6 +2898,7 @@
         {
           "id": 9,
           "text": "1/2 tsp onion powder",
+          "canonical": "onion powder",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -2562,6 +2908,7 @@
         {
           "id": 10,
           "text": "1/2 tsp paprika",
+          "canonical": "paprika",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -2571,6 +2918,7 @@
         {
           "id": 11,
           "text": "1/2 tsp chipotle chile flakes",
+          "canonical": "chipotle chile flakes",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -2580,21 +2928,25 @@
         {
           "id": 12,
           "text": "1 tsp kala namak (Indian black salt)",
+          "canonical": "kala namak",
+          "preparation": "(Indian black salt)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "kala namak (Indian black salt)"
+            "item": "kala namak"
           }
         },
         {
           "id": 13,
-          "text": "Freshly cracked black pepper (optional)"
+          "text": "Freshly cracked black pepper (optional)",
+          "canonical": "black pepper",
+          "preparation": "(optional)"
         }
       ]
     },
     "steps": [
       {
-        "text": "Make the eggy sauce. In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth."
+        "text": "Make the eggy sauce. In a bowl, whisk together the {ground turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth."
       },
       {
         "text": "Crumble the pressed {tofu} with your hands into chunks — not too big, not too small."
@@ -2612,7 +2964,7 @@
         "text": "Pour in the eggy sauce and continue frying until the scramble is as moist or dry as you like — pull it off the heat early for a soft, creamy scramble, or keep going for firmer, drier curds."
       },
       {
-        "text": "For extra creaminess, stir in the {plant-based yogurt} and mix through."
+        "text": "For extra creaminess, stir in the {vegan yogurt} and mix through."
       },
       {
         "text": "Taste and add a pinch {kala namak} and {black pepper} if needed."
@@ -2643,56 +2995,70 @@
         {
           "id": 1,
           "text": "1 large onion, diced",
+          "canonical": "onion",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
             "unit": "large",
-            "item": "onion, diced"
+            "item": "onion"
           }
         },
         {
           "id": 2,
           "text": "3 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 3.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
           "text": "1 red pepper, diced",
+          "canonical": "red pepper",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
-            "item": "red pepper, diced"
+            "item": "red pepper"
           }
         },
         {
           "id": 4,
           "text": "1 yellow pepper, diced",
+          "canonical": "yellow pepper",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
-            "item": "yellow pepper, diced"
+            "item": "yellow pepper"
           }
         },
         {
           "id": 5,
           "text": "2 carrots, peeled and diced",
+          "canonical": "carrot",
+          "preparation": "peeled and diced",
           "quantity": {
             "amount": 2.0,
-            "item": "carrots, peeled and diced"
+            "item": "carrots"
           }
         },
         {
           "id": 6,
           "text": "1 stick celery, diced",
+          "canonical": "celery",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
-            "item": "stick celery, diced"
+            "unit": "stick",
+            "item": "celery"
           }
         },
         {
           "id": 7,
           "text": "Juice of 1/2 lime",
+          "canonical": "lime",
           "quantity": {
             "amount": 0.5,
             "item": "lime",
@@ -2704,6 +3070,7 @@
         {
           "id": 8,
           "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -2713,6 +3080,7 @@
         {
           "id": 9,
           "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -2724,10 +3092,12 @@
         {
           "id": 10,
           "text": "1 tin (400 g) kidney beans, drained and rinsed",
+          "canonical": "kidney bean",
+          "preparation": "drained and rinsed",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
-            "item": "kidney beans, drained and rinsed",
+            "item": "kidney beans",
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
@@ -2735,10 +3105,12 @@
         {
           "id": 11,
           "text": "1 tin (400 g) black beans, drained and rinsed",
+          "canonical": "black bean",
+          "preparation": "drained and rinsed",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
-            "item": "black beans, drained and rinsed",
+            "item": "black beans",
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
@@ -2746,6 +3118,7 @@
         {
           "id": 12,
           "text": "150 g red lentils",
+          "canonical": "red lentil",
           "quantity": {
             "amount": 150.0,
             "unit": "g",
@@ -2755,10 +3128,12 @@
         {
           "id": 13,
           "text": "1 tin (200 g) sweetcorn, drained",
+          "canonical": "sweetcorn",
+          "preparation": "drained",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
-            "item": "sweetcorn, drained",
+            "item": "sweetcorn",
             "secondary_amount": 200.0,
             "secondary_unit": "g"
           }
@@ -2766,6 +3141,7 @@
         {
           "id": 14,
           "text": "400 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 400.0,
             "unit": "ml",
@@ -2775,6 +3151,7 @@
         {
           "id": 15,
           "text": "2 tbsp tomato puree",
+          "canonical": "tomato puree",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
@@ -2786,6 +3163,7 @@
         {
           "id": 16,
           "text": "1 tsp ground cumin",
+          "canonical": "ground cumin",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -2795,6 +3173,7 @@
         {
           "id": 17,
           "text": "1 tsp smoked paprika",
+          "canonical": "smoked paprika",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -2804,15 +3183,18 @@
         {
           "id": 18,
           "text": "1 tsp chilli powder (adjust to taste)",
+          "canonical": "chilli powder",
+          "preparation": "(adjust to taste)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "chilli powder (adjust to taste)"
+            "item": "chilli powder"
           }
         },
         {
           "id": 19,
           "text": "1/2 tsp ground coriander",
+          "canonical": "ground coriander",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -2822,6 +3204,7 @@
         {
           "id": 20,
           "text": "1/2 tsp oregano",
+          "canonical": "oregano",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -2831,14 +3214,18 @@
         {
           "id": 21,
           "text": "1 pinch cayenne pepper (optional)",
+          "canonical": "cayenne pepper",
+          "preparation": "(optional)",
           "quantity": {
             "amount": 1.0,
-            "item": "pinch cayenne pepper (optional)"
+            "unit": "pinch",
+            "item": "cayenne pepper"
           }
         },
         {
           "id": 22,
           "text": "1 tsp cocoa powder",
+          "canonical": "cocoa powder",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -2847,7 +3234,15 @@
         },
         {
           "id": 23,
-          "text": "Salt and pepper to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
+        },
+        {
+          "id": 24,
+          "text": "pepper to taste",
+          "canonical": "pepper",
+          "preparation": "to taste"
         }
       ]
     },
@@ -2862,7 +3257,7 @@
         ]
       },
       {
-        "text": "Add the {garlic}, {red pepper}, {yellow pepper}, {carrots}, and {celery}. Cook for another 5 minutes, stirring occasionally.",
+        "text": "Add the {garlic}, {red pepper}, {yellow pepper}, {carrot}, and {celery}. Cook for another 5 minutes, stirring occasionally.",
         "durations": [
           {
             "seconds": 300,
@@ -2871,7 +3266,7 @@
         ]
       },
       {
-        "text": "Stir in the {cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for 1 minute to toast the spices.",
+        "text": "Stir in the {ground cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for 1 minute to toast the spices.",
         "durations": [
           {
             "seconds": 60,
@@ -2883,7 +3278,7 @@
         "text": "Add the {tomato puree} and stir well."
       },
       {
-        "text": "Pour in the {chopped tomatoes} and {vegetable stock}. Add the {kidney beans}, {black beans}, {red lentils}, and {sweetcorn}."
+        "text": "Pour in the {chopped tomato} and {vegetable stock}. Add the {kidney bean}, {black bean}, {red lentil}, and {sweetcorn}."
       },
       {
         "text": "Bring to a boil, then reduce to a low simmer. Cover and cook for 25 to 30 minutes, stirring occasionally, until the lentils are soft and the chilli has thickened.",
@@ -2895,7 +3290,7 @@
         ]
       },
       {
-        "text": "Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt and pepper}."
+        "text": "Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt} and {pepper}."
       },
       {
         "text": "Taste and adjust the spices as needed. Let it sit for a few minutes before serving."
@@ -2927,48 +3322,60 @@
         {
           "id": 1,
           "text": "1 onion, diced",
+          "canonical": "onion",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
-            "item": "onion, diced"
+            "item": "onion"
           }
         },
         {
           "id": 2,
           "text": "3 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 3.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 3,
           "text": "1 carrot, diced",
+          "canonical": "carrot",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
-            "item": "carrot, diced"
+            "item": "carrot"
           }
         },
         {
           "id": 4,
           "text": "1 stick celery, diced",
+          "canonical": "celery",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
-            "item": "stick celery, diced"
+            "unit": "stick",
+            "item": "celery"
           }
         },
         {
           "id": 5,
           "text": "120 g kale, stems removed and leaves roughly chopped",
+          "canonical": "kale",
+          "preparation": "stems removed and leaves roughly chopped",
           "quantity": {
             "amount": 120.0,
             "unit": "g",
-            "item": "kale, stems removed and leaves roughly chopped"
+            "item": "kale"
           }
         },
         {
           "id": 6,
           "text": "Juice of 1/2 lemon",
+          "canonical": "lemon",
           "quantity": {
             "amount": 0.5,
             "item": "lemon",
@@ -2980,6 +3387,7 @@
         {
           "id": 7,
           "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -2989,6 +3397,7 @@
         {
           "id": 8,
           "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -3000,21 +3409,24 @@
         {
           "id": 9,
           "text": "1 tin (400 g) white beans (cannellini or butter beans), drained and rinsed",
+          "canonical": "white bean",
+          "preparation": "(cannellini or butter beans), drained and rinsed",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
-            "item": "white beans (cannellini or butter beans), drained and rinsed",
+            "item": "white beans",
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
         },
         {
           "id": 10,
-          "text": "500 ml vegetable broth",
+          "text": "500 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 500.0,
             "unit": "ml",
-            "item": "vegetable broth"
+            "item": "vegetable stock"
           }
         }
       ],
@@ -3022,6 +3434,7 @@
         {
           "id": 11,
           "text": "1 tsp smoked paprika",
+          "canonical": "smoked paprika",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -3031,6 +3444,7 @@
         {
           "id": 12,
           "text": "1 tsp ground cumin",
+          "canonical": "ground cumin",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -3040,15 +3454,25 @@
         {
           "id": 13,
           "text": "1/2 tsp chilli flakes (optional, adjust to taste)",
+          "canonical": "chilli flakes",
+          "preparation": "(optional, adjust to taste)",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
-            "item": "chilli flakes (optional, adjust to taste)"
+            "item": "chilli flakes"
           }
         },
         {
           "id": 14,
-          "text": "Salt and pepper to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
+        },
+        {
+          "id": 15,
+          "text": "pepper to taste",
+          "canonical": "pepper",
+          "preparation": "to taste"
         }
       ]
     },
@@ -3063,13 +3487,13 @@
         ]
       },
       {
-        "text": "Add the {garlic}, {smoked paprika}, {cumin}, and {chilli flakes}. Stir for about a minute until fragrant."
+        "text": "Add the {garlic}, {smoked paprika}, {ground cumin}, and {chilli flakes}. Stir for about a minute until fragrant."
       },
       {
-        "text": "Pour in the {chopped tomatoes} and {vegetable broth}. Give it a good stir and bring to a simmer."
+        "text": "Pour in the {chopped tomato} and {vegetable stock}. Give it a good stir and bring to a simmer."
       },
       {
-        "text": "Add the {white beans} and let it simmer for about 10 minutes so the flavours come together.",
+        "text": "Add the {white bean} and let it simmer for about 10 minutes so the flavours come together.",
         "durations": [
           {
             "seconds": 600,
@@ -3113,17 +3537,20 @@
     "ingredients": {
       "Fridge": [
         {
-          "id": 6,
+          "id": 7,
           "text": "500 ml oat milk (or soy milk)",
+          "canonical": "oat milk",
+          "preparation": "(or soy milk)",
           "quantity": {
             "amount": 500.0,
             "unit": "ml",
-            "item": "oat milk (or soy milk)"
+            "item": "oat milk"
           }
         },
         {
-          "id": 7,
+          "id": 8,
           "text": "50 ml sparkling water",
+          "canonical": "sparkling water",
           "quantity": {
             "amount": 50.0,
             "unit": "ml",
@@ -3131,73 +3558,102 @@
           }
         },
         {
-          "id": 8,
-          "text": "A little vegan butter for the pan"
+          "id": 9,
+          "text": "A little vegan butter for the pan",
+          "canonical": "vegan butter",
+          "preparation": "for the pan"
         }
       ],
       "Pantry": [
         {
           "id": 1,
           "text": "220 g plain flour (T45 / Type 405 / Tipo 00)",
+          "canonical": "plain flour",
+          "preparation": "(T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 220.0,
             "unit": "g",
-            "item": "plain flour (T45 / Type 405 / Tipo 00)"
+            "item": "plain flour"
           }
         },
         {
           "id": 2,
           "text": "30 g corn starch or potato starch",
+          "canonical": "corn starch",
+          "preparation": "or potato starch",
           "quantity": {
             "amount": 30.0,
             "unit": "g",
-            "item": "corn starch or potato starch"
+            "item": "corn starch"
           }
         },
         {
           "id": 3,
           "text": "1 tbsp sugar (optional, for sweet crêpes)",
+          "canonical": "sugar",
+          "preparation": "(optional, for sweet crêpes)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "sugar (optional, for sweet crêpes)"
+            "item": "sugar"
           }
         },
         {
           "id": 4,
           "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         },
         {
           "id": 5,
-          "text": "1 tbsp of vanilla extract or orange blossom water (optional, for sweet crêpes)",
+          "text": "1 tbsp vanilla extract (optional, for sweet crêpes)",
+          "canonical": "vanilla extract",
+          "preparation": "(optional, for sweet crêpes)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "of vanilla extract or orange blossom water (optional, for sweet crêpes)"
+            "item": "vanilla extract"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tbsp orange blossom water (optional, for sweet crêpes)",
+          "canonical": "orange blossom water",
+          "preparation": "(optional, for sweet crêpes)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "orange blossom water"
           }
         }
       ],
       "Spices": [
         {
-          "id": 9,
-          "text": "Pinch of salt"
+          "id": 10,
+          "text": "1 pinch salt",
+          "canonical": "salt",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "pinch",
+            "item": "salt"
+          }
         }
       ]
     },
     "steps": [
       {
-        "text": "Sift the {flour} and {starch} into a large bowl. Add the {sugar} and {salt}."
+        "text": "Sift the {plain flour} and {corn starch} into a large bowl. Add the {sugar} and {salt}."
       },
       {
         "text": "Make a well in the centre and gradually pour in the {oat milk} while whisking from the centre outward, incorporating the flour slowly. This avoids lumps."
       },
       {
-        "text": "Add the {oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth."
+        "text": "Add the {vegetable oil} and {orange blossom water} (or {vanilla extract}) and whisk until smooth."
       },
       {
         "text": "Add the {sparkling water} and give it a final mix."
@@ -3248,37 +3704,45 @@
         {
           "id": 1,
           "text": "3-4 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 3.0,
             "amount_max": 4.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 2,
           "text": "1/2 small onion, finely diced",
+          "canonical": "onion",
+          "preparation": "finely diced",
           "quantity": {
             "amount": 0.5,
             "unit": "small",
-            "item": "onion, finely diced"
+            "item": "onion"
           }
         },
         {
           "id": 3,
-          "text": "60 g baby spinach, roughly chopped",
+          "text": "60 g spinach, roughly chopped",
+          "canonical": "spinach",
+          "preparation": "roughly chopped",
           "quantity": {
             "amount": 60.0,
             "unit": "g",
-            "item": "baby spinach, roughly chopped"
+            "item": "spinach"
           }
         },
         {
           "id": 4,
           "text": "Juice of 1/2 lemon (optional)",
+          "canonical": "lemon",
+          "preparation": "(optional)",
           "quantity": {
             "amount": 0.5,
-            "item": "lemon (optional)",
+            "item": "lemon",
             "prefix": "Juice of"
           }
         }
@@ -3287,15 +3751,18 @@
         {
           "id": 5,
           "text": "1 tbsp vegan butter (or regular)",
+          "canonical": "vegan butter",
+          "preparation": "(or regular)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "vegan butter (or regular)"
+            "item": "vegan butter"
           }
         },
         {
           "id": 6,
           "text": "240 g coconut cream",
+          "canonical": "coconut cream",
           "quantity": {
             "amount": 240.0,
             "unit": "g",
@@ -3305,10 +3772,12 @@
         {
           "id": 7,
           "text": "2 tbsp cream cheese, vegan or regular",
+          "canonical": "cream cheese",
+          "preparation": "vegan or regular",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "cream cheese, vegan or regular"
+            "item": "cream cheese"
           }
         }
       ],
@@ -3316,6 +3785,7 @@
         {
           "id": 8,
           "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
@@ -3325,15 +3795,18 @@
         {
           "id": 9,
           "text": "55 g sun-dried tomatoes, finely chopped (oil packed)",
+          "canonical": "sun-dried tomato",
+          "preparation": "finely chopped (oil packed)",
           "quantity": {
             "amount": 55.0,
             "unit": "g",
-            "item": "sun-dried tomatoes, finely chopped (oil packed)"
+            "item": "sun-dried tomatoes"
           }
         },
         {
           "id": 10,
           "text": "450 g gnocchi",
+          "canonical": "gnocchi",
           "quantity": {
             "amount": 450.0,
             "unit": "g",
@@ -3343,19 +3816,23 @@
         {
           "id": 11,
           "text": "120 ml water or vegetable broth",
+          "canonical": "water",
+          "preparation": "or vegetable broth",
           "quantity": {
             "amount": 120.0,
             "unit": "ml",
-            "item": "water or vegetable broth"
+            "item": "water"
           }
         },
         {
           "id": 12,
           "text": "2 tbsp nutritional yeast (or finely grated parmesan)",
+          "canonical": "nutritional yeast",
+          "preparation": "(or finely grated parmesan)",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "nutritional yeast (or finely grated parmesan)"
+            "item": "nutritional yeast"
           }
         }
       ],
@@ -3363,15 +3840,18 @@
         {
           "id": 13,
           "text": "1 tsp Italian seasoning (or oregano)",
+          "canonical": "italian seasoning",
+          "preparation": "(or oregano)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "Italian seasoning (or oregano)"
+            "item": "italian seasoning"
           }
         },
         {
           "id": 14,
           "text": "1/2 tsp black pepper",
+          "canonical": "black pepper",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -3380,13 +3860,15 @@
         },
         {
           "id": 15,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Warm {olive oil} and {butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for 2-3 minutes until fragrant.",
+        "text": "Warm {olive oil} and {vegan butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for 2-3 minutes until fragrant.",
         "durations": [
           {
             "seconds": 180,
@@ -3395,7 +3877,7 @@
         ]
       },
       {
-        "text": "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer 2-3 minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {pepper}, and a pinch of {salt}.",
+        "text": "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer 2-3 minutes to gently reduce. Stir in {sun-dried tomato}, {nutritional yeast}, {Italian seasoning}, {black pepper}, and a pinch of {salt}.",
         "durations": [
           {
             "seconds": 180,
@@ -3440,40 +3922,49 @@
       "Fridge": [
         {
           "id": 1,
-          "text": "55 g plant-based block margarine, cold",
+          "text": "55 g margarine, cold",
+          "canonical": "margarine",
+          "preparation": "cold",
           "quantity": {
             "amount": 55.0,
             "unit": "g",
-            "item": "plant-based block margarine, cold"
+            "item": "margarine"
           }
         },
         {
           "id": 2,
           "text": "150 ml plant milk for the dough",
+          "canonical": "plant milk",
+          "preparation": "for the dough",
           "quantity": {
             "amount": 150.0,
             "unit": "ml",
-            "item": "plant milk for the dough"
+            "item": "plant milk"
           }
         },
         {
           "id": 3,
-          "text": "A splash of plant milk for brushing"
+          "text": "A splash of plant milk for brushing",
+          "canonical": "plant milk",
+          "preparation": "for brushing"
         }
       ],
       "Pantry": [
         {
           "id": 5,
           "text": "225 g plain flour (T45 / Type 405 / Tipo 00)",
+          "canonical": "plain flour",
+          "preparation": "(T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 225.0,
             "unit": "g",
-            "item": "plain flour (T45 / Type 405 / Tipo 00)"
+            "item": "plain flour"
           }
         },
         {
           "id": 6,
           "text": "3 tsp baking powder",
+          "canonical": "baking powder",
           "quantity": {
             "amount": 3.0,
             "unit": "tsp",
@@ -3483,6 +3974,7 @@
         {
           "id": 7,
           "text": "25 g caster sugar",
+          "canonical": "caster sugar",
           "quantity": {
             "amount": 25.0,
             "unit": "g",
@@ -3493,7 +3985,8 @@
       "Spices": [
         {
           "id": 4,
-          "text": "Pinch of salt"
+          "text": "Pinch of salt",
+          "canonical": "salt"
         }
       ]
     },
@@ -3502,13 +3995,13 @@
         "text": "Preheat the oven to 220°C / 200°C fan / Gas 7 and lightly grease a large baking tray."
       },
       {
-        "text": "Whisk together {flour}, {baking powder}, and {salt} so the raising agent is evenly distributed."
+        "text": "Whisk together {plain flour}, {baking powder}, and {salt} so the raising agent is evenly distributed."
       },
       {
-        "text": "Using your fingertips, rub the cold {margarine} into the {flour} until the mixture resembles fine breadcrumbs."
+        "text": "Using your fingertips, rub the cold {margarine} into the {plain flour} until the mixture resembles fine breadcrumbs."
       },
       {
-        "text": "Stir in {sugar}. Add most of the {plant milk for the dough} and mix to form a soft and slightly sticky dough. If it's a little dry, add more milk until you get the right consistency."
+        "text": "Stir in {caster sugar}. Add most of the plant milk and mix to form a soft and slightly sticky dough. If it's a little dry, add more milk until you get the right consistency."
       },
       {
         "text": "Turn out onto a floured work surface and knead very lightly. Pat out into a round about 2cm thick."
@@ -3517,7 +4010,7 @@
         "text": "Use a 5cm cutter to stamp out rounds and place on the baking tray. Lightly knead together any remaining dough and stamp out more scones to use it all up."
       },
       {
-        "text": "Brush the tops with a little {plant milk for brushing}."
+        "text": "Brush the tops with a little plant milk."
       },
       {
         "text": "Bake for 12-15 minutes until well risen and golden.",
@@ -3558,15 +4051,18 @@
         {
           "id": 1,
           "text": "1 clove garlic, crushed",
+          "canonical": "garlic",
+          "preparation": "crushed",
           "quantity": {
             "amount": 1.0,
             "unit": "clove",
-            "item": "garlic, crushed"
+            "item": "garlic"
           }
         },
         {
           "id": 2,
           "text": "Juice of 1 lemon",
+          "canonical": "lemon",
           "quantity": {
             "amount": 1.0,
             "item": "lemon",
@@ -3577,68 +4073,101 @@
       "Fridge": [
         {
           "id": 3,
-          "text": "Few ice cubes"
+          "text": "Few ice cubes",
+          "canonical": "ice",
+          "preparation": "cubes"
         }
       ],
       "Pantry": [
         {
-          "id": 6,
-          "text": "250 g dried chickpeas",
+          "id": 9,
+          "text": "250 g chickpeas",
+          "canonical": "chickpea",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
-            "item": "dried chickpeas"
-          }
-        },
-        {
-          "id": 7,
-          "text": "1 tsp baking soda for soaking",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "baking soda for soaking"
-          }
-        },
-        {
-          "id": 8,
-          "text": "1 tsp baking soda for cooking",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "baking soda for cooking"
-          }
-        },
-        {
-          "id": 9,
-          "text": "120 g tahini (or more to taste)",
-          "quantity": {
-            "amount": 120.0,
-            "unit": "g",
-            "item": "tahini (or more to taste)"
+            "item": "chickpeas"
           }
         },
         {
           "id": 10,
-          "text": "Good quality olive oil (for serving)"
+          "text": "1 tsp baking soda for soaking",
+          "canonical": "baking soda",
+          "preparation": "for soaking",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking soda"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1 tsp baking soda for cooking",
+          "canonical": "baking soda",
+          "preparation": "for cooking",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking soda"
+          }
+        },
+        {
+          "id": 12,
+          "text": "120 g tahini (or more to taste)",
+          "canonical": "tahini",
+          "preparation": "(or more to taste)",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "g",
+            "item": "tahini"
+          }
+        },
+        {
+          "id": 13,
+          "text": "Good quality olive oil (for serving)",
+          "canonical": "olive oil",
+          "preparation": "(for serving)"
         }
       ],
       "Spices": [
         {
           "id": 4,
-          "text": "Salt to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
         },
         {
           "id": 5,
-          "text": "Optional: pinch of cumin, paprika, sumac, or za'atar"
+          "text": "Pinch of ground cumin (optional, for topping)",
+          "canonical": "ground cumin",
+          "preparation": "(optional, for topping)"
+        },
+        {
+          "id": 6,
+          "text": "Pinch of paprika (optional, for topping)",
+          "canonical": "paprika",
+          "preparation": "(optional, for topping)"
+        },
+        {
+          "id": 7,
+          "text": "Pinch of sumac (optional, for topping)",
+          "canonical": "sumac",
+          "preparation": "(optional, for topping)"
+        },
+        {
+          "id": 8,
+          "text": "Pinch of za'atar (optional, for topping)",
+          "canonical": "za'atar",
+          "preparation": "(optional, for topping)"
         }
       ]
     },
     "steps": [
       {
-        "text": "Cover {chickpeas} with plenty of water, add 1 teaspoon of {baking soda for soaking}, and leave overnight."
+        "text": "Cover {chickpea} with plenty of water, add 1 teaspoon of baking soda, and leave overnight."
       },
       {
-        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the second teaspoon of {baking soda for cooking} and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+        "text": "Drain and rinse the {chickpea}. Place them in a pan with the second teaspoon of baking soda and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for 20 to 40 minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
         "durations": [
           {
             "seconds": 2400,
@@ -3647,10 +4176,10 @@
         ]
       },
       {
-        "text": "Drain {chickpeas} over a bowl, saving the cooking water."
+        "text": "Drain {chickpea} over a bowl, saving the cooking water."
       },
       {
-        "text": "While the {chickpeas} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice cubes}, 2 tablespoons of the reserved chickpea water, a good pinch of {salt}, and a couple of {ice cubes}."
+        "text": "While the {chickpea} are still warm, put them into a food processor with {tahini}, {garlic}, {lemon} juice, {ice} cubes, 2 tablespoons of the reserved chickpea water, and a good pinch of {salt}."
       },
       {
         "text": "Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy."
@@ -3665,7 +4194,7 @@
         ]
       },
       {
-        "text": "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
+        "text": "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {ground cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
       }
     ],
     "serving_suggestions": "Drizzle with your best olive oil and add a squeeze of fresh lemon. Sprinkle with cumin, paprika, sumac, or za'atar. Serve with warm pita bread, fresh vegetables, or use as a sandwich spread. For the tahini, Al Arz is a great brand that's not too bitter.",
@@ -3692,38 +4221,46 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "500 g mixed mushrooms (champignon, king oyster, shiitake), sliced",
+          "text": "500 g mushrooms (champignon, king oyster, shiitake), sliced",
+          "canonical": "mushroom",
+          "preparation": "(champignon, king oyster, shiitake), sliced",
           "quantity": {
             "amount": 500.0,
             "unit": "g",
-            "item": "mixed mushrooms (champignon, king oyster, shiitake), sliced"
+            "item": "mushrooms"
           }
         },
         {
           "id": 2,
           "text": "1 medium onion, diced",
+          "canonical": "onion",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
             "unit": "medium",
-            "item": "onion, diced"
+            "item": "onion"
           }
         },
         {
           "id": 3,
           "text": "3 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 3.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 4,
-          "text": "1 medium floury potato (about 150 g), peeled and cubed",
+          "text": "1 medium potato (about 150 g), peeled and cubed",
+          "canonical": "potato",
+          "preparation": "(about 150 g), peeled and cubed",
           "quantity": {
             "amount": 1.0,
             "unit": "medium",
-            "item": "floury potato, peeled and cubed",
+            "item": "potato",
             "secondary_amount": 150.0,
             "secondary_unit": "g",
             "secondary_prefix": "about"
@@ -3731,26 +4268,33 @@
         },
         {
           "id": 5,
-          "text": "1 tsp fresh thyme (or 1/2 tsp dried)",
+          "text": "1 tsp thyme (or 1/2 tsp dried)",
+          "canonical": "thyme",
+          "preparation": "(or 1/2 tsp dried)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
-            "item": "fresh thyme (or 1/2 tsp dried)"
+            "item": "thyme"
           }
         },
         {
           "id": 6,
-          "text": "Lemon for juice"
+          "text": "Lemon for juice",
+          "canonical": "lemon",
+          "preparation": "for juice"
         },
         {
           "id": 7,
-          "text": "Fresh parsley for garnish"
+          "text": "Fresh parsley for garnish",
+          "canonical": "parsley",
+          "preparation": "for garnish"
         }
       ],
       "Fridge": [
         {
           "id": 8,
           "text": "200 ml oat cream",
+          "canonical": "oat cream",
           "quantity": {
             "amount": 200.0,
             "unit": "ml",
@@ -3762,6 +4306,7 @@
         {
           "id": 9,
           "text": "750 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 750.0,
             "unit": "ml",
@@ -3771,6 +4316,7 @@
         {
           "id": 10,
           "text": "2 tbsp olive oil",
+          "canonical": "olive oil",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
@@ -3780,6 +4326,7 @@
         {
           "id": 11,
           "text": "2 tbsp soy sauce",
+          "canonical": "soy sauce",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
@@ -3790,13 +4337,21 @@
       "Spices": [
         {
           "id": 12,
-          "text": "Salt and pepper to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
+        },
+        {
+          "id": 13,
+          "text": "pepper to taste",
+          "canonical": "pepper",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.",
+        "text": "Heat {olive oil} in a large pot over medium-high heat. Add {mushroom} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.",
         "durations": [
           {
             "seconds": 480,
@@ -3829,7 +4384,7 @@
         "text": "Stir in {oat cream} and {soy sauce}."
       },
       {
-        "text": "Blend the soup using a stick blender until smooth and creamy. If you set some {mushrooms} aside earlier, stir them back in now for a bit of texture."
+        "text": "Blend the soup using a stick blender until smooth and creamy. If you set some mushrooms aside earlier, stir them back in now for a bit of texture."
       },
       {
         "text": "Season with {salt}, {pepper}, and a squeeze of {lemon} juice. The lemon really lifts the flavour."
@@ -3864,10 +4419,12 @@
         {
           "id": 1,
           "text": "250 ml (1 cup) milk (or plant milk for a vegan version)",
+          "canonical": "milk",
+          "preparation": "(or plant milk for a vegan version)",
           "quantity": {
             "amount": 250.0,
             "unit": "ml",
-            "item": "milk (or plant milk for a vegan version)",
+            "item": "milk",
             "secondary_amount": 1.0,
             "secondary_unit": "cup"
           }
@@ -3877,6 +4434,7 @@
         {
           "id": 2,
           "text": "125 g (3/4 cup) brown sugar",
+          "canonical": "brown sugar",
           "quantity": {
             "amount": 125.0,
             "unit": "g",
@@ -3888,10 +4446,12 @@
         {
           "id": 3,
           "text": "250 g (1-3/4 cups) plain flour (T45 / Type 405 / Tipo 00)",
+          "canonical": "plain flour",
+          "preparation": "(T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
-            "item": "plain flour (T45 / Type 405 / Tipo 00)",
+            "item": "plain flour",
             "secondary_amount": 1.75,
             "secondary_unit": "cups"
           }
@@ -3899,15 +4459,18 @@
         {
           "id": 4,
           "text": "3 tbsp honey (or jam for a vegan version)",
+          "canonical": "honey",
+          "preparation": "(or jam for a vegan version)",
           "quantity": {
             "amount": 3.0,
             "unit": "tbsp",
-            "item": "honey (or jam for a vegan version)"
+            "item": "honey"
           }
         },
         {
           "id": 5,
           "text": "3 tsp baking soda",
+          "canonical": "baking soda",
           "quantity": {
             "amount": 3.0,
             "unit": "tsp",
@@ -3917,6 +4480,7 @@
         {
           "id": 6,
           "text": "3 tsp orange blossom water",
+          "canonical": "orange blossom water",
           "quantity": {
             "amount": 3.0,
             "unit": "tsp",
@@ -3928,10 +4492,12 @@
         {
           "id": 7,
           "text": "2 tsp spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)",
+          "canonical": "spice mix",
+          "preparation": "(cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)",
           "quantity": {
             "amount": 2.0,
             "unit": "tsp",
-            "item": "spice mix (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)"
+            "item": "spice mix"
           }
         }
       ]
@@ -3941,7 +4507,7 @@
         "text": "Preheat the oven to 180°C (160°C fan)."
       },
       {
-        "text": "In a large bowl, mix together {brown sugar}, {flour}, {honey}, {baking soda}, {orange blossom water}, {spice mix}, and {milk} until well combined and smooth."
+        "text": "In a large bowl, mix together {brown sugar}, {plain flour}, {honey}, {baking soda}, {orange blossom water}, {spice mix}, and {milk} until well combined and smooth."
       },
       {
         "text": "Pour the batter into a greased rectangular baking tin (about 20cm x 10cm)."
@@ -3991,55 +4557,70 @@
         {
           "id": 1,
           "text": "500 g pumpkin, peeled and cubed",
+          "canonical": "pumpkin",
+          "preparation": "peeled and cubed",
           "quantity": {
             "amount": 500.0,
             "unit": "g",
-            "item": "pumpkin, peeled and cubed"
+            "item": "pumpkin"
           }
         },
         {
           "id": 2,
-          "text": "500 g floury potatoes, peeled and cubed",
+          "text": "500 g potatoes, peeled and cubed",
+          "canonical": "potato",
+          "preparation": "peeled and cubed",
           "quantity": {
             "amount": 500.0,
             "unit": "g",
-            "item": "floury potatoes, peeled and cubed"
+            "item": "potatoes"
           }
         },
         {
           "id": 3,
           "text": "1 onion, diced",
+          "canonical": "onion",
+          "preparation": "diced",
           "quantity": {
             "amount": 1.0,
-            "item": "onion, diced"
+            "item": "onion"
           }
         },
         {
           "id": 4,
           "text": "2 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
           "quantity": {
             "amount": 2.0,
             "unit": "cloves",
-            "item": "garlic, minced"
+            "item": "garlic"
           }
         },
         {
           "id": 5,
-          "text": "Thumb-sized piece of ginger, grated"
+          "text": "Thumb-sized piece of ginger, grated",
+          "canonical": "ginger",
+          "preparation": "grated"
         },
         {
           "id": 6,
-          "text": "Fresh coriander to serve"
+          "text": "Fresh coriander to serve",
+          "canonical": "coriander",
+          "preparation": "to serve"
         },
         {
           "id": 7,
-          "text": "Lime to serve"
+          "text": "Lime to serve",
+          "canonical": "lime",
+          "preparation": "to serve"
         }
       ],
       "Pantry": [
         {
-          "id": 11,
+          "id": 12,
           "text": "1 tin (400 ml) coconut milk",
+          "canonical": "coconut milk",
           "quantity": {
             "amount": 1.0,
             "unit": "tin",
@@ -4049,8 +4630,9 @@
           }
         },
         {
-          "id": 12,
+          "id": 13,
           "text": "200 ml vegetable stock",
+          "canonical": "vegetable stock",
           "quantity": {
             "amount": 200.0,
             "unit": "ml",
@@ -4058,21 +4640,25 @@
           }
         },
         {
-          "id": 13,
+          "id": 14,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 1.0,
             "unit": "tbsp",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         },
         {
-          "id": 14,
+          "id": 15,
           "text": "2 tbsp curry paste (red or yellow)",
+          "canonical": "curry paste",
+          "preparation": "(red or yellow)",
           "quantity": {
             "amount": 2.0,
             "unit": "tbsp",
-            "item": "curry paste (red or yellow)"
+            "item": "curry paste"
           }
         }
       ],
@@ -4080,6 +4666,7 @@
         {
           "id": 8,
           "text": "1 tsp ground cumin",
+          "canonical": "ground cumin",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -4089,6 +4676,7 @@
         {
           "id": 9,
           "text": "1 tsp ground turmeric",
+          "canonical": "ground turmeric",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -4097,13 +4685,21 @@
         },
         {
           "id": 10,
-          "text": "Salt and pepper to taste"
+          "text": "salt to taste",
+          "canonical": "salt",
+          "preparation": "to taste"
+        },
+        {
+          "id": 11,
+          "text": "pepper to taste",
+          "canonical": "pepper",
+          "preparation": "to taste"
         }
       ]
     },
     "steps": [
       {
-        "text": "Heat {oil} in a large pot over medium heat. Add {onion} and cook for about 5 minutes until soft.",
+        "text": "Heat {vegetable oil} in a large pot over medium heat. Add {onion} and cook for about 5 minutes until soft.",
         "durations": [
           {
             "seconds": 300,
@@ -4112,7 +4708,7 @@
         ]
       },
       {
-        "text": "Add {garlic}, {ginger}, {curry paste}, {cumin}, and {turmeric}. Stir and cook for another minute until fragrant."
+        "text": "Add {garlic}, {ginger}, {curry paste}, {ground cumin}, and {ground turmeric}. Stir and cook for another minute until fragrant."
       },
       {
         "text": "Add {pumpkin} and {potato} cubes and stir everything together so they're coated in the spices."
@@ -4121,7 +4717,7 @@
         "text": "Pour in {coconut milk} and {vegetable stock}. Give it a good stir and bring to a gentle boil."
       },
       {
-        "text": "Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the {pumpkin} and {potatoes} are tender. The floury {potatoes} will start to break down and thicken the sauce beautifully.",
+        "text": "Reduce the heat, cover, and let it simmer for about 20–25 minutes, stirring occasionally, until both the pumpkin and potatoes are tender. The floury potatoes will start to break down and thicken the sauce beautifully.",
         "durations": [
           {
             "seconds": 1500,
@@ -4157,69 +4753,81 @@
       "Fresh": [
         {
           "id": 1,
-          "text": "4 medium ripe bananas, mashed",
+          "text": "4 medium bananas, mashed",
+          "canonical": "banana",
+          "preparation": "mashed",
           "quantity": {
             "amount": 4.0,
             "unit": "medium",
-            "item": "ripe bananas, mashed"
+            "item": "bananas"
           }
         },
         {
           "id": 2,
-          "text": "Extra banana slices for topping"
+          "text": "Extra banana slices for topping",
+          "canonical": "banana",
+          "preparation": "slices for topping"
         }
       ],
       "Fridge": [
         {
           "id": 3,
-          "text": "60 ml unsweetened plant milk",
+          "text": "60 ml plant milk",
+          "canonical": "plant milk",
           "quantity": {
             "amount": 60.0,
             "unit": "ml",
-            "item": "unsweetened plant milk"
+            "item": "plant milk"
           }
         }
       ],
       "Pantry": [
         {
           "id": 4,
-          "text": "100 g light brown sugar",
+          "text": "100 g brown sugar",
+          "canonical": "brown sugar",
           "quantity": {
             "amount": 100.0,
             "unit": "g",
-            "item": "light brown sugar"
+            "item": "brown sugar"
           }
         },
         {
           "id": 5,
           "text": "250 g plain flour (T45 / Type 405 / Tipo 00)",
+          "canonical": "plain flour",
+          "preparation": "(T45 / Type 405 / Tipo 00)",
           "quantity": {
             "amount": 250.0,
             "unit": "g",
-            "item": "plain flour (T45 / Type 405 / Tipo 00)"
+            "item": "plain flour"
           }
         },
         {
           "id": 6,
           "text": "60 ml vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
           "quantity": {
             "amount": 60.0,
             "unit": "ml",
-            "item": "vegetable oil (e.g. rapeseed, sunflower, canola)"
+            "item": "vegetable oil"
           }
         },
         {
           "id": 7,
-          "text": "2 tsp pure vanilla extract",
+          "text": "2 tsp vanilla extract",
+          "canonical": "vanilla extract",
           "quantity": {
             "amount": 2.0,
             "unit": "tsp",
-            "item": "pure vanilla extract"
+            "item": "vanilla extract"
           }
         },
         {
           "id": 8,
           "text": "1 tsp baking soda",
+          "canonical": "baking soda",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -4231,6 +4839,7 @@
         {
           "id": 9,
           "text": "1 tsp cinnamon",
+          "canonical": "cinnamon",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -4240,6 +4849,7 @@
         {
           "id": 10,
           "text": "1/2 tsp salt",
+          "canonical": "salt",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
@@ -4253,13 +4863,13 @@
         "text": "Preheat the oven to 180°C (160°C fan). Spray a 9×5 inch (23×13cm) loaf pan with nonstick spray, then dust with flour."
       },
       {
-        "text": "In a large mixing bowl, roughly mash {bananas}. Add {light brown sugar}, {oil}, {vanilla}, and {unsweetened plant milk}, and whisk to incorporate."
+        "text": "In a large mixing bowl, roughly mash the bananas. Add {brown sugar}, {vegetable oil}, {vanilla extract}, and {plant milk}, and whisk to incorporate."
       },
       {
-        "text": "Sift in {flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix."
+        "text": "Sift in {plain flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix."
       },
       {
-        "text": "Transfer the batter to your prepared pan, and top with {extra banana slices}."
+        "text": "Transfer the batter to your prepared pan, and top with extra banana slices."
       },
       {
         "text": "Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.",

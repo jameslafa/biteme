@@ -19,37 +19,37 @@ Press the tofu well — at least 15 minutes with a cloth or kitchen paper — fo
 
 ## Fresh
 
-- 500 g fresh spinach
-- 2 medium onions, roughly chopped
-- 4 cloves garlic
-- 1 thumb fresh ginger
-- Lemon for juice
+- 500 g [spinach]
+- 2 medium [onions], roughly chopped
+- 4 cloves [garlic]
+- 1 thumb [ginger]
+- [Lemon] for juice
 
 ## Fridge
 
-- 400 g firm tofu
-- 1 tin (400 ml) coconut cream
+- 400 g [tofu]
+- 1 tin (400 ml) [coconut cream]
 
 ## Pantry
 
-- 2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)
+- 2 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)
 
 ## Spices
 
-- 2 tsp cumin seeds
-- 1 tsp coriander powder
-- 1 tsp garam masala
-- 1/2 tsp turmeric
-- 1/4 tsp nutmeg
-- 1 tsp chilli flakes, adjust to taste
-- Salt to taste
+- 2 tsp [cumin seeds]
+- 1 tsp [ground coriander]
+- 1 tsp [garam masala]
+- 1/2 tsp [turmeric]
+- 1/4 tsp [nutmeg]
+- 1 tsp [chilli flakes], adjust to taste
+- [salt] to taste
 
 # Instructions
 
 1. Press {tofu} with a cloth or kitchen paper for at least 15 minutes to remove excess moisture, then cut into 2 cm cubes.
-2. Heat {oil} in a pan over high heat. Pan-fry the tofu until golden and crispy on all sides. Set aside.
-3. In the same pan, fry the {cumin seeds} until they pop, then add {onions} and cook until deeply golden, about 10 minutes.
-4. Add {garlic} and {ginger}, cook for 2 minutes, then add {turmeric}, {coriander powder} and {chilli flakes}. Stir well.
+2. Heat {vegetable oil} in a pan over high heat. Pan-fry the tofu until golden and crispy on all sides. Set aside.
+3. In the same pan, fry the {cumin seed} until they pop, then add {onion} and cook until deeply golden, about 10 minutes.
+4. Add {garlic} and {ginger}, cook for 2 minutes, then add {turmeric}, {ground coriander} and {chilli flakes}. Stir well.
 5. Add the {spinach} and let it wilt completely.
 6. Blend everything into a smooth sauce using a hand blender.
 7. Stir in the {coconut cream} and simmer for 5 minutes.

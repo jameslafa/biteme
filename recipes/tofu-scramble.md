@@ -19,33 +19,33 @@ Press the tofu for at least 24 hours to extract all the water. The drier the tof
 
 ## Pantry
 
-- 1 tbsp olive oil
-- 2 tbsp nutritional yeast
-- 1 tbsp tahini
+- 1 tbsp [olive oil]
+- 2 tbsp [nutritional yeast]
+- 1 tbsp [tahini]
 
 ## Fridge
 
-- 400 g firm tofu (pressed for 24h)
-- 120 ml full-fat oat milk (or creamy plant milk)
-- 1 tbsp plant-based yogurt (optional)
+- 400 g [tofu] (pressed for 24h)
+- 120 ml [oat milk] (or creamy plant milk)
+- 1 tbsp [vegan yogurt] (plant-based yogurt, optional)
 
 ## Spices
 
-- 1/2 tsp ground turmeric
-- 1/2 tsp garlic powder
-- 1/2 tsp onion powder
-- 1/2 tsp paprika
-- 1/2 tsp chipotle chile flakes
-- 1 tsp kala namak (Indian black salt)
-- Freshly cracked black pepper (optional)
+- 1/2 tsp [ground turmeric]
+- 1/2 tsp [garlic powder]
+- 1/2 tsp [onion powder]
+- 1/2 tsp [paprika]
+- 1/2 tsp [chipotle chile flakes]
+- 1 tsp [kala namak] (Indian black salt)
+- Freshly cracked [black pepper] (optional)
 
 # Instructions
 
-1. **Make the eggy sauce.** In a bowl, whisk together the {turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth.
+1. **Make the eggy sauce.** In a bowl, whisk together the {ground turmeric}, {garlic powder}, {onion powder}, {paprika}, {chipotle chile flakes}, {kala namak}, {tahini}, and {nutritional yeast}. Gradually pour in the {oat milk} and whisk until smooth.
 2. Crumble the pressed {tofu} with your hands into chunks — not too big, not too small.
 3. Heat a large nonstick frying pan over medium-high heat with the {olive oil}. Once hot, add the tofu and fry until lightly browned, 5 to 7 minutes. Stir occasionally but not too often to let the exterior crisp up.
 4. Pour in the eggy sauce and continue frying until the scramble is as moist or dry as you like — pull it off the heat early for a soft, creamy scramble, or keep going for firmer, drier curds.
-5. For extra creaminess, stir in the {plant-based yogurt} and mix through.
+5. For extra creaminess, stir in the {vegan yogurt} and mix through.
 6. Taste and add a pinch {kala namak} and {black pepper} if needed.
 
 # Serving Suggestions

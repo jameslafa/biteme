@@ -18,29 +18,29 @@ Use very ripe bananas with lots of brown spots for the best flavour and natural 
 # Ingredients
 
 ## Fresh
-- 4 medium ripe bananas, mashed
-- Extra banana slices for topping
+- 4 medium [bananas], mashed
+- Extra [banana] slices for topping
 
 ## Fridge
-- 60 ml unsweetened plant milk
+- 60 ml [plant milk]
 
 ## Pantry
-- 100 g light brown sugar
-- 250 g plain flour (T45 / Type 405 / Tipo 00)
-- 60 ml vegetable oil (e.g. rapeseed, sunflower, canola)
-- 2 tsp pure vanilla extract
-- 1 tsp baking soda
+- 100 g [brown sugar]
+- 250 g [plain flour] (T45 / Type 405 / Tipo 00)
+- 60 ml [vegetable oil] (e.g. rapeseed, sunflower, canola)
+- 2 tsp [vanilla extract]
+- 1 tsp [baking soda]
 
 ## Spices
-- 1 tsp cinnamon
-- 1/2 tsp salt
+- 1 tsp [cinnamon]
+- 1/2 tsp [salt]
 
 # Instructions
 
 1. Preheat the oven to 180°C (160°C fan). Spray a 9×5 inch (23×13cm) loaf pan with nonstick spray, then dust with flour.
-2. In a large mixing bowl, roughly mash {bananas}. Add {light brown sugar}, {oil}, {vanilla}, and {unsweetened plant milk}, and whisk to incorporate.
-3. Sift in {flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix.
-4. Transfer the batter to your prepared pan, and top with {extra banana slices}.
+2. In a large mixing bowl, roughly mash the bananas. Add {brown sugar}, {vegetable oil}, {vanilla extract}, and {plant milk}, and whisk to incorporate.
+3. Sift in {plain flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix.
+4. Transfer the batter to your prepared pan, and top with extra banana slices.
 5. Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.
 6. Let cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing.
 

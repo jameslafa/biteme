@@ -263,17 +263,29 @@ The `diet` field holds dietary labels separated from meal-type/cuisine `tags`. V
 
 ### Ingredient Schema
 
-Each ingredient in the JSON includes a `text` field (original text) and an optional `quantity` field with structured data for scaling:
+Each ingredient in the JSON includes a `text` field (display-ready text), `canonical` and `preparation` fields for shopping list merging, and an optional `quantity` field with structured data for scaling.
+
+Ingredient canonical names are controlled by `docs/canonical.json` — a vocabulary mapping singular canonical names to their plural forms (or `null` for mass nouns). Authors tag ingredients in recipe markdown using `[brackets]`:
+
+```
+- 2 cloves [garlic], minced    →  canonical: "garlic",  preparation: "minced"
+- 1 tin (400 g) [chickpea]     →  canonical: "chickpea", preparation: null
+- [salt] to taste              →  canonical: "salt",    preparation: null
+```
+
+The parser strips brackets for display, normalises plural forms to singular canonical, and separates the preparation text.
 
 ```typescript
 {
   id: number;
-  text: string;            // Original ingredient text (always present)
+  text: string;            // Display text (brackets stripped, always present)
+  canonical: string | null; // Singular-normalised canonical name (null if no [tag] found)
+  preparation: string | null; // Text after ], e.g. "minced", "diced" (null if none)
   quantity?: {             // Omitted for non-scalable ingredients
     amount: number;        // Primary quantity (e.g., 500)
     amount_max?: number;   // Upper bound for ranges (e.g., 4 in "3-4")
     unit?: string;         // Unit after the number (e.g., "g", "tsp", "cloves", "medium")
-    item: string;          // Everything after the quantity/unit
+    item: string;          // Canonical name (when [tag] present) or raw item text
     secondary_amount?: number;   // Parenthetical quantity (e.g., 400 in "(400 ml)")
     secondary_unit?: string;     // Parenthetical unit
     secondary_prefix?: string;   // Modifier like "about" in "(about 150 g)"
@@ -283,11 +295,11 @@ Each ingredient in the JSON includes a `text` field (original text) and an optio
 ```
 
 **Examples:**
-- `500 g mushrooms, sliced` → `{ amount: 500, unit: "g", item: "mushrooms, sliced" }`
-- `3-4 cloves garlic` → `{ amount: 3, amount_max: 4, unit: "cloves", item: "garlic" }`
-- `1 tin (400 ml) coconut milk` → `{ amount: 1, unit: "tin", secondary_amount: 400, secondary_unit: "ml", item: "coconut milk" }`
-- `Juice of 1/2 lemon` → `{ amount: 0.5, item: "lemon", prefix: "Juice of" }`
-- `Salt to taste` → no `quantity` field (non-scalable)
+- `2 cloves [garlic], minced` → `{ canonical: "garlic", preparation: "minced", quantity: { amount: 2, unit: "cloves", item: "garlic" } }`
+- `500 g [mushroom], sliced` → `{ canonical: "mushroom", preparation: "sliced", quantity: { amount: 500, unit: "g", item: "mushroom" } }`
+- `1 tin (400 ml) [coconut milk]` → `{ canonical: "coconut milk", preparation: null, quantity: { amount: 1, unit: "tin", secondary_amount: 400, secondary_unit: "ml", item: "coconut milk" } }`
+- `Juice of 1/2 [lemon]` → `{ canonical: "lemon", preparation: null, quantity: { amount: 0.5, item: "lemon", prefix: "Juice of" } }`
+- `[salt] to taste` → `{ canonical: "salt", preparation: "to taste" }` (no `quantity` field — non-scalable)
 
 ### Step Schema
 

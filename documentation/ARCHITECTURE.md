@@ -50,11 +50,10 @@ name: Pad Thai
 {
   "ingredients": {
     "Fresh": [
-      { "id": 1, "text": "2 tomatoes, diced" },
-      { "id": 2, "text": "1 onion, diced" }
-    ],
-    "Pantry": [
-      { "id": 3, "text": "1 cup rice" }
+      { "id": 1, "text": "2 cloves garlic, minced", "canonical": "garlic", "preparation": "minced",
+        "quantity": { "amount": 2, "unit": "cloves", "item": "garlic" } },
+      { "id": 2, "text": "1 onion, diced", "canonical": "onion", "preparation": "diced",
+        "quantity": { "amount": 1, "item": "onion" } }
     ]
   }
 }
@@ -67,12 +66,31 @@ name: Pad Thai
 
 **Trade-offs:**
 - Changing ingredient order changes IDs (acceptable for simplicity)
-- No structured data (quantity, unit, name) - deferred for later
-- No normalization or aggregation across recipes
 
-**Future Considerations:**
-- Structured ingredients (quantity, unit, canonical name) when needed
-- For now, keep it simple with text + ID
+## Canonical Ingredient Vocabulary
+
+**Decision:** Controlled vocabulary in `docs/canonical.json` mapping ingredient names to their canonical singular forms, loaded by the Rust parser at build time.
+
+**Rationale:**
+- Shopping list merging requires a stable key to match the same ingredient across recipes (e.g. `2 cloves garlic, minced` and `3 cloves garlic, crushed` both → canonical `"garlic"`)
+- Free-form text matching is fragile; explicit author tagging with `[brackets]` is unambiguous
+- Plural/singular normalisation (eggs → egg) handled at parse time via the vocabulary
+
+**Implementation:**
+- Authors tag ingredient names in markdown: `2 cloves [garlic], minced`
+- The parser extracts the bracket text, normalises to singular canonical via `docs/canonical.json`, and stores `canonical` + `preparation` as separate fields on each ingredient
+- `quantity.item` is set to the bracket text as the author wrote it (preserving natural plural/singular)
+- Step refs `{canonical}` match against the singular `canonical` field exactly — no fuzzy matching
+
+**`docs/canonical.json` structure:**
+```json
+{
+  "ingredients": { "tomato": "tomatoes", "garlic": null, ... },
+  "units": { "clove": "cloves", "stick": "sticks", "stalk": "stalks", ... }
+}
+```
+
+Words in `units` belong before the bracket (`2 cloves [garlic]`), not inside it (`[garlic cloves]`). The linter errors on missing or unknown canonical tags.
 
 ## Data Storage
 
