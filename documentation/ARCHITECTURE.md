@@ -314,6 +314,28 @@ Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="ca
 - Icons are used both in static HTML (via `data-icon`) and in JS-generated HTML strings (via `icon()`); a sprite file only serves `<use>` references, not string interpolation
 - Single source of truth — one definition covers both usage patterns
 
+## Shopping List Merged View
+
+**Decision:** Two-view toggle (Merged / By recipe) on the shopping list, with Merged as the default.
+
+**Rationale:**
+- When shopping, users want a flat list — one line per ingredient, not one per recipe
+- By-recipe view is useful when managing the list (removing a recipe's items)
+- `canonical` field on every ingredient provides the stable key needed for cross-recipe grouping
+
+**How it works:**
+- `resolveAllItems()` loads all DB items, looks up the recipe and ingredient for each, and computes the serving ratio and scaled text
+- `buildMergedGroups()` groups by `ingredient.canonical` (falling back to `ingredient.text` for untagged ingredients), then sub-groups by unit. Items in the same canonical+unit sub-group have their amounts summed with `smartRound`
+- Each merged group renders as a single row with summed amount, the item name, and an attribution line listing the source recipes
+- Checked state is computed per group: all sources checked → checked; some → indeterminate (partial); none → unchecked. A checkbox click writes to all source DB items via `setShoppingListItemChecked`
+- View preference persisted in `localStorage('shopping_view')`; defaults to `'merged'`
+
+**Multi-unit display:**
+When the same canonical appears with different units across recipes (e.g. `1 tin` + `250 g` lentils), they stay as separate unit sub-groups and are rendered as a single line: `lentils (1 tin + 250 g)`.
+
+**Unitless fallback:**
+If a single-source sub-group has no unit (likely a parser data quality issue where the unit was lost), the original `ingredient.text` is used as the display label rather than a bare number.
+
 ## Surprise Me
 
 **Decision:** A shuffle button that picks a random recipe using a 4-tier algorithm that prioritises variety and discovery.

@@ -12,8 +12,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-md);
-  position: relative;
 }
 
 .shopping-header h2 {
@@ -24,10 +22,71 @@
   margin-bottom: var(--spacing-xs);
 }
 
+.shopping-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
 .shopping-progress {
   color: var(--text-secondary);
   font-size: 0.95rem;
   font-weight: 300;
+}
+
+/* View Toggle */
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.view-toggle-btn {
+  background: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  padding: 0.3rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  line-height: 1.5;
+}
+
+.view-toggle-btn:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  border-right: none;
+}
+
+.view-toggle-btn:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.view-toggle-btn.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.view-toggle-btn:hover:not(.active) {
+  background-color: var(--accent-light);
+  color: var(--text-primary);
+}
+
+/* Merged view items */
+.merged-item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.merged-attribution {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 300;
+  margin-top: 0.1rem;
 }
 
 /* Shopping List */
@@ -185,15 +244,13 @@
 
 /* Clear All Button */
 .clear-all {
-  position: absolute;
-  right: 0;
   background: none;
   border: 1px solid var(--border);
   cursor: pointer;
   color: var(--text-secondary);
   font-size: 0.85rem;
   font-weight: 400;
-  padding: 0.3rem 0.75rem;
+  padding: 0.3rem 0.9rem;
   border-radius: var(--radius-sm);
   transition: all 0.2s;
 }

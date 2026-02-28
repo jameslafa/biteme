@@ -29,9 +29,15 @@
     <div class="shopping-header">
       <div class="shopping-header-row">
         <h2>Shopping List</h2>
-        <button id="clear-all" class="clear-all" style="display: none;" aria-label="Remove all recipes from shopping list">Remove all recipes</button>
       </div>
-      <p id="shopping-progress" class="shopping-progress"></p>
+      <div class="view-toggle" id="view-toggle" style="display: none;">
+        <button class="view-toggle-btn" data-view="by-recipe">By recipe</button>
+        <button class="view-toggle-btn active" data-view="merged">Merged</button>
+      </div>
+      <div class="shopping-footer-row" id="shopping-footer-row" style="display: none;">
+        <p id="shopping-progress" class="shopping-progress"></p>
+        <button id="clear-all" class="clear-all" aria-label="Clear shopping list">Clear all</button>
+      </div>
     </div>
 
     <div id="shopping-list" class="shopping-list">

@@ -12,7 +12,7 @@
     "ingredients": {
       "Fresh": [
         { "id": 1, "text": "1 onion, diced", "canonical": null, "preparation": null, "quantity": { "amount": 1, "item": "onion, diced" } },
-        { "id": 2, "text": "2 cloves garlic, minced", "canonical": null, "preparation": null, "quantity": { "amount": 2, "unit": "cloves", "item": "garlic, minced" } }
+        { "id": 2, "text": "2 cloves garlic, minced", "canonical": "garlic", "preparation": null, "quantity": { "amount": 2, "unit": "cloves", "item": "garlic, minced" } }
       ],
       "Spices": [
         { "id": 3, "text": "1 tsp curry powder", "canonical": null, "preparation": null, "quantity": { "amount": 1, "unit": "tsp", "item": "curry powder" } }
@@ -45,7 +45,8 @@
     "ingredients": {
       "Fresh": [
         { "id": 1, "text": "2 cups lettuce", "canonical": null, "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
-        { "id": 2, "text": "1 tomato", "canonical": null, "preparation": null, "quantity": { "amount": 1, "item": "tomato" } }
+        { "id": 2, "text": "1 tomato", "canonical": null, "preparation": null, "quantity": { "amount": 1, "item": "tomato" } },
+        { "id": 4, "text": "1 clove garlic", "canonical": "garlic", "preparation": null, "quantity": { "amount": 1, "unit": "cloves", "item": "garlic" } }
       ],
       "Pantry": [
         { "id": 3, "text": "2 tbsp olive oil", "canonical": null, "preparation": null, "quantity": { "amount": 2, "unit": "tbsp", "item": "olive oil" } }

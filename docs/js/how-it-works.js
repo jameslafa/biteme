@@ -205,27 +205,28 @@ const FEATURES = [
         `
       },
       {
-        label: 'Then at the supermarket, tap the cart icon in the top right to open your shopping list and cross items off as you go:',
+        label: 'Then at the supermarket, tap the cart icon to open your shopping list. Ingredients shared across recipes are automatically merged into one line with summed quantities:',
         html: `
-          <div class="recipe-group" style="margin-bottom:0;">
-            <div class="recipe-group-header">
-              <span class="recipe-group-title">Thai Green Curry</span>
-            </div>
-            <ul class="shopping-items">
-              <li class="shopping-item checked">
-                <label class="shopping-item-checkbox">
-                  <input type="checkbox" checked tabindex="-1">
-                  <span class="shopping-item-label" style="color:var(--text-secondary);">3 tbsp green curry paste</span>
-                </label>
-              </li>
-              <li class="shopping-item">
-                <label class="shopping-item-checkbox">
-                  <input type="checkbox" tabindex="-1">
+          <ul class="shopping-items">
+            <li class="shopping-item merged-item checked">
+              <div class="shopping-item-checkbox">
+                <input type="checkbox" checked tabindex="-1">
+                <div class="merged-item-content">
+                  <span class="shopping-item-label" style="color:var(--text-secondary);">6 cloves garlic</span>
+                  <span class="merged-attribution">Thai Green Curry, Dal Tadka</span>
+                </div>
+              </div>
+            </li>
+            <li class="shopping-item merged-item">
+              <div class="shopping-item-checkbox">
+                <input type="checkbox" tabindex="-1">
+                <div class="merged-item-content">
                   <span class="shopping-item-label">1 block firm tofu</span>
-                </label>
-              </li>
-            </ul>
-          </div>
+                  <span class="merged-attribution">Thai Green Curry</span>
+                </div>
+              </div>
+            </li>
+          </ul>
         `
       }
     ]

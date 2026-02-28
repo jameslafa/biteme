@@ -212,6 +212,34 @@ async function getAllShoppingListItems() {
   });
 }
 
+// Set item checked status explicitly
+async function setShoppingListItemChecked(itemId, checked) {
+  if (!db) await initDB();
+
+  const transaction = db.transaction(['shopping_list'], 'readwrite');
+  const store = transaction.objectStore('shopping_list');
+
+  return new Promise((resolve, reject) => {
+    const getRequest = store.get(itemId);
+
+    getRequest.onsuccess = () => {
+      const item = getRequest.result;
+      if (!item) {
+        reject(new Error('Item not found'));
+        return;
+      }
+
+      item.checked_at = checked ? Date.now() : null;
+
+      const updateRequest = store.put(item);
+      updateRequest.onsuccess = () => resolve(item);
+      updateRequest.onerror = () => reject(updateRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+}
+
 // Toggle item checked status
 async function toggleShoppingListItem(itemId) {
   if (!db) await initDB();

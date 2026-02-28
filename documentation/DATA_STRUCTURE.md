@@ -91,9 +91,9 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Ingredient text looked up from recipe data for display
 - TTL cleanup: Items with `checked_at` older than 1 hour are auto-deleted
 - Provides 1-hour undo window for checked items
-- Grouped by recipe for better organization
 - Hard delete after TTL expiry
 - Simple matching: can show shopping list state on recipe page
+- The shopping list UI offers two views: **Merged** (default) groups by `ingredient.canonical` and sums quantities across recipes; **By recipe** groups by `recipe_id`. The schema is the same for both — merging is purely a display-time operation.
 
 ## Cooking Sessions
 
