@@ -166,7 +166,7 @@ main {
 #search-input {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  padding-right: 5.5rem;
+  padding-right: 7.5rem;
   font-size: 0.95rem;
   font-weight: 300;
   border: 1px solid var(--border);

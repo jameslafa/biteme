@@ -183,4 +183,28 @@ test.describe('Recipe Detail', () => {
     // Toast should disappear
     await expect(toast).toBeHidden({ timeout: 5000 });
   });
+
+  test('shows similar recipes section when matches exist', async ({ page }) => {
+    await page.goto('/recipe.html?id=test-curry');
+
+    // test-curry shares garlic + lentil with test-salad
+    const section = page.locator('#similar-recipes');
+    await expect(section).toBeVisible();
+    await expect(section.locator('h3')).toHaveText('Same ingredients, different dish');
+
+    const items = section.locator('.similar-recipe-item');
+    await expect(items).toHaveCount(1); // only test-salad matches
+    await expect(items.first()).toHaveAttribute('href', /recipe\.html\?id=test-salad/);
+    await expect(section.locator('.similar-recipe-name').first()).toHaveText('Test Salad');
+    await expect(section.locator('.similar-recipe-shared').first()).toContainText('garlic');
+    await expect(section.locator('.similar-recipe-shared').first()).toContainText('lentil');
+  });
+
+  test('hides similar recipes section when no matches exist', async ({ page }) => {
+    // test-toast has bread + butter — unique, no overlap with other recipes
+    await page.goto('/recipe.html?id=test-toast');
+
+    const section = page.locator('#similar-recipes');
+    await expect(section).toBeEmpty();
+  });
 });

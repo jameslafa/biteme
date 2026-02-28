@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 19, date: '2026-02-28', text: 'Recipe recommendations — scroll to the bottom of any recipe to find dishes that share its ingredients, so you can plan your week around what you\'ve already bought and waste less' },
   { id: 18, date: '2026-02-28', text: 'Shopping list now merges the same ingredient from different recipes into one line with summed quantities — no more hunting for garlic twice' },
   { id: 17, date: '2026-02-21', text: 'Surprise me — pick a random recipe respecting your active filters, with smart prioritisation' },
   { id: 16, date: '2026-02-20', text: 'Feeling adventurous? Enable experimental recipes in Settings — untested creations for the brave cook' },

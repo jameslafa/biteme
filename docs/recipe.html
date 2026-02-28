@@ -31,6 +31,7 @@
   <script src="js/icons.js"></script>
     <script src="js/db.js"></script>
   <script src="js/recipes.js"></script>
+  <script src="js/recommendations.js"></script>
   <script src="js/servings.js"></script>
   <script src="js/notes.js"></script>
   <script src="js/rating.js"></script>
@@ -120,6 +121,8 @@
           </section>
           ` : ''}
 
+          <section id="similar-recipes"></section>
+
           <div class="action-buttons">
             <button class="button button-primary" onclick="startCooking('${recipe.id}')">
               Start cooking
@@ -165,6 +168,9 @@
 
       // Show cooking notes
       showCookingNotes(recipeId);
+
+      // Show similar recipes
+      renderSimilarRecipes(recipeId);
 
       // Update cart count
       updateCartCount();
@@ -373,6 +379,29 @@
 
     function escapeHtml(text) {
       return text.replace(/</g, '&lt;');
+    }
+
+    async function renderSimilarRecipes(recipeId) {
+      const results = await getSimilarRecipes(recipeId);
+      const section = document.getElementById('similar-recipes');
+      if (!section || results.length === 0) return;
+
+      section.innerHTML = `
+        <h3>Same ingredients, different dish</h3>
+        <ul class="similar-recipes-list">
+          ${results.map(({ recipe, sharedIngredients }) => `
+            <li>
+              <a href="recipe.html?id=${recipe.id}" class="similar-recipe-item">
+                <div class="similar-recipe-body">
+                  <span class="similar-recipe-name">${recipe.name}</span>
+                  <span class="similar-recipe-shared">${sharedIngredients.join(' · ')}</span>
+                </div>
+                <span class="similar-recipe-chevron">${icon('chevron-right', 18)}</span>
+              </a>
+            </li>
+          `).join('')}
+        </ul>
+      `;
     }
 
     async function showCookingNotes(recipeId) {

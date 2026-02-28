@@ -441,6 +441,75 @@
   color: var(--text-secondary);
 }
 
+/* Similar Recipes */
+#similar-recipes {
+  margin-top: var(--spacing-xl);
+}
+
+#similar-recipes:empty {
+  display: none;
+}
+
+#similar-recipes h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--accent-light);
+  padding-bottom: var(--spacing-sm);
+  letter-spacing: 0.02em;
+}
+
+.similar-recipes-list {
+  list-style: none;
+  padding: 0;
+}
+
+.similar-recipe-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.similar-recipes-list li:last-child .similar-recipe-item {
+  border-bottom: none;
+}
+
+.similar-recipe-item:active {
+  background: var(--accent-light-alpha-30);
+}
+
+.similar-recipe-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.similar-recipe-name {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.similar-recipe-shared {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}
+
+.similar-recipe-chevron {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
 /* Action Buttons */
 .action-buttons {
   margin-top: var(--spacing-xl);

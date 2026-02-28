@@ -355,6 +355,29 @@ If a single-source sub-group has no unit (likely a parser data quality issue whe
 - Popover button commits pending tag/rating to active state before picking (same outcome as clicking Filter then Surprise)
 - `filterRecipes()` is called with current state — no special casing needed
 
+## Recipe Recommendation Engine
+
+**Decision:** IDF-weighted ingredient similarity computed entirely client-side, on demand.
+
+**Algorithm:**
+1. Build a set of canonical ingredient keys per recipe (excluding the Spices category — salt, pepper, etc. are noise)
+2. Compute IDF (inverse document frequency) per canonical: `Math.log(N / df)` where N = corpus size and df = number of recipes containing that ingredient. Common ingredients (garlic in 18 of 24 recipes) get low weight; rare shared ones (lemongrass in 2 recipes) get high weight.
+3. Score each candidate recipe by summing the IDF of every canonical it shares with the target recipe
+4. Return the top N results sorted by score, each with the list of shared canonical names
+
+**Corpus filtering:**
+The corpus respects the user's settings — `showUntestedRecipes` (IndexedDB) and `dietaryFilters` — so recommendations only surface recipes the user can actually see. If the target recipe itself falls outside the corpus (e.g. an untested recipe viewed via direct link when the setting is off), its ingredients are still extracted from the raw data so it can be scored against the visible corpus.
+
+**Why IDF over raw count:**
+Naïve shared-ingredient counting is dominated by ubiquitous items. IDF naturally downweights common ingredients and surfaces meaningful flavour connections — two recipes sharing coconut milk + lemongrass score far higher than two sharing garlic + salt.
+
+**Why Spices excluded:**
+Spices are present in almost every recipe and carry no useful signal for recommendation. Excluding the entire Spices category avoids IDF working around them and keeps the vocabulary clean.
+
+**Files:**
+- `docs/js/recommendations.js` — `buildRecipeIngredientSets`, `computeIDF`, `getSimilarRecipes` (all global, no module system)
+- Loaded on `recipe.html` only, after `db.js` and `recipes.js`
+
 ## Progressive Enhancement
 
 **Decision:** Build features that work today but plan for future enhancements

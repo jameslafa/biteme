@@ -72,8 +72,10 @@ test.describe('Home Page', () => {
 
     await searchInput.fill('lentils');
     const cards = page.locator('.recipe-card');
-    await expect(cards).toHaveCount(1);
-    await expect(cards.first().locator('.recipe-title')).toHaveText('Test Curry');
+    await expect(cards).toHaveCount(2);
+    const titles = await cards.locator('.recipe-title').allTextContents();
+    expect(titles).toContain('Test Curry');
+    expect(titles).toContain('Test Salad');
 
     await searchInput.clear();
     await expect(page.locator('.recipe-card')).toHaveCount(3);

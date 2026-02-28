@@ -232,6 +232,45 @@ const FEATURES = [
     ]
   },
   {
+    id: 'reduce-waste',
+    title: 'Plan smart, waste less',
+    description: 'Bought a tin of coconut milk for tonight\'s curry? Scroll to the bottom of any recipe and you\'ll see a "Same ingredients, different dish" section — a list of other recipes that share those same ingredients. Plan your week around what you\'ve already bought, use everything up, and spend less at the shops.',
+    mockupHTML: `
+      <div style="margin-top:var(--spacing-xs);">
+        <h3 style="font-size:1.1rem;font-weight:400;color:var(--primary-color);border-bottom:2px solid var(--accent-light);padding-bottom:0.5rem;margin-bottom:var(--spacing-sm);letter-spacing:0.02em;">Same ingredients, different dish</h3>
+        <ul style="list-style:none;padding:0;">
+          <li>
+            <a class="similar-recipe-item" href="#" tabindex="-1" style="pointer-events:none;">
+              <div class="similar-recipe-body">
+                <span class="similar-recipe-name">Indonesian Satay</span>
+                <span class="similar-recipe-shared">coconut milk · lemongrass · red chilli</span>
+              </div>
+              <span class="similar-recipe-chevron">${icon('chevron-right', 18)}</span>
+            </a>
+          </li>
+          <li>
+            <a class="similar-recipe-item" href="#" tabindex="-1" style="pointer-events:none;">
+              <div class="similar-recipe-body">
+                <span class="similar-recipe-name">Pumpkin &amp; Potato Curry</span>
+                <span class="similar-recipe-shared">coconut milk · garlic · ginger</span>
+              </div>
+              <span class="similar-recipe-chevron">${icon('chevron-right', 18)}</span>
+            </a>
+          </li>
+          <li>
+            <a class="similar-recipe-item" href="#" tabindex="-1" style="pointer-events:none;border-bottom:none;">
+              <div class="similar-recipe-body">
+                <span class="similar-recipe-name">Dal Tadka</span>
+                <span class="similar-recipe-shared">garlic · ginger · vegetable stock</span>
+              </div>
+              <span class="similar-recipe-chevron">${icon('chevron-right', 18)}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    `
+  },
+  {
     id: 'cook',
     title: 'Start cooking',
     description: 'When you\'re ready, hit "Start cooking" and you\'ll get a focused view — one step at a time, with only the ingredients you need right there. No scrolling back and forth, no flour on your screen while you swipe around. You can also keep the screen always on with the lightbulb button — handy when your hands are covered in dough.',

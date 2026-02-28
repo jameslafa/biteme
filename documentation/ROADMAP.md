@@ -68,6 +68,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Side Drawer (Hamburger Menu)** — Navigation drawer on home page, houses What's New and footer links, notification dot aggregation
 - **Cooking Log** — Dedicated page with stats (recipes cooked, sessions, total time, week streak), most-made recipes, and monthly timeline of all completed cooks
 - **How It Works** — Feature guide page with real UI mockups, 8 walkthrough sections, deep-linkable anchors, first-visit nudge on home page
+- **Recipe Recommendations** — IDF-weighted ingredient similarity engine; "Same ingredients, different dish" section on recipe detail page showing top 5 related recipes with shared ingredients; respects user's dietary and untested-recipe settings
 
 ---
 
