@@ -1,5 +1,142 @@
 [
   {
+    "id": "life-changing-tofu",
+    "name": "Life-Changing Tofu",
+    "description": "Tofu coated in potato starch, fried until crispy, then glazed in a sweet-savory ginger and garlic sauce",
+    "servings": 2,
+    "time": 25,
+    "difficulty": "easy",
+    "tags": [
+      "asian",
+      "tofu"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "author": "Scarlett",
+    "date": "2026-03-01",
+    "notes": "This technique comes from Chinese and Korean cooking. The potato starch coating crisps up beautifully without absorbing much oil. Fresh ginger is strongly preferred here — grate it on the fine side of a box grater. The tofu keeps well and is excellent cold the next day in a lunchbox.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 2,
+          "text": "2 cm ginger, finely grated",
+          "canonical": "ginger",
+          "preparation": "finely grated",
+          "quantity": {
+            "amount": 2.0,
+            "item": "ginger"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1-2 cloves garlic, finely grated",
+          "canonical": "garlic",
+          "preparation": "finely grated",
+          "quantity": {
+            "amount": 1.0,
+            "amount_max": 2.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 1,
+          "text": "360 g tofu, cut into cubes",
+          "canonical": "tofu",
+          "preparation": "cut into cubes",
+          "quantity": {
+            "amount": 360.0,
+            "unit": "g",
+            "item": "tofu"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 4,
+          "text": "3 tbsp potato starch",
+          "canonical": "potato starch",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "potato starch"
+          }
+        },
+        {
+          "id": 5,
+          "text": "3 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "vegetable oil"
+          }
+        },
+        {
+          "id": 6,
+          "text": "3 tbsp soy sauce",
+          "canonical": "soy sauce",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          }
+        },
+        {
+          "id": 7,
+          "text": "3 tbsp agave syrup",
+          "canonical": "agave syrup",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "agave syrup"
+          }
+        },
+        {
+          "id": 8,
+          "text": "60-80 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 60.0,
+            "amount_max": 80.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Place {tofu} cubes in a bag or bowl, add {potato starch}, and toss until every piece is evenly coated."
+      },
+      {
+        "text": "Heat {vegetable oil} in a large frying pan over high heat until shimmering. Add the tofu in a single layer and fry for 3-4 minutes per side until the coating is golden and crispy. Transfer to a plate lined with kitchen paper.",
+        "durations": [
+          {
+            "seconds": 240,
+            "text": "for 3-4 minutes"
+          }
+        ]
+      },
+      {
+        "text": "While the tofu fries, combine {soy sauce}, {agave syrup}, and {water} in a small bowl. Grate in {ginger} and {garlic} and stir well."
+      },
+      {
+        "text": "Pour the sauce into the same pan (or a smaller one) and bring to a vigorous boil over high heat. Add the tofu and toss until completely coated and the sauce has reduced slightly."
+      },
+      {
+        "text": "Season with black pepper and serve immediately."
+      }
+    ],
+    "serving_suggestions": "Serve over steamed rice or rice noodles with broccoli or kimchi on the side. Also excellent wrapped in spring rolls.",
+    "tested": false
+  },
+  {
     "id": "cauliflower-pea-korma",
     "name": "Cauliflower & Pea Korma",
     "description": "Creamy, fragrant korma with tender cauliflower florets and sweet peas in a rich coconut tomato sauce",
