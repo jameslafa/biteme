@@ -54,7 +54,7 @@ test.describe('What\'s New Page', () => {
       return await getSetting('lastSeenChangelogId');
     });
 
-    expect(lastSeenId).toBe(20);
+    expect(lastSeenId).toBe(21);
   });
 
   test('back button navigates to home', async ({ page }) => {
