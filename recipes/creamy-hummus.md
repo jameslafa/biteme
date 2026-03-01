@@ -28,7 +28,6 @@ Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not
 
 ## Spices
 
-- [salt] to taste
 - Pinch of [ground cumin] (optional, for topping)
 - Pinch of [paprika] (optional, for topping)
 - Pinch of [sumac] (optional, for topping)

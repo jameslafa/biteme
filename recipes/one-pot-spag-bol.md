@@ -38,11 +38,6 @@ Nutritional yeast has a savoury, cheesy flavour and is available in most health 
 - 2 tbsp [tamari] or soy sauce
 - [nutritional yeast] to serve
 
-## Spices
-
-- [salt] to taste
-- [black pepper] to taste
-
 # Instructions
 
 1. Finely chop {red onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomato}. Drain and rinse {lentil}.

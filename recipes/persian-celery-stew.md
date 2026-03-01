@@ -36,8 +36,6 @@ A dish from northern Iran where butter beans are a common plant-based swap for t
 
 - 1/2 tsp [saffron] threads
 - 1 tsp [ground turmeric]
-- [salt] to taste
-- [black pepper] to taste
 
 # Instructions
 

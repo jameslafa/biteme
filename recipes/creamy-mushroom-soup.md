@@ -37,11 +37,6 @@ For a deeper, more umami flavour, add a splash of dry white wine after cooking t
 - 2 tbsp [olive oil]
 - 2 tbsp [soy sauce]
 
-## Spices
-
-- [salt] to taste
-- [pepper] to taste
-
 # Instructions
 
 1. Heat {olive oil} in a large pot over medium-high heat. Add {mushroom} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.

@@ -2,12 +2,16 @@
 // These are excluded from similarity scoring entirely.
 const PANTRY_STOPLIST = new Set([
   'water', 'vegetable stock', 'plain flour', 'self-raising flour',
-  'sugar', 'brown sugar', 'baking soda', 'baking powder', 'maple syrup', 'salt',
+  'baking soda', 'baking powder', 'maple syrup',
   'butter', 'vegan butter', 'margarine',
 ]);
 
 function isStopIngredient(canonical) {
   return PANTRY_STOPLIST.has(canonical)
+    || canonical.includes('salt')
+    || canonical.includes('sugar')
+    || canonical.includes('black pepper')
+    || canonical.includes('white pepper')
     || canonical.endsWith(' oil')
     || canonical.endsWith(' milk')
     || canonical === 'milk';

@@ -39,8 +39,7 @@ Don't rush the onions — cooking them until deep golden brown is key to the ric
 - 1 tsp [garam masala]
 - 1 tsp [smoked paprika]
 - 1/2 tsp [turmeric]
-- 1/2 tsp [chilli powder], adjust to taste
-- [salt] to taste
+- 1/2 tsp [chilli powder]
 
 # Instructions
 

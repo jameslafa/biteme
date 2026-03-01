@@ -9,6 +9,7 @@ tags: [ramen, japanese]
 diet: [vegetarian]
 tested: false
 date: 2026-02-27
+author: Scarlett
 ---
 
 # Notes
@@ -45,7 +46,6 @@ Start the marinated eggs the evening before — they need at least one night in 
 ## Spices
 
 - 1 tsp [ground ginger]
-- [salt] to taste
 
 # Instructions
 

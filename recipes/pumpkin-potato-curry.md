@@ -29,8 +29,6 @@ If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2.
 ## Spices
 - 1 tsp [ground cumin]
 - 1 tsp [ground turmeric]
-- [salt] to taste
-- [pepper] to taste
 
 ## Pantry
 - 1 tin (400 ml) [coconut milk]

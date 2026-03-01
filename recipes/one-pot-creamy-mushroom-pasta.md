@@ -41,7 +41,6 @@ If you don't want to use wine, replace it with the same amount of vegetable stoc
 ## Spices
 
 - 2 tsp [salt]
-- [black pepper] to taste
 
 # Instructions
 

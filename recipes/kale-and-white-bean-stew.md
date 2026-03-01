@@ -37,9 +37,7 @@ This stew actually tastes even better the next day as the flavours develop. Keep
 
 - 1 tsp [smoked paprika]
 - 1 tsp [ground cumin]
-- 1/2 tsp [chilli flakes] (optional, adjust to taste)
-- [salt] to taste
-- [pepper] to taste
+- 1/2 tsp [chilli flakes] (optional)
 
 # Instructions
 

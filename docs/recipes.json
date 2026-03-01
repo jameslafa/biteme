@@ -266,6 +266,7 @@
     "diet": [
       "vegetarian"
     ],
+    "author": "Scarlett",
     "date": "2026-02-27",
     "notes": "Start the marinated eggs the evening before — they need at least one night in the fridge. Everything else comes together in about 35 minutes. The nutty base and tofu can be prepped simultaneously while the broth heats.",
     "ingredients": {
@@ -449,12 +450,6 @@
             "unit": "tsp",
             "item": "ground ginger"
           }
-        },
-        {
-          "id": 18,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
         }
       ]
     },
@@ -671,20 +666,6 @@
           "canonical": "toasted nut",
           "preparation": "for garnish"
         }
-      ],
-      "Spices": [
-        {
-          "id": 18,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 19,
-          "text": "pepper to taste",
-          "canonical": "pepper",
-          "preparation": "to taste"
-        }
       ]
     },
     "steps": [
@@ -868,12 +849,6 @@
             "unit": "tsp",
             "item": "salt"
           }
-        },
-        {
-          "id": 14,
-          "text": "black pepper to taste",
-          "canonical": "black pepper",
-          "preparation": "to taste"
         }
       ]
     },
@@ -1067,20 +1042,6 @@
           "canonical": "nutritional yeast",
           "preparation": "to serve"
         }
-      ],
-      "Spices": [
-        {
-          "id": 16,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 17,
-          "text": "black pepper to taste",
-          "canonical": "black pepper",
-          "preparation": "to taste"
-        }
       ]
     },
     "steps": [
@@ -1237,17 +1198,11 @@
             "unit": "tsp",
             "item": "brown sugar"
           }
-        },
-        {
-          "id": 11,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
         }
       ],
       "Spices": [
         {
-          "id": 12,
+          "id": 11,
           "text": "1 1/2 tsp garam masala",
           "canonical": "garam masala",
           "quantity": {
@@ -1256,7 +1211,7 @@
           }
         },
         {
-          "id": 13,
+          "id": 12,
           "text": "1 tsp ground cumin",
           "canonical": "ground cumin",
           "quantity": {
@@ -1266,7 +1221,7 @@
           }
         },
         {
-          "id": 14,
+          "id": 13,
           "text": "1/2 tsp turmeric",
           "canonical": "turmeric",
           "quantity": {
@@ -1276,7 +1231,7 @@
           }
         },
         {
-          "id": 15,
+          "id": 14,
           "text": "1/2 tsp ground coriander (optional)",
           "canonical": "ground coriander",
           "preparation": "(optional)",
@@ -1285,12 +1240,6 @@
             "unit": "tsp",
             "item": "ground coriander"
           }
-        },
-        {
-          "id": 16,
-          "text": "black pepper to taste",
-          "canonical": "black pepper",
-          "preparation": "to taste"
         }
       ]
     },
@@ -1487,18 +1436,6 @@
             "unit": "tsp",
             "item": "ground turmeric"
           }
-        },
-        {
-          "id": 12,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 13,
-          "text": "black pepper to taste",
-          "canonical": "black pepper",
-          "preparation": "to taste"
         }
       ]
     },
@@ -1688,18 +1625,6 @@
             "unit": "tsp",
             "item": "garam masala"
           }
-        },
-        {
-          "id": 11,
-          "text": "chilli to taste",
-          "canonical": "chilli",
-          "preparation": "to taste"
-        },
-        {
-          "id": 12,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
         }
       ]
     },
@@ -1907,20 +1832,13 @@
         },
         {
           "id": 14,
-          "text": "1 tsp chilli flakes, adjust to taste",
+          "text": "1 tsp chilli flakes",
           "canonical": "chilli flakes",
-          "preparation": "adjust to taste",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
             "item": "chilli flakes"
           }
-        },
-        {
-          "id": 15,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
         }
       ]
     },
@@ -2151,20 +2069,13 @@
         },
         {
           "id": 15,
-          "text": "1/2 tsp chilli powder, adjust to taste",
+          "text": "1/2 tsp chilli powder",
           "canonical": "chilli powder",
-          "preparation": "adjust to taste",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
             "item": "chilli powder"
           }
-        },
-        {
-          "id": 16,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
         }
       ]
     },
@@ -2336,12 +2247,6 @@
         },
         {
           "id": 9,
-          "text": "chilli flakes to taste",
-          "canonical": "chilli flakes",
-          "preparation": "to taste"
-        },
-        {
-          "id": 10,
           "text": "sesame seeds for serving",
           "canonical": "sesame seed",
           "preparation": "for serving"
@@ -3182,9 +3087,8 @@
         },
         {
           "id": 18,
-          "text": "1 tsp chilli powder (adjust to taste)",
+          "text": "1 tsp chilli powder",
           "canonical": "chilli powder",
-          "preparation": "(adjust to taste)",
           "quantity": {
             "amount": 1.0,
             "unit": "tsp",
@@ -3231,18 +3135,6 @@
             "unit": "tsp",
             "item": "cocoa powder"
           }
-        },
-        {
-          "id": 23,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 24,
-          "text": "pepper to taste",
-          "canonical": "pepper",
-          "preparation": "to taste"
         }
       ]
     },
@@ -3453,26 +3345,14 @@
         },
         {
           "id": 13,
-          "text": "1/2 tsp chilli flakes (optional, adjust to taste)",
+          "text": "1/2 tsp chilli flakes (optional)",
           "canonical": "chilli flakes",
-          "preparation": "(optional, adjust to taste)",
+          "preparation": "(optional)",
           "quantity": {
             "amount": 0.5,
             "unit": "tsp",
             "item": "chilli flakes"
           }
-        },
-        {
-          "id": 14,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 15,
-          "text": "pepper to taste",
-          "canonical": "pepper",
-          "preparation": "to taste"
         }
       ]
     },
@@ -3857,12 +3737,6 @@
             "unit": "tsp",
             "item": "black pepper"
           }
-        },
-        {
-          "id": 15,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
         }
       ]
     },
@@ -4080,7 +3954,7 @@
       ],
       "Pantry": [
         {
-          "id": 9,
+          "id": 8,
           "text": "250 g chickpeas",
           "canonical": "chickpea",
           "quantity": {
@@ -4090,7 +3964,7 @@
           }
         },
         {
-          "id": 10,
+          "id": 9,
           "text": "1 tsp baking soda for soaking",
           "canonical": "baking soda",
           "preparation": "for soaking",
@@ -4101,7 +3975,7 @@
           }
         },
         {
-          "id": 11,
+          "id": 10,
           "text": "1 tsp baking soda for cooking",
           "canonical": "baking soda",
           "preparation": "for cooking",
@@ -4112,7 +3986,7 @@
           }
         },
         {
-          "id": 12,
+          "id": 11,
           "text": "120 g tahini (or more to taste)",
           "canonical": "tahini",
           "preparation": "(or more to taste)",
@@ -4123,7 +3997,7 @@
           }
         },
         {
-          "id": 13,
+          "id": 12,
           "text": "Good quality olive oil (for serving)",
           "canonical": "olive oil",
           "preparation": "(for serving)"
@@ -4132,30 +4006,24 @@
       "Spices": [
         {
           "id": 4,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 5,
           "text": "Pinch of ground cumin (optional, for topping)",
           "canonical": "ground cumin",
           "preparation": "(optional, for topping)"
         },
         {
-          "id": 6,
+          "id": 5,
           "text": "Pinch of paprika (optional, for topping)",
           "canonical": "paprika",
           "preparation": "(optional, for topping)"
         },
         {
-          "id": 7,
+          "id": 6,
           "text": "Pinch of sumac (optional, for topping)",
           "canonical": "sumac",
           "preparation": "(optional, for topping)"
         },
         {
-          "id": 8,
+          "id": 7,
           "text": "Pinch of za'atar (optional, for topping)",
           "canonical": "za'atar",
           "preparation": "(optional, for topping)"
@@ -4332,20 +4200,6 @@
             "unit": "tbsp",
             "item": "soy sauce"
           }
-        }
-      ],
-      "Spices": [
-        {
-          "id": 12,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 13,
-          "text": "pepper to taste",
-          "canonical": "pepper",
-          "preparation": "to taste"
         }
       ]
     },
@@ -4618,7 +4472,7 @@
       ],
       "Pantry": [
         {
-          "id": 12,
+          "id": 10,
           "text": "1 tin (400 ml) coconut milk",
           "canonical": "coconut milk",
           "quantity": {
@@ -4630,7 +4484,7 @@
           }
         },
         {
-          "id": 13,
+          "id": 11,
           "text": "200 ml vegetable stock",
           "canonical": "vegetable stock",
           "quantity": {
@@ -4640,7 +4494,7 @@
           }
         },
         {
-          "id": 14,
+          "id": 12,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "canonical": "vegetable oil",
           "preparation": "(e.g. rapeseed, sunflower, canola)",
@@ -4651,7 +4505,7 @@
           }
         },
         {
-          "id": 15,
+          "id": 13,
           "text": "2 tbsp curry paste (red or yellow)",
           "canonical": "curry paste",
           "preparation": "(red or yellow)",
@@ -4682,18 +4536,6 @@
             "unit": "tsp",
             "item": "ground turmeric"
           }
-        },
-        {
-          "id": 10,
-          "text": "salt to taste",
-          "canonical": "salt",
-          "preparation": "to taste"
-        },
-        {
-          "id": 11,
-          "text": "pepper to taste",
-          "canonical": "pepper",
-          "preparation": "to taste"
         }
       ]
     },

@@ -42,13 +42,11 @@ The cocoa powder adds a lovely depth without making it taste chocolatey. Add the
 
 - 1 tsp [ground cumin]
 - 1 tsp [smoked paprika]
-- 1 tsp [chilli powder] (adjust to taste)
+- 1 tsp [chilli powder]
 - 1/2 tsp [ground coriander]
 - 1/2 tsp [oregano]
 - 1 pinch [cayenne pepper] (optional)
 - 1 tsp [cocoa powder]
-- [salt] to taste
-- [pepper] to taste
 
 # Instructions
 

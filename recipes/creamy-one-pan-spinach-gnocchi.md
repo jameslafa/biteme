@@ -38,7 +38,6 @@ date: 2026-02-12
 
 - 1 tsp [Italian seasoning] (or oregano)
 - 1/2 tsp [black pepper]
-- [salt] to taste
 
 # Instructions
 

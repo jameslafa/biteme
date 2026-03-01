@@ -40,11 +40,6 @@ Use tamari instead of soy sauce to make this gluten-free. You can swap the courg
 - 350 ml warm [water]
 - A handful of [toasted nuts] for garnish <!-- no-scale -->
 
-## Spices
-
-- [salt] to taste
-- [pepper] to taste
-
 # Instructions
 
 1. Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onion}. Cook for 1 1/2 minutes, stirring regularly.

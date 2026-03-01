@@ -32,7 +32,6 @@ This comes together in 20 minutes — prep the vegetables while the water boils.
 ## Spices
 
 - 1/4 tsp [white pepper]
-- [chilli flakes] to taste
 - [sesame seeds] for serving
 
 # Instructions

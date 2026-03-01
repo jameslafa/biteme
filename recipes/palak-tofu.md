@@ -41,8 +41,7 @@ Press the tofu well — at least 15 minutes with a cloth or kitchen paper — fo
 - 1 tsp [garam masala]
 - 1/2 tsp [turmeric]
 - 1/4 tsp [nutmeg]
-- 1 tsp [chilli flakes], adjust to taste
-- [salt] to taste
+- 1 tsp [chilli flakes]
 
 # Instructions
 

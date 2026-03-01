@@ -72,6 +72,8 @@ Group ingredients under **`##` (H2) category headings**. Valid categories are:
 
 Not all categories are required — only use the ones that apply. Each ingredient is a bullet point.
 
+**Do not list salt, black pepper, or white pepper as ingredients.** These are universal kitchen staples — assume the cook has them. Use "season to taste" or similar in the instructions instead. Likewise, avoid any ingredient written purely as "X to taste" with no quantity — if it has no meaningful amount, it belongs in the instructions, not the ingredient list.
+
 ---
 
 ## Canonical Ingredient Tags
@@ -82,7 +84,6 @@ Every ingredient line **must** tag the ingredient name in `[square brackets]`. T
 - 500 g [mushrooms], sliced
 - 2 cloves [garlic], minced
 - 1 tbsp [olive oil]
-- [salt] to taste
 ```
 
 The tagged name must exist in `docs/canonical.json`. If it doesn't, add it before committing. The linter will error on unknown or missing tags.
@@ -147,7 +148,7 @@ The comma after `]` is conventional but not required.
 
 ### Non-scalable ingredients
 
-Ingredients without a leading number (e.g., `[salt] to taste`, `[coriander] for garnish`) are treated as non-scalable and displayed as-is regardless of serving adjustments.
+Ingredients without a leading number (e.g., `[coriander] for garnish`) are treated as non-scalable and displayed as-is regardless of serving adjustments.
 
 Add `<!-- no-scale -->` to explicitly exclude a numbered ingredient from scaling:
 
@@ -228,8 +229,6 @@ The canonical name is the singular form as listed in `docs/canonical.json`. It m
 | `250 g [mushrooms], sliced` | `{mushroom}` | Ref uses singular canonical |
 | `1 tin (400 g) [chickpeas], drained` | `{chickpea}` | Ref uses singular canonical |
 | `1 tbsp [olive oil]` | `{olive oil}` | Full canonical name, not just "oil" |
-| `[salt] to taste` | `{salt}` | |
-| `[black pepper] to taste` | `{black pepper}` | |
 
 ---
 
@@ -270,7 +269,6 @@ Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.
 - 250 ml [coconut milk]
 - 1 tsp [ginger paste]
 - 1 tsp [brown sugar]
-- [salt] to taste
 
 ## Spices
 
@@ -278,13 +276,12 @@ Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.
 - 1 tsp [ground cumin]
 - 1/2 tsp [turmeric]
 - 1/2 tsp [ground coriander] (optional)
-- [black pepper] to taste
 
 # Instructions
 
 1. Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about 3-4 minutes.
-2. Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for 30 seconds, stirring constantly.
-3. Pour in {passata}, {water}, {chickpea}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.
+2. Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, and {ground coriander}. Fry for 30 seconds, stirring constantly.
+3. Pour in {passata}, {water}, and {chickpea}. Season with salt. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.
 4. Stir in {coconut milk} and {brown sugar}. Simmer for a further 2-3 minutes.
 5. Taste and adjust seasoning. Garnish with {coriander}.
 
@@ -311,6 +308,8 @@ Before outputting the recipe, verify:
 - [ ] Ingredient categories use `##` (H2) headings: `## Fresh`, `## Fridge`, `## Spices`, `## Pantry`
 - [ ] Category names are exactly one of: Fresh, Fridge, Spices, Pantry
 - [ ] Section order is: Notes (optional) → Ingredients → Instructions → Serving Suggestions (optional)
+- [ ] Salt, black pepper, and white pepper are **not** listed as ingredients — use "season to taste" in instructions instead
+- [ ] No ingredient lines written purely as "X to taste" with no quantity
 - [ ] At least one ingredient category with at least one ingredient
 - [ ] Instructions are a numbered list with at least one step
 - [ ] Every ingredient line has a `[canonical]` tag

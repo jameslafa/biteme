@@ -32,15 +32,12 @@ US recipes often call this "tomato puree" — in European terms that's passata (
 - 250 ml [coconut milk]
 - 1 tsp [ginger paste]
 - 1 tsp [brown sugar]
-- [salt] to taste
-
 ## Spices
 
 - 1 1/2 tsp [garam masala]
 - 1 tsp [ground cumin]
 - 1/2 tsp [turmeric]
 - 1/2 tsp [ground coriander] (optional)
-- [black pepper] to taste
 
 # Instructions
 

@@ -35,8 +35,6 @@ Red lentils break down into a creamy texture, yellow lentils hold their shape a 
 - 1 tsp [cumin seeds]
 - 1 tsp [turmeric]
 - 1 tsp [garam masala]
-- [chilli] to taste
-- [salt] to taste
 
 # Instructions
 
