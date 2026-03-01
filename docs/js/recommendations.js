@@ -1,27 +1,49 @@
-// Returns Map<recipeId, Set<canonical>> filtered by user settings, excluding Spices.
-function buildRecipeIngredientSets(recipes, { showUntestedRecipes = true, dietaryFilters = [] } = {}) {
-  const sets = new Map();
+// Pantry staples that don't meaningfully define a recipe's identity.
+// These are excluded from similarity scoring entirely.
+const PANTRY_STOPLIST = new Set([
+  'water', 'vegetable stock', 'plain flour', 'self-raising flour',
+  'sugar', 'brown sugar', 'baking soda', 'baking powder', 'maple syrup', 'salt',
+  'butter', 'vegan butter', 'margarine',
+]);
+
+function isStopIngredient(canonical) {
+  return PANTRY_STOPLIST.has(canonical)
+    || canonical.endsWith(' oil')
+    || canonical.endsWith(' milk')
+    || canonical === 'milk';
+}
+
+// Category weights: perishable ingredients (Fresh/Fridge) define a recipe's
+// identity more than shelf-stable pantry items.
+const CATEGORY_WEIGHT = { Fresh: 2, Fridge: 2, Pantry: 1 };
+
+// Returns Map<recipeId, Map<canonical, category>> filtered by user settings.
+// Excludes Spices and pantry stoplist ingredients.
+function buildRecipeIngredientMaps(recipes, { showUntestedRecipes = true, dietaryFilters = [] } = {}) {
+  const maps = new Map();
   for (const recipe of recipes) {
     if (!showUntestedRecipes && recipe.tested === false) continue;
     if (dietaryFilters.length > 0 && !dietaryFilters.every(d => (recipe.diet || []).includes(d))) continue;
-    const canonicals = new Set();
+    const ingredientMap = new Map();
     for (const [category, ingredients] of Object.entries(recipe.ingredients)) {
       if (category === 'Spices') continue;
       for (const ing of ingredients) {
-        canonicals.add(ing.canonical || ing.text);
+        const canonical = ing.canonical || ing.text;
+        if (isStopIngredient(canonical)) continue;
+        ingredientMap.set(canonical, category);
       }
     }
-    sets.set(recipe.id, canonicals);
+    maps.set(recipe.id, ingredientMap);
   }
-  return sets;
+  return maps;
 }
 
 // Returns Map<canonical, idfScore>
-function computeIDF(ingredientSets) {
+function computeIDF(ingredientMaps) {
   const df = new Map();
-  const N = ingredientSets.size;
-  for (const canonicals of ingredientSets.values()) {
-    for (const c of canonicals) {
+  const N = ingredientMaps.size;
+  for (const ingredientMap of ingredientMaps.values()) {
+    for (const c of ingredientMap.keys()) {
       df.set(c, (df.get(c) || 0) + 1);
     }
   }
@@ -34,7 +56,7 @@ function computeIDF(ingredientSets) {
 
 // Returns [{ recipe, score, sharedIngredients: string[] }] sorted by score desc.
 // n = max results to return. Excludes the recipe itself.
-// Excludes recipes with score 0 (no shared non-spice ingredients).
+// Excludes recipes with score 0 (no shared meaningful ingredients).
 // Respects the user's showUntestedRecipes and dietaryFilters settings.
 async function getSimilarRecipes(recipeId, n = 5) {
   const recipes = await getRecipes();
@@ -43,34 +65,40 @@ async function getSimilarRecipes(recipeId, n = 5) {
   const showUntestedRecipes = !!(await getSetting('showUntestedRecipes'));
   const dietaryFilters = (await getSetting('dietaryFilters')) || [];
 
-  const ingredientSets = buildRecipeIngredientSets(recipes, { showUntestedRecipes, dietaryFilters });
-  const idf = computeIDF(ingredientSets);
+  const ingredientMaps = buildRecipeIngredientMaps(recipes, { showUntestedRecipes, dietaryFilters });
+  const idf = computeIDF(ingredientMaps);
 
-  // Get target set from corpus; if not there (e.g. recipe filtered by diet but user navigated directly),
+  // Get target map from corpus; if not there (e.g. recipe filtered by diet but user navigated directly),
   // build it from the raw recipe data so we can still score against the visible corpus.
-  let targetSet = ingredientSets.get(recipeId);
-  if (!targetSet) {
+  let targetMap = ingredientMaps.get(recipeId);
+  if (!targetMap) {
     const targetRecipe = recipes.find(r => r.id === recipeId);
     if (!targetRecipe) return [];
-    targetSet = new Set();
+    targetMap = new Map();
     for (const [category, ingredients] of Object.entries(targetRecipe.ingredients)) {
       if (category === 'Spices') continue;
       for (const ing of ingredients) {
-        targetSet.add(ing.canonical || ing.text);
+        const canonical = ing.canonical || ing.text;
+        if (isStopIngredient(canonical)) continue;
+        targetMap.set(canonical, category);
       }
     }
   }
 
   const scores = [];
-  for (const [otherId, otherSet] of ingredientSets) {
+  for (const [otherId, otherMap] of ingredientMaps) {
     if (otherId === recipeId) continue;
 
     const shared = [];
     let score = 0;
-    for (const c of targetSet) {
-      if (otherSet.has(c)) {
-        shared.push(c);
-        score += idf.get(c);
+    for (const [canonical, category] of targetMap) {
+      if (otherMap.has(canonical)) {
+        shared.push(canonical);
+        const weight = Math.max(
+          CATEGORY_WEIGHT[category] || 1,
+          CATEGORY_WEIGHT[otherMap.get(canonical)] || 1,
+        );
+        score += idf.get(canonical) * weight;
       }
     }
 

@@ -82,6 +82,42 @@
     "tested": true
   },
   {
+    "id": "test-fresh-sharer",
+    "name": "Test Fresh Sharer",
+    "description": "Shares only a Fresh ingredient with test-curry (for category weight test)",
+    "servings": 2,
+    "time": 10,
+    "difficulty": "easy",
+    "tags": ["test"],
+    "diet": ["vegan"],
+    "ingredients": {
+      "Fresh": [
+        { "id": 1, "text": "1 clove garlic", "canonical": "garlic", "preparation": null, "quantity": { "amount": 1, "unit": "clove", "item": "garlic" } },
+        { "id": 2, "text": "1 leek, sliced", "canonical": "leek", "preparation": null, "quantity": { "amount": 1, "item": "leek, sliced" } }
+      ]
+    },
+    "steps": [{ "text": "Cook the leek with garlic" }],
+    "tested": false
+  },
+  {
+    "id": "test-pantry-sharer",
+    "name": "Test Pantry Sharer",
+    "description": "Shares only a Pantry ingredient with test-curry (for category weight test)",
+    "servings": 2,
+    "time": 10,
+    "difficulty": "easy",
+    "tags": ["test"],
+    "diet": ["vegan"],
+    "ingredients": {
+      "Pantry": [
+        { "id": 1, "text": "1 cup lentils", "canonical": "lentil", "preparation": null, "quantity": { "amount": 1, "unit": "cup", "item": "lentils" } },
+        { "id": 2, "text": "1 cup rice", "canonical": "rice", "preparation": null, "quantity": { "amount": 1, "unit": "cup", "item": "rice" } }
+      ]
+    },
+    "steps": [{ "text": "Cook rice and lentils" }],
+    "tested": false
+  },
+  {
     "id": "test-soup",
     "name": "Test Soup",
     "description": "An experimental soup recipe not yet tested",

@@ -357,25 +357,32 @@ If a single-source sub-group has no unit (likely a parser data quality issue whe
 
 ## Recipe Recommendation Engine
 
-**Decision:** IDF-weighted ingredient similarity computed entirely client-side, on demand.
+**Decision:** IDF-weighted ingredient similarity with category weighting and pantry stoplist, computed entirely client-side, on demand.
 
 **Algorithm:**
-1. Build a set of canonical ingredient keys per recipe (excluding the Spices category — salt, pepper, etc. are noise)
+1. Build a map of canonical ingredient keys per recipe (excluding Spices and stoplist ingredients). Each entry records the ingredient's category (Fresh, Fridge, Pantry).
 2. Compute IDF (inverse document frequency) per canonical: `Math.log(N / df)` where N = corpus size and df = number of recipes containing that ingredient. Common ingredients (garlic in 18 of 24 recipes) get low weight; rare shared ones (lemongrass in 2 recipes) get high weight.
-3. Score each candidate recipe by summing the IDF of every canonical it shares with the target recipe
-4. Return the top N results sorted by score, each with the list of shared canonical names
+3. Score each candidate recipe by summing `IDF × categoryWeight` for every canonical it shares with the target. The weight used is the maximum of the two recipes' category for that ingredient.
+4. Return the top N results sorted by score, each with the list of shared canonical names.
+
+**Category weights:**
+- Fresh / Fridge: `2` — perishable ingredients define what a dish actually *is*
+- Pantry: `1` — shelf-stable items are less identity-defining
+
+**Pantry stoplist:**
+Ingredients excluded entirely regardless of IDF score: all oils (pattern `* oil`), all milks (pattern `* milk` and `milk`), water, vegetable stock, plain/self-raising flour, sugar, brown sugar, baking soda, baking powder, maple syrup, salt, butter, vegan butter, margarine. These are pantry staples present in any kitchen — sharing them carries no useful signal.
+
+**Spices category:**
+Excluded entirely. Salt, pepper, and spices are present in almost every recipe and would dominate scoring without contributing useful similarity.
 
 **Corpus filtering:**
 The corpus respects the user's settings — `showUntestedRecipes` (IndexedDB) and `dietaryFilters` — so recommendations only surface recipes the user can actually see. If the target recipe itself falls outside the corpus (e.g. an untested recipe viewed via direct link when the setting is off), its ingredients are still extracted from the raw data so it can be scored against the visible corpus.
 
 **Why IDF over raw count:**
-Naïve shared-ingredient counting is dominated by ubiquitous items. IDF naturally downweights common ingredients and surfaces meaningful flavour connections — two recipes sharing coconut milk + lemongrass score far higher than two sharing garlic + salt.
-
-**Why Spices excluded:**
-Spices are present in almost every recipe and carry no useful signal for recommendation. Excluding the entire Spices category avoids IDF working around them and keeps the vocabulary clean.
+Naïve shared-ingredient counting is dominated by ubiquitous items. IDF naturally downweights common ingredients and surfaces meaningful flavour connections — two recipes sharing coconut milk + lemongrass score far higher than two sharing garlic + onion.
 
 **Files:**
-- `docs/js/recommendations.js` — `buildRecipeIngredientSets`, `computeIDF`, `getSimilarRecipes` (all global, no module system)
+- `docs/js/recommendations.js` — `buildRecipeIngredientMaps`, `computeIDF`, `getSimilarRecipes` (all global, no module system)
 - Loaded on `recipe.html` only, after `db.js` and `recipes.js`
 
 ## Progressive Enhancement

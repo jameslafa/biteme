@@ -98,14 +98,52 @@ test.describe('Recipe Recommendations', () => {
   test('rare ingredients score higher than common ones', async ({ page }) => {
     const results = await page.evaluate(async () => {
       const recipes = await getRecipes();
-      const sets = buildRecipeIngredientSets(recipes);
-      const idf = computeIDF(sets);
+      const maps = buildRecipeIngredientMaps(recipes);
+      const idf = computeIDF(maps);
       return {
         garlicIdf: idf.get('garlic'),
-        oilIdf: idf.get('vegetable oil'),
+        onionIdf: idf.get('onion'),
       };
     });
-    // vegetable oil (df=1) should have higher IDF than garlic (df=2)
-    expect(results.oilIdf).toBeGreaterThan(results.garlicIdf);
+    // onion (only in test-curry) should have higher IDF than garlic (appears in more recipes)
+    expect(results.onionIdf).toBeGreaterThan(results.garlicIdf);
+  });
+
+  test('excludes stoplist ingredients from scoring', async ({ page }) => {
+    const results = await page.evaluate(async () => {
+      return await getSimilarRecipes('test-curry');
+    });
+    for (const r of results) {
+      expect(r.sharedIngredients).not.toContain('vegetable oil');
+      expect(r.sharedIngredients).not.toContain('olive oil');
+      expect(r.sharedIngredients).not.toContain('butter');
+    }
+  });
+
+  test('weights Fresh ingredients higher than Pantry', async ({ page }) => {
+    // Call buildRecipeIngredientMaps directly (showUntestedRecipes defaults to true)
+    // so the untested fixture recipes are included in the corpus for this test.
+    const result = await page.evaluate(async () => {
+      const recipes = await getRecipes();
+      const maps = buildRecipeIngredientMaps(recipes);
+      const idf = computeIDF(maps);
+      const targetMap = maps.get('test-curry');
+      function scoreAgainst(recipeId) {
+        const other = maps.get(recipeId);
+        let s = 0;
+        for (const [c, cat] of targetMap) {
+          if (other.has(c)) {
+            const w = Math.max(CATEGORY_WEIGHT[cat] || 1, CATEGORY_WEIGHT[other.get(c)] || 1);
+            s += idf.get(c) * w;
+          }
+        }
+        return s;
+      }
+      return {
+        freshSharerScore: scoreAgainst('test-fresh-sharer'),
+        pantrySharerScore: scoreAgainst('test-pantry-sharer'),
+      };
+    });
+    expect(result.freshSharerScore).toBeGreaterThan(result.pantrySharerScore);
   });
 });
