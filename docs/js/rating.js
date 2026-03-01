@@ -91,11 +91,11 @@ function renderRatingBanner(recipe, session) {
   content.appendChild(closeBtn);
   banner.appendChild(content);
 
-  // Insert before the search bar
+  // Insert before the meal plan banner if present, otherwise before the search bar
   const main = document.querySelector('main');
-  const searchContainer = document.querySelector('.search-container');
-  if (main && searchContainer) {
-    main.insertBefore(banner, searchContainer);
+  const anchor = document.querySelector('#meal-plan-banner') || document.querySelector('.search-container');
+  if (main && anchor) {
+    main.insertBefore(banner, anchor);
   }
 }
 

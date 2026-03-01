@@ -26,13 +26,13 @@ test.describe('How It Works Page', () => {
     await expect(page).toHaveTitle('How It Works - biteme');
   });
 
-  test('renders all 11 feature sections', async ({ page }) => {
+  test('renders all 12 feature sections', async ({ page }) => {
     const sections = page.locator('.feature-section');
-    await expect(sections).toHaveCount(11);
+    await expect(sections).toHaveCount(12);
   });
 
   test('sections have correct anchor IDs', async ({ page }) => {
-    const expectedIds = ['find', 'surprise', 'diet', 'prepare', 'reduce-waste', 'cook', 'timer', 'after-cooking', 'share', 'offline', 'cooking-log'];
+    const expectedIds = ['find', 'surprise', 'diet', 'prepare', 'reduce-waste', 'meal-plan', 'cook', 'timer', 'after-cooking', 'share', 'offline', 'cooking-log'];
     for (const id of expectedIds) {
       await expect(page.locator(`#${id}`)).toBeVisible();
     }
@@ -65,6 +65,8 @@ test.describe('How It Works Page', () => {
   });
 
   test('back button navigates to home', async ({ page }) => {
+    await page.goto('/');
+    await page.goto('/how-it-works.html');
     await page.locator('.back-button').click();
     await expect(page).toHaveURL(/index\.html|\/$/);
   });

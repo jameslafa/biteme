@@ -355,9 +355,18 @@ If a single-source sub-group has no unit (likely a parser data quality issue whe
 - Native `<select>` with `<optgroup>` sections: a disabled placeholder, "Any recipe", Favourites (up to 5), Last cooked (up to 5, deduped), and "Let me choose…" which reveals a text search input
 - `?seed=recipeId` URL param from recipe detail page pre-selects a recipe safely (injects the option if not yet in the select)
 
+**Two-mode state machine:**
+- **Planning mode**: the 3-step form is shown; suggestions are generated live as the user picks a seed/N/servings
+- **Active mode**: entered when the user clicks "Save this plan"; shows active cards with cooked-state tracking
+- `plan_finalized_at` (localStorage timestamp) is the boundary: present → show active mode on load
+- `cooked_at` on each plan entry is three-valued: `null` = auto-sync eligible, `number` (timestamp) = cooked, `false` = user explicitly marked as not cooked
+- `syncCookedState()` auto-detects recipes completed after `plan_finalized_at` from IndexedDB sessions
+- The home page banner (`#meal-plan-banner`) reads `plan_finalized_at` + `meal_plan` from localStorage synchronously on DOMContentLoaded and shows progress when there are uncooked recipes
+- Back navigation on all sub-pages uses `history.back()` (with `href="index.html"` as fallback)
+
 **Files:**
-- `docs/plan.html` — 3-step UI: seed, N (2–8), servings per recipe
-- `docs/js/plan.js` — plan algorithm, card rendering, swap panel, ingredient list
+- `docs/plan.html` — 3-step UI: seed, N (2–8), servings per recipe; active plan section
+- `docs/js/plan.js` — plan algorithm, card rendering, swap panel, ingredient list, active plan mode
 - `docs/css/plan.css` — plan-specific styles; ingredient list matches recipe detail page design
 - Reuses globals from `recommendations.js` (ingredient maps, IDF, stoplist)
 

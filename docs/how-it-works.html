@@ -15,15 +15,16 @@
   <link rel="stylesheet" href="css/completion.css">
   <link rel="stylesheet" href="css/cooking-log.css">
   <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/plan.css">
   <link rel="stylesheet" href="css/how-it-works.css">
 </head>
 <body>
   <header>
     <nav class="recipe-nav">
-      <a href="index.html" class="back-button" aria-label="Back to recipes">
+      <a href="index.html" class="back-button" aria-label="Go back" onclick="event.preventDefault();history.back()">
         <svg data-icon="back" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
       </a>
-      <h1 class="logo">bite<span class="logo-accent">me</span></h1>
+      <h1><a href="index.html" class="logo">bite<span class="logo-accent">me</span></a></h1>
       <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
         <svg data-icon="cart" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
         <span id="cart-count" class="cart-badge" style="display: none;">0</span>

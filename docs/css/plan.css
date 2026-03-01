@@ -253,17 +253,46 @@
 .plan-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.plan-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  transition: height 0.2s ease;
+}
+
+.plan-card:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px var(--shadow);
+  transform: translateY(-2px);
+}
+
+.plan-card:hover:before {
+  height: 4px;
+}
+
+.plan-card:active {
+  transform: translateY(0);
 }
 
 .plan-card-title {
   display: block;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 400;
   color: var(--text-primary);
   text-decoration: none;
   margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.01em;
 }
 
 .plan-card-title:hover {
@@ -390,11 +419,12 @@
   margin: 0 auto;
 }
 
-.plan-ingredients-title {
+.plan-section-title {
   font-size: 1.2rem;
   font-weight: 300;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-md);
+  max-width: 800px;
+  margin: 0 auto var(--spacing-md);
 }
 
 .plan-ingredients .ingredient-category {
@@ -471,6 +501,233 @@
   fill: var(--primary-color);
 }
 
+/* Finalise button */
+
+.plan-finalise-wrap {
+  max-width: 800px;
+  margin: var(--spacing-lg) auto 0;
+  text-align: center;
+}
+
+.plan-finalise-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 2.5rem;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.plan-finalise-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Seed confirmation banner (shown when arriving with ?seed= over an active plan) */
+
+.plan-seed-confirm {
+  max-width: 800px;
+  margin: 0 auto var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--surface);
+  border: 1px solid var(--accent-color);
+  border-radius: var(--radius-md);
+}
+
+.plan-seed-confirm-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.plan-seed-confirm-note {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-bottom: var(--spacing-md);
+}
+
+.plan-seed-confirm-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.plan-seed-confirm-yes {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.plan-seed-confirm-yes:hover {
+  background: var(--primary-dark);
+}
+
+.plan-seed-confirm-no {
+  background: none;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.plan-seed-confirm-no:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+/* Active plan */
+
+.plan-active-cards {
+  max-width: 800px;
+  margin: 0 auto var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.plan-active-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease, opacity 0.2s;
+}
+
+.plan-active-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  transition: height 0.2s ease;
+}
+
+.plan-active-card:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px var(--shadow);
+  transform: translateY(-2px);
+}
+
+.plan-active-card:hover:before {
+  height: 4px;
+}
+
+.plan-active-card:active {
+  transform: translateY(0);
+}
+
+.plan-active-card.is-cooked {
+  opacity: 0.45;
+}
+
+.plan-active-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.plan-cooked-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.plan-cooked-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.plan-cooked-btn.is-cooked {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Active mode ingredients toggle */
+
+.plan-active-ingredients-wrap {
+  max-width: 800px;
+  margin: 0 auto var(--spacing-lg);
+  text-align: center;
+}
+
+.plan-active-ingredients-toggle {
+  background: none;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.plan-active-ingredients-toggle:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.plan-active-ingredients-wrap .plan-ingredients-section {
+  margin-top: var(--spacing-md);
+  text-align: left;
+}
+
+/* New plan button */
+
+.plan-new-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.plan-new-btn {
+  background: none;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.plan-new-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
 /* Empty state */
 
 .empty-state {
@@ -498,7 +755,8 @@
     font-size: 1.5rem;
   }
 
-  .plan-card {
+  .plan-card,
+  .plan-active-card {
     padding: var(--spacing-sm);
   }
 }

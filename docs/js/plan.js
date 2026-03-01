@@ -14,6 +14,8 @@ let _corpusIds = [];
 let _seedRecipe = null;
 let _currentPlan = [];
 let _defaultServings = 4;
+let _planFinalizedAt = null;
+let _suggestionsActive = false;
 
 // ─── Persistence ──────────────────────────────────────────────────────────
 
@@ -44,6 +46,21 @@ function loadPlanServings() {
 
 function savePlanServings(n) {
   try { localStorage.setItem('plan_servings', String(n)); }
+  catch {}
+}
+
+function loadPlanFinalizedAt() {
+  const v = localStorage.getItem('plan_finalized_at');
+  return v ? parseInt(v, 10) : null;
+}
+
+function savePlanFinalizedAt(ts) {
+  try { localStorage.setItem('plan_finalized_at', String(ts)); }
+  catch {}
+}
+
+function clearPlanFinalizedAt() {
+  try { localStorage.removeItem('plan_finalized_at'); }
   catch {}
 }
 
@@ -286,6 +303,7 @@ function hideCustomSearch() {
 
 function selectSeed(recipe) {
   _seedRecipe = recipe;
+  _suggestionsActive = true;
   hideCustomSearch();
 
   const sel = document.getElementById('plan-seed-select');
@@ -311,6 +329,7 @@ function selectSeed(recipe) {
 
 function clearSeed() {
   _seedRecipe = null;
+  _suggestionsActive = true;
   document.getElementById('plan-seed-warning').style.display = 'none';
   hideCustomSearch();
   const sel = document.getElementById('plan-seed-select');
@@ -395,7 +414,7 @@ function renderNSelector(activeN) {
       document.querySelectorAll('.plan-n-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       savePlanN(n);
-      debouncedSuggest();
+      if (_suggestionsActive) debouncedSuggest();
     });
     container.appendChild(btn);
   }
@@ -416,7 +435,7 @@ function setupServingsControls() {
       _defaultServings--;
       countEl.textContent = _defaultServings;
       savePlanServings(_defaultServings);
-      debouncedSuggest();
+      if (_suggestionsActive) debouncedSuggest();
     }
   });
 
@@ -425,7 +444,7 @@ function setupServingsControls() {
       _defaultServings++;
       countEl.textContent = _defaultServings;
       savePlanServings(_defaultServings);
-      debouncedSuggest();
+      if (_suggestionsActive) debouncedSuggest();
     }
   });
 }
@@ -582,12 +601,13 @@ function renderSharedIngredients() {
 
 // ─── Ingredient list ───────────────────────────────────────────────────────
 
-function renderIngredientList() {
-  const section = document.getElementById('plan-ingredients-section');
-  const container = document.getElementById('plan-ingredients');
+function renderIngredientList(sectionId = 'plan-ingredients-section', containerId = 'plan-ingredients', autoShow = true) {
+  const section = document.getElementById(sectionId);
+  const container = document.getElementById(containerId);
+  if (!section || !container) return;
 
   const merged = getMergedIngredients(_currentPlan, _allRecipes);
-  if (merged.length === 0) { section.style.display = 'none'; return; }
+  if (merged.length === 0) { if (autoShow) section.style.display = 'none'; return; }
 
   const CATEGORY_ORDER = ['Fresh', 'Fridge', 'Pantry', 'Spices'];
   const byCategory = new Map();
@@ -649,18 +669,171 @@ function renderIngredientList() {
     });
   });
 
-  section.style.display = 'block';
+  if (autoShow) section.style.display = 'block';
 }
 
 async function updatePlanCartButtonStates() {
   const allItems = await getAllShoppingListItems();
   const inCartSet = new Set(allItems.map(i => `${i.recipe_id}:${i.ingredient_id}`));
 
-  document.querySelectorAll('#plan-ingredients .add-to-cart').forEach(btn => {
+  document.querySelectorAll('#plan-ingredients .add-to-cart, #plan-active-ingredients .add-to-cart').forEach(btn => {
     const allInCart = btn.dataset.sources.split(',').every(s => inCartSet.has(s));
     btn.classList.toggle('in-cart', allInCart);
     btn.setAttribute('aria-label', allInCart ? 'Remove from shopping list' : 'Add to shopping list');
   });
+}
+
+// ─── Active plan ──────────────────────────────────────────────────────────
+
+async function syncCookedState() {
+  if (!_planFinalizedAt) return;
+  const sessions = await getAllCompletedSessions();
+  let changed = false;
+  for (const entry of _currentPlan) {
+    if (entry.cooked_at !== null) continue; // already has definitive state
+    const session = sessions.find(s => s.recipe_id === entry.recipe_id && s.completed_at > _planFinalizedAt);
+    if (session) {
+      entry.cooked_at = session.completed_at;
+      changed = true;
+    }
+  }
+  if (changed) savePlan(_currentPlan);
+}
+
+function toggleCooked(recipeId) {
+  const entry = _currentPlan.find(e => e.recipe_id === recipeId);
+  if (!entry) return;
+  const isCooked = entry.cooked_at !== null && entry.cooked_at !== false;
+  entry.cooked_at = isCooked ? false : Date.now();
+  savePlan(_currentPlan);
+  renderActivePlan();
+}
+
+function renderActivePlan() {
+  const container = document.getElementById('plan-active-cards');
+  container.innerHTML = _currentPlan.map(entry => {
+    const recipe = _allRecipes.find(r => r.id === entry.recipe_id);
+    if (!recipe) return '';
+    const isCooked = entry.cooked_at !== null && entry.cooked_at !== false;
+    return `
+      <div class="plan-active-card${isCooked ? ' is-cooked' : ''}" data-recipe-id="${recipe.id}">
+        <div class="plan-active-card-content">
+          <span class="plan-card-title">${recipe.name}</span>
+          <p class="plan-card-description">${recipe.description}</p>
+        </div>
+        <button class="plan-cooked-btn${isCooked ? ' is-cooked' : ''}" data-recipe-id="${recipe.id}" aria-label="${isCooked ? 'Mark as not cooked' : 'Mark as cooked'}">
+          ${icon('check', 20)}
+        </button>
+      </div>
+    `;
+  }).join('');
+
+  container.querySelectorAll('.plan-active-card').forEach(card => {
+    card.addEventListener('click', () => {
+      location.href = `recipe.html?id=${card.dataset.recipeId}`;
+    });
+  });
+
+  container.querySelectorAll('.plan-cooked-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleCooked(btn.dataset.recipeId);
+    });
+  });
+
+  const cooked = _currentPlan.filter(e => e.cooked_at !== null && e.cooked_at !== false).length;
+  const total = _currentPlan.length;
+  const subtitleEl = document.getElementById('plan-subtitle');
+  if (subtitleEl) {
+    if (cooked === total && total > 0) {
+      subtitleEl.textContent = 'All recipes cooked — well done!';
+    } else if (cooked === 0) {
+      subtitleEl.textContent = 'Tap the check when you cook a recipe.';
+    } else {
+      subtitleEl.textContent = `${cooked} of ${total} recipes cooked.`;
+    }
+  }
+}
+
+function showActivePlan() {
+  document.getElementById('plan-planning').style.display = 'none';
+  document.getElementById('plan-active').style.display = 'block';
+  renderIngredientList('plan-active-ingredients-section', 'plan-active-ingredients', false);
+
+  const toggle = document.getElementById('plan-active-ingredients-toggle');
+  const section = document.getElementById('plan-active-ingredients-section');
+  if (toggle && !toggle._bound) {
+    toggle._bound = true;
+    toggle.addEventListener('click', () => {
+      const open = section.style.display !== 'none';
+      section.style.display = open ? 'none' : 'block';
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? "Show the plan's ingredient list" : 'Hide ingredient list';
+    });
+  }
+}
+
+function showPlanningMode() {
+  document.getElementById('plan-active').style.display = 'none';
+  document.getElementById('plan-planning').style.display = 'block';
+  document.getElementById('plan-subtitle').textContent = "Let's plan your week together — recipes with common ingredients mean less shopping and less waste.";
+}
+
+function finalisePlan() {
+  if (_currentPlan.length === 0) return;
+  _planFinalizedAt = Date.now();
+  savePlanFinalizedAt(_planFinalizedAt);
+  for (const entry of _currentPlan) {
+    if (!('cooked_at' in entry)) entry.cooked_at = null;
+    setServings(entry.recipe_id, entry.servings);
+  }
+  savePlan(_currentPlan);
+  renderActivePlan();
+  showActivePlan();
+}
+
+function showSeedConfirmBanner(seedRecipe, uncookedCount) {
+  const existing = document.getElementById('plan-seed-confirm');
+  if (existing) existing.remove();
+
+  const banner = document.createElement('div');
+  banner.id = 'plan-seed-confirm';
+  banner.className = 'plan-seed-confirm';
+  banner.innerHTML = `
+    <p class="plan-seed-confirm-title">Plan a new week around <strong>${seedRecipe.name}</strong>?</p>
+    <p class="plan-seed-confirm-note">Your current plan has ${uncookedCount} uncooked recipe${uncookedCount !== 1 ? 's' : ''}.</p>
+    <div class="plan-seed-confirm-actions">
+      <button class="plan-seed-confirm-yes">Start new plan</button>
+      <button class="plan-seed-confirm-no">Keep current plan</button>
+    </div>
+  `;
+
+  const active = document.getElementById('plan-active');
+  active.insertBefore(banner, active.firstChild);
+
+  banner.querySelector('.plan-seed-confirm-yes').addEventListener('click', () => {
+    banner.remove();
+    startNewPlan();
+    selectSeed(seedRecipe);
+  });
+  banner.querySelector('.plan-seed-confirm-no').addEventListener('click', () => {
+    banner.remove();
+  });
+}
+
+function startNewPlan() {
+  _suggestionsActive = false;
+  _planFinalizedAt = null;
+  clearPlanFinalizedAt();
+  _currentPlan = [];
+  savePlan([]);
+  _seedRecipe = null;
+  hideCustomSearch();
+  document.getElementById('plan-results').style.display = 'none';
+  document.getElementById('plan-empty').style.display = 'none';
+  const sel = document.getElementById('plan-seed-select');
+  if (sel) sel.value = '__any__';
+  showPlanningMode();
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────
@@ -688,16 +861,32 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Populate select with favorites + last cooked (async, non-blocking)
   loadSelectData().then(renderSelect);
 
-  // Handle ?seed= from recipe detail page
+  document.getElementById('plan-finalise-btn').addEventListener('click', finalisePlan);
+  document.getElementById('plan-new-btn').addEventListener('click', startNewPlan);
+
   const urlParams = new URLSearchParams(window.location.search);
   const seedId = urlParams.get('seed');
-  if (seedId) {
-    const seedRecipe = _allRecipes.find(r => r.id === seedId);
+  const seedRecipe = seedId ? _allRecipes.find(r => r.id === seedId) : null;
+
+  _planFinalizedAt = loadPlanFinalizedAt();
+  if (_planFinalizedAt) {
+    _currentPlan = loadPlan().map(e => ({ cooked_at: null, ...e }));
+    await syncCookedState();
+    renderActivePlan();
+    showActivePlan();
+
+    if (seedRecipe) {
+      const uncookedCount = _currentPlan.filter(e => e.cooked_at === null || e.cooked_at === false).length;
+      if (uncookedCount > 0) {
+        showSeedConfirmBanner(seedRecipe, uncookedCount);
+      } else {
+        startNewPlan();
+        selectSeed(seedRecipe);
+      }
+    }
+  } else {
     if (seedRecipe) selectSeed(seedRecipe);
   }
-
-  // Results only appear after an explicit selection — never auto-restore on load
-  // (except when arriving via ?seed= param, which calls selectSeed above)
 
   updateCartCount();
 });

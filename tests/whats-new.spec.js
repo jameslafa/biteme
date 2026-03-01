@@ -58,6 +58,8 @@ test.describe('What\'s New Page', () => {
   });
 
   test('back button navigates to home', async ({ page }) => {
+    await page.goto('/');
+    await page.goto('/whats-new.html');
     await page.locator('.back-button').click();
     await expect(page).toHaveURL(/index\.html|\/$/);
   });

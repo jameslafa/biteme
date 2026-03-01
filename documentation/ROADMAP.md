@@ -68,7 +68,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Cooking Log** — Dedicated page with stats (recipes cooked, sessions, total time, week streak), most-made recipes, and monthly timeline of all completed cooks
 - **How It Works** — Feature guide page with real UI mockups, 8 walkthrough sections, deep-linkable anchors, first-visit nudge on home page
 - **Recipe Recommendations** — IDF-weighted ingredient similarity engine with category weighting (Fresh/Fridge > Pantry) and pantry stoplist (oils, flour, sugar, etc.); "Same ingredients, different dish" section on recipe detail page showing top 5 related recipes with shared ingredients; respects user's dietary and untested-recipe settings
-- **Meal Plan** — Weekly meal planner with IDF-weighted greedy recipe selection, seed recipe support, per-recipe servings, swap panel, shared ingredient callout, and per-ingredient cart buttons; lives at `plan.html`
+- **Meal Plan** — Weekly meal planner with IDF-weighted greedy recipe selection, seed recipe support, per-recipe servings, swap panel, shared ingredient callout, and per-ingredient cart buttons; active plan mode with cooked-state tracking (auto-synced from cooking sessions + manual toggle); home screen banner shows plan progress; back navigation uses `history.back()` on all sub-pages
 - **Ingredient display improvements** — Preparation text stripped from shopping contexts (shopping list, plan); first letter capitalised; text fractions (`1/2`) used consistently instead of unicode (`½`); attribution removed from merged shopping list view
 
 ---

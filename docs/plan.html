@@ -14,10 +14,10 @@
 <body>
   <header>
     <nav class="recipe-nav">
-      <a href="index.html" class="back-button" aria-label="Back to recipes">
+      <a href="index.html" class="back-button" aria-label="Go back" onclick="event.preventDefault();history.back()">
         <svg data-icon="back" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
       </a>
-      <h1 class="logo">bite<span class="logo-accent">me</span></h1>
+      <h1><a href="index.html" class="logo">bite<span class="logo-accent">me</span></a></h1>
       <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
         <svg data-icon="cart" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
         <span id="cart-count" class="cart-badge" style="display: none;">0</span>
@@ -28,9 +28,10 @@
   <main>
     <div class="plan-header">
       <h2>This Week's Plan</h2>
-      <p class="plan-subtitle">Let's plan your week together — recipes with common ingredients mean less shopping and less waste.</p>
+      <p id="plan-subtitle" class="plan-subtitle">Let's plan your week together — recipes with common ingredients mean less shopping and less waste.</p>
     </div>
 
+    <div id="plan-planning">
     <div class="plan-steps">
 
       <!-- Step 1 -->
@@ -80,6 +81,7 @@
     </div>
 
     <div id="plan-results" style="display: none;">
+      <h3 class="plan-section-title">Suggestions for this week</h3>
       <div id="plan-cards" class="plan-cards"></div>
 
       <div id="plan-shared" class="plan-shared" style="display: none;">
@@ -87,8 +89,12 @@
       </div>
 
       <div id="plan-ingredients-section" class="plan-ingredients-section" style="display: none;">
-        <h3 class="plan-ingredients-title">Ingredients</h3>
+        <h3 class="plan-section-title">Add what you need to your shopping list</h3>
         <div id="plan-ingredients" class="plan-ingredients"></div>
+      </div>
+
+      <div class="plan-finalise-wrap">
+        <button id="plan-finalise-btn" class="plan-finalise-btn">Save this plan</button>
       </div>
     </div>
 
@@ -96,6 +102,22 @@
       <p>No recipes match your current filters.</p>
       <p class="empty-subtitle">Try adjusting your dietary settings.</p>
       <a href="settings.html" class="button">Open Settings</a>
+    </div>
+    </div><!-- #plan-planning -->
+
+    <div id="plan-active" style="display: none;">
+      <div id="plan-active-cards" class="plan-active-cards"></div>
+
+      <div class="plan-active-ingredients-wrap">
+        <button id="plan-active-ingredients-toggle" class="plan-active-ingredients-toggle" aria-expanded="false">Show the plan's ingredient list</button>
+        <div id="plan-active-ingredients-section" class="plan-ingredients-section" style="display: none;">
+          <div id="plan-active-ingredients" class="plan-ingredients"></div>
+        </div>
+      </div>
+
+      <div class="plan-new-wrap">
+        <button id="plan-new-btn" class="plan-new-btn">Start a new plan</button>
+      </div>
     </div>
   </main>
 

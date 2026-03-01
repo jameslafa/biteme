@@ -271,6 +271,73 @@ const FEATURES = [
     `
   },
   {
+    id: 'meal-plan',
+    title: 'Plan your whole week at once',
+    description: 'Head to Meal Plan and pick a recipe you want to cook. The app suggests a full week of dishes that share its ingredients — so you buy one bunch of coriander and use it across three meals instead of watching half of it go limp at the back of the fridge. Lock in the plan, then come back to tick off recipes as the week goes on.',
+    mockups: [
+      {
+        label: 'Pick a seed recipe and get a week of suggestions that share its ingredients:',
+        html: `
+          <div class="plan-cards" style="margin-bottom:0;">
+            <div class="plan-card" style="cursor:default;">
+              <a class="plan-card-title" tabindex="-1" style="pointer-events:none;">Thai Green Curry</a>
+              <p class="plan-card-description">A fragrant coconut curry with seasonal vegetables</p>
+              <div class="plan-card-footer">
+                <div class="plan-card-servings">
+                  <button class="plan-servings-btn" tabindex="-1">−</button>
+                  <span class="plan-servings-count">4</span>
+                  <span class="plan-servings-label">servings</span>
+                  <button class="plan-servings-btn" tabindex="-1">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="plan-card" style="cursor:default;">
+              <a class="plan-card-title" tabindex="-1" style="pointer-events:none;">Indonesian Satay</a>
+              <p class="plan-card-description">Skewers with rich peanut sauce and coconut rice</p>
+              <div class="plan-card-footer">
+                <div class="plan-card-servings">
+                  <button class="plan-servings-btn" tabindex="-1">−</button>
+                  <span class="plan-servings-count">4</span>
+                  <span class="plan-servings-label">servings</span>
+                  <button class="plan-servings-btn" tabindex="-1">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="plan-shared" style="margin-bottom:0;">
+            <span class="plan-shared-label">Shared ingredients: </span>
+            <span class="plan-shared-list">coconut milk · lemongrass · garlic · ginger</span>
+          </div>
+        `
+      },
+      {
+        label: 'Save the plan, then tick off recipes as you cook them through the week:',
+        html: `
+          <div class="plan-active-cards" style="margin-bottom:0;">
+            <div class="plan-active-card is-cooked" style="cursor:default;">
+              <div class="plan-active-card-content">
+                <span class="plan-card-title">Thai Green Curry</span>
+                <p class="plan-card-description">A fragrant coconut curry with seasonal vegetables</p>
+              </div>
+              <button class="plan-cooked-btn is-cooked" tabindex="-1" aria-label="Mark as not cooked">
+                ${icon('check', 20)}
+              </button>
+            </div>
+            <div class="plan-active-card" style="cursor:default;">
+              <div class="plan-active-card-content">
+                <span class="plan-card-title">Indonesian Satay</span>
+                <p class="plan-card-description">Skewers with rich peanut sauce and coconut rice</p>
+              </div>
+              <button class="plan-cooked-btn" tabindex="-1" aria-label="Mark as cooked">
+                ${icon('check', 20)}
+              </button>
+            </div>
+          </div>
+        `
+      }
+    ]
+  },
+  {
     id: 'cook',
     title: 'Start cooking',
     description: 'When you\'re ready, hit "Start cooking" and you\'ll get a focused view — one step at a time, with only the ingredients you need right there. No scrolling back and forth, no flour on your screen while you swipe around. You can also keep the screen always on with the lightbulb button — handy when your hands are covered in dough.',

@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   updateCartCount();
   setupDrawer();
   checkFirstVisitNudge();
+  showMealPlanBanner();
   showRatingBannerIfNeeded();
   setupPullToRefresh();
 
@@ -580,6 +581,32 @@ async function checkFirstVisitNudge() {
     nudge.style.display = 'none';
     await setSetting('hasSeenHowItWorks', true);
   });
+}
+
+// Meal plan banner
+
+function showMealPlanBanner() {
+  const banner = document.getElementById('meal-plan-banner');
+  if (!banner) return;
+
+  const finalizedAt = localStorage.getItem('plan_finalized_at');
+  if (!finalizedAt) return;
+
+  let plan;
+  try { plan = JSON.parse(localStorage.getItem('meal_plan') || '[]'); }
+  catch { return; }
+  if (!plan.length) return;
+
+  const cooked = plan.filter(e => e.cooked_at !== null && e.cooked_at !== false).length;
+  const total = plan.length;
+  if (cooked === total) return;
+
+  const text = cooked === 0
+    ? `This week's plan — ${total} recipe${total !== 1 ? 's' : ''} to cook`
+    : `This week: ${cooked} of ${total} recipes cooked`;
+
+  document.getElementById('meal-plan-banner-text').textContent = text;
+  banner.style.display = 'flex';
 }
 
 // Surprise Me feature
