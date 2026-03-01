@@ -124,6 +124,9 @@
           <section id="similar-recipes"></section>
 
           <div class="action-buttons">
+            <a href="plan.html?seed=${recipe.id}" class="plan-week-btn" aria-label="Plan week around this recipe" title="Plan week around this">
+              ${icon('calendar', 20)}
+            </a>
             <button class="button button-primary" onclick="startCooking('${recipe.id}')">
               Start cooking
             </button>

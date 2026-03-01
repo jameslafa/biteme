@@ -27,9 +27,12 @@ You can substitute broccoli for the cauliflower if you prefer. Remove the chilli
 - 1/2 fresh [red chilli], finely sliced
 - [coriander] for garnish
 
-## Pantry
+## Fridge
 
 - 250 g [frozen peas]
+
+## Pantry
+
 - 1 tin (400 ml) [coconut milk]
 - 1 tin (400 g) [chopped tomatoes]
 - 1 1/2 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)

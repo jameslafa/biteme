@@ -81,13 +81,6 @@
   flex: 1;
 }
 
-.merged-attribution {
-  display: block;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  font-weight: 300;
-  margin-top: 0.1rem;
-}
 
 /* Shopping List */
 .shopping-list {

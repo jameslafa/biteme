@@ -326,7 +326,7 @@ Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="ca
 **How it works:**
 - `resolveAllItems()` loads all DB items, looks up the recipe and ingredient for each, and computes the serving ratio and scaled text
 - `buildMergedGroups()` groups by `ingredient.canonical` (falling back to `ingredient.text` for untagged ingredients), then sub-groups by unit. Items in the same canonical+unit sub-group have their amounts summed with `smartRound`
-- Each merged group renders as a single row with summed amount, the item name, and an attribution line listing the source recipes
+- Each merged group renders as a single row with summed amount and the item name
 - Checked state is computed per group: all sources checked → checked; some → indeterminate (partial); none → unchecked. A checkbox click writes to all source DB items via `setShoppingListItemChecked`
 - View preference persisted in `localStorage('shopping_view')`; defaults to `'merged'`
 
@@ -335,6 +335,31 @@ When the same canonical appears with different units across recipes (e.g. `1 tin
 
 **Unitless fallback:**
 If a single-source sub-group has no unit (likely a parser data quality issue where the unit was lost), the original `ingredient.text` is used as the display label rather than a bare number.
+
+## Meal Plan
+
+**Decision:** IDF-weighted greedy set selection, reusing the recommendation engine's ingredient maps and IDF scores. No backend — everything computed client-side on demand.
+
+**Algorithm:**
+1. Precompute all C(R,2) pairwise ingredient-overlap scores from the same `ingredientMaps` and `idf` used by the recommendation engine: `pairScore(a,b) = Σ IDF(canonical) × max(weight_a, weight_b)` for each shared canonical
+2. Seed selection: if a seed recipe is provided, fix it as the first element and pick the best companion from the pairwise matrix; otherwise pick the highest-scoring pair
+3. Greedy extension: add one recipe at a time, choosing the candidate that maximises total pairwise score with the current set
+
+**Ingredient list:**
+- `getMergedIngredients()` builds a flat list of unique canonicals across all plan recipes, grouped by category, sorted alphabetically within each category, excluding stoplist ingredients
+- Each item has `sources[]` — one entry per `(recipeId, ingredientId)` pair across the plan (same canonical may appear in multiple recipes)
+- Preparation text is stripped from display (`omitPreparation: true`)
+- Per-ingredient cart buttons add/remove all sources for that canonical to/from the shopping list; `in-cart` state is derived from IndexedDB on render
+
+**Seed recipe UI:**
+- Native `<select>` with `<optgroup>` sections: a disabled placeholder, "Any recipe", Favourites (up to 5), Last cooked (up to 5, deduped), and "Let me choose…" which reveals a text search input
+- `?seed=recipeId` URL param from recipe detail page pre-selects a recipe safely (injects the option if not yet in the select)
+
+**Files:**
+- `docs/plan.html` — 3-step UI: seed, N (2–8), servings per recipe
+- `docs/js/plan.js` — plan algorithm, card rendering, swap panel, ingredient list
+- `docs/css/plan.css` — plan-specific styles; ingredient list matches recipe detail page design
+- Reuses globals from `recommendations.js` (ingredient maps, IDF, stoplist)
 
 ## Surprise Me
 

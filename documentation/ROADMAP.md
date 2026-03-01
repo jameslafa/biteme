@@ -19,11 +19,10 @@ This document tracks feature ideas and improvements for BiteMe.
 - Show recipes ranked by ingredient coverage
 - Lightweight — no persistence needed, just a search UI
 
-### [ ] Meal Planning
+### [ ] Meal Planning — More ingredient categories
 
-- Pick recipes for the week on a planner view
-- Connects recipes → shopping list in a meaningful weekly workflow
-- Shopping list already handles merged quantities across recipes; this adds the planning layer on top
+- 4 categories (Fresh, Fridge, Pantry, Spices) may not be enough — frozen goods and fridge/freezer items are awkwardly grouped
+- Consider: Freezer, Deli, Bakery, or other supermarket-aisle groupings
 
 ### [ ] Unit System Toggle (Metric / Imperial)
 
@@ -69,6 +68,8 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Cooking Log** — Dedicated page with stats (recipes cooked, sessions, total time, week streak), most-made recipes, and monthly timeline of all completed cooks
 - **How It Works** — Feature guide page with real UI mockups, 8 walkthrough sections, deep-linkable anchors, first-visit nudge on home page
 - **Recipe Recommendations** — IDF-weighted ingredient similarity engine with category weighting (Fresh/Fridge > Pantry) and pantry stoplist (oils, flour, sugar, etc.); "Same ingredients, different dish" section on recipe detail page showing top 5 related recipes with shared ingredients; respects user's dietary and untested-recipe settings
+- **Meal Plan** — Weekly meal planner with IDF-weighted greedy recipe selection, seed recipe support, per-recipe servings, swap panel, shared ingredient callout, and per-ingredient cart buttons; lives at `plan.html`
+- **Ingredient display improvements** — Preparation text stripped from shopping contexts (shopping list, plan); first letter capitalised; text fractions (`1/2`) used consistently instead of unicode (`½`); attribution removed from merged shopping list view
 
 ---
 

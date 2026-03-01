@@ -68,7 +68,7 @@ async function resolveAllItems() {
       ingredient,
       ratio,
       checked: !!item.checked_at,
-      scaledText: scaleIngredientText(ingredient, ratio)
+      scaledText: scaleIngredientText(ingredient, ratio, { omitPreparation: true })
     });
   }
 
@@ -175,7 +175,6 @@ function buildMergedGroups(resolvedItems) {
       group.lines = [group.sources[0].scaledText];
     }
 
-    group.attribution = [...new Set(group.sources.map(s => s.recipeName))].join(', ');
     delete group.unitLines;
     delete group.hasQuantity;
   }
@@ -280,7 +279,6 @@ function renderMergedView(mergedGroups) {
           />
           <div class="merged-item-content">
             ${labelsHtml}
-            <span class="merged-attribution">${escapeHtml(group.attribution)}</span>
           </div>
         </div>
       </li>

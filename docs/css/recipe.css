@@ -514,8 +514,34 @@
 .action-buttons {
   margin-top: var(--spacing-xl);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   gap: var(--spacing-sm);
+}
+
+.action-buttons .button {
+  flex: 1;
+  width: auto;
+}
+
+.plan-week-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.plan-week-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 /* Responsive Design */

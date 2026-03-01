@@ -92,7 +92,7 @@
           "preparation": "for garnish"
         }
       ],
-      "Pantry": [
+      "Fridge": [
         {
           "id": 8,
           "text": "250 g frozen peas",
@@ -102,7 +102,9 @@
             "unit": "g",
             "item": "frozen peas"
           }
-        },
+        }
+      ],
+      "Pantry": [
         {
           "id": 9,
           "text": "1 tin (400 ml) coconut milk",

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plan your week's meals around shared ingredients — less shopping, less waste.">
+  <meta name="theme-color" content="#6B9080">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
+  <title>Meal Plan — BiteMe</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/plan.css">
+</head>
+<body>
+  <header>
+    <nav class="recipe-nav">
+      <a href="index.html" class="back-button" aria-label="Back to recipes">
+        <svg data-icon="back" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+      </a>
+      <h1 class="logo">bite<span class="logo-accent">me</span></h1>
+      <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
+        <svg data-icon="cart" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="plan-header">
+      <h2>This Week's Plan</h2>
+      <p class="plan-subtitle">Let's plan your week together — recipes with common ingredients mean less shopping and less waste.</p>
+    </div>
+
+    <div class="plan-steps">
+
+      <!-- Step 1 -->
+      <div class="plan-step">
+        <div class="plan-step-header">
+          <span class="plan-step-number">1</span>
+          <span class="plan-step-title">Select your main recipe</span>
+        </div>
+        <select id="plan-seed-select" class="plan-seed-select" aria-label="Choose a seed recipe"></select>
+        <div id="plan-seed-search-wrap" class="plan-seed-search-wrap" style="display: none;">
+          <input
+            type="search"
+            id="plan-seed-search"
+            class="plan-seed-input"
+            placeholder="Search recipes…"
+            autocomplete="off"
+            aria-label="Search for a recipe"
+          >
+          <div id="plan-seed-results" class="plan-seed-results" style="display: none;"></div>
+        </div>
+        <p id="plan-seed-warning" class="plan-seed-warning" style="display: none;"></p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="plan-step">
+        <div class="plan-step-header">
+          <span class="plan-step-number">2</span>
+          <span class="plan-step-title">How many times do you want to cook this week?</span>
+        </div>
+        <div id="plan-n-selector" class="plan-n-selector"></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="plan-step">
+        <div class="plan-step-header">
+          <span class="plan-step-number">3</span>
+          <span class="plan-step-title">How many servings per recipe?</span>
+        </div>
+        <div class="plan-default-servings">
+          <button id="plan-servings-dec" class="plan-servings-btn" aria-label="Decrease servings">−</button>
+          <span id="plan-servings-count" class="plan-default-servings-count">4</span>
+          <span class="plan-servings-label">servings</span>
+          <button id="plan-servings-inc" class="plan-servings-btn" aria-label="Increase servings">+</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="plan-results" style="display: none;">
+      <div id="plan-cards" class="plan-cards"></div>
+
+      <div id="plan-shared" class="plan-shared" style="display: none;">
+        <span class="plan-shared-label">Shared ingredients: </span><span id="plan-shared-list" class="plan-shared-list"></span>
+      </div>
+
+      <div id="plan-ingredients-section" class="plan-ingredients-section" style="display: none;">
+        <h3 class="plan-ingredients-title">Ingredients</h3>
+        <div id="plan-ingredients" class="plan-ingredients"></div>
+      </div>
+    </div>
+
+    <div id="plan-empty" class="empty-state" style="display: none;">
+      <p>No recipes match your current filters.</p>
+      <p class="empty-subtitle">Try adjusting your dietary settings.</p>
+      <a href="settings.html" class="button">Open Settings</a>
+    </div>
+  </main>
+
+  <script src="js/icons.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/recipes.js"></script>
+  <script src="js/servings.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/plan.js"></script>
+</body>
+</html>

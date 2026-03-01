@@ -221,20 +221,6 @@ test.describe('Shopping List — Merged view', () => {
     await expect(label).toHaveText('3 cloves garlic, minced');
   });
 
-  test('merged view shows attribution with recipe names', async ({ page }) => {
-    await addIngredientsByIndex(page, 'test-curry', [1]);
-    await addIngredientsByIndex(page, 'test-salad', [2]);
-    await page.goto('/shopping.html');
-
-    await page.locator('.view-toggle-btn[data-view="merged"]').click();
-
-    const attribution = page.locator('.merged-attribution');
-    await expect(attribution).toBeVisible();
-    const text = await attribution.textContent();
-    expect(text).toContain('Test Curry');
-    expect(text).toContain('Test Salad');
-  });
-
   test('checking merged item marks all underlying items checked', async ({ page }) => {
     await addIngredientsByIndex(page, 'test-curry', [1]);
     await addIngredientsByIndex(page, 'test-salad', [2]);

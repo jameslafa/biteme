@@ -66,7 +66,7 @@ If you like heat, add a chopped chilli in step 2. Keeps well in the fridge for 3
 Group ingredients under **`##` (H2) category headings**. Valid categories are:
 
 - `## Fresh` — produce, herbs, anything from the fresh aisle
-- `## Fridge` — dairy, cream, items stored in the fridge
+- `## Fridge` — dairy, cream, frozen goods, and anything stored cold (fridge or freezer)
 - `## Spices` — dried spices and seasonings
 - `## Pantry` — oils, stock, canned goods, dried goods
 

@@ -3,11 +3,11 @@
 // ── Formatting ──
 
 const FRACTION_MAP = [
-  [0.25, '\u00BC'],
-  [1/3,  '\u2153'],
-  [0.5,  '\u00BD'],
-  [2/3,  '\u2154'],
-  [0.75, '\u00BE'],
+  [0.25, '1/4'],
+  [1/3,  '1/3'],
+  [0.5,  '1/2'],
+  [2/3,  '2/3'],
+  [0.75, '3/4'],
 ];
 
 function formatAmount(n) {
@@ -26,14 +26,13 @@ function formatAmount(n) {
   }
 
   if (fracChar) {
-    return whole > 0 ? `${whole}${fracChar}` : fracChar;
+    return whole > 0 ? `${whole} ${fracChar}` : fracChar;
   }
   if (frac < 0.05) {
     return `${whole}`;
   }
-  // Round to 1 decimal, drop trailing zero
-  const rounded = Math.round(n * 10) / 10;
-  return rounded % 1 === 0 ? `${rounded}` : `${rounded}`;
+  // Round to 1 decimal
+  return `${Math.round(n * 10) / 10}`;
 }
 
 function smartRound(n, unit) {
@@ -63,9 +62,19 @@ function smartRound(n, unit) {
 
 // ── Scaling ──
 
-function scaleIngredientText(ingredient, ratio) {
+function capitaliseFirst(s) {
+  if (!s) return s;
+  return s.replace(/^[a-z]/, c => c.toUpperCase());
+}
+
+function scaleIngredientText(ingredient, ratio, { omitPreparation = false } = {}) {
   if (!ingredient.quantity || ratio === 1) {
-    return ingredient.text;
+    if (omitPreparation && ingredient.preparation) {
+      const suffix = ', ' + ingredient.preparation;
+      const text = ingredient.text;
+      return capitaliseFirst(text.endsWith(suffix) ? text.slice(0, -suffix.length) : text);
+    }
+    return capitaliseFirst(ingredient.text);
   }
 
   const q = ingredient.quantity;
@@ -110,11 +119,11 @@ function scaleIngredientText(ingredient, ratio) {
   }
 
   // Preparation (now stored separately on the ingredient)
-  if (ingredient.preparation) {
+  if (!omitPreparation && ingredient.preparation) {
     result += ', ' + ingredient.preparation;
   }
 
-  return result;
+  return capitaliseFirst(result);
 }
 
 // ── Persistence ──
