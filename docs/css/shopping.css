@@ -74,6 +74,24 @@
   color: var(--text-primary);
 }
 
+/* Merged view — section headers */
+#shopping-list .ingredient-category {
+  margin-bottom: var(--spacing-lg);
+}
+
+#shopping-list .ingredient-category:last-child {
+  margin-bottom: 0;
+}
+
+#shopping-list .ingredient-category h4 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+}
+
 /* Merged view items */
 .merged-item-content {
   display: flex;

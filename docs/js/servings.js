@@ -35,6 +35,50 @@ function formatAmount(n) {
   return `${Math.round(n * 10) / 10}`;
 }
 
+// ── Unit normalisation ──
+
+// Countable units with distinct singular/plural forms.
+// Keys are singular, values are plural — mirrors docs/ingredients.json "units" section.
+const UNIT_PLURAL_MAP = {
+  'clove':    'cloves',
+  'tin':      'tins',
+  'can':      'cans',
+  'cup':      'cups',
+  'sheet':    'sheets',
+  'stalk':    'stalks',
+  'stick':    'sticks',
+  'bunch':    'bunches',
+  'thumb':    'thumbs',
+  'pinch':    'pinches',
+  'handful':  'handfuls',
+  'bundle':   'bundles',
+  'portion':  'portions',
+  'head':     'heads',
+};
+
+// Reverse: plural → singular
+const UNIT_SINGULAR_MAP = Object.fromEntries(
+  Object.entries(UNIT_PLURAL_MAP).map(([s, p]) => [p, s])
+);
+
+/**
+ * Normalise a unit string to its singular canonical form.
+ * Used as a merge key so "clove" and "cloves" group together.
+ */
+function unitSingular(unit) {
+  return UNIT_SINGULAR_MAP[unit] || unit;
+}
+
+/**
+ * Return the appropriate singular/plural form of a unit for a given amount.
+ * Falls back to the unit as-is for non-countable units (g, ml, tbsp, …).
+ */
+function unitForAmount(unit, amount) {
+  if (!unit) return unit;
+  const singular = UNIT_SINGULAR_MAP[unit] || unit;
+  return amount === 1 ? singular : (UNIT_PLURAL_MAP[singular] || singular);
+}
+
 function smartRound(n, unit) {
   if (n <= 0) return 0;
 
@@ -52,7 +96,7 @@ function smartRound(n, unit) {
   }
 
   // Counts (cloves, tins, etc.): round to nearest 0.5
-  if (['cloves', 'clove', 'tins', 'tin', 'cans', 'can'].includes(u)) {
+  if (unitSingular(u) in UNIT_PLURAL_MAP) {
     return Math.round(n * 2) / 2;
   }
 

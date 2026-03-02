@@ -53,10 +53,11 @@ async function resolveAllItems() {
     const savedServings = getServings(item.recipe_id, recipe.servings);
     const ratio = savedServings / recipe.servings;
     let ingredient = null;
+    let section = null;
 
-    for (const ingredients of Object.values(recipe.ingredients)) {
+    for (const [sec, ingredients] of Object.entries(recipe.ingredients)) {
       const found = ingredients.find(ing => ing.id === item.ingredient_id);
-      if (found) { ingredient = found; break; }
+      if (found) { ingredient = found; section = sec; break; }
     }
 
     if (!ingredient) continue;
@@ -66,6 +67,7 @@ async function resolveAllItems() {
       recipeId: item.recipe_id,
       recipeName: recipe.name,
       ingredient,
+      section,
       ratio,
       checked: !!item.checked_at,
       scaledText: scaleIngredientText(ingredient, ratio, { omitPreparation: true })
@@ -88,7 +90,8 @@ function buildMergedGroups(resolvedItems) {
       groups.set(canonicalKey, {
         unitLines: new Map(),
         sources: [],
-        hasQuantity: false
+        hasQuantity: false,
+        section: item.section
       });
     }
 
@@ -104,7 +107,8 @@ function buildMergedGroups(resolvedItems) {
     if (ingredient.quantity) {
       group.hasQuantity = true;
       const unit = ingredient.quantity.unit || null;
-      const unitKey = unit !== null ? unit : '__unitless__';
+      // Normalise to singular canonical so "clove" and "cloves" merge into one group.
+      const unitKey = unit !== null ? unitSingular(unit) : '__unitless__';
       const scaledAmount = smartRound(ingredient.quantity.amount * ratio, unit);
       const scaledMax = ingredient.quantity.amount_max != null
         ? smartRound(ingredient.quantity.amount_max * ratio, unit)
@@ -114,7 +118,7 @@ function buildMergedGroups(resolvedItems) {
         group.unitLines.set(unitKey, {
           amount: scaledAmount,
           amountMax: scaledMax,
-          unit,
+          unit: unit !== null ? unitKey : null,  // store singular canonical, null for unitless
           item: ingredient.quantity.item || '',
           prefix: ingredient.quantity.prefix || null,
           sourceCount: 1,
@@ -122,9 +126,9 @@ function buildMergedGroups(resolvedItems) {
         });
       } else {
         const line = group.unitLines.get(unitKey);
-        line.amount = smartRound(line.amount + scaledAmount, unit);
+        line.amount = smartRound(line.amount + scaledAmount, unitKey);
         if (scaledMax != null && line.amountMax != null) {
-          line.amountMax = smartRound(line.amountMax + scaledMax, unit);
+          line.amountMax = smartRound(line.amountMax + scaledMax, unitKey);
         } else {
           line.amountMax = null;
         }
@@ -153,7 +157,9 @@ function buildMergedGroups(resolvedItems) {
           if (line.prefix) label += line.prefix + ' ';
           label += formatAmount(line.amount);
           if (line.amountMax != null) label += '-' + formatAmount(line.amountMax);
-          if (line.unit) label += ' ' + line.unit;
+          // Pluralise based on final merged amount (e.g. 1 clove, 5 cloves)
+          const displayAmt = line.amountMax != null ? line.amountMax : line.amount;
+          if (line.unit) label += ' ' + unitForAmount(line.unit, displayAmt);
           if (line.item) label += ' ' + line.item;
           group.lines = [label];
         }
@@ -165,7 +171,8 @@ function buildMergedGroups(resolvedItems) {
           if (line.prefix) q += line.prefix + ' ';
           q += formatAmount(line.amount);
           if (line.amountMax != null) q += '-' + formatAmount(line.amountMax);
-          if (line.unit) q += ' ' + line.unit;
+          const displayAmt = line.amountMax != null ? line.amountMax : line.amount;
+          if (line.unit) q += ' ' + unitForAmount(line.unit, displayAmt);
           return q;
         }).join(' + ');
         group.lines = [`${itemName} (${quantities})`];
@@ -262,12 +269,25 @@ function renderByRecipeView(resolvedItems) {
 function renderMergedView(mergedGroups) {
   const container = document.getElementById('shopping-list');
 
-  const items = [...mergedGroups.values()].map(group => {
+  const SECTION_ORDER = ['Fresh', 'Fridge', 'Pantry', 'Condiments', 'Spices'];
+
+  const bySection = new Map();
+  for (const group of mergedGroups.values()) {
+    const sec = group.section || 'Other';
+    if (!bySection.has(sec)) bySection.set(sec, []);
+    bySection.get(sec).push(group);
+  }
+
+  const orderedSections = [
+    ...SECTION_ORDER.filter(s => bySection.has(s)),
+    ...[...bySection.keys()].filter(s => !SECTION_ORDER.includes(s)),
+  ];
+
+  const renderItem = group => {
     const sourceIds = group.sources.map(s => s.itemId).join(',');
     const labelsHtml = group.lines
       .map(line => `<span class="shopping-item-label">${escapeHtml(line)}</span>`)
       .join('');
-
     return `
       <li class="shopping-item merged-item ${group.checked ? 'checked' : group.partial ? 'partial' : ''}"
           data-source-ids="${sourceIds}">
@@ -283,9 +303,14 @@ function renderMergedView(mergedGroups) {
         </div>
       </li>
     `;
-  }).join('');
+  };
 
-  container.innerHTML = `<ul class="shopping-items">${items}</ul>`;
+  container.innerHTML = orderedSections.map(sec => `
+    <div class="ingredient-category">
+      <h4>${escapeHtml(sec)}</h4>
+      <ul class="shopping-items">${bySection.get(sec).map(renderItem).join('')}</ul>
+    </div>
+  `).join('');
 
   // Indeterminate state must be set via JS (can't be expressed in HTML)
   container.querySelectorAll('.merged-item.partial input[type="checkbox"]').forEach(cb => {

@@ -19,7 +19,9 @@
       ],
       "Pantry": [
         { "id": 4, "text": "1 cup lentils", "canonical": "lentil", "preparation": null, "quantity": { "amount": 1, "unit": "cup", "item": "lentils" } },
-        { "id": 5, "text": "2 cups vegetable broth", "canonical": "vegetable broth", "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "vegetable broth" } },
+        { "id": 5, "text": "2 cups vegetable broth", "canonical": "vegetable broth", "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "vegetable broth" } }
+      ],
+      "Condiments": [
         { "id": 6, "text": "1 tbsp oil", "canonical": "vegetable oil", "preparation": null, "quantity": { "amount": 1, "unit": "tbsp", "item": "oil" } }
       ]
     },
@@ -46,11 +48,13 @@
       "Fresh": [
         { "id": 1, "text": "2 cups lettuce", "canonical": "lettuce", "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
         { "id": 2, "text": "1 tomato", "canonical": "tomato", "preparation": null, "quantity": { "amount": 1, "item": "tomato" } },
-        { "id": 4, "text": "1 clove garlic", "canonical": "garlic", "preparation": null, "quantity": { "amount": 1, "unit": "cloves", "item": "garlic" } }
+        { "id": 4, "text": "1 clove garlic", "canonical": "garlic", "preparation": null, "quantity": { "amount": 1, "unit": "clove", "item": "garlic" } }
       ],
       "Pantry": [
-        { "id": 3, "text": "2 tbsp olive oil", "canonical": "olive oil", "preparation": null, "quantity": { "amount": 2, "unit": "tbsp", "item": "olive oil" } },
         { "id": 5, "text": "½ cup lentils", "canonical": "lentil", "preparation": null, "quantity": { "amount": 0.5, "unit": "cup", "item": "lentils" } }
+      ],
+      "Condiments": [
+        { "id": 3, "text": "2 tbsp olive oil", "canonical": "olive oil", "preparation": null, "quantity": { "amount": 2, "unit": "tbsp", "item": "olive oil" } }
       ]
     },
     "steps": [
