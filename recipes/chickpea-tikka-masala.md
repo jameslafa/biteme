@@ -17,13 +17,9 @@ US recipes often call this "tomato puree" — in European terms that's passata (
 
 # Ingredients
 
-## Fresh
-
 - 1 medium [onion], diced
 - 2 cloves [garlic], minced
 - Handful [coriander], to serve
-
-## Pantry
 
 - 1 tbsp [olive oil]
 - 2 tins (400 g) [chickpeas], drained and rinsed
@@ -32,7 +28,6 @@ US recipes often call this "tomato puree" — in European terms that's passata (
 - 250 ml [coconut milk]
 - 1 tsp [ginger paste]
 - 1 tsp [brown sugar]
-## Spices
 
 - 1 1/2 tsp [garam masala]
 - 1 tsp [ground cumin]

@@ -609,7 +609,7 @@ function renderIngredientList(sectionId = 'plan-ingredients-section', containerI
   const merged = getMergedIngredients(_currentPlan, _allRecipes);
   if (merged.length === 0) { if (autoShow) section.style.display = 'none'; return; }
 
-  const CATEGORY_ORDER = ['Fresh', 'Fridge', 'Pantry', 'Spices'];
+  const CATEGORY_ORDER = ['Fresh', 'Fridge', 'Pantry', 'Condiments', 'Spices'];
   const byCategory = new Map();
   for (const item of merged) {
     if (!byCategory.has(item.category)) byCategory.set(item.category, []);

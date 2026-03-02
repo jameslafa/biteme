@@ -17,23 +17,15 @@ Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not
 
 # Ingredients
 
-## Fresh
-
 - 1 clove [garlic], crushed
 - Juice of 1 [lemon]
 
-## Fridge
-
 - Few [ice] cubes
-
-## Spices
 
 - Pinch of [ground cumin] (optional, for topping)
 - Pinch of [paprika] (optional, for topping)
 - Pinch of [sumac] (optional, for topping)
 - Pinch of [za'atar] (optional, for topping)
-
-## Pantry
 
 - 250 g [chickpeas]
 - 1 tsp [baking soda] for soaking

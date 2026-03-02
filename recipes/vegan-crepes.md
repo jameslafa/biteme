@@ -17,8 +17,6 @@ The resting time is important. It lets the flour fully hydrate and the gluten re
 
 # Ingredients
 
-## Pantry
-
 - 220 g [plain flour] (T45 / Type 405 / Tipo 00)
 - 30 g [corn starch] or potato starch
 - 1 tbsp [sugar] (optional, for sweet crêpes)
@@ -26,13 +24,9 @@ The resting time is important. It lets the flour fully hydrate and the gluten re
 - 1 tbsp [vanilla extract] (optional, for sweet crêpes)
 - 1 tbsp [orange blossom water] (optional, for sweet crêpes)
 
-## Fridge
-
 - 500 ml [oat milk] (or soy milk)
 - 50 ml [sparkling water]
 - A little [vegan butter] for the pan
-
-## Spices
 
 - 1 pinch [salt]
 

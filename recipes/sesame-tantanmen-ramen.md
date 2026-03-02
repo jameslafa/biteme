@@ -17,21 +17,15 @@ Tantanmen is the Japanese take on Sichuan dan dan noodles. The key is the sesame
 
 # Ingredients
 
-## Fresh
-
 - 1/4 small [cabbage], shredded
 - 100 g [bean sprouts]
 - 2 [spring onions], sliced
 - 1 clove [garlic], minced
 - 1 tsp [ginger], minced
 
-## Fridge
-
 - 200 g [tofu], drained and crumbled
 - 250 ml [soy milk]
 - 1/2 tbsp [miso paste]
-
-## Pantry
 
 - 2 portions [ramen noodles]
 - 3 tbsp [Asian sesame paste]
@@ -42,8 +36,6 @@ Tantanmen is the Japanese take on Sichuan dan dan noodles. The key is the sesame
 - 300 ml [vegetable stock]
 - 80 g [sweetcorn]
 - Crushed [peanuts] to serve
-
-## Spices
 
 - 1 tsp [chilli oil]
 - [Sesame seeds] to serve

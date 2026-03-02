@@ -17,17 +17,14 @@ This delicious French spice bread is best enjoyed the next day when the flavours
 
 # Ingredients
 
-## Fridge
 - 250 ml (1 cup) [milk] (or plant milk for a vegan version)
 
-## Pantry
 - 125 g (3/4 cup) [brown sugar]
 - 250 g (1-3/4 cups) [plain flour] (T45 / Type 405 / Tipo 00)
 - 3 tbsp [honey] (or jam for a vegan version)
 - 3 tsp [baking soda]
 - 3 tsp [orange blossom water]
 
-## Spices
 - 2 tsp [spice mix] (cinnamon, green aniseed, star anise, grated nutmeg, coriander seeds, cloves, ground ginger)
 
 # Instructions

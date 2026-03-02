@@ -17,19 +17,13 @@ Press the tofu for at least 24 hours to extract all the water. The drier the tof
 
 # Ingredients
 
-## Pantry
-
 - 1 tbsp [olive oil]
 - 2 tbsp [nutritional yeast]
 - 1 tbsp [tahini]
 
-## Fridge
-
 - 400 g [tofu] (pressed for 24h)
 - 120 ml [oat milk] (or creamy plant milk)
 - 1 tbsp [vegan yogurt] (plant-based yogurt, optional)
-
-## Spices
 
 - 1/2 tsp [ground turmeric]
 - 1/2 tsp [garlic powder]

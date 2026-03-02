@@ -17,9 +17,9 @@ function isStopIngredient(canonical) {
     || canonical === 'milk';
 }
 
-// Category weights: perishable ingredients (Fresh/Fridge) define a recipe's
-// identity more than shelf-stable pantry items.
-const CATEGORY_WEIGHT = { Fresh: 2, Fridge: 2, Pantry: 1 };
+// Category weights: perishable ingredients (Fresh/Fridge) are most identity-defining.
+// Condiments (tahini, miso, soy sauce) are more distinctive than generic pantry staples.
+const CATEGORY_WEIGHT = { Fresh: 2, Fridge: 2, Pantry: 1, Condiments: 1.5 };
 
 // Returns Map<recipeId, Map<canonical, category>> filtered by user settings.
 // Excludes Spices and pantry stoplist ingredients.
@@ -30,7 +30,7 @@ function buildRecipeIngredientMaps(recipes, { showUntestedRecipes = true, dietar
     if (dietaryFilters.length > 0 && !dietaryFilters.every(d => (recipe.diet || []).includes(d))) continue;
     const ingredientMap = new Map();
     for (const [category, ingredients] of Object.entries(recipe.ingredients)) {
-      if (category === 'Spices') continue;
+      if (category === 'Spices') continue; // Spices don't define recipe identity
       for (const ing of ingredients) {
         const canonical = ing.canonical || ing.text;
         if (isStopIngredient(canonical)) continue;
@@ -80,7 +80,7 @@ async function getSimilarRecipes(recipeId, n = 5) {
     if (!targetRecipe) return [];
     targetMap = new Map();
     for (const [category, ingredients] of Object.entries(targetRecipe.ingredients)) {
-      if (category === 'Spices') continue;
+      if (category === 'Spices') continue; // Spices don't define recipe identity
       for (const ing of ingredients) {
         const canonical = ing.canonical || ing.text;
         if (isStopIngredient(canonical)) continue;

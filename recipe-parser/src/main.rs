@@ -114,15 +114,24 @@ struct Manifest {
 }
 
 #[derive(Deserialize)]
+struct CanonicalIngredientEntry {
+    #[serde(default)]
+    plural: Option<String>,
+    section: String,
+}
+
+#[derive(Deserialize)]
 struct CanonicalJson {
-    ingredients: HashMap<String, Option<String>>,
+    ingredients: HashMap<String, CanonicalIngredientEntry>,
     units: HashMap<String, Option<String>>,
 }
 
-/// Canonical vocabulary loaded from docs/canonical.json.
+/// Canonical vocabulary loaded from docs/ingredients.json.
 struct CanonicalData {
     /// Maps any form (singular or plural, lowercase) → singular canonical (lowercase).
     ingredients: HashMap<String, String>,
+    /// Maps singular canonical (lowercase) → section name (e.g. "Fresh", "Pantry").
+    ingredient_sections: HashMap<String, String>,
     /// All known unit forms (both singular and plural), sorted by length descending.
     units: Vec<String>,
 }
@@ -132,25 +141,21 @@ impl CanonicalData {
         let content = fs::read_to_string(path)
             .with_context(|| format!("Failed to read canonical vocabulary: {:?}", path))?;
         let json: CanonicalJson = serde_json::from_str(&content)
-            .context("Failed to parse canonical.json")?;
+            .context("Failed to parse ingredients.json")?;
 
         let mut ingredients = HashMap::new();
-        for (key, plural_opt) in &json.ingredients {
-            if key == "comment" {
-                continue;
-            }
+        let mut ingredient_sections = HashMap::new();
+        for (key, entry) in &json.ingredients {
             let canonical = key.to_lowercase();
             ingredients.insert(canonical.clone(), canonical.clone());
-            if let Some(plural) = plural_opt {
+            ingredient_sections.insert(canonical.clone(), entry.section.clone());
+            if let Some(plural) = &entry.plural {
                 ingredients.insert(plural.to_lowercase(), canonical);
             }
         }
 
         let mut units: Vec<String> = Vec::new();
         for (singular, plural_opt) in &json.units {
-            if singular == "comment" {
-                continue;
-            }
             units.push(singular.to_lowercase());
             if let Some(plural) = plural_opt {
                 units.push(plural.to_lowercase());
@@ -160,7 +165,7 @@ impl CanonicalData {
         units.sort_by(|a, b| b.len().cmp(&a.len()).then(a.cmp(b)));
         units.dedup();
 
-        Ok(Self { ingredients, units })
+        Ok(Self { ingredients, ingredient_sections, units })
     }
 
     /// Empty canonical data for use in unit tests; falls back to hardcoded units.
@@ -171,19 +176,24 @@ impl CanonicalData {
             "cans".to_string(), "can".to_string(), "medium".to_string(), "small".to_string(),
             "large".to_string(), "kg".to_string(), "ml".to_string(), "g".to_string(), "l".to_string(),
         ];
-        Self { ingredients: HashMap::new(), units }
+        Self { ingredients: HashMap::new(), ingredient_sections: HashMap::new(), units }
     }
 
     fn lookup_ingredient(&self, raw: &str) -> Option<&str> {
         self.ingredients.get(raw).map(|s| s.as_str())
     }
+
+    fn lookup_section(&self, canonical: &str) -> Option<&str> {
+        self.ingredient_sections.get(canonical).map(|s| s.as_str())
+    }
 }
 
-// Valid ingredient categories (also defines the output order)
+// Valid ingredient sections (also defines the output order)
 const VALID_CATEGORIES: &[&str] = &[
     "Fresh",
     "Fridge",
     "Pantry",
+    "Condiments",
     "Spices",
 ];
 
@@ -654,8 +664,7 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
     let parser = MarkdownParser::new(markdown_content);
 
     let mut current_section = String::new();
-    let mut current_category = String::new();
-    let mut ingredients: HashMap<String, Vec<Ingredient>> = HashMap::new();
+    let mut flat_ingredients: Vec<Ingredient> = Vec::new();
     let mut steps: Vec<Step> = Vec::new();
     let mut notes: Option<String> = None;
     let mut serving_suggestions: Option<String> = None;
@@ -684,15 +693,15 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
                 current_heading_level = 0;
             }
             Event::End(TagEnd::Heading(_)) if current_heading_level == 2 && current_section == "Ingredients" && !current_text.is_empty() => {
-                current_category = current_text.trim().to_string();
-
-                // Validate category
-                if !VALID_CATEGORIES.contains(&current_category.as_str()) {
-                    bail!("Invalid ingredient category: '{}'. Valid categories: {:?}",
-                          current_category, VALID_CATEGORIES);
+                // Section headers (## Fresh, ## Pantry, etc.) are no longer used.
+                // Sections are derived from ingredients.json.
+                if lint {
+                    bail!(
+                        "Ingredient section headers ('## {}') are no longer supported. \
+                         Remove section headers from recipe files — sections are derived from ingredients.json.",
+                        current_text.trim()
+                    );
                 }
-
-                ingredients.insert(current_category.clone(), Vec::new());
                 current_text.clear();
                 current_heading_level = 0;
             }
@@ -711,64 +720,73 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
                 // Strip any no-scale annotation from text (in case parser included it)
                 let raw_text = current_text.trim()
                     .replace("<!-- no-scale -->", "").trim().to_string();
-                if !raw_text.is_empty() && !current_category.is_empty() {
-                    if let Some(category_items) = ingredients.get_mut(&current_category) {
-                        // Extract [canonical] tag and preparation from text
-                        let (clean_text, raw_canonical, preparation) = strip_canonical(&raw_text);
+                if !raw_text.is_empty() {
+                    // Extract [canonical] tag and preparation from text
+                    let (clean_text, raw_canonical, preparation) = strip_canonical(&raw_text);
 
-                        // Lint: error if no [canonical] tag present
-                        if lint && raw_canonical.is_none() {
-                            bail!(
-                                "Ingredient '{}' (category '{}') is missing a [canonical] tag. \
-                                Wrap the ingredient name in brackets, e.g. [garlic].",
-                                raw_text, current_category
-                            );
-                        }
+                    // Lint: error if no [canonical] tag present
+                    if lint && raw_canonical.is_none() {
+                        bail!(
+                            "Ingredient '{}' is missing a [canonical] tag. \
+                            Wrap the ingredient name in brackets, e.g. [garlic].",
+                            raw_text
+                        );
+                    }
 
-                        // Resolve canonical to singular form via vocabulary
-                        let canonical_resolved = raw_canonical.as_deref().and_then(|raw| {
-                            canonical.lookup_ingredient(raw).map(|s| s.to_string())
-                        }).or_else(|| raw_canonical.clone());
+                    // Resolve canonical to singular form via vocabulary
+                    let canonical_resolved = raw_canonical.as_deref().and_then(|raw| {
+                        canonical.lookup_ingredient(raw).map(|s| s.to_string())
+                    }).or_else(|| raw_canonical.clone());
 
-                        // Lint: error if [canonical] is not in the vocabulary
-                        if lint {
-                            if let Some(raw) = &raw_canonical {
-                                if canonical.lookup_ingredient(raw).is_none() && !canonical.ingredients.is_empty() {
+                    // Lint: error if [canonical] is not in the vocabulary or has no section
+                    if lint {
+                        if let Some(raw) = &raw_canonical {
+                            if canonical.lookup_ingredient(raw).is_none() && !canonical.ingredients.is_empty() {
+                                bail!(
+                                    "Ingredient '{}': [{}] is not in ingredients.json. \
+                                    Add it to docs/ingredients.json before linting.",
+                                    raw_text, raw
+                                );
+                            }
+                            if let Some(resolved) = &canonical_resolved {
+                                if !canonical.ingredient_sections.is_empty()
+                                    && canonical.lookup_section(resolved).is_none()
+                                {
                                     bail!(
-                                        "Ingredient '{}' (category '{}'): [{}] is not in canonical.json. \
-                                        Add it to docs/canonical.json before linting.",
-                                        raw_text, current_category, raw
+                                        "Ingredient '{}': canonical '{}' has no section in ingredients.json. \
+                                        Add a 'section' field to its entry.",
+                                        clean_text, resolved
                                     );
                                 }
                             }
                         }
-
-                        let quantity = if current_ingredient_no_scale {
-                            None
-                        } else {
-                            let mut q = parse_ingredient_quantity(&clean_text, &canonical.units);
-                            // Override quantity.item with the bracket text the author wrote
-                            if let (Some(ref mut qty), Some(ref raw)) = (&mut q, &raw_canonical) {
-                                qty.item = raw.clone();
-                            }
-                            // Lint warning: ingredient looks scalable but failed to parse
-                            if lint && q.is_none() {
-                                let first_char = clean_text.chars().next().unwrap_or(' ');
-                                if first_char.is_ascii_digit() || unicode_fraction_value(first_char).is_some() {
-                                    eprintln!("  \u{26a0}\u{fe0f}  WARNING: Ingredient '{}' (category '{}') starts with a number but could not be parsed for scaling. Add <!-- no-scale --> to suppress.", clean_text, current_category);
-                                }
-                            }
-                            q
-                        };
-                        category_items.push(Ingredient {
-                            id: ingredient_id,
-                            text: clean_text,
-                            canonical: canonical_resolved,
-                            preparation,
-                            quantity,
-                        });
-                        ingredient_id += 1;
                     }
+
+                    let quantity = if current_ingredient_no_scale {
+                        None
+                    } else {
+                        let mut q = parse_ingredient_quantity(&clean_text, &canonical.units);
+                        // Override quantity.item with the bracket text the author wrote
+                        if let (Some(ref mut qty), Some(ref raw)) = (&mut q, &raw_canonical) {
+                            qty.item = raw.clone();
+                        }
+                        // Lint warning: ingredient looks scalable but failed to parse
+                        if lint && q.is_none() {
+                            let first_char = clean_text.chars().next().unwrap_or(' ');
+                            if first_char.is_ascii_digit() || unicode_fraction_value(first_char).is_some() {
+                                eprintln!("  \u{26a0}\u{fe0f}  WARNING: Ingredient '{}' starts with a number but could not be parsed for scaling. Add <!-- no-scale --> to suppress.", clean_text);
+                            }
+                        }
+                        q
+                    };
+                    flat_ingredients.push(Ingredient {
+                        id: ingredient_id,
+                        text: clean_text,
+                        canonical: canonical_resolved,
+                        preparation,
+                        quantity,
+                    });
+                    ingredient_id += 1;
                 }
                 current_text.clear();
                 current_ingredient_no_scale = false;
@@ -822,9 +840,19 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
         }
     }
 
+    // Assign sections from ingredients.json and group by section
+    let mut ingredients: HashMap<String, Vec<Ingredient>> = HashMap::new();
+    for ing in flat_ingredients {
+        let section = ing.canonical.as_deref()
+            .and_then(|c| canonical.lookup_section(c))
+            .unwrap_or("Pantry")
+            .to_string();
+        ingredients.entry(section).or_default().push(ing);
+    }
+
     // Validation
     if ingredients.is_empty() {
-        bail!("Recipe must have at least one ingredient category");
+        bail!("Recipe must have at least one ingredient");
     }
     if steps.is_empty() {
         bail!("Recipe must have at least one instruction step");
@@ -1178,11 +1206,11 @@ fn main() -> Result<()> {
     }
 
     // Load canonical vocabulary
-    let canonical_path = std::path::Path::new("docs/canonical.json");
+    let canonical_path = std::path::Path::new("docs/ingredients.json");
     let canonical = if canonical_path.exists() {
         CanonicalData::load(canonical_path)?
     } else {
-        eprintln!("⚠️  WARNING: docs/canonical.json not found; canonical validation disabled.");
+        eprintln!("⚠️  WARNING: docs/ingredients.json not found; canonical validation disabled.");
         CanonicalData::empty()
     };
 
@@ -1298,7 +1326,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup test ingredient
 
 # Instructions
@@ -1338,7 +1365,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1358,11 +1384,11 @@ date: 2026-01-01
     }
 
     #[test]
-    fn test_invalid_category() {
+    fn test_lint_rejects_section_headers() {
         let test_recipe = r#"---
-id: bad-category
-name: Bad Category
-description: Recipe with invalid ingredient category
+id: section-headers
+name: Section Headers Recipe
+description: Recipe with section headers in lint mode
 servings: 2
 time: 15
 difficulty: easy
@@ -1373,7 +1399,7 @@ date: 2026-01-01
 
 # Ingredients
 
-## Invalid Category
+## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1382,14 +1408,14 @@ date: 2026-01-01
 "#;
 
         let temp_dir = std::env::temp_dir();
-        let test_file = temp_dir.join("bad-category.md");
+        let test_file = temp_dir.join("section-headers.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
+        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("Invalid ingredient category"));
+        assert!(result.unwrap_err().to_string().contains("no longer supported"));
     }
 
     #[test]
@@ -1408,7 +1434,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1443,7 +1468,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1482,7 +1506,6 @@ This is a test note.
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1524,7 +1547,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1559,7 +1581,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1605,7 +1626,7 @@ date: 2026-01-01
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("at least one ingredient category"));
+        assert!(result.unwrap_err().to_string().contains("at least one ingredient"));
     }
 
     #[test]
@@ -1624,7 +1645,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 "#;
 
@@ -1655,7 +1675,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1690,7 +1709,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1725,11 +1743,9 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - First ingredient
 - Second ingredient
 
-## Spices
 - Third ingredient
 
 # Instructions
@@ -1746,14 +1762,12 @@ date: 2026-01-01
 
         assert!(result.is_ok());
         let recipe = result.unwrap();
-        
-        // Check IDs are sequential
-        let pantry = recipe.ingredients.get("Pantry").unwrap();
-        assert_eq!(pantry[0].id, 1);
-        assert_eq!(pantry[1].id, 2);
-        
-        let spices = recipe.ingredients.get("Spices").unwrap();
-        assert_eq!(spices[0].id, 3);
+
+        // All ingredients without canonical fall back to Pantry — IDs must be sequential across sections
+        let all_ingredients: Vec<_> = recipe.ingredients.values().flatten().collect();
+        let mut ids: Vec<u32> = all_ingredients.iter().map(|i| i.id).collect();
+        ids.sort();
+        assert_eq!(ids, vec![1, 2, 3]);
     }
 
     #[test]
@@ -1772,13 +1786,10 @@ date: 2026-01-01
 
 # Ingredients
 
-## Fresh
 - 1 onion
 
-## Pantry
 - 1 cup rice
 
-## Spices
 - 1 tsp salt
 
 # Instructions
@@ -1795,10 +1806,9 @@ date: 2026-01-01
 
         assert!(result.is_ok());
         let recipe = result.unwrap();
-        assert_eq!(recipe.ingredients.len(), 3);
-        assert!(recipe.ingredients.contains_key("Fresh"));
-        assert!(recipe.ingredients.contains_key("Pantry"));
-        assert!(recipe.ingredients.contains_key("Spices"));
+        // Ingredients without canonical tags fall back to Pantry
+        let total: usize = recipe.ingredients.values().map(|v| v.len()).sum();
+        assert_eq!(total, 3);
     }
 
     #[test]
@@ -1817,7 +1827,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup [flour]
 - 2 tbsp [oil]
 - 1 tsp [salt]
@@ -1856,11 +1865,9 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup rice
 - 2 tbsp oil
 
-## Fresh
 - 1 onion, diced
 
 # Instructions
@@ -1890,8 +1897,9 @@ date: 2026-01-01
 
     #[test]
     fn test_ingredient_category_order() {
-        // Test that categories are always output in VALID_CATEGORIES order
-        // regardless of their order in the markdown file
+        // Test that sections are output in VALID_CATEGORIES order in JSON
+        // Use canonical data so ingredients are distributed across multiple sections.
+        // Ingredients listed in reverse canonical order to verify output order is fixed.
         let test_recipe = r#"---
 id: order-test
 name: Category Order Test
@@ -1906,50 +1914,45 @@ date: 2026-01-01
 
 # Ingredients
 
-## Spices
-- 1 tsp salt
-
-## Fresh
-- 1 onion
-
-## Pantry
-- 1 cup rice
-
-## Fridge
-- 1 cup milk
+- 1 tsp [salt]
+- 2 [eggs]
+- 1 tin [chickpeas]
+- 1 tbsp [olive oil]
+- 2 cloves [garlic]
 
 # Instructions
 
-1. Step one
+1. Use {salt}, {egg}, {chickpea}, {olive oil}, {garlic}
 "#;
 
         let temp_dir = std::env::temp_dir();
         let test_file = temp_dir.join("order-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
-        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
+        let result = parse_recipe_file(&test_file, false, &make_canonical_data());
         fs::remove_file(&test_file).ok();
 
         assert!(result.is_ok());
         let recipe = result.unwrap();
 
-        // Serialize to JSON to check order
+        // Serialize to JSON and check that section keys appear in VALID_CATEGORIES order
+        // by comparing their positions in the raw JSON string.
         let json = serde_json::to_string(&recipe).unwrap();
-        let value: serde_json::Value = serde_json::from_str(&json).unwrap();
-
-        // Get the keys in order they appear in JSON
-        let ingredients = value["ingredients"].as_object().unwrap();
-        let keys: Vec<&str> = ingredients.keys().map(|s| s.as_str()).collect();
-
-        // Should be in VALID_CATEGORIES order: Fresh, Fridge, Pantry, Spices
-        assert_eq!(keys, vec!["Fresh", "Fridge", "Pantry", "Spices"]);
+        let fresh_pos = json.find("\"Fresh\"").expect("Fresh not found");
+        let fridge_pos = json.find("\"Fridge\"").expect("Fridge not found");
+        let pantry_pos = json.find("\"Pantry\"").expect("Pantry not found");
+        let condiments_pos = json.find("\"Condiments\"").expect("Condiments not found");
+        let spices_pos = json.find("\"Spices\"").expect("Spices not found");
+        assert!(fresh_pos < fridge_pos, "Fresh should come before Fridge");
+        assert!(fridge_pos < pantry_pos, "Fridge should come before Pantry");
+        assert!(pantry_pos < condiments_pos, "Pantry should come before Condiments");
+        assert!(condiments_pos < spices_pos, "Condiments should come before Spices");
     }
 
     #[test]
     fn test_missing_frontmatter() {
         let test_recipe = r#"# Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -1984,7 +1987,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2019,7 +2021,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2054,7 +2055,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2090,7 +2090,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2126,7 +2125,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2162,7 +2160,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2197,7 +2194,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2232,7 +2228,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2268,7 +2263,6 @@ date: 2026-02-10
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2305,7 +2299,6 @@ date: 10-02-2026
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2341,7 +2334,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2377,7 +2369,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2412,7 +2403,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2447,7 +2437,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup ingredient
 
 # Instructions
@@ -2660,7 +2649,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 large handful of spinach <!-- no-scale -->
 - 500 g flour
 
@@ -2706,11 +2694,9 @@ date: 2026-01-01
 
 # Ingredients
 
-## Fresh
 - 3-4 cloves garlic, minced
 - Juice of 1/2 lemon
 
-## Pantry
 - 1 tin (400 ml) coconut milk
 - Salt to taste
 
@@ -2729,30 +2715,32 @@ date: 2026-01-01
         assert!(result.is_ok());
         let recipe = result.unwrap();
 
-        let fresh = recipe.ingredients.get("Fresh").unwrap();
-        // 3-4 cloves garlic
-        let garlic = &fresh[0];
+        // No canonical tags → all fall back to Pantry section
+        let pantry = recipe.ingredients.get("Pantry").unwrap();
+
+        // Find garlic by text content
+        let garlic = pantry.iter().find(|i| i.text.contains("garlic")).unwrap();
         let gq = garlic.quantity.as_ref().unwrap();
         assert_eq!(gq.amount, 3.0);
         assert_eq!(gq.amount_max, Some(4.0));
         assert_eq!(gq.unit.as_deref(), Some("cloves"));
 
-        // Juice of 1/2 lemon
-        let lemon = &fresh[1];
+        // Find lemon by text content
+        let lemon = pantry.iter().find(|i| i.text.contains("lemon")).unwrap();
         let lq = lemon.quantity.as_ref().unwrap();
         assert_eq!(lq.prefix.as_deref(), Some("Juice of"));
         assert_eq!(lq.amount, 0.5);
 
-        let pantry = recipe.ingredients.get("Pantry").unwrap();
-        // 1 tin (400 ml) coconut milk
-        let coconut = &pantry[0];
+        // Find coconut milk by text content
+        let coconut = pantry.iter().find(|i| i.text.contains("coconut")).unwrap();
         let cq = coconut.quantity.as_ref().unwrap();
         assert_eq!(cq.amount, 1.0);
         assert_eq!(cq.unit.as_deref(), Some("tin"));
         assert_eq!(cq.secondary_amount, Some(400.0));
 
         // Salt to taste — non-scalable
-        assert!(pantry[1].quantity.is_none());
+        let salt = pantry.iter().find(|i| i.text.contains("Salt") || i.text.contains("salt")).unwrap();
+        assert!(salt.quantity.is_none());
     }
 
     #[test]
@@ -2930,7 +2918,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 cup rice
 
 # Instructions
@@ -3005,6 +2992,7 @@ date: 2026-01-01
 
     fn make_canonical_data() -> CanonicalData {
         let mut ingredients = HashMap::new();
+        let mut ingredient_sections = HashMap::new();
         // singular entries
         for key in &["garlic", "olive oil", "salt", "egg", "chickpea", "mushroom"] {
             ingredients.insert(key.to_string(), key.to_string());
@@ -3013,12 +3001,19 @@ date: 2026-01-01
         ingredients.insert("eggs".to_string(), "egg".to_string());
         ingredients.insert("chickpeas".to_string(), "chickpea".to_string());
         ingredients.insert("mushrooms".to_string(), "mushroom".to_string());
+        // sections
+        ingredient_sections.insert("garlic".to_string(), "Fresh".to_string());
+        ingredient_sections.insert("mushroom".to_string(), "Fresh".to_string());
+        ingredient_sections.insert("egg".to_string(), "Fridge".to_string());
+        ingredient_sections.insert("chickpea".to_string(), "Pantry".to_string());
+        ingredient_sections.insert("olive oil".to_string(), "Condiments".to_string());
+        ingredient_sections.insert("salt".to_string(), "Spices".to_string());
         let units = vec![
             "cloves".to_string(), "clove".to_string(),
             "tbsp".to_string(), "tsp".to_string(),
             "g".to_string(), "ml".to_string(),
         ];
-        CanonicalData { ingredients, units }
+        CanonicalData { ingredients, ingredient_sections, units }
     }
 
     #[test]
@@ -3037,7 +3032,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 2 cloves [garlic], minced
 - 1 tbsp [olive oil]
 - [salt] to taste
@@ -3056,21 +3050,23 @@ date: 2026-01-01
 
         assert!(result.is_ok());
         let recipe = result.unwrap();
-        let pantry = recipe.ingredients.get("Pantry").unwrap();
 
-        // garlic: canonical = "garlic", preparation = "minced"
-        assert_eq!(pantry[0].canonical.as_deref(), Some("garlic"));
-        assert_eq!(pantry[0].preparation.as_deref(), Some("minced"));
-        assert_eq!(pantry[0].text, "2 cloves garlic, minced");
+        // garlic → Fresh: canonical = "garlic", preparation = "minced"
+        let fresh = recipe.ingredients.get("Fresh").unwrap();
+        let garlic = fresh.iter().find(|i| i.canonical.as_deref() == Some("garlic")).unwrap();
+        assert_eq!(garlic.preparation.as_deref(), Some("minced"));
+        assert_eq!(garlic.text, "2 cloves garlic, minced");
 
-        // olive oil: canonical = "olive oil", no preparation
-        assert_eq!(pantry[1].canonical.as_deref(), Some("olive oil"));
-        assert_eq!(pantry[1].preparation, None);
+        // olive oil → Condiments: canonical = "olive oil", no preparation
+        let condiments = recipe.ingredients.get("Condiments").unwrap();
+        let oil = condiments.iter().find(|i| i.canonical.as_deref() == Some("olive oil")).unwrap();
+        assert_eq!(oil.preparation, None);
 
-        // salt to taste: canonical = "salt", preparation = "to taste", no quantity
-        assert_eq!(pantry[2].canonical.as_deref(), Some("salt"));
-        assert_eq!(pantry[2].preparation.as_deref(), Some("to taste"));
-        assert!(pantry[2].quantity.is_none());
+        // salt → Spices: canonical = "salt", preparation = "to taste", no quantity
+        let spices = recipe.ingredients.get("Spices").unwrap();
+        let salt = spices.iter().find(|i| i.canonical.as_deref() == Some("salt")).unwrap();
+        assert_eq!(salt.preparation.as_deref(), Some("to taste"));
+        assert!(salt.quantity.is_none());
     }
 
     #[test]
@@ -3090,7 +3086,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Fridge
 - 2 [eggs]
 
 # Instructions
@@ -3132,7 +3127,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 tin (400 g) [chickpeas], drained
 
 # Instructions
@@ -3172,7 +3166,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 tbsp olive oil
 
 # Instructions
@@ -3207,7 +3200,6 @@ date: 2026-01-01
 
 # Ingredients
 
-## Pantry
 - 1 tbsp [dragon-fruit-extract]
 
 # Instructions

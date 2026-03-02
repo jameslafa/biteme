@@ -17,8 +17,6 @@ The cocoa powder adds a lovely depth without making it taste chocolatey. Add the
 
 # Ingredients
 
-## Fresh
-
 - 1 large [onion], diced
 - 3 cloves [garlic], minced
 - 1 [red pepper], diced
@@ -26,8 +24,6 @@ The cocoa powder adds a lovely depth without making it taste chocolatey. Add the
 - 2 [carrots], peeled and diced
 - 1 stick [celery], diced
 - Juice of 1/2 [lime]
-
-## Pantry
 
 - 1 tbsp [olive oil]
 - 1 tin (400 g) [chopped tomatoes]
@@ -37,8 +33,6 @@ The cocoa powder adds a lovely depth without making it taste chocolatey. Add the
 - 1 tin (200 g) [sweetcorn], drained
 - 400 ml [vegetable stock]
 - 2 tbsp [tomato puree]
-
-## Spices
 
 - 1 tsp [ground cumin]
 - 1 tsp [smoked paprika]

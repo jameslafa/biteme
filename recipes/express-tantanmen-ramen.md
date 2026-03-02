@@ -18,17 +18,11 @@ Start the marinated eggs the evening before — they need at least one night in 
 
 # Ingredients
 
-## Fridge
-
 - 2 [eggs]
 - 300 ml [oat milk] or soy milk
 - 180 g [smoked tofu]
 
-## Fresh
-
 - 2 tbsp [chive], finely chopped
-
-## Pantry
 
 - 300 ml [vegetable stock]
 - 100 g [ramen noodles]
@@ -42,8 +36,6 @@ Start the marinated eggs the evening before — they need at least one night in 
 - 20 g [tahini]
 - 1 tsp [sesame oil]
 - 3 tsp [crispy chili oil] (1 for tofu, 2 for nutty base)
-
-## Spices
 
 - 1 tsp [ground ginger]
 

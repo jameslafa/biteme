@@ -17,21 +17,17 @@ Use very ripe bananas with lots of brown spots for the best flavour and natural 
 
 # Ingredients
 
-## Fresh
 - 4 medium [bananas], mashed
 - Extra [banana] slices for topping
 
-## Fridge
 - 60 ml [plant milk]
 
-## Pantry
 - 100 g [brown sugar]
 - 250 g [plain flour] (T45 / Type 405 / Tipo 00)
 - 60 ml [vegetable oil] (e.g. rapeseed, sunflower, canola)
 - 2 tsp [vanilla extract]
 - 1 tsp [baking soda]
 
-## Spices
 - 1 tsp [cinnamon]
 - 1/2 tsp [salt]
 

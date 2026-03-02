@@ -251,7 +251,7 @@ Each recipe object includes:
   date: string;
   tested: boolean;       // false for untested recipes, true (default) otherwise
   notes?: string;
-  ingredients: Record<string, Ingredient[]>;
+  ingredients: Record<'Fresh' | 'Fridge' | 'Pantry' | 'Condiments' | 'Spices', Ingredient[]>;
   steps: Step[];
   serving_suggestions?: string;
 }
@@ -265,7 +265,7 @@ The `diet` field holds dietary labels separated from meal-type/cuisine `tags`. V
 
 Each ingredient in the JSON includes a `text` field (display-ready text), `canonical` and `preparation` fields for shopping list merging, and an optional `quantity` field with structured data for scaling.
 
-Ingredient canonical names are controlled by `docs/canonical.json` — a vocabulary mapping singular canonical names to their plural forms (or `null` for mass nouns). Authors tag ingredients in recipe markdown using `[brackets]`:
+Ingredient canonical names and sections are controlled by `docs/ingredients.json`. Each entry maps a singular canonical name to an object with an optional `plural` form and a required `section` (`Fresh`, `Fridge`, `Pantry`, `Condiments`, or `Spices`). The parser derives the section for each ingredient from this file at build time — recipe markdown files do not contain section headers. Authors tag ingredients in recipe markdown using `[brackets]`:
 
 ```
 - 2 cloves [garlic], minced    →  canonical: "garlic",  preparation: "minced"

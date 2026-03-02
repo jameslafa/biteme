@@ -16,20 +16,14 @@ This comes together in 20 minutes — prep the vegetables while the water boils.
 
 # Ingredients
 
-## Fresh
-
 - 3 bunches [bok choy], chopped, whites and greens separated
 - 4 cloves [garlic], diced
 - 1 bunch [spring onions], chopped, whites and greens separated
 - 225 g [mushrooms], chopped small
 
-## Pantry
-
 - 2 bundles [soba noodles]
 - 1 tbsp [sesame oil]
 - 80 ml [teriyaki sauce], or to taste
-
-## Spices
 
 - 1/4 tsp [white pepper]
 - [sesame seeds] for serving

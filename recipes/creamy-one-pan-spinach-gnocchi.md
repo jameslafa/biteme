@@ -13,28 +13,20 @@ date: 2026-02-12
 
 # Ingredients
 
-## Fresh
-
 - 3-4 cloves [garlic], minced
 - 1/2 small [onion], finely diced
 - 60 g [spinach], roughly chopped
 - Juice of 1/2 [lemon] (optional)
 
-## Fridge
-
 - 1 tbsp [vegan butter] (or regular)
 - 240 g [coconut cream]
 - 2 tbsp [cream cheese], vegan or regular
-
-## Pantry
 
 - 1 tbsp [olive oil]
 - 55 g [sun-dried tomatoes], finely chopped (oil packed)
 - 450 g [gnocchi]
 - 120 ml [water] or vegetable broth
 - 2 tbsp [nutritional yeast] (or finely grated parmesan)
-
-## Spices
 
 - 1 tsp [Italian seasoning] (or oregano)
 - 1/2 tsp [black pepper]

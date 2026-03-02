@@ -17,19 +17,13 @@ If you don't want to use wine, replace it with the same amount of vegetable stoc
 
 # Ingredients
 
-## Fresh
-
 - 1 medium [red onion], finely chopped
 - 2 cloves [garlic], minced
 - 400 g [mushrooms], finely chopped
 - A small handful [thyme] sprigs
 - [lemon] for juice
 
-## Fridge
-
 - 800 ml [oat milk] (or other non-dairy milk)
-
-## Pantry
 
 - 500 g wholemeal or spelt [spaghetti]
 - 200 ml [white wine]
@@ -37,8 +31,6 @@ If you don't want to use wine, replace it with the same amount of vegetable stoc
 - 2 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)
 - 2 tbsp [nutritional yeast], plus extra for garnish
 - [chilli flakes] for garnish (optional)
-
-## Spices
 
 - 2 tsp [salt]
 

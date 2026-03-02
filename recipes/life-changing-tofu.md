@@ -18,16 +18,10 @@ This technique comes from Chinese and Korean cooking. The potato starch coating 
 
 # Ingredients
 
-## Fridge
-
 - 360 g [tofu], cut into cubes
-
-## Fresh
 
 - 2 cm [ginger], finely grated
 - 1-2 cloves [garlic], finely grated
-
-## Pantry
 
 - 3 tbsp [potato starch]
 - 3 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)

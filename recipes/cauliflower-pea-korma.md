@@ -17,8 +17,6 @@ You can substitute broccoli for the cauliflower if you prefer. Remove the chilli
 
 # Ingredients
 
-## Fresh
-
 - 1 head [cauliflower] (about 600 g), cut into small florets
 - 1 large [red pepper], deseeded and finely chopped
 - 4 [spring onions], finely sliced
@@ -27,11 +25,7 @@ You can substitute broccoli for the cauliflower if you prefer. Remove the chilli
 - 1/2 fresh [red chilli], finely sliced
 - [coriander] for garnish
 
-## Fridge
-
 - 250 g [frozen peas]
-
-## Pantry
 
 - 1 tin (400 ml) [coconut milk]
 - 1 tin (400 g) [chopped tomatoes]
@@ -39,8 +33,6 @@ You can substitute broccoli for the cauliflower if you prefer. Remove the chilli
 - 1 tbsp [maple syrup]
 - Juice of 1/2 [lime]
 - [flaked almonds] for garnish
-
-## Spices
 
 - 1 tsp [cumin seeds]
 - 1 1/2 tbsp [curry powder]

@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 22, date: '2026-03-02', text: 'Ingredients in the meal plan and shopping list are now grouped into 5 sections — Fresh, Fridge, Pantry, Condiments, and Spices — making it easier to work through your list aisle by aisle' },
   { id: 21, date: '2026-03-01', text: 'Meal Plan — pick a seed recipe, get a week of suggestions sharing ingredients, add them to your shopping list, then track what you\'ve cooked as the week goes on' },
   { id: 19, date: '2026-02-28', text: 'Recipe recommendations — scroll to the bottom of any recipe to find dishes that share its ingredients, so you can plan your week around what you\'ve already bought and waste less' },
   { id: 18, date: '2026-02-28', text: 'Shopping list now merges the same ingredient from different recipes into one line with summed quantities — no more hunting for garlic twice' },

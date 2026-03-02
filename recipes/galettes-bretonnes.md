@@ -17,14 +17,10 @@ The batter needs at least 2 hours of resting in the fridge, ideally overnight â€
 
 # Ingredients
 
-## Fresh
-
 - 200 g [mushrooms] (chestnut, oyster, or shiitake), sliced
 - 2 cloves [garlic], minced
 - Fresh [thyme], a few sprigs
 - Fresh [parsley], chopped
-
-## Pantry
 
 - 250 g [buckwheat flour]
 - 500-750 ml [water]

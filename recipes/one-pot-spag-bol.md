@@ -17,8 +17,6 @@ Nutritional yeast has a savoury, cheesy flavour and is available in most health 
 
 # Ingredients
 
-## Fresh
-
 - 1 [red onion], finely chopped
 - 4 cloves [garlic], minced
 - 1 [carrot], grated
@@ -27,8 +25,6 @@ Nutritional yeast has a savoury, cheesy flavour and is available in most health 
 - A handful of [cherry tomatoes], halved
 - A bunch of [basil]
 - [lemon] for juice
-
-## Pantry
 
 - 1 tin (400 g) [lentils], drained and rinsed
 - 1 tin (400 g) [chopped tomatoes]

@@ -67,6 +67,19 @@
           }
         },
         {
+          "id": 8,
+          "text": "60-80 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 60.0,
+            "amount_max": 80.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        }
+      ],
+      "Condiments": [
+        {
           "id": 5,
           "text": "3 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "canonical": "vegetable oil",
@@ -95,17 +108,6 @@
             "amount": 3.0,
             "unit": "tbsp",
             "item": "agave syrup"
-          }
-        },
-        {
-          "id": 8,
-          "text": "60-80 ml water",
-          "canonical": "water",
-          "quantity": {
-            "amount": 60.0,
-            "amount_max": 80.0,
-            "unit": "ml",
-            "item": "water"
           }
         }
       ]
@@ -227,6 +229,16 @@
           "text": "coriander for garnish",
           "canonical": "coriander",
           "preparation": "for garnish"
+        },
+        {
+          "id": 13,
+          "text": "Juice of 1/2 lime",
+          "canonical": "lime",
+          "quantity": {
+            "amount": 0.5,
+            "item": "lime",
+            "prefix": "Juice of"
+          }
         }
       ],
       "Fridge": [
@@ -267,6 +279,14 @@
           }
         },
         {
+          "id": 14,
+          "text": "flaked almonds for garnish",
+          "canonical": "flaked almond",
+          "preparation": "for garnish"
+        }
+      ],
+      "Condiments": [
+        {
           "id": 11,
           "text": "1 1/2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "canonical": "vegetable oil",
@@ -285,22 +305,6 @@
             "unit": "tbsp",
             "item": "maple syrup"
           }
-        },
-        {
-          "id": 13,
-          "text": "Juice of 1/2 lime",
-          "canonical": "lime",
-          "quantity": {
-            "amount": 0.5,
-            "item": "lime",
-            "prefix": "Juice of"
-          }
-        },
-        {
-          "id": 14,
-          "text": "flaked almonds for garnish",
-          "canonical": "flaked almond",
-          "preparation": "for garnish"
         }
       ],
       "Spices": [
@@ -496,17 +500,6 @@
           }
         },
         {
-          "id": 9,
-          "text": "12 tbsp soy sauce (6 for marinade, 2 each for broth, tofu and nutty base)",
-          "canonical": "soy sauce",
-          "preparation": "(6 for marinade, 2 each for broth, tofu and nutty base)",
-          "quantity": {
-            "amount": 12.0,
-            "unit": "tbsp",
-            "item": "soy sauce"
-          }
-        },
-        {
           "id": 10,
           "text": "150 ml cold water",
           "canonical": "cold water",
@@ -524,6 +517,19 @@
             "amount": 10.0,
             "unit": "g",
             "item": "sugar"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 9,
+          "text": "12 tbsp soy sauce (6 for marinade, 2 each for broth, tofu and nutty base)",
+          "canonical": "soy sauce",
+          "preparation": "(6 for marinade, 2 each for broth, tofu and nutty base)",
+          "quantity": {
+            "amount": 12.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
           }
         },
         {
@@ -738,6 +744,24 @@
           }
         },
         {
+          "id": 16,
+          "text": "350 ml warm water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 350.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        },
+        {
+          "id": 17,
+          "text": "A handful of toasted nuts for garnish",
+          "canonical": "toasted nut",
+          "preparation": "for garnish"
+        }
+      ],
+      "Condiments": [
+        {
           "id": 11,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "canonical": "vegetable oil",
@@ -788,22 +812,6 @@
             "unit": "tbsp",
             "item": "maple syrup"
           }
-        },
-        {
-          "id": 16,
-          "text": "350 ml warm water",
-          "canonical": "water",
-          "quantity": {
-            "amount": 350.0,
-            "unit": "ml",
-            "item": "water"
-          }
-        },
-        {
-          "id": 17,
-          "text": "A handful of toasted nuts for garnish",
-          "canonical": "toasted nut",
-          "preparation": "for garnish"
         }
       ]
     },
@@ -930,16 +938,6 @@
           }
         },
         {
-          "id": 8,
-          "text": "200 ml white wine",
-          "canonical": "white wine",
-          "quantity": {
-            "amount": 200.0,
-            "unit": "ml",
-            "item": "white wine"
-          }
-        },
-        {
           "id": 9,
           "text": "500 ml vegetable stock",
           "canonical": "vegetable stock",
@@ -947,17 +945,6 @@
             "amount": 500.0,
             "unit": "ml",
             "item": "vegetable stock"
-          }
-        },
-        {
-          "id": 10,
-          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
-          "canonical": "vegetable oil",
-          "preparation": "(e.g. rapeseed, sunflower, canola)",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "vegetable oil"
           }
         },
         {
@@ -970,15 +957,38 @@
             "unit": "tbsp",
             "item": "nutritional yeast"
           }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 8,
+          "text": "200 ml white wine",
+          "canonical": "white wine",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "ml",
+            "item": "white wine"
+          }
         },
+        {
+          "id": 10,
+          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "vegetable oil"
+          }
+        }
+      ],
+      "Spices": [
         {
           "id": 12,
           "text": "chilli flakes for garnish (optional)",
           "canonical": "chilli flakes",
           "preparation": "for garnish (optional)"
-        }
-      ],
-      "Spices": [
+        },
         {
           "id": 13,
           "text": "2 tsp salt",
@@ -1146,6 +1156,23 @@
           }
         },
         {
+          "id": 13,
+          "text": "1.2 litres vegetable stock",
+          "canonical": "vegetable stock",
+          "quantity": {
+            "amount": 1.2,
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 15,
+          "text": "nutritional yeast to serve",
+          "canonical": "nutritional yeast",
+          "preparation": "to serve"
+        }
+      ],
+      "Condiments": [
+        {
           "id": 12,
           "text": "1 tbsp olive oil",
           "canonical": "olive oil",
@@ -1153,15 +1180,6 @@
             "amount": 1.0,
             "unit": "tbsp",
             "item": "olive oil"
-          }
-        },
-        {
-          "id": 13,
-          "text": "1.2 litres vegetable stock",
-          "canonical": "vegetable stock",
-          "quantity": {
-            "amount": 1.2,
-            "item": "vegetable stock"
           }
         },
         {
@@ -1174,12 +1192,6 @@
             "unit": "tbsp",
             "item": "tamari"
           }
-        },
-        {
-          "id": 15,
-          "text": "nutritional yeast to serve",
-          "canonical": "nutritional yeast",
-          "preparation": "to serve"
         }
       ]
     },
@@ -1264,16 +1276,6 @@
       ],
       "Pantry": [
         {
-          "id": 4,
-          "text": "1 tbsp olive oil",
-          "canonical": "olive oil",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "olive oil"
-          }
-        },
-        {
           "id": 5,
           "text": "2 tins (400 g) chickpeas, drained and rinsed",
           "canonical": "chickpea",
@@ -1319,16 +1321,6 @@
           }
         },
         {
-          "id": 9,
-          "text": "1 tsp ginger paste",
-          "canonical": "ginger paste",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "ginger paste"
-          }
-        },
-        {
           "id": 10,
           "text": "1 tsp brown sugar",
           "canonical": "brown sugar",
@@ -1336,6 +1328,28 @@
             "amount": 1.0,
             "unit": "tsp",
             "item": "brown sugar"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 4,
+          "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 tsp ginger paste",
+          "canonical": "ginger paste",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ginger paste"
           }
         }
       ],
@@ -1505,17 +1519,6 @@
             "unit": "g",
             "item": "mint"
           }
-        },
-        {
-          "id": 6,
-          "text": "130 ml lime juice (about 4-5 limes)",
-          "canonical": "lime juice",
-          "preparation": "(about 4-5 limes)",
-          "quantity": {
-            "amount": 130.0,
-            "unit": "ml",
-            "item": "lime juice"
-          }
         }
       ],
       "Pantry": [
@@ -1533,6 +1536,29 @@
           }
         },
         {
+          "id": 9,
+          "text": "1 vegetable stock cube",
+          "canonical": "vegetable stock",
+          "preparation": "cube",
+          "quantity": {
+            "amount": 1.0,
+            "item": "vegetable stock"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 6,
+          "text": "130 ml lime juice (about 4-5 limes)",
+          "canonical": "lime juice",
+          "preparation": "(about 4-5 limes)",
+          "quantity": {
+            "amount": 130.0,
+            "unit": "ml",
+            "item": "lime juice"
+          }
+        },
+        {
           "id": 8,
           "text": "5 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
           "canonical": "vegetable oil",
@@ -1541,16 +1567,6 @@
             "amount": 5.0,
             "unit": "tbsp",
             "item": "vegetable oil"
-          }
-        },
-        {
-          "id": 9,
-          "text": "1 vegetable stock cube",
-          "canonical": "vegetable stock",
-          "preparation": "cube",
-          "quantity": {
-            "amount": 1.0,
-            "item": "vegetable stock"
           }
         }
       ],
@@ -1721,7 +1737,9 @@
             "secondary_amount": 400.0,
             "secondary_unit": "g"
           }
-        },
+        }
+      ],
+      "Condiments": [
         {
           "id": 7,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
@@ -1891,7 +1909,9 @@
             "unit": "g",
             "item": "tofu"
           }
-        },
+        }
+      ],
+      "Pantry": [
         {
           "id": 7,
           "text": "1 tin (400 ml) coconut cream",
@@ -1905,7 +1925,7 @@
           }
         }
       ],
-      "Pantry": [
+      "Condiments": [
         {
           "id": 8,
           "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
@@ -2124,16 +2144,6 @@
           }
         },
         {
-          "id": 7,
-          "text": "1 tbsp tomato puree",
-          "canonical": "tomato puree",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "tomato puree"
-          }
-        },
-        {
           "id": 8,
           "text": "250 ml vegetable stock",
           "canonical": "vegetable stock",
@@ -2141,6 +2151,18 @@
             "amount": 250.0,
             "unit": "ml",
             "item": "vegetable stock"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 7,
+          "text": "1 tbsp tomato puree",
+          "canonical": "tomato puree",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "tomato puree"
           }
         },
         {
@@ -2352,6 +2374,14 @@
           }
         },
         {
+          "id": 9,
+          "text": "sesame seeds for serving",
+          "canonical": "sesame seed",
+          "preparation": "for serving"
+        }
+      ],
+      "Condiments": [
+        {
           "id": 6,
           "text": "1 tbsp sesame oil",
           "canonical": "sesame oil",
@@ -2383,12 +2413,6 @@
             "unit": "tsp",
             "item": "white pepper"
           }
-        },
-        {
-          "id": 9,
-          "text": "sesame seeds for serving",
-          "canonical": "sesame seed",
-          "preparation": "for serving"
         }
       ]
     },
@@ -2498,17 +2522,9 @@
             "unit": "ml",
             "item": "water"
           }
-        },
-        {
-          "id": 7,
-          "text": "5 g fine salt",
-          "canonical": "salt",
-          "quantity": {
-            "amount": 5.0,
-            "unit": "g",
-            "item": "salt"
-          }
-        },
+        }
+      ],
+      "Condiments": [
         {
           "id": 8,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
@@ -2528,6 +2544,18 @@
             "amount": 1.0,
             "unit": "tbsp",
             "item": "soy sauce"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 7,
+          "text": "5 g fine salt",
+          "canonical": "salt",
+          "quantity": {
+            "amount": 5.0,
+            "unit": "g",
+            "item": "salt"
           }
         }
       ]
@@ -2670,16 +2698,6 @@
             "unit": "ml",
             "item": "soy milk"
           }
-        },
-        {
-          "id": 8,
-          "text": "1/2 tbsp miso paste",
-          "canonical": "miso paste",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tbsp",
-            "item": "miso paste"
-          }
         }
       ],
       "Pantry": [
@@ -2691,6 +2709,50 @@
             "amount": 2.0,
             "unit": "portions",
             "item": "ramen noodles"
+          }
+        },
+        {
+          "id": 15,
+          "text": "300 ml vegetable stock",
+          "canonical": "vegetable stock",
+          "quantity": {
+            "amount": 300.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 16,
+          "text": "80 g sweetcorn",
+          "canonical": "sweetcorn",
+          "quantity": {
+            "amount": 80.0,
+            "unit": "g",
+            "item": "sweetcorn"
+          }
+        },
+        {
+          "id": 17,
+          "text": "Crushed peanuts to serve",
+          "canonical": "peanut",
+          "preparation": "to serve"
+        },
+        {
+          "id": 19,
+          "text": "Sesame seeds to serve",
+          "canonical": "sesame seed",
+          "preparation": "to serve"
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 8,
+          "text": "1/2 tbsp miso paste",
+          "canonical": "miso paste",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tbsp",
+            "item": "miso paste"
           }
         },
         {
@@ -2745,34 +2807,6 @@
           }
         },
         {
-          "id": 15,
-          "text": "300 ml vegetable stock",
-          "canonical": "vegetable stock",
-          "quantity": {
-            "amount": 300.0,
-            "unit": "ml",
-            "item": "vegetable stock"
-          }
-        },
-        {
-          "id": 16,
-          "text": "80 g sweetcorn",
-          "canonical": "sweetcorn",
-          "quantity": {
-            "amount": 80.0,
-            "unit": "g",
-            "item": "sweetcorn"
-          }
-        },
-        {
-          "id": 17,
-          "text": "Crushed peanuts to serve",
-          "canonical": "peanut",
-          "preparation": "to serve"
-        }
-      ],
-      "Spices": [
-        {
           "id": 18,
           "text": "1 tsp chilli oil",
           "canonical": "chilli oil",
@@ -2781,12 +2815,6 @@
             "unit": "tsp",
             "item": "chilli oil"
           }
-        },
-        {
-          "id": 19,
-          "text": "Sesame seeds to serve",
-          "canonical": "sesame seed",
-          "preparation": "to serve"
         }
       ]
     },
@@ -2888,16 +2916,6 @@
       ],
       "Pantry": [
         {
-          "id": 1,
-          "text": "1 tbsp olive oil",
-          "canonical": "olive oil",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "olive oil"
-          }
-        },
-        {
           "id": 2,
           "text": "2 tbsp nutritional yeast",
           "canonical": "nutritional yeast",
@@ -2905,6 +2923,18 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "nutritional yeast"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 1,
+          "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
           }
         },
         {
@@ -3112,16 +3142,6 @@
       ],
       "Pantry": [
         {
-          "id": 8,
-          "text": "1 tbsp olive oil",
-          "canonical": "olive oil",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "olive oil"
-          }
-        },
-        {
           "id": 9,
           "text": "1 tin (400 g) chopped tomatoes",
           "canonical": "chopped tomato",
@@ -3190,6 +3210,28 @@
             "amount": 400.0,
             "unit": "ml",
             "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 22,
+          "text": "1 tsp cocoa powder",
+          "canonical": "cocoa powder",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cocoa powder"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 8,
+          "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
           }
         },
         {
@@ -3263,16 +3305,6 @@
             "amount": 1.0,
             "unit": "pinch",
             "item": "cayenne pepper"
-          }
-        },
-        {
-          "id": 22,
-          "text": "1 tsp cocoa powder",
-          "canonical": "cocoa powder",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "cocoa powder"
           }
         }
       ]
@@ -3416,16 +3448,6 @@
       ],
       "Pantry": [
         {
-          "id": 7,
-          "text": "1 tbsp olive oil",
-          "canonical": "olive oil",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "olive oil"
-          }
-        },
-        {
           "id": 8,
           "text": "1 tin (400 g) chopped tomatoes",
           "canonical": "chopped tomato",
@@ -3458,6 +3480,18 @@
             "amount": 500.0,
             "unit": "ml",
             "item": "vegetable stock"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 7,
+          "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
           }
         }
       ],
@@ -3567,16 +3601,6 @@
           }
         },
         {
-          "id": 8,
-          "text": "50 ml sparkling water",
-          "canonical": "sparkling water",
-          "quantity": {
-            "amount": 50.0,
-            "unit": "ml",
-            "item": "sparkling water"
-          }
-        },
-        {
           "id": 9,
           "text": "A little vegan butter for the pan",
           "canonical": "vegan butter",
@@ -3617,6 +3641,18 @@
             "item": "sugar"
           }
         },
+        {
+          "id": 8,
+          "text": "50 ml sparkling water",
+          "canonical": "sparkling water",
+          "quantity": {
+            "amount": 50.0,
+            "unit": "ml",
+            "item": "sparkling water"
+          }
+        }
+      ],
+      "Condiments": [
         {
           "id": 4,
           "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
@@ -3779,16 +3815,6 @@
           }
         },
         {
-          "id": 6,
-          "text": "240 g coconut cream",
-          "canonical": "coconut cream",
-          "quantity": {
-            "amount": 240.0,
-            "unit": "g",
-            "item": "coconut cream"
-          }
-        },
-        {
           "id": 7,
           "text": "2 tbsp cream cheese, vegan or regular",
           "canonical": "cream cheese",
@@ -3798,17 +3824,27 @@
             "unit": "tbsp",
             "item": "cream cheese"
           }
+        },
+        {
+          "id": 10,
+          "text": "450 g gnocchi",
+          "canonical": "gnocchi",
+          "quantity": {
+            "amount": 450.0,
+            "unit": "g",
+            "item": "gnocchi"
+          }
         }
       ],
       "Pantry": [
         {
-          "id": 8,
-          "text": "1 tbsp olive oil",
-          "canonical": "olive oil",
+          "id": 6,
+          "text": "240 g coconut cream",
+          "canonical": "coconut cream",
           "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "olive oil"
+            "amount": 240.0,
+            "unit": "g",
+            "item": "coconut cream"
           }
         },
         {
@@ -3820,16 +3856,6 @@
             "amount": 55.0,
             "unit": "g",
             "item": "sun-dried tomatoes"
-          }
-        },
-        {
-          "id": 10,
-          "text": "450 g gnocchi",
-          "canonical": "gnocchi",
-          "quantity": {
-            "amount": 450.0,
-            "unit": "g",
-            "item": "gnocchi"
           }
         },
         {
@@ -3852,6 +3878,18 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "nutritional yeast"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 8,
+          "text": "1 tbsp olive oil",
+          "canonical": "olive oil",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
           }
         }
       ],
@@ -4083,15 +4121,13 @@
           }
         }
       ],
-      "Fridge": [
+      "Pantry": [
         {
           "id": 3,
           "text": "Few ice cubes",
           "canonical": "ice",
           "preparation": "cubes"
-        }
-      ],
-      "Pantry": [
+        },
         {
           "id": 8,
           "text": "250 g chickpeas",
@@ -4123,7 +4159,9 @@
             "unit": "tsp",
             "item": "baking soda"
           }
-        },
+        }
+      ],
+      "Condiments": [
         {
           "id": 11,
           "text": "120 g tahini (or more to taste)",
@@ -4319,7 +4357,9 @@
             "unit": "ml",
             "item": "vegetable stock"
           }
-        },
+        }
+      ],
+      "Condiments": [
         {
           "id": 10,
           "text": "2 tbsp olive oil",
@@ -4450,6 +4490,18 @@
           }
         },
         {
+          "id": 5,
+          "text": "3 tsp baking soda",
+          "canonical": "baking soda",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tsp",
+            "item": "baking soda"
+          }
+        }
+      ],
+      "Condiments": [
+        {
           "id": 4,
           "text": "3 tbsp honey (or jam for a vegan version)",
           "canonical": "honey",
@@ -4458,16 +4510,6 @@
             "amount": 3.0,
             "unit": "tbsp",
             "item": "honey"
-          }
-        },
-        {
-          "id": 5,
-          "text": "3 tsp baking soda",
-          "canonical": "baking soda",
-          "quantity": {
-            "amount": 3.0,
-            "unit": "tsp",
-            "item": "baking soda"
           }
         },
         {
@@ -4631,7 +4673,9 @@
             "unit": "ml",
             "item": "vegetable stock"
           }
-        },
+        }
+      ],
+      "Condiments": [
         {
           "id": 12,
           "text": "1 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
@@ -4785,6 +4829,18 @@
           }
         },
         {
+          "id": 8,
+          "text": "1 tsp baking soda",
+          "canonical": "baking soda",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking soda"
+          }
+        }
+      ],
+      "Condiments": [
+        {
           "id": 6,
           "text": "60 ml vegetable oil (e.g. rapeseed, sunflower, canola)",
           "canonical": "vegetable oil",
@@ -4803,16 +4859,6 @@
             "amount": 2.0,
             "unit": "tsp",
             "item": "vanilla extract"
-          }
-        },
-        {
-          "id": 8,
-          "text": "1 tsp baking soda",
-          "canonical": "baking soda",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tsp",
-            "item": "baking soda"
           }
         }
       ],

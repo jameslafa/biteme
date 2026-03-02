@@ -69,7 +69,7 @@ name: Pad Thai
 
 ## Canonical Ingredient Vocabulary
 
-**Decision:** Controlled vocabulary in `docs/canonical.json` mapping ingredient names to their canonical singular forms, loaded by the Rust parser at build time.
+**Decision:** Controlled vocabulary in `docs/ingredients.json` mapping ingredient names to their canonical singular forms, loaded by the Rust parser at build time.
 
 **Rationale:**
 - Shopping list merging requires a stable key to match the same ingredient across recipes (e.g. `2 cloves garlic, minced` and `3 cloves garlic, crushed` both → canonical `"garlic"`)
@@ -78,19 +78,25 @@ name: Pad Thai
 
 **Implementation:**
 - Authors tag ingredient names in markdown: `2 cloves [garlic], minced`
-- The parser extracts the bracket text, normalises to singular canonical via `docs/canonical.json`, and stores `canonical` + `preparation` as separate fields on each ingredient
+- The parser extracts the bracket text, normalises to singular canonical via `docs/ingredients.json`, and stores `canonical` + `preparation` as separate fields on each ingredient
 - `quantity.item` is set to the bracket text as the author wrote it (preserving natural plural/singular)
 - Step refs `{canonical}` match against the singular `canonical` field exactly — no fuzzy matching
 
-**`docs/canonical.json` structure:**
+**`docs/ingredients.json` structure:**
 ```json
 {
-  "ingredients": { "tomato": "tomatoes", "garlic": null, ... },
+  "sections": ["Fresh", "Fridge", "Pantry", "Condiments", "Spices"],
+  "ingredients": {
+    "garlic": { "section": "Fresh" },
+    "tomato": { "plural": "tomatoes", "section": "Fresh" },
+    "olive oil": { "section": "Condiments" },
+    "chickpea": { "plural": "chickpeas", "section": "Pantry" }
+  },
   "units": { "clove": "cloves", "stick": "sticks", "stalk": "stalks", ... }
 }
 ```
 
-Words in `units` belong before the bracket (`2 cloves [garlic]`), not inside it (`[garlic cloves]`). The linter errors on missing or unknown canonical tags.
+Each ingredient entry has a required `section` and an optional `plural`. The parser assigns each ingredient its section from this file at build time — recipe files contain a flat ingredient list with no section headers. Words in `units` belong before the bracket (`2 cloves [garlic]`), not inside it (`[garlic cloves]`). The linter errors on missing or unknown canonical tags.
 
 ## Data Storage
 

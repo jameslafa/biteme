@@ -17,24 +17,16 @@ Press the tofu well — at least 15 minutes with a cloth or kitchen paper — fo
 
 # Ingredients
 
-## Fresh
-
 - 500 g [spinach]
 - 2 medium [onions], roughly chopped
 - 4 cloves [garlic]
 - 1 thumb [ginger]
 - [Lemon] for juice
 
-## Fridge
-
 - 400 g [tofu]
 - 1 tin (400 ml) [coconut cream]
 
-## Pantry
-
 - 2 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)
-
-## Spices
 
 - 2 tsp [cumin seeds]
 - 1 tsp [ground coriander]

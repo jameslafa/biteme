@@ -17,8 +17,6 @@ Use tamari instead of soy sauce to make this gluten-free. You can swap the courg
 
 # Ingredients
 
-## Fresh
-
 - 1/2 thumb [ginger], finely chopped
 - 2 cloves [garlic], minced
 - 4 [spring onions], finely sliced
@@ -28,8 +26,6 @@ Use tamari instead of soy sauce to make this gluten-free. You can swap the courg
 - [coriander] for garnish
 - [basil] for garnish
 - [bean sprouts] for garnish <!-- no-scale -->
-
-## Pantry
 
 - 1 tin (400 g) [chickpeas], drained and rinsed
 - 1 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)

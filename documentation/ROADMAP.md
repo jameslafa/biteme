@@ -19,10 +19,6 @@ This document tracks feature ideas and improvements for BiteMe.
 - Show recipes ranked by ingredient coverage
 - Lightweight — no persistence needed, just a search UI
 
-### [ ] Meal Planning — More ingredient categories
-
-- 4 categories (Fresh, Fridge, Pantry, Spices) may not be enough — frozen goods and fridge/freezer items are awkwardly grouped
-- Consider: Freezer, Deli, Bakery, or other supermarket-aisle groupings
 
 ### [ ] Unit System Toggle (Metric / Imperial)
 
@@ -42,7 +38,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Recipe Linter** — Validates structure, fields, ingredient format
 - **Versioning/Caching** — Manifest-based cache with offline fallback
 - **Service Worker Updates** — Toast notification on homepage when app code changes
-- **Ingredient Categories** — 4 categories (Fresh, Fridge, Pantry, Spices), validated by parser
+- **Ingredient Categories** — 5 categories (Fresh, Fridge, Pantry, Condiments, Spices), sections defined in `docs/ingredients.json` and derived by the parser at build time
 - **Favorites** — Heart icon, IndexedDB, filter view, persisted state
 - **What's New** — Standalone changelog page with timeline layout, notification dot on drawer, accessible from side drawer
 - **Shopping List** — Add ingredients from recipe, grouped list, check off in store, TTL cleanup
@@ -61,7 +57,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Tag & Rating Filtering** — Filter panel with tag and rating dropdowns, live result count, clickable tags on cards, URL param support
 - **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
 - **Recipe Rating (Phase 1)** — Local star ratings (1–5), post-cooking banner prompt, displayed on cards and detail page, editable from detail page, IndexedDB storage
-- **Canonical Ingredient System** — Controlled vocabulary (`docs/canonical.json`), `[bracket]` syntax in recipe markdown, `canonical` + `preparation` fields in JSON output, exact step ref matching, linter enforcement
+- **Canonical Ingredient System** — Controlled vocabulary (`docs/ingredients.json`), `[bracket]` syntax in recipe markdown, `canonical` + `preparation` fields in JSON output, exact step ref matching, linter enforcement
 - **Shopping List Merged View** — Merged/by-recipe toggle on the shopping list; same-canonical ingredients across recipes consolidated into one row with summed quantities, attribution, and indeterminate partial-check state
 - **Ingredient Search (Phase 1)** — Search bar matches ingredient text, relevance-scored results (name > tag/description > ingredient)
 - **Side Drawer (Hamburger Menu)** — Navigation drawer on home page, houses What's New and footer links, notification dot aggregation

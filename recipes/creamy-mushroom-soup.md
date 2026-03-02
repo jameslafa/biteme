@@ -17,8 +17,6 @@ For a deeper, more umami flavour, add a splash of dry white wine after cooking t
 
 # Ingredients
 
-## Fresh
-
 - 500 g [mushrooms] (champignon, king oyster, shiitake), sliced
 - 1 medium [onion], diced
 - 3 cloves [garlic], minced
@@ -27,11 +25,7 @@ For a deeper, more umami flavour, add a splash of dry white wine after cooking t
 - [Lemon] for juice
 - Fresh [parsley] for garnish
 
-## Fridge
-
 - 200 ml [oat cream]
-
-## Pantry
 
 - 750 ml [vegetable stock]
 - 2 tbsp [olive oil]

@@ -17,7 +17,6 @@ If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2.
 
 # Ingredients
 
-## Fresh
 - 500 g [pumpkin], peeled and cubed
 - 500 g [potatoes], peeled and cubed
 - 1 [onion], diced
@@ -26,11 +25,9 @@ If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2.
 - Fresh [coriander] to serve
 - [Lime] to serve
 
-## Spices
 - 1 tsp [ground cumin]
 - 1 tsp [ground turmeric]
 
-## Pantry
 - 1 tin (400 ml) [coconut milk]
 - 200 ml [vegetable stock]
 - 1 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)

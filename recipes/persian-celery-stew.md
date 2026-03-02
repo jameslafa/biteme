@@ -17,8 +17,6 @@ A dish from northern Iran where butter beans are a common plant-based swap for t
 
 # Ingredients
 
-## Fresh
-
 - 2 large [onions], thinly sliced
 - 3 cloves [garlic], minced
 - 6-8 stalks [celery], cut into 3 cm pieces
@@ -26,13 +24,9 @@ A dish from northern Iran where butter beans are a common plant-based swap for t
 - 50 g [mint] (or 2 1/2 tbsp dried)
 - 130 ml [lime juice] (about 4-5 limes)
 
-## Pantry
-
 - 1 tin (400 g) [butter beans], drained and rinsed
 - 5 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)
 - 1 [vegetable stock] cube
-
-## Spices
 
 - 1/2 tsp [saffron] threads
 - 1 tsp [ground turmeric]

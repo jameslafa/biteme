@@ -42,7 +42,7 @@ date: 2026-02-10
 
 ## Sections
 
-After the frontmatter, the recipe body uses **`#` (H1) headings** for sections and **`##` (H2) headings** for ingredient categories.
+After the frontmatter, the recipe body uses **`#` (H1) headings** for sections.
 
 Sections must appear in this order (optional sections can be omitted entirely):
 
@@ -63,14 +63,15 @@ If you like heat, add a chopped chilli in step 2. Keeps well in the fridge for 3
 
 ### Ingredients (required)
 
-Group ingredients under **`##` (H2) category headings**. Valid categories are:
+List all ingredients as bullet points directly under `# Ingredients`. Sections are assigned automatically based on each ingredient's canonical name. The five sections:
 
-- `## Fresh` — produce, herbs, anything from the fresh aisle
-- `## Fridge` — dairy, cream, frozen goods, and anything stored cold (fridge or freezer)
-- `## Spices` — dried spices and seasonings
-- `## Pantry` — oils, stock, canned goods, dried goods
-
-Not all categories are required — only use the ones that apply. Each ingredient is a bullet point.
+| Section | What goes here |
+|---|---|
+| `Fresh` | Produce, fresh herbs, garlic, ginger |
+| `Fridge` | Tofu, dairy alternatives, eggs |
+| `Pantry` | Tins, dried legumes, grains, pasta, baking goods, nuts |
+| `Condiments` | Oils, vinegars, sauces, pastes, nut butters, sweeteners |
+| `Spices` | Dried spices, ground spices, dried herbs, salt, pepper |
 
 **Do not list salt, black pepper, or white pepper as ingredients.** These are universal kitchen staples — assume the cook has them. Use "season to taste" or similar in the instructions instead. Likewise, avoid any ingredient written purely as "X to taste" with no quantity — if it has no meaningful amount, it belongs in the instructions, not the ingredient list.
 
@@ -86,7 +87,7 @@ Every ingredient line **must** tag the ingredient name in `[square brackets]`. T
 - 1 tbsp [olive oil]
 ```
 
-The tagged name must exist in `docs/canonical.json`. If it doesn't, add it before committing. The linter will error on unknown or missing tags.
+The tagged name must exist in `docs/ingredients.json`. If it doesn't, add it before committing. The linter will error on unknown or missing tags.
 
 ### Natural plural/singular form
 
@@ -202,7 +203,7 @@ Avoid brand names or country-specific product names (e.g. "Hafer Cuisine", "Natr
 
 When you mention an ingredient in the instructions, wrap its **canonical name** in `{curly braces}`. This highlights the ingredient in cooking mode.
 
-The canonical name is the singular form as listed in `docs/canonical.json`. It must match exactly — step refs are not fuzzy-matched.
+The canonical name is the singular form as listed in `docs/ingredients.json`. It must match exactly — step refs are not fuzzy-matched.
 
 ```markdown
 # Instructions
@@ -254,14 +255,9 @@ Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.
 
 # Ingredients
 
-## Fresh
-
 - 1 medium [onion], diced
 - 2 cloves [garlic], minced
 - Handful [coriander], to serve
-
-## Pantry
-
 - 1 tbsp [olive oil]
 - 2 tins (400 g) [chickpeas], drained and rinsed
 - 1 tin (400 g) [passata]
@@ -269,9 +265,6 @@ Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.
 - 250 ml [coconut milk]
 - 1 tsp [ginger paste]
 - 1 tsp [brown sugar]
-
-## Spices
-
 - 1 1/2 tsp [garam masala]
 - 1 tsp [ground cumin]
 - 1/2 tsp [turmeric]
@@ -305,15 +298,13 @@ Before outputting the recipe, verify:
 - [ ] `tags` are all lowercase, no spaces, no duplicates, at least 1. No dietary values (use `diet` instead)
 - [ ] `diet` values (if present) are only `vegan`, `vegetarian`, or `gluten-free`
 - [ ] Sections use `#` (H1) headings: `# Notes`, `# Ingredients`, `# Instructions`, `# Serving Suggestions`
-- [ ] Ingredient categories use `##` (H2) headings: `## Fresh`, `## Fridge`, `## Spices`, `## Pantry`
-- [ ] Category names are exactly one of: Fresh, Fridge, Spices, Pantry
 - [ ] Section order is: Notes (optional) → Ingredients → Instructions → Serving Suggestions (optional)
 - [ ] Salt, black pepper, and white pepper are **not** listed as ingredients — use "season to taste" in instructions instead
 - [ ] No ingredient lines written purely as "X to taste" with no quantity
 - [ ] At least one ingredient category with at least one ingredient
 - [ ] Instructions are a numbered list with at least one step
 - [ ] Every ingredient line has a `[canonical]` tag
-- [ ] Tagged name exists in `docs/canonical.json` (add it if missing)
+- [ ] Tagged name exists in `docs/ingredients.json` (add it if missing)
 - [ ] Unit words (`cloves`, `sticks`, `stalks`, `sheets`, `bunch`, `head`, `thumb`, `tin`, `can`, etc.) appear **before** the bracket, not inside it
 - [ ] Plural/singular form inside `[]` matches what's natural for the quantity
 - [ ] Every ingredient is referenced at least once in the instructions using `{canonical}` syntax

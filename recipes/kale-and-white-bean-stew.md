@@ -17,8 +17,6 @@ This stew actually tastes even better the next day as the flavours develop. Keep
 
 # Ingredients
 
-## Fresh
-
 - 1 [onion], diced
 - 3 cloves [garlic], minced
 - 1 [carrot], diced
@@ -26,14 +24,10 @@ This stew actually tastes even better the next day as the flavours develop. Keep
 - 120 g [kale], stems removed and leaves roughly chopped
 - Juice of 1/2 [lemon]
 
-## Pantry
-
 - 1 tbsp [olive oil]
 - 1 tin (400 g) [chopped tomatoes]
 - 1 tin (400 g) [white beans] (cannellini or butter beans), drained and rinsed
 - 500 ml [vegetable stock]
-
-## Spices
 
 - 1 tsp [smoked paprika]
 - 1 tsp [ground cumin]

@@ -17,20 +17,14 @@ Red lentils break down into a creamy texture, yellow lentils hold their shape a 
 
 # Ingredients
 
-## Fresh
-
 - 1 [onion], finely diced
 - 3 cloves [garlic], minced
 - 1 thumb [ginger], grated
 - [Lemon] for juice
 
-## Pantry
-
 - 250 g [lentils]
 - 1 tin (400 g) [chopped tomatoes]
 - 1 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)
-
-## Spices
 
 - 1 tsp [cumin seeds]
 - 1 tsp [turmeric]

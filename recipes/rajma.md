@@ -17,22 +17,16 @@ Don't rush the onions — cooking them until deep golden brown is key to the ric
 
 # Ingredients
 
-## Fresh
-
 - 2 medium [onions], finely diced
 - 4 cloves [garlic], minced
 - 1 thumb [ginger], grated
 - Fresh [coriander] to finish
-
-## Pantry
 
 - 2 tins (400 g each) [kidney beans], drained and rinsed
 - 1 tin (400 g) [chopped tomatoes]
 - 1 tbsp [tomato puree]
 - 250 ml [vegetable stock]
 - 1 tbsp [vegetable oil] (e.g. rapeseed, sunflower, canola)
-
-## Spices
 
 - 1 tsp [cumin seeds]
 - 1 tsp [ground coriander]
