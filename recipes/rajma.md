@@ -5,7 +5,6 @@ description: Rich red kidney bean curry — even better the next day
 servings: 4
 time: 55
 difficulty: easy
-tags: [indian, curry]
 diet: [vegan, gluten-free]
 cuisine: [indian]
 meal_type: [dinner]

@@ -6,33 +6,113 @@
     "servings": 2,
     "time": 30,
     "difficulty": "easy",
-    "tags": ["dinner", "curry"],
-    "diet": ["vegan"],
-    "cuisine": ["indian"],
-    "meal_type": ["dinner"],
+    "diet": [
+      "vegan"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "notes": "Make sure to use fresh spices for best flavor. This curry tastes even better the next day.",
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "1 onion, diced", "canonical": "onion", "preparation": null, "quantity": { "amount": 1, "item": "onion, diced" } },
-        { "id": 2, "text": "2 cloves garlic, minced", "canonical": "garlic", "preparation": null, "quantity": { "amount": 2, "unit": "cloves", "item": "garlic, minced" } }
+        {
+          "id": 1,
+          "text": "1 onion, diced",
+          "canonical": "onion",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "item": "onion, diced"
+          }
+        },
+        {
+          "id": 2,
+          "text": "2 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": null,
+          "quantity": {
+            "amount": 2,
+            "unit": "cloves",
+            "item": "garlic, minced"
+          }
+        }
       ],
       "Spices": [
-        { "id": 3, "text": "1 tsp curry powder", "canonical": null, "preparation": null, "quantity": { "amount": 1, "unit": "tsp", "item": "curry powder" } }
+        {
+          "id": 3,
+          "text": "1 tsp curry powder",
+          "canonical": null,
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "tsp",
+            "item": "curry powder"
+          }
+        }
       ],
       "Pantry": [
-        { "id": 4, "text": "1 cup lentils", "canonical": "lentil", "preparation": null, "quantity": { "amount": 1, "unit": "cup", "item": "lentils" } },
-        { "id": 5, "text": "2 cups vegetable broth", "canonical": "vegetable broth", "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "vegetable broth" } }
+        {
+          "id": 4,
+          "text": "1 cup lentils",
+          "canonical": "lentil",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "cup",
+            "item": "lentils"
+          }
+        },
+        {
+          "id": 5,
+          "text": "2 cups vegetable broth",
+          "canonical": "vegetable broth",
+          "preparation": null,
+          "quantity": {
+            "amount": 2,
+            "unit": "cups",
+            "item": "vegetable broth"
+          }
+        }
       ],
       "Condiments": [
-        { "id": 6, "text": "1 tbsp oil", "canonical": "vegetable oil", "preparation": null, "quantity": { "amount": 1, "unit": "tbsp", "item": "oil" } }
+        {
+          "id": 6,
+          "text": "1 tbsp oil",
+          "canonical": "vegetable oil",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "tbsp",
+            "item": "oil"
+          }
+        }
       ]
     },
     "steps": [
-      { "text": "Heat {oil} in a pot" },
-      { "text": "Add {onion} and {garlic}" },
-      { "text": "Add {curry powder}" },
-      { "text": "Add {lentils} and {broth}" },
-      { "text": "Simmer for 20 minutes", "durations": [{ "seconds": 1200, "text": "20 minutes" }] }
+      {
+        "text": "Heat {oil} in a pot"
+      },
+      {
+        "text": "Add {onion} and {garlic}"
+      },
+      {
+        "text": "Add {curry powder}"
+      },
+      {
+        "text": "Add {lentils} and {broth}"
+      },
+      {
+        "text": "Simmer for 20 minutes",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "20 minutes"
+          }
+        ]
+      }
     ],
     "serving_suggestions": "Serve over rice with naan bread. Garnish with fresh cilantro.",
     "tested": true
@@ -44,27 +124,87 @@
     "servings": 2,
     "time": 10,
     "difficulty": "easy",
-    "tags": ["lunch", "salad"],
-    "diet": ["vegan"],
-    "cuisine": ["mediterranean"],
-    "meal_type": ["lunch"],
+    "diet": [
+      "vegan"
+    ],
+    "cuisine": [
+      "mediterranean"
+    ],
+    "meal_type": [
+      "lunch"
+    ],
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "2 cups lettuce", "canonical": "lettuce", "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
-        { "id": 2, "text": "1 tomato", "canonical": "tomato", "preparation": null, "quantity": { "amount": 1, "item": "tomato" } },
-        { "id": 4, "text": "1 clove garlic", "canonical": "garlic", "preparation": null, "quantity": { "amount": 1, "unit": "clove", "item": "garlic" } }
+        {
+          "id": 1,
+          "text": "2 cups lettuce",
+          "canonical": "lettuce",
+          "preparation": null,
+          "quantity": {
+            "amount": 2,
+            "unit": "cups",
+            "item": "lettuce"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 tomato",
+          "canonical": "tomato",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "item": "tomato"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 clove garlic",
+          "canonical": "garlic",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "clove",
+            "item": "garlic"
+          }
+        }
       ],
       "Pantry": [
-        { "id": 5, "text": "½ cup lentils", "canonical": "lentil", "preparation": null, "quantity": { "amount": 0.5, "unit": "cup", "item": "lentils" } }
+        {
+          "id": 5,
+          "text": "½ cup lentils",
+          "canonical": "lentil",
+          "preparation": null,
+          "quantity": {
+            "amount": 0.5,
+            "unit": "cup",
+            "item": "lentils"
+          }
+        }
       ],
       "Condiments": [
-        { "id": 3, "text": "2 tbsp olive oil", "canonical": "olive oil", "preparation": null, "quantity": { "amount": 2, "unit": "tbsp", "item": "olive oil" } }
+        {
+          "id": 3,
+          "text": "2 tbsp olive oil",
+          "canonical": "olive oil",
+          "preparation": null,
+          "quantity": {
+            "amount": 2,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        }
       ]
     },
     "steps": [
-      { "text": "Chop lettuce" },
-      { "text": "Slice tomato" },
-      { "text": "Mix and add oil" }
+      {
+        "text": "Chop lettuce"
+      },
+      {
+        "text": "Slice tomato"
+      },
+      {
+        "text": "Mix and add oil"
+      }
     ],
     "tested": true
   },
@@ -75,19 +215,47 @@
     "servings": 1,
     "time": 5,
     "difficulty": "easy",
-    "tags": ["breakfast", "quick"],
-    "diet": ["vegan"],
-    "cuisine": ["american"],
-    "meal_type": ["breakfast"],
+    "diet": [
+      "vegan"
+    ],
+    "cuisine": [
+      "american"
+    ],
+    "meal_type": [
+      "breakfast"
+    ],
     "ingredients": {
       "Pantry": [
-        { "id": 1, "text": "2 slices bread", "canonical": "bread", "preparation": null, "quantity": { "amount": 2, "item": "slices bread" } },
-        { "id": 2, "text": "1 tbsp butter", "canonical": "butter", "preparation": null, "quantity": { "amount": 1, "unit": "tbsp", "item": "butter" } }
+        {
+          "id": 1,
+          "text": "2 slices bread",
+          "canonical": "bread",
+          "preparation": null,
+          "quantity": {
+            "amount": 2,
+            "item": "slices bread"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 tbsp butter",
+          "canonical": "butter",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "tbsp",
+            "item": "butter"
+          }
+        }
       ]
     },
     "steps": [
-      { "text": "Toast the bread" },
-      { "text": "Spread butter" }
+      {
+        "text": "Toast the bread"
+      },
+      {
+        "text": "Spread butter"
+      }
     ],
     "tested": true
   },
@@ -98,15 +266,39 @@
     "servings": 2,
     "time": 10,
     "difficulty": "easy",
-    "tags": ["test"],
-    "diet": ["vegan"],
+    "diet": [
+      "vegan"
+    ],
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "1 clove garlic", "canonical": "garlic", "preparation": null, "quantity": { "amount": 1, "unit": "clove", "item": "garlic" } },
-        { "id": 2, "text": "1 leek, sliced", "canonical": "leek", "preparation": null, "quantity": { "amount": 1, "item": "leek, sliced" } }
+        {
+          "id": 1,
+          "text": "1 clove garlic",
+          "canonical": "garlic",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "clove",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 leek, sliced",
+          "canonical": "leek",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "item": "leek, sliced"
+          }
+        }
       ]
     },
-    "steps": [{ "text": "Cook the leek with garlic" }],
+    "steps": [
+      {
+        "text": "Cook the leek with garlic"
+      }
+    ],
     "tested": false
   },
   {
@@ -116,15 +308,40 @@
     "servings": 2,
     "time": 10,
     "difficulty": "easy",
-    "tags": ["test"],
-    "diet": ["vegan"],
+    "diet": [
+      "vegan"
+    ],
     "ingredients": {
       "Pantry": [
-        { "id": 1, "text": "1 cup lentils", "canonical": "lentil", "preparation": null, "quantity": { "amount": 1, "unit": "cup", "item": "lentils" } },
-        { "id": 2, "text": "1 cup rice", "canonical": "rice", "preparation": null, "quantity": { "amount": 1, "unit": "cup", "item": "rice" } }
+        {
+          "id": 1,
+          "text": "1 cup lentils",
+          "canonical": "lentil",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "cup",
+            "item": "lentils"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 cup rice",
+          "canonical": "rice",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "cup",
+            "item": "rice"
+          }
+        }
       ]
     },
-    "steps": [{ "text": "Cook rice and lentils" }],
+    "steps": [
+      {
+        "text": "Cook rice and lentils"
+      }
+    ],
     "tested": false
   },
   {
@@ -134,19 +351,49 @@
     "servings": 2,
     "time": 20,
     "difficulty": "easy",
-    "tags": ["dinner", "soup"],
-    "diet": ["vegan"],
+    "diet": [
+      "vegan"
+    ],
     "ingredients": {
       "Fresh": [
-        { "id": 1, "text": "2 carrots, chopped", "canonical": "carrot", "preparation": null, "quantity": { "amount": 2, "item": "carrots, chopped" } }
+        {
+          "id": 1,
+          "text": "2 carrots, chopped",
+          "canonical": "carrot",
+          "preparation": null,
+          "quantity": {
+            "amount": 2,
+            "item": "carrots, chopped"
+          }
+        }
       ],
       "Pantry": [
-        { "id": 2, "text": "4 cups vegetable broth", "canonical": "vegetable broth", "preparation": null, "quantity": { "amount": 4, "unit": "cups", "item": "vegetable broth" } }
+        {
+          "id": 2,
+          "text": "4 cups vegetable broth",
+          "canonical": "vegetable broth",
+          "preparation": null,
+          "quantity": {
+            "amount": 4,
+            "unit": "cups",
+            "item": "vegetable broth"
+          }
+        }
       ]
     },
     "steps": [
-      { "text": "Chop the carrots" },
-      { "text": "Add broth and simmer for 15 minutes", "durations": [{ "seconds": 900, "text": "15 minutes" }] }
+      {
+        "text": "Chop the carrots"
+      },
+      {
+        "text": "Add broth and simmer for 15 minutes",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "15 minutes"
+          }
+        ]
+      }
     ],
     "tested": false
   }

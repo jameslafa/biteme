@@ -5,7 +5,6 @@ description: Tofu coated in potato starch, fried until crispy, then glazed in a 
 servings: 2
 time: 25
 difficulty: easy
-tags: [asian, tofu]
 diet: [vegan, gluten-free]
 cuisine: [asian]
 meal_type: [dinner]

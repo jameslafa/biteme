@@ -5,7 +5,6 @@ description: Rich and creamy mushroom soup perfect for batch cooking and freezin
 servings: 4
 time: 40
 difficulty: easy
-tags: [soup, one-pot]
 diet: [vegan, gluten-free]
 cuisine: [french]
 meal_type: [lunch, dinner]

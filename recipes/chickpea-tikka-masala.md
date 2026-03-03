@@ -5,7 +5,6 @@ description: Chickpeas simmered in a creamy, spiced tomato and coconut milk sauc
 servings: 4
 time: 35
 difficulty: easy
-tags: [indian, curry]
 diet: [vegan, gluten-free]
 cuisine: [indian]
 meal_type: [dinner]

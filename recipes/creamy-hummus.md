@@ -5,7 +5,6 @@ description: Silky smooth hummus with the perfect creamy texture
 servings: 6
 time: 90
 difficulty: medium
-tags: [middle-eastern, dip]
 diet: [vegan, gluten-free]
 cuisine: [middle-eastern]
 meal_type: [brunch, lunch, dinner]

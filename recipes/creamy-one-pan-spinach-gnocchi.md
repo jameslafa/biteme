@@ -5,7 +5,6 @@ description: Quick and creamy one-pan gnocchi in a coconut cream sauce with sun-
 servings: 2
 time: 20
 difficulty: easy
-tags: [pasta, one-pot]
 diet: [vegan, gluten-free]
 cuisine: [italian]
 meal_type: [dinner]

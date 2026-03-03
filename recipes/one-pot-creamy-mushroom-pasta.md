@@ -5,7 +5,6 @@ description: A quick one-pot wonder where spaghetti cooks directly in the sauce 
 servings: 4
 time: 20
 difficulty: easy
-tags: [pasta, italian]
 diet: [vegan]
 cuisine: [italian]
 meal_type: [dinner]

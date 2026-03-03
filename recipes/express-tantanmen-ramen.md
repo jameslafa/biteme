@@ -5,7 +5,6 @@ description: Quick Japanese ramen with a rich peanut-tahini broth, crispy smoked
 servings: 2
 time: 35
 difficulty: medium
-tags: [ramen, japanese]
 diet: [vegetarian]
 cuisine: [asian]
 meal_type: [lunch, dinner]

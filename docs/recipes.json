@@ -6,11 +6,6 @@
     "servings": 4,
     "time": 40,
     "difficulty": "medium",
-    "tags": [
-      "dinner",
-      "asian",
-      "stir-fry"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -214,10 +209,6 @@
     "servings": 2,
     "time": 35,
     "difficulty": "easy",
-    "tags": [
-      "dinner",
-      "middle-eastern"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -397,10 +388,6 @@
     "servings": 2,
     "time": 30,
     "difficulty": "medium",
-    "tags": [
-      "dinner",
-      "middle-eastern"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -617,10 +604,6 @@
     "servings": 4,
     "time": 45,
     "difficulty": "medium",
-    "tags": [
-      "dinner",
-      "middle-eastern"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -858,10 +841,6 @@
     "servings": 2,
     "time": 75,
     "difficulty": "easy",
-    "tags": [
-      "dinner",
-      "stew"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -1052,10 +1031,6 @@
     "servings": 2,
     "time": 70,
     "difficulty": "easy",
-    "tags": [
-      "brunch",
-      "middle-eastern"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -1319,10 +1294,6 @@
     "servings": 2,
     "time": 25,
     "difficulty": "easy",
-    "tags": [
-      "asian",
-      "tofu"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -1463,10 +1434,6 @@
     "servings": 3,
     "time": 25,
     "difficulty": "easy",
-    "tags": [
-      "indian",
-      "curry"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -1726,10 +1693,6 @@
     "servings": 2,
     "time": 35,
     "difficulty": "medium",
-    "tags": [
-      "ramen",
-      "japanese"
-    ],
     "diet": [
       "vegetarian"
     ],
@@ -1967,10 +1930,6 @@
     "servings": 4,
     "time": 15,
     "difficulty": "easy",
-    "tags": [
-      "asian",
-      "indonesian"
-    ],
     "diet": [
       "vegan"
     ],
@@ -2192,10 +2151,6 @@
     "servings": 4,
     "time": 20,
     "difficulty": "easy",
-    "tags": [
-      "pasta",
-      "italian"
-    ],
     "diet": [
       "vegan"
     ],
@@ -2380,10 +2335,6 @@
     "servings": 4,
     "time": 20,
     "difficulty": "easy",
-    "tags": [
-      "pasta",
-      "italian"
-    ],
     "diet": [
       "vegan"
     ],
@@ -2581,10 +2532,6 @@
     "servings": 4,
     "time": 35,
     "difficulty": "easy",
-    "tags": [
-      "indian",
-      "curry"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -2805,11 +2752,6 @@
     "servings": 6,
     "time": 75,
     "difficulty": "medium",
-    "tags": [
-      "stew",
-      "persian",
-      "iranian"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -3024,10 +2966,6 @@
     "servings": 4,
     "time": 35,
     "difficulty": "easy",
-    "tags": [
-      "indian",
-      "curry"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -3205,10 +3143,6 @@
     "servings": 4,
     "time": 45,
     "difficulty": "medium",
-    "tags": [
-      "indian",
-      "curry"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -3439,10 +3373,6 @@
     "servings": 4,
     "time": 55,
     "difficulty": "easy",
-    "tags": [
-      "indian",
-      "curry"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -3684,10 +3614,6 @@
     "servings": 4,
     "time": 20,
     "difficulty": "easy",
-    "tags": [
-      "japanese",
-      "stir-fry"
-    ],
     "diet": [
       "vegan"
     ],
@@ -3838,9 +3764,6 @@
     "servings": 4,
     "time": 35,
     "difficulty": "easy",
-    "tags": [
-      "french"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -4001,10 +3924,6 @@
     "servings": 2,
     "time": 45,
     "difficulty": "medium",
-    "tags": [
-      "ramen",
-      "japanese"
-    ],
     "diet": [
       "vegan"
     ],
@@ -4265,9 +4184,6 @@
     "servings": 2,
     "time": 20,
     "difficulty": "easy",
-    "tags": [
-      "breakfast"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -4457,10 +4373,6 @@
     "servings": 4,
     "time": 50,
     "difficulty": "easy",
-    "tags": [
-      "chilli",
-      "one-pot"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -4778,10 +4690,6 @@
     "servings": 4,
     "time": 30,
     "difficulty": "easy",
-    "tags": [
-      "stew",
-      "one-pot"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -4991,10 +4899,6 @@
     "servings": 8,
     "time": 60,
     "difficulty": "easy",
-    "tags": [
-      "french",
-      "dessert"
-    ],
     "diet": [
       "vegan"
     ],
@@ -5166,10 +5070,6 @@
     "servings": 2,
     "time": 20,
     "difficulty": "easy",
-    "tags": [
-      "pasta",
-      "one-pot"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -5386,10 +5286,6 @@
     "servings": 10,
     "time": 30,
     "difficulty": "easy",
-    "tags": [
-      "baking",
-      "british"
-    ],
     "diet": [
       "vegan"
     ],
@@ -5519,10 +5415,6 @@
     "servings": 6,
     "time": 90,
     "difficulty": "medium",
-    "tags": [
-      "middle-eastern",
-      "dip"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -5692,10 +5584,6 @@
     "servings": 4,
     "time": 40,
     "difficulty": "easy",
-    "tags": [
-      "soup",
-      "one-pot"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -5883,11 +5771,6 @@
     "servings": 8,
     "time": 50,
     "difficulty": "easy",
-    "tags": [
-      "french",
-      "baking",
-      "dessert"
-    ],
     "diet": [
       "vegetarian"
     ],
@@ -6029,10 +5912,6 @@
     "servings": 4,
     "time": 40,
     "difficulty": "easy",
-    "tags": [
-      "curry",
-      "one-pot"
-    ],
     "diet": [
       "vegan",
       "gluten-free"
@@ -6222,10 +6101,6 @@
     "servings": 10,
     "time": 65,
     "difficulty": "easy",
-    "tags": [
-      "baking",
-      "dessert"
-    ],
     "diet": [
       "vegan"
     ],

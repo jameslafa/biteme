@@ -5,7 +5,6 @@ description: Vegan saag paneer — crispy tofu in a creamy spiced spinach sauce
 servings: 4
 time: 45
 difficulty: medium
-tags: [indian, curry]
 diet: [vegan, gluten-free]
 cuisine: [indian]
 meal_type: [dinner]

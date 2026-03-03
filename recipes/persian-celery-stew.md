@@ -5,7 +5,6 @@ description: A fragrant Iranian stew with celery, butter beans, fried herbs, saf
 servings: 6
 time: 75
 difficulty: medium
-tags: [stew, persian, iranian]
 diet: [vegan, gluten-free]
 cuisine: [middle-eastern]
 meal_type: [dinner]

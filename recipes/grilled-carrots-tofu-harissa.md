@@ -5,7 +5,6 @@ description: Charred tofu and baby carrots smothered in a fragrant harissa and g
 servings: 2
 time: 30
 difficulty: medium
-tags: [dinner, middle-eastern]
 diet: [vegan, gluten-free]
 cuisine: [middle-eastern]
 meal_type: [dinner]

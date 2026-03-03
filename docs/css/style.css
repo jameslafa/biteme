@@ -372,13 +372,11 @@ main {
   letter-spacing: 0.02em;
 }
 
-a.tag-filter,
 a.tag-cuisine,
 a.tag-meal-type {
   text-decoration: none;
 }
 
-.tag-filter,
 .tag-cuisine,
 .tag-meal-type {
   cursor: pointer;
@@ -386,13 +384,11 @@ a.tag-meal-type {
   transition: all 0.2s;
 }
 
-.tag-filter:hover,
 .tag-cuisine:hover,
 .tag-meal-type:hover {
   background-color: var(--accent-color);
 }
 
-.tag-filter.active,
 .tag-cuisine.active,
 .tag-meal-type.active {
   background-color: var(--primary-color);

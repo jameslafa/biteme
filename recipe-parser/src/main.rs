@@ -32,7 +32,6 @@ struct RecipeFrontmatter {
     servings: u32,
     time: u32,
     difficulty: String,
-    tags: Vec<String>,
     diet: Vec<String>,
     cuisine: Vec<String>,
     meal_type: Vec<String>,
@@ -92,7 +91,6 @@ struct Recipe {
     servings: u32,
     time: u32,
     difficulty: String,
-    tags: Vec<String>,
     diet: Vec<String>,
     cuisine: Vec<String>,
     meal_type: Vec<String>,
@@ -912,7 +910,6 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
         servings: frontmatter.servings,
         time: frontmatter.time,
         difficulty: frontmatter.difficulty,
-        tags: frontmatter.tags,
         diet: frontmatter.diet,
         cuisine: frontmatter.cuisine,
         meal_type: frontmatter.meal_type,
@@ -985,7 +982,6 @@ fn friendly_frontmatter_error(err: &serde_yaml::Error) -> anyhow::Error {
             "servings" => "Add a line like: servings: 4",
             "time" => "Add a line like: time: 30 (total minutes)",
             "difficulty" => "Add a line like: difficulty: easy (easy, medium, or hard)",
-            "tags" => "Add a line like: tags: [pasta, italian, dinner]",
             "date" => "Add a line like: date: 2026-01-15",
             _ => "",
         };
@@ -996,11 +992,7 @@ fn friendly_frontmatter_error(err: &serde_yaml::Error) -> anyhow::Error {
         };
     }
 
-    // Wrong type: "tags: invalid type: string \"dinner\", expected a sequence"
     if msg.contains("invalid type") {
-        if msg.contains("expected a sequence") {
-            return anyhow::anyhow!("'tags' should be a list, not a single value.\n  Use square brackets: tags: [dinner, pasta]");
-        }
         if msg.contains("expected u32") || msg.contains("expected an integer") {
             let field = if msg.contains("servings") || msg.starts_with("servings") {
                 "servings"
@@ -1018,7 +1010,7 @@ fn friendly_frontmatter_error(err: &serde_yaml::Error) -> anyhow::Error {
         if let Some(rest) = msg.strip_prefix("unknown field `") {
             if let Some(field) = rest.split('`').next() {
                 return anyhow::anyhow!(
-                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, cuisine, meal_type, date. Optional: diet, tested",
+                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, cuisine, meal_type, date. Optional: diet, tested",
                     field
                 );
             }
@@ -1141,28 +1133,6 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
         if fm.description.len() < 10 {
             bail!("Description too short (minimum 10 characters)");
         }
-        if fm.tags.is_empty() {
-            bail!("At least one tag is required");
-        }
-
-        // Check for duplicate tags
-        let mut seen_tags = std::collections::HashSet::new();
-        for tag in &fm.tags {
-            if !seen_tags.insert(tag.to_lowercase()) {
-                bail!("Duplicate tag found: '{}'", tag);
-            }
-        }
-
-        // Validate tag format (lowercase, no spaces)
-        for tag in &fm.tags {
-            if tag.chars().any(|c| c.is_uppercase()) {
-                bail!("Tags must be lowercase: '{}'", tag);
-            }
-            if tag.contains(' ') {
-                bail!("Tags must not contain spaces: '{}'", tag);
-            }
-        }
-
         // Reasonable ranges
         if fm.servings > 100 {
             bail!("Servings seems unreasonably high: {} (max 100)", fm.servings);
@@ -1337,7 +1307,6 @@ description: A test recipe for unit testing
 servings: 2
 time: 15
 difficulty: easy
-tags: [test, vegan]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1378,7 +1347,6 @@ description: Recipe with invalid difficulty
 servings: 2
 time: 15
 difficulty: super-hard
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1414,7 +1382,6 @@ description: Recipe with section headers in lint mode
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1451,7 +1418,6 @@ description: Short
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1479,42 +1445,6 @@ date: 2026-01-01
     }
 
     #[test]
-    fn test_lint_mode_requires_tags() {
-        let test_recipe = r#"---
-id: no-tags
-name: No Tags Recipe
-description: Recipe without tags for testing
-servings: 2
-time: 15
-difficulty: easy
-tags: []
-diet: [vegan]
-cuisine: [french]
-meal_type: [dinner]
-date: 2026-01-01
----
-
-# Ingredients
-
-- 1 cup ingredient
-
-# Instructions
-
-1. Step one
-"#;
-
-        let temp_dir = std::env::temp_dir();
-        let test_file = temp_dir.join("no-tags.md");
-        fs::write(&test_file, test_recipe).unwrap();
-
-        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
-        fs::remove_file(&test_file).ok();
-
-        assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("At least one tag is required"));
-    }
-
-    #[test]
     fn test_optional_sections() {
         let test_recipe = r#"---
 id: with-notes
@@ -1523,7 +1453,6 @@ description: Recipe with optional notes and serving suggestions
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1570,7 +1499,6 @@ description: Recipe with uppercase in ID
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1606,7 +1534,6 @@ description: Recipe with spaces in ID
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1642,7 +1569,6 @@ description: Recipe without ingredients section
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1674,7 +1600,6 @@ description: Recipe without instructions section
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1706,7 +1631,6 @@ description: Recipe with zero servings
 servings: 0
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1742,7 +1666,6 @@ description: Recipe with zero time
 servings: 2
 time: 0
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1778,7 +1701,6 @@ description: Test sequential ID assignment
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1823,7 +1745,6 @@ description: Recipe with multiple ingredient categories
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1866,7 +1787,6 @@ description: Test unreferenced ingredient detection
 servings: 2
 time: 10
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1906,7 +1826,6 @@ description: Test that ingredient links are preserved in steps
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -1957,7 +1876,6 @@ description: Test category ordering
 servings: 2
 time: 10
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2024,114 +1942,6 @@ date: 2026-01-01
     }
 
     #[test]
-    fn test_lint_uppercase_tag() {
-        let test_recipe = r#"---
-id: uppercase-tag
-name: Uppercase Tag
-description: Recipe with uppercase tag
-servings: 2
-time: 15
-difficulty: easy
-tags: [Vegan, test]
-diet: [vegan]
-cuisine: [french]
-meal_type: [dinner]
-date: 2026-01-01
----
-
-# Ingredients
-
-- 1 cup ingredient
-
-# Instructions
-
-1. Step one
-"#;
-
-        let temp_dir = std::env::temp_dir();
-        let test_file = temp_dir.join("uppercase-tag.md");
-        fs::write(&test_file, test_recipe).unwrap();
-
-        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
-        fs::remove_file(&test_file).ok();
-
-        assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("Tags must be lowercase"));
-    }
-
-    #[test]
-    fn test_lint_tag_with_spaces() {
-        let test_recipe = r#"---
-id: tag-spaces
-name: Tag Spaces
-description: Recipe with tag containing spaces
-servings: 2
-time: 15
-difficulty: easy
-tags: [vegan food, test]
-diet: [vegan]
-cuisine: [french]
-meal_type: [dinner]
-date: 2026-01-01
----
-
-# Ingredients
-
-- 1 cup ingredient
-
-# Instructions
-
-1. Step one
-"#;
-
-        let temp_dir = std::env::temp_dir();
-        let test_file = temp_dir.join("tag-spaces.md");
-        fs::write(&test_file, test_recipe).unwrap();
-
-        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
-        fs::remove_file(&test_file).ok();
-
-        assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("must not contain spaces"));
-    }
-
-    #[test]
-    fn test_lint_duplicate_tags() {
-        let test_recipe = r#"---
-id: dup-tags
-name: Duplicate Tags
-description: Recipe with duplicate tags
-servings: 2
-time: 15
-difficulty: easy
-tags: [vegan, test, vegan]
-diet: [vegan]
-cuisine: [french]
-meal_type: [dinner]
-date: 2026-01-01
----
-
-# Ingredients
-
-- 1 cup ingredient
-
-# Instructions
-
-1. Step one
-"#;
-
-        let temp_dir = std::env::temp_dir();
-        let test_file = temp_dir.join("dup-tags.md");
-        fs::write(&test_file, test_recipe).unwrap();
-
-        let result = parse_recipe_file(&test_file, true, &CanonicalData::empty());
-        fs::remove_file(&test_file).ok();
-
-        assert!(result.is_err());
-        assert!(result.unwrap_err().to_string().contains("Duplicate tag"));
-    }
-
-    #[test]
     fn test_id_too_long() {
         let long_id = "a".repeat(101);
         let test_recipe = format!(r#"---
@@ -2141,7 +1951,6 @@ description: Recipe with too long ID
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2178,7 +1987,6 @@ description: Recipe with too long name
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2215,7 +2023,6 @@ description: {}
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2251,7 +2058,6 @@ description: Recipe with unreasonable servings
 servings: 150
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2287,7 +2093,6 @@ description: Recipe with unreasonably long time
 servings: 2
 time: 2000
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2323,7 +2128,6 @@ description: Recipe with a date field
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2360,7 +2164,6 @@ description: Recipe with invalid date format
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2398,7 +2201,6 @@ description: Recipe without diet field
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 date: 2026-01-01
 ---
 
@@ -2432,7 +2234,6 @@ description: Recipe with empty diet list
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: []
 cuisine: [french]
 meal_type: [dinner]
@@ -2468,7 +2269,6 @@ description: Recipe with invalid diet value
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [keto]
 cuisine: [french]
 meal_type: [dinner]
@@ -2504,7 +2304,6 @@ description: Recipe with multiple valid diet values
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan, gluten-free]
 cuisine: [french]
 meal_type: [dinner]
@@ -2718,7 +2517,6 @@ description: Test no-scale annotation handling
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2765,7 +2563,6 @@ description: Test quantity parsing in full recipe
 servings: 4
 time: 30
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -2991,7 +2788,6 @@ description: Test duration extraction from steps
 servings: 2
 time: 15
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -3107,7 +2903,6 @@ description: Test that canonical and preparation fields are populated
 servings: 2
 time: 10
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -3163,7 +2958,6 @@ description: Test that plural forms normalise canonical but preserve item text
 servings: 2
 time: 10
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -3206,7 +3000,6 @@ description: Test that quantity item uses bracket text not canonical
 servings: 2
 time: 10
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -3247,7 +3040,6 @@ description: Test that lint errors when canonical tag is missing
 servings: 2
 time: 10
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]
@@ -3283,7 +3075,6 @@ description: Test that lint errors when canonical is not in vocabulary
 servings: 2
 time: 10
 difficulty: easy
-tags: [test]
 diet: [vegan]
 cuisine: [french]
 meal_type: [dinner]

@@ -667,7 +667,6 @@ test.describe('Recipe Refresh on Resume', () => {
       servings: 2,
       time: 20,
       difficulty: 'easy',
-      tags: ['vegan', 'dinner', 'pasta'],
       ingredients: {
         Pantry: [
           { id: 1, text: '200g pasta' },
@@ -759,7 +758,6 @@ test.describe('Pull to Refresh', () => {
       servings: 2,
       time: 20,
       difficulty: 'easy',
-      tags: ['vegan', 'dinner'],
       diet: ['vegan'],
       tested: true,
       ingredients: {

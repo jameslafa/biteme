@@ -5,7 +5,6 @@ description: Classic hearty lentil curry with a tempered spice topping
 servings: 4
 time: 35
 difficulty: easy
-tags: [indian, curry]
 diet: [vegan, gluten-free]
 cuisine: [indian]
 meal_type: [dinner]

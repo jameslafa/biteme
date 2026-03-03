@@ -5,7 +5,6 @@ description: Traditional French spiced honey cake with warming spices
 servings: 8
 time: 50
 difficulty: easy
-tags: [french, baking, dessert]
 diet: [vegetarian]
 cuisine: [french]
 meal_type: [baking, dessert]

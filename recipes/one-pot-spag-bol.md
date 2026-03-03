@@ -5,7 +5,6 @@ description: A quick vegan take on spaghetti bolognese with lentils — pasta an
 servings: 4
 time: 20
 difficulty: easy
-tags: [pasta, italian]
 diet: [vegan]
 cuisine: [italian]
 meal_type: [dinner]

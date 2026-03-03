@@ -54,7 +54,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action
 - **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
 - **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
-- **Tag & Rating Filtering** — Filter panel with tag and rating dropdowns, live result count, clickable tags on cards, URL param support
+- **Cuisine & Meal Type Filtering** — Filter panel with cuisine, meal type, and rating dropdowns, live result count, clickable badges on cards, URL param support
 - **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
 - **Recipe Rating (Phase 1)** — Local star ratings (1–5), post-cooking banner prompt, displayed on cards and detail page, editable from detail page, IndexedDB storage
 - **Canonical Ingredient System** — Controlled vocabulary (`docs/ingredients.json`), `[bracket]` syntax in recipe markdown, `canonical` + `preparation` fields in JSON output, exact step ref matching, linter enforcement

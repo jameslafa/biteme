@@ -5,7 +5,6 @@ description: A proper French recipe, no eggs, no dairy, all delicious
 servings: 8
 time: 60
 difficulty: easy
-tags: [french, dessert]
 diet: [vegan]
 cuisine: [french]
 meal_type: [breakfast, brunch, dessert]

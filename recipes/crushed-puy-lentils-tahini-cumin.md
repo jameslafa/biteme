@@ -5,7 +5,6 @@ description: Puy lentils crushed into a thick, spiced base of garlic, cumin, and
 servings: 2
 time: 35
 difficulty: easy
-tags: [dinner, middle-eastern]
 diet: [vegan, gluten-free]
 cuisine: [middle-eastern]
 meal_type: [lunch, dinner]

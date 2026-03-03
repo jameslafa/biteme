@@ -5,7 +5,6 @@ description: Traditional Breton buckwheat crêpes with sautéed mushrooms — na
 servings: 4
 time: 35
 difficulty: easy
-tags: [french]
 diet: [vegan, gluten-free]
 cuisine: [french]
 meal_type: [brunch, dinner]

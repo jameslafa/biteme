@@ -5,7 +5,6 @@ description: Rich and nutty peanut sauce with chickpeas and crunchy vegetables, 
 servings: 4
 time: 15
 difficulty: easy
-tags: [asian, indonesian]
 diet: [vegan]
 cuisine: [asian]
 meal_type: [dinner]

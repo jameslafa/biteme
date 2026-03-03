@@ -5,7 +5,6 @@ description: Crispy deep-fried tofu simmered in a rich, cumin-spiced tomato sauc
 servings: 4
 time: 45
 difficulty: medium
-tags: [dinner, middle-eastern]
 diet: [vegan, gluten-free]
 cuisine: [middle-eastern]
 meal_type: [dinner]

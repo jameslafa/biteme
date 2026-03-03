@@ -5,7 +5,6 @@ description: Creamy, fragrant korma with tender cauliflower florets and sweet pe
 servings: 3
 time: 25
 difficulty: easy
-tags: [indian, curry]
 diet: [vegan, gluten-free]
 cuisine: [indian]
 meal_type: [dinner]

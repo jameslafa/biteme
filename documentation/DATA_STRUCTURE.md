@@ -245,9 +245,9 @@ Each recipe object includes:
   servings: number;
   time: number;
   difficulty: string;
-  tags: string[];
+  cuisine: string[];       // e.g. "indian", "french", "mediterranean"
+  meal_type: string[];     // e.g. "breakfast", "lunch", "dinner"
   diet: string[];          // Dietary labels: "vegan", "vegetarian", "gluten-free"
-  author?: string;
   date: string;
   tested: boolean;       // false for untested recipes, true (default) otherwise
   notes?: string;
@@ -259,7 +259,7 @@ Each recipe object includes:
 
 The `tested` field is controlled by recipe frontmatter (`tested: false`). When omitted or `true`, the recipe is considered tested. Untested recipes are hidden by default on the home page — users can opt in via the Settings page.
 
-The `diet` field holds dietary labels separated from meal-type/cuisine `tags`. Valid values: `"vegan"`, `"vegetarian"`, `"gluten-free"`. Always serialized (empty array if none apply). Used by the Settings page dietary filters and rendered as text badges (circled letters) on recipe cards.
+The `diet` field holds dietary labels separated from `cuisine` and `meal_type`. Valid values: `"vegan"`, `"vegetarian"`, `"gluten-free"`. Always serialized (empty array if none apply). Used by the Settings page dietary filters and rendered as text badges (circled letters) on recipe cards.
 
 ### Ingredient Schema
 

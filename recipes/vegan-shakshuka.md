@@ -5,7 +5,6 @@ description: Silken tofu seasoned with kala namak to mimic eggs, poached in a ri
 servings: 2
 time: 70
 difficulty: easy
-tags: [brunch, middle-eastern]
 diet: [vegan, gluten-free]
 cuisine: [middle-eastern]
 meal_type: [brunch, dinner]

@@ -5,7 +5,6 @@ description: Tender aubergine and puy lentils simmered in a rich tomato and herb
 servings: 2
 time: 75
 difficulty: easy
-tags: [dinner, stew]
 diet: [vegan, gluten-free]
 cuisine: [mediterranean]
 meal_type: [dinner]

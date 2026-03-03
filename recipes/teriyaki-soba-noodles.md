@@ -5,7 +5,6 @@ description: Quick stir-fried soba noodles with mushrooms, bok choy and teriyaki
 servings: 4
 time: 20
 difficulty: easy
-tags: [japanese, stir-fry]
 diet: [vegan]
 cuisine: [asian]
 meal_type: [dinner]
