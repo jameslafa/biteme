@@ -7,6 +7,8 @@ time: 30
 difficulty: medium
 tags: [dinner, middle-eastern]
 diet: [vegan, gluten-free]
+cuisine: [middle-eastern]
+meal_type: [dinner]
 date: 2026-03-03
 ---
 

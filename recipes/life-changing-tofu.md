@@ -7,6 +7,8 @@ time: 25
 difficulty: easy
 tags: [asian, tofu]
 diet: [vegan, gluten-free]
+cuisine: [asian]
+meal_type: [dinner]
 date: 2026-03-01
 ---
 

@@ -7,6 +7,8 @@ time: 30
 difficulty: easy
 tags: [baking, british]
 diet: [vegan]
+cuisine: [british]
+meal_type: [baking, breakfast]
 date: 2026-02-10
 ---
 

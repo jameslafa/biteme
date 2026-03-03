@@ -7,6 +7,8 @@ time: 40
 difficulty: medium
 tags: [dinner, asian, stir-fry]
 diet: [vegan, gluten-free]
+cuisine: [asian]
+meal_type: [dinner]
 date: 2026-03-03
 ---
 

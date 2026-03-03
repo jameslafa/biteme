@@ -7,6 +7,8 @@ time: 40
 difficulty: easy
 tags: [soup, one-pot]
 diet: [vegan, gluten-free]
+cuisine: [french]
+meal_type: [lunch, dinner]
 date: 2026-02-10
 ---
 

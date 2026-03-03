@@ -7,6 +7,8 @@ time: 30
 difficulty: easy
 tags: [stew, one-pot]
 diet: [vegan, gluten-free]
+cuisine: [mediterranean]
+meal_type: [dinner]
 date: 2026-02-14
 ---
 

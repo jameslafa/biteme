@@ -34,6 +34,8 @@ struct RecipeFrontmatter {
     difficulty: String,
     tags: Vec<String>,
     diet: Vec<String>,
+    cuisine: Vec<String>,
+    meal_type: Vec<String>,
     date: String,
     #[serde(default)]
     tested: Option<bool>,
@@ -92,6 +94,8 @@ struct Recipe {
     difficulty: String,
     tags: Vec<String>,
     diet: Vec<String>,
+    cuisine: Vec<String>,
+    meal_type: Vec<String>,
     date: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     notes: Option<String>,
@@ -910,6 +914,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
         difficulty: frontmatter.difficulty,
         tags: frontmatter.tags,
         diet: frontmatter.diet,
+        cuisine: frontmatter.cuisine,
+        meal_type: frontmatter.meal_type,
         date: frontmatter.date,
         notes,
         ingredients,
@@ -1012,7 +1018,7 @@ fn friendly_frontmatter_error(err: &serde_yaml::Error) -> anyhow::Error {
         if let Some(rest) = msg.strip_prefix("unknown field `") {
             if let Some(field) = rest.split('`').next() {
                 return anyhow::anyhow!(
-                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, date. Optional: diet, tested",
+                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, cuisine, meal_type, date. Optional: diet, tested",
                     field
                 );
             }
@@ -1102,6 +1108,28 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
     for d in &fm.diet {
         if !valid_diets.contains(&d.as_str()) {
             bail!("Invalid diet value: '{}'. Valid values: {:?}", d, valid_diets);
+        }
+    }
+
+    // Validate cuisine values
+    if fm.cuisine.is_empty() {
+        bail!("cuisine must have at least one value. Valid values: indian, middle-eastern, asian, french, italian, british, american, mediterranean");
+    }
+    let valid_cuisines = ["indian", "middle-eastern", "asian", "french", "italian", "british", "american", "mediterranean"];
+    for c in &fm.cuisine {
+        if !valid_cuisines.contains(&c.as_str()) {
+            bail!("Invalid cuisine value: '{}'. Valid values: {:?}", c, valid_cuisines);
+        }
+    }
+
+    // Validate meal_type values
+    if fm.meal_type.is_empty() {
+        bail!("meal_type must have at least one value. Valid values: breakfast, brunch, lunch, dinner, dessert, baking");
+    }
+    let valid_meal_types = ["breakfast", "brunch", "lunch", "dinner", "dessert", "baking"];
+    for m in &fm.meal_type {
+        if !valid_meal_types.contains(&m.as_str()) {
+            bail!("Invalid meal_type value: '{}'. Valid values: {:?}", m, valid_meal_types);
         }
     }
 
@@ -1311,6 +1339,8 @@ time: 15
 difficulty: easy
 tags: [test, vegan]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1350,6 +1380,8 @@ time: 15
 difficulty: super-hard
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1384,6 +1416,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1419,6 +1453,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1453,6 +1489,8 @@ time: 15
 difficulty: easy
 tags: []
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1487,6 +1525,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1532,6 +1572,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1566,6 +1608,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1600,6 +1644,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1630,6 +1676,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1660,6 +1708,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1694,6 +1744,8 @@ time: 0
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1728,6 +1780,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1771,6 +1825,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1812,6 +1868,8 @@ time: 10
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1850,6 +1908,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1899,6 +1959,8 @@ time: 10
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -1972,6 +2034,8 @@ time: 15
 difficulty: easy
 tags: [Vegan, test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2006,6 +2070,8 @@ time: 15
 difficulty: easy
 tags: [vegan food, test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2040,6 +2106,8 @@ time: 15
 difficulty: easy
 tags: [vegan, test, vegan]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2075,6 +2143,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2110,6 +2180,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2145,6 +2217,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2179,6 +2253,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2213,6 +2289,8 @@ time: 2000
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2247,6 +2325,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-02-10
 ---
 
@@ -2282,6 +2362,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 10-02-2026
 ---
 
@@ -2352,6 +2434,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: []
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2386,6 +2470,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [keto]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2420,6 +2506,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan, gluten-free]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2632,6 +2720,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2677,6 +2767,8 @@ time: 30
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -2901,6 +2993,8 @@ time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -3015,6 +3109,8 @@ time: 10
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -3069,6 +3165,8 @@ time: 10
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -3110,6 +3208,8 @@ time: 10
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -3149,6 +3249,8 @@ time: 10
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 
@@ -3183,6 +3285,8 @@ time: 10
 difficulty: easy
 tags: [test]
 diet: [vegan]
+cuisine: [french]
+meal_type: [dinner]
 date: 2026-01-01
 ---
 

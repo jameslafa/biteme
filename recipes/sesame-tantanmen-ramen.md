@@ -7,6 +7,8 @@ time: 45
 difficulty: medium
 tags: [ramen, japanese]
 diet: [vegan]
+cuisine: [asian]
+meal_type: [lunch, dinner]
 date: 2026-02-17
 ---
 

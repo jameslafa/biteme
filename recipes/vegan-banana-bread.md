@@ -7,6 +7,8 @@ time: 65
 difficulty: easy
 tags: [baking, dessert]
 diet: [vegan]
+cuisine: [american, british]
+meal_type: [baking]
 date: 2026-02-10
 ---
 

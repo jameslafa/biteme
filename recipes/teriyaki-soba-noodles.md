@@ -7,6 +7,8 @@ time: 20
 difficulty: easy
 tags: [japanese, stir-fry]
 diet: [vegan]
+cuisine: [asian]
+meal_type: [dinner]
 date: 2026-02-20
 ---
 

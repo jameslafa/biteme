@@ -7,6 +7,8 @@ time: 35
 difficulty: easy
 tags: [french]
 diet: [vegan, gluten-free]
+cuisine: [french]
+meal_type: [brunch, dinner]
 date: 2026-02-17
 ---
 

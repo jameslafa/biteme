@@ -7,6 +7,8 @@ time: 50
 difficulty: easy
 tags: [chilli, one-pot]
 diet: [vegan, gluten-free]
+cuisine: [american]
+meal_type: [dinner]
 date: 2026-02-16
 ---
 

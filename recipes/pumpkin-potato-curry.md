@@ -7,6 +7,8 @@ time: 40
 difficulty: easy
 tags: [curry, one-pot]
 diet: [vegan, gluten-free]
+cuisine: [indian]
+meal_type: [dinner]
 date: 2026-02-10
 ---
 

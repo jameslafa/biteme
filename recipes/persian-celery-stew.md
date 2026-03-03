@@ -7,6 +7,8 @@ time: 75
 difficulty: medium
 tags: [stew, persian, iranian]
 diet: [vegan, gluten-free]
+cuisine: [middle-eastern]
+meal_type: [dinner]
 date: 2026-02-26
 ---
 

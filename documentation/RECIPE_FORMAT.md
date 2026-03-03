@@ -18,6 +18,8 @@ time: 45
 difficulty: medium
 tags: [tag-one, tag-two, tag-three]
 diet: [vegan, gluten-free]
+cuisine: [french]
+meal_type: [dinner, brunch]
 date: 2026-02-10
 ---
 ```
@@ -34,6 +36,8 @@ date: 2026-02-10
 | `difficulty`  | string  | Exactly one of: `easy`, `medium`, `hard`. Lowercase only.                                                                                                                                                              |
 | `tags`        | array   | At least 1 tag. All lowercase, no spaces within tags. No duplicates. Meal-type/cuisine only — dietary info goes in `diet`.                                                                                             |
 | `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`. For `gluten-free`: tag the recipe if gluten only appears in ingredients with a widely available GF alternative (soy sauce → tamari, gnocchi → GF gnocchi, stock → GF stock). Do **not** tag if gluten is structural to the dish (wheat flour, pasta, ramen noodles, soba noodles, bread). |
+| `cuisine`     | array   | At least 1 value. Valid values: `indian`, `middle-eastern`, `asian`, `french`, `italian`, `british`, `american`, `mediterranean`. |
+| `meal_type`   | array   | At least 1 value. Valid values: `breakfast`, `brunch`, `lunch`, `dinner`, `dessert`, `baking`. A recipe can belong to multiple meal types. |
 | `date`        | string  | Format: `YYYY-MM-DD`. Date the recipe was added.                                                                                                                                                                       |
 
 ---
@@ -243,6 +247,8 @@ time: 35
 difficulty: easy
 tags: [indian, curry]
 diet: [vegan, gluten-free]
+cuisine: [indian]
+meal_type: [dinner]
 date: 2026-02-26
 ---
 
@@ -294,6 +300,8 @@ Before outputting the recipe, verify:
 - [ ] `difficulty` is exactly `easy`, `medium`, or `hard`
 - [ ] `tags` are all lowercase, no spaces, no duplicates, at least 1. No dietary values (use `diet` instead)
 - [ ] `diet` values (if present) are only `vegan`, `vegetarian`, or `gluten-free`
+- [ ] `cuisine` has at least 1 value from: `indian`, `middle-eastern`, `asian`, `french`, `italian`, `british`, `american`, `mediterranean`
+- [ ] `meal_type` has at least 1 value from: `breakfast`, `brunch`, `lunch`, `dinner`, `dessert`, `baking`
 - [ ] Sections use `#` (H1) headings: `# Notes`, `# Ingredients`, `# Instructions`, `# Serving Suggestions`
 - [ ] Section order is: Notes (optional) → Ingredients → Instructions → Serving Suggestions (optional)
 - [ ] Salt, black pepper, and white pepper are **not** listed as ingredients — use "season to taste" in instructions instead

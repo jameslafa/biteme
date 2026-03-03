@@ -7,6 +7,8 @@ time: 25
 difficulty: easy
 tags: [indian, curry]
 diet: [vegan, gluten-free]
+cuisine: [indian]
+meal_type: [dinner]
 date: 2026-02-27
 ---
 

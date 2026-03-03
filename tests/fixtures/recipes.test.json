@@ -8,6 +8,8 @@
     "difficulty": "easy",
     "tags": ["dinner", "curry"],
     "diet": ["vegan"],
+    "cuisine": ["indian"],
+    "meal_type": ["dinner"],
     "notes": "Make sure to use fresh spices for best flavor. This curry tastes even better the next day.",
     "ingredients": {
       "Fresh": [

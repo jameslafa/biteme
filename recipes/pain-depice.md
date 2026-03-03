@@ -7,6 +7,8 @@ time: 50
 difficulty: easy
 tags: [french, baking, dessert]
 diet: [vegetarian]
+cuisine: [french]
+meal_type: [baking, dessert]
 date: 2026-02-10
 ---
 

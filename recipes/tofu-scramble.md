@@ -7,6 +7,8 @@ time: 20
 difficulty: easy
 tags: [breakfast]
 diet: [vegan, gluten-free]
+cuisine: [american]
+meal_type: [breakfast, brunch]
 date: 2026-02-17
 ---
 

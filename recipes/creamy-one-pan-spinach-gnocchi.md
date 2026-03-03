@@ -7,6 +7,8 @@ time: 20
 difficulty: easy
 tags: [pasta, one-pot]
 diet: [vegan, gluten-free]
+cuisine: [italian]
+meal_type: [dinner]
 date: 2026-02-12
 ---
 

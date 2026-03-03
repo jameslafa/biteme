@@ -7,6 +7,8 @@ time: 60
 difficulty: easy
 tags: [french, dessert]
 diet: [vegan]
+cuisine: [french]
+meal_type: [breakfast, brunch, dessert]
 date: 2026-02-14
 ---
 

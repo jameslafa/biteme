@@ -7,6 +7,8 @@ time: 70
 difficulty: easy
 tags: [brunch, middle-eastern]
 diet: [vegan, gluten-free]
+cuisine: [middle-eastern]
+meal_type: [brunch, dinner]
 date: 2026-03-03
 ---
 

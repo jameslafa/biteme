@@ -7,6 +7,8 @@ time: 75
 difficulty: easy
 tags: [dinner, stew]
 diet: [vegan, gluten-free]
+cuisine: [mediterranean]
+meal_type: [dinner]
 date: 2026-03-03
 ---
 

@@ -15,6 +15,12 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "asian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-03-03",
     "notes": "Use firm or extra-firm tofu — it needs to hold up to frying. Press it dry for at least 20 minutes if you have time. The 5 tbsp of coarsely ground black pepper is not a typo; it is the point of the dish. Grind it yourself for the best texture and flavour.",
     "ingredients": {
@@ -216,6 +222,13 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "middle-eastern"
+    ],
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
     "date": "2026-03-03",
     "ingredients": {
       "Fresh": [
@@ -391,6 +404,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "middle-eastern"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-03-03",
     "notes": "You need two pans running at once towards the end — read through the method before you start. The silken tofu cream can be made ahead and refrigerated.",
@@ -605,6 +624,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "middle-eastern"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-03-03",
     "ingredients": {
@@ -841,6 +866,12 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "mediterranean"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-03-03",
     "ingredients": {
       "Fresh": [
@@ -1028,6 +1059,13 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "middle-eastern"
+    ],
+    "meal_type": [
+      "brunch",
+      "dinner"
     ],
     "date": "2026-03-03",
     "notes": "Kala namak (black salt) has a high sulphur content that gives tofu a remarkably egg-like flavour and aroma. Find it at Indian or Asian grocery stores. Don't skip it — it's what makes this dish work.",
@@ -1289,6 +1327,12 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "asian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-03-01",
     "notes": "This technique comes from Chinese and Korean cooking. The potato starch coating crisps up beautifully without absorbing much oil. Fresh ginger is strongly preferred here — grate it on the fine side of a box grater. The tofu keeps well and is excellent cold the next day in a lunchbox.",
     "ingredients": {
@@ -1426,6 +1470,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-27",
     "notes": "You can substitute broccoli for the cauliflower if you prefer. Remove the chilli seeds for a milder dish.",
@@ -1683,6 +1733,13 @@
     "diet": [
       "vegetarian"
     ],
+    "cuisine": [
+      "asian"
+    ],
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
     "date": "2026-02-27",
     "notes": "Start the marinated eggs the evening before — they need at least one night in the fridge. Everything else comes together in about 35 minutes. The nutty base and tofu can be prepped simultaneously while the broth heats.",
     "ingredients": {
@@ -1917,6 +1974,12 @@
     "diet": [
       "vegan"
     ],
+    "cuisine": [
+      "asian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-02-27",
     "notes": "Use tamari instead of soy sauce to make this gluten-free. You can swap the courgette and red pepper for any fast-cooking veg — mushrooms, sugarsnap peas or spinach all work well.",
     "ingredients": {
@@ -2136,6 +2199,12 @@
     "diet": [
       "vegan"
     ],
+    "cuisine": [
+      "italian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-02-27",
     "notes": "If you don't want to use wine, replace it with the same amount of vegetable stock.",
     "ingredients": {
@@ -2317,6 +2386,12 @@
     ],
     "diet": [
       "vegan"
+    ],
+    "cuisine": [
+      "italian"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-27",
     "notes": "Nutritional yeast has a savoury, cheesy flavour and is available in most health food stores and online. Use tamari instead of soy sauce to make this gluten-free.",
@@ -2513,6 +2588,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-26",
     "notes": "US recipes often call this \"tomato puree\" — in European terms that's passata (sieved tomatoes), not the concentrated paste. A standard 400 g carton works perfectly. Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.",
@@ -2733,6 +2814,12 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "middle-eastern"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-02-26",
     "notes": "A dish from northern Iran where butter beans are a common plant-based swap for the traditional lamb. Don't rush the herb frying step — the parsley and mint need to darken and concentrate to develop the characteristic deep flavour. The stew should have some liquid remaining when done; don't let it dry out.",
     "ingredients": {
@@ -2945,6 +3032,12 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-02-20",
     "notes": "Red lentils break down into a creamy texture, yellow lentils hold their shape a bit more — both work well. Lentils are easy to find in any German supermarket or Asian shop.",
     "ingredients": {
@@ -3119,6 +3212,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-20",
     "notes": "Press the tofu well — at least 15 minutes with a cloth or kitchen paper — for crispier results. Fresh spinach gives a brighter colour but frozen works fine if well drained.",
@@ -3347,6 +3446,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-20",
     "notes": "Don't rush the onions — cooking them until deep golden brown is key to the richness of the dish. Like most curries, this one is even better the next day once the flavours have had time to develop.",
@@ -3586,6 +3691,12 @@
     "diet": [
       "vegan"
     ],
+    "cuisine": [
+      "asian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-02-20",
     "notes": "This comes together in 20 minutes — prep the vegetables while the water boils. If the noodles start sticking after draining, rinse them with cold water. Add teriyaki sauce gradually to taste — different brands vary in sweetness and saltiness.",
     "ingredients": {
@@ -3733,6 +3844,13 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "french"
+    ],
+    "meal_type": [
+      "brunch",
+      "dinner"
     ],
     "date": "2026-02-17",
     "notes": "The batter needs at least 2 hours of resting in the fridge, ideally overnight — plan ahead. The first galette is almost always a throwaway (la galette de test!) so don't worry about it. Good buckwheat flour is key — look for farine de sarrasin or blé noir. Stack cooked galettes under a tea towel to keep them warm and pliable. Leftovers keep well in the fridge for 2–3 days; reheat in a dry pan.",
@@ -3889,6 +4007,13 @@
     ],
     "diet": [
       "vegan"
+    ],
+    "cuisine": [
+      "asian"
+    ],
+    "meal_type": [
+      "lunch",
+      "dinner"
     ],
     "date": "2026-02-17",
     "notes": "Tantanmen is the Japanese take on Sichuan dan dan noodles. The key is the sesame paste — use Asian sesame paste (not tahini), which is made from toasted seeds and has a much deeper flavour. If you can't find rayu (Japanese chilli oil), any chilli oil works. Press the tofu well before crumbling for crispier results.",
@@ -4147,6 +4272,13 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "american"
+    ],
+    "meal_type": [
+      "breakfast",
+      "brunch"
+    ],
     "date": "2026-02-17",
     "notes": "Press the tofu for at least 24 hours to extract all the water. The drier the tofu, the better it will brown. Kala namak (Indian black salt) is the secret ingredient — it gives the scramble its eggy flavour. You can find it at Indian grocery stores or online.",
     "ingredients": {
@@ -4332,6 +4464,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "american"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-16",
     "notes": "The cocoa powder adds a lovely depth without making it taste chocolatey. Add the chilli powder gradually and taste as you go if you're not sure about heat levels. For a smoky twist, add a finely chopped chipotle pepper or a teaspoon of chipotle paste. Freezes brilliantly in portions for easy weeknight dinners.",
@@ -4648,6 +4786,12 @@
       "vegan",
       "gluten-free"
     ],
+    "cuisine": [
+      "mediterranean"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
     "date": "2026-02-14",
     "notes": "This stew actually tastes even better the next day as the flavours develop. Keeps in the fridge for 3 to 4 days and freezes well in portions for easy future meals.",
     "ingredients": {
@@ -4854,6 +4998,14 @@
     "diet": [
       "vegan"
     ],
+    "cuisine": [
+      "french"
+    ],
+    "meal_type": [
+      "breakfast",
+      "brunch",
+      "dessert"
+    ],
     "date": "2026-02-14",
     "notes": "The resting time is important. It lets the flour fully hydrate and the gluten relax, which makes the crêpes easier to spread thinly and less likely to tear. The first crêpe is almost always a disaster. Consider it a test run and adjust the heat accordingly. La première est pour le chien! Corn starch will give slightly crispier crêpes, potato starch will give softer, more flexible ones.",
     "ingredients": {
@@ -5021,6 +5173,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "italian"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-12",
     "ingredients": {
@@ -5235,6 +5393,13 @@
     "diet": [
       "vegan"
     ],
+    "cuisine": [
+      "british"
+    ],
+    "meal_type": [
+      "baking",
+      "breakfast"
+    ],
     "date": "2026-02-10",
     "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
     "ingredients": {
@@ -5361,6 +5526,14 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "middle-eastern"
+    ],
+    "meal_type": [
+      "brunch",
+      "lunch",
+      "dinner"
     ],
     "date": "2026-02-10",
     "notes": "Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not optional! The cold shock against the warm chickpeas aerates the hummus beautifully. Don't add olive oil to the base mixture. The tahini has plenty of fat. Olive oil goes on top when serving. The hummus keeps well in the fridge for up to 3 days.",
@@ -5526,6 +5699,13 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "french"
+    ],
+    "meal_type": [
+      "lunch",
+      "dinner"
     ],
     "date": "2026-02-10",
     "notes": "For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini, soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.",
@@ -5711,6 +5891,13 @@
     "diet": [
       "vegetarian"
     ],
+    "cuisine": [
+      "french"
+    ],
+    "meal_type": [
+      "baking",
+      "dessert"
+    ],
     "date": "2026-02-10",
     "notes": "This delicious French spice bread is best enjoyed the next day when the flavours have had time to develop. It keeps well wrapped in foil for up to a week. The spice mix typically includes cinnamon, green aniseed, star anise, nutmeg, coriander seeds, cloves and ground ginger, but you can also use a pre-made pain d'épices spice blend if available.",
     "ingredients": {
@@ -5849,6 +6036,12 @@
     "diet": [
       "vegan",
       "gluten-free"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
     ],
     "date": "2026-02-10",
     "notes": "If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2. A handful of spinach stirred in at the end is a nice addition. Keeps well in the fridge for 3–4 days and actually tastes even better the next day!",
@@ -6035,6 +6228,13 @@
     ],
     "diet": [
       "vegan"
+    ],
+    "cuisine": [
+      "american",
+      "british"
+    ],
+    "meal_type": [
+      "baking"
     ],
     "date": "2026-02-10",
     "notes": "Use very ripe bananas with lots of brown spots for the best flavour and natural sweetness. The banana bread keeps well wrapped in foil for 3-4 days at room temperature, or can be frozen for up to 3 months. For extra indulgence, fold in some chocolate chips or chopped walnuts before baking.",

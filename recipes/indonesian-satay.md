@@ -7,6 +7,8 @@ time: 15
 difficulty: easy
 tags: [asian, indonesian]
 diet: [vegan]
+cuisine: [asian]
+meal_type: [dinner]
 date: 2026-02-27
 ---
 
