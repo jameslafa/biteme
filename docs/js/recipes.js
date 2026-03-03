@@ -119,7 +119,8 @@ async function searchRecipes(query) {
   return recipes.filter(recipe =>
     recipe.name.toLowerCase().includes(lowerQuery) ||
     recipe.description.toLowerCase().includes(lowerQuery) ||
-    recipe.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+    (recipe.cuisine || []).some(c => c.toLowerCase().includes(lowerQuery)) ||
+    (recipe.meal_type || []).some(m => m.toLowerCase().includes(lowerQuery))
   );
 }
 

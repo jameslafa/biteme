@@ -2,9 +2,11 @@
 
 let showFavoritesOnly = false;
 let showUntestedRecipes = false;
-let activeTag = null;
+let activeCuisine = null;
+let activeMealType = null;
 let activeMinRating = null;
-let pendingTag = null;
+let pendingCuisine = null;
+let pendingMealType = null;
 let pendingMinRating = null;
 let cachedAllRecipes = [];
 let cachedRatingsMap = {};
@@ -23,9 +25,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Load dietary filters from IndexedDB
   activeDietaryFilters = (await getSetting('dietaryFilters')) || [];
 
-  // Read tag filter from URL param
+  // Read cuisine/meal_type filters from URL params
   const urlParams = new URLSearchParams(window.location.search);
-  activeTag = urlParams.get('tag') || null;
+  activeCuisine = urlParams.get('cuisine') || null;
+  activeMealType = urlParams.get('meal_type') || null;
 
   loadRecipes();
   setupSearch();
@@ -51,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // Single filter function used by both loadRecipes (applied) and live count (pending)
-function filterRecipes({ tag, minRating, favoritesOnly, searchQuery }) {
+function filterRecipes({ cuisine, mealType, minRating, favoritesOnly, searchQuery }) {
   let recipes = cachedAllRecipes;
 
   if (!showUntestedRecipes) {
@@ -73,7 +76,8 @@ function filterRecipes({ tag, minRating, favoritesOnly, searchQuery }) {
         let score = 0;
         if (recipe.name.toLowerCase().includes(lowerQuery)) score += 3;
         if (recipe.description.toLowerCase().includes(lowerQuery)) score += 2;
-        if (recipe.tags.some(t => t.toLowerCase().includes(lowerQuery))) score += 2;
+        if ((recipe.cuisine || []).some(c => c.toLowerCase().includes(lowerQuery))) score += 2;
+        if ((recipe.meal_type || []).some(m => m.toLowerCase().includes(lowerQuery))) score += 1;
         if (Object.values(recipe.ingredients).some(group =>
           group.some(ing => ing.text.toLowerCase().includes(lowerQuery))
         )) score += 1;
@@ -84,8 +88,12 @@ function filterRecipes({ tag, minRating, favoritesOnly, searchQuery }) {
       .map(r => r.recipe);
   }
 
-  if (tag) {
-    recipes = recipes.filter(r => r.tags.includes(tag));
+  if (cuisine) {
+    recipes = recipes.filter(r => (r.cuisine || []).includes(cuisine));
+  }
+
+  if (mealType) {
+    recipes = recipes.filter(r => (r.meal_type || []).includes(mealType));
   }
 
   if (minRating) {
@@ -107,7 +115,8 @@ async function loadRecipes() {
   cachedFavoriteIds = new Set(favorites.map(f => f.recipe_id));
 
   const recipes = filterRecipes({
-    tag: activeTag,
+    cuisine: activeCuisine,
+    mealType: activeMealType,
     minRating: activeMinRating,
     favoritesOnly: showFavoritesOnly,
     searchQuery: document.getElementById('search-input').value,
@@ -115,7 +124,7 @@ async function loadRecipes() {
 
   // Update filter icon state
   const filterBtn = document.getElementById('tag-filter-btn');
-  filterBtn.classList.toggle('active', !!activeTag || !!activeMinRating);
+  filterBtn.classList.toggle('active', !!activeCuisine || !!activeMealType || !!activeMinRating);
 
   await displayRecipes(recipes);
 }
@@ -129,7 +138,8 @@ function setupFilterPanel() {
   filterBtn.addEventListener('click', () => {
     const wasOpen = container.classList.contains('open');
     if (!wasOpen) {
-      pendingTag = activeTag;
+      pendingCuisine = activeCuisine;
+      pendingMealType = activeMealType;
       pendingMinRating = activeMinRating;
       renderFilterDropdowns();
     }
@@ -145,21 +155,28 @@ function setupFilterPanel() {
     }
   });
 
-  // Setup tag dropdown
-  document.getElementById('tag-select-btn').addEventListener('click', (e) => {
+  // Setup cuisine dropdown
+  document.getElementById('cuisine-select-btn').addEventListener('click', (e) => {
     e.stopPropagation();
-    toggleFilterSelect('tag-select', 'rating-select');
+    toggleFilterSelect('cuisine-select', 'meal-type-select', 'rating-select');
+  });
+
+  // Setup meal type dropdown
+  document.getElementById('meal-type-select-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleFilterSelect('meal-type-select', 'cuisine-select', 'rating-select');
   });
 
   // Setup rating dropdown
   document.getElementById('rating-select-btn').addEventListener('click', (e) => {
     e.stopPropagation();
-    toggleFilterSelect('rating-select', 'tag-select');
+    toggleFilterSelect('rating-select', 'cuisine-select', 'meal-type-select');
   });
 
   // Filter (apply) button — commit pending → active
   document.getElementById('filter-apply-btn').addEventListener('click', () => {
-    activeTag = pendingTag;
+    activeCuisine = pendingCuisine;
+    activeMealType = pendingMealType;
     activeMinRating = pendingMinRating;
     updateFilterURL();
     container.classList.remove('open');
@@ -174,9 +191,11 @@ function setupFilterPanel() {
 
   // Reset button
   document.getElementById('filter-reset-btn').addEventListener('click', () => {
-    pendingTag = null;
+    pendingCuisine = null;
+    pendingMealType = null;
     pendingMinRating = null;
-    activeTag = null;
+    activeCuisine = null;
+    activeMealType = null;
     activeMinRating = null;
     updateFilterURL();
     container.classList.remove('open');
@@ -185,8 +204,8 @@ function setupFilterPanel() {
   });
 }
 
-function toggleFilterSelect(openId, closeId) {
-  document.getElementById(closeId).classList.remove('open');
+function toggleFilterSelect(openId, ...closeIds) {
+  closeIds.forEach(id => document.getElementById(id).classList.remove('open'));
   document.getElementById(openId).classList.toggle('open');
 }
 
@@ -197,43 +216,74 @@ function closeAllFilterSelects() {
 // Count how many recipes match the pending filters (for live preview in popover)
 function countPendingFilterResults() {
   return filterRecipes({
-    tag: pendingTag,
+    cuisine: pendingCuisine,
+    mealType: pendingMealType,
     minRating: pendingMinRating,
     favoritesOnly: showFavoritesOnly,
     searchQuery: document.getElementById('search-input').value,
   }).length;
 }
 
-// Render tag and rating dropdown options using pending state
+// Render cuisine, meal type, and rating dropdown options using pending state
 function renderFilterDropdowns() {
   const filterBtn = document.getElementById('tag-filter-btn');
   const resetBtn = document.getElementById('filter-reset-btn');
   const applyBtn = document.getElementById('filter-apply-btn');
 
-  // Tag dropdown — only show tags present in recipes matching current search/filters
+  // Cuisine dropdown — only show cuisines from recipes matching current search/rating/favorites
   const baseRecipes = filterRecipes({
-    tag: null,
+    cuisine: null,
+    mealType: null,
     minRating: pendingMinRating,
     favoritesOnly: showFavoritesOnly,
     searchQuery: document.getElementById('search-input').value,
   });
-  const tags = [...new Set(baseRecipes.flatMap(r => r.tags))].sort();
-  const tagOptions = document.getElementById('tag-options');
-  const tagBtn = document.getElementById('tag-select-btn');
+  const cuisines = [...new Set(baseRecipes.flatMap(r => r.cuisine || []))].sort();
+  const cuisineOptions = document.getElementById('cuisine-options');
+  const cuisineBtn = document.getElementById('cuisine-select-btn');
 
-  tagOptions.innerHTML = `<button class="filter-option${!pendingTag ? ' active' : ''}" data-value="">All</button>`
-    + tags.map(tag =>
-      `<button class="filter-option${pendingTag === tag ? ' active' : ''}" data-value="${tag}">${tag}</button>`
+  cuisineOptions.innerHTML = `<button class="filter-option${!pendingCuisine ? ' active' : ''}" data-value="">All</button>`
+    + cuisines.map(c =>
+      `<button class="filter-option${pendingCuisine === c ? ' active' : ''}" data-value="${c}">${c}</button>`
     ).join('');
 
-  tagBtn.textContent = pendingTag || 'All';
-  tagBtn.classList.toggle('has-value', !!pendingTag);
+  cuisineBtn.textContent = pendingCuisine || 'All';
+  cuisineBtn.classList.toggle('has-value', !!pendingCuisine);
 
-  tagOptions.querySelectorAll('.filter-option').forEach(opt => {
+  cuisineOptions.querySelectorAll('.filter-option').forEach(opt => {
     opt.addEventListener('click', (e) => {
       e.stopPropagation();
-      pendingTag = opt.dataset.value || null;
-      document.getElementById('tag-select').classList.remove('open');
+      pendingCuisine = opt.dataset.value || null;
+      document.getElementById('cuisine-select').classList.remove('open');
+      renderFilterDropdowns();
+    });
+  });
+
+  // Meal type dropdown — only show meal types from recipes matching pending cuisine
+  const mealTypeBaseRecipes = filterRecipes({
+    cuisine: pendingCuisine,
+    mealType: null,
+    minRating: pendingMinRating,
+    favoritesOnly: showFavoritesOnly,
+    searchQuery: document.getElementById('search-input').value,
+  });
+  const mealTypes = [...new Set(mealTypeBaseRecipes.flatMap(r => r.meal_type || []))].sort();
+  const mealTypeOptions = document.getElementById('meal-type-options');
+  const mealTypeBtn = document.getElementById('meal-type-select-btn');
+
+  mealTypeOptions.innerHTML = `<button class="filter-option${!pendingMealType ? ' active' : ''}" data-value="">All</button>`
+    + mealTypes.map(m =>
+      `<button class="filter-option${pendingMealType === m ? ' active' : ''}" data-value="${m}">${m}</button>`
+    ).join('');
+
+  mealTypeBtn.textContent = pendingMealType || 'All';
+  mealTypeBtn.classList.toggle('has-value', !!pendingMealType);
+
+  mealTypeOptions.querySelectorAll('.filter-option').forEach(opt => {
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      pendingMealType = opt.dataset.value || null;
+      document.getElementById('meal-type-select').classList.remove('open');
       renderFilterDropdowns();
     });
   });
@@ -266,11 +316,11 @@ function renderFilterDropdowns() {
   });
 
   // Show/hide reset button
-  const hasPendingFilters = !!pendingTag || !!pendingMinRating;
+  const hasPendingFilters = !!pendingCuisine || !!pendingMealType || !!pendingMinRating;
   resetBtn.style.display = hasPendingFilters ? '' : 'none';
 
   // Update filter icon active state based on applied filters
-  const hasActiveFilters = !!activeTag || !!activeMinRating;
+  const hasActiveFilters = !!activeCuisine || !!activeMealType || !!activeMinRating;
   filterBtn.classList.toggle('active', hasActiveFilters);
 
   // Live result count on the apply button
@@ -281,19 +331,31 @@ function renderFilterDropdowns() {
   applyBtn.disabled = count === 0;
 }
 
-// Set active tag, update URL, and reload
-function setActiveTag(tag) {
-  activeTag = tag;
+// Set active cuisine, update URL, and reload
+function setActiveCuisine(cuisine) {
+  activeCuisine = cuisine;
+  updateFilterURL();
+  loadRecipes();
+}
+
+// Set active meal type, update URL, and reload
+function setActiveMealType(mealType) {
+  activeMealType = mealType;
   updateFilterURL();
   loadRecipes();
 }
 
 function updateFilterURL() {
   const url = new URL(window.location);
-  if (activeTag) {
-    url.searchParams.set('tag', activeTag);
+  if (activeCuisine) {
+    url.searchParams.set('cuisine', activeCuisine);
   } else {
-    url.searchParams.delete('tag');
+    url.searchParams.delete('cuisine');
+  }
+  if (activeMealType) {
+    url.searchParams.set('meal_type', activeMealType);
+  } else {
+    url.searchParams.delete('meal_type');
   }
   history.replaceState(null, '', url);
 }
@@ -363,7 +425,10 @@ async function displayRecipes(recipes) {
         const filterBtn = document.getElementById('favorites-filter');
         filterBtn.classList.remove('active');
         filterBtn.setAttribute('aria-label', 'Show favourites only');
-        setActiveTag(null);
+        activeCuisine = null;
+        activeMealType = null;
+        updateFilterURL();
+        loadRecipes();
       });
     } else {
       recipeGrid.innerHTML = `
@@ -378,7 +443,10 @@ async function displayRecipes(recipes) {
       `;
       document.getElementById('clear-search-btn').addEventListener('click', () => {
         document.getElementById('search-input').value = '';
-        setActiveTag(null);
+        activeCuisine = null;
+        activeMealType = null;
+        updateFilterURL();
+        loadRecipes();
       });
     }
     return;
@@ -416,7 +484,8 @@ async function displayRecipes(recipes) {
       <div class="recipe-tags">
         <div class="recipe-tags-left">
           ${recipe.tested === false ? '<span class="tag tag-untested">untested</span>' : ''}
-          ${recipe.tags.map(tag => `<button class="tag tag-filter${activeTag === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`).join('')}
+          ${(recipe.cuisine || []).map(c => `<button class="tag tag-cuisine${activeCuisine === c ? ' active' : ''}" data-cuisine="${c}">${c}</button>`).join('')}
+          ${(recipe.meal_type || []).map(m => `<button class="tag tag-meal-type${activeMealType === m ? ' active' : ''}" data-meal-type="${m}">${m}</button>`).join('')}
         </div>
         ${renderDietIcons(recipe.diet || [])}
       </div>
@@ -442,11 +511,19 @@ async function displayRecipes(recipes) {
     });
   }
 
-  // Setup tag click handlers on cards
-  recipeGrid.querySelectorAll('.recipe-card .tag-filter').forEach(tagBtn => {
-    tagBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevent card navigation
-      setActiveTag(tagBtn.dataset.tag === activeTag ? null : tagBtn.dataset.tag);
+  // Setup cuisine click handlers on cards
+  recipeGrid.querySelectorAll('.recipe-card .tag-cuisine').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setActiveCuisine(btn.dataset.cuisine === activeCuisine ? null : btn.dataset.cuisine);
+    });
+  });
+
+  // Setup meal type click handlers on cards
+  recipeGrid.querySelectorAll('.recipe-card .tag-meal-type').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setActiveMealType(btn.dataset.mealType === activeMealType ? null : btn.dataset.mealType);
     });
   });
 }
@@ -647,7 +724,8 @@ async function pickSurpriseRecipe(filtered) {
 
 async function triggerSurprise(usePending = false) {
   if (usePending) {
-    activeTag = pendingTag;
+    activeCuisine = pendingCuisine;
+    activeMealType = pendingMealType;
     activeMinRating = pendingMinRating;
     updateFilterURL();
     document.getElementById('tag-dropdown').classList.remove('open');
@@ -655,7 +733,8 @@ async function triggerSurprise(usePending = false) {
   }
 
   const filtered = filterRecipes({
-    tag: activeTag,
+    cuisine: activeCuisine,
+    mealType: activeMealType,
     minRating: activeMinRating,
     favoritesOnly: showFavoritesOnly,
     searchQuery: document.getElementById('search-input').value,

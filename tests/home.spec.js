@@ -84,8 +84,8 @@ test.describe('Home Page', () => {
   test('title matches rank above ingredient-only matches', async ({ page }) => {
     const searchInput = page.locator('#search-input');
 
-    // "curry" matches Test Curry by name (score 3) + tag (2) + ingredient "curry powder" (1) = 6
-    // Other recipes with curry powder but no name/tag match would score 1
+    // "curry" matches Test Curry by name (score 3) + ingredient "curry powder" (1) = 4
+    // No other recipe contains "curry" in any field
     await searchInput.fill('curry');
     const cards = page.locator('.recipe-card');
     await expect(cards).toHaveCount(1);
@@ -421,33 +421,48 @@ test.describe('Filter Panel', () => {
     await expect(page.locator('.filter-popover')).toBeHidden();
   });
 
-  test('tag dropdown lists all tags sorted', async ({ page }) => {
+  test('cuisine dropdown lists all cuisines sorted', async ({ page }) => {
     await openFilterPanel(page);
-    await page.locator('#tag-select-btn').click();
+    await page.locator('#cuisine-select-btn').click();
 
-    const options = page.locator('#tag-options .filter-option');
-    // "All" + 6 unique tags from tested recipes: breakfast, curry, dinner, lunch, quick, salad
-    // (test-soup is tested:false so it and its tags are excluded)
-    await expect(options).toHaveCount(7);
+    const options = page.locator('#cuisine-options .filter-option');
+    // "All" + 3 unique cuisines from tested recipes: american, indian, mediterranean
+    // (test-soup is tested:false so excluded)
+    await expect(options).toHaveCount(4);
     await expect(options.nth(0)).toHaveText('All');
-    await expect(options.nth(1)).toHaveText('breakfast');
+    await expect(options.nth(1)).toHaveText('american');
+    await expect(options.nth(2)).toHaveText('indian');
+    await expect(options.nth(3)).toHaveText('mediterranean');
   });
 
-  test('tag dropdown narrows to tags from search-matching recipes', async ({ page }) => {
+  test('meal type dropdown lists all meal types sorted', async ({ page }) => {
+    await openFilterPanel(page);
+    await page.locator('#meal-type-select-btn').click();
+
+    const options = page.locator('#meal-type-options .filter-option');
+    // "All" + 3 unique meal types from tested recipes: breakfast, dinner, lunch
+    await expect(options).toHaveCount(4);
+    await expect(options.nth(0)).toHaveText('All');
+    await expect(options.nth(1)).toHaveText('breakfast');
+    await expect(options.nth(2)).toHaveText('dinner');
+    await expect(options.nth(3)).toHaveText('lunch');
+  });
+
+  test('cuisine dropdown narrows to cuisines from search-matching recipes', async ({ page }) => {
     await page.locator('#search-input').fill('curry');
     await expect(page.locator('.recipe-card')).toHaveCount(1);
 
     await openFilterPanel(page);
-    await page.locator('#tag-select-btn').click();
+    await page.locator('#cuisine-select-btn').click();
 
-    const options = page.locator('#tag-options .filter-option');
-    // Only test-curry matches: tags are "curry" and "dinner"
-    await expect(options).toHaveCount(3); // "All" + curry + dinner
+    const options = page.locator('#cuisine-options .filter-option');
+    // Only test-curry matches: cuisine is "indian"
+    await expect(options).toHaveCount(2); // "All" + indian
     const texts = await options.allTextContents();
-    expect(texts).toEqual(['All', 'curry', 'dinner']);
+    expect(texts).toEqual(['All', 'indian']);
   });
 
-  test('tag dropdown restores all tags when search is cleared', async ({ page }) => {
+  test('cuisine dropdown restores all cuisines when search is cleared', async ({ page }) => {
     await page.locator('#search-input').fill('toast');
     await expect(page.locator('.recipe-card')).toHaveCount(1);
 
@@ -455,10 +470,10 @@ test.describe('Filter Panel', () => {
     await expect(page.locator('.recipe-card')).toHaveCount(3);
 
     await openFilterPanel(page);
-    await page.locator('#tag-select-btn').click();
+    await page.locator('#cuisine-select-btn').click();
 
-    const options = page.locator('#tag-options .filter-option');
-    await expect(options).toHaveCount(7); // All + 6 tags
+    const options = page.locator('#cuisine-options .filter-option');
+    await expect(options).toHaveCount(4); // All + 3 cuisines
   });
 
   test('apply button shows live result count', async ({ page }) => {
@@ -468,23 +483,23 @@ test.describe('Filter Panel', () => {
     // No filters — all 3 recipes
     await expect(applyBtn).toHaveText('Show 3 recipes');
 
-    // Select tag "curry" — 1 recipe
-    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    // Select cuisine "american" — 1 recipe (test-toast)
+    await selectFilterOption(page, 'cuisine-select-btn', 'american');
     await expect(applyBtn).toHaveText('Show 1 recipe');
 
-    // Select tag "breakfast" — 1 recipe (test-toast)
-    await selectFilterOption(page, 'tag-select-btn', 'breakfast');
+    // Select cuisine "indian" — 1 recipe (test-curry)
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
     await expect(applyBtn).toHaveText('Show 1 recipe');
   });
 
-  test('selecting tag and clicking Filter applies it', async ({ page }) => {
+  test('selecting cuisine and clicking Filter applies it', async ({ page }) => {
     await expect(page.locator('.recipe-card')).toHaveCount(3);
 
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
     await page.locator('#filter-apply-btn').click();
 
-    // Popover closed, only dinner recipes shown
+    // Popover closed, only indian cuisine recipes shown
     await expect(page.locator('.filter-popover')).toBeHidden();
     await expect(page.locator('.recipe-card')).toHaveCount(1);
     await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
@@ -492,7 +507,7 @@ test.describe('Filter Panel', () => {
 
   test('filter does not apply until Filter button is clicked', async ({ page }) => {
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
 
     // List should still show all 3 recipes (pending, not applied)
     await expect(page.locator('.recipe-card')).toHaveCount(3);
@@ -500,21 +515,21 @@ test.describe('Filter Panel', () => {
 
   test('outside click discards pending filter changes', async ({ page }) => {
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
 
     // Close by clicking outside (discard)
     await page.locator('h1').click();
 
-    // Reopen — should show "All" again, not "dinner"
+    // Reopen — should show "All" again, not "indian"
     await openFilterPanel(page);
-    await expect(page.locator('#tag-select-btn')).toHaveText('All');
+    await expect(page.locator('#cuisine-select-btn')).toHaveText('All');
     await expect(page.locator('#filter-apply-btn')).toHaveText('Show 3 recipes');
   });
 
   test('reset clears active filters', async ({ page }) => {
-    // Apply a tag filter first
+    // Apply a cuisine filter first
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
     await page.locator('#filter-apply-btn').click();
     await expect(page.locator('.recipe-card')).toHaveCount(1);
 
@@ -537,7 +552,7 @@ test.describe('Filter Panel', () => {
     await expect(filterIcon).not.toHaveClass(/active/);
 
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
     await page.locator('#filter-apply-btn').click();
 
     await expect(filterIcon).toHaveClass(/active/);
@@ -558,14 +573,14 @@ test.describe('Filter Panel', () => {
     await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
   });
 
-  test('combined tag and rating filter', async ({ page }) => {
+  test('combined cuisine and rating filter', async ({ page }) => {
     await seedRating(page, 'test-curry', 5);
     await seedRating(page, 'test-salad', 5);
     await page.goto('/');
 
     await openFilterPanel(page);
-    // Filter by tag "dinner" AND rating 4+ — only curry matches both
-    await selectFilterOption(page, 'tag-select-btn', 'dinner');
+    // Filter by cuisine "indian" AND rating 4+ — only curry matches both
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
     await selectFilterOption(page, 'rating-select-btn', '4');
     await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
 
@@ -598,17 +613,17 @@ test.describe('Filter Panel', () => {
     await openFilterPanel(page);
     await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
 
-    // Tag dropdown should only show tags from the favourited recipe (curry, dinner)
-    await page.locator('#tag-select-btn').click();
-    const tagOptions = page.locator('#tag-options .filter-option');
-    await expect(tagOptions).toHaveCount(3); // All + curry + dinner
-    const texts = await tagOptions.allTextContents();
-    expect(texts).toEqual(['All', 'curry', 'dinner']);
+    // Cuisine dropdown should only show cuisines from the favourited recipe (indian)
+    await page.locator('#cuisine-select-btn').click();
+    const cuisineOptions = page.locator('#cuisine-options .filter-option');
+    await expect(cuisineOptions).toHaveCount(2); // All + indian
+    const texts = await cuisineOptions.allTextContents();
+    expect(texts).toEqual(['All', 'indian']);
   });
 
-  test('clicking tag on card applies filter directly', async ({ page }) => {
-    // Click "dinner" tag on curry card
-    await page.locator('.recipe-card').first().locator('.tag-filter[data-tag="dinner"]').click();
+  test('clicking cuisine badge on card applies filter directly', async ({ page }) => {
+    // Click "indian" cuisine badge on curry card
+    await page.locator('.recipe-card').first().locator('.tag-cuisine[data-cuisine="indian"]').click();
 
     await expect(page.locator('.recipe-card')).toHaveCount(1);
     await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
@@ -617,12 +632,23 @@ test.describe('Filter Panel', () => {
     await expect(page.locator('#tag-filter-btn')).toHaveClass(/active/);
   });
 
-  test('tag filter persists in URL', async ({ page }) => {
+  test('clicking meal type badge on card applies filter directly', async ({ page }) => {
+    // Click "breakfast" meal type badge on toast card
+    await page.locator('.recipe-card').nth(2).locator('.tag-meal-type[data-meal-type="breakfast"]').click();
+
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    await expect(page.locator('.recipe-title')).toHaveText('Test Toast');
+
+    // Filter icon should be active
+    await expect(page.locator('#tag-filter-btn')).toHaveClass(/active/);
+  });
+
+  test('cuisine filter persists in URL', async ({ page }) => {
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
     await page.locator('#filter-apply-btn').click();
 
-    await expect(page).toHaveURL(/tag=curry/);
+    await expect(page).toHaveURL(/cuisine=indian/);
 
     // Reload — filter should still be applied
     await page.goto(page.url());
@@ -843,10 +869,10 @@ test.describe('Surprise Me', () => {
     await expect(page).toHaveURL(/recipe\.html\?id=/);
   });
 
-  test('surprise navigates to a recipe matching the active tag filter', async ({ page }) => {
-    // Apply "curry" tag filter (only test-curry matches)
+  test('surprise navigates to a recipe matching the active cuisine filter', async ({ page }) => {
+    // Apply "indian" cuisine filter (only test-curry matches)
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
     await page.locator('#filter-apply-btn').click();
 
     await page.locator('#surprise-btn').click();
@@ -892,14 +918,14 @@ test.describe('Surprise Me', () => {
   });
 
   test('surprise in filter popover applies pending filter before picking', async ({ page }) => {
-    // Open popover, select "curry" tag (pending — not yet applied)
+    // Open popover, select "indian" cuisine (pending — not yet applied)
     await openFilterPanel(page);
-    await selectFilterOption(page, 'tag-select-btn', 'curry');
+    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
 
     // Click "Surprise me" inside the popover
     await page.locator('#surprise-popover-btn').click();
 
-    // Should navigate to the only curry recipe
+    // Should navigate to the only indian cuisine recipe
     await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);
   });
 

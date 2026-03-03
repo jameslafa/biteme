@@ -46,6 +46,8 @@
     "difficulty": "easy",
     "tags": ["lunch", "salad"],
     "diet": ["vegan"],
+    "cuisine": ["mediterranean"],
+    "meal_type": ["lunch"],
     "ingredients": {
       "Fresh": [
         { "id": 1, "text": "2 cups lettuce", "canonical": "lettuce", "preparation": null, "quantity": { "amount": 2, "unit": "cups", "item": "lettuce" } },
@@ -75,6 +77,8 @@
     "difficulty": "easy",
     "tags": ["breakfast", "quick"],
     "diet": ["vegan"],
+    "cuisine": ["american"],
+    "meal_type": ["breakfast"],
     "ingredients": {
       "Pantry": [
         { "id": 1, "text": "2 slices bread", "canonical": "bread", "preparation": null, "quantity": { "amount": 2, "item": "slices bread" } },
