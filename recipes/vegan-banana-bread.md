@@ -7,7 +7,6 @@ time: 65
 difficulty: easy
 tags: [baking, dessert]
 diet: [vegan]
-author: James
 date: 2026-02-10
 ---
 

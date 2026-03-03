@@ -7,7 +7,6 @@ time: 30
 difficulty: easy
 tags: [baking, british]
 diet: [vegan]
-author: James
 date: 2026-02-10
 ---
 

@@ -6,8 +6,7 @@ servings: 4
 time: 40
 difficulty: easy
 tags: [soup, one-pot]
-diet: [vegan]
-author: James
+diet: [vegan, gluten-free]
 date: 2026-02-10
 ---
 

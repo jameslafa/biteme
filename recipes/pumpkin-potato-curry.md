@@ -7,7 +7,6 @@ time: 40
 difficulty: easy
 tags: [curry, one-pot]
 diet: [vegan, gluten-free]
-author: James
 date: 2026-02-10
 ---
 

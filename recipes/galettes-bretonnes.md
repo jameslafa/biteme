@@ -7,7 +7,6 @@ time: 35
 difficulty: easy
 tags: [french]
 diet: [vegan, gluten-free]
-author: James
 date: 2026-02-17
 ---
 

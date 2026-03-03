@@ -7,7 +7,6 @@ time: 60
 difficulty: easy
 tags: [french, dessert]
 diet: [vegan]
-author: James
 date: 2026-02-14
 ---
 

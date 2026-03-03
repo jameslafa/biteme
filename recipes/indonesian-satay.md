@@ -7,7 +7,6 @@ time: 15
 difficulty: easy
 tags: [asian, indonesian]
 diet: [vegan]
-tested: false
 date: 2026-02-27
 ---
 

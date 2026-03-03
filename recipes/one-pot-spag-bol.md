@@ -7,7 +7,6 @@ time: 20
 difficulty: easy
 tags: [pasta, italian]
 diet: [vegan]
-tested: false
 date: 2026-02-27
 ---
 

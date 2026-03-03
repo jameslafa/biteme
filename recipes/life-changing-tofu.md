@@ -7,9 +7,7 @@ time: 25
 difficulty: easy
 tags: [asian, tofu]
 diet: [vegan, gluten-free]
-tested: false
 date: 2026-03-01
-author: Scarlett
 ---
 
 # Notes

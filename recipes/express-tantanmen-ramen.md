@@ -7,9 +7,7 @@ time: 35
 difficulty: medium
 tags: [ramen, japanese]
 diet: [vegetarian]
-tested: false
 date: 2026-02-27
-author: Scarlett
 ---
 
 # Notes

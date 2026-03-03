@@ -7,7 +7,6 @@ time: 35
 difficulty: easy
 tags: [indian, curry]
 diet: [vegan, gluten-free]
-tested: false
 date: 2026-02-20
 ---
 

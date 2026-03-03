@@ -1,5 +1,1280 @@
 [
   {
+    "id": "black-pepper-tofu",
+    "name": "Black Pepper Tofu",
+    "description": "Crispy fried tofu smothered in a rich, buttery sauce of shallots, garlic, chillies, and an unapologetic amount of black pepper.",
+    "servings": 4,
+    "time": 40,
+    "difficulty": "medium",
+    "tags": [
+      "dinner",
+      "asian",
+      "stir-fry"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-03-03",
+    "notes": "Use firm or extra-firm tofu — it needs to hold up to frying. Press it dry for at least 20 minutes if you have time. The 5 tbsp of coarsely ground black pepper is not a typo; it is the point of the dish. Grind it yourself for the best texture and flavour.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 5,
+          "text": "12 small shallots, thinly sliced",
+          "canonical": "shallot",
+          "preparation": "thinly sliced",
+          "quantity": {
+            "amount": 12.0,
+            "unit": "small",
+            "item": "shallots"
+          }
+        },
+        {
+          "id": 6,
+          "text": "12 cloves garlic, crushed",
+          "canonical": "garlic",
+          "preparation": "crushed",
+          "quantity": {
+            "amount": 12.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 7,
+          "text": "3 tbsp ginger, finely chopped",
+          "canonical": "ginger",
+          "preparation": "finely chopped",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "ginger"
+          }
+        },
+        {
+          "id": 8,
+          "text": "8 red chillies, thinly sliced",
+          "canonical": "red chilli",
+          "preparation": "thinly sliced",
+          "quantity": {
+            "amount": 8.0,
+            "item": "red chillies"
+          }
+        },
+        {
+          "id": 13,
+          "text": "16 small spring onions, cut into 3 cm pieces",
+          "canonical": "spring onion",
+          "preparation": "cut into 3 cm pieces",
+          "quantity": {
+            "amount": 16.0,
+            "unit": "small",
+            "item": "spring onions"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 1,
+          "text": "800 g tofu, firm, pressed and cut into 3 cm cubes",
+          "canonical": "tofu",
+          "preparation": "firm, pressed and cut into 3 cm cubes",
+          "quantity": {
+            "amount": 800.0,
+            "unit": "g",
+            "item": "tofu"
+          }
+        },
+        {
+          "id": 4,
+          "text": "150 g vegan butter",
+          "canonical": "vegan butter",
+          "quantity": {
+            "amount": 150.0,
+            "unit": "g",
+            "item": "vegan butter"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 2,
+          "text": "4 tbsp corn starch",
+          "canonical": "corn starch",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "tbsp",
+            "item": "corn starch"
+          }
+        },
+        {
+          "id": 12,
+          "text": "2 tbsp sugar",
+          "canonical": "sugar",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "sugar"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 3,
+          "text": "200 ml vegetable oil, for shallow-frying",
+          "canonical": "vegetable oil",
+          "preparation": "for shallow-frying",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "ml",
+            "item": "vegetable oil"
+          }
+        },
+        {
+          "id": 9,
+          "text": "3 tbsp kecap manis",
+          "canonical": "kecap manis",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "kecap manis"
+          }
+        },
+        {
+          "id": 10,
+          "text": "3 tbsp soy sauce",
+          "canonical": "soy sauce",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          }
+        },
+        {
+          "id": 11,
+          "text": "4 tsp dark soy sauce",
+          "canonical": "dark soy sauce",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "tsp",
+            "item": "dark soy sauce"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Toss {tofu} cubes with {corn starch} until evenly coated. Heat {vegetable oil} in a large frying pan or wok over medium-high heat. Fry the tofu in batches until golden and crisp on all sides, about 3 minutes per batch. Drain on paper towels and set aside. Discard the oil and wipe the pan clean.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "about 3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Return the pan to medium heat and melt {vegan butter}. Add {shallot}, {garlic}, {ginger}, and {red chilli}. Cook, stirring occasionally, until completely softened and starting to colour, about 15 minutes.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "about 15 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in 5 tbsp coarsely ground black pepper, {kecap manis}, {soy sauce}, {dark soy sauce}, and {sugar}."
+      },
+      {
+        "text": "Return the tofu to the pan and fold gently to coat. Cook for 2 minutes until warmed through.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in {spring onion} and serve immediately."
+      }
+    ],
+    "serving_suggestions": "Serve over steamed jasmine or basmati rice. A side of steamed pak choi or a simple cucumber salad balances the heat well.",
+    "tested": true
+  },
+  {
+    "id": "crushed-puy-lentils-tahini-cumin",
+    "name": "Crushed Puy Lentils with Tahini and Cumin",
+    "description": "Puy lentils crushed into a thick, spiced base of garlic, cumin, and fresh tomato, finished with tahini and lemon.",
+    "servings": 2,
+    "time": 35,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "middle-eastern"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-03-03",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 4,
+          "text": "3 cloves garlic, crushed",
+          "canonical": "garlic",
+          "preparation": "crushed",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 6,
+          "text": "3 medium tomatoes, skinned and cut into 1 cm dice",
+          "canonical": "tomato",
+          "preparation": "skinned and cut into 1 cm dice",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "medium",
+            "item": "tomatoes"
+          }
+        },
+        {
+          "id": 7,
+          "text": "25 g coriander, leaves only, chopped",
+          "canonical": "coriander",
+          "preparation": "leaves only, chopped",
+          "quantity": {
+            "amount": 25.0,
+            "unit": "g",
+            "item": "coriander"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1/2 small red onion, very thinly sliced",
+          "canonical": "red onion",
+          "preparation": "very thinly sliced",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "small",
+            "item": "red onion"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 2,
+          "text": "30 g vegan butter",
+          "canonical": "vegan butter",
+          "quantity": {
+            "amount": 30.0,
+            "unit": "g",
+            "item": "vegan butter"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 1,
+          "text": "200 g puy lentils",
+          "canonical": "puy lentil",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "g",
+            "item": "puy lentils"
+          }
+        },
+        {
+          "id": 10,
+          "text": "70 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 70.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 3,
+          "text": "2 tbsp olive oil, plus extra to finish",
+          "canonical": "olive oil",
+          "preparation": "plus extra to finish",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 8,
+          "text": "4 tbsp tahini",
+          "canonical": "tahini",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "tbsp",
+            "item": "tahini"
+          }
+        },
+        {
+          "id": 9,
+          "text": "2 tbsp lemon juice",
+          "canonical": "lemon juice",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "lemon juice"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 5,
+          "text": "1 tsp ground cumin",
+          "canonical": "ground cumin",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground cumin"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Bring a pan of water to a boil. Add {puy lentil} and cook for 15–20 minutes until completely tender. Drain and set aside.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for 15–20 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Melt {vegan butter} with {olive oil} in a large sauté pan over medium-high heat. Add {garlic} and {ground cumin} and cook for 1 minute. Add {tomato}, 20 g of {coriander}, and the cooked lentils. Stir and cook for 2 minutes.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          },
+          {
+            "seconds": 120,
+            "text": "for 2 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {tahini}, {lemon juice}, {water}, 1 tsp salt, and a generous grind of pepper. Reduce the heat to medium and cook gently, stirring, for a few minutes until hot and thickened. Roughly mash with a potato masher until some lentils are broken up and the mixture has a thick, porridge-like consistency."
+      },
+      {
+        "text": "Spread on a flat platter and run a fork through to create a wavy pattern. Scatter over the remaining {coriander} and {red onion}, and finish with a drizzle of olive oil. Serve warm."
+      }
+    ],
+    "serving_suggestions": "Good with warm flatbread or pitta.",
+    "tested": true
+  },
+  {
+    "id": "grilled-carrots-tofu-harissa",
+    "name": "Grilled Carrots and Tofu with Harissa",
+    "description": "Charred tofu and baby carrots smothered in a fragrant harissa and ginger sauce, served over a smooth silken tofu and tahini cream.",
+    "servings": 2,
+    "time": 30,
+    "difficulty": "medium",
+    "tags": [
+      "dinner",
+      "middle-eastern"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-03-03",
+    "notes": "You need two pans running at once towards the end — read through the method before you start. The silken tofu cream can be made ahead and refrigerated.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 7,
+          "text": "5 cloves garlic, crushed",
+          "canonical": "garlic",
+          "preparation": "crushed",
+          "quantity": {
+            "amount": 5.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 8,
+          "text": "20 g ginger, finely grated",
+          "canonical": "ginger",
+          "preparation": "finely grated",
+          "quantity": {
+            "amount": 20.0,
+            "unit": "g",
+            "item": "ginger"
+          }
+        },
+        {
+          "id": 9,
+          "text": "3 spring onions, whites finely chopped, green tops julienned and soaked in cold water",
+          "canonical": "spring onion",
+          "preparation": "whites finely chopped, green tops julienned and soaked in cold water",
+          "quantity": {
+            "amount": 3.0,
+            "item": "spring onions"
+          }
+        },
+        {
+          "id": 12,
+          "text": "250 g carrot, baby, tops trimmed",
+          "canonical": "carrot",
+          "preparation": "baby, tops trimmed",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "carrot"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1 lime, halved",
+          "canonical": "lime",
+          "preparation": "halved",
+          "quantity": {
+            "amount": 1.0,
+            "item": "lime"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 1,
+          "text": "100 g silken tofu",
+          "canonical": "silken tofu",
+          "quantity": {
+            "amount": 100.0,
+            "unit": "g",
+            "item": "silken tofu"
+          }
+        },
+        {
+          "id": 11,
+          "text": "280 g tofu, extra-firm, drained and patted dry",
+          "canonical": "tofu",
+          "preparation": "extra-firm, drained and patted dry",
+          "quantity": {
+            "amount": 280.0,
+            "unit": "g",
+            "item": "tofu"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 14,
+          "text": "100 ml cold water",
+          "canonical": "cold water",
+          "quantity": {
+            "amount": 100.0,
+            "unit": "ml",
+            "item": "cold water"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 2,
+          "text": "2 tbsp tahini",
+          "canonical": "tahini",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "tahini"
+          }
+        },
+        {
+          "id": 3,
+          "text": "50 g rose harissa",
+          "canonical": "rose harissa",
+          "quantity": {
+            "amount": 50.0,
+            "unit": "g",
+            "item": "rose harissa"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 tsp maple syrup",
+          "canonical": "maple syrup",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "maple syrup"
+          }
+        },
+        {
+          "id": 5,
+          "text": "2 tbsp apple cider vinegar",
+          "canonical": "apple cider vinegar",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "apple cider vinegar"
+          }
+        },
+        {
+          "id": 6,
+          "text": "2 tbsp soy sauce",
+          "canonical": "soy sauce",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1 tbsp olive oil, plus 1/2 tsp",
+          "canonical": "olive oil",
+          "preparation": "plus 1/2 tsp",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Blitz {silken tofu}, {tahini}, and a pinch of salt in a food processor until completely smooth. Set aside."
+      },
+      {
+        "text": "Put {rose harissa}, {maple syrup}, {apple cider vinegar}, {soy sauce}, {garlic}, {ginger}, the chopped {spring onion} whites, and 1 tbsp {olive oil} in a medium sauté pan over medium-high heat. Cook for 5 minutes, stirring, until the oil splits and the sauce is fragrant and slightly reduced.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Heat a griddle pan over medium-high heat and ventilate the kitchen. Cut the firm {tofu} lengthwise into 6 slices, then halve each piece lengthways to give 12 slices. Grill in two batches for 1 minute per side until charred, transferring each batch to the sauce pan as it's done. Once all the tofu is in, stir in {cold water} and simmer for 5 minutes.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          },
+          {
+            "seconds": 300,
+            "text": "for 5 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Toss the {carrot} with the remaining 1/2 tsp {olive oil} and a pinch of salt. Grill on the same griddle, turning as needed, for 5–10 minutes until charred and tender. Gently stir into the tofu pan to coat in the sauce.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for 5–10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Spread the tofu cream over a serving platter. Arrange the tofu and carrots on top. Drain the spring onion greens and scatter over. Squeeze {lime} over the top and serve immediately."
+      }
+    ],
+    "serving_suggestions": "Serve with flatbread or crusty bread to scoop up the tofu cream.",
+    "tested": true
+  },
+  {
+    "id": "noors-lime-tofu",
+    "name": "Noor's Lime Tofu",
+    "description": "Crispy deep-fried tofu simmered in a rich, cumin-spiced tomato sauce with wilted spinach and quick-pickled red onion.",
+    "servings": 4,
+    "time": 45,
+    "difficulty": "medium",
+    "tags": [
+      "dinner",
+      "middle-eastern"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-03-03",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 3,
+          "text": "1 small red onion (60 g), thinly sliced into rounds",
+          "canonical": "red onion",
+          "preparation": "(60 g), thinly sliced into rounds",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "small",
+            "item": "red onion"
+          }
+        },
+        {
+          "id": 7,
+          "text": "2 onions (300 g), roughly chopped",
+          "canonical": "onion",
+          "preparation": "(300 g), roughly chopped",
+          "quantity": {
+            "amount": 2.0,
+            "item": "onions"
+          }
+        },
+        {
+          "id": 8,
+          "text": "6 cloves garlic, roughly chopped",
+          "canonical": "garlic",
+          "preparation": "roughly chopped",
+          "quantity": {
+            "amount": 6.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 11,
+          "text": "2 limes, juice and zest of (about 1 tbsp each)",
+          "canonical": "lime",
+          "preparation": "juice and zest of (about 1 tbsp each)",
+          "quantity": {
+            "amount": 2.0,
+            "item": "limes"
+          }
+        },
+        {
+          "id": 14,
+          "text": "20 g parsley, roughly chopped",
+          "canonical": "parsley",
+          "preparation": "roughly chopped",
+          "quantity": {
+            "amount": 20.0,
+            "unit": "g",
+            "item": "parsley"
+          }
+        },
+        {
+          "id": 15,
+          "text": "250 g spinach",
+          "canonical": "spinach",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "spinach"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 5,
+          "text": "560 g tofu, extra-firm, patted dry and cut into 2 cm cubes",
+          "canonical": "tofu",
+          "preparation": "extra-firm, patted dry and cut into 2 cm cubes",
+          "quantity": {
+            "amount": 560.0,
+            "unit": "g",
+            "item": "tofu"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 2,
+          "text": "2 tsp caster sugar",
+          "canonical": "caster sugar",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "caster sugar"
+          }
+        },
+        {
+          "id": 6,
+          "text": "2 tbsp corn starch",
+          "canonical": "corn starch",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "corn starch"
+          }
+        },
+        {
+          "id": 13,
+          "text": "400 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 1,
+          "text": "1 tbsp apple cider vinegar",
+          "canonical": "apple cider vinegar",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "apple cider vinegar"
+          }
+        },
+        {
+          "id": 4,
+          "text": "600 ml vegetable oil, for deep-frying",
+          "canonical": "vegetable oil",
+          "preparation": "for deep-frying",
+          "quantity": {
+            "amount": 600.0,
+            "unit": "ml",
+            "item": "vegetable oil"
+          }
+        },
+        {
+          "id": 9,
+          "text": "60 ml olive oil",
+          "canonical": "olive oil",
+          "quantity": {
+            "amount": 60.0,
+            "unit": "ml",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 12,
+          "text": "2 tbsp tomato paste",
+          "canonical": "tomato paste",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "tomato paste"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 10,
+          "text": "2 tsp cumin seeds, roughly crushed",
+          "canonical": "cumin seed",
+          "preparation": "roughly crushed",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Mix {apple cider vinegar}, 1 tsp {caster sugar}, {red onion}, and a pinch of salt in a small bowl. Set aside to pickle while you prepare the rest."
+      },
+      {
+        "text": "Heat {vegetable oil} in a medium high-sided pan over medium-high heat. Toss {tofu} with {corn starch} until well coated. Fry in two batches until crispy and golden, about 6 minutes per batch. Drain on paper towels and set aside.",
+        "durations": [
+          {
+            "seconds": 360,
+            "text": "about 6 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Pulse {onion} and {garlic} in a food processor until very finely minced but not puréed. Heat {olive oil} in a large sauté pan over medium-high heat. Cook the onion mixture, stirring occasionally, until softened and lightly browned, about 10 minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "about 10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {cumin seed}, {lime} juice and zest, and {tomato paste}. Cook for 1 minute. Add {water}, the remaining 1 tsp {caster sugar}, 1 1/4 tsp salt, and a generous grind of pepper. Simmer for 6 minutes, stirring occasionally, until thick and rich.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          },
+          {
+            "seconds": 360,
+            "text": "for 6 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in the fried tofu and {parsley} and another grind of pepper. Add {spinach} in increments, stirring until just wilted, about 3 minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "about 3 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Transfer to a shallow serving platter and top with the pickled {red onion}."
+      }
+    ],
+    "serving_suggestions": "Serve with flatbread or rice to soak up the sauce.",
+    "tested": true
+  },
+  {
+    "id": "puy-lentil-aubergine-stew",
+    "name": "Puy Lentil and Aubergine Stew",
+    "description": "Tender aubergine and puy lentils simmered in a rich tomato and herb broth, served with a dollop of vegan yogurt and chilli flakes.",
+    "servings": 2,
+    "time": 75,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "stew"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-03-03",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 2,
+          "text": "3 cloves garlic, finely sliced",
+          "canonical": "garlic",
+          "preparation": "finely sliced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1 large red onion (160 g), finely chopped",
+          "canonical": "red onion",
+          "preparation": "(160 g), finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "large",
+            "item": "red onion"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1/2 tbsp thyme, picked leaves",
+          "canonical": "thyme",
+          "preparation": "picked leaves",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tbsp",
+            "item": "thyme"
+          }
+        },
+        {
+          "id": 5,
+          "text": "2 small aubergines (420 g), cut into 5 x 2 cm chunks",
+          "canonical": "aubergine",
+          "preparation": "(420 g), cut into 5 x 2 cm chunks",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "small",
+            "item": "aubergines"
+          }
+        },
+        {
+          "id": 6,
+          "text": "200 g cherry tomatoes",
+          "canonical": "cherry tomato",
+          "quantity": {
+            "amount": 200.0,
+            "unit": "g",
+            "item": "cherry tomatoes"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 10,
+          "text": "100 g vegan yogurt",
+          "canonical": "vegan yogurt",
+          "quantity": {
+            "amount": 100.0,
+            "unit": "g",
+            "item": "vegan yogurt"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 7,
+          "text": "180 g puy lentils",
+          "canonical": "puy lentil",
+          "quantity": {
+            "amount": 180.0,
+            "unit": "g",
+            "item": "puy lentils"
+          }
+        },
+        {
+          "id": 8,
+          "text": "580 ml vegetable stock",
+          "canonical": "vegetable stock",
+          "quantity": {
+            "amount": 580.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 9,
+          "text": "450 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 450.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 1,
+          "text": "3 tbsp olive oil, plus extra to serve",
+          "canonical": "olive oil",
+          "preparation": "plus extra to serve",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 11,
+          "text": "1/2 tsp chilli flakes",
+          "canonical": "chilli flakes",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "chilli flakes"
+          }
+        },
+        {
+          "id": 12,
+          "text": "2 tsp oregano, picked leaves",
+          "canonical": "oregano",
+          "preparation": "picked leaves",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "oregano"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Heat 2 tbsp {olive oil} in a large high-sided sauté pan over medium-high heat. Add {garlic}, {red onion}, {thyme}, and 1/4 tsp salt. Fry for 8 minutes, stirring often, until soft and golden. Tip into a bowl, leaving the oil behind.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "for 8 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the remaining 1 tbsp {olive oil} to the same pan and heat until very hot. Season {aubergine} and {cherry tomato} with 1/4 tsp salt and plenty of pepper, then add to the pan. Fry for 10 minutes over medium-high heat, turning often, until the aubergine is soft and golden-brown and the tomatoes are beginning to blacken.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for 10 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Return the onion and garlic to the pan. Add {puy lentil}, {vegetable stock}, {water}, and 3/4 tsp salt. Bring to the boil, then reduce the heat to medium and simmer gently for about 40 minutes, until the lentils are soft but still retain some bite.",
+        "durations": [
+          {
+            "seconds": 2400,
+            "text": "for about 40 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Serve warm or at room temperature, topped with a dollop of {vegan yogurt}, a drizzle of olive oil, {chilli flakes}, and {oregano}."
+      }
+    ],
+    "tested": true
+  },
+  {
+    "id": "vegan-shakshuka",
+    "name": "Vegan Shakshuka",
+    "description": "Silken tofu seasoned with kala namak to mimic eggs, poached in a rich, spiced tomato sauce.",
+    "servings": 2,
+    "time": 70,
+    "difficulty": "easy",
+    "tags": [
+      "brunch",
+      "middle-eastern"
+    ],
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "date": "2026-03-03",
+    "notes": "Kala namak (black salt) has a high sulphur content that gives tofu a remarkably egg-like flavour and aroma. Find it at Indian or Asian grocery stores. Don't skip it — it's what makes this dish work.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 2,
+          "text": "1 medium onion, finely diced",
+          "canonical": "onion",
+          "preparation": "finely diced",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "medium",
+            "item": "onion"
+          }
+        },
+        {
+          "id": 3,
+          "text": "3 cloves garlic, finely diced",
+          "canonical": "garlic",
+          "preparation": "finely diced",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 red pepper, finely diced",
+          "canonical": "red pepper",
+          "preparation": "finely diced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "red pepper"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 small aubergine, diced (optional)",
+          "canonical": "aubergine",
+          "preparation": "diced (optional)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "small",
+            "item": "aubergine"
+          }
+        },
+        {
+          "id": 17,
+          "text": "parsley, fresh, chopped, to serve",
+          "canonical": "parsley",
+          "preparation": "fresh, chopped, to serve"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 13,
+          "text": "175 g silken tofu, drained and cut into cubes",
+          "canonical": "silken tofu",
+          "preparation": "drained and cut into cubes",
+          "quantity": {
+            "amount": 175.0,
+            "unit": "g",
+            "item": "silken tofu"
+          }
+        },
+        {
+          "id": 16,
+          "text": "60 g frozen peas (optional)",
+          "canonical": "frozen pea",
+          "preparation": "(optional)",
+          "quantity": {
+            "amount": 60.0,
+            "unit": "g",
+            "item": "frozen peas"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 6,
+          "text": "2 tins (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tins",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 11,
+          "text": "2 tsp brown sugar (optional)",
+          "canonical": "brown sugar",
+          "preparation": "(optional)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "brown sugar"
+          }
+        },
+        {
+          "id": 12,
+          "text": "120 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 1,
+          "text": "2 tbsp olive oil",
+          "canonical": "olive oil",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "olive oil"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tbsp tomato paste",
+          "canonical": "tomato paste",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "tomato paste"
+          }
+        },
+        {
+          "id": 18,
+          "text": "chilli oil, to serve (optional)",
+          "canonical": "chilli oil",
+          "preparation": "to serve (optional)"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 8,
+          "text": "1 tsp ground cumin",
+          "canonical": "ground cumin",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground cumin"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1 1/2 tsp smoked paprika",
+          "canonical": "smoked paprika",
+          "quantity": {
+            "amount": 1.0,
+            "item": "smoked paprika"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1/2 tsp chilli powder",
+          "canonical": "chilli powder",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "chilli powder"
+          }
+        },
+        {
+          "id": 14,
+          "text": "1/2-1 tsp kala namak",
+          "canonical": "kala namak",
+          "quantity": {
+            "amount": 0.5,
+            "amount_max": 1.0,
+            "unit": "tsp",
+            "item": "kala namak"
+          }
+        },
+        {
+          "id": 15,
+          "text": "1/2 tsp turmeric",
+          "canonical": "turmeric",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "turmeric"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Heat {olive oil} in a large pan over low-medium heat. Add {onion} and fry until soft and translucent, about 8 minutes, stirring frequently. Add {garlic} and fry for 2 more minutes.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "about 8 minutes"
+          }
+        ]
+      },
+      {
+        "text": "If using {aubergine}, push the onion mixture to the side and fry the aubergine separately in a little oil until golden, about 8 minutes, then combine.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "about 8 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {red pepper} and fry until soft, about 5 minutes. Stir in {ground cumin}, {smoked paprika}, and {chilli powder} and fry for 1 minute, stirring constantly.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "about 5 minutes"
+          },
+          {
+            "seconds": 60,
+            "text": "for 1 minute"
+          }
+        ]
+      },
+      {
+        "text": "Add {tomato paste}, then {chopped tomato} and {water}. Season with 1/2 tsp salt. Simmer over low-medium heat for 45 minutes, stirring occasionally, until the sauce is thick and rich. Taste and adjust with salt and {brown sugar} if needed.",
+        "durations": [
+          {
+            "seconds": 2700,
+            "text": "for 45 minutes"
+          }
+        ]
+      },
+      {
+        "text": "Toss {silken tofu} cubes with {kala namak} and {turmeric}. Nestle into the sauce along with {frozen peas} if using. Cover and heat on low for a few minutes until the tofu is warmed through and the peas have thawed."
+      },
+      {
+        "text": "Serve straight from the pan, scattered with {parsley} and a drizzle of {chilli oil}."
+      }
+    ],
+    "serving_suggestions": "Serve with crusty bread or pitta to scoop up the sauce.",
+    "tested": true
+  },
+  {
     "id": "life-changing-tofu",
     "name": "Life-Changing Tofu",
     "description": "Tofu coated in potato starch, fried until crispy, then glazed in a sweet-savory ginger and garlic sauce",
@@ -14,7 +1289,6 @@
       "vegan",
       "gluten-free"
     ],
-    "author": "Scarlett",
     "date": "2026-03-01",
     "notes": "This technique comes from Chinese and Korean cooking. The potato starch coating crisps up beautifully without absorbing much oil. Fresh ginger is strongly preferred here — grate it on the fine side of a box grater. The tofu keeps well and is excellent cold the next day in a lunchbox.",
     "ingredients": {
@@ -136,7 +1410,7 @@
       }
     ],
     "serving_suggestions": "Serve over steamed rice or rice noodles with broccoli or kimchi on the side. Also excellent wrapped in spring rolls.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "cauliflower-pea-korma",
@@ -393,7 +1667,7 @@
       }
     ],
     "serving_suggestions": "Serve with basmati or brown rice and warm naan bread.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "express-tantanmen-ramen",
@@ -409,7 +1683,6 @@
     "diet": [
       "vegetarian"
     ],
-    "author": "Scarlett",
     "date": "2026-02-27",
     "notes": "Start the marinated eggs the evening before — they need at least one night in the fridge. Everything else comes together in about 35 minutes. The nutty base and tofu can be prepped simultaneously while the broth heats.",
     "ingredients": {
@@ -628,7 +1901,7 @@
       }
     ],
     "serving_suggestions": "Serve immediately while piping hot. Add extra crispy chili oil on top for more heat.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "indonesian-satay",
@@ -847,7 +2120,7 @@
         "text": "Divide between four bowls and top with {coriander}, {bean sprout} and {toasted nut}."
       }
     ],
-    "tested": false
+    "tested": true
   },
   {
     "id": "one-pot-creamy-mushroom-pasta",
@@ -1029,7 +2302,7 @@
       }
     ],
     "serving_suggestions": "Serve straight from the pan. A green salad on the side keeps it fresh and light.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "one-pot-spag-bol",
@@ -1224,7 +2497,7 @@
         "text": "Serve topped with the basil leaves and {nutritional yeast}."
       }
     ],
-    "tested": false
+    "tested": true
   },
   {
     "id": "chickpea-tikka-masala",
@@ -1442,7 +2715,7 @@
       }
     ],
     "serving_suggestions": "Serve with basmati rice and naan. A dollop of coconut yoghurt on top works well.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "persian-celery-stew",
@@ -1655,7 +2928,7 @@
       }
     ],
     "serving_suggestions": "Serve hot over steamed basmati rice. A dollop of vegan yoghurt on the side works well.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "dal-tadka",
@@ -1830,7 +3103,7 @@
       }
     ],
     "serving_suggestions": "Serve with basmati rice or naan bread. A dollop of coconut yoghurt and fresh coriander on top works nicely.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "palak-tofu",
@@ -2058,7 +3331,7 @@
       }
     ],
     "serving_suggestions": "Serve with basmati rice or naan. A squeeze of lemon at the end brightens it up nicely.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "rajma",
@@ -2297,7 +3570,7 @@
       }
     ],
     "serving_suggestions": "Serve with basmati rice. A squeeze of lemon and a dollop of coconut yoghurt work well on top.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "teriyaki-soba-noodles",
@@ -2461,7 +3734,6 @@
       "vegan",
       "gluten-free"
     ],
-    "author": "James",
     "date": "2026-02-17",
     "notes": "The batter needs at least 2 hours of resting in the fridge, ideally overnight — plan ahead. The first galette is almost always a throwaway (la galette de test!) so don't worry about it. Good buckwheat flour is key — look for farine de sarrasin or blé noir. Stack cooked galettes under a tea towel to keep them warm and pliable. Leftovers keep well in the fridge for 2–3 days; reheat in a dry pan.",
     "ingredients": {
@@ -2618,7 +3890,6 @@
     "diet": [
       "vegan"
     ],
-    "author": "James",
     "date": "2026-02-17",
     "notes": "Tantanmen is the Japanese take on Sichuan dan dan noodles. The key is the sesame paste — use Asian sesame paste (not tahini), which is made from toasted seeds and has a much deeper flavour. If you can't find rayu (Japanese chilli oil), any chilli oil works. Press the tofu well before crumbling for crispier results.",
     "ingredients": {
@@ -2873,9 +4144,9 @@
       "breakfast"
     ],
     "diet": [
-      "vegan"
+      "vegan",
+      "gluten-free"
     ],
-    "author": "James",
     "date": "2026-02-17",
     "notes": "Press the tofu for at least 24 hours to extract all the water. The drier the tofu, the better it will brown. Kala namak (Indian black salt) is the secret ingredient — it gives the scramble its eggy flavour. You can find it at Indian grocery stores or online.",
     "ingredients": {
@@ -3377,7 +4648,6 @@
       "vegan",
       "gluten-free"
     ],
-    "author": "James",
     "date": "2026-02-14",
     "notes": "This stew actually tastes even better the next day as the flavours develop. Keeps in the fridge for 3 to 4 days and freezes well in portions for easy future meals.",
     "ingredients": {
@@ -3584,7 +4854,6 @@
     "diet": [
       "vegan"
     ],
-    "author": "James",
     "date": "2026-02-14",
     "notes": "The resting time is important. It lets the flour fully hydrate and the gluten relax, which makes the crêpes easier to spread thinly and less likely to tear. The first crêpe is almost always a disaster. Consider it a test run and adjust the heat accordingly. La première est pour le chien! Corn starch will give slightly crispier crêpes, potato starch will give softer, more flexible ones.",
     "ingredients": {
@@ -3750,9 +5019,9 @@
       "one-pot"
     ],
     "diet": [
-      "vegan"
+      "vegan",
+      "gluten-free"
     ],
-    "author": "Kimberley",
     "date": "2026-02-12",
     "ingredients": {
       "Fresh": [
@@ -3966,7 +5235,6 @@
     "diet": [
       "vegan"
     ],
-    "author": "James",
     "date": "2026-02-10",
     "notes": "Keep the margarine cold – this helps create a flaky texture. Don't overwork the dough, just bring it together gently. Best eaten fresh on the day, but they freeze well too. Just defrost at room temperature and reheat in a hot oven for a few minutes.",
     "ingredients": {
@@ -4094,7 +5362,6 @@
       "vegan",
       "gluten-free"
     ],
-    "author": "James",
     "date": "2026-02-10",
     "notes": "Use warm chickpeas, as they're softer and easier to blend. The ice cubes are not optional! The cold shock against the warm chickpeas aerates the hummus beautifully. Don't add olive oil to the base mixture. The tahini has plenty of fat. Olive oil goes on top when serving. The hummus keeps well in the fridge for up to 3 days.",
     "ingredients": {
@@ -4257,9 +5524,9 @@
       "one-pot"
     ],
     "diet": [
-      "vegan"
+      "vegan",
+      "gluten-free"
     ],
-    "author": "James",
     "date": "2026-02-10",
     "notes": "For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini, soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.",
     "ingredients": {
@@ -4444,7 +5711,6 @@
     "diet": [
       "vegetarian"
     ],
-    "author": "James",
     "date": "2026-02-10",
     "notes": "This delicious French spice bread is best enjoyed the next day when the flavours have had time to develop. It keeps well wrapped in foil for up to a week. The spice mix typically includes cinnamon, green aniseed, star anise, nutmeg, coriander seeds, cloves and ground ginger, but you can also use a pre-made pain d'épices spice blend if available.",
     "ingredients": {
@@ -4584,7 +5850,6 @@
       "vegan",
       "gluten-free"
     ],
-    "author": "James",
     "date": "2026-02-10",
     "notes": "If you like a bit of heat, add a chopped chilli or some chilli flakes in step 2. A handful of spinach stirred in at the end is a nice addition. Keeps well in the fridge for 3–4 days and actually tastes even better the next day!",
     "ingredients": {
@@ -4771,7 +6036,6 @@
     "diet": [
       "vegan"
     ],
-    "author": "James",
     "date": "2026-02-10",
     "notes": "Use very ripe bananas with lots of brown spots for the best flavour and natural sweetness. The banana bread keeps well wrapped in foil for 3-4 days at room temperature, or can be frozen for up to 3 months. For extra indulgence, fold in some chocolate chips or chopped walnuts before baking.",
     "ingredients": {

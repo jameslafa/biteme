@@ -6,8 +6,7 @@ servings: 2
 time: 20
 difficulty: easy
 tags: [breakfast]
-diet: [vegan]
-author: James
+diet: [vegan, gluten-free]
 date: 2026-02-17
 ---
 

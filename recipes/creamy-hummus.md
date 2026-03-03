@@ -7,7 +7,6 @@ time: 90
 difficulty: medium
 tags: [middle-eastern, dip]
 diet: [vegan, gluten-free]
-author: James
 date: 2026-02-10
 ---
 

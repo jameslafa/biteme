@@ -6,8 +6,7 @@ servings: 2
 time: 20
 difficulty: easy
 tags: [pasta, one-pot]
-diet: [vegan]
-author: Kimberley
+diet: [vegan, gluten-free]
 date: 2026-02-12
 ---
 

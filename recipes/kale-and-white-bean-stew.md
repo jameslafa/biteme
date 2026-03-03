@@ -7,7 +7,6 @@ time: 30
 difficulty: easy
 tags: [stew, one-pot]
 diet: [vegan, gluten-free]
-author: James
 date: 2026-02-14
 ---
 

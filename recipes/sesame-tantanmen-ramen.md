@@ -7,7 +7,6 @@ time: 45
 difficulty: medium
 tags: [ramen, japanese]
 diet: [vegan]
-author: James
 date: 2026-02-17
 ---
 
