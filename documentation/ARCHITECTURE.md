@@ -376,11 +376,33 @@ If a single-source sub-group has no unit (likely a parser data quality issue whe
 - `docs/css/plan.css` — plan-specific styles; ingredient list matches recipe detail page design
 - Reuses globals from `recommendations.js` (ingredient maps, IDF, stoplist)
 
+## Chip Filters
+
+**Decision:** Replace the filter popover with two always-visible chip rows — meal type on top, cuisine below — that apply filters immediately on click.
+
+**Bidirectionality:**
+- Meal type chips are counted from recipes matching the active cuisine (if any), and vice versa
+- If you select a meal type and then switch to an incompatible cuisine (or vice versa), the first filter is automatically cleared — preventing a zero-result state
+- This auto-clear happens in `setActiveMealType` / `setActiveCuisine` by checking whether the previously active value still appears in the narrowed pool
+
+**Chip overflow:**
+- Only the top `CHIPS_VISIBLE` (3) chips are shown by default, sorted by recipe count descending then alphabetically
+- If the active chip is behind the "more" threshold, it is promoted into the visible row (replacing the last visible chip, which moves to the front of the hidden list)
+- Clicking "+N more" permanently expands the row (no collapse); new chips animate in with `chip-appear`
+
+**Taxonomy colours:**
+- Meal type chips use a teal family (`--meal-type-color: #4A8A82`)
+- Cuisine chips use a terracotta family (`--cuisine-color: #B05A3A`)
+- Inactive chips show a light tinted background with a coloured border; active chips use the full colour with white text
+- The same variables drive `.tag-meal-type` and `.tag-cuisine` on recipe cards and the recipe detail page — one set of variables covers all surfaces
+
+**URL persistence:** `cuisine` and `meal_type` query params are written on every filter change via `history.replaceState` and read on page load, so filtered views are bookmarkable and shareable.
+
 ## Surprise Me
 
 **Decision:** A shuffle button that picks a random recipe using a 4-tier algorithm that prioritises variety and discovery.
 
-**Entry points:** search bar button and filter popover button.
+**Entry point:** search bar button only.
 
 **Algorithm (4 tiers, pick highest non-empty tier, random within it):**
 1. Not yet cooked AND not in recent history
@@ -391,8 +413,7 @@ If a single-source sub-group has no unit (likely a parser data quality issue whe
 **History:** `localStorage` key `surpriseHistory`, JSON array of up to 10 recipe IDs (rolling window). Ephemeral — fine to lose on cache clear. No manual reset needed.
 
 **Filter integration:**
-- Search bar button uses the current active filters (tag, rating, favorites, dietary, search query)
-- Popover button commits pending tag/rating to active state before picking (same outcome as clicking Filter then Surprise)
+- Uses current active filters (cuisine, meal type, favorites, dietary, search query)
 - `filterRecipes()` is called with current state — no special casing needed
 
 ## Recipe Recommendation Engine

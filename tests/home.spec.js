@@ -382,278 +382,145 @@ test.describe('What\'s New', () => {
   });
 });
 
-test.describe('Filter Panel', () => {
-  // Helper: open the filter popover
-  async function openFilterPanel(page) {
-    await page.locator('#tag-filter-btn').click();
-    await expect(page.locator('.filter-popover')).toBeVisible();
-  }
-
-  // Helper: select a value from a custom dropdown
-  async function selectFilterOption(page, selectBtnId, value) {
-    await page.locator(`#${selectBtnId}`).click();
-    const option = page.locator(`.filter-select.open .filter-option[data-value="${value}"]`);
-    await option.click();
-  }
-
-  // Helper: seed a rating for a recipe
-  async function seedRating(page, recipeId, rating) {
-    await page.evaluate(async ({ recipeId, rating }) => {
-      await initDB();
-      await saveRating(recipeId, rating);
-    }, { recipeId, rating });
-  }
-
-  test('filter icon opens and closes popover', async ({ page }) => {
-    const popover = page.locator('.filter-popover');
-    await expect(popover).toBeHidden();
-
-    await page.locator('#tag-filter-btn').click();
-    await expect(popover).toBeVisible();
-
-    await page.locator('#tag-filter-btn').click();
-    await expect(popover).toBeHidden();
+test.describe('Chip Filters', () => {
+  test('both chip rows present in DOM on load', async ({ page }) => {
+    await expect(page.locator('#meal-type-chips')).toBeAttached();
+    await expect(page.locator('#cuisine-chips')).toBeAttached();
   });
 
-  test('popover closes on outside click', async ({ page }) => {
-    await openFilterPanel(page);
-    await page.locator('h1').click(); // click header (outside)
-    await expect(page.locator('.filter-popover')).toBeHidden();
+  test('meal type chips rendered: breakfast, dinner, lunch (all count=1, alphabetical)', async ({ page }) => {
+    const chips = page.locator('#meal-type-chips .chip:not(.chip-more)');
+    await expect(chips).toHaveCount(3);
+    await expect(chips.nth(0)).toHaveText('breakfast');
+    await expect(chips.nth(1)).toHaveText('dinner');
+    await expect(chips.nth(2)).toHaveText('lunch');
+    // No "more" button — exactly 3 = CHIPS_VISIBLE
+    await expect(page.locator('#meal-type-chips .chip-more')).toHaveCount(0);
   });
 
-  test('cuisine dropdown lists all cuisines sorted', async ({ page }) => {
-    await openFilterPanel(page);
-    await page.locator('#cuisine-select-btn').click();
-
-    const options = page.locator('#cuisine-options .filter-option');
-    // "All" + 3 unique cuisines from tested recipes: american, indian, mediterranean
-    // (test-soup is tested:false so excluded)
-    await expect(options).toHaveCount(4);
-    await expect(options.nth(0)).toHaveText('All');
-    await expect(options.nth(1)).toHaveText('american');
-    await expect(options.nth(2)).toHaveText('indian');
-    await expect(options.nth(3)).toHaveText('mediterranean');
+  test('cuisine chips rendered: american, french, indian visible; mediterranean behind "more"', async ({ page }) => {
+    // 4 cuisines total, all count=1 → alphabetical: american, french, indian, mediterranean
+    const chips = page.locator('#cuisine-chips .chip:not(.chip-more)');
+    await expect(chips).toHaveCount(3);
+    await expect(chips.nth(0)).toHaveText('american');
+    await expect(chips.nth(1)).toHaveText('french');
+    await expect(chips.nth(2)).toHaveText('indian');
+    await expect(page.locator('#cuisine-chips .chip-more')).toHaveText('+1 more');
   });
 
-  test('meal type dropdown lists all meal types sorted', async ({ page }) => {
-    await openFilterPanel(page);
-    await page.locator('#meal-type-select-btn').click();
-
-    const options = page.locator('#meal-type-options .filter-option');
-    // "All" + 3 unique meal types from tested recipes: breakfast, dinner, lunch
-    await expect(options).toHaveCount(4);
-    await expect(options.nth(0)).toHaveText('All');
-    await expect(options.nth(1)).toHaveText('breakfast');
-    await expect(options.nth(2)).toHaveText('dinner');
-    await expect(options.nth(3)).toHaveText('lunch');
-  });
-
-  test('cuisine dropdown narrows to cuisines from search-matching recipes', async ({ page }) => {
-    await page.locator('#search-input').fill('curry');
-    await expect(page.locator('.recipe-card')).toHaveCount(1);
-
-    await openFilterPanel(page);
-    await page.locator('#cuisine-select-btn').click();
-
-    const options = page.locator('#cuisine-options .filter-option');
-    // Only test-curry matches: cuisine is "indian"
-    await expect(options).toHaveCount(2); // "All" + indian
-    const texts = await options.allTextContents();
-    expect(texts).toEqual(['All', 'indian']);
-  });
-
-  test('cuisine dropdown restores all cuisines when search is cleared', async ({ page }) => {
-    await page.locator('#search-input').fill('toast');
-    await expect(page.locator('.recipe-card')).toHaveCount(1);
-
-    await page.locator('#search-input').clear();
-    await expect(page.locator('.recipe-card')).toHaveCount(3);
-
-    await openFilterPanel(page);
-    await page.locator('#cuisine-select-btn').click();
-
-    const options = page.locator('#cuisine-options .filter-option');
-    await expect(options).toHaveCount(4); // All + 3 cuisines
-  });
-
-  test('apply button shows live result count', async ({ page }) => {
-    await openFilterPanel(page);
-    const applyBtn = page.locator('#filter-apply-btn');
-
-    // No filters — all 3 recipes
-    await expect(applyBtn).toHaveText('Show 3 recipes');
-
-    // Select cuisine "american" — 1 recipe (test-toast)
-    await selectFilterOption(page, 'cuisine-select-btn', 'american');
-    await expect(applyBtn).toHaveText('Show 1 recipe');
-
-    // Select cuisine "indian" — 1 recipe (test-curry)
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-    await expect(applyBtn).toHaveText('Show 1 recipe');
-  });
-
-  test('selecting cuisine and clicking Filter applies it', async ({ page }) => {
-    await expect(page.locator('.recipe-card')).toHaveCount(3);
-
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-    await page.locator('#filter-apply-btn').click();
-
-    // Popover closed, only indian cuisine recipes shown
-    await expect(page.locator('.filter-popover')).toBeHidden();
+  test('clicking a meal type chip filters recipes', async ({ page }) => {
+    await page.locator('#meal-type-chips .chip[data-value="dinner"]').click();
     await expect(page.locator('.recipe-card')).toHaveCount(1);
     await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
   });
 
-  test('filter does not apply until Filter button is clicked', async ({ page }) => {
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
+  test('clicking active chip deselects and restores all', async ({ page }) => {
+    await page.locator('#meal-type-chips .chip[data-value="dinner"]').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
 
-    // List should still show all 3 recipes (pending, not applied)
+    // Click again to deselect
+    await page.locator('#meal-type-chips .chip[data-value="dinner"]').click();
     await expect(page.locator('.recipe-card')).toHaveCount(3);
   });
 
-  test('outside click discards pending filter changes', async ({ page }) => {
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-
-    // Close by clicking outside (discard)
-    await page.locator('h1').click();
-
-    // Reopen — should show "All" again, not "indian"
-    await openFilterPanel(page);
-    await expect(page.locator('#cuisine-select-btn')).toHaveText('All');
-    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 3 recipes');
-  });
-
-  test('reset clears active filters', async ({ page }) => {
-    // Apply a cuisine filter first
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-    await page.locator('#filter-apply-btn').click();
+  test('cuisine row narrows when meal type is selected', async ({ page }) => {
+    // Select "breakfast" — only test-toast matches (cuisine: american)
+    await page.locator('#meal-type-chips .chip[data-value="breakfast"]').click();
     await expect(page.locator('.recipe-card')).toHaveCount(1);
 
-    // Open and reset
-    await openFilterPanel(page);
-    await expect(page.locator('#filter-reset-btn')).toBeVisible();
-    await page.locator('#filter-reset-btn').click();
-
-    await expect(page.locator('.recipe-card')).toHaveCount(3);
-    await expect(page.locator('.filter-popover')).toBeHidden();
+    // Cuisine chips should only show "american" now
+    const cuisineChips = page.locator('#cuisine-chips .chip:not(.chip-more)');
+    await expect(cuisineChips).toHaveCount(1);
+    await expect(cuisineChips.first()).toHaveText('american');
   });
 
-  test('reset button hidden when no filters active', async ({ page }) => {
-    await openFilterPanel(page);
-    await expect(page.locator('#filter-reset-btn')).toBeHidden();
-  });
-
-  test('filter icon shows active state when filters applied', async ({ page }) => {
-    const filterIcon = page.locator('#tag-filter-btn');
-    await expect(filterIcon).not.toHaveClass(/active/);
-
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-    await page.locator('#filter-apply-btn').click();
-
-    await expect(filterIcon).toHaveClass(/active/);
-  });
-
-  test('rating filter works', async ({ page }) => {
-    // Seed ratings: curry=4, salad=2
-    await seedRating(page, 'test-curry', 4);
-    await seedRating(page, 'test-salad', 2);
-    await page.goto('/');
-
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'rating-select-btn', '3');
-    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
-
-    await page.locator('#filter-apply-btn').click();
-    await expect(page.locator('.recipe-card')).toHaveCount(1);
-    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
-  });
-
-  test('combined cuisine and rating filter', async ({ page }) => {
-    await seedRating(page, 'test-curry', 5);
-    await seedRating(page, 'test-salad', 5);
-    await page.goto('/');
-
-    await openFilterPanel(page);
-    // Filter by cuisine "indian" AND rating 4+ — only curry matches both
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-    await selectFilterOption(page, 'rating-select-btn', '4');
-    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
-
-    await page.locator('#filter-apply-btn').click();
-    await expect(page.locator('.recipe-card')).toHaveCount(1);
-    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
-  });
-
-  test('apply button disabled when no recipes match', async ({ page }) => {
-    // No ratings exist, so filtering by 3+ should show 0
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'rating-select-btn', '3');
-
-    const applyBtn = page.locator('#filter-apply-btn');
-    await expect(applyBtn).toHaveText('No recipes match');
-    await expect(applyBtn).toBeDisabled();
-  });
-
-  test('live count accounts for favorites filter', async ({ page }) => {
-    // Favourite only curry
-    const firstHeart = page.locator('.recipe-card').first().locator('.favorite-button-small');
-    await firstHeart.click();
-    await expect(firstHeart).toHaveClass(/favorited/);
-
-    // Enable favorites filter
-    await page.locator('#favorites-filter').click();
+  test('meal type row narrows when cuisine is selected', async ({ page }) => {
+    // Select "indian" cuisine — only test-curry matches (meal_type: dinner)
+    await page.locator('#cuisine-chips .chip[data-value="indian"]').click();
     await expect(page.locator('.recipe-card')).toHaveCount(1);
 
-    // Open filter panel — count should reflect favorites (1 recipe)
-    await openFilterPanel(page);
-    await expect(page.locator('#filter-apply-btn')).toHaveText('Show 1 recipe');
-
-    // Cuisine dropdown should only show cuisines from the favourited recipe (indian)
-    await page.locator('#cuisine-select-btn').click();
-    const cuisineOptions = page.locator('#cuisine-options .filter-option');
-    await expect(cuisineOptions).toHaveCount(2); // All + indian
-    const texts = await cuisineOptions.allTextContents();
-    expect(texts).toEqual(['All', 'indian']);
+    // Meal type chips should only show "dinner" now
+    const mealChips = page.locator('#meal-type-chips .chip:not(.chip-more)');
+    await expect(mealChips).toHaveCount(1);
+    await expect(mealChips.first()).toHaveText('dinner');
   });
 
-  test('clicking cuisine badge on card applies filter directly', async ({ page }) => {
-    // Click "indian" cuisine badge on curry card
-    await page.locator('.recipe-card').first().locator('.tag-cuisine[data-cuisine="indian"]').click();
+  test('"more" button appears when cuisine options exceed 3', async ({ page }) => {
+    await expect(page.locator('#cuisine-chips .chip-more')).toBeVisible();
+    await expect(page.locator('#meal-type-chips .chip-more')).toHaveCount(0);
+  });
 
+  test('clicking "more" reveals remaining chips with no collapse', async ({ page }) => {
+    await page.locator('#cuisine-chips .chip-more').click();
+
+    // All 4 cuisine chips now visible, no "more" button
+    const chips = page.locator('#cuisine-chips .chip:not(.chip-more)');
+    await expect(chips).toHaveCount(4);
+    const texts = await chips.allTextContents();
+    expect(texts).toContain('mediterranean');
+    await expect(page.locator('#cuisine-chips .chip-more')).toHaveCount(0);
+  });
+
+  test('active chip promoted from hidden when behind "more"', async ({ page }) => {
+    // Navigate with mediterranean active — it's behind "more" normally
+    await page.goto('/?cuisine=mediterranean');
     await expect(page.locator('.recipe-card')).toHaveCount(1);
-    await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
 
-    // Filter icon should be active
-    await expect(page.locator('#tag-filter-btn')).toHaveClass(/active/);
+    // Mediterranean should be promoted into the visible slots
+    const visibleChips = page.locator('#cuisine-chips .chip:not(.chip-more)');
+    await expect(visibleChips).toHaveCount(3);
+    const texts = await visibleChips.allTextContents();
+    expect(texts).toContain('mediterranean');
+
+    // The active chip should have chip-active class
+    await expect(page.locator('#cuisine-chips .chip-active')).toHaveText('mediterranean');
   });
 
-  test('clicking meal type badge on card applies filter directly', async ({ page }) => {
-    // Click "breakfast" meal type badge on toast card
-    await page.locator('.recipe-card').nth(2).locator('.tag-meal-type[data-meal-type="breakfast"]').click();
-
-    await expect(page.locator('.recipe-card')).toHaveCount(1);
-    await expect(page.locator('.recipe-title')).toHaveText('Test Toast');
-
-    // Filter icon should be active
-    await expect(page.locator('#tag-filter-btn')).toHaveClass(/active/);
-  });
-
-  test('cuisine filter persists in URL', async ({ page }) => {
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-    await page.locator('#filter-apply-btn').click();
-
+  test('cuisine and meal_type filters persist in URL and restore on reload', async ({ page }) => {
+    await page.locator('#cuisine-chips .chip[data-value="indian"]').click();
     await expect(page).toHaveURL(/cuisine=indian/);
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
 
-    // Reload — filter should still be applied
+    // Reload
     await page.goto(page.url());
     await expect(page.locator('.recipe-card')).toHaveCount(1);
     await expect(page.locator('.recipe-title')).toHaveText('Test Curry');
+    await expect(page.locator('#cuisine-chips .chip-active')).toHaveText('indian');
+  });
+
+  test('bidirectionality: selecting incompatible cuisine auto-clears meal type', async ({ page }) => {
+    // Select "lunch" meal type (only test-salad: cuisine mediterranean/french)
+    await page.locator('#meal-type-chips .chip[data-value="lunch"]').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    await expect(page.locator('#meal-type-chips .chip-active')).toHaveText('lunch');
+
+    // Cuisine chips now show french and mediterranean (both from test-salad)
+    // Select "american" via the card tag on toast (not visible in chips since filtered)
+    // Instead: deselect lunch, select american cuisine, then select lunch
+    // American + lunch → no recipe, so lunch should be cleared
+
+    // Deselect lunch first
+    await page.locator('#meal-type-chips .chip[data-value="lunch"]').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    // Select "american" cuisine (test-toast: breakfast)
+    await page.locator('#cuisine-chips .chip[data-value="american"]').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
+    // meal_type chip row now shows only "breakfast"
+
+    // Now trigger setActiveMealType('lunch') which is incompatible with american
+    // by clicking the tag on the salad card (not visible — american shows toast only)
+    // Use JS to directly set an incompatible meal type
+    await page.evaluate(() => {
+      setActiveMealType('lunch');
+    });
+
+    // lunch has no american cuisine recipe → activeCuisine should be cleared
+    await expect(page.locator('.recipe-card')).toHaveCount(1); // only test-salad has lunch
+    await expect(page.locator('.recipe-title')).toHaveText('Test Salad');
+    await expect(page.locator('#meal-type-chips .chip-active')).toHaveText('lunch');
+    // cuisine active chip should be gone
+    await expect(page.locator('#cuisine-chips .chip-active')).toHaveCount(0);
   });
 });
 
@@ -846,18 +713,6 @@ test.describe('Pull to Refresh', () => {
 });
 
 test.describe('Surprise Me', () => {
-  // Helper: open filter popover
-  async function openFilterPanel(page) {
-    await page.locator('#tag-filter-btn').click();
-    await expect(page.locator('.filter-popover')).toBeVisible();
-  }
-
-  async function selectFilterOption(page, selectBtnId, value) {
-    await page.locator(`#${selectBtnId}`).click();
-    const option = page.locator(`.filter-select.open .filter-option[data-value="${value}"]`);
-    await option.click();
-  }
-
   test('surprise button is visible in search bar', async ({ page }) => {
     await expect(page.locator('#surprise-btn')).toBeVisible();
   });
@@ -868,10 +723,9 @@ test.describe('Surprise Me', () => {
   });
 
   test('surprise navigates to a recipe matching the active cuisine filter', async ({ page }) => {
-    // Apply "indian" cuisine filter (only test-curry matches)
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-    await page.locator('#filter-apply-btn').click();
+    // Apply "indian" cuisine filter via chip (only test-curry matches)
+    await page.locator('#cuisine-chips .chip[data-value="indian"]').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(1);
 
     await page.locator('#surprise-btn').click();
     await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);
@@ -915,18 +769,6 @@ test.describe('Surprise Me', () => {
     await expect(page).toHaveURL(/index\.html|\/$/);
   });
 
-  test('surprise in filter popover applies pending filter before picking', async ({ page }) => {
-    // Open popover, select "indian" cuisine (pending — not yet applied)
-    await openFilterPanel(page);
-    await selectFilterOption(page, 'cuisine-select-btn', 'indian');
-
-    // Click "Surprise me" inside the popover
-    await page.locator('#surprise-popover-btn').click();
-
-    // Should navigate to the only indian cuisine recipe
-    await expect(page).toHaveURL(/recipe\.html\?id=test-curry/);
-  });
-
   test('surprise history is stored in localStorage', async ({ page }) => {
     await page.locator('#surprise-btn').click();
     await page.waitForURL(/recipe\.html\?id=/);
@@ -944,7 +786,7 @@ test.describe('Surprise Me', () => {
 test.describe('Icon Rendering', () => {
   test('data-icon SVGs are injected on home page', async ({ page }) => {
     // Check a few key icons have non-empty innerHTML after DOMContentLoaded
-    const icons = ['menu', 'cart', 'filter', 'heart', 'shuffle'];
+    const icons = ['menu', 'cart', 'heart', 'shuffle'];
     for (const name of icons) {
       const inner = await page.locator(`svg[data-icon="${name}"]`).first().innerHTML();
       expect(inner.trim(), `icon "${name}" should be injected`).not.toBe('');

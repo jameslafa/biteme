@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 24, date: '2026-03-03', text: 'Cuisine and meal type filters are now always visible as chip rows — click any chip to filter instantly, with smart bidirectional narrowing and a "more" button for extra options' },
   { id: 23, date: '2026-03-03', text: 'Filter recipes by cuisine and meal type — use the new filter dropdowns to browse by indian, mediterranean, asian and more, or narrow to breakfast, lunch, dinner, and beyond' },
   { id: 22, date: '2026-03-02', text: 'Ingredients in the meal plan and shopping list are now grouped into 5 sections — Fresh, Fridge, Pantry, Condiments, and Spices — making it easier to work through your list aisle by aisle' },
   { id: 21, date: '2026-03-01', text: 'Meal Plan — pick a seed recipe, get a week of suggestions sharing ingredients, add them to your shopping list, then track what you\'ve cooked as the week goes on' },

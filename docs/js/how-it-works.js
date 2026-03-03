@@ -4,7 +4,7 @@ const FEATURES = [
   {
     id: 'find',
     title: 'Find something to cook',
-    description: 'Search by name, or by ingredient if you want to use what\'s already in your fridge. Once you\'ve cooked a few recipes, you can rate them and filter to only show the ones you truly loved. And those recipes that become your go-tos? Mark them as favourites and find them in one tap.',
+    description: 'Search by name, or by ingredient if you want to use what\'s already in your fridge. Use the meal type and cuisine chips to narrow the list instantly — they work together, so picking "dinner" immediately shows only the cuisines you have dinner recipes for. And those recipes that become your go-tos? Mark them as favourites and find them in one tap.',
     mockups: [
       {
         label: 'Browse all recipes for inspiration:',
@@ -19,8 +19,10 @@ const FEATURES = [
               </div>
               <p class="recipe-description">A fragrant coconut curry with seasonal vegetables</p>
               <div class="recipe-tags">
-                <span class="tag">curry</span>
-                <span class="tag">dinner</span>
+                <div class="recipe-tags-left">
+                  <span class="tag tag-meal-type">dinner</span>
+                  <span class="tag tag-cuisine">asian</span>
+                </div>
               </div>
               <p class="card-cooking-stats">Cooked 3 times · ~35 min <span class="card-rating">· ★★★★☆</span></p>
             </div>
@@ -33,48 +35,40 @@ const FEATURES = [
               </div>
               <p class="recipe-description">Classic stir-fried noodles with tofu and peanuts</p>
               <div class="recipe-tags">
-                <span class="tag">quick</span>
-                <span class="tag">dinner</span>
+                <div class="recipe-tags-left">
+                  <span class="tag tag-meal-type">dinner</span>
+                  <span class="tag tag-cuisine">asian</span>
+                </div>
               </div>
             </div>
           </div>
         `
       },
       {
-        label: 'Use the search bar to find recipes by name or ingredient, and tap the filter icon to narrow down by tag or rating:',
+        label: 'Tap any chip to filter instantly — selecting a meal type narrows the cuisine row to only what\'s available:',
         html: `
-          <div style="margin-bottom:var(--spacing-xs);">
-            <div class="search-container tag-dropdown" style="margin-bottom:0;">
-              <input type="search" value="curry" aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5.5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
-              <div class="search-actions">
-                <button class="search-action-btn active" tabindex="-1" aria-label="Filter by tag">
-                  ${icon('filter', 18)}
-                </button>
-                <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
-                  ${icon('heart', 18)}
-                </button>
-                <button class="search-action-btn" tabindex="-1" aria-label="Surprise me">
-                  ${icon('shuffle', 18)}
-                </button>
-              </div>
+          <div class="search-container" style="margin-bottom:var(--spacing-sm);">
+            <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
+            <div class="search-actions">
+              <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
+                ${icon('heart', 18)}
+              </button>
+              <button class="search-action-btn" tabindex="-1" aria-label="Surprise me">
+                ${icon('shuffle', 18)}
+              </button>
             </div>
           </div>
-          <div class="filter-popover" style="display:flex;position:static;flex-direction:column;gap:var(--spacing-xs);">
-            <div class="filter-row">
-              <label class="filter-label">Tag</label>
-              <div class="filter-select" style="position:relative;">
-                <button class="filter-select-btn has-value" tabindex="-1">vegan</button>
-              </div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <button class="chip" style="background:var(--meal-type-color);color:var(--surface);border-color:var(--meal-type-color);" tabindex="-1">dinner</button>
+              <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">breakfast</button>
+              <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">lunch</button>
             </div>
-            <div class="filter-row">
-              <label class="filter-label">Rating</label>
-              <div class="filter-select" style="position:relative;">
-                <button class="filter-select-btn has-value" tabindex="-1">4+ stars</button>
-              </div>
-            </div>
-            <div class="filter-actions">
-              <button class="filter-reset-btn" tabindex="-1">Reset</button>
-              <button class="filter-apply-btn" tabindex="-1">Show 2 recipes</button>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">indian</button>
+              <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">asian</button>
+              <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">french</button>
+              <button class="chip chip-more" style="border-color:var(--cuisine-border);" tabindex="-1">+2 more</button>
             </div>
           </div>
         `
@@ -84,51 +78,32 @@ const FEATURES = [
   {
     id: 'surprise',
     title: 'Can\'t decide? Let us pick',
-    description: 'Hit the shuffle button next to the search bar and we\'ll pick a random recipe for you. It respects whatever filters you have active, and it\'s smart enough to favour recipes you haven\'t cooked yet — so you\'re more likely to discover something new. You can also use it directly from the filter panel to pick a surprise within a specific tag or rating.',
-    mockups: [
-      {
-        label: 'Tap the shuffle button in the search bar for an instant pick:',
-        html: `
-          <div class="search-container tag-dropdown" style="margin-bottom:0;">
-            <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:6.5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
-            <div class="search-actions">
-              <button class="search-action-btn" tabindex="-1" aria-label="Filter by tag">
-                ${icon('filter', 18)}
-              </button>
-              <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
-                ${icon('heart', 18)}
-              </button>
-              <button class="search-action-btn" tabindex="-1" aria-label="Surprise me">
-                ${icon('shuffle', 18)}
-              </button>
-            </div>
-          </div>
-        `
-      },
-      {
-        label: 'Or pick a surprise within a specific tag or rating from the filter panel:',
-        html: `
-          <div class="filter-popover" style="display:flex;position:static;flex-direction:column;gap:var(--spacing-xs);">
-            <div class="filter-row">
-              <label class="filter-label">Tag</label>
-              <div class="filter-select" style="position:relative;">
-                <button class="filter-select-btn has-value" tabindex="-1">dinner</button>
-              </div>
-            </div>
-            <div class="filter-row">
-              <label class="filter-label">Rating</label>
-              <div class="filter-select" style="position:relative;">
-                <button class="filter-select-btn" tabindex="-1">Any</button>
-              </div>
-            </div>
-            <div class="filter-actions">
-              <button class="surprise-popover-btn" tabindex="-1">🎲 Surprise me</button>
-              <button class="filter-apply-btn" tabindex="-1">Show 4 recipes</button>
-            </div>
-          </div>
-        `
-      }
-    ]
+    description: 'Hit the shuffle button next to the search bar and we\'ll pick a random recipe for you. It respects whatever filters you have active — including any meal type or cuisine chips you\'ve selected — and it\'s smart enough to favour recipes you haven\'t cooked yet, so you\'re more likely to discover something new.',
+    mockupHTML: `
+      <div class="search-container" style="margin-bottom:var(--spacing-sm);">
+        <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
+        <div class="search-actions">
+          <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
+            ${icon('heart', 18)}
+          </button>
+          <button class="search-action-btn" tabindex="-1" aria-label="Surprise me">
+            ${icon('shuffle', 18)}
+          </button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <button class="chip" style="background:var(--meal-type-color);color:var(--surface);border-color:var(--meal-type-color);" tabindex="-1">dinner</button>
+          <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">breakfast</button>
+          <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">lunch</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">indian</button>
+          <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">asian</button>
+          <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">french</button>
+        </div>
+      </div>
+    `
   },
   {
     id: 'diet',

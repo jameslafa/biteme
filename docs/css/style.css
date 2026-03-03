@@ -23,8 +23,16 @@ html {
   --text-secondary: #7F8C8D;
   --border: #E8EDED;
   --shadow: rgba(107, 144, 128, 0.1);
-  --tag-background: #F8F9FA;
-  --tag-text: #6B9080;
+
+  /* Meal type / cuisine taxonomy colours */
+  --meal-type-color: #4A8A82;
+  --meal-type-light: #EBF4F3;
+  --meal-type-border: #8EC0BC;
+  --meal-type-hover: #D8EDEC;
+  --cuisine-color: #B05A3A;
+  --cuisine-light: #FAF0EC;
+  --cuisine-border: #D49080;
+  --cuisine-hover: #F2E4DC;
 
   /* Semi-transparent variants */
   --primary-alpha-20: rgba(107, 144, 128, 0.2);
@@ -384,16 +392,38 @@ a.tag-meal-type {
   transition: all 0.2s;
 }
 
-.tag-cuisine:hover,
-.tag-meal-type:hover {
-  background-color: var(--accent-color);
+.tag-cuisine {
+  background-color: var(--cuisine-light);
+  color: var(--cuisine-color);
+  border-color: var(--cuisine-border);
 }
 
-.tag-cuisine.active,
-.tag-meal-type.active {
-  background-color: var(--primary-color);
+.tag-cuisine:hover {
+  background-color: var(--cuisine-hover);
+  border-color: var(--cuisine-color);
+}
+
+.tag-cuisine.active {
+  background-color: var(--cuisine-color);
   color: var(--surface);
-  border-color: var(--primary-color);
+  border-color: var(--cuisine-color);
+}
+
+.tag-meal-type {
+  background-color: var(--meal-type-light);
+  color: var(--meal-type-color);
+  border-color: var(--meal-type-border);
+}
+
+.tag-meal-type:hover {
+  background-color: var(--meal-type-hover);
+  border-color: var(--meal-type-color);
+}
+
+.tag-meal-type.active {
+  background-color: var(--meal-type-color);
+  color: var(--surface);
+  border-color: var(--meal-type-color);
 }
 
 /* Diet Badges */
@@ -426,191 +456,93 @@ a.tag-meal-type {
   border-color: #ffcc80;
 }
 
-/* Filter Dropdown Panel */
-.tag-dropdown {
-  position: relative;
-}
-
-.filter-popover {
-  display: none;
-  position: absolute;
-  top: calc(100% + 0.25rem);
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-sm);
-  box-shadow: 0 4px 16px var(--shadow);
+/* Chip Filters */
+.chip-filters {
+  display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 0.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
-.tag-dropdown.open .filter-popover {
+.chip-row {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 2rem;
 }
 
-.filter-row {
-  display: flex;
+.chip {
+  display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.filter-label {
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
   font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  width: 4.5rem;
-  flex-shrink: 0;
-}
-
-.filter-select {
-  position: relative;
-  flex: 1;
-}
-
-.filter-select-btn {
-  width: 100%;
-  padding: 0.4rem 0.75rem;
-  font-size: 0.85rem;
   font-family: var(--font-family);
-  text-align: left;
   background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
   color: var(--text-secondary);
-  transition: border-color 0.2s;
-}
-
-.filter-select-btn.has-value {
-  color: var(--text-primary);
-  font-weight: 400;
-}
-
-.filter-select-btn:hover {
-  border-color: var(--accent-color);
-}
-
-.filter-select-btn::after {
-  content: '';
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid var(--text-secondary);
-}
-
-.filter-select.open .filter-select-btn::after {
-  border-top: none;
-  border-bottom: 4px solid var(--text-secondary);
-}
-
-.filter-select-options {
-  display: none;
-  position: absolute;
-  top: calc(100% + 2px);
-  left: 0;
-  right: 0;
-  z-index: 110;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 4px 12px var(--shadow);
-  max-height: 12rem;
-  overflow-y: auto;
-}
-
-.filter-select.open .filter-select-options {
-  display: flex;
-  flex-direction: column;
-}
-
-.filter-option {
-  padding: 0.4rem 0.75rem;
-  font-size: 0.85rem;
-  font-family: var(--font-family);
-  text-align: left;
-  background: none;
-  border: none;
   cursor: pointer;
-  color: var(--text-primary);
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
 }
 
-.filter-option:hover {
-  background: var(--accent-light);
+/* Meal type chips — blue */
+#meal-type-chips .chip {
+  background: var(--meal-type-light);
+  color: var(--meal-type-color);
+  border-color: var(--meal-type-border);
 }
 
-.filter-option.active {
-  color: var(--primary-color);
-  font-weight: 500;
+#meal-type-chips .chip:hover {
+  background: var(--meal-type-hover);
+  border-color: var(--meal-type-color);
 }
 
-.filter-actions {
-  display: flex;
-  gap: var(--spacing-xs);
-  justify-content: flex-end;
-  margin-top: 0.25rem;
-}
-
-.filter-reset-btn {
-  padding: 0.4rem 0.75rem;
-  font-size: 0.8rem;
-  font-family: var(--font-family);
-  color: var(--text-secondary);
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.filter-reset-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--text-secondary);
-}
-
-.filter-apply-btn {
-  padding: 0.4rem 1rem;
-  font-size: 0.8rem;
-  font-family: var(--font-family);
-  font-weight: 500;
+#meal-type-chips .chip-active {
+  background: var(--meal-type-color);
   color: var(--surface);
-  background: var(--primary-color);
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: background 0.2s;
+  border-color: var(--meal-type-color);
 }
 
-.filter-apply-btn:hover:not(:disabled) {
-  background: var(--primary-dark);
+#meal-type-chips .chip-active:hover {
+  background: var(--meal-type-color);
+  color: var(--surface);
 }
 
-.filter-apply-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+/* Cuisine chips — amber */
+#cuisine-chips .chip {
+  background: var(--cuisine-light);
+  color: var(--cuisine-color);
+  border-color: var(--cuisine-border);
 }
 
-.surprise-popover-btn {
-  padding: 0.4rem 0.75rem;
-  font-size: 0.8rem;
-  font-family: var(--font-family);
-  color: var(--text-secondary);
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.2s;
+#cuisine-chips .chip:hover {
+  background: var(--cuisine-hover);
+  border-color: var(--cuisine-color);
 }
 
-.surprise-popover-btn:hover {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+#cuisine-chips .chip-active {
+  background: var(--cuisine-color);
+  color: var(--surface);
+  border-color: var(--cuisine-color);
+}
+
+#cuisine-chips .chip-active:hover {
+  background: var(--cuisine-color);
+  color: var(--surface);
+}
+
+.chip-more {
+  border-style: dashed;
+}
+
+@keyframes chip-appear {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.chip-new {
+  animation: chip-appear 0.18s ease-out both;
 }
 
 /* Buttons */

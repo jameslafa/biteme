@@ -4,14 +4,12 @@ let showFavoritesOnly = false;
 let showUntestedRecipes = false;
 let activeCuisine = null;
 let activeMealType = null;
-let activeMinRating = null;
-let pendingCuisine = null;
-let pendingMealType = null;
-let pendingMinRating = null;
 let cachedAllRecipes = [];
 let cachedRatingsMap = {};
 let cachedFavoriteIds = new Set();
 let activeDietaryFilters = [];
+let mealTypeChipsExpanded = false;
+let cuisineChipsExpanded = false;
 
 document.addEventListener('DOMContentLoaded', async function() {
   await initDB();
@@ -33,7 +31,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   loadRecipes();
   setupSearch();
   setupFavoritesFilter();
-  setupFilterPanel();
   setupSurpriseBtn();
   updateCartCount();
   setupDrawer();
@@ -53,8 +50,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 });
 
-// Single filter function used by both loadRecipes (applied) and live count (pending)
-function filterRecipes({ cuisine, mealType, minRating, favoritesOnly, searchQuery }) {
+// Single filter function used by loadRecipes
+function filterRecipes({ cuisine, mealType, favoritesOnly, searchQuery }) {
   let recipes = cachedAllRecipes;
 
   if (!showUntestedRecipes) {
@@ -96,10 +93,6 @@ function filterRecipes({ cuisine, mealType, minRating, favoritesOnly, searchQuer
     recipes = recipes.filter(r => (r.meal_type || []).includes(mealType));
   }
 
-  if (minRating) {
-    recipes = recipes.filter(r => (cachedRatingsMap[r.id] || 0) >= minRating);
-  }
-
   return recipes;
 }
 
@@ -117,230 +110,38 @@ async function loadRecipes() {
   const recipes = filterRecipes({
     cuisine: activeCuisine,
     mealType: activeMealType,
-    minRating: activeMinRating,
     favoritesOnly: showFavoritesOnly,
     searchQuery: document.getElementById('search-input').value,
   });
-
-  // Update filter icon state
-  const filterBtn = document.getElementById('tag-filter-btn');
-  filterBtn.classList.toggle('active', !!activeCuisine || !!activeMealType || !!activeMinRating);
 
   await displayRecipes(recipes);
+  renderChips();
 }
 
-// Setup the filter panel: toggle popover, outside-click-to-close, custom dropdowns
-function setupFilterPanel() {
-  const container = document.getElementById('tag-dropdown');
-  const filterBtn = document.getElementById('tag-filter-btn');
-
-  // Toggle popover — initialize pending state from active when opening
-  filterBtn.addEventListener('click', () => {
-    const wasOpen = container.classList.contains('open');
-    if (!wasOpen) {
-      pendingCuisine = activeCuisine;
-      pendingMealType = activeMealType;
-      pendingMinRating = activeMinRating;
-      renderFilterDropdowns();
-    }
-    container.classList.toggle('open');
-    closeAllFilterSelects();
-  });
-
-  // Close popover on outside click (discard pending changes)
-  document.addEventListener('click', (e) => {
-    if (!container.contains(e.target)) {
-      container.classList.remove('open');
-      closeAllFilterSelects();
-    }
-  });
-
-  // Setup cuisine dropdown
-  document.getElementById('cuisine-select-btn').addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleFilterSelect('cuisine-select', 'meal-type-select', 'rating-select');
-  });
-
-  // Setup meal type dropdown
-  document.getElementById('meal-type-select-btn').addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleFilterSelect('meal-type-select', 'cuisine-select', 'rating-select');
-  });
-
-  // Setup rating dropdown
-  document.getElementById('rating-select-btn').addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleFilterSelect('rating-select', 'cuisine-select', 'meal-type-select');
-  });
-
-  // Filter (apply) button — commit pending → active
-  document.getElementById('filter-apply-btn').addEventListener('click', () => {
-    activeCuisine = pendingCuisine;
-    activeMealType = pendingMealType;
-    activeMinRating = pendingMinRating;
-    updateFilterURL();
-    container.classList.remove('open');
-    closeAllFilterSelects();
-    loadRecipes();
-  });
-
-  // Surprise me button in popover
-  document.getElementById('surprise-popover-btn').addEventListener('click', () => {
-    triggerSurprise(true);
-  });
-
-  // Reset button
-  document.getElementById('filter-reset-btn').addEventListener('click', () => {
-    pendingCuisine = null;
-    pendingMealType = null;
-    pendingMinRating = null;
-    activeCuisine = null;
-    activeMealType = null;
-    activeMinRating = null;
-    updateFilterURL();
-    container.classList.remove('open');
-    closeAllFilterSelects();
-    loadRecipes();
-  });
-}
-
-function toggleFilterSelect(openId, ...closeIds) {
-  closeIds.forEach(id => document.getElementById(id).classList.remove('open'));
-  document.getElementById(openId).classList.toggle('open');
-}
-
-function closeAllFilterSelects() {
-  document.querySelectorAll('.filter-select').forEach(el => el.classList.remove('open'));
-}
-
-// Count how many recipes match the pending filters (for live preview in popover)
-function countPendingFilterResults() {
-  return filterRecipes({
-    cuisine: pendingCuisine,
-    mealType: pendingMealType,
-    minRating: pendingMinRating,
-    favoritesOnly: showFavoritesOnly,
-    searchQuery: document.getElementById('search-input').value,
-  }).length;
-}
-
-// Render cuisine, meal type, and rating dropdown options using pending state
-function renderFilterDropdowns() {
-  const filterBtn = document.getElementById('tag-filter-btn');
-  const resetBtn = document.getElementById('filter-reset-btn');
-  const applyBtn = document.getElementById('filter-apply-btn');
-
-  // Cuisine dropdown — only show cuisines from recipes matching current search/rating/favorites
-  const baseRecipes = filterRecipes({
-    cuisine: null,
-    mealType: null,
-    minRating: pendingMinRating,
-    favoritesOnly: showFavoritesOnly,
-    searchQuery: document.getElementById('search-input').value,
-  });
-  const cuisines = [...new Set(baseRecipes.flatMap(r => r.cuisine || []))].sort();
-  const cuisineOptions = document.getElementById('cuisine-options');
-  const cuisineBtn = document.getElementById('cuisine-select-btn');
-
-  cuisineOptions.innerHTML = `<button class="filter-option${!pendingCuisine ? ' active' : ''}" data-value="">All</button>`
-    + cuisines.map(c =>
-      `<button class="filter-option${pendingCuisine === c ? ' active' : ''}" data-value="${c}">${c}</button>`
-    ).join('');
-
-  cuisineBtn.textContent = pendingCuisine || 'All';
-  cuisineBtn.classList.toggle('has-value', !!pendingCuisine);
-
-  cuisineOptions.querySelectorAll('.filter-option').forEach(opt => {
-    opt.addEventListener('click', (e) => {
-      e.stopPropagation();
-      pendingCuisine = opt.dataset.value || null;
-      document.getElementById('cuisine-select').classList.remove('open');
-      renderFilterDropdowns();
-    });
-  });
-
-  // Meal type dropdown — only show meal types from recipes matching pending cuisine
-  const mealTypeBaseRecipes = filterRecipes({
-    cuisine: pendingCuisine,
-    mealType: null,
-    minRating: pendingMinRating,
-    favoritesOnly: showFavoritesOnly,
-    searchQuery: document.getElementById('search-input').value,
-  });
-  const mealTypes = [...new Set(mealTypeBaseRecipes.flatMap(r => r.meal_type || []))].sort();
-  const mealTypeOptions = document.getElementById('meal-type-options');
-  const mealTypeBtn = document.getElementById('meal-type-select-btn');
-
-  mealTypeOptions.innerHTML = `<button class="filter-option${!pendingMealType ? ' active' : ''}" data-value="">All</button>`
-    + mealTypes.map(m =>
-      `<button class="filter-option${pendingMealType === m ? ' active' : ''}" data-value="${m}">${m}</button>`
-    ).join('');
-
-  mealTypeBtn.textContent = pendingMealType || 'All';
-  mealTypeBtn.classList.toggle('has-value', !!pendingMealType);
-
-  mealTypeOptions.querySelectorAll('.filter-option').forEach(opt => {
-    opt.addEventListener('click', (e) => {
-      e.stopPropagation();
-      pendingMealType = opt.dataset.value || null;
-      document.getElementById('meal-type-select').classList.remove('open');
-      renderFilterDropdowns();
-    });
-  });
-
-  // Rating dropdown
-  const ratingOptions = document.getElementById('rating-options');
-  const ratingBtn = document.getElementById('rating-select-btn');
-  const ratingChoices = [
-    { value: '', label: 'Any' },
-    { value: '3', label: '3+ stars' },
-    { value: '4', label: '4+ stars' },
-    { value: '5', label: '5 stars' },
-  ];
-
-  ratingOptions.innerHTML = ratingChoices.map(c =>
-    `<button class="filter-option${String(pendingMinRating || '') === c.value ? ' active' : ''}" data-value="${c.value}">${c.label}</button>`
-  ).join('');
-
-  ratingBtn.textContent = pendingMinRating ? `${pendingMinRating}+ stars` : 'Any';
-  if (pendingMinRating === 5) ratingBtn.textContent = '5 stars';
-  ratingBtn.classList.toggle('has-value', !!pendingMinRating);
-
-  ratingOptions.querySelectorAll('.filter-option').forEach(opt => {
-    opt.addEventListener('click', (e) => {
-      e.stopPropagation();
-      pendingMinRating = opt.dataset.value ? parseInt(opt.dataset.value) : null;
-      document.getElementById('rating-select').classList.remove('open');
-      renderFilterDropdowns();
-    });
-  });
-
-  // Show/hide reset button
-  const hasPendingFilters = !!pendingCuisine || !!pendingMealType || !!pendingMinRating;
-  resetBtn.style.display = hasPendingFilters ? '' : 'none';
-
-  // Update filter icon active state based on applied filters
-  const hasActiveFilters = !!activeCuisine || !!activeMealType || !!activeMinRating;
-  filterBtn.classList.toggle('active', hasActiveFilters);
-
-  // Live result count on the apply button
-  const count = countPendingFilterResults();
-  applyBtn.textContent = count === 0
-    ? 'No recipes match'
-    : `Show ${count} recipe${count !== 1 ? 's' : ''}`;
-  applyBtn.disabled = count === 0;
-}
-
-// Set active cuisine, update URL, and reload
+// Set active cuisine with bidirectionality check, update URL, and reload
 function setActiveCuisine(cuisine) {
   activeCuisine = cuisine;
+  if (activeCuisine && activeMealType) {
+    const available = cachedAllRecipes
+      .filter(r => showUntestedRecipes || r.tested !== false)
+      .filter(r => (r.cuisine || []).includes(activeCuisine))
+      .flatMap(r => r.meal_type || []);
+    if (!available.includes(activeMealType)) activeMealType = null;
+  }
   updateFilterURL();
   loadRecipes();
 }
 
-// Set active meal type, update URL, and reload
+// Set active meal type with bidirectionality check, update URL, and reload
 function setActiveMealType(mealType) {
   activeMealType = mealType;
+  if (activeMealType && activeCuisine) {
+    const available = cachedAllRecipes
+      .filter(r => showUntestedRecipes || r.tested !== false)
+      .filter(r => (r.meal_type || []).includes(activeMealType))
+      .flatMap(r => r.cuisine || []);
+    if (!available.includes(activeCuisine)) activeCuisine = null;
+  }
   updateFilterURL();
   loadRecipes();
 }
@@ -358,6 +159,89 @@ function updateFilterURL() {
     url.searchParams.delete('meal_type');
   }
   history.replaceState(null, '', url);
+}
+
+const CHIPS_VISIBLE = 3;
+
+function renderChips() {
+  let base = cachedAllRecipes;
+  if (!showUntestedRecipes) base = base.filter(r => r.tested !== false);
+  if (activeDietaryFilters.length > 0)
+    base = base.filter(r => activeDietaryFilters.every(d => (r.diet || []).includes(d)));
+
+  // Meal type counts — narrowed by active cuisine
+  const mealTypePool = activeCuisine
+    ? base.filter(r => (r.cuisine || []).includes(activeCuisine))
+    : base;
+  const mealTypeCounts = {};
+  for (const r of mealTypePool)
+    for (const m of (r.meal_type || [])) mealTypeCounts[m] = (mealTypeCounts[m] || 0) + 1;
+
+  // Cuisine counts — narrowed by active meal_type
+  const cuisinePool = activeMealType
+    ? base.filter(r => (r.meal_type || []).includes(activeMealType))
+    : base;
+  const cuisineCounts = {};
+  for (const r of cuisinePool)
+    for (const c of (r.cuisine || [])) cuisineCounts[c] = (cuisineCounts[c] || 0) + 1;
+
+  renderChipRow(
+    document.getElementById('meal-type-chips'),
+    mealTypeCounts, activeMealType, 'mealType',
+    mealTypeChipsExpanded, v => { mealTypeChipsExpanded = v; }
+  );
+  renderChipRow(
+    document.getElementById('cuisine-chips'),
+    cuisineCounts, activeCuisine, 'cuisine',
+    cuisineChipsExpanded, v => { cuisineChipsExpanded = v; }
+  );
+}
+
+function renderChipRow(container, counts, activeValue, type, expanded, setExpanded) {
+  const sorted = Object.keys(counts)
+    .sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+
+  if (sorted.length === 0) { container.innerHTML = ''; return; }
+
+  const visible = sorted.slice(0, CHIPS_VISIBLE);
+  const hidden = sorted.slice(CHIPS_VISIBLE);
+
+  // Promote active chip out of hidden into the last visible slot
+  if (activeValue && hidden.includes(activeValue)) {
+    const displaced = visible.splice(CHIPS_VISIBLE - 1, 1, activeValue)[0];
+    hidden.splice(hidden.indexOf(activeValue), 1);
+    hidden.unshift(displaced);
+  }
+
+  const makeChip = (value) =>
+    `<button class="chip${activeValue === value ? ' chip-active' : ''}" data-type="${type}" data-value="${value}">${value}</button>`;
+
+  if (expanded) {
+    container.innerHTML =
+      sorted.slice(0, CHIPS_VISIBLE).map(v => makeChip(v)).join('') +
+      sorted.slice(CHIPS_VISIBLE).map((v, i) =>
+        `<button class="chip${activeValue === v ? ' chip-active' : ''} chip-new" style="animation-delay:${i * 40}ms" data-type="${type}" data-value="${v}">${v}</button>`
+      ).join('');
+  } else {
+    container.innerHTML =
+      visible.map(v => makeChip(v)).join('') +
+      (hidden.length > 0
+        ? `<button class="chip chip-more">+${hidden.length} more</button>`
+        : '');
+  }
+
+  container.querySelectorAll('.chip:not(.chip-more)').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.value;
+      if (type === 'mealType') setActiveMealType(activeMealType === val ? null : val);
+      else setActiveCuisine(activeCuisine === val ? null : val);
+    });
+  });
+
+  container.querySelector('.chip-more')?.addEventListener('click', () => {
+    setExpanded(true);
+    renderChips();
+  });
 }
 
 // Build a map of recipe ID → { count, avgDuration } from completed sessions
@@ -484,8 +368,8 @@ async function displayRecipes(recipes) {
       <div class="recipe-tags">
         <div class="recipe-tags-left">
           ${recipe.tested === false ? '<span class="tag tag-untested">untested</span>' : ''}
-          ${(recipe.cuisine || []).map(c => `<button class="tag tag-cuisine${activeCuisine === c ? ' active' : ''}" data-cuisine="${c}">${c}</button>`).join('')}
           ${(recipe.meal_type || []).map(m => `<button class="tag tag-meal-type${activeMealType === m ? ' active' : ''}" data-meal-type="${m}">${m}</button>`).join('')}
+          ${(recipe.cuisine || []).map(c => `<button class="tag tag-cuisine${activeCuisine === c ? ' active' : ''}" data-cuisine="${c}">${c}</button>`).join('')}
         </div>
         ${renderDietIcons(recipe.diet || [])}
       </div>
@@ -722,20 +606,10 @@ async function pickSurpriseRecipe(filtered) {
   return picked;
 }
 
-async function triggerSurprise(usePending = false) {
-  if (usePending) {
-    activeCuisine = pendingCuisine;
-    activeMealType = pendingMealType;
-    activeMinRating = pendingMinRating;
-    updateFilterURL();
-    document.getElementById('tag-dropdown').classList.remove('open');
-    closeAllFilterSelects();
-  }
-
+async function triggerSurprise() {
   const filtered = filterRecipes({
     cuisine: activeCuisine,
     mealType: activeMealType,
-    minRating: activeMinRating,
     favoritesOnly: showFavoritesOnly,
     searchQuery: document.getElementById('search-input').value,
   });
@@ -748,7 +622,7 @@ async function triggerSurprise(usePending = false) {
 
 function setupSurpriseBtn() {
   document.getElementById('surprise-btn').addEventListener('click', () => {
-    triggerSurprise(false);
+    triggerSurprise();
   });
 }
 

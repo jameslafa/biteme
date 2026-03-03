@@ -43,7 +43,6 @@ This document tracks feature ideas and improvements for BiteMe.
 - **What's New** — Standalone changelog page with timeline layout, notification dot on drawer, accessible from side drawer
 - **Shopping List** — Add ingredients from recipe, grouped list, check off in store, TTL cleanup
 - **Screen Wake Lock** — Keeps screen awake in cooking mode
-- **Recipe Author & Date** — Optional frontmatter fields, displayed on detail page
 - **Adjustable Servings** — Structured quantity parsing, +/- controls, smart rounding, no-scale support
 - **Cooking Time Tracking** — Session tracking, elapsed time on completion, history on detail page
 - **Share Recipe** — Web Share API on mobile, copy-to-clipboard fallback
@@ -54,7 +53,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action
 - **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
 - **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
-- **Cuisine & Meal Type Filtering** — Filter panel with cuisine, meal type, and rating dropdowns, live result count, clickable badges on cards, URL param support
+- **Cuisine & Meal Type Filtering** — Always-visible chip rows (meal type above, cuisine below); bidirectional narrowing (selecting one dimension narrows the other); "more" button expands overflow chips permanently; active chip promoted out of hidden; clickable tags on cards and recipe page link back to filtered list; URL param persistence; two distinct taxonomy colours (teal for meal type, terracotta for cuisine)
 - **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
 - **Recipe Rating (Phase 1)** — Local star ratings (1–5), post-cooking banner prompt, displayed on cards and detail page, editable from detail page, IndexedDB storage
 - **Canonical Ingredient System** — Controlled vocabulary (`docs/ingredients.json`), `[bracket]` syntax in recipe markdown, `canonical` + `preparation` fields in JSON output, exact step ref matching, linter enforcement

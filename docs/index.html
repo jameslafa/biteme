@@ -54,7 +54,7 @@
       <svg data-icon="chevron-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="meal-plan-banner-chevron"></svg>
     </a>
 
-    <div id="tag-dropdown" class="search-container tag-dropdown">
+    <div class="search-container">
       <input
         type="search"
         id="search-input"
@@ -62,9 +62,6 @@
         aria-label="Search recipes and ingredients"
       >
       <div class="search-actions">
-        <button id="tag-filter-btn" class="search-action-btn" aria-label="Filter by tag">
-          <svg data-icon="filter" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
-        </button>
         <button id="favorites-filter" class="search-action-btn" aria-label="Show favorites only">
           <svg data-icon="heart" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
         </button>
@@ -72,34 +69,11 @@
           <svg data-icon="shuffle" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
         </button>
       </div>
-      <div class="filter-popover">
-        <div class="filter-row">
-          <label class="filter-label">Cuisine</label>
-          <div class="filter-select" id="cuisine-select">
-            <button class="filter-select-btn" id="cuisine-select-btn">All</button>
-            <div class="filter-select-options" id="cuisine-options"></div>
-          </div>
-        </div>
-        <div class="filter-row">
-          <label class="filter-label">Meal type</label>
-          <div class="filter-select" id="meal-type-select">
-            <button class="filter-select-btn" id="meal-type-select-btn">All</button>
-            <div class="filter-select-options" id="meal-type-options"></div>
-          </div>
-        </div>
-        <div class="filter-row">
-          <label class="filter-label">Rating</label>
-          <div class="filter-select" id="rating-select">
-            <button class="filter-select-btn" id="rating-select-btn">Any</button>
-            <div class="filter-select-options" id="rating-options"></div>
-          </div>
-        </div>
-        <div class="filter-actions">
-          <button class="filter-reset-btn" id="filter-reset-btn" style="display: none;">Reset</button>
-          <button class="surprise-popover-btn" id="surprise-popover-btn">🎲 Surprise me</button>
-          <button class="filter-apply-btn" id="filter-apply-btn">Filter</button>
-        </div>
-      </div>
+    </div>
+
+    <div class="chip-filters">
+      <div class="chip-row" id="meal-type-chips"></div>
+      <div class="chip-row" id="cuisine-chips"></div>
     </div>
 
     <div id="recipe-grid" class="recipe-grid">

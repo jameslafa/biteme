@@ -78,13 +78,9 @@
           <div id="cooking-stats" class="cooking-stats"></div>
 
           <div class="recipe-tags">
-            ${(recipe.cuisine || []).map(c => `<a href="index.html?cuisine=${encodeURIComponent(c)}" class="tag tag-cuisine">${c}</a>`).join('')}
             ${(recipe.meal_type || []).map(m => `<a href="index.html?meal_type=${encodeURIComponent(m)}" class="tag tag-meal-type">${m}</a>`).join('')}
+            ${(recipe.cuisine || []).map(c => `<a href="index.html?cuisine=${encodeURIComponent(c)}" class="tag tag-cuisine">${c}</a>`).join('')}
           </div>
-
-          <p class="recipe-meta">
-            ${new Date(recipe.date + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
-          </p>
 
           <div id="cooking-notes-display"></div>
 

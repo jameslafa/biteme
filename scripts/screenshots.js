@@ -16,7 +16,12 @@ async function takeScreenshots() {
   });
   const page = await context.newPage();
 
-  // Load the app once to initialize DB
+  // Load the app once to initialize DB, then hide the first-visit nudge
+  await page.goto(`${BASE_URL}/`);
+  await page.waitForSelector('.recipe-card');
+  await page.evaluate(async () => {
+    await setSetting('hasSeenHowItWorks', true);
+  });
   await page.goto(`${BASE_URL}/`);
   await page.waitForSelector('.recipe-card');
 

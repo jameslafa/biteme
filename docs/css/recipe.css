@@ -248,14 +248,6 @@
   color: var(--primary-color);
 }
 
-/* Recipe Meta (author & date) */
-.recipe-meta {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  margin-top: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-}
 
 /* Sections */
 .ingredients,
