@@ -34,8 +34,6 @@ struct RecipeFrontmatter {
     difficulty: String,
     tags: Vec<String>,
     diet: Vec<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    author: Option<String>,
     date: String,
     #[serde(default)]
     tested: Option<bool>,
@@ -94,8 +92,6 @@ struct Recipe {
     difficulty: String,
     tags: Vec<String>,
     diet: Vec<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    author: Option<String>,
     date: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     notes: Option<String>,
@@ -914,7 +910,6 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
         difficulty: frontmatter.difficulty,
         tags: frontmatter.tags,
         diet: frontmatter.diet,
-        author: frontmatter.author,
         date: frontmatter.date,
         notes,
         ingredients,
@@ -1017,7 +1012,7 @@ fn friendly_frontmatter_error(err: &serde_yaml::Error) -> anyhow::Error {
         if let Some(rest) = msg.strip_prefix("unknown field `") {
             if let Some(field) = rest.split('`').next() {
                 return anyhow::anyhow!(
-                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, date. Optional: diet, author, tested",
+                    "Unknown field: '{}'\n  Check for typos. Required fields: id, name, description, servings, time, difficulty, tags, date. Optional: diet, tested",
                     field
                 );
             }
@@ -1090,11 +1085,6 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
     }
 
     // Validate optional fields (always, not just lint mode)
-    if let Some(ref author) = fm.author {
-        if author.is_empty() || author.len() > 100 {
-            bail!("Author must be 1–100 characters, got {}", author.len());
-        }
-    }
     let valid_date = fm.date.len() == 10
         && fm.date.chars().enumerate().all(|(i, c)| match i {
             4 | 7 => c == '-',
@@ -2247,17 +2237,16 @@ date: 2026-01-01
     }
 
     #[test]
-    fn test_recipe_with_author_and_date() {
+    fn test_recipe_with_date() {
         let test_recipe = r#"---
-id: author-date-test
-name: Author Date Test
-description: Recipe with author and date fields
+id: date-test
+name: Date Test
+description: Recipe with a date field
 servings: 2
 time: 15
 difficulty: easy
 tags: [test]
 diet: [vegan]
-author: James
 date: 2026-02-10
 ---
 
@@ -2271,7 +2260,7 @@ date: 2026-02-10
 "#;
 
         let temp_dir = std::env::temp_dir();
-        let test_file = temp_dir.join("author-date-test.md");
+        let test_file = temp_dir.join("date-test.md");
         fs::write(&test_file, test_recipe).unwrap();
 
         let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
@@ -2279,7 +2268,6 @@ date: 2026-02-10
 
         assert!(result.is_ok());
         let recipe = result.unwrap();
-        assert_eq!(recipe.author, Some("James".to_string()));
         assert_eq!(recipe.date, "2026-02-10");
     }
 
