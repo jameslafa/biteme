@@ -18,7 +18,6 @@ time: 45
 difficulty: medium
 tags: [tag-one, tag-two, tag-three]
 diet: [vegan, gluten-free]
-author: Your Name
 date: 2026-02-10
 ---
 ```
@@ -34,8 +33,7 @@ date: 2026-02-10
 | `time`        | integer | 1–1440. Total time in minutes (1440 = 24 hours).                                                                                                                                                                       |
 | `difficulty`  | string  | Exactly one of: `easy`, `medium`, `hard`. Lowercase only.                                                                                                                                                              |
 | `tags`        | array   | At least 1 tag. All lowercase, no spaces within tags. No duplicates. Meal-type/cuisine only — dietary info goes in `diet`.                                                                                             |
-| `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`.                                                                                                                                                   |
-| `author`      | string  | **Optional.** 1–100 characters. Name of the recipe contributor.                                                                                                                                                        |
+| `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`. For `gluten-free`: tag the recipe if gluten only appears in ingredients with a widely available GF alternative (soy sauce → tamari, gnocchi → GF gnocchi, stock → GF stock). Do **not** tag if gluten is structural to the dish (wheat flour, pasta, ramen noodles, soba noodles, bread). |
 | `date`        | string  | Format: `YYYY-MM-DD`. Date the recipe was added.                                                                                                                                                                       |
 
 ---
@@ -245,7 +243,6 @@ time: 35
 difficulty: easy
 tags: [indian, curry]
 diet: [vegan, gluten-free]
-author: James
 date: 2026-02-26
 ---
 
@@ -289,7 +286,7 @@ Serve with basmati rice and naan. A dollop of coconut yoghurt on top works well.
 
 Before outputting the recipe, verify:
 
-- [ ] Frontmatter has all 8 required fields (`id`, `name`, `description`, `servings`, `time`, `difficulty`, `tags`, `date`) plus optional `diet` and `author`
+- [ ] Frontmatter has all 8 required fields (`id`, `name`, `description`, `servings`, `time`, `difficulty`, `tags`, `date`) plus optional `diet`
 - [ ] `id` is lowercase-and-dashes only, no leading/trailing/consecutive dashes, max 100 chars
 - [ ] `name` is 3–200 characters
 - [ ] `description` is 10–500 characters
