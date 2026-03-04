@@ -406,13 +406,16 @@ const FEATURES = [
   },
   {
     id: 'share',
-    title: 'Share the ones you love',
-    description: 'Found a recipe your friends need to try? Tap the share button on any recipe page to send them a link — no account needed.',
+    title: 'Share or print',
+    description: 'Found a recipe your friends need to try? Tap the share button to send them a link — no account needed. Need a paper copy? Tap the print icon for a clean, ink-friendly layout with printable ingredient checkboxes. Works on mobile too — your browser will offer "Save as PDF" or send it to a printer via AirPrint.',
     mockupHTML: `
       <div class="recipe" style="padding:var(--spacing-md);max-width:none;">
         <div class="recipe-header" style="margin-bottom:0;">
           <h2 class="recipe-name" style="font-size:1.5rem;">Galettes Bretonnes</h2>
           <div class="recipe-actions">
+            <button class="icon-button" tabindex="-1" aria-label="Print recipe">
+              ${icon('print', 24)}
+            </button>
             <button class="icon-button" tabindex="-1" aria-label="Share recipe">
               ${icon('share', 24)}
             </button>

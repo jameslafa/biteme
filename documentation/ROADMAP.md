@@ -53,6 +53,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Ingredient Checkbox Flow** — Clean separation: overview = prep, cooking mode = action
 - **Per-Recipe OG Tags** — Static HTML files with Open Graph + Twitter Card meta tags for rich link previews
 - **CI/CD Pipeline** — GitHub Actions: lint on PR, parse + auto-commit on merge, issue template for recipe submissions
+- **Print View** — `@media print` stylesheet on recipe page; hides UI chrome, replaces interactive checkboxes with printable squares, adds attribution footer; print button in recipe header
 - **Cuisine & Meal Type Filtering** — Always-visible chip rows (meal type above, cuisine below); bidirectional narrowing (selecting one dimension narrows the other); "more" button expands overflow chips permanently; active chip promoted out of hidden; clickable tags on cards and recipe page link back to filtered list; URL param persistence; two distinct taxonomy colours (teal for meal type, terracotta for cuisine)
 - **Cooking Timers** — Countdown timer in cooking mode with audio alert and vibration, durations parsed from step text by Rust parser, adjustable before starting, auto screen wake lock
 - **Recipe Rating (Phase 1)** — Local star ratings (1–5), post-cooking banner prompt, displayed on cards and detail page, editable from detail page, IndexedDB storage

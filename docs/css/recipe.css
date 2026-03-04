@@ -592,3 +592,70 @@
     font-size: 1rem;
   }
 }
+
+/* ─── Print ─────────────────────────────────────────────────────────────── */
+
+@media print {
+  /* Reset page */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  header,
+  .recipe-actions,
+  .serving-adjuster,
+  .add-to-cart,
+  #similar-recipes,
+  .action-buttons,
+  .cooking-stats,
+  .recipe-tags { display: none !important; }
+
+  body { background: white; }
+
+  .recipe {
+    border: none;
+    padding: 0;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* Replace interactive checkboxes with printable squares */
+  .ingredient-checkbox input[type="checkbox"] { display: none; }
+  .ingredient-checkbox label::before {
+    content: '';
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 1.5px solid #666;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  /* Clean up ingredient rows */
+  .ingredients li {
+    border-left: none;
+    background: none;
+    padding: 0.2rem 0;
+    margin: 0;
+  }
+
+  .ingredient-item { gap: 0; }
+
+  /* Keep step numbers but make them print-friendly */
+  .instructions li:before {
+    background-color: #6B9080;
+    print-color-adjust: exact;
+  }
+
+  /* Attribution footer */
+  .recipe::after {
+    content: 'biteme.ovh';
+    display: block;
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    color: #999;
+    text-align: right;
+    border-top: 1px solid #eee;
+    padding-top: 0.5rem;
+  }
+}

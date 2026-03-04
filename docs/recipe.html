@@ -65,6 +65,9 @@
           <div class="recipe-header">
             <h2 class="recipe-name">${recipe.name}</h2>
             <div class="recipe-actions">
+              <button class="icon-button" aria-label="Print recipe" onclick="window.print()">
+                ${icon('print', 24)}
+              </button>
               <button id="share-btn" class="icon-button" aria-label="Share recipe">
                 ${icon('share', 24)}
               </button>
