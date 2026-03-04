@@ -544,6 +544,30 @@ test.describe('Cooking Timer', () => {
     await expect(page.locator('.timer-display')).toHaveText('20:00');
   });
 
+  test('time badge works for word duration "one and a half minutes"', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+
+    // Go to step 6 which has "one and a half minutes" time badge
+    const nextBtn = page.locator('#next-btn');
+    for (let i = 0; i < 5; i++) {
+      await nextBtn.click();
+      await page.waitForTimeout(300);
+    }
+
+    // Timer bar should show 1:30
+    await expect(page.locator('#timer-bar')).toBeVisible();
+    await expect(page.locator('.timer-display')).toHaveText('1:30');
+
+    // The badge text should be present and clickable
+    await expect(page.locator('.time-badge')).toHaveText('one and a half minutes');
+
+    // Adjust timer then click badge to confirm it prefills 90s
+    await page.locator('.timer-arrow[aria-label="Add 1 minute"]').click();
+    await expect(page.locator('.timer-display')).toHaveText('2:30');
+    await page.locator('.time-badge').click();
+    await expect(page.locator('.timer-display')).toHaveText('1:30');
+  });
+
   test('toggle shows timer with step duration when available', async ({ page }) => {
     await page.goto('/cooking.html?id=test-curry');
 

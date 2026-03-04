@@ -6,6 +6,7 @@ use sha2::{Sha256, Digest};
 use std::collections::HashMap;
 use std::fs;
 use std::path::PathBuf;
+use std::sync::OnceLock;
 
 #[derive(ClapParser)]
 #[command(name = "recipe-parser")]
@@ -513,32 +514,87 @@ fn strip_canonical(text: &str) -> (String, Option<String>, Option<String>) {
     (text.to_string(), None, None)
 }
 
-/// Parse duration mentions from step text (e.g. "cook for 5 minutes", "simmer for 25 to 30 minutes").
-/// Returns a list of durations found. For ranges, uses the higher value.
-fn parse_step_durations(text: &str) -> Vec<StepDuration> {
-    let re = regex::Regex::new(
-        r"(?i)(?:for\s+)?(?:about\s+)?(\d+)(?:\s*(?:to|-|–)\s*(\d+))?\s*(minutes?|mins?|seconds?|secs?|hours?|hrs?)"
-    ).unwrap();
+/// Convert a matched number string (digit or word, optionally "and a half") to f64.
+/// Inputs are constrained by the regex in `parse_step_durations`; only known word forms arrive here.
+fn parse_duration_num(s: &str) -> f64 {
+    let trimmed = s.trim();
+    if let Ok(n) = trimmed.parse::<f64>() {
+        return n;
+    }
+    let lower = trimmed.to_lowercase();
+    let (base_str, half) = match lower.find(" and") {
+        Some(pos) => (&lower[..pos], true),
+        None => (lower.as_str(), false),
+    };
+    let base: f64 = match base_str.trim() {
+        "a" | "an" | "one" => 1.0,
+        "two" => 2.0,
+        "three" => 3.0,
+        "four" => 4.0,
+        "five" => 5.0,
+        "six" => 6.0,
+        "seven" => 7.0,
+        "eight" => 8.0,
+        "nine" => 9.0,
+        "ten" => 10.0,
+        "eleven" => 11.0,
+        "twelve" => 12.0,
+        "thirteen" => 13.0,
+        "fourteen" => 14.0,
+        "fifteen" => 15.0,
+        "sixteen" => 16.0,
+        "seventeen" => 17.0,
+        "eighteen" => 18.0,
+        "nineteen" => 19.0,
+        "twenty" => 20.0,
+        "twenty-five" => 25.0,
+        "thirty" => 30.0,
+        "thirty-five" => 35.0,
+        "forty" => 40.0,
+        "forty-five" => 45.0,
+        "fifty" => 50.0,
+        "fifty-five" => 55.0,
+        "sixty" => 60.0,
+        _ => {
+            eprintln!("⚠️  Warning: unrecognised duration number {:?}", trimmed);
+            return 0.0;
+        }
+    };
+    if half { base + 0.5 } else { base }
+}
 
-    re.captures_iter(text).map(|cap| {
-        let value: u32 = cap.get(2)
-            .or(cap.get(1))
-            .unwrap()
-            .as_str()
-            .parse()
-            .unwrap();
+fn duration_re() -> &'static regex::Regex {
+    static RE: OnceLock<regex::Regex> = OnceLock::new();
+    RE.get_or_init(|| {
+        // Longer compound forms must come before their base words to avoid partial matches.
+        let num_pat = r"(?:\d+(?:\.\d+)?|twenty-five|thirty-five|forty-five|fifty-five|(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|a|an)(?:\s+and\s+(?:a\s+)?half)?)";
+        let pattern = format!(
+            r"(?i)(?:for\s+)?(?:about\s+)?({num})(?:\s*(?:to|or|-|–)\s*({num}))?\s*(minutes?|mins?|seconds?|secs?|hours?|hrs?)",
+            num = num_pat
+        );
+        regex::Regex::new(&pattern).unwrap()
+    })
+}
+
+/// Parse duration mentions from step text, supporting both digit and word numbers.
+/// Handles "X and a half", ranges ("three to five"), and "about X". Uses higher value for ranges.
+fn parse_step_durations(text: &str) -> Vec<StepDuration> {
+    duration_re().captures_iter(text).filter_map(|cap| {
+        let raw = cap.get(2).or(cap.get(1)).unwrap().as_str();
+        let value = parse_duration_num(raw);
+        if value <= 0.0 { return None; }
         let unit = cap.get(3).unwrap().as_str().to_lowercase();
         let seconds = if unit.starts_with('h') {
-            value * 3600
+            (value * 3600.0) as u32
         } else if unit.starts_with('s') {
-            value
+            value as u32
         } else {
-            value * 60
+            (value * 60.0) as u32
         };
-        StepDuration {
+        Some(StepDuration {
             seconds,
             text: cap.get(0).unwrap().as_str().to_string(),
-        }
+        })
     }).collect()
 }
 
@@ -2678,7 +2734,7 @@ date: 2026-01-01
             Ingredient { id: 3, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["ice cubes".to_string(), "lemon".to_string()];
-        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
         assert_eq!(unreferenced, vec!["2 tbsp olive oil (Fresh)"]);
     }
 
@@ -2690,7 +2746,7 @@ date: 2026-01-01
             Ingredient { id: 2, text: "120 g tahini".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["chickpeas".to_string(), "tahini".to_string()];
-        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
         assert!(unreferenced.is_empty());
     }
 
@@ -2701,7 +2757,7 @@ date: 2026-01-01
             Ingredient { id: 1, text: "Salt to taste".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["oil".to_string()];
-        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
         assert_eq!(unreferenced, vec!["Salt to taste (Spices)"]);
     }
 
@@ -2715,7 +2771,7 @@ date: 2026-01-01
             Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["oil".to_string()];
-        let ambiguous = find_ambiguous_refs(&ingredients, &refs);
+        let ambiguous = find_ambiguous_refs(&ingredients, &refs, &CanonicalData::empty());
         assert_eq!(ambiguous.len(), 1);
         assert_eq!(ambiguous[0].0, "oil");
         assert_eq!(ambiguous[0].1.len(), 2);
@@ -2729,7 +2785,7 @@ date: 2026-01-01
             Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None },
         ]);
         let refs = vec!["olive oil".to_string()];
-        let ambiguous = find_ambiguous_refs(&ingredients, &refs);
+        let ambiguous = find_ambiguous_refs(&ingredients, &refs, &CanonicalData::empty());
         assert!(ambiguous.is_empty());
     }
 
@@ -3126,12 +3182,12 @@ date: 2026-01-01
 
         // {olive oil} — exact match, not ambiguous
         let refs = vec!["olive oil".to_string()];
-        let ambiguous = find_ambiguous_refs(&ingredients, &refs);
+        let ambiguous = find_ambiguous_refs(&ingredients, &refs, &CanonicalData::empty());
         assert!(ambiguous.is_empty());
 
         // {oil} — does not match either canonical exactly
         let refs = vec!["oil".to_string()];
-        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
         assert_eq!(unreferenced.len(), 2); // both are unreferenced
     }
 
@@ -3145,7 +3201,90 @@ date: 2026-01-01
         ]);
 
         let refs = vec!["egg".to_string()];
-        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs);
+        let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
         assert!(unreferenced.is_empty()); // {egg} matches canonical "egg"
+    }
+
+    #[test]
+    fn test_parse_step_durations_digit() {
+        let d = parse_step_durations("cook for 5 minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 300);
+        assert_eq!(d[0].text, "for 5 minutes");
+    }
+
+    #[test]
+    fn test_parse_step_durations_word_simple() {
+        let d = parse_step_durations("simmer for two minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 120);
+        assert_eq!(d[0].text, "for two minutes");
+    }
+
+    #[test]
+    fn test_parse_step_durations_and_a_half() {
+        let d = parse_step_durations("fry for one and a half minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 90);
+        assert_eq!(d[0].text, "for one and a half minutes");
+    }
+
+    #[test]
+    fn test_parse_step_durations_and_half_no_a() {
+        let d = parse_step_durations("cook for two and half minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 150);
+    }
+
+    #[test]
+    fn test_parse_step_durations_range_words() {
+        // Range: takes the higher value
+        let d = parse_step_durations("cook for three to five minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 300);
+        assert_eq!(d[0].text, "for three to five minutes");
+    }
+
+    #[test]
+    fn test_parse_step_durations_range_digits() {
+        let d = parse_step_durations("simmer for 15 to 20 minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 1200);
+    }
+
+    #[test]
+    fn test_parse_step_durations_about() {
+        let d = parse_step_durations("cook for about ten minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 600);
+    }
+
+    #[test]
+    fn test_parse_step_durations_seconds() {
+        let d = parse_step_durations("stir for thirty seconds");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 30);
+    }
+
+    #[test]
+    fn test_parse_step_durations_hyphenated() {
+        let d = parse_step_durations("bake for forty-five minutes");
+        assert_eq!(d.len(), 1);
+        assert_eq!(d[0].seconds, 2700);
+        assert_eq!(d[0].text, "for forty-five minutes");
+    }
+
+    #[test]
+    fn test_parse_step_durations_multiple() {
+        let d = parse_step_durations("cook for one minute, then simmer for five minutes");
+        assert_eq!(d.len(), 2);
+        assert_eq!(d[0].seconds, 60);
+        assert_eq!(d[1].seconds, 300);
+    }
+
+    #[test]
+    fn test_parse_step_durations_none() {
+        let d = parse_step_durations("stir until golden");
+        assert!(d.is_empty());
     }
 }

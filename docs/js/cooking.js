@@ -8,11 +8,28 @@ let servingRatio = 1;
 // Timer state
 let timerSeconds = 0;
 let timerRemaining = 0;
+let timerStartedAt = null;
 let timerInterval = null;
 let timerRunning = false;
 let timerFinished = false;
 let timerDismissed = false;
 let timerAudio = null;
+
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState !== 'visible' || !timerRunning || !timerStartedAt) return;
+  timerRemaining = timerSeconds - Math.floor((Date.now() - timerStartedAt) / 1000);
+  if (timerRemaining <= 0) {
+    timerRemaining = 0;
+    timerRunning = false;
+    timerFinished = true;
+    timerStartedAt = null;
+    clearInterval(timerInterval);
+    timerInterval = null;
+    onTimerComplete(); // calls suggestTimerForStep → renderTimerBar
+    return;
+  }
+  renderTimerBar();
+});
 
 document.addEventListener('DOMContentLoaded', async function() {
   await loadIngredientVocabulary();
@@ -433,15 +450,18 @@ function startTimer() {
   if (!screenLockActive) enableScreenLock();
   timerRunning = true;
   timerFinished = false;
+  timerStartedAt = Date.now() - (timerSeconds - timerRemaining) * 1000;
   timerInterval = setInterval(() => {
-    timerRemaining--;
+    timerRemaining = timerSeconds - Math.floor((Date.now() - timerStartedAt) / 1000);
     if (timerRemaining <= 0) {
       timerRemaining = 0;
       timerRunning = false;
       timerFinished = true;
+      timerStartedAt = null;
       clearInterval(timerInterval);
       timerInterval = null;
-      onTimerComplete();
+      onTimerComplete(); // calls suggestTimerForStep → renderTimerBar
+      return;
     }
     renderTimerBar();
   }, 1000);
@@ -450,6 +470,7 @@ function startTimer() {
 
 function pauseTimer() {
   timerRunning = false;
+  timerStartedAt = null;
   clearInterval(timerInterval);
   timerInterval = null;
   renderTimerBar();
@@ -458,6 +479,7 @@ function pauseTimer() {
 function stopTimer() {
   timerRunning = false;
   timerFinished = false;
+  timerStartedAt = null;
   clearInterval(timerInterval);
   timerInterval = null;
   // Re-suggest from current step

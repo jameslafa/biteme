@@ -209,9 +209,9 @@ The canonical name is the singular form as listed in `docs/ingredients.json`. It
 # Instructions
 
 1. Heat {olive oil} in a large pot over medium heat.
-2. Add {onion} and {garlic}, cook for 5 minutes.
-3. Add {ground cumin} and {smoked paprika}, stir for 1 minute.
-4. Add {chickpeas} and {passata}. Simmer for 20 minutes.
+2. Add {onion} and {garlic}, cook for five minutes.
+3. Add {ground cumin} and {smoked paprika}, stir for one minute.
+4. Add {chickpeas} and {passata}. Simmer for twenty minutes.
 ```
 
 **Rules:**
@@ -220,6 +220,7 @@ The canonical name is the singular form as listed in `docs/ingredients.json`. It
 - Every ingredient should be referenced at least once (linter warns on unreferenced ingredients)
 - Do not reference preparation text — `{garlic}` not `{garlic, minced}`
 - Do not include the unit — `{garlic}` not `{2 cloves garlic}`
+- Write all durations in plain English words — `five minutes`, `one and a half minutes`, `thirty seconds`. Never use digits for durations (`5 minutes`, `1½ minutes`). The cooking mode uses these to create tappable timer badges.
 
 **Examples:**
 
@@ -272,10 +273,10 @@ Ginger paste from a tube is fine here, or grate a small thumb of fresh ginger.
 
 # Instructions
 
-1. Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about 3-4 minutes.
-2. Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, and {ground coriander}. Fry for 30 seconds, stirring constantly.
-3. Pour in {passata}, {water}, and {chickpea}. Season with salt. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.
-4. Stir in {coconut milk} and {brown sugar}. Simmer for a further 2-3 minutes.
+1. Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about three to four minutes.
+2. Add {garlic} and {ginger paste}, saute for one minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, and {ground coriander}. Fry for thirty seconds, stirring constantly.
+3. Pour in {passata}, {water}, and {chickpea}. Season with salt. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for twenty minutes, stirring occasionally, until the sauce thickens and darkens.
+4. Stir in {coconut milk} and {brown sugar}. Simmer for a further two to three minutes.
 5. Taste and adjust seasoning. Garnish with {coriander}.
 
 # Serving Suggestions
@@ -310,4 +311,5 @@ Before outputting the recipe, verify:
 - [ ] Plural/singular form inside `[]` matches what's natural for the quantity
 - [ ] Every ingredient is referenced at least once in the instructions using `{canonical}` syntax
 - [ ] Step refs use the singular canonical name (e.g. `{egg}` not `{eggs}`, `{chickpea}` not `{chickpeas}`)
+- [ ] All durations in instructions are written as words (`five minutes`, `one and a half minutes`), not digits
 - [ ] The filename would be `recipes/{id}.md`

@@ -112,6 +112,15 @@
             "text": "20 minutes"
           }
         ]
+      },
+      {
+        "text": "Fry for one and a half minutes until golden",
+        "durations": [
+          {
+            "seconds": 90,
+            "text": "one and a half minutes"
+          }
+        ]
       }
     ],
     "serving_suggestions": "Serve over rice with naan bread. Garnish with fresh cilantro.",

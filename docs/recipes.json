@@ -179,16 +179,34 @@
     },
     "steps": [
       {
-        "text": "Toss {tofu} cubes with {corn starch} until evenly coated. Heat {vegetable oil} in a large frying pan or wok over medium-high heat. Fry the tofu in batches until golden and crisp on all sides, about three minutes per batch. Drain on paper towels and set aside. Discard the oil and wipe the pan clean."
+        "text": "Toss {tofu} cubes with {corn starch} until evenly coated. Heat {vegetable oil} in a large frying pan or wok over medium-high heat. Fry the tofu in batches until golden and crisp on all sides, about three minutes per batch. Drain on paper towels and set aside. Discard the oil and wipe the pan clean.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "about three minutes"
+          }
+        ]
       },
       {
-        "text": "Return the pan to medium heat and melt {vegan butter}. Add {shallots}, {garlic}, {ginger}, and {red chillies}. Cook, stirring occasionally, until completely softened and starting to colour, about fifteen minutes."
+        "text": "Return the pan to medium heat and melt {vegan butter}. Add {shallots}, {garlic}, {ginger}, and {red chillies}. Cook, stirring occasionally, until completely softened and starting to colour, about fifteen minutes.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "about fifteen minutes"
+          }
+        ]
       },
       {
         "text": "Stir in {black pepper}, {kecap manis}, {soy sauce}, {dark soy sauce}, and {sugar}."
       },
       {
-        "text": "Return the tofu to the pan and fold gently to coat. Cook for two minutes until warmed through."
+        "text": "Return the tofu to the pan and fold gently to coat. Cook for two minutes until warmed through.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
         "text": "Stir in {spring onions} and serve immediately."
@@ -355,10 +373,26 @@
     },
     "steps": [
       {
-        "text": "Bring a pan of water to a boil. Add {puy lentils} and cook for fifteen to twenty minutes until completely tender. Drain and set aside."
+        "text": "Bring a pan of water to a boil. Add {puy lentils} and cook for fifteen to twenty minutes until completely tender. Drain and set aside.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for fifteen to twenty minutes"
+          }
+        ]
       },
       {
-        "text": "Melt {vegan butter} with {olive oil} in a large sauté pan over medium-high heat. Add {garlic} and {ground cumin} and cook for one minute. Add {tomatoes}, most of the {coriander}, and the cooked lentils. Stir and cook for two minutes."
+        "text": "Melt {vegan butter} with {olive oil} in a large sauté pan over medium-high heat. Add {garlic} and {ground cumin} and cook for one minute. Add {tomatoes}, most of the {coriander}, and the cooked lentils. Stir and cook for two minutes.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          },
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
         "text": "Add {tahini}, {lemon juice}, {water}, {salt}, and a generous grind of pepper. Reduce the heat to medium and cook gently, stirring, for a few minutes until hot and thickened. Roughly mash with a potato masher until some lentils are broken up and the mixture has a thick, porridge-like consistency."
@@ -549,13 +583,35 @@
         "text": "Blitz {silken tofu}, {tahini}, and a pinch of salt in a food processor until completely smooth. Set aside."
       },
       {
-        "text": "Put {rose harissa}, {maple syrup}, {apple cider vinegar}, {soy sauce}, {garlic}, {ginger}, the chopped {spring onion} whites, and 1 tbsp {olive oil} in a medium sauté pan over medium-high heat. Cook for five minutes, stirring, until the oil splits and the sauce is fragrant and slightly reduced."
+        "text": "Put {rose harissa}, {maple syrup}, {apple cider vinegar}, {soy sauce}, {garlic}, {ginger}, the chopped {spring onion} whites, and 1 tbsp {olive oil} in a medium sauté pan over medium-high heat. Cook for five minutes, stirring, until the oil splits and the sauce is fragrant and slightly reduced.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for five minutes"
+          }
+        ]
       },
       {
-        "text": "Heat a griddle pan over medium-high heat and ventilate the kitchen. Cut the firm {tofu} lengthwise into 6 slices, then halve each piece lengthways to give 12 slices. Grill in two batches for one minute per side until charred, transferring each batch to the sauce pan as it's done. Once all the tofu is in, stir in {cold water} and simmer for five minutes."
+        "text": "Heat a griddle pan over medium-high heat and ventilate the kitchen. Cut the firm {tofu} lengthwise into 6 slices, then halve each piece lengthways to give 12 slices. Grill in two batches for one minute per side until charred, transferring each batch to the sauce pan as it's done. Once all the tofu is in, stir in {cold water} and simmer for five minutes.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          },
+          {
+            "seconds": 300,
+            "text": "for five minutes"
+          }
+        ]
       },
       {
-        "text": "Toss the {baby carrots} with the remaining 1/2 tsp {olive oil} and a pinch of salt. Grill on the same griddle, turning as needed, for five to ten minutes until charred and tender. Gently stir into the tofu pan to coat in the sauce."
+        "text": "Toss the {baby carrots} with the remaining 1/2 tsp {olive oil} and a pinch of salt. Grill on the same griddle, turning as needed, for five to ten minutes until charred and tender. Gently stir into the tofu pan to coat in the sauce.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for five to ten minutes"
+          }
+        ]
       },
       {
         "text": "Spread the tofu cream over a serving platter. Arrange the tofu and carrots on top. Drain the spring onion greens and scatter over. Squeeze {lime} over the top and serve immediately."
@@ -764,16 +820,44 @@
         "text": "Mix {apple cider vinegar}, half the {caster sugar}, {red onion}, and a pinch of salt in a small bowl. Set aside to pickle while you prepare the rest."
       },
       {
-        "text": "Heat {vegetable oil} in a medium high-sided pan over medium-high heat. Toss {tofu} with {corn starch} until well coated. Fry in two batches until crispy and golden, about six minutes per batch. Drain on paper towels and set aside."
+        "text": "Heat {vegetable oil} in a medium high-sided pan over medium-high heat. Toss {tofu} with {corn starch} until well coated. Fry in two batches until crispy and golden, about six minutes per batch. Drain on paper towels and set aside.",
+        "durations": [
+          {
+            "seconds": 360,
+            "text": "about six minutes"
+          }
+        ]
       },
       {
-        "text": "Pulse {onions} and {garlic} in a food processor until very finely minced but not puréed. Heat {olive oil} in a large sauté pan over medium-high heat. Cook the onion mixture, stirring occasionally, until softened and lightly browned, about ten minutes."
+        "text": "Pulse {onions} and {garlic} in a food processor until very finely minced but not puréed. Heat {olive oil} in a large sauté pan over medium-high heat. Cook the onion mixture, stirring occasionally, until softened and lightly browned, about ten minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "about ten minutes"
+          }
+        ]
       },
       {
-        "text": "Add {cumin seeds}, {lime} juice and zest, and {tomato paste}. Cook for one minute. Add {water}, the remaining {caster sugar}, {salt}, and a generous grind of pepper. Simmer for six minutes, stirring occasionally, until thick and rich."
+        "text": "Add {cumin seeds}, {lime} juice and zest, and {tomato paste}. Cook for one minute. Add {water}, the remaining {caster sugar}, {salt}, and a generous grind of pepper. Simmer for six minutes, stirring occasionally, until thick and rich.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          },
+          {
+            "seconds": 360,
+            "text": "for six minutes"
+          }
+        ]
       },
       {
-        "text": "Stir in the fried tofu and {parsley} and another grind of pepper. Add {spinach} in increments, stirring until just wilted, about three minutes."
+        "text": "Stir in the fried tofu and {parsley} and another grind of pepper. Add {spinach} in increments, stirring until just wilted, about three minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "about three minutes"
+          }
+        ]
       },
       {
         "text": "Transfer to a shallow serving platter and top with the pickled {red onion}."
@@ -949,13 +1033,31 @@
     },
     "steps": [
       {
-        "text": "Heat 2/3 of the {olive oil} in a large high-sided sauté pan over medium-high heat. Add {garlic}, {red onion}, {thyme}, and a fifth of the {salt}. Fry for eight minutes, stirring often, until soft and golden. Tip into a bowl, leaving the oil behind."
+        "text": "Heat 2/3 of the {olive oil} in a large high-sided sauté pan over medium-high heat. Add {garlic}, {red onion}, {thyme}, and a fifth of the {salt}. Fry for eight minutes, stirring often, until soft and golden. Tip into a bowl, leaving the oil behind.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "for eight minutes"
+          }
+        ]
       },
       {
-        "text": "Add the remaining {olive oil} to the same pan and heat until very hot. Season {aubergines} and {cherry tomatoes} with another fifth of the {salt} and plenty of pepper, then add to the pan. Fry for ten minutes over medium-high heat, turning often, until the aubergine is soft and golden-brown and the tomatoes are beginning to blacken."
+        "text": "Add the remaining {olive oil} to the same pan and heat until very hot. Season {aubergines} and {cherry tomatoes} with another fifth of the {salt} and plenty of pepper, then add to the pan. Fry for ten minutes over medium-high heat, turning often, until the aubergine is soft and golden-brown and the tomatoes are beginning to blacken.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for ten minutes"
+          }
+        ]
       },
       {
-        "text": "Return the onion and garlic to the pan. Add {puy lentils}, {vegetable stock}, {water}, and the remaining {salt}. Bring to the boil, then reduce the heat to medium and simmer gently for about forty minutes, until the lentils are soft but still retain some bite."
+        "text": "Return the onion and garlic to the pan. Add {puy lentils}, {vegetable stock}, {water}, and the remaining {salt}. Bring to the boil, then reduce the heat to medium and simmer gently for about forty minutes, until the lentils are soft but still retain some bite.",
+        "durations": [
+          {
+            "seconds": 2400,
+            "text": "for about forty minutes"
+          }
+        ]
       },
       {
         "text": "Serve warm or at room temperature, topped with a dollop of {vegan yogurt}, a drizzle of olive oil, {chilli flakes}, and {oregano}."
@@ -1187,16 +1289,44 @@
     },
     "steps": [
       {
-        "text": "Heat {olive oil} in a large pan over low-medium heat. Add {onion} and fry until soft and translucent, about eight minutes, stirring frequently. Add {garlic} and fry for two more minutes."
+        "text": "Heat {olive oil} in a large pan over low-medium heat. Add {onion} and fry until soft and translucent, about eight minutes, stirring frequently. Add {garlic} and fry for two more minutes.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "about eight minutes"
+          }
+        ]
       },
       {
-        "text": "If using an {aubergine}, push the onion mixture to the side and fry the aubergine separately in a little oil until golden, about eight minutes, then combine."
+        "text": "If using an {aubergine}, push the onion mixture to the side and fry the aubergine separately in a little oil until golden, about eight minutes, then combine.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "about eight minutes"
+          }
+        ]
       },
       {
-        "text": "Add {red pepper} and fry until soft, about five minutes. Stir in {ground cumin}, {smoked paprika}, and {chilli powder} and fry for one minute, stirring constantly."
+        "text": "Add {red pepper} and fry until soft, about five minutes. Stir in {ground cumin}, {smoked paprika}, and {chilli powder} and fry for one minute, stirring constantly.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "about five minutes"
+          },
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          }
+        ]
       },
       {
-        "text": "Add {tomato paste}, then {chopped tomatoes} and {water}. Season with {salt}. Simmer over low-medium heat for forty-five minutes, stirring occasionally, until the sauce is thick and rich. Taste and adjust with salt and {brown sugar} if needed."
+        "text": "Add {tomato paste}, then {chopped tomatoes} and {water}. Season with {salt}. Simmer over low-medium heat for forty-five minutes, stirring occasionally, until the sauce is thick and rich. Taste and adjust with salt and {brown sugar} if needed.",
+        "durations": [
+          {
+            "seconds": 2700,
+            "text": "for forty-five minutes"
+          }
+        ]
       },
       {
         "text": "Toss {silken tofu} cubes with {kala namak} and {turmeric}. Nestle into the sauce along with {frozen peas} if using. Cover and heat on low for a few minutes until the tofu is warmed through and the peas have thawed."
@@ -1327,7 +1457,13 @@
         "text": "Place {tofu} cubes in a bag or bowl, add {potato starch}, and toss until every piece is evenly coated."
       },
       {
-        "text": "Heat {vegetable oil} in a large frying pan over high heat until shimmering. Add the tofu in a single layer and fry for three to four minutes per side until the coating is golden and crispy. Transfer to a plate lined with kitchen paper."
+        "text": "Heat {vegetable oil} in a large frying pan over high heat until shimmering. Add the tofu in a single layer and fry for three to four minutes per side until the coating is golden and crispy. Transfer to a plate lined with kitchen paper.",
+        "durations": [
+          {
+            "seconds": 240,
+            "text": "for three to four minutes"
+          }
+        ]
       },
       {
         "text": "While the tofu fries, combine {soy sauce}, {agave syrup}, and {water} in a small bowl. Grate in {ginger} and {garlic} and stir well."
@@ -1565,13 +1701,31 @@
         "text": "Place {frozen peas} in a bowl of boiling water to thaw."
       },
       {
-        "text": "Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for one and a half minutes, stirring regularly."
+        "text": "Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for one and a half minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 90,
+            "text": "for one and a half minutes"
+          }
+        ]
       },
       {
-        "text": "Add {cauliflower} florets, {red pepper} and {cumin seeds}. Cook for two minutes, stirring regularly."
+        "text": "Add {cauliflower} florets, {red pepper} and {cumin seeds}. Cook for two minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
-        "text": "Drain the peas. Add the peas along with {coconut milk}, {chopped tomatoes}, {curry powder}, {black pepper}, {salt} and {maple syrup}. Bring to the boil, then reduce to a simmer for two minutes."
+        "text": "Drain the peas. Add the peas along with {coconut milk}, {chopped tomatoes}, {curry powder}, {black pepper}, {salt} and {maple syrup}. Bring to the boil, then reduce to a simmer for two minutes.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
         "text": "Remove from the heat and stir in the {lime} juice."
@@ -1790,10 +1944,22 @@
     },
     "steps": [
       {
-        "text": "One day ahead — marinate the eggs: Soft-boil the {eggs} in salted water for six to seven minutes, then transfer to cold water and peel. Mix 150 ml {cold water}, 6 tbsp {soy sauce}, {sugar} and {rice vinegar} in a jar. Submerge the eggs, seal and refrigerate overnight."
+        "text": "One day ahead — marinate the eggs: Soft-boil the {eggs} in salted water for six to seven minutes, then transfer to cold water and peel. Mix 150 ml {cold water}, 6 tbsp {soy sauce}, {sugar} and {rice vinegar} in a jar. Submerge the eggs, seal and refrigerate overnight.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "for six to seven minutes"
+          }
+        ]
       },
       {
-        "text": "Crispy tofu: Pat the {smoked tofu} dry and crumble into small pieces. Heat {sesame oil} in a pan over medium-high heat. Add the tofu with 2 tbsp {soy sauce}, {ground ginger} and 1 tsp {crispy chili oil}. Fry for fifteen to twenty minutes, stirring occasionally, until golden and crispy. Set aside."
+        "text": "Crispy tofu: Pat the {smoked tofu} dry and crumble into small pieces. Heat {sesame oil} in a pan over medium-high heat. Add the tofu with 2 tbsp {soy sauce}, {ground ginger} and 1 tsp {crispy chili oil}. Fry for fifteen to twenty minutes, stirring occasionally, until golden and crispy. Set aside.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for fifteen to twenty minutes"
+          }
+        ]
       },
       {
         "text": "Nutty base: Whisk together {peanut butter}, {tahini}, 2 tbsp {soy sauce} and 2 tsp {crispy chili oil}. Thin with a small splash of water until pourable. Set aside."
@@ -2006,10 +2172,22 @@
     },
     "steps": [
       {
-        "text": "Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for one and a half minutes, stirring regularly."
+        "text": "Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for one and a half minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 90,
+            "text": "for one and a half minutes"
+          }
+        ]
       },
       {
-        "text": "Add {courgette} and {red pepper}. Cook for one minute, then add {tamari} and cook for another minute. Reduce heat to medium."
+        "text": "Add {courgette} and {red pepper}. Cook for one minute, then add {tamari} and cook for another minute. Reduce heat to medium.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          }
+        ]
       },
       {
         "text": "In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and half the {water}. Blend or whisk until smooth, then add to the pan."
@@ -2185,7 +2363,17 @@
         "text": "Finely chop {red onion} and {garlic}. Chop {mushrooms} reasonably finely."
       },
       {
-        "text": "Heat {vegetable oil} in a large pan over high heat. Add {red onion} and {garlic} and cook until they start to brown, about two to three minutes, stirring continuously. Add {mushrooms} and cook for two minutes."
+        "text": "Heat {vegetable oil} in a large pan over high heat. Add {red onion} and {garlic} and cook until they start to brown, about two to three minutes, stirring continuously. Add {mushrooms} and cook for two minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "about two to three minutes"
+          },
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
         "text": "Add {white wine} and most of the {thyme} leaves, and cook for another minute."
@@ -2371,10 +2559,22 @@
         "text": "Finely chop {red onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomatoes}. Drain and rinse {lentils}."
       },
       {
-        "text": "Heat {olive oil} in a large pot over high heat. Add {red onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for three minutes, stirring regularly."
+        "text": "Heat {olive oil} in a large pot over high heat. Add {red onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for three minutes, stirring regularly.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for three minutes"
+          }
+        ]
       },
       {
-        "text": "Add {chopped tomatoes}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomatoes}. Bring to the boil, then simmer until the pasta is cooked, about nine to eleven minutes. Remove from the heat."
+        "text": "Add {chopped tomatoes}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomatoes}. Bring to the boil, then simmer until the pasta is cooked, about nine to eleven minutes. Remove from the heat.",
+        "durations": [
+          {
+            "seconds": 660,
+            "text": "about nine to eleven minutes"
+          }
+        ]
       },
       {
         "text": "Pluck {basil} leaves and set aside. Finely chop the stalks and stir into the pot. Season with {black pepper} and a squeeze of {lemon} juice."
@@ -2559,16 +2759,44 @@
     },
     "steps": [
       {
-        "text": "Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about three to four minutes."
+        "text": "Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about three to four minutes.",
+        "durations": [
+          {
+            "seconds": 240,
+            "text": "about three to four minutes"
+          }
+        ]
       },
       {
-        "text": "Add {garlic} and {ginger paste}, saute for one minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for thirty seconds, stirring constantly."
+        "text": "Add {garlic} and {ginger paste}, saute for one minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for thirty seconds, stirring constantly.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          },
+          {
+            "seconds": 30,
+            "text": "for thirty seconds"
+          }
+        ]
       },
       {
-        "text": "Pour in {passata}, {water}, {chickpeas}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for twenty minutes, stirring occasionally, until the sauce thickens and darkens."
+        "text": "Pour in {passata}, {water}, {chickpeas}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for twenty minutes, stirring occasionally, until the sauce thickens and darkens.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for twenty minutes"
+          }
+        ]
       },
       {
-        "text": "Stir in {coconut milk} and {brown sugar}. Simmer for a further two to three minutes."
+        "text": "Stir in {coconut milk} and {brown sugar}. Simmer for a further two to three minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "two to three minutes"
+          }
+        ]
       },
       {
         "text": "Taste and adjust seasoning. Garnish with {coriander}."
@@ -2733,22 +2961,56 @@
         "text": "Dissolve {saffron} in 60 ml boiling water and set aside to bloom."
       },
       {
-        "text": "Heat 3 tbsp {vegetable oil} in a frying pan over medium heat. Add {parsley} and {mint} and fry for ten to fifteen minutes, stirring often, until darkened and fragrant. Set aside."
+        "text": "Heat 3 tbsp {vegetable oil} in a frying pan over medium heat. Add {parsley} and {mint} and fry for ten to fifteen minutes, stirring often, until darkened and fragrant. Set aside.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for ten to fifteen minutes"
+          }
+        ]
       },
       {
-        "text": "Heat the remaining {vegetable oil} in a large pot over medium heat. Add {onions} and cook for about ten minutes until translucent."
+        "text": "Heat the remaining {vegetable oil} in a large pot over medium heat. Add {onions} and cook for about ten minutes until translucent.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for about ten minutes"
+          }
+        ]
       },
       {
-        "text": "Add {ground turmeric} and {garlic}, stir for one minute, then add {celery} and cook for another five minutes."
+        "text": "Add {ground turmeric} and {garlic}, stir for one minute, then add {celery} and cook for another five minutes.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          },
+          {
+            "seconds": 300,
+            "text": "five minutes"
+          }
+        ]
       },
       {
-        "text": "Add {butter beans} and the fried herbs. Stir together for one minute."
+        "text": "Add {butter beans} and the fried herbs. Stir together for one minute.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          }
+        ]
       },
       {
         "text": "Pour in 700 ml boiling water, then add the {vegetable stock} cube, {lime juice}, and the bloomed saffron water. Stir to combine."
       },
       {
-        "text": "Cover and simmer on low heat for forty-five to sixty minutes, until the celery is tender. The stew should retain some liquid."
+        "text": "Cover and simmer on low heat for forty-five to sixty minutes, until the celery is tender. The stew should retain some liquid.",
+        "durations": [
+          {
+            "seconds": 3600,
+            "text": "for forty-five to sixty minutes"
+          }
+        ]
       },
       {
         "text": "Taste and season with {salt} and {black pepper}."
@@ -2889,19 +3151,43 @@
     },
     "steps": [
       {
-        "text": "Rinse {lentils} and cook in water until soft, about fifteen minutes. Drain any excess water."
+        "text": "Rinse {lentils} and cook in water until soft, about fifteen minutes. Drain any excess water.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "about fifteen minutes"
+          }
+        ]
       },
       {
         "text": "In a pan, heat {vegetable oil} and fry the {cumin seeds} until they start to pop, then add {onion} and cook until golden."
       },
       {
-        "text": "Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for two minutes, stirring often."
+        "text": "Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for two minutes, stirring often.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
-        "text": "Add the {chopped tomatoes} and cook for five minutes."
+        "text": "Add the {chopped tomatoes} and cook for five minutes.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for five minutes"
+          }
+        ]
       },
       {
-        "text": "Stir in the cooked lentils and simmer together for ten minutes."
+        "text": "Stir in the cooked lentils and simmer together for ten minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for ten minutes"
+          }
+        ]
       },
       {
         "text": "Season with {salt} and finish with a squeeze of {lemon} juice."
@@ -3083,16 +3369,34 @@
     },
     "steps": [
       {
-        "text": "Press {tofu} with a cloth or kitchen paper for at least fifteen minutes to remove excess moisture, then cut into 2 cm cubes."
+        "text": "Press {tofu} with a cloth or kitchen paper for at least fifteen minutes to remove excess moisture, then cut into 2 cm cubes.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "fifteen minutes"
+          }
+        ]
       },
       {
         "text": "Heat {vegetable oil} in a pan over high heat. Pan-fry the tofu until golden and crispy on all sides. Set aside."
       },
       {
-        "text": "In the same pan, fry the {cumin seeds} until they pop, then add {onions} and cook until deeply golden, about ten minutes."
+        "text": "In the same pan, fry the {cumin seeds} until they pop, then add {onions} and cook until deeply golden, about ten minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "about ten minutes"
+          }
+        ]
       },
       {
-        "text": "Add {garlic} and {ginger}, cook for two minutes, then add {turmeric}, {ground coriander} and {chilli flakes}. Stir well."
+        "text": "Add {garlic} and {ginger}, cook for two minutes, then add {turmeric}, {ground coriander} and {chilli flakes}. Stir well.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
         "text": "Add the {spinach} and let it wilt completely."
@@ -3101,10 +3405,22 @@
         "text": "Blend everything into a smooth sauce using a hand blender."
       },
       {
-        "text": "Stir in the {coconut cream} and simmer for five minutes."
+        "text": "Stir in the {coconut cream} and simmer for five minutes.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for five minutes"
+          }
+        ]
       },
       {
-        "text": "Add the tofu back in, season with {garam masala}, {nutmeg} and {salt}, and simmer for another five minutes. Finish with a squeeze of {lemon} juice."
+        "text": "Add the tofu back in, season with {garam masala}, {nutmeg} and {salt}, and simmer for another five minutes. Finish with a squeeze of {lemon} juice.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "five minutes"
+          }
+        ]
       }
     ],
     "serving_suggestions": "Serve with basmati rice or naan. A squeeze of lemon at the end brightens it up nicely.",
@@ -3297,19 +3613,49 @@
         "text": "Heat {vegetable oil} in a heavy-bottomed pan and fry the {cumin seeds} until they pop."
       },
       {
-        "text": "Add the {onions} and cook on medium heat for twelve to fifteen minutes until deep golden brown."
+        "text": "Add the {onions} and cook on medium heat for twelve to fifteen minutes until deep golden brown.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for twelve to fifteen minutes"
+          }
+        ]
       },
       {
-        "text": "Add {garlic} and {ginger}, cook for two minutes."
+        "text": "Add {garlic} and {ginger}, cook for two minutes.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
-        "text": "Add {turmeric}, {ground coriander}, {smoked paprika}, {chilli powder} and {tomato puree}. Stir well and cook for two minutes."
+        "text": "Add {turmeric}, {ground coriander}, {smoked paprika}, {chilli powder} and {tomato puree}. Stir well and cook for two minutes.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
       },
       {
-        "text": "Add the {chopped tomatoes} and cook for eight to ten minutes until the sauce thickens and the oil starts to separate slightly."
+        "text": "Add the {chopped tomatoes} and cook for eight to ten minutes until the sauce thickens and the oil starts to separate slightly.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for eight to ten minutes"
+          }
+        ]
       },
       {
-        "text": "Add the {kidney beans} and {vegetable stock}, stir well, cover and simmer on low heat for twenty to twenty-five minutes."
+        "text": "Add the {kidney beans} and {vegetable stock}, stir well, cover and simmer on low heat for twenty to twenty-five minutes.",
+        "durations": [
+          {
+            "seconds": 1500,
+            "text": "for twenty to twenty-five minutes"
+          }
+        ]
       },
       {
         "text": "Lightly mash a few beans with the back of a spoon to thicken the sauce further."
@@ -3442,10 +3788,22 @@
     },
     "steps": [
       {
-        "text": "Bring a pot of water to a boil. While waiting, prep the vegetables. Add {soba noodles} and cook for three to five minutes until tender. Drain and rinse with cold water."
+        "text": "Bring a pot of water to a boil. While waiting, prep the vegetables. Add {soba noodles} and cook for three to five minutes until tender. Drain and rinse with cold water.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for three to five minutes"
+          }
+        ]
       },
       {
-        "text": "Meanwhile, heat {sesame oil} in a skillet over medium heat. Add {garlic}, {mushrooms}, whites of the {bok choy}, whites of the {spring onion}, {white pepper} and {chilli flakes}. Cook for about five minutes until the mushrooms have released their liquid and it has cooked off."
+        "text": "Meanwhile, heat {sesame oil} in a skillet over medium heat. Add {garlic}, {mushrooms}, whites of the {bok choy}, whites of the {spring onion}, {white pepper} and {chilli flakes}. Cook for about five minutes until the mushrooms have released their liquid and it has cooked off.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about five minutes"
+          }
+        ]
       },
       {
         "text": "Add 2 tablespoons of {teriyaki sauce} and cook for one more minute."
@@ -3589,7 +3947,13 @@
         "text": "When ready to cook, check the batter consistency and add a splash of water if needed."
       },
       {
-        "text": "Heat a drizzle of {vegetable oil} in a pan over medium heat. Add the {mushrooms} and cook for five minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside."
+        "text": "Heat a drizzle of {vegetable oil} in a pan over medium heat. Add the {mushrooms} and cook for five minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for five minutes"
+          }
+        ]
       },
       {
         "text": "Heat a large flat pan over medium-high heat. Lightly grease with {vegetable oil}."
@@ -3598,7 +3962,13 @@
         "text": "Pour a ladleful of batter and quickly spread it as thinly as possible."
       },
       {
-        "text": "Cook for about two minutes until the edges lift and turn crispy. Flip and cook for one more minute."
+        "text": "Cook for about two minutes until the edges lift and turn crispy. Flip and cook for one more minute.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for about two minutes"
+          }
+        ]
       },
       {
         "text": "Spoon the mushroom filling onto the galette, fold the edges in, sprinkle with fresh {parsley}, and serve immediately."
@@ -3825,13 +4195,31 @@
     },
     "steps": [
       {
-        "text": "Heat a drizzle of {sesame oil} in a skillet over medium heat. Add {garlic} and {ginger}, stir for thirty seconds until fragrant."
+        "text": "Heat a drizzle of {sesame oil} in a skillet over medium heat. Add {garlic} and {ginger}, stir for thirty seconds until fragrant.",
+        "durations": [
+          {
+            "seconds": 30,
+            "text": "for thirty seconds"
+          }
+        ]
       },
       {
-        "text": "Add the crumbled {tofu}, {soy sauce} (1/2 tbsp), {miso paste}, and {chilli oil}. Fry for three to five minutes, stirring often, until the tofu is golden and crispy. Set aside."
+        "text": "Add the crumbled {tofu}, {soy sauce} (1/2 tbsp), {miso paste}, and {chilli oil}. Fry for three to five minutes, stirring often, until the tofu is golden and crispy. Set aside.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for three to five minutes"
+          }
+        ]
       },
       {
-        "text": "Steam or blanch the {cabbage} and {bean sprouts} for about three minutes until just tender. Set aside."
+        "text": "Steam or blanch the {cabbage} and {bean sprouts} for about three minutes until just tender. Set aside.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for about three minutes"
+          }
+        ]
       },
       {
         "text": "In a small bowl, mix the {Asian sesame paste}, remaining {soy sauce} (1 1/2 tbsp), {rice vinegar}, 1 tsp {sesame oil}, and {rayu} into a smooth paste."
@@ -4017,13 +4405,25 @@
         "text": "Crumble the pressed {tofu} with your hands into chunks — not too big, not too small."
       },
       {
-        "text": "Heat a large nonstick frying pan over medium-high heat with the {olive oil}. Once hot, add the tofu and fry until lightly browned, five to seven minutes. Stir occasionally but not too often to let the exterior crisp up."
+        "text": "Heat a large nonstick frying pan over medium-high heat with the {olive oil}. Once hot, add the tofu and fry until lightly browned, five to seven minutes. Stir occasionally but not too often to let the exterior crisp up.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "five to seven minutes"
+          }
+        ]
       },
       {
         "text": "Pour in the eggy sauce and continue frying until the scramble is as moist or dry as you like — pull it off the heat early for a soft, creamy scramble, or keep going for firmer, drier curds."
       },
       {
-        "text": "For extra creaminess, stir in the {vegan yogurt} and mix through."
+        "text": "For extra creaminess, stir in the {vegan yogurt} and mix through.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "amin"
+          }
+        ]
       },
       {
         "text": "Taste and add a pinch {kala namak} and {black pepper} if needed."
@@ -4298,13 +4698,31 @@
     },
     "steps": [
       {
-        "text": "Heat {olive oil} in a large pot over medium heat. Add the {onion} and cook for about five minutes until softened."
+        "text": "Heat {olive oil} in a large pot over medium heat. Add the {onion} and cook for about five minutes until softened.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about five minutes"
+          }
+        ]
       },
       {
-        "text": "Add the {garlic}, {red pepper}, {yellow pepper}, {carrots}, and {celery}. Cook for another five minutes, stirring occasionally."
+        "text": "Add the {garlic}, {red pepper}, {yellow pepper}, {carrots}, and {celery}. Cook for another five minutes, stirring occasionally.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "five minutes"
+          }
+        ]
       },
       {
-        "text": "Stir in the {ground cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for one minute to toast the spices."
+        "text": "Stir in the {ground cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for one minute to toast the spices.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for one minute"
+          }
+        ]
       },
       {
         "text": "Add the {tomato puree} and stir well."
@@ -4313,7 +4731,13 @@
         "text": "Pour in the {chopped tomatoes} and {vegetable stock}. Add the {kidney beans}, {black beans}, {red lentils}, and {sweetcorn}."
       },
       {
-        "text": "Bring to a boil, then reduce to a low simmer. Cover and cook for twenty-five to thirty minutes, stirring occasionally, until the lentils are soft and the chilli has thickened."
+        "text": "Bring to a boil, then reduce to a low simmer. Cover and cook for twenty-five to thirty minutes, stirring occasionally, until the lentils are soft and the chilli has thickened.",
+        "durations": [
+          {
+            "seconds": 1800,
+            "text": "for twenty-five to thirty minutes"
+          }
+        ]
       },
       {
         "text": "Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt} and {pepper}."
@@ -4495,19 +4919,43 @@
     },
     "steps": [
       {
-        "text": "Heat the {olive oil} in a large pot over medium heat. Add the {onion}, {carrot}, and {celery}, and cook for about five to seven minutes until softened."
+        "text": "Heat the {olive oil} in a large pot over medium heat. Add the {onion}, {carrot}, and {celery}, and cook for about five to seven minutes until softened.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "for about five to seven minutes"
+          }
+        ]
       },
       {
-        "text": "Add the {garlic}, {smoked paprika}, {ground cumin}, and {chilli flakes}. Stir for about a minute until fragrant."
+        "text": "Add the {garlic}, {smoked paprika}, {ground cumin}, and {chilli flakes}. Stir for about a minute until fragrant.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for about a minute"
+          }
+        ]
       },
       {
         "text": "Pour in the {chopped tomatoes} and {vegetable stock}. Give it a good stir and bring to a simmer."
       },
       {
-        "text": "Add the {white beans} and let it simmer for about ten minutes so the flavours come together."
+        "text": "Add the {white beans} and let it simmer for about ten minutes so the flavours come together.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for about ten minutes"
+          }
+        ]
       },
       {
-        "text": "Toss in the {kale} and stir it through. Let it cook for another five to seven minutes until the kale is tender but still has a bit of bite."
+        "text": "Toss in the {kale} and stir it through. Let it cook for another five to seven minutes until the kale is tender but still has a bit of bite.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "five to seven minutes"
+          }
+        ]
       },
       {
         "text": "Season with {salt}, {pepper}, and the {lemon} juice. Taste and adjust as needed."
@@ -4663,7 +5111,13 @@
         "text": "Add the {sparkling water} and give it a final mix."
       },
       {
-        "text": "Let the batter rest for an hour. It should have the consistency of liquid cream. If it's too thick after resting, add a splash of oat milk or water to thin it out."
+        "text": "Let the batter rest for an hour. It should have the consistency of liquid cream. If it's too thick after resting, add a splash of oat milk or water to thin it out.",
+        "durations": [
+          {
+            "seconds": 3600,
+            "text": "for an hour"
+          }
+        ]
       },
       {
         "text": "Heat a crêpe pan (or flat non-stick pan) on medium-high heat. Melt a small knob of {vegan butter} on the pan."
@@ -4672,7 +5126,13 @@
         "text": "Pour a thin layer of batter, swirling quickly to cover the whole surface."
       },
       {
-        "text": "Cook for about one to two minutes per side until lightly golden."
+        "text": "Cook for about one to two minutes per side until lightly golden.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for about one to two minutes"
+          }
+        ]
       },
       {
         "text": "Repeat, adding a little {vegan butter} to the pan between crêpes."
@@ -4864,13 +5324,31 @@
     },
     "steps": [
       {
-        "text": "Warm {olive oil} and {vegan butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for two to three minutes until fragrant."
+        "text": "Warm {olive oil} and {vegan butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for two to three minutes until fragrant.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for two to three minutes"
+          }
+        ]
       },
       {
-        "text": "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer two to three minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {black pepper}, and a pinch of {salt}."
+        "text": "Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer two to three minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {black pepper}, and a pinch of {salt}.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "two to three minutes"
+          }
+        ]
       },
       {
-        "text": "Add {gnocchi} and stir well. Cover and cook three to four minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken."
+        "text": "Add {gnocchi} and stir well. Cover and cook three to four minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken.",
+        "durations": [
+          {
+            "seconds": 240,
+            "text": "three to four minutes"
+          }
+        ]
       },
       {
         "text": "Stir in {spinach} until wilted. Mix in {lemon} juice if using. Taste and adjust seasoning."
@@ -4987,7 +5465,13 @@
         "text": "Brush the tops with the remaining {plant milk}."
       },
       {
-        "text": "Bake for twelve to fifteen minutes until well risen and golden."
+        "text": "Bake for twelve to fifteen minutes until well risen and golden.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for twelve to fifteen minutes"
+          }
+        ]
       },
       {
         "text": "Cool on a wire rack. Serve with jam and vegan butter, or vegan whipped cream if you're feeling fancy!"
@@ -5121,7 +5605,13 @@
         "text": "Cover {chickpeas} with plenty of water, add half the {baking soda}, and leave overnight."
       },
       {
-        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the other half of the {baking soda} and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for twenty to forty minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook."
+        "text": "Drain and rinse the {chickpeas}. Place them in a pan with the other half of the {baking soda} and stir over medium heat for a few minutes. Add enough water to cover them by a few centimeters, bring to a boil, and simmer for twenty to forty minutes until they're really soft with no bite at all. Skim off any foam and loose skins as they cook.",
+        "durations": [
+          {
+            "seconds": 2400,
+            "text": "for twenty to forty minutes"
+          }
+        ]
       },
       {
         "text": "Drain {chickpeas} over a bowl, saving the cooking water."
@@ -5133,7 +5623,13 @@
         "text": "Blitz until smooth, then taste and adjust. You might need more {tahini}, {garlic}, {lemon}, {salt}, or chickpea water. Don't be shy about adding more {tahini}. Blitz for a few minutes at least until it's really smooth and creamy."
       },
       {
-        "text": "Transfer to a bowl, cover the surface with cling film, and let it rest for at least thirty minutes."
+        "text": "Transfer to a bowl, cover the surface with cling film, and let it rest for at least thirty minutes.",
+        "durations": [
+          {
+            "seconds": 1800,
+            "text": "thirty minutes"
+          }
+        ]
       },
       {
         "text": "Serve drizzled with good {olive oil} and a squeeze of {lemon}. Optionally sprinkle with {ground cumin}, {paprika}, {sumac}, or {za'atar} for extra flavour."
@@ -5284,16 +5780,40 @@
     },
     "steps": [
       {
-        "text": "Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about eight minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like."
+        "text": "Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about eight minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.",
+        "durations": [
+          {
+            "seconds": 480,
+            "text": "for about eight minutes"
+          }
+        ]
       },
       {
-        "text": "Lower the heat to medium, add a little more oil if needed, and cook {onion} for about five minutes until soft and translucent."
+        "text": "Lower the heat to medium, add a little more oil if needed, and cook {onion} for about five minutes until soft and translucent.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about five minutes"
+          }
+        ]
       },
       {
-        "text": "Add {garlic} and {thyme}, stir for about a minute until fragrant."
+        "text": "Add {garlic} and {thyme}, stir for about a minute until fragrant.",
+        "durations": [
+          {
+            "seconds": 60,
+            "text": "for about a minute"
+          }
+        ]
       },
       {
-        "text": "Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about fifteen minutes, until the potato is completely tender."
+        "text": "Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about fifteen minutes, until the potato is completely tender.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "for about fifteen minutes"
+          }
+        ]
       },
       {
         "text": "Stir in {oat cream} and {soy sauce}."
@@ -5431,10 +5951,22 @@
         "text": "Pour the batter into a greased rectangular baking tin (about 20cm x 10cm)."
       },
       {
-        "text": "Bake for forty-five minutes, or until a skewer inserted into the center comes out clean."
+        "text": "Bake for forty-five minutes, or until a skewer inserted into the center comes out clean.",
+        "durations": [
+          {
+            "seconds": 2700,
+            "text": "for forty-five minutes"
+          }
+        ]
       },
       {
-        "text": "Let cool in the tin for ten minutes, then turn out onto a wire rack to cool completely."
+        "text": "Let cool in the tin for ten minutes, then turn out onto a wire rack to cool completely.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for ten minutes"
+          }
+        ]
       }
     ],
     "serving_suggestions": "Slice and enjoy with butter, or serve with tea or coffee. Even better the next day when the flavours have mellowed and the texture becomes more moist. Store wrapped in foil to keep fresh.",
@@ -5596,7 +6128,13 @@
     },
     "steps": [
       {
-        "text": "Heat {vegetable oil} in a large pot over medium heat. Add {onion} and cook for about five minutes until soft."
+        "text": "Heat {vegetable oil} in a large pot over medium heat. Add {onion} and cook for about five minutes until soft.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about five minutes"
+          }
+        ]
       },
       {
         "text": "Add {garlic}, {ginger}, {curry paste}, {ground cumin}, and {ground turmeric}. Stir and cook for another minute until fragrant."
@@ -5608,7 +6146,13 @@
         "text": "Pour in {coconut milk} and {vegetable stock}. Give it a good stir and bring to a gentle boil."
       },
       {
-        "text": "Reduce the heat, cover, and let it simmer for about twenty to twenty-five minutes, stirring occasionally, until both the pumpkin and potatoes are tender. The floury potatoes will start to break down and thicken the sauce beautifully."
+        "text": "Reduce the heat, cover, and let it simmer for about twenty to twenty-five minutes, stirring occasionally, until both the pumpkin and potatoes are tender. The floury potatoes will start to break down and thicken the sauce beautifully.",
+        "durations": [
+          {
+            "seconds": 1500,
+            "text": "for about twenty to twenty-five minutes"
+          }
+        ]
       },
       {
         "text": "Season with {salt} and {pepper}, then serve over rice (or with naan) topped with fresh {coriander} and a squeeze of {lime}."
@@ -5756,10 +6300,26 @@
         "text": "Transfer the batter to your prepared pan, and top with the reserved {banana} slices."
       },
       {
-        "text": "Bake for about forty-five minutes, then cover with foil and bake for ten to fifteen minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs."
+        "text": "Bake for about forty-five minutes, then cover with foil and bake for ten to fifteen minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.",
+        "durations": [
+          {
+            "seconds": 2700,
+            "text": "for about forty-five minutes"
+          },
+          {
+            "seconds": 900,
+            "text": "for ten to fifteen minutes"
+          }
+        ]
       },
       {
-        "text": "Let cool in the pan for ten minutes, then turn out onto a wire rack to cool completely before slicing."
+        "text": "Let cool in the pan for ten minutes, then turn out onto a wire rack to cool completely before slicing.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for ten minutes"
+          }
+        ]
       }
     ],
     "serving_suggestions": "Enjoy warm with vegan butter, or toasted the next day. Delicious for breakfast with coffee or as an afternoon snack. Try spreading with peanut butter or almond butter for extra protein.",
