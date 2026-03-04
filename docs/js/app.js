@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', async function() {
   showRatingBannerIfNeeded();
   setupPullToRefresh();
 
+  // Re-render chips when window is resized (dynamic visible count depends on container width)
+  let chipResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(chipResizeTimer);
+    chipResizeTimer = setTimeout(renderChips, 150);
+  });
+
   // Refresh recipes when returning to the app (e.g. PWA resume)
   document.addEventListener('visibilitychange', async () => {
     if (document.visibilityState === 'visible') {
@@ -161,8 +168,6 @@ function updateFilterURL() {
   history.replaceState(null, '', url);
 }
 
-const CHIPS_VISIBLE = 3;
-
 function renderChips() {
   let base = cachedAllRecipes;
   if (!showUntestedRecipes) base = base.filter(r => r.tested !== false);
@@ -203,31 +208,57 @@ function renderChipRow(container, counts, activeValue, type, expanded, setExpand
 
   if (sorted.length === 0) { container.innerHTML = ''; return; }
 
-  const visible = sorted.slice(0, CHIPS_VISIBLE);
-  const hidden = sorted.slice(CHIPS_VISIBLE);
-
-  // Promote active chip out of hidden into the last visible slot
-  if (activeValue && hidden.includes(activeValue)) {
-    const displaced = visible.splice(CHIPS_VISIBLE - 1, 1, activeValue)[0];
-    hidden.splice(hidden.indexOf(activeValue), 1);
-    hidden.unshift(displaced);
-  }
-
-  const makeChip = (value) =>
-    `<button class="chip${activeValue === value ? ' chip-active' : ''}" data-type="${type}" data-value="${value}">${value}</button>`;
+  const makeChip = (value, extra = '') =>
+    `<button class="chip${activeValue === value ? ' chip-active' : ''}${extra}" data-type="${type}" data-value="${value}">${value}</button>`;
 
   if (expanded) {
-    container.innerHTML =
-      sorted.slice(0, CHIPS_VISIBLE).map(v => makeChip(v)).join('') +
-      sorted.slice(CHIPS_VISIBLE).map((v, i) =>
-        `<button class="chip${activeValue === v ? ' chip-active' : ''} chip-new" style="animation-delay:${i * 40}ms" data-type="${type}" data-value="${v}">${v}</button>`
-      ).join('');
+    container.innerHTML = sorted.map((v, i) => makeChip(v, i > 0 ? ` chip-new" style="animation-delay:${(i - 1) * 40}ms` : '')).join('');
   } else {
-    container.innerHTML =
-      visible.map(v => makeChip(v)).join('') +
-      (hidden.length > 0
-        ? `<button class="chip chip-more">+${hidden.length} more</button>`
-        : '');
+    // Render all chips to measure actual widths, then trim to what fits
+    container.innerHTML = sorted.map(v => makeChip(v)).join('');
+
+    const chips = [...container.querySelectorAll('.chip')];
+    const containerWidth = container.clientWidth;
+
+    if (containerWidth > 0 && chips.length > 0) {
+      const GAP = 8; // 0.5rem gap between chips
+      const MORE_BTN_WIDTH = 96; // approximate width of "+N more" button
+
+      // Check if all chips fit without a "more" button
+      const totalWidth = chips.reduce((s, c, i) => s + c.offsetWidth + (i > 0 ? GAP : 0), 0);
+
+      if (totalWidth > containerWidth) {
+        // Find how many chips fit alongside a "more" button
+        let usedWidth = 0;
+        let cutoff = 0;
+
+        for (let i = 0; i < chips.length; i++) {
+          const chipWidth = chips[i].offsetWidth + GAP;
+          if (usedWidth + chipWidth + MORE_BTN_WIDTH + GAP > containerWidth) {
+            cutoff = Math.max(1, i);
+            break;
+          }
+          usedWidth += chipWidth;
+          cutoff = i + 1;
+        }
+
+        if (cutoff < sorted.length) {
+          const visible = sorted.slice(0, cutoff);
+          const hidden = sorted.slice(cutoff);
+
+          // Promote active chip out of hidden into the last visible slot
+          if (activeValue && hidden.includes(activeValue)) {
+            const displaced = visible.splice(cutoff - 1, 1, activeValue)[0];
+            hidden.splice(hidden.indexOf(activeValue), 1);
+            hidden.unshift(displaced);
+          }
+
+          container.innerHTML =
+            visible.map(v => makeChip(v)).join('') +
+            `<button class="chip chip-more">+${hidden.length} more</button>`;
+        }
+      }
+    }
   }
 
   container.querySelectorAll('.chip:not(.chip-more)').forEach(btn => {

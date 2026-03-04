@@ -398,14 +398,16 @@ test.describe('Chip Filters', () => {
     await expect(page.locator('#meal-type-chips .chip-more')).toHaveCount(0);
   });
 
-  test('cuisine chips rendered: american, french, indian visible; mediterranean behind "more"', async ({ page }) => {
+  test('cuisine chips rendered: all 4 visible in alphabetical order at default viewport', async ({ page }) => {
     // 4 cuisines total, all count=1 → alphabetical: american, french, indian, mediterranean
+    // At default (wide) viewport all 4 fit without a "more" button
     const chips = page.locator('#cuisine-chips .chip:not(.chip-more)');
-    await expect(chips).toHaveCount(3);
+    await expect(chips).toHaveCount(4);
     await expect(chips.nth(0)).toHaveText('american');
     await expect(chips.nth(1)).toHaveText('french');
     await expect(chips.nth(2)).toHaveText('indian');
-    await expect(page.locator('#cuisine-chips .chip-more')).toHaveText('+1 more');
+    await expect(chips.nth(3)).toHaveText('mediterranean');
+    await expect(page.locator('#cuisine-chips .chip-more')).toHaveCount(0);
   });
 
   test('clicking a meal type chip filters recipes', async ({ page }) => {
@@ -445,12 +447,20 @@ test.describe('Chip Filters', () => {
     await expect(mealChips.first()).toHaveText('dinner');
   });
 
-  test('"more" button appears when cuisine options exceed 3', async ({ page }) => {
+  test('"more" button appears when container is too narrow for all chips', async ({ page }) => {
+    // At 380px not all 4 cuisine chips fit — a "more" button should appear
+    await page.setViewportSize({ width: 380, height: 800 });
+    await page.goto('/');
+    await page.waitForSelector('.recipe-card');
     await expect(page.locator('#cuisine-chips .chip-more')).toBeVisible();
+    // Only 3 meal types exist — they all fit even at 380px
     await expect(page.locator('#meal-type-chips .chip-more')).toHaveCount(0);
   });
 
   test('clicking "more" reveals remaining chips with no collapse', async ({ page }) => {
+    await page.setViewportSize({ width: 380, height: 800 });
+    await page.goto('/');
+    await page.waitForSelector('.recipe-card');
     await page.locator('#cuisine-chips .chip-more').click();
 
     // All 4 cuisine chips now visible, no "more" button
@@ -462,18 +472,19 @@ test.describe('Chip Filters', () => {
   });
 
   test('active chip promoted from hidden when behind "more"', async ({ page }) => {
-    // Navigate with mediterranean active — it's behind "more" normally
+    // At 380px not all 4 cuisine chips fit — mediterranean is initially hidden
+    await page.setViewportSize({ width: 380, height: 800 });
     await page.goto('/?cuisine=mediterranean');
     await expect(page.locator('.recipe-card')).toHaveCount(1);
 
-    // Mediterranean should be promoted into the visible slots
+    // Mediterranean should be promoted into the visible chips
     const visibleChips = page.locator('#cuisine-chips .chip:not(.chip-more)');
-    await expect(visibleChips).toHaveCount(3);
     const texts = await visibleChips.allTextContents();
     expect(texts).toContain('mediterranean');
 
-    // The active chip should have chip-active class
+    // The active chip should have chip-active class and be visible (not behind "more")
     await expect(page.locator('#cuisine-chips .chip-active')).toHaveText('mediterranean');
+    await expect(page.locator('#cuisine-chips .chip-more')).toBeVisible();
   });
 
   test('cuisine and meal_type filters persist in URL and restore on reload', async ({ page }) => {
