@@ -36,10 +36,10 @@ US recipes often call this "tomato puree" — in European terms that's passata (
 
 # Instructions
 
-1. Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about 3-4 minutes.
-2. Add {garlic} and {ginger paste}, saute for 1 minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for 30 seconds, stirring constantly.
-3. Pour in {passata}, {water}, {chickpea}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for 20 minutes, stirring occasionally, until the sauce thickens and darkens.
-4. Stir in {coconut milk} and {brown sugar}. Simmer for a further 2-3 minutes.
+1. Heat {olive oil} in a large saucepan over medium heat. Cook {onion} until softened, about three to four minutes.
+2. Add {garlic} and {ginger paste}, saute for one minute until fragrant. Stir in {garam masala}, {ground cumin}, {turmeric}, {ground coriander}, and {black pepper}. Fry for thirty seconds, stirring constantly.
+3. Pour in {passata}, {water}, {chickpeas}, and {salt}. Bring to a rapid simmer, then reduce to medium-low. Simmer covered for twenty minutes, stirring occasionally, until the sauce thickens and darkens.
+4. Stir in {coconut milk} and {brown sugar}. Simmer for a further two to three minutes.
 5. Taste and adjust seasoning. Garnish with {coriander}.
 
 # Serving Suggestions

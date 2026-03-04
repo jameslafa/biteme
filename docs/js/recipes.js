@@ -1,6 +1,31 @@
 // Cache for loaded recipes
 let recipesCache = null;
 
+// Map of any ingredient form (singular/plural, lowercase) → canonical (lowercase)
+let ingredientVocabulary = null;
+
+async function loadIngredientVocabulary() {
+  if (ingredientVocabulary) return;
+  try {
+    const response = await fetch('ingredients.json');
+    if (!response.ok) return;
+    const data = await response.json();
+    ingredientVocabulary = new Map();
+    for (const [canonical, entry] of Object.entries(data.ingredients)) {
+      const key = canonical.toLowerCase();
+      ingredientVocabulary.set(key, key);
+      if (entry.plural) ingredientVocabulary.set(entry.plural.toLowerCase(), key);
+    }
+  } catch {
+    ingredientVocabulary = new Map();
+  }
+}
+
+function resolveIngredientRef(name) {
+  if (!ingredientVocabulary) return name.toLowerCase();
+  return ingredientVocabulary.get(name.toLowerCase()) ?? name.toLowerCase();
+}
+
 // Force a fresh fetch from the network, bypassing version check and localStorage cache
 // Returns true on success, false on failure
 async function forceRefreshRecipes() {
@@ -124,27 +149,26 @@ async function searchRecipes(query) {
   );
 }
 
+// Match a step ref name against an ingredient — resolves ref to canonical, then falls back to text
+function matchStepRef(ingredientName, item) {
+  const resolved = resolveIngredientRef(ingredientName);
+  if (item.canonical && item.canonical.toLowerCase() === resolved) {
+    return true;
+  }
+  const regex = new RegExp(`\\b${ingredientName}\\b`, 'i');
+  return regex.test(item.text);
+}
+
 // Parse step text and replace {ingredient} references with clickable links
 function parseStepText(stepText, ingredients, stepIndex) {
-  // Find all {ingredient} patterns
   return stepText.replace(/\{([^}]+)\}/g, (match, ingredientName) => {
-    // Search for ingredient in all categories
-    for (const [category, items] of Object.entries(ingredients)) {
-      const found = items.find(item => {
-        // Use word boundary matching for precise matches
-        const regex = new RegExp(`\\b${ingredientName}\\b`, 'i');
-        return regex.test(item.text);
-      });
-
+    for (const items of Object.values(ingredients)) {
+      const found = items.find(item => matchStepRef(ingredientName, item));
       if (found) {
-        // Create a unique ID for this ingredient reference
         const refId = `step-${stepIndex}-ingredient-${ingredientName.replace(/\s+/g, '-')}`;
-        // Return clickable styled reference
         return `<a href="#${refId}" class="ingredient-ref">${ingredientName}</a>`;
       }
     }
-
-    // Fallback: just return the ingredient name without braces
     return ingredientName;
   });
 }
@@ -152,24 +176,14 @@ function parseStepText(stepText, ingredients, stepIndex) {
 // Extract ingredients used in a step
 function getStepIngredients(stepText, ingredients) {
   const stepIngredients = [];
-  const matches = stepText.matchAll(/\{([^}]+)\}/g);
-
-  for (const match of matches) {
+  for (const match of stepText.matchAll(/\{([^}]+)\}/g)) {
     const ingredientName = match[1];
-
-    // Search for ingredient in all categories
-    for (const [category, items] of Object.entries(ingredients)) {
-      const found = items.find(item => {
-        // Use word boundary matching for precise matches
-        const regex = new RegExp(`\\b${ingredientName}\\b`, 'i');
-        return regex.test(item.text);
-      });
-
+    for (const items of Object.values(ingredients)) {
+      const found = items.find(item => matchStepRef(ingredientName, item));
       if (found && !stepIngredients.some(i => i.id === found.id)) {
         stepIngredients.push(found);
       }
     }
   }
-
   return stepIngredients;
 }

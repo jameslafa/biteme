@@ -33,14 +33,15 @@ Use tamari instead of soy sauce to make this gluten-free. You can swap the courg
 - 4 tbsp [peanut butter]
 - 2 tbsp [apple cider vinegar]
 - 2 tbsp [maple syrup]
-- 350 ml warm [water]
+- 300 ml warm [water], divided
 - A handful of [toasted nuts] for garnish <!-- no-scale -->
+- [salt] and [black pepper] to taste
 
 # Instructions
 
-1. Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onion}. Cook for 1 1/2 minutes, stirring regularly.
-2. Add {courgette} and {red pepper}. Cook for 1 minute, then add {tamari} and cook for another minute. Reduce heat to medium.
-3. In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and 150 ml of the {water}. Blend or whisk until smooth, then add to the pan.
-4. Pour in the remaining water along with the {chickpea}. Turn the heat back up to high and bring to the boil, then remove from the heat.
-5. Season with {salt} and {pepper} to taste.
-6. Divide between four bowls and top with {coriander}, {bean sprout} and {toasted nut}.
+1. Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for one and a half minutes, stirring regularly.
+2. Add {courgette} and {red pepper}. Cook for one minute, then add {tamari} and cook for another minute. Reduce heat to medium.
+3. In a blender or bowl, combine {peanut butter}, {apple cider vinegar}, {maple syrup} and half the {water}. Blend or whisk until smooth, then add to the pan.
+4. Pour in the remaining water along with the {chickpeas}. Turn the heat back up to high and bring to the boil, then remove from the heat.
+5. Season with {salt} and {black pepper} to taste.
+6. Divide between four bowls and top with {coriander}, {basil}, {bean sprouts} and {toasted nuts}.

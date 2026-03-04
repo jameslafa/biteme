@@ -31,7 +31,7 @@ This technique comes from Chinese and Korean cooking. The potato starch coating 
 # Instructions
 
 1. Place {tofu} cubes in a bag or bowl, add {potato starch}, and toss until every piece is evenly coated.
-2. Heat {vegetable oil} in a large frying pan over high heat until shimmering. Add the tofu in a single layer and fry for 3-4 minutes per side until the coating is golden and crispy. Transfer to a plate lined with kitchen paper.
+2. Heat {vegetable oil} in a large frying pan over high heat until shimmering. Add the tofu in a single layer and fry for three to four minutes per side until the coating is golden and crispy. Transfer to a plate lined with kitchen paper.
 3. While the tofu fries, combine {soy sauce}, {agave syrup}, and {water} in a small bowl. Grate in {ginger} and {garlic} and stir well.
 4. Pour the sauce into the same pan (or a smaller one) and bring to a vigorous boil over high heat. Add the tofu and toss until completely coated and the sauce has reduced slightly.
 5. Season with black pepper and serve immediately.

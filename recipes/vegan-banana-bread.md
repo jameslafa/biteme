@@ -17,8 +17,7 @@ Use very ripe bananas with lots of brown spots for the best flavour and natural 
 
 # Ingredients
 
-- 4 medium [bananas], mashed
-- Extra [banana] slices for topping
+- 4-5 medium [bananas], mashed, saving a few slices for topping
 
 - 60 ml [plant milk]
 
@@ -34,11 +33,11 @@ Use very ripe bananas with lots of brown spots for the best flavour and natural 
 # Instructions
 
 1. Preheat the oven to 180°C (160°C fan). Spray a 9×5 inch (23×13cm) loaf pan with nonstick spray, then dust with flour.
-2. In a large mixing bowl, roughly mash the bananas. Add {brown sugar}, {vegetable oil}, {vanilla extract}, and {plant milk}, and whisk to incorporate.
+2. In a large mixing bowl, roughly mash most of the {bananas}. Add {brown sugar}, {vegetable oil}, {vanilla extract}, and {plant milk}, and whisk to incorporate.
 3. Sift in {plain flour}, {baking soda}, {salt}, and {cinnamon}, and use a wooden spoon to mix until just combined. Don't overmix.
-4. Transfer the batter to your prepared pan, and top with extra banana slices.
-5. Bake for about 45 minutes, then cover with foil and bake for 10-15 minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.
-6. Let cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing.
+4. Transfer the batter to your prepared pan, and top with the reserved {banana} slices.
+5. Bake for about forty-five minutes, then cover with foil and bake for ten to fifteen minutes longer, until a toothpick inserted in the center comes out with just a couple of crumbs.
+6. Let cool in the pan for ten minutes, then turn out onto a wire rack to cool completely before slicing.
 
 # Serving Suggestions
 

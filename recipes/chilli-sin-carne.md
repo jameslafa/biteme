@@ -45,12 +45,12 @@ The cocoa powder adds a lovely depth without making it taste chocolatey. Add the
 
 # Instructions
 
-1. Heat {olive oil} in a large pot over medium heat. Add the {onion} and cook for about 5 minutes until softened.
-2. Add the {garlic}, {red pepper}, {yellow pepper}, {carrot}, and {celery}. Cook for another 5 minutes, stirring occasionally.
-3. Stir in the {ground cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for 1 minute to toast the spices.
+1. Heat {olive oil} in a large pot over medium heat. Add the {onion} and cook for about five minutes until softened.
+2. Add the {garlic}, {red pepper}, {yellow pepper}, {carrots}, and {celery}. Cook for another five minutes, stirring occasionally.
+3. Stir in the {ground cumin}, {smoked paprika}, {chilli powder}, {ground coriander}, {oregano}, and {cayenne pepper}. Cook for one minute to toast the spices.
 4. Add the {tomato puree} and stir well.
-5. Pour in the {chopped tomato} and {vegetable stock}. Add the {kidney bean}, {black bean}, {red lentil}, and {sweetcorn}.
-6. Bring to a boil, then reduce to a low simmer. Cover and cook for 25 to 30 minutes, stirring occasionally, until the lentils are soft and the chilli has thickened.
+5. Pour in the {chopped tomatoes} and {vegetable stock}. Add the {kidney beans}, {black beans}, {red lentils}, and {sweetcorn}.
+6. Bring to a boil, then reduce to a low simmer. Cover and cook for twenty-five to thirty minutes, stirring occasionally, until the lentils are soft and the chilli has thickened.
 7. Stir in the {cocoa powder}, squeeze in the {lime} juice, and season with {salt} and {pepper}.
 8. Taste and adjust the spices as needed. Let it sit for a few minutes before serving.
 

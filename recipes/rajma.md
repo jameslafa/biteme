@@ -37,12 +37,12 @@ Don't rush the onions — cooking them until deep golden brown is key to the ric
 
 # Instructions
 
-1. Heat {vegetable oil} in a heavy-bottomed pan and fry the {cumin seed} until they pop.
-2. Add the {onion} and cook on medium heat for 12–15 minutes until deep golden brown.
-3. Add {garlic} and {ginger}, cook for 2 minutes.
-4. Add {turmeric}, {ground coriander}, {smoked paprika}, {chilli powder} and {tomato puree}. Stir well and cook for 2 minutes.
-5. Add the {chopped tomato} and cook for 8–10 minutes until the sauce thickens and the oil starts to separate slightly.
-6. Add the {kidney bean} and {vegetable stock}, stir well, cover and simmer on low heat for 20–25 minutes.
+1. Heat {vegetable oil} in a heavy-bottomed pan and fry the {cumin seeds} until they pop.
+2. Add the {onions} and cook on medium heat for twelve to fifteen minutes until deep golden brown.
+3. Add {garlic} and {ginger}, cook for two minutes.
+4. Add {turmeric}, {ground coriander}, {smoked paprika}, {chilli powder} and {tomato puree}. Stir well and cook for two minutes.
+5. Add the {chopped tomatoes} and cook for eight to ten minutes until the sauce thickens and the oil starts to separate slightly.
+6. Add the {kidney beans} and {vegetable stock}, stir well, cover and simmer on low heat for twenty to twenty-five minutes.
 7. Lightly mash a few beans with the back of a spoon to thicken the sauce further.
 8. Season with {salt}, finish with {garam masala} and fresh {coriander}.
 

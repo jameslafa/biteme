@@ -33,9 +33,9 @@ date: 2026-02-12
 
 # Instructions
 
-1. Warm {olive oil} and {vegan butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for 2-3 minutes until fragrant.
-2. Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer 2-3 minutes to gently reduce. Stir in {sun-dried tomato}, {nutritional yeast}, {Italian seasoning}, {black pepper}, and a pinch of {salt}.
-3. Add {gnocchi} and stir well. Cover and cook 3-4 minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken.
+1. Warm {olive oil} and {vegan butter} in a wide skillet over medium heat. Add {onion} and {garlic}, cook for two to three minutes until fragrant.
+2. Pour in {coconut cream} and whisk in {cream cheese} until smooth. Simmer two to three minutes to gently reduce. Stir in {sun-dried tomatoes}, {nutritional yeast}, {Italian seasoning}, {black pepper}, and a pinch of {salt}.
+3. Add {gnocchi} and stir well. Cover and cook three to four minutes, stirring once or twice, until tender and the sauce is silky. If the sauce tightens too much, add splashes of {water} as needed. If it's too loose, let it bubble uncovered to thicken.
 4. Stir in {spinach} until wilted. Mix in {lemon} juice if using. Taste and adjust seasoning.
 
 # Serving Suggestions

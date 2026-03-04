@@ -32,11 +32,11 @@ Red lentils break down into a creamy texture, yellow lentils hold their shape a 
 
 # Instructions
 
-1. Rinse {lentil} and cook in water until soft, about 15 minutes. Drain any excess water.
-2. In a pan, heat {vegetable oil} and fry the {cumin seed} until they start to pop, then add {onion} and cook until golden.
-3. Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for 2 minutes, stirring often.
-4. Add the {chopped tomato} and cook for 5 minutes.
-5. Stir in the cooked lentils and simmer together for 10 minutes.
+1. Rinse {lentils} and cook in water until soft, about fifteen minutes. Drain any excess water.
+2. In a pan, heat {vegetable oil} and fry the {cumin seeds} until they start to pop, then add {onion} and cook until golden.
+3. Add {garlic}, {ginger}, {turmeric}, {garam masala} and {chilli}. Cook for two minutes, stirring often.
+4. Add the {chopped tomatoes} and cook for five minutes.
+5. Stir in the cooked lentils and simmer together for ten minutes.
 6. Season with {salt} and finish with a squeeze of {lemon} juice.
 
 # Serving Suggestions

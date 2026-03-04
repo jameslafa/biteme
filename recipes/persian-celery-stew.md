@@ -34,12 +34,12 @@ A dish from northern Iran where butter beans are a common plant-based swap for t
 # Instructions
 
 1. Dissolve {saffron} in 60 ml boiling water and set aside to bloom.
-2. Heat 3 tbsp {vegetable oil} in a frying pan over medium heat. Add {parsley} and {mint} and fry for 10-15 minutes, stirring often, until darkened and fragrant. Set aside.
-3. Heat the remaining {vegetable oil} in a large pot over medium heat. Add {onion} and cook for about 10 minutes until translucent.
-4. Add {ground turmeric} and {garlic}, stir for 1 minute, then add {celery} and cook for another 5 minutes.
-5. Add {butter bean} and the fried herbs. Stir together for 1 minute.
+2. Heat 3 tbsp {vegetable oil} in a frying pan over medium heat. Add {parsley} and {mint} and fry for ten to fifteen minutes, stirring often, until darkened and fragrant. Set aside.
+3. Heat the remaining {vegetable oil} in a large pot over medium heat. Add {onions} and cook for about ten minutes until translucent.
+4. Add {ground turmeric} and {garlic}, stir for one minute, then add {celery} and cook for another five minutes.
+5. Add {butter beans} and the fried herbs. Stir together for one minute.
 6. Pour in 700 ml boiling water, then add the {vegetable stock} cube, {lime juice}, and the bloomed saffron water. Stir to combine.
-7. Cover and simmer on low heat for 45-60 minutes, until the celery is tender. The stew should retain some liquid.
+7. Cover and simmer on low heat for forty-five to sixty minutes, until the celery is tender. The stew should retain some liquid.
 8. Taste and season with {salt} and {black pepper}.
 
 # Serving Suggestions

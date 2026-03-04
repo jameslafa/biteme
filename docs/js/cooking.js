@@ -15,6 +15,8 @@ let timerDismissed = false;
 let timerAudio = null;
 
 document.addEventListener('DOMContentLoaded', async function() {
+  await loadIngredientVocabulary();
+
   const urlParams = new URLSearchParams(window.location.search);
   const recipeId = urlParams.get('id');
 

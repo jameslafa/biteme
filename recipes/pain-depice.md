@@ -32,8 +32,8 @@ This delicious French spice bread is best enjoyed the next day when the flavours
 1. Preheat the oven to 180°C (160°C fan).
 2. In a large bowl, mix together {brown sugar}, {plain flour}, {honey}, {baking soda}, {orange blossom water}, {spice mix}, and {milk} until well combined and smooth.
 3. Pour the batter into a greased rectangular baking tin (about 20cm x 10cm).
-4. Bake for 45 minutes, or until a skewer inserted into the center comes out clean.
-5. Let cool in the tin for 10 minutes, then turn out onto a wire rack to cool completely.
+4. Bake for forty-five minutes, or until a skewer inserted into the center comes out clean.
+5. Let cool in the tin for ten minutes, then turn out onto a wire rack to cool completely.
 
 # Serving Suggestions
 

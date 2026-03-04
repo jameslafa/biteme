@@ -36,8 +36,8 @@ Nutritional yeast has a savoury, cheesy flavour and is available in most health 
 
 # Instructions
 
-1. Finely chop {red onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomato}. Drain and rinse {lentil}.
-2. Heat {olive oil} in a large pot over high heat. Add {red onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for 3 minutes, stirring regularly.
-3. Add {chopped tomato}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomato}. Bring to the boil, then simmer until the pasta is cooked, about 9-11 minutes. Remove from the heat.
+1. Finely chop {red onion} and {garlic}. Grate {carrot}, thinly slice {celery} and finely chop {chilli}. Halve {cherry tomatoes}. Drain and rinse {lentils}.
+2. Heat {olive oil} in a large pot over high heat. Add {red onion}, {garlic}, {carrot}, {celery}, {chilli} and a pinch of {salt}. Cook for three minutes, stirring regularly.
+3. Add {chopped tomatoes}, {vegetable stock}, {spaghetti} (break it to fit if needed -- an Italian panda might die though, so you might have it on your conscience), {tamari} and {cherry tomatoes}. Bring to the boil, then simmer until the pasta is cooked, about nine to eleven minutes. Remove from the heat.
 4. Pluck {basil} leaves and set aside. Finely chop the stalks and stir into the pot. Season with {black pepper} and a squeeze of {lemon} juice.
 5. Serve topped with the basil leaves and {nutritional yeast}.

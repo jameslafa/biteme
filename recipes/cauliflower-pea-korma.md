@@ -42,12 +42,12 @@ You can substitute broccoli for the cauliflower if you prefer. Remove the chilli
 
 # Instructions
 
-1. Place {frozen pea} in a bowl of boiling water to thaw.
-2. Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onion}. Cook for 1 1/2 minutes, stirring regularly.
-3. Add {cauliflower} florets, {red pepper} and {cumin seed}. Cook for 2 minutes, stirring regularly.
-4. Drain the peas. Add the peas along with {coconut milk}, {chopped tomato}, {curry powder}, {black pepper}, {salt} and {maple syrup}. Bring to the boil, then reduce to a simmer for 2 minutes.
+1. Place {frozen peas} in a bowl of boiling water to thaw.
+2. Heat {vegetable oil} in a large pan over high heat. Once hot, add {garlic}, {ginger}, {red chilli} and {spring onions}. Cook for one and a half minutes, stirring regularly.
+3. Add {cauliflower} florets, {red pepper} and {cumin seeds}. Cook for two minutes, stirring regularly.
+4. Drain the peas. Add the peas along with {coconut milk}, {chopped tomatoes}, {curry powder}, {black pepper}, {salt} and {maple syrup}. Bring to the boil, then reduce to a simmer for two minutes.
 5. Remove from the heat and stir in the {lime} juice.
-6. Serve topped with {coriander}, {flaked almond} and {chilli flakes}.
+6. Serve topped with {coriander}, {flaked almonds} and {chilli flakes}.
 
 # Serving Suggestions
 

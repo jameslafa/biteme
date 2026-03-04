@@ -13,7 +13,7 @@ date: 2026-02-10
 
 # Notes
 
-For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini, soak a small handful in warm water for 20 minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.
+For a deeper, more umami flavour, add a splash of dry white wine after cooking the onions and let it reduce before adding the stock. If you have dried porcini, soak a small handful in warm water for twenty minutes, chop them up and add them along with their soaking liquid for incredible depth. The soup keeps well in the fridge for 3-4 days and also freezes beautifully.
 
 # Ingredients
 
@@ -33,10 +33,10 @@ For a deeper, more umami flavour, add a splash of dry white wine after cooking t
 
 # Instructions
 
-1. Heat {olive oil} in a large pot over medium-high heat. Add {mushroom} and cook for about 8 minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.
-2. Lower the heat to medium, add a little more oil if needed, and cook {onion} for about 5 minutes until soft and translucent.
+1. Heat {olive oil} in a large pot over medium-high heat. Add {mushrooms} and cook for about eight minutes until they've released their liquid and turned golden brown. Set aside a small handful for garnish if you like.
+2. Lower the heat to medium, add a little more oil if needed, and cook {onion} for about five minutes until soft and translucent.
 3. Add {garlic} and {thyme}, stir for about a minute until fragrant.
-4. Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about 15 minutes, until the potato is completely tender.
+4. Add {potato} cubes and {vegetable stock}. Bring to a boil, then reduce to a simmer and cook for about fifteen minutes, until the potato is completely tender.
 5. Stir in {oat cream} and {soy sauce}.
 6. Blend the soup using a stick blender until smooth and creamy. If you set some mushrooms aside earlier, stir them back in now for a bit of texture.
 7. Season with {salt}, {pepper}, and a squeeze of {lemon} juice. The lemon really lifts the flavour.

@@ -42,13 +42,13 @@ Tantanmen is the Japanese take on Sichuan dan dan noodles. The key is the sesame
 
 # Instructions
 
-1. Heat a drizzle of {sesame oil} in a skillet over medium heat. Add {garlic} and {ginger}, stir for 30 seconds until fragrant.
-2. Add the crumbled {tofu}, {soy sauce} (1/2 tbsp), {miso paste}, and {chilli oil}. Fry for 3 to 5 minutes, stirring often, until the tofu is golden and crispy. Set aside.
-3. Steam or blanch the {cabbage} and {bean sprout} for about 3 minutes until just tender. Set aside.
+1. Heat a drizzle of {sesame oil} in a skillet over medium heat. Add {garlic} and {ginger}, stir for thirty seconds until fragrant.
+2. Add the crumbled {tofu}, {soy sauce} (1/2 tbsp), {miso paste}, and {chilli oil}. Fry for three to five minutes, stirring often, until the tofu is golden and crispy. Set aside.
+3. Steam or blanch the {cabbage} and {bean sprouts} for about three minutes until just tender. Set aside.
 4. In a small bowl, mix the {Asian sesame paste}, remaining {soy sauce} (1 1/2 tbsp), {rice vinegar}, 1 tsp {sesame oil}, and {rayu} into a smooth paste.
 5. In a saucepan, heat the {soy milk} and {vegetable stock} over medium-low heat. When it starts to bubble, reduce the heat to low and whisk in the sesame paste mixture until fully dissolved.
-6. Cook the {ramen noodle} according to the package instructions. Drain and divide between two bowls.
-7. Pour the hot broth over the noodles. Top with the spicy tofu crumbles, steamed vegetables, {sweetcorn}, {spring onion}, {peanut}, and {sesame seed}. Finish with extra {rayu} to taste.
+6. Cook the {ramen noodles} according to the package instructions. Drain and divide between two bowls.
+7. Pour the hot broth over the noodles. Top with the spicy tofu crumbles, steamed vegetables, {sweetcorn}, {spring onions}, {peanuts}, and {sesame seeds}. Finish with extra {rayu} to taste.
 
 # Serving Suggestions
 

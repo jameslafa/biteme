@@ -36,8 +36,8 @@ If you don't want to use wine, replace it with the same amount of vegetable stoc
 
 # Instructions
 
-1. Finely chop {red onion} and {garlic}. Chop {mushroom} reasonably finely.
-2. Heat {vegetable oil} in a large pan over high heat. Add {red onion} and {garlic} and cook until they start to brown, about 2-3 minutes, stirring continuously. Add {mushroom} and cook for 2 minutes.
+1. Finely chop {red onion} and {garlic}. Chop {mushrooms} reasonably finely.
+2. Heat {vegetable oil} in a large pan over high heat. Add {red onion} and {garlic} and cook until they start to brown, about two to three minutes, stirring continuously. Add {mushrooms} and cook for two minutes.
 3. Add {white wine} and most of the {thyme} leaves, and cook for another minute.
 4. Break {spaghetti} into the pan and add {oat milk}, {vegetable stock} and {salt}. Turn the heat up high and cover with a lid. Once boiling, remove the lid to let the liquid evaporate. Stir occasionally to prevent sticking. When the sauce has reduced and the pasta is cooked, stir in {nutritional yeast} and a squeeze of {lemon} juice.
 5. Season with {black pepper} and more salt if needed. Top each serving with the reserved {thyme} sprigs, extra nutritional yeast and {chilli flakes} if desired.

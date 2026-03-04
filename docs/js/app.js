@@ -13,6 +13,7 @@ let cuisineChipsExpanded = false;
 
 document.addEventListener('DOMContentLoaded', async function() {
   await initDB();
+  await loadIngredientVocabulary();
 
   // Restore filter state from localStorage
   showFavoritesOnly = localStorage.getItem('showFavoritesOnly') === 'true';

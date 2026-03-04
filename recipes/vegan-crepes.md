@@ -39,7 +39,7 @@ The resting time is important. It lets the flour fully hydrate and the gluten re
 5. Let the batter rest for an hour. It should have the consistency of liquid cream. If it's too thick after resting, add a splash of oat milk or water to thin it out.
 6. Heat a crêpe pan (or flat non-stick pan) on medium-high heat. Melt a small knob of {vegan butter} on the pan.
 7. Pour a thin layer of batter, swirling quickly to cover the whole surface.
-8. Cook for about 1-2 minutes per side until lightly golden.
+8. Cook for about one to two minutes per side until lightly golden.
 9. Repeat, adding a little {vegan butter} to the pan between crêpes.
 
 # Serving Suggestions

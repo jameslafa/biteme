@@ -32,16 +32,17 @@ Kala namak (black salt) has a high sulphur content that gives tofu a remarkably 
 - 175 g [silken tofu], drained and cut into cubes
 - 1/2-1 tsp [kala namak]
 - 1/2 tsp [turmeric]
+- 1/2 tsp [salt]
 - 60 g [frozen peas] (optional)
 - [parsley], fresh, chopped, to serve
 - [chilli oil], to serve (optional)
 
 # Instructions
 
-1. Heat {olive oil} in a large pan over low-medium heat. Add {onion} and fry until soft and translucent, about 8 minutes, stirring frequently. Add {garlic} and fry for 2 more minutes.
-2. If using {aubergine}, push the onion mixture to the side and fry the aubergine separately in a little oil until golden, about 8 minutes, then combine.
-3. Add {red pepper} and fry until soft, about 5 minutes. Stir in {ground cumin}, {smoked paprika}, and {chilli powder} and fry for 1 minute, stirring constantly.
-4. Add {tomato paste}, then {chopped tomato} and {water}. Season with 1/2 tsp salt. Simmer over low-medium heat for 45 minutes, stirring occasionally, until the sauce is thick and rich. Taste and adjust with salt and {brown sugar} if needed.
+1. Heat {olive oil} in a large pan over low-medium heat. Add {onion} and fry until soft and translucent, about eight minutes, stirring frequently. Add {garlic} and fry for two more minutes.
+2. If using an {aubergine}, push the onion mixture to the side and fry the aubergine separately in a little oil until golden, about eight minutes, then combine.
+3. Add {red pepper} and fry until soft, about five minutes. Stir in {ground cumin}, {smoked paprika}, and {chilli powder} and fry for one minute, stirring constantly.
+4. Add {tomato paste}, then {chopped tomatoes} and {water}. Season with {salt}. Simmer over low-medium heat for forty-five minutes, stirring occasionally, until the sauce is thick and rich. Taste and adjust with salt and {brown sugar} if needed.
 5. Toss {silken tofu} cubes with {kala namak} and {turmeric}. Nestle into the sauce along with {frozen peas} if using. Cover and heat on low for a few minutes until the tofu is warmed through and the peas have thawed.
 6. Serve straight from the pan, scattered with {parsley} and a drizzle of {chilli oil}.
 

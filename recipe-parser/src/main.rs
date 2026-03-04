@@ -561,22 +561,40 @@ fn extract_step_refs(steps_text: &str) -> Vec<String> {
     refs
 }
 
+/// Returns true if a step ref matches an ingredient.
+/// Mirrors JS matchStepRef logic:
+/// 1. Exact canonical match (e.g. {shallot} matches [shallots] whose canonical is "shallot")
+/// 2. Vocabulary lookup of the step ref (e.g. {frozen peas} → lookup → "frozen pea" == canonical)
+/// 3. Text fallback only for ingredients with no canonical
+fn step_ref_matches(ingredient: &Ingredient, r: &str, canonical_data: &CanonicalData) -> bool {
+    if let Some(canonical) = &ingredient.canonical {
+        // Exact canonical match
+        if canonical == r {
+            return true;
+        }
+        // Resolve step ref through vocabulary (handles plural step refs like {frozen peas})
+        if let Some(resolved) = canonical_data.lookup_ingredient(r) {
+            if resolved == canonical.as_str() {
+                return true;
+            }
+        }
+        false
+    } else {
+        // No canonical: fall back to substring match on ingredient text
+        ingredient.text.to_lowercase().contains(r)
+    }
+}
+
 /// Find ingredients not matched by any step reference.
-/// If the ingredient has a canonical tag, matches exactly on canonical; otherwise falls back
-/// to substring of ingredient text.
 fn find_unreferenced_ingredients(
     ingredients: &HashMap<String, Vec<Ingredient>>,
     step_refs: &[String],
+    canonical_data: &CanonicalData,
 ) -> Vec<String> {
     let mut unreferenced = Vec::new();
     for (category, items) in ingredients {
         for ingredient in items {
-            let is_referenced = if let Some(canonical) = &ingredient.canonical {
-                step_refs.iter().any(|r| r == canonical)
-            } else {
-                let text = ingredient.text.to_lowercase();
-                step_refs.iter().any(|r| text.contains(r.as_str()))
-            };
+            let is_referenced = step_refs.iter().any(|r| step_ref_matches(ingredient, r, canonical_data));
             if !is_referenced {
                 unreferenced.push(format!("{} ({})", ingredient.text, category));
             }
@@ -586,10 +604,10 @@ fn find_unreferenced_ingredients(
 }
 
 /// Find step refs that match more than one ingredient line (ambiguous references).
-/// Returns a list of (ref, matching ingredient texts) for each ambiguous ref.
 fn find_ambiguous_refs(
     ingredients: &HashMap<String, Vec<Ingredient>>,
     step_refs: &[String],
+    canonical_data: &CanonicalData,
 ) -> Vec<(String, Vec<String>)> {
     let mut ambiguous = Vec::new();
     let mut seen = std::collections::HashSet::new();
@@ -600,13 +618,7 @@ fn find_ambiguous_refs(
         let matches: Vec<String> = ingredients
             .values()
             .flat_map(|items| items.iter())
-            .filter(|ing| {
-                if let Some(canonical) = &ing.canonical {
-                    canonical == r
-                } else {
-                    ing.text.to_lowercase().contains(r.as_str())
-                }
-            })
+            .filter(|ing| step_ref_matches(ing, r, canonical_data))
             .map(|ing| ing.text.clone())
             .collect();
         if matches.len() > 1 {
@@ -878,7 +890,7 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
         // Check for unreferenced ingredients
         let all_steps_text = steps.iter().map(|s| s.text.as_str()).collect::<Vec<_>>().join(" ").to_lowercase();
         let step_refs = extract_step_refs(&all_steps_text);
-        let unreferenced_ingredients = find_unreferenced_ingredients(&ingredients, &step_refs);
+        let unreferenced_ingredients = find_unreferenced_ingredients(&ingredients, &step_refs, canonical);
 
         // Print warnings for unreferenced ingredients (non-blocking)
         if !unreferenced_ingredients.is_empty() {
@@ -890,7 +902,7 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
         }
 
         // Check for ambiguous refs (blocking)
-        let ambiguous_refs = find_ambiguous_refs(&ingredients, &step_refs);
+        let ambiguous_refs = find_ambiguous_refs(&ingredients, &step_refs, canonical);
         if !ambiguous_refs.is_empty() {
             let details: Vec<String> = ambiguous_refs
                 .iter()
