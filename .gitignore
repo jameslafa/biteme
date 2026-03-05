@@ -22,7 +22,7 @@ test-results/
 playwright-report/
 
 # Claude Code
-.claude/
+.claude/settings.local.json
 
 # Rust
 recipe-parser/target/
