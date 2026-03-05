@@ -159,14 +159,13 @@ function matchStepRef(ingredientName, item) {
   return regex.test(item.text);
 }
 
-// Parse step text and replace {ingredient} references with clickable links
-function parseStepText(stepText, ingredients, stepIndex) {
-  return stepText.replace(/\{([^}]+)\}/g, (match, ingredientName) => {
+// Parse step text and replace {ingredient} references with highlighted spans
+function parseStepText(stepText, ingredients) {
+  return stepText.replace(/\{([^}]+)\}/g, (_match, ingredientName) => {
     for (const items of Object.values(ingredients)) {
       const found = items.find(item => matchStepRef(ingredientName, item));
       if (found) {
-        const refId = `step-${stepIndex}-ingredient-${ingredientName.replace(/\s+/g, '-')}`;
-        return `<a href="#${refId}" class="ingredient-ref">${ingredientName}</a>`;
+        return `<span class="ingredient-ref">${ingredientName}</span>`;
       }
     }
     return ingredientName;

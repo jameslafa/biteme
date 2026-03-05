@@ -375,9 +375,6 @@
 .ingredient-ref {
   color: var(--primary-color);
   font-weight: 500;
-  text-decoration: none;
-  border-bottom: 2px dotted var(--accent-color);
-  padding-bottom: 1px;
 }
 
 /* Instructions List */
