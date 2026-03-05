@@ -1,6 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const testRecipes = require('./fixtures/recipes.test.json');
 
+const CURRY_STEPS = testRecipes.find(r => r.id === 'test-curry').steps.length;
+
 async function clearAppState(page) {
   await page.evaluate(async () => {
     localStorage.clear();
@@ -17,7 +19,6 @@ async function clearAppState(page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  // Mock the recipes.json fetch to return test data
   await page.route('**/recipes.json', route => {
     route.fulfill({
       status: 200,
@@ -38,7 +39,7 @@ test.describe('Recipe Detail', () => {
     await expect(page.locator('.recipe-description')).toContainText('simple test curry');
     await expect(page.locator('.ingredients')).toBeVisible();
     await expect(page.locator('.instructions')).toBeVisible();
-    await expect(page.locator('.instructions ol li')).toHaveCount(5);
+    await expect(page.locator('.instructions ol li')).toHaveCount(CURRY_STEPS);
   });
 
   test('favourite toggle persists on reload', async ({ page }) => {
@@ -50,36 +51,27 @@ test.describe('Recipe Detail', () => {
     await heartBtn.click();
     await expect(heartBtn).toHaveClass(/favorited/);
 
-    // Reload and check persistence
     await page.reload();
     await expect(page.locator('#favorite-btn')).toHaveClass(/favorited/);
   });
 
-  test('add to shopping list', async ({ page }) => {
+  test('shopping list toggle', async ({ page }) => {
     await page.goto('/recipe.html?id=test-curry');
 
     const cartBtn = page.locator('.add-to-cart').first();
     const badge = page.locator('#cart-count');
 
+    // Add
     await expect(cartBtn).not.toHaveClass(/in-cart/);
     await cartBtn.click();
     await expect(cartBtn).toHaveClass(/in-cart/);
     await expect(badge).toBeVisible();
     await expect(badge).toHaveText('1');
-  });
 
-  test('remove from shopping list', async ({ page }) => {
-    await page.goto('/recipe.html?id=test-curry');
-
-    const cartBtn = page.locator('.add-to-cart').first();
-
-    // Add then remove
-    await cartBtn.click();
-    await expect(cartBtn).toHaveClass(/in-cart/);
-
+    // Remove
     await cartBtn.click();
     await expect(cartBtn).not.toHaveClass(/in-cart/);
-    await expect(page.locator('#cart-count')).toBeHidden();
+    await expect(badge).toBeHidden();
   });
 
   test('start cooking navigates to cooking page', async ({ page }) => {
@@ -89,42 +81,35 @@ test.describe('Recipe Detail', () => {
     await expect(page).toHaveURL(/cooking\.html\?id=test-curry/);
   });
 
-  test('invalid recipe ID redirects to home', async ({ page }) => {
+  test('invalid recipe ID shows error', async ({ page }) => {
     await page.goto('/recipe.html?id=nonexistent-recipe');
     await expect(page.locator('.error')).toBeVisible();
     await expect(page.locator('.error')).toContainText('Recipe not found');
   });
 
-  test('displays notes and serving suggestions when present', async ({ page }) => {
+  test('notes and serving suggestions shown when present, hidden when not', async ({ page }) => {
+    // test-curry has both
     await page.goto('/recipe.html?id=test-curry');
+    await expect(page.locator('.recipe-notes')).toBeVisible();
+    await expect(page.locator('.recipe-notes h3')).toHaveText('Notes');
+    await expect(page.locator('.recipe-notes p')).toContainText('Make sure to use fresh spices');
+    await expect(page.locator('.serving-suggestions')).toBeVisible();
+    await expect(page.locator('.serving-suggestions h3')).toHaveText('Serving Suggestions');
+    await expect(page.locator('.serving-suggestions p')).toContainText('Serve over rice with naan bread');
 
-    // Check notes section is visible
-    const notesSection = page.locator('.recipe-notes');
-    await expect(notesSection).toBeVisible();
-    await expect(notesSection.locator('h3')).toHaveText('Notes');
-    await expect(notesSection.locator('p')).toContainText('Make sure to use fresh spices');
-
-    // Check serving suggestions section is visible
-    const servingSection = page.locator('.serving-suggestions');
-    await expect(servingSection).toBeVisible();
-    await expect(servingSection.locator('h3')).toHaveText('Serving Suggestions');
-    await expect(servingSection.locator('p')).toContainText('Serve over rice with naan bread');
-  });
-
-  test('hides notes and serving suggestions when not present', async ({ page }) => {
+    // test-salad has neither
     await page.goto('/recipe.html?id=test-salad');
-
-    // Test salad has no notes or serving suggestions
-    const notesSection = page.locator('.recipe-notes');
-    const servingSection = page.locator('.serving-suggestions');
-
-    await expect(notesSection).toBeHidden();
-    await expect(servingSection).toBeHidden();
+    await expect(page.locator('.recipe-notes')).toBeHidden();
+    await expect(page.locator('.serving-suggestions')).toBeHidden();
   });
 
-  test('shows cooking stats when sessions exist', async ({ page }) => {
-    // Seed a completed cooking session
+  test('cooking stats shown when sessions exist, hidden when not', async ({ page }) => {
+    // No sessions — stats hidden
     await page.goto('/recipe.html?id=test-curry');
+    await expect(page.locator('.recipe-name')).toBeVisible(); // page ready
+    await expect(page.locator('#cooking-stats')).toBeHidden();
+
+    // Seed a session and reload — stats visible
     await page.evaluate(async () => {
       await initDB();
       const tx = db.transaction(['cooking_sessions'], 'readwrite');
@@ -133,78 +118,44 @@ test.describe('Recipe Detail', () => {
       store.add({ recipe_id: 'test-curry', started_at: now - 1800000, completed_at: now });
       await new Promise(resolve => { tx.oncomplete = resolve; });
     });
-
-    // Reload to pick up the seeded session
     await page.goto('/recipe.html?id=test-curry');
-    await page.waitForTimeout(500);
-
-    const stats = page.locator('#cooking-stats');
-    await expect(stats).toBeVisible();
-    await expect(stats).toContainText('Cooked once');
-    await expect(stats).toContainText('30 min');
+    await expect(page.locator('#cooking-stats')).toBeVisible();
+    await expect(page.locator('#cooking-stats')).toContainText('Cooked once');
+    await expect(page.locator('#cooking-stats')).toContainText('30 min');
   });
 
-  test('hides cooking stats when no sessions', async ({ page }) => {
-    await page.goto('/recipe.html?id=test-curry');
-    await page.waitForTimeout(500);
-
-    const stats = page.locator('#cooking-stats');
-    await expect(stats).toBeHidden();
-  });
-
-  test('share button is visible', async ({ page }) => {
+  test('share button copies link to clipboard', async ({ page }) => {
     await page.goto('/recipe.html?id=test-curry');
 
     const shareBtn = page.locator('#share-btn');
     await expect(shareBtn).toBeVisible();
     await expect(shareBtn).toHaveAttribute('aria-label', 'Share recipe');
-  });
 
-  test('share button copies link when Web Share API is unavailable', async ({ page }) => {
-    await page.goto('/recipe.html?id=test-curry');
-
-    // Ensure navigator.share is not available (Playwright doesn't support it)
-    const hasShare = await page.evaluate(() => !!navigator.share);
-    expect(hasShare).toBe(false);
-
-    // Grant clipboard permissions and click share
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
-    await page.locator('#share-btn').click();
+    await shareBtn.click();
 
-    // Should show copy toast
     const toast = page.locator('.copy-toast');
     await expect(toast).toBeVisible();
     await expect(toast).toHaveText('Link copied!');
-
-    // Verify clipboard content
     const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
     expect(clipboardText).toContain('/r/test-curry.html');
-
-    // Toast should disappear
     await expect(toast).toBeHidden({ timeout: 5000 });
   });
 
-  test('shows similar recipes section when matches exist', async ({ page }) => {
-    await page.goto('/recipe.html?id=test-curry');
-
+  test('similar recipes shown when matches exist, empty when not', async ({ page }) => {
     // test-curry shares garlic + lentil with test-salad
+    await page.goto('/recipe.html?id=test-curry');
     const section = page.locator('#similar-recipes');
     await expect(section).toBeVisible();
     await expect(section.locator('h3')).toHaveText('Same ingredients, different dish');
-
     const items = section.locator('.similar-recipe-item');
-    await expect(items).toHaveCount(1); // only test-salad matches
+    await expect(items).toHaveCount(1);
     await expect(items.first()).toHaveAttribute('href', /recipe\.html\?id=test-salad/);
-    await expect(section.locator('.similar-recipe-name').first()).toHaveText('Test Salad');
     await expect(section.locator('.similar-recipe-shared').first()).toContainText('garlic');
     await expect(section.locator('.similar-recipe-shared').first()).toContainText('lentil');
-  });
 
-  test('hides similar recipes section when no matches exist', async ({ page }) => {
-    // test-toast has bread + butter — unique, no overlap with other recipes
+    // test-toast has no shared ingredients with any recipe
     await page.goto('/recipe.html?id=test-toast');
-
-    const section = page.locator('#similar-recipes');
-    await expect(section).toBeEmpty();
+    await expect(page.locator('#similar-recipes')).toBeEmpty();
   });
 });

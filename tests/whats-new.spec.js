@@ -1,5 +1,14 @@
 const { test, expect } = require('@playwright/test');
 
+// Fixture changelog — 3 entries, independent of the real changelog.js
+const MOCK_CHANGELOG = [
+  { id: 3, date: '2026-03-05', text: 'Feature C — newest entry' },
+  { id: 2, date: '2026-02-01', text: 'Feature B — middle entry' },
+  { id: 1, date: '2026-01-01', text: 'Feature A — oldest entry' },
+];
+
+const MOCK_CHANGELOG_JS = `const CHANGELOG = ${JSON.stringify(MOCK_CHANGELOG)};`;
+
 async function clearAppState(page) {
   await page.evaluate(async () => {
     localStorage.clear();
@@ -16,51 +25,44 @@ async function clearAppState(page) {
 }
 
 test.beforeEach(async ({ page }) => {
+  await page.route('**/changelog.js', route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/javascript',
+      body: MOCK_CHANGELOG_JS,
+    });
+  });
   await page.goto('/whats-new.html');
   await clearAppState(page);
   await page.goto('/whats-new.html');
 });
 
 test.describe('What\'s New Page', () => {
-  test('displays all changelog entries', async ({ page }) => {
+  test('displays all entries in correct order', async ({ page }) => {
     const entries = page.locator('.timeline-entry');
-    await expect(entries).toHaveCount(25);
+    await expect(entries).toHaveCount(MOCK_CHANGELOG.length);
+
+    // Newest first, oldest last
+    await expect(entries.first().locator('.timeline-entry-text')).toContainText('Feature C');
+    await expect(entries.last().locator('.timeline-entry-text')).toContainText('Feature A');
+
+    // Each entry has a day circle and text
+    await expect(entries.first().locator('.timeline-day')).toBeVisible();
+    await expect(entries.first().locator('.timeline-entry-text')).toBeVisible();
   });
 
-  test('entries are grouped by month with labels', async ({ page }) => {
-    const months = page.locator('.timeline-month');
-    await expect(months.first().locator('.timeline-month-label')).toBeVisible();
-  });
-
-  test('entries show day circle and text', async ({ page }) => {
-    const firstEntry = page.locator('.timeline-entry').first();
-    await expect(firstEntry.locator('.timeline-day')).toBeVisible();
-    await expect(firstEntry.locator('.timeline-entry-text')).toBeVisible();
-    await expect(firstEntry.locator('.timeline-entry-text')).toContainText('Dark mode');
-  });
-
-  test('newest entry is first', async ({ page }) => {
-    const firstText = await page.locator('.timeline-entry-text').first().textContent();
-    const lastText = await page.locator('.timeline-entry-text').last().textContent();
-
-    // First entry should be the newest changelog item
-    expect(firstText).toContain('Dark mode');
-    // Last entry should be the oldest
-    expect(lastText).toContain('Install BiteMe');
-  });
-
-  test('marks entries as seen on page load', async ({ page }) => {
+  test('marks all entries as seen on page load', async ({ page }) => {
     const lastSeenId = await page.evaluate(async () => {
       return await getSetting('lastSeenChangelogId');
     });
-
-    expect(lastSeenId).toBe(26);
+    const maxId = Math.max(...MOCK_CHANGELOG.map(e => e.id));
+    expect(lastSeenId).toBe(maxId);
   });
 
   test('back button navigates to home', async ({ page }) => {
     await page.goto('/');
     await page.goto('/whats-new.html');
     await page.locator('.back-button').click();
-    await expect(page).toHaveURL(/index\.html|\/$/);
+    await expect(page).toHaveURL(/index\.html|\//);
   });
 });

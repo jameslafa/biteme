@@ -30,103 +30,56 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Recipe Recommendations', () => {
-  test('returns similar recipes sorted by score', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-curry');
-    });
+  test('getSimilarRecipes: sorted by score, correct ingredients, all exclusions applied', async ({ page }) => {
+    const results = await page.evaluate(async () => getSimilarRecipes('test-curry'));
+
+    // Sorted by score, test-salad first (shares garlic + lentil)
     expect(results.length).toBeGreaterThan(0);
     expect(results[0].recipe.id).toBe('test-salad');
     for (let i = 1; i < results.length; i++) {
       expect(results[i].score).toBeLessThanOrEqual(results[i - 1].score);
     }
-  });
 
-  test('includes shared ingredient names', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-curry');
-    });
+    // Shared ingredients include garlic and lentil
     const salad = results.find(r => r.recipe.id === 'test-salad');
-    expect(salad).toBeTruthy();
     expect(salad.sharedIngredients).toContain('garlic');
     expect(salad.sharedIngredients).toContain('lentil');
-  });
 
-  test('excludes spices from similarity', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-curry');
-    });
+    // Does not include self, untested recipes, spices, or stoplist ingredients
+    expect(results.find(r => r.recipe.id === 'test-curry')).toBeUndefined();
+    expect(results.find(r => r.recipe.id === 'test-soup')).toBeUndefined();
     for (const r of results) {
       expect(r.sharedIngredients).not.toContain('curry powder');
-    }
-  });
-
-  test('does not recommend the recipe to itself', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-curry');
-    });
-    expect(results.find(r => r.recipe.id === 'test-curry')).toBeUndefined();
-  });
-
-  test('excludes untested recipes', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-curry');
-    });
-    expect(results.find(r => r.recipe.id === 'test-soup')).toBeUndefined();
-  });
-
-  test('returns empty array for recipe with no matches', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-toast');
-    });
-    expect(results).toEqual([]);
-  });
-
-  test('respects n parameter', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-curry', 1);
-    });
-    expect(results.length).toBeLessThanOrEqual(1);
-  });
-
-  test('returns empty array for unknown recipe', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('nonexistent');
-    });
-    expect(results).toEqual([]);
-  });
-
-  test('rare ingredients score higher than common ones', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      const recipes = await getRecipes();
-      const maps = buildRecipeIngredientMaps(recipes);
-      const idf = computeIDF(maps);
-      return {
-        garlicIdf: idf.get('garlic'),
-        onionIdf: idf.get('onion'),
-      };
-    });
-    // onion (only in test-curry) should have higher IDF than garlic (appears in more recipes)
-    expect(results.onionIdf).toBeGreaterThan(results.garlicIdf);
-  });
-
-  test('excludes stoplist ingredients from scoring', async ({ page }) => {
-    const results = await page.evaluate(async () => {
-      return await getSimilarRecipes('test-curry');
-    });
-    for (const r of results) {
       expect(r.sharedIngredients).not.toContain('vegetable oil');
       expect(r.sharedIngredients).not.toContain('olive oil');
       expect(r.sharedIngredients).not.toContain('butter');
     }
+
+    // Respects n parameter
+    const limited = await page.evaluate(async () => getSimilarRecipes('test-curry', 1));
+    expect(limited.length).toBeLessThanOrEqual(1);
   });
 
-  test('weights Fresh ingredients higher than Pantry', async ({ page }) => {
-    // Call buildRecipeIngredientMaps directly (showUntestedRecipes defaults to true)
-    // so the untested fixture recipes are included in the corpus for this test.
+  test('returns empty array for recipe with no matches and for unknown id', async ({ page }) => {
+    const [noMatches, unknown] = await page.evaluate(async () => [
+      await getSimilarRecipes('test-toast'),
+      await getSimilarRecipes('nonexistent'),
+    ]);
+    expect(noMatches).toEqual([]);
+    expect(unknown).toEqual([]);
+  });
+
+  test('IDF scoring: rare ingredients score higher; Fresh weighted above Pantry', async ({ page }) => {
     const result = await page.evaluate(async () => {
       const recipes = await getRecipes();
       const maps = buildRecipeIngredientMaps(recipes);
       const idf = computeIDF(maps);
+
+      // onion (only in test-curry) has higher IDF than garlic (in multiple recipes)
+      const garlicIdf = idf.get('garlic');
+      const onionIdf = idf.get('onion');
+
+      // Fresh ingredient sharer scores higher than Pantry ingredient sharer
       const targetMap = maps.get('test-curry');
       function scoreAgainst(recipeId) {
         const other = maps.get(recipeId);
@@ -139,11 +92,16 @@ test.describe('Recipe Recommendations', () => {
         }
         return s;
       }
+
       return {
+        onionIdf,
+        garlicIdf,
         freshSharerScore: scoreAgainst('test-fresh-sharer'),
         pantrySharerScore: scoreAgainst('test-pantry-sharer'),
       };
     });
+
+    expect(result.onionIdf).toBeGreaterThan(result.garlicIdf);
     expect(result.freshSharerScore).toBeGreaterThan(result.pantrySharerScore);
   });
 });

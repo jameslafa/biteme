@@ -25,4 +25,10 @@
 - `docs/js/changelog.js` — In-app "What's New" entries (increment ID, newest first)
 - `scripts/screenshots.js` — Playwright script for README screenshots
 - `tests/fixtures/recipes.test.json` — Test fixture for Playwright e2e tests (must match `recipes.json` structure)
-- `documentation/` — ROADMAP, ARCHITECTURE, DATA_STRUCTURE docs (update before committing features)
+- `documentation/` — ROADMAP, ARCHITECTURE, DATA_STRUCTURE, TESTING docs (update before committing features)
+
+# Start of session
+
+Before starting any task, read:
+- `documentation/ARCHITECTURE.md` — understand the current structure before touching code
+- `documentation/TESTING.md` — follow these guidelines whenever writing or modifying tests

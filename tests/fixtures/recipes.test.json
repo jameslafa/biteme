@@ -99,12 +99,6 @@
         "text": "Add {onion} and {garlic}"
       },
       {
-        "text": "Add {curry powder}"
-      },
-      {
-        "text": "Add {lentils} and {broth}"
-      },
-      {
         "text": "Simmer for 20 minutes",
         "durations": [
           {

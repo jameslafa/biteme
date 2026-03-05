@@ -4,9 +4,7 @@ const testRecipes = require('./fixtures/recipes.test.json');
 async function clearAppState(page) {
   await page.evaluate(async () => {
     localStorage.clear();
-    // Close any open DB connection from the app
     if (typeof db !== 'undefined' && db) db.close();
-    // Unregister service workers so they don't intercept test requests
     const registrations = await navigator.serviceWorker.getRegistrations();
     for (const reg of registrations) await reg.unregister();
     return new Promise((resolve) => {
@@ -27,37 +25,21 @@ test.describe('Diet Badges on Cards', () => {
         body: JSON.stringify(testRecipes)
       });
     });
-
     await page.goto('/');
     await clearAppState(page);
     await page.goto('/');
   });
 
-  test('diet badges appear on recipe cards', async ({ page }) => {
+  test('all test recipes show vegan badge', async ({ page }) => {
     const cards = page.locator('.recipe-card');
     await expect(cards).toHaveCount(3);
 
     for (let i = 0; i < 3; i++) {
-      const dietIcons = cards.nth(i).locator('.diet-icons');
-      await expect(dietIcons).toBeVisible();
-      await expect(dietIcons.locator('.diet-badge')).toHaveCount(1);
-    }
-  });
-
-  test('vegan badge shows V', async ({ page }) => {
-    const badge = page.locator('.recipe-card').first().locator('.diet-badge');
-    await expect(badge).toHaveText('V');
-    await expect(badge).toHaveAttribute('title', 'Vegan');
-  });
-
-  test('all test recipes show vegan badge', async ({ page }) => {
-    // No test recipes have gluten-free, so verify all three show vegan
-    const badges = page.locator('.recipe-card .diet-badge');
-    await expect(badges).toHaveCount(3);
-
-    for (let i = 0; i < 3; i++) {
-      await expect(badges.nth(i)).toHaveText('V');
-      await expect(badges.nth(i)).toHaveAttribute('title', 'Vegan');
+      const badge = cards.nth(i).locator('.diet-icons .diet-badge');
+      await expect(cards.nth(i).locator('.diet-icons')).toBeVisible();
+      await expect(badge).toHaveCount(1);
+      await expect(badge).toHaveText('V');
+      await expect(badge).toHaveAttribute('title', 'Vegan');
     }
   });
 });
@@ -69,36 +51,21 @@ test.describe('Settings Dietary Toggles', () => {
     await page.goto('/settings.html');
   });
 
-  test('dietary toggles are off by default', async ({ page }) => {
+  test('toggles off by default; toggling vegan saves and persists on reload', async ({ page }) => {
     const veganToggle = page.locator('#toggle-vegan');
     const glutenFreeToggle = page.locator('#toggle-gluten-free');
 
     await expect(veganToggle).not.toBeChecked();
     await expect(glutenFreeToggle).not.toBeChecked();
-  });
 
-  test('toggling vegan saves to IndexedDB', async ({ page }) => {
     await page.locator('#toggle-vegan + .toggle-slider').click();
 
-    const filters = await page.evaluate(async () => {
-      return await getSetting('dietaryFilters');
-    });
+    const filters = await page.evaluate(async () => getSetting('dietaryFilters'));
     expect(filters).toEqual(['vegan']);
-  });
-
-  test('dietary setting persists on reload', async ({ page }) => {
-    await page.locator('#toggle-vegan + .toggle-slider').click();
-
-    // Verify the setting was saved before reloading
-    const saved = await page.evaluate(async () => {
-      return await getSetting('dietaryFilters');
-    });
-    expect(saved).toEqual(['vegan']);
 
     await page.goto('/settings.html');
-
-    await expect(page.locator('#toggle-vegan')).toBeChecked();
-    await expect(page.locator('#toggle-gluten-free')).not.toBeChecked();
+    await expect(veganToggle).toBeChecked();
+    await expect(glutenFreeToggle).not.toBeChecked();
   });
 });
 
@@ -111,39 +78,26 @@ test.describe('Dietary Filtering on Home Page', () => {
         body: JSON.stringify(testRecipes)
       });
     });
-
     await page.goto('/');
     await clearAppState(page);
     await page.goto('/');
   });
 
-  test('vegan filter shows only vegan recipes', async ({ page }) => {
-    // Set dietary filter in IndexedDB
+  test('vegan filter shows only matching recipes; no recipes hidden when all match', async ({ page }) => {
     await page.evaluate(async () => {
       await setSetting('dietaryFilters', ['vegan']);
     });
 
     await page.goto('/');
 
-    // All visible recipe cards should have vegan diet badge
+    // All 3 test recipes are vegan — none should be hidden
     const cards = page.locator('.recipe-card');
+    await expect(cards.first()).toBeVisible();
     const count = await cards.count();
-    expect(count).toBeGreaterThan(0);
+    expect(count).toBe(3);
 
     for (let i = 0; i < count; i++) {
-      const badge = cards.nth(i).locator('.diet-badge');
-      await expect(badge).toHaveText('V');
+      await expect(cards.nth(i).locator('.diet-badge')).toHaveText('V');
     }
-  });
-
-  test('no recipes hidden when filter matches all', async ({ page }) => {
-    // All 3 test recipes are vegan, so vegan filter should show all 3
-    await page.evaluate(async () => {
-      await setSetting('dietaryFilters', ['vegan']);
-    });
-
-    await page.goto('/');
-
-    await expect(page.locator('.recipe-card')).toHaveCount(3);
   });
 });

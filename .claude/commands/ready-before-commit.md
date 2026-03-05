@@ -8,14 +8,14 @@ argument-hint: [optional commit message override]
 # Are we ready?
 
 Before committing, ensure everything is ready:
-- tests added and passing 
+- tests added, passing
 - code review
 - documentation updated
 
 ## Tests
 
 1. Review the changes and think about what use cases need to be tested.
-2. Add any missing tests.
+2. Add any missing tests, following the guides in documentation/TESTING.md
 3. Run all tests with `npm run test:all` and make sure they pass. We do not commit with any failing test, no matter if you think the failure is due to an earlier change.
    - If recipes were changed, also run `npm run lint-recipes`.
 
@@ -37,7 +37,7 @@ Check all the changes and verify that:
    - `ROADMAP.md` — to reflect progress
 2. If the changes are customer-facing and worth informing users about (if unsure, ask):
    - `docs/js/changelog.js` — increment ID, newest first
-   - `docs/how-it-works.html` — if the user-facing flow changed
+   - `docs/how-it-works.html` — if the user-facing flow changed. Make sure the styles always matching the app, the UI should look identical.
 
 ## Report
 
