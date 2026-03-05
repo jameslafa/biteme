@@ -346,3 +346,15 @@
     padding: var(--spacing-sm);
   }
 }
+
+/* ─── Dark mode overrides ────────────────────────────────────────────────── */
+:root[data-theme="dark"] .shopping-item {
+  background-color: transparent;
+  border-left-color: var(--accent-color);
+}
+
+:root[data-theme="dark"] .view-toggle-btn:hover:not(.active),
+:root[data-theme="dark"] .shopping-item:active,
+:root[data-theme="dark"] .remove-recipe:hover,
+:root[data-theme="dark"] .remove-item:hover,
+:root[data-theme="dark"] .clear-all:hover { background-color: transparent; }

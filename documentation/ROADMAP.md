@@ -66,6 +66,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Recipe Recommendations** — IDF-weighted ingredient similarity engine with category weighting (Fresh/Fridge > Pantry) and pantry stoplist (oils, flour, sugar, etc.); "Same ingredients, different dish" section on recipe detail page showing top 5 related recipes with shared ingredients; respects user's dietary and untested-recipe settings
 - **Meal Plan** — Weekly meal planner with IDF-weighted greedy recipe selection, seed recipe support, per-recipe servings, swap panel, shared ingredient callout, and per-ingredient cart buttons; active plan mode with cooked-state tracking (auto-synced from cooking sessions + manual toggle); home screen banner shows plan progress; back navigation uses `history.back()` on all sub-pages
 - **Ingredient display improvements** — Preparation text stripped from shopping contexts (shopping list, plan); first letter capitalised; text fractions (`1/2`) used consistently instead of unicode (`½`); attribution removed from merged shopping list view
+- **Dark Mode** — Light/Dark/Auto theme selector in Settings; Auto follows the OS preference via `prefers-color-scheme`; no flash of wrong theme on load (inline script sets `data-theme` before first paint); JS always resolves the theme so CSS only needs `[data-theme="dark"]` selectors
 
 ---
 

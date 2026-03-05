@@ -245,7 +245,7 @@
 
 #current-servings {
   font-weight: 500;
-  color: var(--primary-color);
+  color: var(--text-primary);
 }
 
 
@@ -588,6 +588,20 @@
   .recipe-description {
     font-size: 1rem;
   }
+}
+
+/* ─── Dark mode overrides ────────────────────────────────────────────────── */
+:root[data-theme="dark"] .ingredients li {
+  background-color: transparent;
+  border-left-color: var(--accent-color);
+}
+
+:root[data-theme="dark"] .icon-button:hover {
+  background-color: transparent;
+}
+
+:root[data-theme="dark"] .add-to-cart.in-cart {
+  background-color: transparent;
 }
 
 /* ─── Print ─────────────────────────────────────────────────────────────── */

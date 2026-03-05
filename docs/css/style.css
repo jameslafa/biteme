@@ -56,6 +56,23 @@ html {
   --radius-lg: 12px;
 }
 
+/* ─── Dark mode colours ─────────────────────────────────────────────────── */
+:root[data-theme="dark"] {
+  --background: #111827;
+  --surface: #1F2937;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --border: #374151;
+  --accent-light: #1A2E2A;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --meal-type-light: #1A2E2C;
+  --meal-type-hover: #1E3533;
+  --cuisine-light: #2A1E18;
+  --cuisine-hover: #2E2018;
+  --primary-alpha-20: rgba(107, 144, 128, 0.25);
+  --accent-light-alpha-30: rgba(26, 46, 42, 0.5);
+}
+
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
@@ -178,6 +195,7 @@ main {
   padding-right: 7.5rem;
   font-size: 0.95rem;
   font-weight: 300;
+  color: var(--text-primary);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background-color: var(--surface);
@@ -536,6 +554,17 @@ a.tag-meal-type {
   border-style: dashed;
 }
 
+/* Class-based chip variants — used outside of #meal-type-chips / #cuisine-chips (e.g. how-it-works mockups) */
+.chip.chip-meal-type { background: var(--meal-type-light); color: var(--meal-type-color); border-color: var(--meal-type-border); }
+.chip.chip-meal-type:hover { background: var(--meal-type-hover); border-color: var(--meal-type-color); }
+.chip.chip-active.chip-meal-type { background: var(--meal-type-color); color: var(--surface); border-color: var(--meal-type-color); }
+.chip.chip-active.chip-meal-type:hover { background: var(--meal-type-color); color: var(--surface); }
+
+.chip.chip-cuisine { background: var(--cuisine-light); color: var(--cuisine-color); border-color: var(--cuisine-border); }
+.chip.chip-cuisine:hover { background: var(--cuisine-hover); border-color: var(--cuisine-color); }
+.chip.chip-active.chip-cuisine { background: var(--cuisine-color); color: var(--surface); border-color: var(--cuisine-color); }
+.chip.chip-active.chip-cuisine:hover { background: var(--cuisine-color); color: var(--surface); }
+
 @keyframes chip-appear {
   from { opacity: 0; transform: scale(0.85); }
   to   { opacity: 1; transform: scale(1); }
@@ -671,6 +700,60 @@ footer a:hover {
 
 .placeholder h1 {
   margin-bottom: var(--spacing-md);
+}
+
+/* ─── Dark mode overrides ────────────────────────────────────────────────── */
+:root[data-theme="dark"] header { background: var(--surface); }
+
+:root[data-theme="dark"] .tag,
+:root[data-theme="dark"] .tag-cuisine,
+:root[data-theme="dark"] .tag-cuisine:hover,
+:root[data-theme="dark"] .tag-meal-type,
+:root[data-theme="dark"] .tag-meal-type:hover { background-color: transparent; }
+
+:root[data-theme="dark"] .tag-cuisine,
+:root[data-theme="dark"] .tag-cuisine:hover { color: var(--cuisine-border); }
+
+:root[data-theme="dark"] .tag-meal-type,
+:root[data-theme="dark"] .tag-meal-type:hover { color: var(--meal-type-border); }
+
+:root[data-theme="dark"] #meal-type-chips .chip,
+:root[data-theme="dark"] #meal-type-chips .chip:hover,
+:root[data-theme="dark"] .chip.chip-meal-type,
+:root[data-theme="dark"] .chip.chip-meal-type:hover {
+  background: transparent;
+  color: var(--meal-type-border);
+  border-color: var(--meal-type-border);
+}
+
+:root[data-theme="dark"] #cuisine-chips .chip,
+:root[data-theme="dark"] #cuisine-chips .chip:hover,
+:root[data-theme="dark"] .chip.chip-cuisine,
+:root[data-theme="dark"] .chip.chip-cuisine:hover {
+  background: transparent;
+  color: var(--cuisine-border);
+  border-color: var(--cuisine-border);
+}
+
+:root[data-theme="dark"] .back-button:hover,
+:root[data-theme="dark"] .shopping-cart-link:hover,
+:root[data-theme="dark"] .search-action-btn:hover,
+:root[data-theme="dark"] .favorite-button-small:hover,
+:root[data-theme="dark"] .rating-banner-close:hover,
+:root[data-theme="dark"] .install-close:hover,
+:root[data-theme="dark"] .drawer-button:hover,
+:root[data-theme="dark"] .drawer-close-btn:hover,
+:root[data-theme="dark"] .drawer-item:hover,
+:root[data-theme="dark"] .timeline-entry-link:hover { background-color: transparent; }
+
+:root[data-theme="dark"] .first-visit-nudge {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .step-number {
+  background: var(--border);
+  color: var(--text-primary);
 }
 
 .placeholder p {

@@ -8,7 +8,7 @@ argument-hint: [optional commit message override]
 # Are we ready?
 
 Before committing, ensure everything is ready:
-- tests added and passing
+- tests added and passing 
 - code review
 - documentation updated
 
@@ -16,7 +16,7 @@ Before committing, ensure everything is ready:
 
 1. Review the changes and think about what use cases need to be tested.
 2. Add any missing tests.
-3. Run all tests with `npm run test:all` and make sure they pass.
+3. Run all tests with `npm run test:all` and make sure they pass. We do not commit with any failing test, no matter if you think the failure is due to an earlier change.
    - If recipes were changed, also run `npm run lint-recipes`.
 
 ## Code review

@@ -578,3 +578,18 @@
     padding: var(--spacing-md);
   }
 }
+
+/* ─── Dark mode overrides ────────────────────────────────────────────────── */
+:root[data-theme="dark"] .step-ingredients-cooking {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .timer-bar {
+  background-color: var(--surface);
+  border-bottom-color: var(--border);
+}
+
+:root[data-theme="dark"] .time-badge {
+  background-color: var(--border);
+}

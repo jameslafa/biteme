@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>(function(){var t=localStorage.getItem('theme')||'auto';var d=t==='auto'?window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light':t;document.documentElement.setAttribute('data-theme',d);if(t==='auto')window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){if(localStorage.getItem('theme')==='auto')document.documentElement.setAttribute('data-theme',e.matches?'dark':'light');});})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Settings">
   <meta name="theme-color" content="#6B9080">
@@ -54,6 +55,20 @@
       </div>
 
       <div class="settings-section-label">Display</div>
+      <div class="settings-item">
+        <div class="settings-item-text">
+          <span class="settings-item-label">Theme</span>
+          <span class="settings-item-description">Choose light, dark, or follow your device setting</span>
+        </div>
+        <div class="theme-control">
+          <input type="radio" name="theme" id="theme-light" value="light">
+          <label for="theme-light">Light</label>
+          <input type="radio" name="theme" id="theme-auto" value="auto">
+          <label for="theme-auto">Auto</label>
+          <input type="radio" name="theme" id="theme-dark" value="dark">
+          <label for="theme-dark">Dark</label>
+        </div>
+      </div>
       <div class="settings-item">
         <div class="settings-item-text">
           <span class="settings-item-label">Show untested recipes</span>

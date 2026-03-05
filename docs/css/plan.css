@@ -760,3 +760,18 @@
     padding: var(--spacing-sm);
   }
 }
+
+/* ─── Dark mode overrides ────────────────────────────────────────────────── */
+:root[data-theme="dark"] .plan-ingredients li {
+  background-color: transparent;
+  border-left-color: var(--accent-color);
+}
+
+:root[data-theme="dark"] .plan-shared {
+  background: var(--surface);
+}
+
+:root[data-theme="dark"] .plan-seed-result:hover,
+:root[data-theme="dark"] .plan-n-btn:hover:not(.active),
+:root[data-theme="dark"] .plan-swap-alt:hover,
+:root[data-theme="dark"] .plan-ingredients .add-to-cart.in-cart { background-color: transparent; }

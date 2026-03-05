@@ -1,5 +1,6 @@
 // Changelog entries — newest first, incrementing IDs
 const CHANGELOG = [
+  { id: 26, date: '2026-03-05', text: 'Dark mode — choose Light, Dark, or Auto (follows your device) in Settings' },
   { id: 25, date: '2026-03-04', text: 'Print any recipe — tap the printer icon on the recipe page to get a clean, ink-friendly layout with printable ingredient checkboxes' },
   { id: 24, date: '2026-03-03', text: 'Cuisine and meal type filters are now always visible as chip rows — click any chip to filter instantly, with smart bidirectional narrowing and a "more" button for extra options' },
   { id: 23, date: '2026-03-03', text: 'Filter recipes by cuisine and meal type — use the new filter dropdowns to browse by indian, mediterranean, asian and more, or narrow to breakfast, lunch, dinner, and beyond' },

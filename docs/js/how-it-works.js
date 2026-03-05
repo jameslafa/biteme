@@ -48,7 +48,7 @@ const FEATURES = [
         label: 'Tap any chip to filter instantly — selecting a meal type narrows the cuisine row to only what\'s available:',
         html: `
           <div class="search-container" style="margin-bottom:var(--spacing-sm);">
-            <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
+            <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5rem;font-size:0.95rem;font-weight:300;color:var(--text-primary);border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
             <div class="search-actions">
               <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
                 ${icon('heart', 18)}
@@ -60,15 +60,15 @@ const FEATURES = [
           </div>
           <div style="display:flex;flex-direction:column;gap:0.5rem;">
             <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-              <button class="chip" style="background:var(--meal-type-color);color:var(--surface);border-color:var(--meal-type-color);" tabindex="-1">dinner</button>
-              <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">breakfast</button>
-              <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">lunch</button>
+              <button class="chip chip-active chip-meal-type" tabindex="-1">dinner</button>
+              <button class="chip chip-meal-type" tabindex="-1">breakfast</button>
+              <button class="chip chip-meal-type" tabindex="-1">lunch</button>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-              <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">indian</button>
-              <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">asian</button>
-              <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">french</button>
-              <button class="chip chip-more" style="border-color:var(--cuisine-border);" tabindex="-1">+2 more</button>
+              <button class="chip chip-cuisine" tabindex="-1">indian</button>
+              <button class="chip chip-cuisine" tabindex="-1">asian</button>
+              <button class="chip chip-cuisine" tabindex="-1">french</button>
+              <button class="chip chip-more chip-cuisine" tabindex="-1">+2 more</button>
             </div>
           </div>
         `
@@ -81,7 +81,7 @@ const FEATURES = [
     description: 'Hit the shuffle button next to the search bar and we\'ll pick a random recipe for you. It respects whatever filters you have active — including any meal type or cuisine chips you\'ve selected — and it\'s smart enough to favour recipes you haven\'t cooked yet, so you\'re more likely to discover something new.',
     mockupHTML: `
       <div class="search-container" style="margin-bottom:var(--spacing-sm);">
-        <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5rem;font-size:0.95rem;font-weight:300;border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
+        <input type="search" placeholder="Search recipes &amp; ingredients..." aria-label="Search" tabindex="-1" style="width:100%;padding:var(--spacing-sm) var(--spacing-md);padding-right:5rem;font-size:0.95rem;font-weight:300;color:var(--text-primary);border:1px solid var(--border);border-radius:var(--radius-sm);background-color:var(--surface);letter-spacing:0.01em;">
         <div class="search-actions">
           <button class="search-action-btn" tabindex="-1" aria-label="Show favourites only">
             ${icon('heart', 18)}
@@ -93,14 +93,14 @@ const FEATURES = [
       </div>
       <div style="display:flex;flex-direction:column;gap:0.5rem;">
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-          <button class="chip" style="background:var(--meal-type-color);color:var(--surface);border-color:var(--meal-type-color);" tabindex="-1">dinner</button>
-          <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">breakfast</button>
-          <button class="chip" style="background:var(--meal-type-light);color:var(--meal-type-color);border-color:var(--meal-type-border);" tabindex="-1">lunch</button>
+          <button class="chip chip-active chip-meal-type" tabindex="-1">dinner</button>
+          <button class="chip chip-meal-type" tabindex="-1">breakfast</button>
+          <button class="chip chip-meal-type" tabindex="-1">lunch</button>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-          <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">indian</button>
-          <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">asian</button>
-          <button class="chip" style="background:var(--cuisine-light);color:var(--cuisine-color);border-color:var(--cuisine-border);" tabindex="-1">french</button>
+          <button class="chip chip-cuisine" tabindex="-1">indian</button>
+          <button class="chip chip-cuisine" tabindex="-1">asian</button>
+          <button class="chip chip-cuisine" tabindex="-1">french</button>
         </div>
       </div>
     `
@@ -148,32 +148,30 @@ const FEATURES = [
         html: `
           <div class="serving-adjuster" style="margin-bottom:var(--spacing-sm);">
             <button tabindex="-1">−</button>
-            <span><span style="font-weight:500;color:var(--primary-color)">4</span> servings</span>
+            <span><span style="font-weight:500;">4</span> servings</span>
             <button tabindex="-1">+</button>
           </div>
-          <ul style="list-style:none;padding:0;">
-            <li class="ingredients" style="margin-top:0;">
-              <div style="padding:var(--spacing-sm);border-left:3px solid var(--accent-light);background-color:var(--accent-light-alpha-30);border-radius:var(--radius-sm);margin-bottom:var(--spacing-xs);">
-                <div class="ingredient-item">
-                  <div class="ingredient-checkbox">
-                    <input type="checkbox" checked tabindex="-1">
-                    <label style="text-decoration:line-through;color:var(--text-secondary);opacity:0.7;">400ml coconut milk</label>
-                  </div>
-                  <button class="add-to-cart" tabindex="-1" aria-label="Add to shopping list">
-                    ${icon('cart', 16)}
-                  </button>
+          <ul class="ingredients" style="margin-top:0;">
+            <li>
+              <div class="ingredient-item">
+                <div class="ingredient-checkbox">
+                  <input type="checkbox" checked tabindex="-1">
+                  <label style="text-decoration:line-through;color:var(--text-secondary);opacity:0.7;">400ml coconut milk</label>
                 </div>
+                <button class="add-to-cart" tabindex="-1" aria-label="Add to shopping list">
+                  ${icon('cart', 16)}
+                </button>
               </div>
-              <div style="padding:var(--spacing-sm);border-left:3px solid var(--accent-light);background-color:var(--accent-light-alpha-30);border-radius:var(--radius-sm);">
-                <div class="ingredient-item">
-                  <div class="ingredient-checkbox">
-                    <input type="checkbox" tabindex="-1">
-                    <label>3 tbsp green curry paste</label>
-                  </div>
-                  <button class="add-to-cart in-cart" tabindex="-1" aria-label="In shopping list">
-                    ${icon('cart', 16)}
-                  </button>
+            </li>
+            <li>
+              <div class="ingredient-item">
+                <div class="ingredient-checkbox">
+                  <input type="checkbox" tabindex="-1">
+                  <label>3 tbsp green curry paste</label>
                 </div>
+                <button class="add-to-cart in-cart" tabindex="-1" aria-label="In shopping list">
+                  ${icon('cart', 16)}
+                </button>
               </div>
             </li>
           </ul>
@@ -212,7 +210,7 @@ const FEATURES = [
     description: 'Bought a tin of coconut milk for tonight\'s curry? Scroll to the bottom of any recipe and you\'ll see a "Same ingredients, different dish" section — a list of other recipes that share those same ingredients. Plan your week around what you\'ve already bought, use everything up, and spend less at the shops.',
     mockupHTML: `
       <div style="margin-top:var(--spacing-xs);">
-        <h3 style="font-size:1.1rem;font-weight:400;color:var(--primary-color);border-bottom:2px solid var(--accent-light);padding-bottom:0.5rem;margin-bottom:var(--spacing-sm);letter-spacing:0.02em;">Same ingredients, different dish</h3>
+        <h3 style="font-size:1.1rem;font-weight:400;color:var(--primary-color);border-bottom:2px solid var(--accent-color);padding-bottom:0.5rem;margin-bottom:var(--spacing-sm);letter-spacing:0.02em;">Same ingredients, different dish</h3>
         <ul style="list-style:none;padding:0;">
           <li>
             <a class="similar-recipe-item" href="#" tabindex="-1" style="pointer-events:none;">

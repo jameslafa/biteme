@@ -287,6 +287,32 @@ Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="ca
 - Mockups stay visually correct when styles change — no separate screenshots or static images to maintain
 - Zero maintenance cost as the design evolves
 
+## Dark Mode / Theme System
+
+**Decision:** JS-driven `data-theme` attribute on `<html>`, always resolved at load time. CSS uses only `[data-theme="dark"]` selectors — no `@media (prefers-color-scheme)` in stylesheets.
+
+**How it works:**
+- User picks Light / Auto / Dark via a segmented control in Settings; preference stored in `localStorage('theme')`
+- An inline `<script>` immediately after `<meta charset>` (before any CSS link) reads `localStorage`, resolves "auto" via `matchMedia('(prefers-color-scheme: dark)')`, and sets `document.documentElement.setAttribute('data-theme', resolved)` — synchronously, before the first paint, preventing any flash of wrong theme
+- In Auto mode, a `matchMedia` `change` listener (also added in the inline script) updates `data-theme` live if the OS switches between light and dark while the app is open
+- `settings.js` exposes `resolveTheme()` and `applyTheme()` for programmatic changes; `applyTheme()` writes both `localStorage` and the attribute in one call
+
+**CSS palette:**
+- All colours are CSS custom properties on `:root` (light defaults) and overridden in `:root[data-theme="dark"]`
+- Dark palette: `--background: #111827`, `--surface: #1F2937`, `--text-primary: #F9FAFB`, `--text-secondary: #9CA3AF`, `--border: #374151`
+- Each CSS file has a `/* Dark mode overrides */` section at the bottom with its `[data-theme="dark"]` rules
+
+**Why JS-resolved, not pure CSS `@media`:**
+- `prefers-color-scheme` alone can't express a user-controlled Light/Dark/Auto preference — you need JS to store and apply the choice
+- Once JS is already resolving the theme, keeping `@media` blocks in CSS is redundant and doubles maintenance cost
+
+**Files:**
+- All 10 HTML pages: inline anti-FOUC script in `<head>` after `<meta charset>`
+- `docs/js/settings.js`: `resolveTheme()`, `applyTheme()`, segmented control event wiring
+- `docs/css/settings.css`: `.theme-control` segmented control styles
+- `docs/css/style.css`: `:root[data-theme="dark"]` variable block; global dark overrides
+- `docs/css/{recipe,shopping,cooking,plan}.css`: per-page dark overrides section
+
 ## Settings Page
 
 **Decision:** Dedicated settings page accessible from the side drawer
