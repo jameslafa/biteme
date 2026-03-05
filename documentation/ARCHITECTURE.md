@@ -1,484 +1,253 @@
 # Architecture Decisions
 
-This document captures key technical decisions made for the BiteMe project.
+This document captures key technical decisions for the BiteMe project. It is intended as session context — read it to understand how the app is structured and why key choices were made.
+
+---
 
 ## Recipe ID Strategy
 
-**Decision:** Use explicit ID field in markdown frontmatter
+**Decision:** Explicit slug IDs in markdown frontmatter (e.g. `thai-green-curry`)
 
-**Format:** Lowercase slugs with dashes (e.g., `thai-green-curry`)
+**Rationale:** Stable across renames, human-readable in URLs and discussions, easy to validate for uniqueness. UUID rejected for poor readability.
 
-**Rationale:**
-- Stable across recipe renames and file renames
-- Human-readable for debugging and discussions
-- Explicit declaration prevents ambiguity
-- Easy to validate for uniqueness
+**Stability guarantee:** ID never changes once set. Recipe name, filename, and ingredient order can all change without breaking favorites, notes, or ratings.
 
-**Implementation:**
-```markdown
 ---
-id: pad-thai
-name: Pad Thai
----
-```
-
-**Alternative considered:** UUID - Rejected due to poor readability and ugly URLs
-
-**Stability guarantee:**
-- ID never changes once set
-- Recipe name can be updated without breaking references
-- Filename can be changed without breaking references
-- Favorites, notes, and ratings remain linked to ID
 
 ## Ingredient ID Strategy
 
-**Decision:** Incremental IDs per recipe (1, 2, 3...)
+**Decision:** Incremental integers per recipe (1, 2, 3…)
 
-**Rationale:**
-- Simple and predictable
-- Easy to generate in Rust parser
-- Enables matching in shopping list
-- Allows showing shopping list state on recipe page
+**Rationale:** Simple and predictable. The shopping list stores `recipe_id + ingredient_id` pairs and looks up display text from recipe data — no text parsing or matching needed.
 
-**Implementation:**
-- Rust parser assigns IDs sequentially per recipe
-- IDs start at 1 for each recipe
-- Each ingredient gets a unique ID within its recipe
+**Trade-off:** Changing ingredient order changes IDs, which is acceptable for the simplicity gained.
 
-**Structure in JSON:**
-```javascript
-{
-  "ingredients": {
-    "Fresh": [
-      { "id": 1, "text": "2 cloves garlic, minced", "canonical": "garlic", "preparation": "minced",
-        "quantity": { "amount": 2, "unit": "cloves", "item": "garlic" } },
-      { "id": 2, "text": "1 onion, diced", "canonical": "onion", "preparation": "diced",
-        "quantity": { "amount": 1, "item": "onion" } }
-    ]
-  }
-}
-```
-
-**Shopping List Reference:**
-- Stores `recipe_id + ingredient_id` pair
-- Looks up ingredient text from recipe for display
-- No text parsing or matching needed
-
-**Trade-offs:**
-- Changing ingredient order changes IDs (acceptable for simplicity)
+---
 
 ## Canonical Ingredient Vocabulary
 
-**Decision:** Controlled vocabulary in `docs/ingredients.json` mapping ingredient names to their canonical singular forms, loaded by the Rust parser at build time.
+**Decision:** Controlled vocabulary (`docs/ingredients.json`) mapping ingredient names to canonical singular forms, applied by the Rust parser at build time.
 
-**Rationale:**
-- Shopping list merging requires a stable key to match the same ingredient across recipes (e.g. `2 cloves garlic, minced` and `3 cloves garlic, crushed` both → canonical `"garlic"`)
-- Free-form text matching is fragile; explicit author tagging with `[brackets]` is unambiguous
-- Plural/singular normalisation (eggs → egg) handled at parse time via the vocabulary
+**Rationale:** Shopping list merging needs a stable key to match the same ingredient across recipes. Free-form text matching is fragile; explicit bracket-tagging by recipe authors is unambiguous.
 
-**Implementation:**
-- Authors tag ingredient names in markdown: `2 cloves [garlic], minced`
-- The parser extracts the bracket text, normalises to singular canonical via `docs/ingredients.json`, and stores `canonical` + `preparation` as separate fields on each ingredient
-- `quantity.item` is set to the bracket text as the author wrote it (preserving natural plural/singular)
-- Step refs `{canonical}` match against the singular `canonical` field exactly — no fuzzy matching
+**How it works:**
+- Authors tag ingredient names with brackets: `2 cloves [garlic], minced`
+- The parser extracts the bracket text, normalises to a singular canonical, and stores `canonical` + `preparation` as separate fields on each ingredient
+- Step cross-references use `{canonical}` syntax and match exactly against the canonical field — no fuzzy matching
+- Each ingredient belongs to a section (Fresh, Fridge, Pantry, Condiments, Spices) and has an optional plural form, both defined in the vocabulary file
+- The linter rejects missing or unknown canonical tags
 
-**`docs/ingredients.json` structure:**
-```json
-{
-  "sections": ["Fresh", "Fridge", "Pantry", "Condiments", "Spices"],
-  "ingredients": {
-    "garlic": { "section": "Fresh" },
-    "tomato": { "plural": "tomatoes", "section": "Fresh" },
-    "olive oil": { "section": "Condiments" },
-    "chickpea": { "plural": "chickpeas", "section": "Pantry" }
-  },
-  "units": { "clove": "cloves", "stick": "sticks", "stalk": "stalks", ... }
-}
-```
-
-Each ingredient entry has a required `section` and an optional `plural`. The parser assigns each ingredient its section from this file at build time — recipe files contain a flat ingredient list with no section headers. Words in `units` belong before the bracket (`2 cloves [garlic]`), not inside it (`[garlic cloves]`). The linter errors on missing or unknown canonical tags.
+---
 
 ## Data Storage
 
-**Decision:** IndexedDB for local storage with future backend sync support
+**Decision:** IndexedDB for all local user data (favorites, notes, ratings, settings, cooking history)
 
-**Why IndexedDB:**
-- No backend required for MVP
-- Works offline
-- Sufficient for local-only features (favorites, notes, ratings)
-- Easy to sync with Firebase/Supabase later
+**Why not localStorage:** 5–10MB size cap and no indexing make it unsuitable. IndexedDB is async, quota-managed, and can sync with a backend later.
 
-**Alternative considered:** LocalStorage - Rejected due to 5-10MB limit and lack of indexing
+---
 
 ## Future Backend Sync
 
-**Decision:** Design data structures for eventual Firebase/Supabase sync
+**Decision:** Design data structures for eventual cloud sync from the start — timestamps, soft deletes, user/device IDs — without requiring a backend to work.
 
-**Key principles:**
-- Use timestamps for conflict resolution
-- Track sync status with `synced_at` field
-- Use soft deletes (flags instead of hard deletes)
-- Include `user_id` field (null for local-only)
-- Generate unique `device_id` for multi-device support
+All user data is local-first. Sync is additive, not required.
 
-**Sync strategy:**
-- Two-way sync: push local changes, pull remote changes
-- Conflict resolution: newest timestamp wins (`updated_at`)
-- Track sync state: `synced_at` timestamp (null = needs sync)
-- Incremental sync: only sync changed records
+---
 
 ## Recipe Parser (Rust)
 
-**Decision:** Build Rust CLI tool to parse markdown recipes into JSON
+**Decision:** Rust CLI that compiles markdown recipe files into `docs/recipes.json`
 
-**Responsibilities:**
-- Parse recipe markdown files
-- Validate recipe structure and required fields
-- Check for duplicate IDs
-- Generate `recipes.json` for the app
-- Run in GitHub Actions on PR
+**Responsibilities:** Parse and validate recipe markdown, check for duplicate IDs, assign ingredient IDs and sections, generate per-recipe OG HTML, run in GitHub Actions on PR.
 
-**Why Rust:**
-- Fast parsing for large recipe collections
-- Strong type safety for validation
-- Easy to run in GitHub Actions
-- Cross-platform CLI tool
+**Why Rust:** Fast, strongly typed validation, easy to run in CI, cross-platform.
+
+---
 
 ## No Backend (Initial)
 
 **Decision:** Static site with client-side JavaScript only
 
-**Rationale:**
-- Simple deployment (GitHub Pages, Netlify, Vercel)
-- No server costs
-- Fast and reliable
-- Easy for contributors to test locally
-- Backend can be added later without rewriting everything
+**Rationale:** Simple deployment (GitHub Pages), no server costs, easy for contributors to test locally. Backend can be added later without a rewrite.
 
-**Trade-offs:**
-- No community ratings (only personal)
-- No cross-device sync initially
-- Recipes must be bundled with the app
+**Trade-offs:** No community ratings or cross-device sync initially. Recipes are bundled with the app.
+
+---
 
 ## Recipe Caching & Freshness
 
-**Decision:** Three-layer caching with automatic refresh on app resume
+**Decision:** Three-layer caching (in-memory → localStorage → network) with manifest-based invalidation
 
-**Layers:**
-1. **In-memory cache** (`recipesCache` variable) — instant access during a session
-2. **localStorage** — persists across page reloads, keyed by manifest version
-3. **Network** — fetches fresh data when manifest version changes
+**How it works:**
+- A lightweight manifest file carries a version; recipe data is only re-fetched when the version changes
+- Checked on page load and on app resume (`visibilitychange`)
+- Pull-to-refresh forces a network fetch regardless of version
+- Recipe data bypasses the service worker cache — the SW handles the app shell (HTML, CSS, JS) on a different cadence
 
-**Freshness strategy:**
-- On page load: check `recipes-manifest.json` version against localStorage, fetch fresh if different
-- On app resume (`visibilitychange`): re-check manifest, clear in-memory cache and re-render if stale
-- On pull-to-refresh (swipe down from top): force-fetch both `recipes-manifest.json` and `recipes.json` with `cache: 'no-cache'`, bypassing the version check entirely — ensures the user always gets the latest recipes on demand
-- Recipe data (`recipes.json`, `recipes-manifest.json`) bypasses the service worker cache entirely
-
-**Why not service worker for recipes:**
-- Recipes change independently of app code
-- Manifest version check is lightweight and gives precise control
-- Service worker handles app shell (HTML, CSS, JS, icons) — different update cadence
-
-**Service worker update detection:**
-- Separate concern from recipe freshness
-- Toast notification on homepage when new SW is installed
-- Only on homepage to avoid interrupting cooking or other flows
+---
 
 ## Screen Wake Lock
 
-**Decision:** User-toggled wake lock in cooking mode, auto-enabled when timer starts
+**Decision:** User-toggled wake lock in cooking mode, auto-enabled when a timer starts
 
-**Implementation:**
-- Toggle button in cooking header (lightbulb icon) with active/inactive visual states
-- Wake Lock API (`navigator.wakeLock.request('screen')`) for Android/desktop Chrome
-- Silent looping video (`silent.mp4`) for iOS — video playback keeps the screen awake without interfering with audio routing (e.g. AirPods)
-- Re-acquires on `visibilitychange` when returning to the tab
-- Auto-enabled when a cooking timer starts (screen must stay on for the alarm)
+**Implementation:** Wake Lock API on Android/Chrome; a silent looping video on iOS (the only reliable way to prevent screen sleep without disrupting audio routing). Re-acquires automatically on tab focus.
+
+---
 
 ## Cooking Timer
 
 **Decision:** In-memory countdown timer with durations parsed at build time by the Rust parser
 
-**Duration parsing:**
-- Rust regex extracts durations from step text (e.g. "cook for 5 minutes", "simmer for 25 to 30 minutes")
-- Supports ranges with `-`, `to`, and en-dash `–` — uses the higher value
-- Stored in `recipes.json` as `step.durations[]` with `seconds` and `text` fields
-- Step text durations are wrapped as clickable time badges in cooking mode
+**How it works:**
+- The parser extracts time durations from step text and stores them as structured data (seconds + display label)
+- In cooking mode, recognised durations appear as tappable badges that pre-fill the timer
+- One timer at a time, never auto-starts, persists across step navigation
+- Audio alert + vibration on completion
+- iOS requires audio to be unlocked via a user gesture before it can play — handled on first timer start
 
-**Timer behavior:**
-- One timer at a time, persists across step navigation
-- Never auto-starts — user presses play manually
-- Pre-filled from the first duration in the current step, adjustable with ±1min/±5sec arrows
-- Toggle button in header (clock icon) to show/hide timer bar on any step
-- Audio alert (MP3) + vibration on completion, then auto-resets to suggestion
-
-**iOS audio unlock:**
-- `<audio>` element created on first Start press (user gesture)
-- Muted play/pause cycle unlocks the element for later unmuted playback
-- iOS ignores `volume=0` but respects `muted` property
-
-**Flicker prevention:**
-- During countdown ticks, only the time text is updated (not the full innerHTML)
-- Prevents DOM rebuild that causes button flash on every second
+---
 
 ## What's New / Changelog
 
-**Decision:** Client-side changelog with incremental IDs and IndexedDB tracking
+**Decision:** Client-side changelog with incremental integer IDs and IndexedDB tracking
 
 **How it works:**
-- `changelog.js` contains a simple array of entries, each with an incremental `id`, `date`, and `text`
-- On first visit, `lastSeenChangelogId` is set to the latest ID (no notification dot)
-- On subsequent visits, if the latest ID exceeds the stored value, a dot appears on the bell icon in the drawer
-- The drawer "What's New" link navigates to `whats-new.html`, a standalone page that renders entries in a timeline layout (shared with Cooking Log) grouped by month
-- Loading the page marks all entries as seen by storing the latest ID
+- `docs/js/changelog.js` contains an array of entries (id, date, text), newest first
+- The highest seen ID is stored in IndexedDB; a notification dot appears on the drawer bell when new entries exist
+- Visiting the page marks all entries as seen
+- IDs are plain integers — simple to compare, no coupling to app version
 
-**Why incremental IDs (not semver or dates):**
-- Simple integer comparison to detect unseen entries
-- No coupling to app version — changelog entries are independent of releases
-- Easy to add entries: just prepend with `id: previous + 1`
-
-**Why a separate `changelog.js` file:**
-- Cached by service worker alongside app shell
-- Easy to edit without touching app logic
-- Clear separation of content from code
+---
 
 ## Per-Recipe OG HTML
 
-**Decision:** Generate static HTML files with Open Graph and Twitter Card meta tags for each recipe
+**Decision:** Static HTML files generated by the Rust parser for each recipe, used for social sharing previews
 
-**Problem:** Sharing a recipe link on Telegram/Slack/iMessage showed generic app info because crawlers can't execute JavaScript to read recipe data from the SPA.
+**Problem:** Crawlers (Telegram, Slack, iMessage) can't execute JavaScript, so they can't read recipe data from the SPA — shared links showed generic app info.
 
-**Solution:** The Rust parser generates `docs/r/{recipe-id}.html` for each recipe alongside `recipes.json`. Each file contains:
-- OG tags (`og:title`, `og:description`, `og:image`, `og:url`, `og:site_name`)
-- Twitter Card tags (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`)
-- `<meta name="description">` for basic SEO
-- Body text with recipe name and description (required by some crawlers)
-- JavaScript redirect to `/recipe.html?id={recipe-id}`
+**Solution:** The parser generates `docs/r/{recipe-id}.html` per recipe with Open Graph and Twitter Card meta tags, plus a JS redirect to the full recipe page. Crawlers see the tags; users get redirected instantly.
 
-**Why JS redirect, not meta refresh or canonical:**
-Telegram's crawler follows both `<meta http-equiv="refresh">` and `<link rel="canonical">`, reading OG tags from the destination page instead of the current one. Since the SPA recipe page has no OG tags, Telegram would show no preview. A JS redirect is invisible to crawlers (they don't execute JavaScript) but works instantly for real users.
+**Why JS redirect (not `<meta>` refresh or canonical):** Some crawlers follow meta-refresh and canonical links, reading OG tags from the destination (the SPA) instead. JS redirects are invisible to crawlers.
 
-**Why static files, not server-side rendering:**
-- Consistent with the no-backend architecture
-- No new dependencies — just string formatting in Rust
-- Crawlers read the meta tags; real users get redirected via JS
-
-**Share URL format:** `https://biteme.ovh/r/{recipe-id}.html`
+---
 
 ## How It Works (Feature Guide)
 
-**Decision:** Static feature guide page with real UI mockups rendered from actual CSS classes
+**Decision:** Static feature guide page with live UI mockups using the real app's CSS classes
 
 **How it works:**
-- `how-it-works.js` defines 8 feature sections, each with an `id`, `title`, `description`, and mockup HTML (single or multiple per section)
-- Mockup HTML uses the same CSS classes as the real app (`.recipe-card`, `.timer-bar`, `.star-rating`, etc.)
-- The page imports `style.css`, `recipe.css`, `cooking.css`, `shopping.css`, `completion.css`, and `cooking-log.css` so mockups render with real styles
-- `.feature-mockup` container has `pointer-events: none` to prevent interaction
-- Each section has a deep-linkable anchor ID (e.g. `#timer`, `#cook`)
-- On load, sets `hasSeenHowItWorks` in IndexedDB settings
+- Feature sections are defined in `how-it-works.js`, each with a description and mockup HTML
+- Mockups use the same CSS classes as the real app — they always reflect current styling with zero maintenance cost
+- On first visit, a dismissible nudge banner on the home page links to this page
 
-**First-visit nudge:**
-- On the home page, `checkFirstVisitNudge()` checks `hasSeenHowItWorks` setting
-- If null (first visit), a dismissible banner links to the How It Works page
-- Dismissing the nudge or visiting the page sets the flag
-
-**Why real CSS classes for mockups:**
-- Mockups stay visually correct when styles change — no separate screenshots or static images to maintain
-- Zero maintenance cost as the design evolves
+---
 
 ## Dark Mode / Theme System
 
 **Decision:** JS-driven `data-theme` attribute on `<html>`, always resolved at load time. CSS uses only `[data-theme="dark"]` selectors — no `@media (prefers-color-scheme)` in stylesheets.
 
 **How it works:**
-- User picks Light / Auto / Dark via a segmented control in Settings; preference stored in `localStorage('theme')`
-- An inline `<script>` immediately after `<meta charset>` (before any CSS link) reads `localStorage`, resolves "auto" via `matchMedia('(prefers-color-scheme: dark)')`, and sets `document.documentElement.setAttribute('data-theme', resolved)` — synchronously, before the first paint, preventing any flash of wrong theme
-- In Auto mode, a `matchMedia` `change` listener (also added in the inline script) updates `data-theme` live if the OS switches between light and dark while the app is open
-- `settings.js` exposes `resolveTheme()` and `applyTheme()` for programmatic changes; `applyTheme()` writes both `localStorage` and the attribute in one call
+- User picks Light / Auto / Dark in Settings; preference stored in `localStorage`
+- An inline `<script>` in `<head>` (before any CSS link) reads the preference, resolves "auto" via `matchMedia`, and sets `data-theme` synchronously — preventing any flash of wrong theme on load
+- In Auto mode, a `matchMedia` change listener updates the attribute live if the OS theme changes
+- All colours are CSS custom properties; the dark palette overrides them under `[data-theme="dark"]`
+- Each CSS file has a dark mode overrides section at the bottom
 
-**CSS palette:**
-- All colours are CSS custom properties on `:root` (light defaults) and overridden in `:root[data-theme="dark"]`
-- Dark palette: `--background: #111827`, `--surface: #1F2937`, `--text-primary: #F9FAFB`, `--text-secondary: #9CA3AF`, `--border: #374151`
-- Each CSS file has a `/* Dark mode overrides */` section at the bottom with its `[data-theme="dark"]` rules
+**Why JS-resolved, not pure CSS `@media`:** `prefers-color-scheme` alone can't express a user-controlled Light/Dark/Auto choice. Once JS is resolving the theme anyway, `@media` blocks in CSS are redundant and double the maintenance cost.
 
-**Why JS-resolved, not pure CSS `@media`:**
-- `prefers-color-scheme` alone can't express a user-controlled Light/Dark/Auto preference — you need JS to store and apply the choice
-- Once JS is already resolving the theme, keeping `@media` blocks in CSS is redundant and doubles maintenance cost
-
-**Files:**
-- All 10 HTML pages: inline anti-FOUC script in `<head>` after `<meta charset>`
-- `docs/js/settings.js`: `resolveTheme()`, `applyTheme()`, segmented control event wiring
-- `docs/css/settings.css`: `.theme-control` segmented control styles
-- `docs/css/style.css`: `:root[data-theme="dark"]` variable block; global dark overrides
-- `docs/css/{recipe,shopping,cooking,plan}.css`: per-page dark overrides section
+---
 
 ## Settings Page
 
-**Decision:** Dedicated settings page accessible from the side drawer
+**Decision:** Dedicated settings page (not inline in the drawer)
 
-**How it works:**
-- `settings.html` with a simple toggle-based UI
-- Uses `getSetting()` / `setSetting()` from `db.js` for persistent preferences
-- Dietary filters: "Vegan only" and "Gluten-free only" toggles filter recipes by their `diet` field. Stored as `dietaryFilters` array in IndexedDB settings. Applied on home page load alongside other filters.
-- "Show untested recipes" toggle controls visibility of recipes marked with `tested: false` in frontmatter
-- Toggle state is read on home page load to filter the recipe list
+**How it works:** Toggle-based UI backed by `getSetting()` / `setSetting()` from `db.js`. Covers dietary filters (vegan, gluten-free), untested recipe visibility, and theme preference. All filters are applied on home page load.
 
-**Why a separate page (not inline in drawer):**
-- Clean separation — settings will grow over time
-- Consistent with other sub-pages (Cooking Log, What's New)
-- Avoids cluttering the drawer with controls
+**Why separate:** Settings will grow; a dedicated page is consistent with other sub-pages (Cooking Log, What's New) and avoids cluttering the drawer.
+
+---
 
 ## SVG Icon System
 
-**Decision:** Centralise all icons in a single `icons.js` file rather than duplicating inline SVGs across HTML and JS files.
+**Decision:** All icons centralised in `docs/js/icons.js`
 
 **How it works:**
-- `docs/js/icons.js` exports an `ICONS` object keyed by name; values are either a plain inner-SVG string (standard stroke icons) or a metadata object `{inner, viewBox?, solid?}` for icons with non-default viewBox or fill-based rendering
-- `icon(name, size=24, cls='')` helper builds a complete `<svg>` string — used in JS-generated HTML (e.g. recipe cards, timer controls)
-- Static HTML uses `<svg data-icon="name" …></svg>` shells; a `DOMContentLoaded` listener in `icons.js` injects `innerHTML` and updates `viewBox` for special icons
+- An `ICONS` object keyed by name; an `icon(name, size, cls)` helper builds complete SVG strings for use in JS-generated HTML
+- Static HTML uses `<svg data-icon="name">` shells that are hydrated on `DOMContentLoaded`
+- Some icons have non-default viewBox or use fill instead of stroke — handled via per-icon metadata
 
-**Special icon categories:**
-- *Special viewBox* (`timer-clock`, `bulb`): stored as `{viewBox, inner}` — injector overrides the default `viewBox="0 0 24 24"` on the shell element
-- *Solid/fill icons* (`tri-up`, `tri-down`, `play`, `pause`, `stop`): stored as `{solid: true, inner}` — no `fill="none"` or stroke attributes added to the wrapper
+**Why not an SVG sprite:** Icons appear both in static HTML and in JS string interpolation; a sprite only serves `<use>` references.
 
-**Why `icons.js` over an SVG sprite file:**
-- Icons are used both in static HTML (via `data-icon`) and in JS-generated HTML strings (via `icon()`); a sprite file only serves `<use>` references, not string interpolation
-- Single source of truth — one definition covers both usage patterns
+---
 
 ## Shopping List Merged View
 
-**Decision:** Two-view toggle (Merged / By recipe) on the shopping list, with Merged as the default.
+**Decision:** Two-view toggle (Merged / By recipe), Merged as default
 
-**Rationale:**
-- When shopping, users want a flat list — one line per ingredient, not one per recipe
-- By-recipe view is useful when managing the list (removing a recipe's items)
-- `canonical` field on every ingredient provides the stable key needed for cross-recipe grouping
+**Rationale:** When shopping, users want one line per ingredient across all recipes. By-recipe view is useful for managing or removing items.
 
 **How it works:**
-- `resolveAllItems()` loads all DB items, looks up the recipe and ingredient for each, and computes the serving ratio and scaled text
-- `buildMergedGroups()` groups by `ingredient.canonical` (falling back to `ingredient.text` for untagged ingredients), then sub-groups by unit. Items in the same canonical+unit sub-group have their amounts summed with `smartRound`
-- Each merged group renders as a single row with summed amount and the item name
-- Checked state is computed per group: all sources checked → checked; some → indeterminate (partial); none → unchecked. A checkbox click writes to all source DB items via `setShoppingListItemChecked`
-- View preference persisted in `localStorage('shopping_view')`; defaults to `'merged'`
+- Items are grouped by canonical ingredient key, then sub-grouped by unit; amounts are summed within each sub-group
+- When the same canonical appears with different units across recipes, they render on one line with amounts listed separately
+- Checkbox state per group reflects all source items: checked if all are checked, indeterminate if some are
+- View preference is persisted in localStorage
 
-**Multi-unit display:**
-When the same canonical appears with different units across recipes (e.g. `1 tin` + `250 g` lentils), they stay as separate unit sub-groups and are rendered as a single line: `lentils (1 tin + 250 g)`.
-
-**Unitless fallback:**
-If a single-source sub-group has no unit (likely a parser data quality issue where the unit was lost), the original `ingredient.text` is used as the display label rather than a bare number.
+---
 
 ## Meal Plan
 
-**Decision:** IDF-weighted greedy set selection, reusing the recommendation engine's ingredient maps and IDF scores. No backend — everything computed client-side on demand.
+**Decision:** IDF-weighted greedy recipe selection, client-side, reusing the recommendation engine
 
-**Algorithm:**
-1. Precompute all C(R,2) pairwise ingredient-overlap scores from the same `ingredientMaps` and `idf` used by the recommendation engine: `pairScore(a,b) = Σ IDF(canonical) × max(weight_a, weight_b)` for each shared canonical
-2. Seed selection: if a seed recipe is provided, fix it as the first element and pick the best companion from the pairwise matrix; otherwise pick the highest-scoring pair
-3. Greedy extension: add one recipe at a time, choosing the candidate that maximises total pairwise score with the current set
+**How it works:**
+- Given an optional seed recipe and a target count, the algorithm greedily picks recipes that maximise shared ingredient overlap (same IDF scoring as recommendations)
+- Two modes: Planning (interactive form, live suggestions) and Active (saved plan with cooked-state tracking)
+- The finalised plan is saved to localStorage; active mode is entered when the user confirms
+- Cooked state per recipe is three-valued: auto-detected from cooking sessions, manually overridden by the user, or unset
+- The home page shows a progress banner when an active plan has uncooked recipes
 
-**Ingredient list:**
-- `getMergedIngredients()` builds a flat list of unique canonicals across all plan recipes, grouped by category, sorted alphabetically within each category, excluding stoplist ingredients
-- Each item has `sources[]` — one entry per `(recipeId, ingredientId)` pair across the plan (same canonical may appear in multiple recipes)
-- Preparation text is stripped from display (`omitPreparation: true`)
-- Per-ingredient cart buttons add/remove all sources for that canonical to/from the shopping list; `in-cart` state is derived from IndexedDB on render
-
-**Seed recipe UI:**
-- Native `<select>` with `<optgroup>` sections: a disabled placeholder, "Any recipe", Favourites (up to 5), Last cooked (up to 5, deduped), and "Let me choose…" which reveals a text search input
-- `?seed=recipeId` URL param from recipe detail page pre-selects a recipe safely (injects the option if not yet in the select)
-
-**Two-mode state machine:**
-- **Planning mode**: the 3-step form is shown; suggestions are generated live as the user picks a seed/N/servings
-- **Active mode**: entered when the user clicks "Save this plan"; shows active cards with cooked-state tracking
-- `plan_finalized_at` (localStorage timestamp) is the boundary: present → show active mode on load
-- `cooked_at` on each plan entry is three-valued: `null` = auto-sync eligible, `number` (timestamp) = cooked, `false` = user explicitly marked as not cooked
-- `syncCookedState()` auto-detects recipes completed after `plan_finalized_at` from IndexedDB sessions
-- The home page banner (`#meal-plan-banner`) reads `plan_finalized_at` + `meal_plan` from localStorage synchronously on DOMContentLoaded and shows progress when there are uncooked recipes
-- Back navigation on all sub-pages uses `history.back()` (with `href="index.html"` as fallback)
-
-**Files:**
-- `docs/plan.html` — 3-step UI: seed, N (2–8), servings per recipe; active plan section
-- `docs/js/plan.js` — plan algorithm, card rendering, swap panel, ingredient list, active plan mode
-- `docs/css/plan.css` — plan-specific styles; ingredient list matches recipe detail page design
-- Reuses globals from `recommendations.js` (ingredient maps, IDF, stoplist)
+---
 
 ## Chip Filters
 
-**Decision:** Replace the filter popover with two always-visible chip rows — meal type on top, cuisine below — that apply filters immediately on click.
+**Decision:** Two always-visible chip rows (meal type + cuisine) replacing a filter popover
 
-**Bidirectionality:**
-- Meal type chips are counted from recipes matching the active cuisine (if any), and vice versa
-- If you select a meal type and then switch to an incompatible cuisine (or vice versa), the first filter is automatically cleared — preventing a zero-result state
-- This auto-clear happens in `setActiveMealType` / `setActiveCuisine` by checking whether the previously active value still appears in the narrowed pool
+**Bidirectionality:** Selecting one dimension narrows the other — chips that would produce zero results are hidden. If the active filter becomes incompatible after narrowing, it auto-clears.
 
-**Chip overflow:**
-- Only the top `CHIPS_VISIBLE` (3) chips are shown by default, sorted by recipe count descending then alphabetically
-- If the active chip is behind the "more" threshold, it is promoted into the visible row (replacing the last visible chip, which moves to the front of the hidden list)
-- Clicking "+N more" permanently expands the row (no collapse); new chips animate in with `chip-appear`
+**Chip overflow:** Only the top chips by recipe count show by default; an active chip is always promoted into view. "+N more" permanently expands the row.
 
-**Taxonomy colours:**
-- Meal type chips use a teal family (`--meal-type-color: #4A8A82`)
-- Cuisine chips use a terracotta family (`--cuisine-color: #B05A3A`)
-- Inactive chips show a light tinted background with a coloured border; active chips use the full colour with white text
-- The same variables drive `.tag-meal-type` and `.tag-cuisine` on recipe cards and the recipe detail page — one set of variables covers all surfaces
+**Taxonomy colours:** Meal type and cuisine chips use distinct colour families, applied consistently via CSS custom properties across chips, recipe card tags, and the recipe detail page.
 
-**URL persistence:** `cuisine` and `meal_type` query params are written on every filter change via `history.replaceState` and read on page load, so filtered views are bookmarkable and shareable.
+**URL persistence:** Active filters are written to the URL via `history.replaceState` so filtered views are bookmarkable and shareable.
+
+---
 
 ## Surprise Me
 
-**Decision:** A shuffle button that picks a random recipe using a 4-tier algorithm that prioritises variety and discovery.
+**Decision:** Shuffle button that picks a random recipe from the current filtered set using a tiered priority algorithm
 
-**Entry point:** search bar button only.
+**Algorithm:** Prioritises uncooked recipes not in recent history, then any unrecent recipe, then the full filtered set as a fallback. History is a rolling window of recent picks in localStorage — ephemeral and self-managing.
 
-**Algorithm (4 tiers, pick highest non-empty tier, random within it):**
-1. Not yet cooked AND not in recent history
-2. `tested: false` AND not in recent history
-3. Not in recent history
-4. Entire filtered set (fallback if history blocks everything)
-
-**History:** `localStorage` key `surpriseHistory`, JSON array of up to 10 recipe IDs (rolling window). Ephemeral — fine to lose on cache clear. No manual reset needed.
-
-**Filter integration:**
-- Uses current active filters (cuisine, meal type, favorites, dietary, search query)
-- `filterRecipes()` is called with current state — no special casing needed
+---
 
 ## Recipe Recommendation Engine
 
-**Decision:** IDF-weighted ingredient similarity with category weighting and pantry stoplist, computed entirely client-side, on demand.
+**Decision:** IDF-weighted ingredient similarity with category weighting, computed client-side on demand
 
 **Algorithm:**
-1. Build a map of canonical ingredient keys per recipe (excluding Spices and stoplist ingredients). Each entry records the ingredient's category (Fresh, Fridge, Pantry).
-2. Compute IDF (inverse document frequency) per canonical: `Math.log(N / df)` where N = corpus size and df = number of recipes containing that ingredient. Common ingredients (garlic in 18 of 24 recipes) get low weight; rare shared ones (lemongrass in 2 recipes) get high weight.
-3. Score each candidate recipe by summing `IDF × categoryWeight` for every canonical it shares with the target. The weight used is the maximum of the two recipes' category for that ingredient.
-4. Return the top N results sorted by score, each with the list of shared canonical names.
+1. Build ingredient maps per recipe, excluding the Spices category and common pantry staples (ubiquitous items that carry no useful flavour signal)
+2. Compute IDF per ingredient: rare shared ingredients score higher than common ones
+3. Score candidates by summing `IDF × categoryWeight` for each shared ingredient; perishable ingredients (Fresh, Fridge) are weighted higher than shelf-stable ones (Pantry) because they define what a dish actually is
+4. Return the top results with the list of shared ingredients
 
-**Category weights:**
-- Fresh / Fridge: `2` — perishable ingredients define what a dish actually *is*
-- Pantry: `1` — shelf-stable items are less identity-defining
+**Why IDF over raw count:** Naïve counting is dominated by garlic and onion. IDF surfaces meaningful flavour connections — two recipes sharing an unusual ingredient score far higher.
 
-**Pantry stoplist:**
-Ingredients excluded entirely regardless of IDF score: all oils (pattern `* oil`), all milks (pattern `* milk` and `milk`), water, vegetable stock, plain/self-raising flour, sugar, brown sugar, baking soda, baking powder, maple syrup, salt, butter, vegan butter, margarine. These are pantry staples present in any kitchen — sharing them carries no useful signal.
+**Corpus filtering:** Respects dietary and untested-recipe settings so only recipes the user can see are recommended.
 
-**Spices category:**
-Excluded entirely. Salt, pepper, and spices are present in almost every recipe and would dominate scoring without contributing useful similarity.
-
-**Corpus filtering:**
-The corpus respects the user's settings — `showUntestedRecipes` (IndexedDB) and `dietaryFilters` — so recommendations only surface recipes the user can actually see. If the target recipe itself falls outside the corpus (e.g. an untested recipe viewed via direct link when the setting is off), its ingredients are still extracted from the raw data so it can be scored against the visible corpus.
-
-**Why IDF over raw count:**
-Naïve shared-ingredient counting is dominated by ubiquitous items. IDF naturally downweights common ingredients and surfaces meaningful flavour connections — two recipes sharing coconut milk + lemongrass score far higher than two sharing garlic + onion.
-
-**Files:**
-- `docs/js/recommendations.js` — `buildRecipeIngredientMaps`, `computeIDF`, `getSimilarRecipes` (all global, no module system)
-- Loaded on `recipe.html` only, after `db.js` and `recipes.js`
+---
 
 ## Progressive Enhancement
 
-**Decision:** Build features that work today but plan for future enhancements
+**Decision:** Local-first features today, designed for backend sync later
 
-**Examples:**
-- Favorites work locally → sync with backend later
-- Personal ratings → community ratings when backend added
-- Static recipes → user-submitted recipes when backend ready
-
-This allows rapid development while keeping future scalability options open.
+Favorites, ratings, notes, and cooking history all work entirely offline. The data model is designed so sync can be added without breaking anything. No feature requires a backend to function.
