@@ -147,6 +147,16 @@ Everything after `]` is the preparation note and is stored separately:
 
 The comma after `]` is conventional but not required.
 
+The canonical should always reflect **what the cook buys**, not the transformed form. If a prep step changes the ingredient, describe the transformation in the preparation text and the instructions — not in the canonical name:
+
+```markdown
+- 2 tbsp [flax seeds], ground       ✓  (buy flax seeds, grind them)
+- 2 tbsp [ground flax seeds]        ✗  (canonical shouldn't encode prep)
+
+- 50 g [almonds], toasted and crushed  ✓
+- 50 g [toasted almonds]               ✗
+```
+
 ### Non-scalable ingredients
 
 Ingredients without a leading number (e.g., `[coriander] for garnish`) are treated as non-scalable and displayed as-is regardless of serving adjustments.
