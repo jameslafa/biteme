@@ -19,7 +19,7 @@ The espresso powder is optional but amplifies the chocolate without making it ta
 # Ingredients
 
 - 2 tbsp [flax seeds], ground
-- 195 ml [water], divided
+- 200 ml [water], divided
 
 - 300 g [sugar]
 - 180 g [plain flour] (T45 / Type 405 / Tipo 00)
@@ -29,13 +29,13 @@ The espresso powder is optional but amplifies the chocolate without making it ta
 - 100 ml [vegetable oil] (e.g. rapeseed, sunflower, canola)
 - 2 tsp [vanilla extract]
 - 130 g [chocolate chips], vegan, divided
-- 85 g [walnuts], roughly chopped (optional)
+- 80 g [walnuts], roughly chopped (optional)
 
 # Instructions
 
 1. Preheat the oven to 180°C (160°C fan). Line a 20×20 cm baking tin with baking paper.
-2. Grind {flax seed} to a fine powder using a blender or spice grinder. Whisk with 75 ml of the {water} in a small bowl and set aside for five minutes to gel into a flax egg.
-3. Combine {sugar} and the remaining 120 ml of water in a small saucepan over medium heat. Stir for six to eight minutes until the sugar fully dissolves — do not let it boil. Remove from heat.
+2. Grind {flax seed} to a fine powder using a blender or spice grinder. Whisk with one-third of the {water} in a small bowl and set aside for five minutes to gel into a flax egg.
+3. Combine {sugar} and the remaining {water} in a small saucepan over medium heat. Stir for six to eight minutes until the sugar fully dissolves — do not let it boil. Remove from heat.
 4. Whisk {plain flour}, {cocoa powder}, {icing sugar}, and {espresso powder} (if using) together with a pinch of salt in a large bowl.
 5. Add the warm sugar syrup, {vegetable oil}, {vanilla extract}, and the flax egg to the dry ingredients. Fold with a spatula until just combined — do not overmix. The batter will be thick and fudgy.
 6. Fold in {walnut} and 100 g of the {chocolate chip}. Pour into the prepared tin and scatter the remaining 30 g chocolate chips on top.

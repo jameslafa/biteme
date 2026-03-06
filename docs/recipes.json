@@ -1,5 +1,256 @@
 [
   {
+    "id": "channa-masala",
+    "name": "Channa Masala",
+    "description": "Chickpeas simmered in a bold, deeply spiced tomato sauce with a bright finish of lemon and fresh coriander",
+    "servings": 4,
+    "time": 55,
+    "difficulty": "medium",
+    "diet": [
+      "vegan",
+      "vegetarian"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
+    "date": "2026-03-06",
+    "notes": "The trick to deep flavour is patient onions — add small splashes of water to deglaze the sticky brown bits and keep cooking until the onion is genuinely dark. Don't rush this step. Garam masala is added in two stages: most of it early for body, a little at the very end for a fresh, aromatic hit. Adjust the chillies freely — one is mild, three is noticeably hot.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "4 cloves garlic, roughly chopped",
+          "canonical": "garlic",
+          "preparation": "roughly chopped",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 thumb ginger, peeled, roughly chopped",
+          "canonical": "ginger",
+          "preparation": "peeled, roughly chopped",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "thumb",
+            "item": "ginger"
+          }
+        },
+        {
+          "id": 3,
+          "text": "1-3 chillies, green, roughly chopped",
+          "canonical": "chilli",
+          "preparation": "green, roughly chopped",
+          "quantity": {
+            "amount": 1.0,
+            "amount_max": 3.0,
+            "item": "chillies"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 large onion (about 300 g), finely diced",
+          "canonical": "onion",
+          "preparation": "(about 300 g), finely diced",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "large",
+            "item": "onion",
+            "secondary_amount": 300.0,
+            "secondary_unit": "g",
+            "secondary_prefix": "about"
+          }
+        },
+        {
+          "id": 5,
+          "text": "Juice of 1 lemon, divided",
+          "canonical": "lemon",
+          "preparation": "divided",
+          "quantity": {
+            "amount": 1.0,
+            "item": "lemon",
+            "prefix": "Juice of"
+          }
+        },
+        {
+          "id": 6,
+          "text": "25 g coriander, roughly chopped",
+          "canonical": "coriander",
+          "preparation": "roughly chopped",
+          "quantity": {
+            "amount": 25.0,
+            "unit": "g",
+            "item": "coriander"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 7,
+          "text": "2 tins (400 g) chickpeas, drained and rinsed",
+          "canonical": "chickpea",
+          "preparation": "drained and rinsed",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tins",
+            "item": "chickpeas",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 8,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 9,
+          "text": "120 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 120.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        },
+        {
+          "id": 10,
+          "text": "1/4 tsp baking soda",
+          "canonical": "baking soda",
+          "quantity": {
+            "amount": 0.25,
+            "unit": "tsp",
+            "item": "baking soda"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 11,
+          "text": "2 tbsp vegetable oil (e.g. rapeseed, sunflower, canola)",
+          "canonical": "vegetable oil",
+          "preparation": "(e.g. rapeseed, sunflower, canola)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "vegetable oil"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 12,
+          "text": "2 tsp mustard seeds, black",
+          "canonical": "mustard seed",
+          "preparation": "black",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "mustard seeds"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1 tsp cumin seeds",
+          "canonical": "cumin seed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        },
+        {
+          "id": 14,
+          "text": "2 tsp ground coriander",
+          "canonical": "ground coriander",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "ground coriander"
+          }
+        },
+        {
+          "id": 15,
+          "text": "1/2 tsp ground turmeric",
+          "canonical": "ground turmeric",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "ground turmeric"
+          }
+        },
+        {
+          "id": 16,
+          "text": "1 1/2 tsp garam masala, divided",
+          "canonical": "garam masala",
+          "preparation": "divided",
+          "quantity": {
+            "amount": 1.0,
+            "item": "garam masala"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Pound {garlic}, {ginger}, {chilli}, half the {lemon} juice, and a pinch of salt together in a mortar and pestle, or blitz in a small food processor, until a smooth paste forms. Set aside."
+      },
+      {
+        "text": "Heat {vegetable oil} in a large saucepan over medium-high heat. Add {mustard seed} and {cumin seed} — they will spit for about fifteen seconds. As soon as they smell fragrant, add {onion} and {baking soda}. Cook, stirring frequently, until the onion starts to stick and leave a brown coating on the bottom of the pan, about three to four minutes. Add a small splash of water, scrape up the browned bits, and continue cooking. Repeat this deglazing process until the onion is a deep, rich brown, about ten minutes total.",
+        "durations": [
+          {
+            "seconds": 15,
+            "text": "for about fifteen seconds"
+          },
+          {
+            "seconds": 240,
+            "text": "about three to four minutes"
+          },
+          {
+            "seconds": 600,
+            "text": "about ten minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the garlic paste and stir to combine. Add {ground coriander}, {ground turmeric}, and two-thirds of the {garam masala}. Stir for thirty seconds until fragrant.",
+        "durations": [
+          {
+            "seconds": 30,
+            "text": "for thirty seconds"
+          }
+        ]
+      },
+      {
+        "text": "Add {chopped tomato} and break them up with a spoon. Stir in {chickpea}, most of the {coriander}, and the {water}. Bring to a simmer, cover with the lid slightly cracked, and cook over low heat for thirty minutes, stirring occasionally, until the sauce is thick and the spices have melded.",
+        "durations": [
+          {
+            "seconds": 1800,
+            "text": "for thirty minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in the remaining {garam masala} and remaining {lemon} juice. Season to taste with salt. Scatter the reserved coriander over the top."
+      }
+    ],
+    "serving_suggestions": "Serve with basmati rice and warm naan.",
+    "tested": false
+  },
+  {
     "id": "vegan-brownies",
     "name": "Vegan Brownies",
     "description": "Dense, fudgy brownies with a crackly top — completely plant-based and impossible to tell apart from the original",
@@ -33,11 +284,11 @@
         },
         {
           "id": 2,
-          "text": "195 ml water, divided",
+          "text": "200 ml water, divided",
           "canonical": "water",
           "preparation": "divided",
           "quantity": {
-            "amount": 195.0,
+            "amount": 200.0,
             "unit": "ml",
             "item": "water"
           }
@@ -107,11 +358,11 @@
         },
         {
           "id": 11,
-          "text": "85 g walnuts, roughly chopped (optional)",
+          "text": "80 g walnuts, roughly chopped (optional)",
           "canonical": "walnut",
           "preparation": "roughly chopped (optional)",
           "quantity": {
-            "amount": 85.0,
+            "amount": 80.0,
             "unit": "g",
             "item": "walnuts"
           }
@@ -146,7 +397,7 @@
         "text": "Preheat the oven to 180°C (160°C fan). Line a 20×20 cm baking tin with baking paper."
       },
       {
-        "text": "Grind {flax seed} to a fine powder using a blender or spice grinder. Whisk with 75 ml of the {water} in a small bowl and set aside for five minutes to gel into a flax egg.",
+        "text": "Grind {flax seed} to a fine powder using a blender or spice grinder. Whisk with one-third of the {water} in a small bowl and set aside for five minutes to gel into a flax egg.",
         "durations": [
           {
             "seconds": 300,
@@ -155,7 +406,7 @@
         ]
       },
       {
-        "text": "Combine {sugar} and the remaining 120 ml of water in a small saucepan over medium heat. Stir for six to eight minutes until the sugar fully dissolves — do not let it boil. Remove from heat.",
+        "text": "Combine {sugar} and the remaining {water} in a small saucepan over medium heat. Stir for six to eight minutes until the sugar fully dissolves — do not let it boil. Remove from heat.",
         "durations": [
           {
             "seconds": 480,

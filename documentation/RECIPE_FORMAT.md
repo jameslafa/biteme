@@ -231,6 +231,7 @@ The canonical name is the singular form as listed in `docs/ingredients.json`. It
 - Do not reference preparation text — `{garlic}` not `{garlic, minced}`
 - Do not include the unit — `{garlic}` not `{2 cloves garlic}`
 - Write all durations in plain English words — `five minutes`, `one and a half minutes`, `thirty seconds`. Never use digits for durations (`5 minutes`, `1½ minutes`). The cooking mode uses these to create tappable timer badges.
+- **Never use absolute quantities in instructions** (e.g. "add 200 ml of water"). Quantities live in the ingredient list where they scale with servings. In instructions, refer to the ingredient by name only — `add {water}`, `stir in {sugar}`. If an ingredient is used in stages, describe the split using fractions: "use one-third of the {water}", "add two-thirds of the {garam masala}", "stir in the remaining {sugar}". Avoid vague words like "most" or "some" — they don't communicate a precise amount.
 
 **Examples:**
 
