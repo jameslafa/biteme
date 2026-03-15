@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       if (updated) {
         loadRecipes();
       }
+      checkWhatsNewDot();
     }
   });
 });
@@ -551,13 +552,18 @@ async function checkWhatsNewDot() {
   const latestId = CHANGELOG[0].id;
   const lastSeenId = await getSetting('lastSeenChangelogId');
 
+  const dot = document.getElementById('drawer-whats-new-dot');
+
   // First visit — mark all as seen, no dot
   if (lastSeenId === null) {
     await setSetting('lastSeenChangelogId', latestId);
   } else if (latestId > lastSeenId) {
-    document.getElementById('drawer-whats-new-dot').style.display = '';
-    updateDrawerDot();
+    dot.style.display = '';
+  } else {
+    dot.style.display = 'none';
   }
+
+  updateDrawerDot();
 }
 
 // Show a nudge for first-time visitors pointing to the How It Works page
