@@ -251,195 +251,6 @@
     "tested": false
   },
   {
-    "id": "vegan-brownies",
-    "name": "Vegan Brownies",
-    "description": "Dense, fudgy brownies with a crackly top — completely plant-based and impossible to tell apart from the original",
-    "servings": 16,
-    "time": 50,
-    "difficulty": "easy",
-    "diet": [
-      "vegan"
-    ],
-    "cuisine": [
-      "american"
-    ],
-    "meal_type": [
-      "dessert",
-      "baking"
-    ],
-    "date": "2026-03-06",
-    "notes": "The espresso powder is optional but amplifies the chocolate without making it taste of coffee. Walnuts are optional; swap for pecans, or leave them out entirely. Make sure the brownies are completely cool before slicing — they firm up as they cool and will slice cleanly.",
-    "ingredients": {
-      "Pantry": [
-        {
-          "id": 1,
-          "text": "2 tbsp flax seeds, ground",
-          "canonical": "flax seed",
-          "preparation": "ground",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tbsp",
-            "item": "flax seeds"
-          }
-        },
-        {
-          "id": 2,
-          "text": "200 ml water, divided",
-          "canonical": "water",
-          "preparation": "divided",
-          "quantity": {
-            "amount": 200.0,
-            "unit": "ml",
-            "item": "water"
-          }
-        },
-        {
-          "id": 3,
-          "text": "300 g sugar",
-          "canonical": "sugar",
-          "quantity": {
-            "amount": 300.0,
-            "unit": "g",
-            "item": "sugar"
-          }
-        },
-        {
-          "id": 4,
-          "text": "180 g plain flour (T45 / Type 405 / Tipo 00)",
-          "canonical": "plain flour",
-          "preparation": "(T45 / Type 405 / Tipo 00)",
-          "quantity": {
-            "amount": 180.0,
-            "unit": "g",
-            "item": "plain flour"
-          }
-        },
-        {
-          "id": 5,
-          "text": "65 g cocoa powder",
-          "canonical": "cocoa powder",
-          "quantity": {
-            "amount": 65.0,
-            "unit": "g",
-            "item": "cocoa powder"
-          }
-        },
-        {
-          "id": 6,
-          "text": "30 g icing sugar",
-          "canonical": "icing sugar",
-          "quantity": {
-            "amount": 30.0,
-            "unit": "g",
-            "item": "icing sugar"
-          }
-        },
-        {
-          "id": 7,
-          "text": "1/2 tbsp espresso powder (optional; or instant coffee)",
-          "canonical": "espresso powder",
-          "preparation": "(optional; or instant coffee)",
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tbsp",
-            "item": "espresso powder"
-          }
-        },
-        {
-          "id": 10,
-          "text": "130 g chocolate chips, vegan, divided",
-          "canonical": "chocolate chip",
-          "preparation": "vegan, divided",
-          "quantity": {
-            "amount": 130.0,
-            "unit": "g",
-            "item": "chocolate chips"
-          }
-        },
-        {
-          "id": 11,
-          "text": "80 g walnuts, roughly chopped (optional)",
-          "canonical": "walnut",
-          "preparation": "roughly chopped (optional)",
-          "quantity": {
-            "amount": 80.0,
-            "unit": "g",
-            "item": "walnuts"
-          }
-        }
-      ],
-      "Condiments": [
-        {
-          "id": 8,
-          "text": "100 ml vegetable oil (e.g. rapeseed, sunflower, canola)",
-          "canonical": "vegetable oil",
-          "preparation": "(e.g. rapeseed, sunflower, canola)",
-          "quantity": {
-            "amount": 100.0,
-            "unit": "ml",
-            "item": "vegetable oil"
-          }
-        },
-        {
-          "id": 9,
-          "text": "2 tsp vanilla extract",
-          "canonical": "vanilla extract",
-          "quantity": {
-            "amount": 2.0,
-            "unit": "tsp",
-            "item": "vanilla extract"
-          }
-        }
-      ]
-    },
-    "steps": [
-      {
-        "text": "Preheat the oven to 180°C (160°C fan). Line a 20×20 cm baking tin with baking paper."
-      },
-      {
-        "text": "Grind {flax seed} to a fine powder using a blender or spice grinder. Whisk with one-third of the {water} in a small bowl and set aside for five minutes to gel into a flax egg.",
-        "durations": [
-          {
-            "seconds": 300,
-            "text": "for five minutes"
-          }
-        ]
-      },
-      {
-        "text": "Combine {sugar} and the remaining {water} in a small saucepan over medium heat. Stir for six to eight minutes until the sugar fully dissolves — do not let it boil. Remove from heat.",
-        "durations": [
-          {
-            "seconds": 480,
-            "text": "for six to eight minutes"
-          }
-        ]
-      },
-      {
-        "text": "Whisk {plain flour}, {cocoa powder}, {icing sugar}, and {espresso powder} (if using) together with a pinch of salt in a large bowl."
-      },
-      {
-        "text": "Add the warm sugar syrup, {vegetable oil}, {vanilla extract}, and the flax egg to the dry ingredients. Fold with a spatula until just combined — do not overmix. The batter will be thick and fudgy."
-      },
-      {
-        "text": "Fold in {walnut} and 100 g of the {chocolate chip}. Pour into the prepared tin and scatter the remaining 30 g chocolate chips on top."
-      },
-      {
-        "text": "Bake for thirty-five to forty minutes. A skewer may not come out clean — that's intentional, these are meant to be fudgy.",
-        "durations": [
-          {
-            "seconds": 2400,
-            "text": "for thirty-five to forty minutes"
-          }
-        ]
-      },
-      {
-        "text": "Leave to cool completely in the tin before slicing into 16 pieces. For firmer brownies, refrigerate once cooled."
-      }
-    ],
-    "serving_suggestions": "Best at room temperature or slightly warm. Store in an airtight container for up to three days, or refrigerate for up to a week.",
-    "tested": false
-  },
-  {
     "id": "black-pepper-tofu",
     "name": "Black Pepper Tofu",
     "description": "Crispy fried tofu smothered in a rich, buttery sauce of shallots, garlic, chillies, and an unapologetic amount of black pepper.",
@@ -4260,9 +4071,9 @@
   {
     "id": "galettes-bretonnes",
     "name": "Galettes Bretonnes",
-    "description": "Traditional Breton buckwheat crêpes with sautéed mushrooms — naturally vegan and gluten-free",
+    "description": "Traditional Breton buckwheat crêpes with caramelised onions, mushrooms, and thyme — naturally vegan and gluten-free",
     "servings": 4,
-    "time": 35,
+    "time": 50,
     "difficulty": "easy",
     "diet": [
       "vegan",
@@ -4292,6 +4103,17 @@
         },
         {
           "id": 2,
+          "text": "2 medium onions, thinly sliced",
+          "canonical": "onion",
+          "preparation": "thinly sliced",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "medium",
+            "item": "onions"
+          }
+        },
+        {
+          "id": 3,
           "text": "2 cloves garlic, minced",
           "canonical": "garlic",
           "preparation": "minced",
@@ -4302,16 +4124,18 @@
           }
         },
         {
-          "id": 3,
+          "id": 4,
           "text": "Fresh thyme, a few sprigs",
           "canonical": "thyme",
           "preparation": "a few sprigs"
-        },
+        }
+      ],
+      "Fridge": [
         {
-          "id": 4,
-          "text": "Fresh parsley, chopped",
-          "canonical": "parsley",
-          "preparation": "chopped"
+          "id": 9,
+          "text": "vegan butter, for the pan",
+          "canonical": "vegan butter",
+          "preparation": "for the pan"
         }
       ],
       "Pantry": [
@@ -4348,16 +4172,6 @@
             "unit": "tbsp",
             "item": "vegetable oil"
           }
-        },
-        {
-          "id": 9,
-          "text": "1 tbsp soy sauce",
-          "canonical": "soy sauce",
-          "quantity": {
-            "amount": 1.0,
-            "unit": "tbsp",
-            "item": "soy sauce"
-          }
         }
       ],
       "Spices": [
@@ -4384,25 +4198,10 @@
         ]
       },
       {
-        "text": "When ready to cook, check the batter consistency and add a splash of water if needed."
+        "text": "When ready to cook, check the batter consistency and add a splash more {water} if needed. Heat a large flat pan over medium-high heat and lightly grease with {vegetable oil}."
       },
       {
-        "text": "Heat a drizzle of {vegetable oil} in a pan over medium heat. Add the {mushrooms} and cook for five minutes until golden. Add the {garlic} and {thyme}, cook for another minute, then add the {soy sauce}. Stir and set aside.",
-        "durations": [
-          {
-            "seconds": 300,
-            "text": "for five minutes"
-          }
-        ]
-      },
-      {
-        "text": "Heat a large flat pan over medium-high heat. Lightly grease with {vegetable oil}."
-      },
-      {
-        "text": "Pour a ladleful of batter and quickly spread it as thinly as possible."
-      },
-      {
-        "text": "Cook for about two minutes until the edges lift and turn crispy. Flip and cook for one more minute.",
+        "text": "Pour a ladleful of batter and quickly spread it as thinly as possible. Cook for about two minutes until the edges lift and turn crispy, then flip and cook for one more minute. Slide onto a plate and repeat with the remaining batter, stacking the galettes.",
         "durations": [
           {
             "seconds": 120,
@@ -4411,10 +4210,29 @@
         ]
       },
       {
-        "text": "Spoon the mushroom filling onto the galette, fold the edges in, sprinkle with fresh {parsley}, and serve immediately."
+        "text": "While cooking the galettes, make the filling in a separate pan. Heat a drizzle of {vegetable oil} over medium-low heat. Add the {onion} with a pinch of salt and cook slowly for fifteen to twenty minutes, stirring occasionally, until deeply golden and caramelised. Increase the heat to medium, add the {mushroom} and cook for five minutes until golden. Add the {garlic} and {thyme}, cook for another minute. Set aside.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for fifteen to twenty minutes"
+          },
+          {
+            "seconds": 300,
+            "text": "for five minutes"
+          }
+        ]
+      },
+      {
+        "text": "To serve, melt a knob of {vegan butter} in the pan over medium-high heat. Add a galette and warm for thirty seconds, then flip. Spoon the filling onto the centre, fold all four sides inward to form a square, and serve immediately.",
+        "durations": [
+          {
+            "seconds": 30,
+            "text": "for thirty seconds"
+          }
+        ]
       }
     ],
-    "serving_suggestions": "Serve with a bowl of cidre breton for the full Breton experience. Other vegan filling ideas: creamy leeks with oat cream and nutmeg; ratatouille; caramelised onion and spinach with vegan cheese; roasted butternut squash with cumin, hummus, and toasted pumpkin seeds; or vegan pesto with sun-dried tomatoes, pine nuts, and rocket.\n\nFor vegetarian fillings: a fried egg with grated Comté (the classic complète); goat cheese with honey and walnuts; sautéed mushrooms with egg and Gruyère; or wilted spinach with ricotta, lemon zest, and black pepper.",
+    "serving_suggestions": "Serve with a bowl of cidre breton for the full Breton experience. Other vegan filling ideas: creamy leeks with oat cream and nutmeg; caramelised onion and spinach with vegan cheese; roasted butternut squash with cumin, hummus, and toasted pumpkin seeds; or vegan pesto with sun-dried tomatoes, pine nuts, and rocket.\n\nFor vegetarian fillings: a fried egg with grated Comté (the classic complète); goat cheese with honey and walnuts; sautéed mushrooms with egg and Gruyère; or wilted spinach with ricotta, lemon zest, and black pepper.",
     "tested": true
   },
   {
