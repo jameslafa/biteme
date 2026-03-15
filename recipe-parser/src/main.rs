@@ -1346,12 +1346,32 @@ fn main() -> Result<()> {
     fs::create_dir_all(&og_dir)
         .with_context(|| format!("Failed to create OG directory: {:?}", og_dir))?;
 
+    let expected: std::collections::HashSet<String> = recipes.iter()
+        .map(|r| format!("{}.html", r.id))
+        .collect();
+
     for recipe in &recipes {
         let og_path = og_dir.join(format!("{}.html", recipe.id));
         fs::write(&og_path, generate_og_html(recipe))
             .with_context(|| format!("Failed to write OG file: {:?}", og_path))?;
     }
 
+    // Remove stale OG files for deleted recipes
+    let mut removed = 0;
+    for entry in fs::read_dir(&og_dir).with_context(|| format!("Failed to read OG directory: {:?}", og_dir))? {
+        let entry = entry?;
+        let name = entry.file_name();
+        let name_str = name.to_string_lossy();
+        if name_str.ends_with(".html") && !expected.contains(name_str.as_ref()) {
+            fs::remove_file(entry.path())
+                .with_context(|| format!("Failed to remove stale OG file: {:?}", entry.path()))?;
+            removed += 1;
+        }
+    }
+
+    if removed > 0 {
+        println!("🗑️  Removed {} stale OG HTML file(s) from {:?}", removed, og_dir);
+    }
     println!("🔗 Generated {} OG HTML file(s) in {:?}", recipes.len(), og_dir);
 
     if cli.lint {
