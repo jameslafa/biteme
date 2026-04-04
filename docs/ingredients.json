@@ -3,6 +3,7 @@
   "ingredients": {
     "agave syrup": { "section": "Condiments" },
     "almond": { "plural": "almonds", "section": "Pantry" },
+    "apple": { "plural": "apples", "section": "Fresh" },
     "apple cider vinegar": { "section": "Condiments" },
     "Asian sesame paste": { "section": "Condiments" },
     "baking powder": { "section": "Pantry" },
@@ -53,6 +54,7 @@
     "curry paste": { "section": "Condiments" },
     "curry powder": { "section": "Spices" },
     "dark soy sauce": { "section": "Condiments" },
+    "demerara sugar": { "section": "Pantry" },
     "egg": { "plural": "eggs", "section": "Fridge" },
     "espresso powder": { "section": "Pantry" },
     "flaked almond": { "plural": "flaked almonds", "section": "Pantry" },
@@ -100,6 +102,7 @@
     "onion powder": { "section": "Spices" },
     "orange": { "plural": "oranges", "section": "Fresh" },
     "orange blossom water": { "section": "Condiments" },
+    "orange juice": { "section": "Condiments" },
     "oregano": { "section": "Spices" },
     "paprika": { "section": "Spices" },
     "parsley": { "section": "Fresh" },

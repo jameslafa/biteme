@@ -1,5 +1,146 @@
 [
   {
+    "id": "apple-crumble",
+    "name": "Apple Crumble",
+    "description": "A classic British dessert with a golden buttery crumble topping over cinnamon-spiced apples",
+    "servings": 4,
+    "time": 75,
+    "difficulty": "easy",
+    "diet": [
+      "vegan"
+    ],
+    "cuisine": [
+      "british"
+    ],
+    "meal_type": [
+      "dessert"
+    ],
+    "date": "2026-04-04",
+    "notes": "Use a tart apple variety like Bramley or Granny Smith — they hold their shape better and balance the sweetness of the topping. The crumble mixture can be made a day ahead and kept in the fridge.\n\nTo make this non-vegan, substitute the vegan butter with regular butter.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "750 g apples",
+          "canonical": "apple",
+          "quantity": {
+            "amount": 750.0,
+            "unit": "g",
+            "item": "apples"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 3,
+          "text": "75 g vegan butter, cold, cut into pieces",
+          "canonical": "vegan butter",
+          "preparation": "cold, cut into pieces",
+          "quantity": {
+            "amount": 75.0,
+            "unit": "g",
+            "item": "vegan butter"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 4,
+          "text": "175 g plain flour (T45 / Type 405 / Tipo 00)",
+          "canonical": "plain flour",
+          "preparation": "(T45 / Type 405 / Tipo 00)",
+          "quantity": {
+            "amount": 175.0,
+            "unit": "g",
+            "item": "plain flour"
+          }
+        },
+        {
+          "id": 5,
+          "text": "150 g brown sugar",
+          "canonical": "brown sugar",
+          "quantity": {
+            "amount": 150.0,
+            "unit": "g",
+            "item": "brown sugar"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 2,
+          "text": "2 tbsp orange juice (optional, or use water)",
+          "canonical": "orange juice",
+          "preparation": "(optional, or use water)",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tbsp",
+            "item": "orange juice"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 6,
+          "text": "1 tsp cinnamon (or ground ginger)",
+          "canonical": "cinnamon",
+          "preparation": "(or ground ginger)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cinnamon"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Quarter the {apple}, remove the core, peel and slice into thin slices of about 2 mm."
+      },
+      {
+        "text": "Cook the sliced {apple} in a saucepan over low-medium heat with {cinnamon} and {orange juice} until they soften slightly without losing their shape, approximately twenty minutes.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "twenty minutes"
+          }
+        ]
+      },
+      {
+        "text": "Preheat the oven to 200°C / 180°C fan / Gas 6."
+      },
+      {
+        "text": "Make the crumble: sift {plain flour} into a mixing bowl. Add cold {vegan butter} in pieces and rub into the flour with your fingertips until the mixture resembles fine breadcrumbs. Stir in the {brown sugar}."
+      },
+      {
+        "text": "Spread the {apple} evenly in a medium-sized deep ovenproof dish."
+      },
+      {
+        "text": "Sprinkle the crumble topping evenly over the apples. Optionally scatter a few oat flakes and a pinch of brown sugar over the top for extra texture."
+      },
+      {
+        "text": "Bake for thirty to thirty-five minutes, until golden-brown. If the dish is transparent, you should see the apples bubbling at the bottom.",
+        "durations": [
+          {
+            "seconds": 2100,
+            "text": "for thirty to thirty-five minutes"
+          }
+        ]
+      },
+      {
+        "text": "Remove from the oven and leave to rest for fifteen to twenty minutes before serving.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for fifteen to twenty minutes"
+          }
+        ]
+      }
+    ],
+    "serving_suggestions": "Whip double cream with a pinch of cinnamon or ground ginger and serve alongside. Or keep it classic with custard, vanilla ice cream, or cream.",
+    "tested": false
+  },
+  {
     "id": "channa-masala",
     "name": "Channa Masala",
     "description": "Chickpeas simmered in a bold, deeply spiced tomato sauce with a bright finish of lemon and fresh coriander",
