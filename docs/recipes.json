@@ -16,7 +16,7 @@
       "dessert"
     ],
     "date": "2026-04-04",
-    "notes": "Use a tart apple variety like Bramley or Granny Smith — they hold their shape better and balance the sweetness of the topping. The crumble mixture can be made a day ahead and kept in the fridge.\n\nTo make this non-vegan, substitute the vegan butter with regular butter.",
+    "notes": "Use a tart apple variety like Bramley or Granny Smith — they hold their shape better and balance the sweetness of the topping. The crumble mixture can be made a day ahead and kept in the fridge.",
     "ingredients": {
       "Fresh": [
         {
@@ -138,7 +138,7 @@
       }
     ],
     "serving_suggestions": "Whip double cream with a pinch of cinnamon or ground ginger and serve alongside. Or keep it classic with custard, vanilla ice cream, or cream.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "channa-masala",
