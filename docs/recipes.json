@@ -57,10 +57,10 @@
         },
         {
           "id": 5,
-          "text": "150 g brown sugar",
+          "text": "75 g brown sugar",
           "canonical": "brown sugar",
           "quantity": {
-            "amount": 150.0,
+            "amount": 75.0,
             "unit": "g",
             "item": "brown sugar"
           }

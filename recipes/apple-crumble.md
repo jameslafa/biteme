@@ -24,7 +24,7 @@ Use a tart apple variety like Bramley or Granny Smith — they hold their shape 
 - 75 g [vegan butter], cold, cut into pieces
 
 - 175 g [plain flour] (T45 / Type 405 / Tipo 00)
-- 150 g [brown sugar]
+- 75 g [brown sugar]
 
 - 1 tsp [cinnamon] (or ground ginger)
 
