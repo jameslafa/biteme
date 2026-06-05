@@ -1,5 +1,248 @@
 [
   {
+    "id": "butter-bean-masala",
+    "name": "Butter Bean Masala",
+    "description": "Creamy dried butter beans simmered in a spiced tomato, ginger and garlic masala, finished with garam masala, fresh coriander and lemon",
+    "servings": 4,
+    "time": 90,
+    "difficulty": "medium",
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "cuisine": [
+      "indian"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
+    "date": "2026-06-05",
+    "notes": "The beans need soaking overnight (8–12 hours), so plan ahead. For a richer version, stir in a splash of coconut milk or a spoonful of cashew paste near the end.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 2,
+          "text": "2 onions, finely chopped",
+          "canonical": "onion",
+          "preparation": "finely chopped",
+          "quantity": {
+            "amount": 2.0,
+            "item": "onions"
+          }
+        },
+        {
+          "id": 3,
+          "text": "4 cloves garlic, minced",
+          "canonical": "garlic",
+          "preparation": "minced",
+          "quantity": {
+            "amount": 4.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 4,
+          "text": "1 tbsp ginger, grated",
+          "canonical": "ginger",
+          "preparation": "grated",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "ginger"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 fresh green chilli, finely chopped",
+          "canonical": "chilli",
+          "preparation": "finely chopped",
+          "quantity": {
+            "amount": 1.0,
+            "item": "chilli"
+          }
+        },
+        {
+          "id": 6,
+          "text": "400 g tomatoes, chopped (or 1 tin)",
+          "canonical": "tomato",
+          "preparation": "chopped (or 1 tin)",
+          "quantity": {
+            "amount": 400.0,
+            "unit": "g",
+            "item": "tomatoes"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tbsp coriander, chopped",
+          "canonical": "coriander",
+          "preparation": "chopped",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tbsp",
+            "item": "coriander"
+          }
+        },
+        {
+          "id": 8,
+          "text": "Juice of 1/2 lemon",
+          "canonical": "lemon",
+          "quantity": {
+            "amount": 0.5,
+            "item": "lemon",
+            "prefix": "Juice of"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 1,
+          "text": "250 g butter beans, dried",
+          "canonical": "butter bean",
+          "preparation": "dried",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "butter beans"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 9,
+          "text": "3 tbsp vegetable oil",
+          "canonical": "vegetable oil",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "vegetable oil"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 10,
+          "text": "1 tsp cumin seeds",
+          "canonical": "cumin seed",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "cumin seeds"
+          }
+        },
+        {
+          "id": 11,
+          "text": "1/2 tsp turmeric",
+          "canonical": "turmeric",
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp",
+            "item": "turmeric"
+          }
+        },
+        {
+          "id": 12,
+          "text": "2 tsp ground coriander",
+          "canonical": "ground coriander",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tsp",
+            "item": "ground coriander"
+          }
+        },
+        {
+          "id": 13,
+          "text": "1 tsp ground cumin",
+          "canonical": "ground cumin",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "ground cumin"
+          }
+        },
+        {
+          "id": 14,
+          "text": "1 tsp chilli powder",
+          "canonical": "chilli powder",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "chilli powder"
+          }
+        },
+        {
+          "id": 15,
+          "text": "1 tsp garam masala",
+          "canonical": "garam masala",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "garam masala"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Soak the {butter bean} in plenty of cold water overnight, for eight to twelve hours.",
+        "durations": [
+          {
+            "seconds": 43200,
+            "text": "for eight to twelve hours"
+          }
+        ]
+      },
+      {
+        "text": "Drain, cover with fresh water, and simmer gently until fully tender and creamy, about one hour, seasoning with salt only once the beans have softened. Drain, reserving a cup of the cooking liquid.",
+        "durations": [
+          {
+            "seconds": 3600,
+            "text": "about one hour"
+          }
+        ]
+      },
+      {
+        "text": "Heat the {vegetable oil} in a large pan over medium heat. Add the {cumin seed} and sizzle for about thirty seconds until fragrant.",
+        "durations": [
+          {
+            "seconds": 30,
+            "text": "for about thirty seconds"
+          }
+        ]
+      },
+      {
+        "text": "Add the {onion} and cook until soft and golden, about ten minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "about ten minutes"
+          }
+        ]
+      },
+      {
+        "text": "Stir in the {garlic}, {ginger} and {chilli}. Cook for two minutes, until the raw smell goes.",
+        "durations": [
+          {
+            "seconds": 120,
+            "text": "for two minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add the {tomato}, {turmeric}, {ground coriander}, {ground cumin} and {chilli powder}. Cook down until the tomatoes break apart and the oil separates at the edges."
+      },
+      {
+        "text": "Add the {butter bean} and season with salt, stirring gently to coat. Add a splash of the reserved cooking liquid if it looks too dry. Simmer so the beans take on the spices but stay whole."
+      },
+      {
+        "text": "Stir through the {garam masala} and take off the heat. Add the {coriander} and {lemon} juice. Taste, adjust the salt, and rest for a couple of minutes before serving."
+      }
+    ],
+    "serving_suggestions": "Good with rice, roti or naan.",
+    "tested": false
+  },
+  {
     "id": "apple-crumble",
     "name": "Apple Crumble",
     "description": "A classic British dessert with a golden buttery crumble topping over cinnamon-spiced apples",
