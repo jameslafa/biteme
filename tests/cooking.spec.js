@@ -73,6 +73,26 @@ test.describe('Cooking Mode', () => {
     await expect(page.locator('#step-ingredients-container')).toBeHidden();
   });
 
+  test('step-ref resolution does not conflate fresh and ground spice forms', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-spice-collision');
+
+    // Step 1 refs {chilli} and {coriander} — must NOT also pull in
+    // "chilli powder" / "ground coriander" (those have their own canonicals)
+    const items = page.locator('#step-ingredients-container li');
+    await expect(items).toHaveCount(2);
+    await expect(items.nth(0)).toContainText('fresh green chilli');
+    await expect(items.nth(1)).toContainText('coriander, chopped');
+    await expect(page.locator('#step-ingredients-container')).not.toContainText('powder');
+    await expect(page.locator('#step-ingredients-container')).not.toContainText('ground');
+
+    // Step 2 refs {chilli powder} and {ground coriander} — the ground forms only
+    await page.locator('#next-btn').click();
+    await expect(page.locator('#step-progress')).toHaveText('Step 2 of 2');
+    await expect(items).toHaveCount(2);
+    await expect(items.nth(0)).toContainText('chilli powder');
+    await expect(items.nth(1)).toContainText('ground coriander');
+  });
+
   test('navigation: progress and button labels update', async ({ page }) => {
     await page.goto('/cooking.html?id=test-curry');
 

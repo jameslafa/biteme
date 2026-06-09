@@ -400,5 +400,74 @@
       }
     ],
     "tested": false
+  },
+  {
+    "id": "test-spice-collision",
+    "name": "Test Spice Collision",
+    "description": "Fresh and ground forms of the same base word (chilli/chilli powder, coriander/ground coriander) to test step-ref resolution",
+    "servings": 2,
+    "time": 10,
+    "difficulty": "easy",
+    "diet": [
+      "vegan"
+    ],
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1 fresh green chilli, finely chopped",
+          "canonical": "chilli",
+          "preparation": "finely chopped",
+          "quantity": {
+            "amount": 1,
+            "item": "chilli"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 tbsp coriander, chopped",
+          "canonical": "coriander",
+          "preparation": "chopped",
+          "quantity": {
+            "amount": 1,
+            "unit": "tbsp",
+            "item": "coriander"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 3,
+          "text": "1 tsp chilli powder",
+          "canonical": "chilli powder",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "tsp",
+            "item": "chilli powder"
+          }
+        },
+        {
+          "id": 4,
+          "text": "2 tsp ground coriander",
+          "canonical": "ground coriander",
+          "preparation": null,
+          "quantity": {
+            "amount": 2,
+            "unit": "tsp",
+            "item": "ground coriander"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Stir in the {chilli} and {coriander}"
+      },
+      {
+        "text": "Add the {chilli powder} and {ground coriander}"
+      }
+    ],
+    "tested": false
   }
 ]

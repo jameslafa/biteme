@@ -149,24 +149,34 @@ async function searchRecipes(query) {
   );
 }
 
-// Match a step ref name against an ingredient — resolves ref to canonical, then falls back to text
-function matchStepRef(ingredientName, item) {
+// Resolve a step ref name to the single ingredient it refers to.
+// Exact canonical match always wins; a word-boundary text match is only used
+// as a fallback when no ingredient's canonical matches. This prevents a bare
+// ref like {chilli} from also matching "chilli powder", or {coriander} from
+// matching "ground coriander", since those have their own canonical entries.
+function findStepIngredient(ingredientName, ingredients) {
   const resolved = resolveIngredientRef(ingredientName);
-  if (item.canonical && item.canonical.toLowerCase() === resolved) {
-    return true;
+  const escaped = ingredientName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`\\b${escaped}\\b`, 'i');
+  let fallback = null;
+  for (const items of Object.values(ingredients)) {
+    for (const item of items) {
+      if (item.canonical && item.canonical.toLowerCase() === resolved) {
+        return item;
+      }
+      if (!fallback && regex.test(item.text)) {
+        fallback = item;
+      }
+    }
   }
-  const regex = new RegExp(`\\b${ingredientName}\\b`, 'i');
-  return regex.test(item.text);
+  return fallback;
 }
 
 // Parse step text and replace {ingredient} references with highlighted spans
 function parseStepText(stepText, ingredients) {
   return stepText.replace(/\{([^}]+)\}/g, (_match, ingredientName) => {
-    for (const items of Object.values(ingredients)) {
-      const found = items.find(item => matchStepRef(ingredientName, item));
-      if (found) {
-        return `<span class="ingredient-ref">${ingredientName}</span>`;
-      }
+    if (findStepIngredient(ingredientName, ingredients)) {
+      return `<span class="ingredient-ref">${ingredientName}</span>`;
     }
     return ingredientName;
   });
@@ -176,12 +186,9 @@ function parseStepText(stepText, ingredients) {
 function getStepIngredients(stepText, ingredients) {
   const stepIngredients = [];
   for (const match of stepText.matchAll(/\{([^}]+)\}/g)) {
-    const ingredientName = match[1];
-    for (const items of Object.values(ingredients)) {
-      const found = items.find(item => matchStepRef(ingredientName, item));
-      if (found && !stepIngredients.some(i => i.id === found.id)) {
-        stepIngredients.push(found);
-      }
+    const found = findStepIngredient(match[1], ingredients);
+    if (found && !stepIngredients.some(i => i.id === found.id)) {
+      stepIngredients.push(found);
     }
   }
   return stepIngredients;

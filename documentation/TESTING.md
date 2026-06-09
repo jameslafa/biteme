@@ -179,3 +179,4 @@ Key fixture recipes and what they test:
 - `test-toast` — breakfast/american; no shared ingredients (tests "no matches" edge case)
 - `test-soup` — `tested: false`; excluded from recommendations and plan generation
 - `test-fresh-sharer` / `test-pantry-sharer` — used only for IDF category weight scoring test
+- `test-spice-collision` — `tested: false`; fresh/ground form pairs (`chilli`/`chilli powder`, `coriander`/`ground coriander`) to verify step refs resolve 1:1 and don't conflate
