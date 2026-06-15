@@ -1,5 +1,184 @@
 [
   {
+    "id": "rhubarb-cake",
+    "name": "Rhubarb Cake",
+    "description": "A simple spring cake with a tender butter crumb, tart rhubarb, and a bright hit of grapefruit",
+    "servings": 8,
+    "time": 90,
+    "difficulty": "easy",
+    "diet": [
+      "vegetarian"
+    ],
+    "cuisine": [
+      "french"
+    ],
+    "meal_type": [
+      "baking",
+      "dessert"
+    ],
+    "date": "2026-06-14",
+    "notes": "Avoid overmixing — just fold the batter enough to combine. The twenty-minute rest before baking firms the surface so the rhubarb stays on top rather than sinking. Use larger rhubarb pieces for better visual impact.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "5-6 stalks rhubarb (about 400 g), cut into pieces",
+          "canonical": "rhubarb",
+          "preparation": "(about 400 g), cut into pieces",
+          "quantity": {
+            "amount": 5.0,
+            "amount_max": 6.0,
+            "unit": "stalks",
+            "item": "rhubarb",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g",
+            "secondary_prefix": "about"
+          }
+        },
+        {
+          "id": 9,
+          "text": "Zest of 1 grapefruit",
+          "canonical": "grapefruit",
+          "quantity": {
+            "amount": 1.0,
+            "item": "grapefruit",
+            "prefix": "Zest of"
+          }
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 2,
+          "text": "2 eggs",
+          "canonical": "egg",
+          "quantity": {
+            "amount": 2.0,
+            "item": "eggs"
+          }
+        },
+        {
+          "id": 3,
+          "text": "2 egg yolks",
+          "canonical": "egg yolk",
+          "quantity": {
+            "amount": 2.0,
+            "item": "egg yolks"
+          }
+        },
+        {
+          "id": 7,
+          "text": "80 g butter, melted and completely cooled",
+          "canonical": "butter",
+          "preparation": "melted and completely cooled",
+          "quantity": {
+            "amount": 80.0,
+            "unit": "g",
+            "item": "butter"
+          }
+        },
+        {
+          "id": 8,
+          "text": "3 tbsp Greek yogurt",
+          "canonical": "greek yogurt",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "greek yogurt"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 4,
+          "text": "190 g plain flour (T45 / Type 405 / Tipo 00)",
+          "canonical": "plain flour",
+          "preparation": "(T45 / Type 405 / Tipo 00)",
+          "quantity": {
+            "amount": 190.0,
+            "unit": "g",
+            "item": "plain flour"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 tsp baking powder",
+          "canonical": "baking powder",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "baking powder"
+          }
+        },
+        {
+          "id": 6,
+          "text": "250 g caster sugar, plus 2-3 tbsp for sprinkling on top",
+          "canonical": "caster sugar",
+          "preparation": "plus 2-3 tbsp for sprinkling on top",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "g",
+            "item": "caster sugar"
+          }
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 10,
+          "text": "3 tbsp grapefruit juice",
+          "canonical": "grapefruit juice",
+          "quantity": {
+            "amount": 3.0,
+            "unit": "tbsp",
+            "item": "grapefruit juice"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Preheat the oven to 180°C. Grease a 23 cm springform tin with {butter} and line the base with baking paper."
+      },
+      {
+        "text": "Whisk together {plain flour} and {baking powder} in a bowl with a pinch of salt."
+      },
+      {
+        "text": "In a larger bowl, briefly whisk {egg} and {egg yolk} with {caster sugar} until just combined — do not overmix. Fold in {butter}, {Greek yogurt}, {grapefruit} zest, and {grapefruit juice}."
+      },
+      {
+        "text": "Gently fold in the flour mixture until just incorporated. Transfer the batter to the prepared tin."
+      },
+      {
+        "text": "Arrange the {rhubarb} pieces over the batter. Leave to rest for twenty minutes.",
+        "durations": [
+          {
+            "seconds": 1200,
+            "text": "for twenty minutes"
+          }
+        ]
+      },
+      {
+        "text": "Sprinkle the reserved {caster sugar} generously over the top. Bake for fifty to sixty minutes until a skewer comes out nearly clean.",
+        "durations": [
+          {
+            "seconds": 3600,
+            "text": "for fifty to sixty minutes"
+          }
+        ]
+      },
+      {
+        "text": "Leave to cool in the tin for ten minutes before releasing.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "for ten minutes"
+          }
+        ]
+      }
+    ],
+    "serving_suggestions": "Drizzle with honey and serve with vanilla ice cream.",
+    "tested": true
+  },
+  {
     "id": "butter-bean-masala",
     "name": "Butter Bean Masala",
     "description": "Creamy dried butter beans simmered in a spiced tomato, ginger and garlic masala, finished with garam masala, fresh coriander and lemon",
@@ -240,7 +419,7 @@
       }
     ],
     "serving_suggestions": "Good with rice, roti or naan.",
-    "tested": false
+    "tested": true
   },
   {
     "id": "apple-crumble",
