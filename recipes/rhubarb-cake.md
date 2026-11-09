@@ -8,7 +8,6 @@ difficulty: easy
 diet: [vegetarian]
 cuisine: [french]
 meal_type: [baking, dessert]
-tested: true
 date: 2026-06-14
 ---
 

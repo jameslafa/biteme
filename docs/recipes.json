@@ -1,5 +1,176 @@
 [
   {
+    "id": "creamy-pumpkin-soup",
+    "name": "Creamy Pumpkin Soup",
+    "description": "A quick, velvety pumpkin soup made with onion, garlic and stock, finished with cream",
+    "servings": 4,
+    "time": 30,
+    "difficulty": "easy",
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "cuisine": [
+      "french"
+    ],
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "date": "2026-11-09",
+    "notes": "Use any eating pumpkin or butternut squash, not a carving pumpkin. Hokkaido pumpkin doesn't need peeling, since its skin softens and blends smoothly. Peel every other variety, as the skin stays tough. The pumpkin weight is before peeling and seeding, and an approximate amount is fine. For extra flavour, add either nutmeg or curry powder, not both. Nutmeg keeps the soup mild and classic, while curry powder gives it warmth. The cream is optional. The pumpkin already makes the soup thick, and the cream just adds richness. The soup keeps for 4 to 5 days in the fridge and freezes for up to 3 months. If it is too thick when reheated, thin it with a little water.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "1.2 kg pumpkin or butternut squash",
+          "canonical": "pumpkin",
+          "preparation": "or butternut squash",
+          "quantity": {
+            "amount": 1.2,
+            "unit": "kg",
+            "item": "pumpkin"
+          }
+        },
+        {
+          "id": 2,
+          "text": "1 onion, sliced",
+          "canonical": "onion",
+          "preparation": "sliced",
+          "quantity": {
+            "amount": 1.0,
+            "item": "onion"
+          }
+        },
+        {
+          "id": 3,
+          "text": "2 cloves garlic, peeled",
+          "canonical": "garlic",
+          "preparation": "peeled",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "cloves",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 10,
+          "text": "Parsley, chopped, to serve (optional)",
+          "canonical": "parsley",
+          "preparation": "chopped, to serve (optional)"
+        }
+      ],
+      "Fridge": [
+        {
+          "id": 6,
+          "text": "125 ml oat cream, plus extra to serve",
+          "canonical": "oat cream",
+          "preparation": "plus extra to serve",
+          "quantity": {
+            "amount": 125.0,
+            "unit": "ml",
+            "item": "oat cream"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 4,
+          "text": "750 ml vegetable stock",
+          "canonical": "vegetable stock",
+          "quantity": {
+            "amount": 750.0,
+            "unit": "ml",
+            "item": "vegetable stock"
+          }
+        },
+        {
+          "id": 5,
+          "text": "250 ml water",
+          "canonical": "water",
+          "quantity": {
+            "amount": 250.0,
+            "unit": "ml",
+            "item": "water"
+          }
+        },
+        {
+          "id": 7,
+          "text": "1 tin (400 g) brown lentils, drained and rinsed (optional)",
+          "canonical": "lentil",
+          "preparation": "drained and rinsed (optional)",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "lentils",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 8,
+          "text": "1/4-1/2 tsp nutmeg, freshly grated (optional, or use curry powder)",
+          "canonical": "nutmeg",
+          "preparation": "freshly grated (optional, or use curry powder)",
+          "quantity": {
+            "amount": 0.25,
+            "amount_max": 0.5,
+            "unit": "tsp",
+            "item": "nutmeg"
+          }
+        },
+        {
+          "id": 9,
+          "text": "1-2 tsp curry powder (optional, or use nutmeg)",
+          "canonical": "curry powder",
+          "preparation": "(optional, or use nutmeg)",
+          "quantity": {
+            "amount": 1.0,
+            "amount_max": 2.0,
+            "unit": "tsp",
+            "item": "curry powder"
+          }
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Remove the seeds from {pumpkin}. Peel it unless it is a Hokkaido, then cut it into four-centimetre chunks."
+      },
+      {
+        "text": "Put {pumpkin}, {onion}, {garlic}, {vegetable stock} and {water} in a large pot. The liquid won't quite cover the pumpkin. If using {curry powder}, add it now. Bring to a boil uncovered, then reduce the heat and simmer rapidly until the pumpkin is very tender when pierced with a knife, about ten minutes.",
+        "durations": [
+          {
+            "seconds": 600,
+            "text": "about ten minutes"
+          }
+        ]
+      },
+      {
+        "text": "Take the pot off the heat and blend until smooth with a stick blender. If you use a countertop blender, let the soup cool a little first, because hot soup can blow the lid off."
+      },
+      {
+        "text": "Season with salt and pepper, then stir in {oat cream} and {nutmeg}, if using. Don't let the soup boil after adding the cream."
+      },
+      {
+        "text": "For a more filling soup, add {lentil} and warm through gently for two to three minutes.",
+        "durations": [
+          {
+            "seconds": 180,
+            "text": "for two to three minutes"
+          }
+        ]
+      },
+      {
+        "text": "Ladle into bowls, drizzle with a little extra {oat cream}, and finish with black pepper and {parsley}."
+      }
+    ],
+    "serving_suggestions": "Serve with crusty bread for dunking.",
+    "tested": true
+  },
+  {
     "id": "aubergine-riste",
     "name": "Aubergine Riste",
     "description": "A traditional Provençal slow-cooked eggplant stew from Arles, reduced to a rich, jammy consistency",

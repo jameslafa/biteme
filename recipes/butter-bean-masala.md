@@ -9,7 +9,6 @@ diet: [vegan, gluten-free]
 cuisine: [indian]
 meal_type: [dinner]
 date: 2026-06-05
-tested: true
 ---
 
 # Notes

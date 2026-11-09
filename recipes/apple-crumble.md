@@ -8,7 +8,6 @@ difficulty: easy
 diet: [vegan]
 cuisine: [british]
 meal_type: [dessert]
-tested: true
 date: 2026-04-04
 ---
 
