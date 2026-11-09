@@ -1,5 +1,185 @@
 [
   {
+    "id": "aubergine-riste",
+    "name": "Aubergine Riste",
+    "description": "A traditional Provençal slow-cooked eggplant stew from Arles, reduced to a rich, jammy consistency",
+    "servings": 4,
+    "time": 360,
+    "difficulty": "medium",
+    "diet": [
+      "vegan",
+      "gluten-free"
+    ],
+    "cuisine": [
+      "french"
+    ],
+    "meal_type": [
+      "dinner"
+    ],
+    "date": "2026-10-18",
+    "notes": "This is a traditional dish from Arles in Provence that requires patience. The aubergines are slowly reduced over several hours until they melt into a thick, flavourful spread. The original recipe suggests cooking it in stages over two days for the best consistency, but you can achieve good results in one long session. Use a very low heat throughout to avoid burning. Serve hot over rice, as a pasta sauce, or cold on toasted bread. If serving with rice, remember to put it on about twenty minutes before the riste is done. The dish freezes well and can be easily extended with extra water and flour if you need to serve more people.",
+    "ingredients": {
+      "Fresh": [
+        {
+          "id": 1,
+          "text": "5 medium aubergines",
+          "canonical": "aubergine",
+          "quantity": {
+            "amount": 5.0,
+            "unit": "medium",
+            "item": "aubergines"
+          }
+        },
+        {
+          "id": 3,
+          "text": "2 medium onions",
+          "canonical": "onion",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "medium",
+            "item": "onions"
+          }
+        },
+        {
+          "id": 5,
+          "text": "1 clove garlic",
+          "canonical": "garlic",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "clove",
+            "item": "garlic"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 sprig thyme",
+          "canonical": "thyme",
+          "quantity": {
+            "amount": 1.0,
+            "item": "thyme"
+          }
+        }
+      ],
+      "Pantry": [
+        {
+          "id": 4,
+          "text": "2 tins (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
+          "quantity": {
+            "amount": 2.0,
+            "unit": "tins",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
+          }
+        },
+        {
+          "id": 8,
+          "text": "1 tsp sugar",
+          "canonical": "sugar",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tsp",
+            "item": "sugar"
+          }
+        },
+        {
+          "id": 9,
+          "text": "Water, as needed",
+          "canonical": "water",
+          "preparation": "as needed"
+        }
+      ],
+      "Condiments": [
+        {
+          "id": 2,
+          "text": "Olive oil, as needed",
+          "canonical": "olive oil",
+          "preparation": "as needed"
+        }
+      ],
+      "Spices": [
+        {
+          "id": 7,
+          "text": "1 bay leaf",
+          "canonical": "bay leaf",
+          "quantity": {
+            "amount": 1.0,
+            "item": "bay leaf"
+          }
+        },
+        {
+          "id": 10,
+          "text": "Herbes de Provence, to taste",
+          "canonical": "herbes de provence",
+          "preparation": "to taste"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "text": "Remove the tough stem ends from {aubergine}. Cut them in half or quarters lengthwise depending on size, then slice into pieces one to two centimetres thick. The pieces should be fairly large but easy to stir."
+      },
+      {
+        "text": "Heat a little {olive oil} in a large pot over medium-low heat. Add {aubergine} and cook uncovered, stirring frequently, until they have reduced by about two-thirds and lost most of their water. This takes about fifteen minutes. Don't let them burn. Set aside in a bowl.",
+        "durations": [
+          {
+            "seconds": 900,
+            "text": "about fifteen minutes"
+          }
+        ]
+      },
+      {
+        "text": "If there is clean {olive oil} at the bottom of the aubergine bowl, pour it back into the pot. Otherwise add a little fresh oil. Add {onion} and cook over low heat until golden and translucent, about five to seven minutes. Do not let them brown or burn.",
+        "durations": [
+          {
+            "seconds": 420,
+            "text": "about five to seven minutes"
+          }
+        ]
+      },
+      {
+        "text": "Add {chopped tomatoes}, {sugar}, and crushed {garlic}. Cook for about five minutes, stirring occasionally, to cook off the raw tinned taste.",
+        "durations": [
+          {
+            "seconds": 300,
+            "text": "for about five minutes"
+          }
+        ]
+      },
+      {
+        "text": "Return the cooked {aubergine} to the pot. Add {thyme}, {bay leaf}, and a pinch of {herbes de Provence}. Season with salt and pepper to taste."
+      },
+      {
+        "text": "Reduce the heat to very low. Half-cover the pot and simmer very gently, stirring regularly and adding splashes of {water} whenever the mixture looks dry. Continue for two to three hours. An electric hob works better than gas for this, as gas is too fierce even at minimum.",
+        "durations": [
+          {
+            "seconds": 10800,
+            "text": "for two to three hours"
+          }
+        ]
+      },
+      {
+        "text": "When {aubergine} starts to break down and melt, stir well to break up any large pieces. Continue cooking for another one to two hours, stirring often, until the mixture is thick and jammy. If serving with rice, put it on about twenty minutes before the end.",
+        "durations": [
+          {
+            "seconds": 7200,
+            "text": "one to two hours"
+          },
+          {
+            "seconds": 1200,
+            "text": "about twenty minutes"
+          }
+        ]
+      },
+      {
+        "text": "Taste and adjust seasoning. Remove {thyme} sprig and {bay leaf} before serving."
+      }
+    ],
+    "serving_suggestions": "Serve hot over rice, toss with pasta as a sauce, or spread cold on toasted bread as an appetiser. The riste can be refrigerated and reheated, and actually improves with a second gentle reheating the next day.",
+    "tested": true
+  },
+  {
     "id": "rhubarb-cake",
     "name": "Rhubarb Cake",
     "description": "A simple spring cake with a tender butter crumb, tart rhubarb, and a bright hit of grapefruit",
@@ -242,17 +422,6 @@
           }
         },
         {
-          "id": 6,
-          "text": "400 g tomatoes, chopped (or 1 tin)",
-          "canonical": "tomato",
-          "preparation": "chopped (or 1 tin)",
-          "quantity": {
-            "amount": 400.0,
-            "unit": "g",
-            "item": "tomatoes"
-          }
-        },
-        {
           "id": 7,
           "text": "1 tbsp coriander, chopped",
           "canonical": "coriander",
@@ -284,6 +453,18 @@
             "amount": 250.0,
             "unit": "g",
             "item": "butter beans"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
           }
         }
       ],
@@ -409,7 +590,7 @@
         ]
       },
       {
-        "text": "Add the {tomato}, {turmeric}, {ground coriander}, {ground cumin} and {chilli powder}. Cook down until the tomatoes break apart and the oil separates at the edges."
+        "text": "Add the {chopped tomatoes}, {turmeric}, {ground coriander}, {ground cumin} and {chilli powder}. Cook down until the sauce thickens and the oil separates at the edges."
       },
       {
         "text": "Add the {butter bean} and season with salt, stirring gently to coat. Add a splash of the reserved cooking liquid if it looks too dry. Simmer so the beans take on the spices but stay whole."
@@ -1032,7 +1213,7 @@
   {
     "id": "crushed-puy-lentils-tahini-cumin",
     "name": "Crushed Puy Lentils with Tahini and Cumin",
-    "description": "Puy lentils crushed into a thick, spiced base of garlic, cumin, and fresh tomato, finished with tahini and lemon.",
+    "description": "Puy lentils crushed into a thick, spiced base of garlic, cumin, and tomato, finished with tahini and lemon.",
     "servings": 2,
     "time": 35,
     "difficulty": "easy",
@@ -1059,17 +1240,6 @@
             "amount": 3.0,
             "unit": "cloves",
             "item": "garlic"
-          }
-        },
-        {
-          "id": 6,
-          "text": "3 medium tomatoes, skinned and cut into 1 cm dice",
-          "canonical": "tomato",
-          "preparation": "skinned and cut into 1 cm dice",
-          "quantity": {
-            "amount": 3.0,
-            "unit": "medium",
-            "item": "tomatoes"
           }
         },
         {
@@ -1116,6 +1286,18 @@
             "amount": 200.0,
             "unit": "g",
             "item": "puy lentils"
+          }
+        },
+        {
+          "id": 6,
+          "text": "1 tin (400 g) chopped tomatoes",
+          "canonical": "chopped tomato",
+          "quantity": {
+            "amount": 1.0,
+            "unit": "tin",
+            "item": "chopped tomatoes",
+            "secondary_amount": 400.0,
+            "secondary_unit": "g"
           }
         },
         {
@@ -1196,7 +1378,7 @@
         ]
       },
       {
-        "text": "Melt {vegan butter} with {olive oil} in a large sauté pan over medium-high heat. Add {garlic} and {ground cumin} and cook for one minute. Add {tomatoes}, most of the {coriander}, and the cooked lentils. Stir and cook for two minutes.",
+        "text": "Melt {vegan butter} with {olive oil} in a large sauté pan over medium-high heat. Add {garlic} and {ground cumin} and cook for one minute. Add {chopped tomatoes}, most of the {coriander}, and the cooked lentils. Stir and cook for two minutes.",
         "durations": [
           {
             "seconds": 60,

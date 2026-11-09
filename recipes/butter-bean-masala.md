@@ -23,7 +23,7 @@ The beans need soaking overnight (8–12 hours), so plan ahead. For a richer ver
 - 4 cloves [garlic], minced
 - 1 tbsp [ginger], grated
 - 1 fresh green [chilli], finely chopped
-- 400 g [tomatoes], chopped (or 1 tin)
+- 1 tin (400 g) [chopped tomatoes]
 - 1 tbsp [coriander], chopped
 - Juice of 1/2 [lemon]
 - 3 tbsp [vegetable oil]
@@ -41,7 +41,7 @@ The beans need soaking overnight (8–12 hours), so plan ahead. For a richer ver
 3. Heat the {vegetable oil} in a large pan over medium heat. Add the {cumin seed} and sizzle for about thirty seconds until fragrant.
 4. Add the {onion} and cook until soft and golden, about ten minutes.
 5. Stir in the {garlic}, {ginger} and {chilli}. Cook for two minutes, until the raw smell goes.
-6. Add the {tomato}, {turmeric}, {ground coriander}, {ground cumin} and {chilli powder}. Cook down until the tomatoes break apart and the oil separates at the edges.
+6. Add the {chopped tomatoes}, {turmeric}, {ground coriander}, {ground cumin} and {chilli powder}. Cook down until the sauce thickens and the oil separates at the edges.
 7. Add the {butter bean} and season with salt, stirring gently to coat. Add a splash of the reserved cooking liquid if it looks too dry. Simmer so the beans take on the spices but stay whole.
 8. Stir through the {garam masala} and take off the heat. Add the {coriander} and {lemon} juice. Taste, adjust the salt, and rest for a couple of minutes before serving.
 
