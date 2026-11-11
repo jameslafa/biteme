@@ -221,6 +221,7 @@ All user data is local-first. Sync is additive, not required.
 **How it works:**
 - A filter is `{ diets, avoid }`. `currentFilter()` in `app.js` combines directly picked diets with the selected friends' diets, and the union of their avoided ingredients — a recipe must work for everyone
 - `matchesFilter()` in `recipes.js` is the single matching rule: every diet satisfied (vegan counts as vegetarian, so recipes are never tagged both — the linter rejects it) and no avoided canonical ingredient
+- In the sheet, a checkbox per friend combines several; the arrow next to each name selects only that friend and closes the sheet in one tap (the usual case: cooking for one person)
 - Avoided ingredients hide recipes (right for allergies); they're picked from `ingredients.json` canonicals so matching is exact
 - `viewRecipe()` carries the derived filter to the recipe page via `filterQuery()` (`&diet=…&avoid=…`); similar recipes respect it, and a gluten-free diet switches on the recipe's gluten-free version
 - Friends are stored locally in IndexedDB with sync-ready fields (random ID, `updated_at`, soft-delete `deleted_at`) for a future backend

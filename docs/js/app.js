@@ -305,18 +305,33 @@ function renderFriendOptions() {
   const list = document.getElementById('friend-options');
   document.getElementById('no-friends').hidden = friends.length > 0;
   list.innerHTML = friends.map(f => `
-    <li>
+    <li class="friend-option-row">
       <label class="friend-option">
         <input type="checkbox" data-id="${f.id}" ${activeFriendIds.includes(f.id) ? 'checked' : ''}>
         <span class="friend-option-name">${escapeHtml(f.name)}</span>
         ${renderDietIcons(f.diets)}
         ${f.avoid.length > 0 ? `<span class="friend-option-avoid">no ${escapeHtml(f.avoid.join(', '))}</span>` : ''}
       </label>
+      <button class="friend-only" data-id="${f.id}" aria-label="Cook for ${escapeHtml(f.name)} only">
+        ${icon('chevron-right', 20)}
+      </button>
     </li>
   `).join('');
   list.querySelectorAll('input').forEach(input => {
     input.addEventListener('change', () => toggleFriend(input.dataset.id));
   });
+  list.querySelectorAll('.friend-only').forEach(btn => {
+    btn.addEventListener('click', () => selectOnlyFriend(btn.dataset.id));
+  });
+}
+
+// One tap: cook for just this friend and close the sheet
+function selectOnlyFriend(id) {
+  activeFriendIds = [id];
+  activeDiets = [];
+  updateFilterURL();
+  loadRecipes();
+  closeCookingFor();
 }
 
 function openCookingFor() {

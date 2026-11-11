@@ -176,6 +176,23 @@ test.describe('Cooking for', () => {
     await expect(page.locator('#cooking-for-bar')).toBeHidden();
   });
 
+  test('one tap on a friend\'s arrow cooks for just them and closes the sheet', async ({ page }) => {
+    await seedFriends(page, [
+      { name: 'Luna', diets: ['vegan', 'gluten-free'], avoid: [] },
+      { name: 'Milena', diets: ['vegan'], avoid: ['tomato'] },
+    ]);
+
+    // Milena ticked and a plain diet picked first; the arrow replaces both
+    await page.locator('#cooking-for-btn').click();
+    await friendOption(page, 'Milena').check();
+    await page.locator('#diet-chips .chip[data-value="vegetarian"]').click();
+    await page.locator('.friend-only[aria-label="Cook for Luna only"]').click();
+
+    await expect(page.locator('#cooking-for-sheet')).toBeHidden();
+    await expect(page.locator('#cooking-for-bar .cooking-for-label')).toHaveText('Cooking for Luna');
+    await expect(page.locator('.recipe-title')).toHaveText(['Test Salad']);
+  });
+
   test('sheet with no friends invites adding them', async ({ page }) => {
     await page.locator('#cooking-for-btn').click();
     await expect(page.locator('#no-friends')).toBeVisible();

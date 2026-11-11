@@ -192,7 +192,7 @@ main {
 #search-input {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  padding-right: 7.5rem;
+  padding-right: 7rem; /* 3 action buttons (3 × 2rem + gaps + 0.5rem inset) */
   font-size: 0.95rem;
   font-weight: 300;
   color: var(--text-primary);
@@ -696,6 +696,35 @@ a.tag-meal-type {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.friend-option-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.friend-option-row .friend-option {
+  flex: 1;
+  border-bottom: none;
+}
+
+.friend-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.friend-only:hover {
+  background: var(--accent-light);
 }
 
 .friend-option {
