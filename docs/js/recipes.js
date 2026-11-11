@@ -26,7 +26,65 @@ function resolveIngredientRef(name) {
   return ingredientVocabulary.get(name.toLowerCase()) ?? name.toLowerCase();
 }
 
-// Force a fresh fetch from the network, bypassing version check and localStorage cache
+const RECIPES_KEY = 'recipes-cache';
+const MANIFEST_KEY = 'recipes-manifest';
+
+let recipesRevalidation = null;
+
+function readStoredRecipes() {
+  try {
+    return JSON.parse(localStorage.getItem(RECIPES_KEY));
+  } catch {
+    return null;
+  }
+}
+
+function storedRecipesVersion() {
+  try {
+    return JSON.parse(localStorage.getItem(MANIFEST_KEY))?.version ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function storeRecipes(manifest, recipes) {
+  recipesCache = recipes;
+  try {
+    localStorage.setItem(MANIFEST_KEY, JSON.stringify(manifest));
+    localStorage.setItem(RECIPES_KEY, JSON.stringify(recipes));
+  } catch {
+    // Storage full or unavailable — in-memory copy still works for this page
+  }
+}
+
+// Fetch the manifest and, if its version differs from the stored one, the recipes.
+// Returns true if new recipe data was stored.
+async function syncRecipes() {
+  try {
+    const manifestResponse = await fetch('recipes-manifest.json');
+    if (!manifestResponse.ok) return false;
+    const manifest = await manifestResponse.json();
+    if (manifest.version === storedRecipesVersion() && readStoredRecipes()) return false;
+
+    const recipesResponse = await fetch('recipes.json');
+    if (!recipesResponse.ok) return false;
+    storeRecipes(manifest, await recipesResponse.json());
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// Check for newer recipes in the background. Concurrent callers share one request.
+// Resolves to true if recipes changed, so callers can re-render.
+function checkForRecipeUpdates() {
+  if (!recipesRevalidation) {
+    recipesRevalidation = syncRecipes().finally(() => { recipesRevalidation = null; });
+  }
+  return recipesRevalidation;
+}
+
+// Force a fresh fetch from the network, bypassing the version check (pull-to-refresh).
 // Returns true on success, false on failure
 async function forceRefreshRecipes() {
   try {
@@ -35,93 +93,28 @@ async function forceRefreshRecipes() {
       fetch('recipes.json', { cache: 'no-cache' }),
     ]);
     if (!manifestResponse.ok || !recipesResponse.ok) return false;
-
-    const manifest = await manifestResponse.json();
-    recipesCache = await recipesResponse.json();
-    localStorage.setItem('recipes-manifest', JSON.stringify(manifest));
-    localStorage.setItem('recipes-cache', JSON.stringify(recipesCache));
+    storeRecipes(await manifestResponse.json(), await recipesResponse.json());
     return true;
   } catch {
     return false;
   }
 }
 
-// Check manifest and refresh recipes if version changed
-// Returns true if recipes were updated
-async function checkForRecipeUpdates() {
-  try {
-    const response = await fetch('recipes-manifest.json');
-    if (!response.ok) return false;
-
-    const manifest = await response.json();
-    const cachedManifest = localStorage.getItem('recipes-manifest');
-
-    if (cachedManifest) {
-      const cached = JSON.parse(cachedManifest);
-      if (cached.version === manifest.version) return false;
-    }
-
-    // Version changed — clear in-memory cache so next load fetches fresh
-    recipesCache = null;
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-// Load recipes from JSON file with manifest-based caching
+// Stale-while-revalidate: return stored recipes immediately and check for updates
+// in the background, so a slow network never delays rendering. Only the very first
+// load (nothing stored yet) waits for the network.
 async function loadRecipesData() {
-  if (recipesCache) {
+  if (recipesCache) return recipesCache;
+
+  const stored = readStoredRecipes();
+  if (stored) {
+    recipesCache = stored;
+    checkForRecipeUpdates();
     return recipesCache;
   }
 
-  try {
-    // Try to fetch manifest to check version
-    const manifestResponse = await fetch('recipes-manifest.json');
-
-    if (manifestResponse.ok) {
-      const manifest = await manifestResponse.json();
-      const cachedManifest = localStorage.getItem('recipes-manifest');
-      const cachedRecipes = localStorage.getItem('recipes-cache');
-
-      // If we have cached data and version matches, use cache
-      if (cachedManifest && cachedRecipes) {
-        const cached = JSON.parse(cachedManifest);
-        if (cached.version === manifest.version) {
-          console.log('[Recipes] Using cached recipes (version match)');
-          recipesCache = JSON.parse(cachedRecipes);
-          return recipesCache;
-        }
-      }
-
-      // Version mismatch or no cache - fetch fresh recipes
-      console.log('[Recipes] Fetching fresh recipes (new version)');
-      const response = await fetch('recipes.json');
-      if (!response.ok) {
-        throw new Error(`Failed to load recipes: ${response.status}`);
-      }
-      recipesCache = await response.json();
-
-      // Update cache
-      localStorage.setItem('recipes-manifest', JSON.stringify(manifest));
-      localStorage.setItem('recipes-cache', JSON.stringify(recipesCache));
-
-      return recipesCache;
-    }
-  } catch (error) {
-    // Network error - try to use cached data
-    console.log('[Recipes] Network error, trying cache:', error.message);
-    const cachedRecipes = localStorage.getItem('recipes-cache');
-    if (cachedRecipes) {
-      console.log('[Recipes] Using cached recipes (offline)');
-      recipesCache = JSON.parse(cachedRecipes);
-      return recipesCache;
-    }
-
-    // No cache available
-    console.error('[Recipes] No cached data available');
-    return [];
-  }
+  await syncRecipes();
+  return recipesCache || [];
 }
 
 // Get all recipes
@@ -129,24 +122,13 @@ async function getRecipes() {
   return await loadRecipesData();
 }
 
-// Get recipe by ID
+// Get recipe by ID. A recipe missing from stored data may have been added since the
+// last sync (e.g. a freshly shared link), so wait for the update check before giving up.
 async function getRecipeById(id) {
-  const recipes = await loadRecipesData();
-  return recipes.find(recipe => recipe.id === id);
-}
-
-// Search recipes by name
-async function searchRecipes(query) {
-  const recipes = await loadRecipesData();
-  if (!query) return recipes;
-
-  const lowerQuery = query.toLowerCase();
-  return recipes.filter(recipe =>
-    recipe.name.toLowerCase().includes(lowerQuery) ||
-    recipe.description.toLowerCase().includes(lowerQuery) ||
-    (recipe.cuisine || []).some(c => c.toLowerCase().includes(lowerQuery)) ||
-    (recipe.meal_type || []).some(m => m.toLowerCase().includes(lowerQuery))
-  );
+  const find = () => (recipesCache || []).find(recipe => recipe.id === id);
+  await loadRecipesData();
+  if (!find()) await checkForRecipeUpdates();
+  return find();
 }
 
 // Resolve a step ref name to the single ingredient it refers to.

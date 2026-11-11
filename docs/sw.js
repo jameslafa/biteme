@@ -1,4 +1,7 @@
-const CACHE_NAME = 'biteme-v38';
+const CACHE_NAME = 'biteme-v39';
+const NETWORK_TIMEOUT_MS = 3000;
+const SLOW_NETWORK_WINDOW_MS = 30000;
+let slowNetworkUntil = 0;
 
 const APP_SHELL = [
   './',
@@ -96,44 +99,48 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Navigation requests (HTML pages)
+  // Navigation requests are cached by pathname only, so recipe.html?id=X
+  // doesn't create a separate entry per recipe
   if (event.request.mode === 'navigate') {
     event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          // Cache by pathname only (strip query string) so recipe.html?id=X doesn't create separate entries
-          const cacheKey = url.origin + url.pathname;
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(cacheKey, responseToCache);
-          });
-          return response;
-        })
-        .catch(() => {
-          // Offline: try to match by pathname
-          const cacheKey = url.origin + url.pathname;
-          return caches.match(cacheKey).then((cached) => {
-            return cached || caches.match('index.html');
-          });
-        })
+      networkFirst(event.request, url.origin + url.pathname)
+        .catch(() => caches.match('index.html'))
     );
     return;
   }
 
-  // Static assets (CSS, JS, images) — network-first with cache fallback
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        if (response && response.status === 200) {
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-        }
-        return response;
-      })
-      .catch(() => {
-        return caches.match(event.request);
-      })
-  );
+  event.respondWith(networkFirst(event.request, event.request));
 });
+
+// Network-first, but don't wait on a slow connection: after NETWORK_TIMEOUT_MS,
+// serve the cached copy if there is one. Once a request has timed out, treat the
+// connection as slow for SLOW_NETWORK_WINDOW_MS and serve cached copies right away,
+// so the timeout isn't paid again by every script and data file the page loads.
+// The network response still updates the cache in the background for next time.
+async function networkFirst(request, cacheKey) {
+  const network = fetch(request).then((response) => {
+    if (response.ok) {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then((cache) => cache.put(cacheKey, copy));
+    }
+    return response;
+  });
+  network.catch(() => {}); // a late failure after serving the cache is not an error
+
+  if (Date.now() < slowNetworkUntil) {
+    const cached = await caches.match(cacheKey);
+    if (cached) return cached;
+  }
+
+  const timeout = new Promise((resolve) => setTimeout(resolve, NETWORK_TIMEOUT_MS, null));
+  try {
+    const response = await Promise.race([network, timeout]);
+    if (response) return response;
+    slowNetworkUntil = Date.now() + SLOW_NETWORK_WINDOW_MS;
+  } catch {
+    // Network failed — fall through to cache
+  }
+
+  const cached = await caches.match(cacheKey);
+  return cached || network;
+}

@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   activeCuisine = urlParams.get('cuisine') || null;
   activeMealType = urlParams.get('meal_type') || null;
 
-  loadRecipes();
+  // Render stored recipes immediately, then re-render if the background check found newer ones
+  loadRecipes().then(async () => {
+    if (await checkForRecipeUpdates()) loadRecipes();
+  });
   setupSearch();
   setupFavoritesFilter();
   setupSurpriseBtn();

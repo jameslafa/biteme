@@ -343,6 +343,58 @@ test.describe('Recipe Refresh on Resume', () => {
   });
 });
 
+test.describe('Recipe data caching', () => {
+  test('renders stored recipes without waiting for the network; re-renders when the background check finds an update', async ({ page }) => {
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    // Hold the manifest request open to simulate a slow connection
+    let releaseManifest;
+    const manifestGate = new Promise(resolve => { releaseManifest = resolve; });
+    await page.route('**/recipes-manifest.json', async route => {
+      await manifestGate;
+      route.fulfill({
+        status: 200, contentType: 'application/json',
+        body: JSON.stringify({ version: 'updated-version', recipe_count: 4 })
+      });
+    });
+    await page.unroute('**/recipes.json');
+    await page.route('**/recipes.json', route => {
+      route.fulfill({
+        status: 200, contentType: 'application/json',
+        body: JSON.stringify(updatedRecipes)
+      });
+    });
+
+    await page.goto('/');
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    releaseManifest();
+    await expect(page.locator('.recipe-card')).toHaveCount(4);
+  });
+
+  test('recipe missing from stored data is fetched before showing "not found"', async ({ page }) => {
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    const newRecipe = { ...testRecipes[0], id: 'test-new', name: 'Test New Recipe' };
+    await page.route('**/recipes-manifest.json', route => {
+      route.fulfill({
+        status: 200, contentType: 'application/json',
+        body: JSON.stringify({ version: 'updated-version', recipe_count: 4 })
+      });
+    });
+    await page.unroute('**/recipes.json');
+    await page.route('**/recipes.json', route => {
+      route.fulfill({
+        status: 200, contentType: 'application/json',
+        body: JSON.stringify([...testRecipes, newRecipe])
+      });
+    });
+
+    await page.goto('/recipe.html?id=test-new');
+    await expect(page.locator('.recipe-name')).toHaveText('Test New Recipe');
+  });
+});
+
 test.describe('Pull to Refresh', () => {
   async function simulatePullGesture(page, pullDistance) {
     await page.evaluate((distance) => {

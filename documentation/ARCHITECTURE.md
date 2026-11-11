@@ -77,13 +77,17 @@ All user data is local-first. Sync is additive, not required.
 
 ## Recipe Caching & Freshness
 
-**Decision:** Three-layer caching (in-memory → localStorage → network) with manifest-based invalidation
+**Decision:** Three-layer caching (in-memory → localStorage → network) with manifest-based invalidation. Pages never wait on the network when a cached copy exists — a slow kitchen connection must not delay rendering.
 
 **How it works:**
+- Recipe data is stale-while-revalidate: pages render from localStorage immediately and the manifest is checked in the background; the home page re-renders if newer recipes arrive
 - A lightweight manifest file carries a version; recipe data is only re-fetched when the version changes
-- Checked on page load and on app resume (`visibilitychange`)
+- Checked on page load and on app resume (`visibilitychange`); concurrent checks share one request
+- A recipe ID missing from stored data (e.g. a freshly shared link) waits for the update check before showing "not found"
+- Only the very first load, with nothing stored, waits for the network
 - Pull-to-refresh forces a network fetch regardless of version
 - Recipe data bypasses the service worker cache — the SW handles the app shell (HTML, CSS, JS) on a different cadence
+- The SW is network-first with a 3 s timeout, falling back to cache. After a timeout it serves cached files immediately for 30 s (still refreshing the cache in the background), so the timeout isn't paid again by each script and data file a page loads
 - Every file a page or script needs must be listed in `APP_SHELL` in `docs/sw.js`: each SW version bump deletes the old cache, so an unlisted file is unavailable offline until revisited online. `tests/sw.spec.js` enforces this
 
 ---
