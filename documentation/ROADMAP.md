@@ -40,7 +40,6 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Service Worker Updates** — Toast notification on homepage when app code changes
 - **Ingredient Categories** — 5 categories (Fresh, Fridge, Pantry, Condiments, Spices), sections defined in `docs/ingredients.json` and derived by the parser at build time
 - **Favorites** — Heart icon, IndexedDB, filter view, persisted state
-- **What's New** — Standalone changelog page with timeline layout, notification dot on drawer, accessible from side drawer
 - **Shopping List** — Add ingredients from recipe, grouped list, check off in store, TTL cleanup
 - **Screen Wake Lock** — Keeps screen awake in cooking mode
 - **Adjustable Servings** — Structured quantity parsing, +/- controls, smart rounding, no-scale support
@@ -60,9 +59,8 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Canonical Ingredient System** — Controlled vocabulary (`docs/ingredients.json`), `[bracket]` syntax in recipe markdown, `canonical` + `preparation` fields in JSON output, exact step ref matching, linter enforcement
 - **Shopping List Merged View** — Merged/by-recipe toggle on the shopping list; same-canonical ingredients across recipes consolidated into one row with summed quantities, attribution, and indeterminate partial-check state
 - **Ingredient Search (Phase 1)** — Search bar matches ingredient text, relevance-scored results (name > tag/description > ingredient)
-- **Side Drawer (Hamburger Menu)** — Navigation drawer on home page, houses What's New and footer links, notification dot aggregation
+- **Side Drawer (Hamburger Menu)** — Navigation drawer on home page, houses Meal Plan, Cooking Log, Settings and footer links
 - **Cooking Log** — Dedicated page with stats (recipes cooked, sessions, total time, week streak), most-made recipes, and monthly timeline of all completed cooks
-- **How It Works** — Feature guide page with real UI mockups, 8 walkthrough sections, deep-linkable anchors, first-visit nudge on home page
 - **Recipe Recommendations** — IDF-weighted ingredient similarity engine with category weighting (Fresh/Fridge > Pantry) and pantry stoplist (oils, flour, sugar, etc.); "Same ingredients, different dish" section on recipe detail page showing top 5 related recipes with shared ingredients; respects user's dietary and untested-recipe settings
 - **Meal Plan** — Weekly meal planner with IDF-weighted greedy recipe selection, seed recipe support, per-recipe servings, swap panel, shared ingredient callout, and per-ingredient cart buttons; active plan mode with cooked-state tracking (auto-synced from cooking sessions + manual toggle); home screen banner shows plan progress; back navigation uses `history.back()` on all sub-pages
 - **Ingredient display improvements** — Preparation text stripped from shopping contexts (shopping list, plan); first letter capitalised; text fractions (`1/2`) used consistently instead of unicode (`½`); attribution removed from merged shopping list view

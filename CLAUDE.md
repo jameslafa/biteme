@@ -22,7 +22,6 @@
 
 # Key files
 
-- `docs/js/changelog.js` — In-app "What's New" entries (increment ID, newest first)
 - `scripts/screenshots.js` — Playwright script for README screenshots
 - `tests/fixtures/recipes.test.json` — Test fixture for Playwright e2e tests (must match `recipes.json` structure)
 - `documentation/` — ROADMAP, ARCHITECTURE, DATA_STRUCTURE, TESTING docs (update before committing features)

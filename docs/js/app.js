@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupSurpriseBtn();
   updateCartCount();
   setupDrawer();
-  checkFirstVisitNudge();
   showMealPlanBanner();
   showRatingBannerIfNeeded();
   setupPullToRefresh();
@@ -54,7 +53,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       if (updated) {
         loadRecipes();
       }
-      checkWhatsNewDot();
     }
   });
 });
@@ -534,51 +532,6 @@ function setupDrawer() {
     if (e.key === 'Escape' && drawer.style.display !== 'none') {
       closeDrawer();
     }
-  });
-
-  checkWhatsNewDot();
-}
-
-function updateDrawerDot() {
-  const dots = document.querySelectorAll('.drawer-item-dot');
-  const hasAny = [...dots].some(dot => dot.style.display !== 'none');
-  document.getElementById('drawer-dot').style.display = hasAny ? '' : 'none';
-}
-
-// Check if there are unseen changelog entries and show dot
-async function checkWhatsNewDot() {
-  if (typeof CHANGELOG === 'undefined' || CHANGELOG.length === 0) return;
-
-  const latestId = CHANGELOG[0].id;
-  const lastSeenId = await getSetting('lastSeenChangelogId');
-
-  const dot = document.getElementById('drawer-whats-new-dot');
-
-  // First visit — mark all as seen, no dot
-  if (lastSeenId === null) {
-    await setSetting('lastSeenChangelogId', latestId);
-  } else if (latestId > lastSeenId) {
-    dot.style.display = '';
-  } else {
-    dot.style.display = 'none';
-  }
-
-  updateDrawerDot();
-}
-
-// Show a nudge for first-time visitors pointing to the How It Works page
-async function checkFirstVisitNudge() {
-  const hasSeen = await getSetting('hasSeenHowItWorks');
-  if (hasSeen) return;
-
-  const nudge = document.getElementById('first-visit-nudge');
-  if (!nudge) return;
-
-  nudge.style.display = '';
-
-  document.getElementById('nudge-dismiss').addEventListener('click', async () => {
-    nudge.style.display = 'none';
-    await setSetting('hasSeenHowItWorks', true);
   });
 }
 

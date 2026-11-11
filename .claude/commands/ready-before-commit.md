@@ -35,9 +35,6 @@ Check all the changes and verify that:
    - `DATA_STRUCTURE.md` — if data structures changed
    - `RECIPE_FORMAT.md` — if the recipe format changed
    - `ROADMAP.md` — to reflect progress
-2. If the changes are customer-facing and worth informing users about (if unsure, ask):
-   - `docs/js/changelog.js` — increment ID, newest first
-   - `docs/how-it-works.html` — if the user-facing flow changed. Make sure the styles always matching the app, the UI should look identical.
 
 ## Report
 

@@ -578,30 +578,3 @@ async function getAllRatings() {
     request.onerror = () => reject(request.error);
   });
 }
-
-// Check if user has completed at least one cooking session
-async function hasCompletedCooking() {
-  if (!db) await initDB();
-
-  const transaction = db.transaction(['cooking_sessions'], 'readonly');
-  const store = transaction.objectStore('cooking_sessions');
-
-  return new Promise((resolve, reject) => {
-    const request = store.openCursor();
-
-    request.onsuccess = (event) => {
-      const cursor = event.target.result;
-      if (cursor) {
-        if (cursor.value.completed_at !== null) {
-          resolve(true);
-          return;
-        }
-        cursor.continue();
-      } else {
-        resolve(false);
-      }
-    };
-
-    request.onerror = () => reject(request.error);
-  });
-}

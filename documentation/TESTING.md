@@ -62,9 +62,9 @@ await page.goto('/');
 When a setting is written to IndexedDB asynchronously and there's no DOM element to observe, poll with `waitForFunction`:
 
 ```js
-await page.goto('/whats-new.html');
+await page.locator('#toggle-untested').check();
 // Wait for the async write to complete before navigating away
-await page.waitForFunction(async () => await getSetting('lastSeenChangelogId') !== 3);
+await page.waitForFunction(async () => await getSetting('showUntestedRecipes') === true);
 await page.goto('/');
 ```
 
@@ -91,12 +91,11 @@ When asserting something does NOT appear, there is no DOM signal to wait on. A f
 
 ```js
 // Legitimate — no DOM event fires for absence
-await page.waitForTimeout(2500);
-await expect(page.locator('#install-banner')).toBeHidden();
+await page.waitForTimeout(500);
+await expect(page.locator('.rating-banner')).toBeHidden();
 ```
 
 Keep these waits calibrated to the feature's actual timing:
-- Install banner / 30-day cooldown check: `2500ms`
 - Post-reload state checks: `1000ms`
 - Simple negative check: `500ms`
 
@@ -162,8 +161,6 @@ await page.route('**/recipes.json', route => {
   });
 });
 ```
-
-The same applies to `**/changelog.js` in tests that involve the What's New dot — mock it with a fixed `MOCK_CHANGELOG` so the max ID is known and stable.
 
 If a new feature introduces a new data source (e.g. a new JSON file), add a route mock for it in the relevant `beforeEach` from the start.
 

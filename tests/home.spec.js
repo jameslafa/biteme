@@ -1,15 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const testRecipes = require('./fixtures/recipes.test.json');
 
-
-// Fixture changelog — max id=5, so setSetting('lastSeenChangelogId', 3) reliably shows a dot
-const MOCK_CHANGELOG = [
-  { id: 5, date: '2026-03-05', text: 'Newest feature' },
-  { id: 3, date: '2026-02-01', text: 'Middle feature' },
-  { id: 1, date: '2026-01-01', text: 'Oldest feature' },
-];
-const MOCK_CHANGELOG_JS = `const CHANGELOG = ${JSON.stringify(MOCK_CHANGELOG)};`;
-
 // Used by both Recipe Refresh and Pull to Refresh describes
 const updatedRecipes = [
   ...testRecipes,
@@ -63,13 +54,6 @@ test.beforeEach(async ({ page }) => {
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify(testRecipes)
-    });
-  });
-  await page.route('**/changelog.js', route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/javascript',
-      body: MOCK_CHANGELOG_JS,
     });
   });
 
@@ -177,49 +161,6 @@ test.describe('Home Page', () => {
   });
 });
 
-test.describe('Install Prompt', () => {
-  test('banner not shown without completed recipe', async ({ page }) => {
-    await expect(page.locator('.recipe-card').first()).toBeVisible();
-    await page.evaluate(() => {
-      window.dispatchEvent(new Event('beforeinstallprompt'));
-    });
-    await page.waitForTimeout(2500);
-    await expect(page.locator('#install-banner')).toBeHidden();
-  });
-
-  test('banner shown after recipe completion; stays hidden after dismissal', async ({ page }) => {
-    // Seed a completed cooking session directly — no need to navigate through cooking
-    await page.evaluate(async () => {
-      await initDB();
-      const tx = db.transaction(['cooking_sessions'], 'readwrite');
-      const now = Date.now();
-      tx.objectStore('cooking_sessions').add({ recipe_id: 'test-curry', started_at: now - 1800000, completed_at: now });
-      await new Promise(resolve => { tx.oncomplete = resolve; });
-    });
-
-    // Home page — banner should appear after prompt event
-    await page.goto('/');
-    await expect(page.locator('.recipe-card').first()).toBeVisible();
-    await page.evaluate(() => {
-      window.dispatchEvent(new Event('beforeinstallprompt'));
-    });
-    await expect(page.locator('#install-banner')).toBeVisible({ timeout: 5000 });
-
-    // Dismiss — banner hides
-    await page.locator('#install-close').click();
-    await expect(page.locator('#install-banner')).toBeHidden();
-
-    // Reload — banner stays hidden (30-day cooldown)
-    await page.goto('/');
-    await expect(page.locator('.recipe-card').first()).toBeVisible();
-    await page.evaluate(() => {
-      window.dispatchEvent(new Event('beforeinstallprompt'));
-    });
-    await page.waitForTimeout(1000);
-    await expect(page.locator('#install-banner')).toBeHidden();
-  });
-});
-
 test.describe('Drawer', () => {
   test('opens on hamburger click; closes via overlay, close button, and Escape; shows footer links', async ({ page }) => {
     // Opens
@@ -245,37 +186,6 @@ test.describe('Drawer', () => {
     await expect(page.locator('.drawer-panel')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('#drawer')).toBeHidden();
-  });
-});
-
-test.describe('What\'s New', () => {
-  test('dot: hidden on first visit; appears for new entries; disappears after visiting', async ({ page }) => {
-    // No dot on first visit; drawer link navigates to whats-new
-    await expect(page.locator('#drawer-dot')).toBeHidden();
-    await expect(page.locator('#drawer-whats-new-dot')).toBeHidden();
-    await page.locator('#drawer-btn').click();
-    await page.locator('#drawer-whats-new').click();
-    await expect(page).toHaveURL(/whats-new\.html/);
-
-    // Dot appears when lastSeenChangelogId is behind the latest
-    await page.goto('/');
-    await page.evaluate(async () => { await setSetting('lastSeenChangelogId', 3); });
-    await page.goto('/');
-    await expect(page.locator('#drawer-dot')).toBeVisible();
-
-    // Item dot also visible when drawer is open
-    await page.locator('#drawer-btn').click();
-    await expect(page.locator('#drawer-whats-new-dot')).toBeVisible();
-
-    // Visiting What's New clears the dot — wait for the IndexedDB write to complete
-    await page.goto('/whats-new.html');
-    await page.waitForFunction(async () => await getSetting('lastSeenChangelogId') !== 3);
-    await page.goto('/');
-    await expect(page.locator('#drawer-dot')).toBeHidden();
-
-    // Stays gone on reload
-    await page.goto('/');
-    await expect(page.locator('#drawer-dot')).toBeHidden();
   });
 });
 
@@ -544,26 +454,5 @@ test.describe('Icon Rendering', () => {
     const shuffleIcon = page.locator('#surprise-btn svg').first();
     await expect(shuffleIcon).toHaveAttribute('width', '18');
     await expect(shuffleIcon).toHaveAttribute('height', '18');
-  });
-});
-
-test.describe('First Visit Nudge', () => {
-  test('shows on first visit, dismissed sets flag, hidden on repeat visit', async ({ page }) => {
-    const nudge = page.locator('#first-visit-nudge');
-
-    // Visible on first visit with correct content
-    await expect(nudge).toBeVisible();
-    await expect(nudge.locator('.nudge-text')).toContainText('everything you can do with BiteMe');
-    await expect(nudge.locator('.nudge-btn')).toContainText('Take the tour');
-
-    // Dismiss hides the nudge and sets the flag
-    await page.locator('#nudge-dismiss').click();
-    await expect(nudge).toBeHidden();
-    const hasSeen = await page.evaluate(async () => getSetting('hasSeenHowItWorks'));
-    expect(hasSeen).toBe(true);
-
-    // Repeat visit: nudge stays hidden
-    await page.goto('/');
-    await expect(nudge).toBeHidden();
   });
 });

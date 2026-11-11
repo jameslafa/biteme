@@ -554,17 +554,6 @@ a.tag-meal-type {
   border-style: dashed;
 }
 
-/* Class-based chip variants — used outside of #meal-type-chips / #cuisine-chips (e.g. how-it-works mockups) */
-.chip.chip-meal-type { background: var(--meal-type-light); color: var(--meal-type-color); border-color: var(--meal-type-border); }
-.chip.chip-meal-type:hover { background: var(--meal-type-hover); border-color: var(--meal-type-color); }
-.chip.chip-active.chip-meal-type { background: var(--meal-type-color); color: var(--surface); border-color: var(--meal-type-color); }
-.chip.chip-active.chip-meal-type:hover { background: var(--meal-type-color); color: var(--surface); }
-
-.chip.chip-cuisine { background: var(--cuisine-light); color: var(--cuisine-color); border-color: var(--cuisine-border); }
-.chip.chip-cuisine:hover { background: var(--cuisine-hover); border-color: var(--cuisine-color); }
-.chip.chip-active.chip-cuisine { background: var(--cuisine-color); color: var(--surface); border-color: var(--cuisine-color); }
-.chip.chip-active.chip-cuisine:hover { background: var(--cuisine-color); color: var(--surface); }
-
 @keyframes chip-appear {
   from { opacity: 0; transform: scale(0.85); }
   to   { opacity: 1; transform: scale(1); }
@@ -679,7 +668,7 @@ footer a:hover {
   border-color: var(--primary-color);
 }
 
-/* Page Header — shared across sub-pages (Cooking Log, What's New) */
+/* Page Header — shared across sub-pages (Cooking Log, Settings) */
 .page-header {
   text-align: center;
   margin-bottom: var(--spacing-lg);
@@ -718,18 +707,14 @@ footer a:hover {
 :root[data-theme="dark"] .tag-meal-type:hover { color: var(--meal-type-border); }
 
 :root[data-theme="dark"] #meal-type-chips .chip,
-:root[data-theme="dark"] #meal-type-chips .chip:hover,
-:root[data-theme="dark"] .chip.chip-meal-type,
-:root[data-theme="dark"] .chip.chip-meal-type:hover {
+:root[data-theme="dark"] #meal-type-chips .chip:hover {
   background: transparent;
   color: var(--meal-type-border);
   border-color: var(--meal-type-border);
 }
 
 :root[data-theme="dark"] #cuisine-chips .chip,
-:root[data-theme="dark"] #cuisine-chips .chip:hover,
-:root[data-theme="dark"] .chip.chip-cuisine,
-:root[data-theme="dark"] .chip.chip-cuisine:hover {
+:root[data-theme="dark"] #cuisine-chips .chip:hover {
   background: transparent;
   color: var(--cuisine-border);
   border-color: var(--cuisine-border);
@@ -740,21 +725,10 @@ footer a:hover {
 :root[data-theme="dark"] .search-action-btn:hover,
 :root[data-theme="dark"] .favorite-button-small:hover,
 :root[data-theme="dark"] .rating-banner-close:hover,
-:root[data-theme="dark"] .install-close:hover,
 :root[data-theme="dark"] .drawer-button:hover,
 :root[data-theme="dark"] .drawer-close-btn:hover,
 :root[data-theme="dark"] .drawer-item:hover,
 :root[data-theme="dark"] .timeline-entry-link:hover { background-color: transparent; }
-
-:root[data-theme="dark"] .first-visit-nudge {
-  background-color: var(--surface);
-  border-color: var(--border);
-}
-
-:root[data-theme="dark"] .step-number {
-  background: var(--border);
-  color: var(--text-primary);
-}
 
 .placeholder p {
   color: var(--text-secondary);
@@ -924,212 +898,6 @@ footer a:hover {
   }
 }
 
-/* Install Banner */
-.install-banner {
-  position: fixed;
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-  background: var(--surface);
-  color: var(--text-primary);
-  padding: 0.875rem 1rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-  border: 1px solid var(--border);
-  z-index: 1000;
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(calc(100% + 1rem));
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.install-banner-content {
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.install-banner-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.625rem;
-  flex-shrink: 0;
-}
-
-.install-banner-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  flex: 1;
-  min-width: 0;
-}
-
-.install-banner-text strong {
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.install-banner-text span {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.install-banner-actions {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.install-btn {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 2rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: background 0.2s;
-}
-
-.install-btn:hover {
-  background: var(--primary-dark);
-}
-
-.install-close {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 1.25rem;
-  cursor: pointer;
-  padding: 0;
-  width: 1.75rem;
-  height: 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background 0.2s;
-}
-
-.install-close:hover {
-  background: var(--accent-light);
-}
-
-/* Install Modal */
-.install-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.install-modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
-}
-
-.install-modal-content {
-  position: relative;
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.15);
-  animation: modalSlideUp 0.3s ease-out;
-}
-
-@keyframes modalSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.install-modal-content h2 {
-  margin: 0 0 1.25rem 0;
-  color: var(--text-primary);
-  font-size: 1.1rem;
-}
-
-.install-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.install-step {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.step-number {
-  flex-shrink: 0;
-  width: 1.75rem;
-  height: 1.75rem;
-  background: var(--accent-light);
-  color: var(--primary-dark);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 0.8rem;
-}
-
-.install-step p {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: var(--text-primary);
-}
-
-.modal-close-btn {
-  width: 100%;
-  margin-top: 1.25rem;
-  padding: 0.75rem;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.modal-close-btn:hover {
-  background: var(--primary-dark);
-}
-
 /* Drawer Button (hamburger) */
 .drawer-button {
   display: flex;
@@ -1153,16 +921,6 @@ footer a:hover {
 
 .drawer-button:active {
   transform: scale(0.9);
-}
-
-.drawer-dot {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 8px;
-  height: 8px;
-  background-color: #e74c3c;
-  border-radius: 50%;
 }
 
 /* Side Drawer */
@@ -1281,14 +1039,6 @@ footer a:hover {
   flex-shrink: 0;
 }
 
-.drawer-item-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #e74c3c;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
 .drawer-footer {
   padding: 0.75rem 1.25rem 1rem;
   border-top: 1px solid var(--border);
@@ -1330,60 +1080,6 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* First-Visit Nudge */
-.first-visit-nudge {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-  background-color: var(--accent-light);
-  border: 1px solid var(--accent-color);
-  border-radius: var(--radius-md);
-  animation: slideDown 0.3s ease-out;
-}
-
-.nudge-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.nudge-text {
-  color: var(--primary-dark);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.nudge-btn {
-  color: var(--primary-color);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: underline;
-}
-
-.first-visit-nudge button {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 1.25rem;
-  cursor: pointer;
-  margin-left: auto;
-  padding: 0;
-  width: 1.75rem;
-  height: 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  flex-shrink: 0;
-  transition: background 0.2s;
-}
-
-.first-visit-nudge button:hover {
-  background: var(--accent-color);
-}
-
 /* Meal Plan Banner (index page) */
 .meal-plan-banner {
   display: flex;
@@ -1420,7 +1116,7 @@ footer a:hover {
   opacity: 0.5;
 }
 
-/* Timeline — shared between Cooking Log and What's New */
+/* Timeline (Cooking Log) */
 .timeline-section {
   max-width: 800px;
   margin: 0 auto var(--spacing-lg);

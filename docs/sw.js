@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v37';
+const CACHE_NAME = 'biteme-v38';
 
 const APP_SHELL = [
   './',
@@ -8,8 +8,6 @@ const APP_SHELL = [
   'shopping.html',
   'plan.html',
   'cooking-log.html',
-  'whats-new.html',
-  'how-it-works.html',
   'settings.html',
   'completion.html',
   'css/style.css',
@@ -18,10 +16,8 @@ const APP_SHELL = [
   'css/shopping.css',
   'css/plan.css',
   'css/cooking-log.css',
-  'css/how-it-works.css',
   'css/settings.css',
   'css/completion.css',
-  'js/changelog.js',
   'js/icons.js',
   'js/db.js',
   'js/recipes.js',
@@ -31,14 +27,11 @@ const APP_SHELL = [
   'js/plan.js',
   'js/recommendations.js',
   'js/cooking-log.js',
-  'js/whats-new.js',
-  'js/how-it-works.js',
   'js/settings.js',
   'js/servings.js',
   'js/notes.js',
   'js/rating.js',
   'js/completion.js',
-  'js/install.js',
   'js/sw-update.js',
   'assets/icons/favicon.svg',
   'assets/icons/apple-touch-icon.png',

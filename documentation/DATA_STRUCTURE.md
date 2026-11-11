@@ -133,7 +133,6 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - `completed_at` set when user finishes all steps and reaches completion page
 - Sessions with null `completed_at` indicate abandoned cooking sessions
 - Duration can be calculated from `completed_at - started_at`
-- Used to gate the install prompt (only shown after first completed recipe)
 - `rated_at` / `rating_dismissed_at` track whether the rating banner was handled for this session
 - Foundation for future cooking analytics (time tracking, history)
 
@@ -209,7 +208,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
 **Current Schema (v4 - Local Only):**
 ```typescript
 {
-  key: string;    // Setting name (e.g., "lastSeenChangelogId")
+  key: string;    // Setting name (e.g., "showUntestedRecipes")
   value: any;     // Setting value
 }
 ```
@@ -217,14 +216,13 @@ This document defines the data schemas used in BiteMe for local storage and futu
 **Example:**
 ```json
 {
-  "key": "lastSeenChangelogId",
-  "value": 5
+  "key": "showUntestedRecipes",
+  "value": true
 }
 ```
 
 **Notes:**
 - Generic key-value store for app settings
-- Used by the What's New feature to track the last seen changelog entry (`lastSeenChangelogId`)
 - Used by Settings page for `showUntestedRecipes` toggle
 - Used by Settings page for `dietaryFilters` (array of active diet values, e.g. `["vegan", "gluten-free"]`)
 - Designed for reuse by future features needing simple persistent settings
