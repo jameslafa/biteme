@@ -1,7 +1,7 @@
 // IndexedDB helper for BiteMe local storage
 
 const DB_NAME = 'biteme_db';
-const DB_VERSION = 6;
+const DB_VERSION = 7;
 let db = null;
 
 // Initialize database
@@ -51,6 +51,11 @@ function initDB() {
       // Create ratings store
       if (!db.objectStoreNames.contains('ratings')) {
         db.createObjectStore('ratings', { keyPath: 'recipe_id' });
+      }
+
+      // Create friends store
+      if (!db.objectStoreNames.contains('friends')) {
+        db.createObjectStore('friends', { keyPath: 'id' });
       }
     };
   });
@@ -518,6 +523,83 @@ async function setSetting(key, value) {
     const request = store.put({ key, value });
     request.onsuccess = () => resolve();
     request.onerror = () => reject(request.error);
+  });
+}
+
+// Friend Functions
+// Friends are soft-deleted (deleted_at) and carry updated_at so a future
+// backend sync can merge changes and propagate deletions.
+
+// 128-bit random hex ID. crypto.randomUUID() would be simpler but needs a secure
+// context, which plain-http LAN testing on a phone isn't.
+function randomId() {
+  return [...crypto.getRandomValues(new Uint8Array(16))]
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+// All friends that haven't been deleted, sorted by name
+async function getAllFriends() {
+  if (!db) await initDB();
+
+  const store = db.transaction(['friends'], 'readonly').objectStore('friends');
+  return new Promise((resolve, reject) => {
+    const request = store.getAll();
+    request.onsuccess = () => resolve(
+      request.result
+        .filter(f => !f.deleted_at)
+        .sort((a, b) => a.name.localeCompare(b.name))
+    );
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Create or update a friend: { id?, name, diets, avoid }
+async function saveFriend({ id, name, diets, avoid }) {
+  if (!db) await initDB();
+
+  // Read in its own transaction: awaiting between requests can let a shared one auto-commit
+  const existing = id ? await new Promise((resolve, reject) => {
+    const request = db.transaction(['friends'], 'readonly').objectStore('friends').get(id);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  }) : null;
+
+  const now = Date.now();
+
+  const friend = {
+    id: id || randomId(),
+    name,
+    diets,
+    avoid,
+    created_at: existing ? existing.created_at : now,
+    updated_at: now,
+    deleted_at: null,
+  };
+
+  return new Promise((resolve, reject) => {
+    const request = db.transaction(['friends'], 'readwrite').objectStore('friends').put(friend);
+    request.onsuccess = () => resolve(friend);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+// Soft-delete a friend
+async function deleteFriend(id) {
+  if (!db) await initDB();
+
+  const store = db.transaction(['friends'], 'readwrite').objectStore('friends');
+  return new Promise((resolve, reject) => {
+    const getRequest = store.get(id);
+    getRequest.onsuccess = () => {
+      const friend = getRequest.result;
+      if (!friend) return resolve();
+      const now = Date.now();
+      const putRequest = store.put({ ...friend, updated_at: now, deleted_at: now });
+      putRequest.onsuccess = () => resolve();
+      putRequest.onerror = () => reject(putRequest.error);
+    };
+    getRequest.onerror = () => reject(getRequest.error);
   });
 }
 

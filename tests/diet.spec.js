@@ -34,6 +34,17 @@ test.beforeEach(async ({ page }) => {
 const card = (page, name) => page.locator('.recipe-card', { hasText: name });
 const dietChip = (page, diet) => page.locator(`#diet-chips .chip[data-value="${diet}"]`);
 
+// Diet chips live in the "Cooking for" sheet
+async function openCookingFor(page) {
+  await page.locator('#cooking-for-btn').click();
+  await expect(page.locator('#cooking-for-sheet')).toBeVisible();
+}
+
+async function closeCookingFor(page) {
+  await page.locator('#cooking-for-done').click();
+  await expect(page.locator('#cooking-for-sheet')).toBeHidden();
+}
+
 test.describe('Diet Badges', () => {
   test('cards and recipe page show the recipe\'s diet badges', async ({ page }) => {
     await expect(page.locator('.recipe-card')).toHaveCount(3);
@@ -48,6 +59,8 @@ test.describe('Diet Badges', () => {
 
 test.describe('Diet Chips', () => {
   test('diets combine; vegan counts as vegetarian; selection lives in the URL', async ({ page }) => {
+    await expect(page.locator('#cooking-for-bar')).toBeHidden();
+    await openCookingFor(page);
     await expect(page.locator('#diet-chips .chip')).toHaveText(['VVegan', 'VgVegetarian', 'GFGluten-free']);
     await expect(page.locator('#diet-chips .chip-active')).toHaveCount(0);
 
@@ -68,31 +81,44 @@ test.describe('Diet Chips', () => {
     await dietChip(page, 'vegetarian').click();
     await expect(page.locator('.recipe-card')).toHaveCount(3);
 
-    // Reload keeps the selection (it's in the URL)
+    // Summary line shows the selection; reload keeps it (it's in the URL)
+    await closeCookingFor(page);
+    await expect(page.locator('#cooking-for-bar .cooking-for-label')).toHaveText('Vegetarian');
     await page.reload();
-    await expect(dietChip(page, 'vegetarian')).toHaveClass(/chip-active/);
+    await expect(page.locator('#cooking-for-bar .cooking-for-label')).toHaveText('Vegetarian');
+
+    // Clear button removes it
+    await page.locator('.cooking-for-clear').click();
+    await expect(page.locator('#cooking-for-bar')).toBeHidden();
+    await expect(page).not.toHaveURL(/diet=/);
 
     // Opening the app fresh starts with no diet selected
+    await openCookingFor(page);
+    await dietChip(page, 'gluten-free').click();
     await page.goto('/');
-    await expect(page.locator('#diet-chips .chip-active')).toHaveCount(0);
+    await expect(page.locator('#cooking-for-bar')).toBeHidden();
     await expect(page.locator('.recipe-card')).toHaveCount(3);
   });
 
   test('"Browse all recipes" on the empty state clears diets too', async ({ page }) => {
+    await openCookingFor(page);
     await dietChip(page, 'gluten-free').click();
+    await closeCookingFor(page);
     await page.fill('#search-input', 'toast');
     await expect(page.locator('.recipe-card')).toHaveCount(0);
 
     await page.locator('#clear-search-btn').click();
     await expect(page.locator('.recipe-card')).toHaveCount(3);
-    await expect(page.locator('#diet-chips .chip-active')).toHaveCount(0);
+    await expect(page.locator('#cooking-for-bar')).toBeHidden();
     await expect(page).not.toHaveURL(/diet=/);
   });
 });
 
 test.describe('Diet on the Recipe Page', () => {
   test('active diet carries to the recipe page and filters similar recipes', async ({ page }) => {
+    await openCookingFor(page);
     await dietChip(page, 'vegan').click();
+    await closeCookingFor(page);
     await card(page, 'Test Curry').click();
     await expect(page).toHaveURL(/id=test-curry&diet=vegan/);
 

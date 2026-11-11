@@ -541,6 +541,195 @@ a.tag-meal-type {
   transform: translateX(20px);
 }
 
+/* Cooking For — summary line on the home page */
+.cooking-for-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.75rem;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-color);
+  border-radius: 2rem;
+}
+
+.cooking-for-bar[hidden] {
+  display: none;
+}
+
+.cooking-for-summary {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.cooking-for-summary svg {
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.cooking-for-summary .diet-icons {
+  margin: 0;
+}
+
+.cooking-for-summary .diet-badge {
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 0.55rem;
+}
+
+.cooking-for-avoid {
+  color: var(--text-secondary);
+}
+
+.cooking-for-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* Bottom sheet (Cooking For picker) */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+}
+
+.sheet[hidden] {
+  display: none;
+}
+
+.sheet-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--spacing-md) var(--spacing-sm) calc(var(--spacing-sm) + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  animation: sheetSlideUp 0.25s ease-out;
+}
+
+@media (min-width: 600px) {
+  .sheet-panel {
+    left: 50%;
+    width: 480px;
+    margin-left: -240px;
+  }
+}
+
+@keyframes sheetSlideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.sheet-title {
+  margin: 0 0 var(--spacing-xs);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.sheet-section-label {
+  margin: var(--spacing-sm) 0 var(--spacing-xs);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.sheet-empty {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.sheet-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--spacing-md);
+}
+
+/* Sits beside a link, so not full-width like other buttons on phones */
+.sheet-footer .button {
+  width: auto;
+  padding: 0.75rem 2rem;
+}
+
+.sheet-link {
+  color: var(--primary-color);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.friend-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.friend-option {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.friend-option input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--primary-color);
+}
+
+.friend-option-name {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.friend-option .diet-icons {
+  margin: 0;
+}
+
+.friend-option-avoid {
+  flex-basis: 100%;
+  padding-left: 1.65rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
 /* Chip Filters */
 .chip-filters {
   display: flex;

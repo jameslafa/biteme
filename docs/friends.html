@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>(function(){var t=localStorage.getItem('theme')||'auto';var d=t==='auto'?window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light':t;document.documentElement.setAttribute('data-theme',d);if(t==='auto')window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){if(localStorage.getItem('theme')==='auto')document.documentElement.setAttribute('data-theme',e.matches?'dark':'light');});})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Friends">
+  <meta name="theme-color" content="#6B9080">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.svg">
+  <title>Friends - biteme</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/friends.css">
+</head>
+<body>
+  <header>
+    <nav class="recipe-nav">
+      <a href="index.html" class="back-button" aria-label="Go back" onclick="event.preventDefault();history.back()">
+        <svg data-icon="back" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+      </a>
+      <h1><a href="index.html" class="logo">bite<span class="logo-accent">me</span></a></h1>
+      <a href="shopping.html" class="shopping-cart-link" aria-label="View shopping list">
+        <svg data-icon="cart" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h2>Friends</h2>
+    </div>
+
+    <section id="friends-view">
+      <p class="friends-intro">Pick who you're cooking for from the home page, and recipes are filtered to fit their diets and the ingredients they avoid.</p>
+      <ul id="friend-list" class="friend-list"></ul>
+      <button id="add-friend-btn" class="button friends-add-btn">Add a friend</button>
+    </section>
+
+    <form id="friend-form" class="friend-form" hidden novalidate>
+      <label class="friend-form-label" for="friend-name">Name</label>
+      <input id="friend-name" class="friend-form-input" type="text" autocomplete="off" required>
+
+      <span class="friend-form-label">Diet</span>
+      <div id="friend-diets" class="chip-row"></div>
+
+      <label class="friend-form-label" for="friend-avoid-input">Ingredients to avoid</label>
+      <div id="friend-avoid" class="friend-avoid-list"></div>
+      <input id="friend-avoid-input" class="friend-form-input" type="text" list="ingredient-options" placeholder="Type an ingredient…" autocomplete="off" enterkeyhint="done">
+      <datalist id="ingredient-options"></datalist>
+      <p id="friend-avoid-hint" class="friend-form-hint" hidden>Pick an ingredient from the suggestions.</p>
+
+      <p id="friend-form-error" class="friend-form-error" hidden>Enter a name.</p>
+
+      <div class="friend-form-actions">
+        <button type="button" id="friend-delete" class="friend-delete">Delete</button>
+        <span class="friend-form-actions-right">
+          <button type="button" id="friend-cancel" class="friend-cancel">Cancel</button>
+          <button type="submit" class="button">Save</button>
+        </span>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/icons.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/recipes.js"></script>
+  <script src="js/friends.js"></script>
+</body>
+</html>

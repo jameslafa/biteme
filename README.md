@@ -30,6 +30,7 @@ A simple, open-source vegetarian/vegan recipe app with an elegant minimalist des
 ## Why BiteMe?
 
 - 🌱 **Plant-based focus** — Curated vegetarian and vegan recipes
+- 👥 **Cooking for friends** — Save friends' diets and the ingredients they avoid, then see only recipes that work for everyone at the table, with gluten-free swaps spelled out
 - 🔒 **Privacy-first** — No accounts, no tracking, everything stored on your device
 - 📴 **Works offline** — Install it as an app, use it anywhere without internet
 - 🤝 **Community-driven** — Anyone can contribute recipes via pull request

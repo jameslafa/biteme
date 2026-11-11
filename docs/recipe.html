@@ -37,8 +37,9 @@
   <script src="js/notes.js"></script>
   <script src="js/rating.js"></script>
   <script>
-    // Active diets (from the URL); gluten-free here also switches on the recipe's gluten-free version
-    let diets = [];
+    // Active filter (diets + avoided ingredients, from the URL); the gluten-free diet
+    // also switches on the recipe's gluten-free version
+    let filter = { diets: [], avoid: [] };
     let glutenFreeMode = false;
 
     // Load recipe detail
@@ -47,7 +48,7 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       const recipeId = urlParams.get('id');
-      diets = dietsFromParams(urlParams);
+      filter = filterFromParams(urlParams);
 
       if (!recipeId) {
         window.location.href = 'index.html';
@@ -155,7 +156,7 @@
       // Render ingredients with current serving ratio
       let currentServings = getServings(recipeId, recipe.servings);
       document.getElementById('current-servings').textContent = currentServings;
-      glutenFreeMode = hasGlutenFreeVersion(recipe) && diets.includes('gluten-free');
+      glutenFreeMode = hasGlutenFreeVersion(recipe) && filter.diets.includes('gluten-free');
 
       function refreshIngredients() {
         renderIngredients(recipe, currentServings / recipe.servings);
@@ -186,12 +187,13 @@
         gfToggle.checked = glutenFreeMode;
         gfToggle.addEventListener('change', () => {
           glutenFreeMode = gfToggle.checked;
-          diets = glutenFreeMode
-            ? DIETS.filter(d => d === 'gluten-free' || diets.includes(d))
-            : diets.filter(d => d !== 'gluten-free');
-          history.replaceState(null, '', `recipe.html?id=${recipeId}${dietQuery(diets)}`);
+          const diets = glutenFreeMode
+            ? DIETS.filter(d => d === 'gluten-free' || filter.diets.includes(d))
+            : filter.diets.filter(d => d !== 'gluten-free');
+          filter = { ...filter, diets };
+          history.replaceState(null, '', `recipe.html?id=${recipeId}${filterQuery(filter)}`);
           refreshIngredients();
-          renderSimilarRecipes(recipeId, diets);
+          renderSimilarRecipes(recipeId, filter);
         });
       }
 
@@ -211,7 +213,7 @@
       showCookingNotes(recipeId);
 
       // Show similar recipes
-      renderSimilarRecipes(recipeId, diets);
+      renderSimilarRecipes(recipeId, filter);
 
       // Update cart count
       updateCartCount();
@@ -318,7 +320,7 @@
     }
 
     function startCooking(id) {
-      window.location.href = `cooking.html?id=${id}${dietQuery(diets)}`;
+      window.location.href = `cooking.html?id=${id}${filterQuery(filter)}`;
     }
 
     async function setupShoppingCartButtons(recipe) {
@@ -422,12 +424,8 @@
       }
     }
 
-    function escapeHtml(text) {
-      return text.replace(/</g, '&lt;');
-    }
-
-    async function renderSimilarRecipes(recipeId, diets) {
-      const results = await getSimilarRecipes(recipeId, 5, diets);
+    async function renderSimilarRecipes(recipeId, filter) {
+      const results = await getSimilarRecipes(recipeId, 5, filter);
       const section = document.getElementById('similar-recipes');
       if (!section) return;
       if (results.length === 0) {
@@ -440,7 +438,7 @@
         <ul class="similar-recipes-list">
           ${results.map(({ recipe, sharedIngredients }) => `
             <li>
-              <a href="recipe.html?id=${recipe.id}${dietQuery(diets)}" class="similar-recipe-item">
+              <a href="recipe.html?id=${recipe.id}${filterQuery(filter)}" class="similar-recipe-item">
                 <div class="similar-recipe-body">
                   <span class="similar-recipe-name">${recipe.name}</span>
                   <span class="similar-recipe-shared">${sharedIngredients.join(' · ')}</span>

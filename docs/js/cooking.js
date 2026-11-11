@@ -4,7 +4,7 @@ let currentStep = 0; // Start at first cooking step
 let recipe = null;
 let cookingSessionId = null;
 let servingRatio = 1;
-let diets = [];
+let filter = { diets: [], avoid: [] };
 let glutenFreeMode = false;
 
 // Timer state
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   const urlParams = new URLSearchParams(window.location.search);
   const recipeId = urlParams.get('id');
-  diets = dietsFromParams(urlParams);
+  filter = filterFromParams(urlParams);
 
   if (!recipeId) {
     window.location.href = 'index.html';
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   const savedServings = getServings(recipeId, recipe.servings);
   servingRatio = savedServings / recipe.servings;
-  glutenFreeMode = hasGlutenFreeVersion(recipe) && diets.includes('gluten-free');
+  glutenFreeMode = hasGlutenFreeVersion(recipe) && filter.diets.includes('gluten-free');
 
   document.title = `Cooking: ${recipe.name}`;
   const headerText = savedServings !== recipe.servings
@@ -306,7 +306,7 @@ function nextStep() {
 
 function exitCookingMode() {
   disableScreenLock();
-  window.location.href = `recipe.html?id=${recipe.id}${dietQuery(diets)}`;
+  window.location.href = `recipe.html?id=${recipe.id}${filterQuery(filter)}`;
 }
 
 function finishCookingMode() {

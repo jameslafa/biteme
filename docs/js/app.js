@@ -7,7 +7,9 @@ let activeMealType = null;
 let cachedAllRecipes = [];
 let cachedRatingsMap = {};
 let cachedFavoriteIds = new Set();
-let activeDiets = [];
+let activeDiets = [];       // diets picked directly in the "Cooking for" panel
+let friends = [];
+let activeFriendIds = [];   // friends picked in the "Cooking for" panel
 let mealTypeChipsExpanded = false;
 let cuisineChipsExpanded = false;
 
@@ -21,9 +23,11 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Load untested setting from IndexedDB
   showUntestedRecipes = !!(await getSetting('showUntestedRecipes'));
 
-  // Read diet/cuisine/meal_type filters from URL params
+  // Read cooking-for/cuisine/meal_type filters from URL params
   const urlParams = new URLSearchParams(window.location.search);
   activeDiets = dietsFromParams(urlParams);
+  friends = await getAllFriends();
+  activeFriendIds = (urlParams.get('for') || '').split(',').filter(id => friends.some(f => f.id === id));
   activeCuisine = urlParams.get('cuisine') || null;
   activeMealType = urlParams.get('meal_type') || null;
 
@@ -36,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupSurpriseBtn();
   updateCartCount();
   setupDrawer();
+  setupCookingFor();
   showMealPlanBanner();
   showRatingBannerIfNeeded();
   setupPullToRefresh();
@@ -66,7 +71,8 @@ function filterRecipes({ cuisine, mealType, favoritesOnly, searchQuery }) {
     recipes = recipes.filter(r => r.tested !== false);
   }
 
-  recipes = recipes.filter(r => matchesDiets(r, activeDiets));
+  const filter = currentFilter();
+  recipes = recipes.filter(r => matchesFilter(r, filter));
 
   if (favoritesOnly) {
     recipes = recipes.filter(r => cachedFavoriteIds.has(r.id));
@@ -152,6 +158,24 @@ function setActiveMealType(mealType) {
   loadRecipes();
 }
 
+// The combined filter: diets picked directly plus those of the selected friends,
+// and every selected friend's avoided ingredients
+function currentFilter() {
+  const selected = friends.filter(f => activeFriendIds.includes(f.id));
+  return {
+    diets: DIETS.filter(d => activeDiets.includes(d) || selected.some(f => f.diets.includes(d))),
+    avoid: [...new Set(selected.flatMap(f => f.avoid))],
+  };
+}
+
+function toggleFriend(id) {
+  activeFriendIds = activeFriendIds.includes(id)
+    ? activeFriendIds.filter(f => f !== id)
+    : [...activeFriendIds, id];
+  updateFilterURL();
+  loadRecipes();
+}
+
 // Toggle a diet on or off; diets combine (vegan + gluten-free shows recipes that are both)
 function toggleDiet(diet) {
   activeDiets = activeDiets.includes(diet)
@@ -164,6 +188,7 @@ function toggleDiet(diet) {
 function clearAllFilters() {
   document.getElementById('search-input').value = '';
   activeDiets = [];
+  activeFriendIds = [];
   activeCuisine = null;
   activeMealType = null;
   updateFilterURL();
@@ -175,6 +200,11 @@ function updateFilterURL() {
     url.searchParams.set('diet', activeDiets.join(','));
   } else {
     url.searchParams.delete('diet');
+  }
+  if (activeFriendIds.length > 0) {
+    url.searchParams.set('for', activeFriendIds.join(','));
+  } else {
+    url.searchParams.delete('for');
   }
   if (activeCuisine) {
     url.searchParams.set('cuisine', activeCuisine);
@@ -192,7 +222,8 @@ function updateFilterURL() {
 function renderChips() {
   let base = cachedAllRecipes;
   if (!showUntestedRecipes) base = base.filter(r => r.tested !== false);
-  base = base.filter(r => matchesDiets(r, activeDiets));
+  const filter = currentFilter();
+  base = base.filter(r => matchesFilter(r, filter));
 
   // Meal type counts — narrowed by active cuisine
   const mealTypePool = activeCuisine
@@ -210,7 +241,7 @@ function renderChips() {
   for (const r of cuisinePool)
     for (const c of (r.cuisine || [])) cuisineCounts[c] = (cuisineCounts[c] || 0) + 1;
 
-  renderDietChips();
+  renderCookingFor();
   renderChipRow(
     document.getElementById('meal-type-chips'),
     mealTypeCounts, activeMealType, 'mealType',
@@ -221,6 +252,90 @@ function renderChips() {
     cuisineCounts, activeCuisine, 'cuisine',
     cuisineChipsExpanded, v => { cuisineChipsExpanded = v; }
   );
+}
+
+// ── Cooking for ──
+// A summary line on the home page when anything is selected, and a bottom sheet
+// (opened from the search bar) to pick friends or plain diets.
+
+function joinNames(names) {
+  return names.length <= 1 ? names.join('') : `${names.slice(0, -1).join(', ')} & ${names.at(-1)}`;
+}
+
+function renderCookingFor() {
+  const filter = currentFilter();
+  const selected = friends.filter(f => activeFriendIds.includes(f.id));
+  const active = selected.length > 0 || filter.diets.length > 0;
+
+  const btn = document.getElementById('cooking-for-btn');
+  btn.classList.toggle('active', active);
+
+  const bar = document.getElementById('cooking-for-bar');
+  bar.hidden = !active;
+  if (active) {
+    const label = selected.length > 0
+      ? `Cooking for ${escapeHtml(joinNames(selected.map(f => f.name)))}`
+      : filter.diets.map(d => DIET_BADGES[d].title).join(' · ');
+    const avoid = filter.avoid.length > 0
+      ? `<span class="cooking-for-avoid">· no ${escapeHtml(filter.avoid.join(', '))}</span>`
+      : '';
+    bar.innerHTML = `
+      <button class="cooking-for-summary" aria-haspopup="dialog">
+        ${icon('users', 16)}
+        <span class="cooking-for-label">${label}</span>
+        ${selected.length > 0 ? renderDietIcons(filter.diets) : ''}
+        ${avoid}
+      </button>
+      <button class="cooking-for-clear" aria-label="Clear cooking for">${icon('x', 16)}</button>
+    `;
+    bar.querySelector('.cooking-for-summary').addEventListener('click', openCookingFor);
+    bar.querySelector('.cooking-for-clear').addEventListener('click', () => {
+      activeFriendIds = [];
+      activeDiets = [];
+      updateFilterURL();
+      loadRecipes();
+    });
+  }
+
+  renderFriendOptions();
+  renderDietChips();
+}
+
+function renderFriendOptions() {
+  const list = document.getElementById('friend-options');
+  document.getElementById('no-friends').hidden = friends.length > 0;
+  list.innerHTML = friends.map(f => `
+    <li>
+      <label class="friend-option">
+        <input type="checkbox" data-id="${f.id}" ${activeFriendIds.includes(f.id) ? 'checked' : ''}>
+        <span class="friend-option-name">${escapeHtml(f.name)}</span>
+        ${renderDietIcons(f.diets)}
+        ${f.avoid.length > 0 ? `<span class="friend-option-avoid">no ${escapeHtml(f.avoid.join(', '))}</span>` : ''}
+      </label>
+    </li>
+  `).join('');
+  list.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', () => toggleFriend(input.dataset.id));
+  });
+}
+
+function openCookingFor() {
+  document.getElementById('cooking-for-sheet').hidden = false;
+  document.getElementById('cooking-for-done').focus();
+}
+
+function closeCookingFor() {
+  document.getElementById('cooking-for-sheet').hidden = true;
+}
+
+function setupCookingFor() {
+  const sheet = document.getElementById('cooking-for-sheet');
+  document.getElementById('cooking-for-btn').addEventListener('click', openCookingFor);
+  document.getElementById('cooking-for-done').addEventListener('click', closeCookingFor);
+  sheet.querySelector('.sheet-overlay').addEventListener('click', closeCookingFor);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !sheet.hidden) closeCookingFor();
+  });
 }
 
 function renderDietChips() {
@@ -465,7 +580,7 @@ function updateFavoriteButtonSmall(button, favorited) {
 
 // Navigate to recipe detail page
 function viewRecipe(id) {
-  window.location.href = `recipe.html?id=${id}${dietQuery(activeDiets)}`;
+  window.location.href = `recipe.html?id=${id}${filterQuery(currentFilter())}`;
 }
 
 // Setup favorites filter toggle

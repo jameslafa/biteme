@@ -60,10 +60,10 @@ function computeIDF(ingredientMaps) {
 // Returns [{ recipe, score, sharedIngredients: string[] }] sorted by score desc.
 // n = max results to return. Excludes the recipe itself.
 // Excludes recipes with score 0 (no shared meaningful ingredients).
-// Respects the user's showUntestedRecipes setting. Only recipes matching `diets` are
+// Respects the user's showUntestedRecipes setting. Only recipes matching `filter` are
 // suggested, but IDF is computed over the whole corpus: ingredient distinctiveness
 // shouldn't depend on the filter (in a small filtered set, shared ingredients get IDF 0).
-async function getSimilarRecipes(recipeId, n = 5, diets = []) {
+async function getSimilarRecipes(recipeId, n = 5, filter = {}) {
   const recipes = await getRecipes();
 
   await initDB();
@@ -93,7 +93,7 @@ async function getSimilarRecipes(recipeId, n = 5, diets = []) {
   for (const [otherId, otherMap] of ingredientMaps) {
     if (otherId === recipeId) continue;
     const recipe = recipes.find(r => r.id === otherId);
-    if (!matchesDiets(recipe, diets)) continue;
+    if (!matchesFilter(recipe, filter)) continue;
 
     const shared = [];
     let score = 0;

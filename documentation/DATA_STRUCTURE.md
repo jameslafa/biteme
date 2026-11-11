@@ -8,7 +8,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Version:** 6
 
-**Object stores:** favorites, shopping_list, cooking_sessions, settings, cooking_notes, ratings
+**Object stores:** favorites, shopping_list, cooking_sessions, settings, cooking_notes, ratings, friends
 
 ## Favorites
 
@@ -227,6 +227,43 @@ This document defines the data schemas used in BiteMe for local storage and futu
 - Generic key-value store for app settings
 - Used by Settings page for `showUntestedRecipes` toggle
 - Designed for reuse by future features needing simple persistent settings
+
+## Friends
+
+**Object store:** `friends` (added in DB v7)
+
+**Primary key:** `id`
+
+**Current Schema (Local Only, sync-ready):**
+```typescript
+{
+  id: string;              // 32-char random hex (crypto.getRandomValues)
+  name: string;
+  diets: string[];         // "vegan" | "vegetarian" | "gluten-free"
+  avoid: string[];         // Canonical ingredient names (lowercase), from ingredients.json
+  created_at: number;      // Unix timestamp (ms)
+  updated_at: number;      // Unix timestamp (ms), bumped on every change incl. delete
+  deleted_at: number | null; // Soft delete — tombstone kept so a future sync can propagate it
+}
+```
+
+**Example:**
+```json
+{
+  "id": "3f9c2a7e0b1d4c58a6e2f7b9c0d1e2f3",
+  "name": "Luna",
+  "diets": ["vegan", "gluten-free"],
+  "avoid": ["mushroom"],
+  "created_at": 1762880000000,
+  "updated_at": 1762880000000,
+  "deleted_at": null
+}
+```
+
+**Notes:**
+- `getAllFriends()` excludes deleted friends and sorts by name
+- Used by the home page "Cooking for" sheet and the Friends page
+- Personal data: lives only on the device; never committed or sent anywhere
 
 ## Recipe JSON (`recipes.json`)
 

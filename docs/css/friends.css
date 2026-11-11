@@ -1,0 +1,170 @@
+/* Friends page */
+
+.friends-intro {
+  margin: 0 0 var(--spacing-md);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.friend-list {
+  list-style: none;
+  margin: 0 0 var(--spacing-md);
+  padding: 0;
+}
+
+.friend-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  margin-bottom: var(--spacing-xs);
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  text-align: left;
+  cursor: pointer;
+}
+
+.friend-row-main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.friend-row-name {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.friend-row .diet-icons {
+  margin: 0;
+}
+
+.friend-row-avoid {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.friends-add-btn {
+  display: block;
+  width: 100%;
+}
+
+/* Form */
+
+.friend-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.friend-form[hidden] {
+  display: none;
+}
+
+.friend-form-label {
+  margin: var(--spacing-sm) 0 var(--spacing-xs);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.friend-form-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-family: var(--font-family);
+  font-size: 1rem; /* 16px+ prevents iOS zoom on focus */
+  color: var(--text-primary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.friend-avoid-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.friend-avoid-list:not(:empty) {
+  margin-bottom: var(--spacing-xs);
+}
+
+.friend-avoid-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.2rem 0.2rem 0.2rem 0.75rem;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-color);
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.friend-avoid-chip button {
+  display: flex;
+  padding: 0.25rem;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.friend-form-hint,
+.friend-form-error {
+  margin: var(--spacing-xs) 0 0;
+  font-size: 0.85rem;
+}
+
+.friend-form-hint {
+  color: var(--text-secondary);
+}
+
+.friend-form-error {
+  color: #c0392b;
+}
+
+.friend-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--spacing-lg);
+}
+
+.friend-form-actions-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.friend-form-actions .button {
+  width: auto; /* beside Cancel, not full-width like other buttons on phones */
+}
+
+.friend-delete,
+.friend-cancel {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.friend-delete {
+  color: #c0392b;
+}
+
+.friend-delete[hidden] {
+  display: none;
+}
+
+.friend-cancel {
+  color: var(--text-secondary);
+}

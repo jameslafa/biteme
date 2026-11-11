@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v41';
+const CACHE_NAME = 'biteme-v42';
 const NETWORK_TIMEOUT_MS = 3000;
 const SLOW_NETWORK_WINDOW_MS = 30000;
 let slowNetworkUntil = 0;
@@ -12,6 +12,7 @@ const APP_SHELL = [
   'plan.html',
   'cooking-log.html',
   'settings.html',
+  'friends.html',
   'completion.html',
   'css/style.css',
   'css/recipe.css',
@@ -20,6 +21,7 @@ const APP_SHELL = [
   'css/plan.css',
   'css/cooking-log.css',
   'css/settings.css',
+  'css/friends.css',
   'css/completion.css',
   'js/icons.js',
   'js/db.js',
@@ -31,6 +33,7 @@ const APP_SHELL = [
   'js/recommendations.js',
   'js/cooking-log.js',
   'js/settings.js',
+  'js/friends.js',
   'js/servings.js',
   'js/notes.js',
   'js/rating.js',

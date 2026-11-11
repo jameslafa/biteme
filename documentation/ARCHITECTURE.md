@@ -212,16 +212,19 @@ All user data is local-first. Sync is additive, not required.
 
 ---
 
-## Diet Filtering
+## Cooking For (Friends & Diet Filtering)
 
-**Decision:** Diet chips (vegan, vegetarian, gluten-free) on the home page, combinable, with state in the URL (`?diet=vegan,gluten-free`) — not a persistent setting
+**Decision:** Pick who you're cooking for — saved friends (name, diets, ingredients to avoid) or plain diets — from a bottom sheet opened by an icon in the search bar. Selection lives in the URL (`?for=<friend ids>&diet=…`), not a persistent setting.
 
-**Why:** Diet filtering is usually per occasion ("cooking for a gluten-free friend tonight"). A persistent setting hidden in Settings silently hid recipes long after the occasion. URL state survives navigation (recipe page and back) but resets when the app is reopened, and the active chips are always visible.
+**Why:** Diet filtering is per occasion ("Luna is coming tonight"). A persistent setting hidden in Settings silently hid recipes long after the occasion. URL state survives navigation (recipe page and back) but resets when the app is reopened. When anything is selected, a summary line on the home page shows it with a one-tap clear, so a filter is never invisible. Nothing is added to the home page when nothing is selected.
 
 **How it works:**
-- `matchesDiets()` in `recipes.js` is the single matching rule: a recipe matches if it satisfies every selected diet; vegan recipes count as vegetarian, so recipes are never tagged both (the linter rejects it)
-- `viewRecipe()` carries the diets to the recipe page via `dietQuery()`; similar-recipe suggestions there respect them and keep them in their links
-- The meal plan ignores diets — it plans for the user's own week
+- A filter is `{ diets, avoid }`. `currentFilter()` in `app.js` combines directly picked diets with the selected friends' diets, and the union of their avoided ingredients — a recipe must work for everyone
+- `matchesFilter()` in `recipes.js` is the single matching rule: every diet satisfied (vegan counts as vegetarian, so recipes are never tagged both — the linter rejects it) and no avoided canonical ingredient
+- Avoided ingredients hide recipes (right for allergies); they're picked from `ingredients.json` canonicals so matching is exact
+- `viewRecipe()` carries the derived filter to the recipe page via `filterQuery()` (`&diet=…&avoid=…`); similar recipes respect it, and a gluten-free diet switches on the recipe's gluten-free version
+- Friends are stored locally in IndexedDB with sync-ready fields (random ID, `updated_at`, soft-delete `deleted_at`) for a future backend
+- The meal plan ignores the filter — it plans for the user's own week
 
 ---
 

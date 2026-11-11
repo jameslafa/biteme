@@ -1,3 +1,12 @@
+// Escape user-entered text (notes, friend names) before inserting it as HTML
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // Cache for loaded recipes
 let recipesCache = null;
 
@@ -150,9 +159,11 @@ function renderDietIcons(diet) {
   return badges ? `<span class="diet-icons">${badges}</span>` : '';
 }
 
-// ── Diet filtering ──
-// The active diets travel in the URL (?diet=vegan,gluten-free) so they survive
-// navigation within a session but reset when the app is reopened.
+// ── Diet & avoided-ingredient filtering ──
+// A filter is { diets, avoid }: diets the recipe must satisfy, and canonical
+// ingredient names it must not contain. It travels between pages in the URL
+// (?diet=vegan,gluten-free&avoid=mushroom) so it survives navigation within a
+// session but resets when the app is reopened.
 
 const DIETS = Object.keys(DIET_BADGES);
 
@@ -163,13 +174,32 @@ function matchesDiets(recipe, diets) {
   return diets.every(d => tags.includes(d) || (d === 'vegetarian' && tags.includes('vegan')));
 }
 
+function containsAvoided(recipe, avoid) {
+  if (avoid.length === 0) return false;
+  return Object.values(recipe.ingredients).flat().some(i => avoid.includes(i.canonical));
+}
+
+function matchesFilter(recipe, { diets = [], avoid = [] } = {}) {
+  return matchesDiets(recipe, diets) && !containsAvoided(recipe, avoid);
+}
+
 function dietsFromParams(params) {
   return (params.get('diet') || '').split(',').filter(d => DIETS.includes(d));
 }
 
-// Query-string suffix that carries the active diets to another page
-function dietQuery(diets) {
-  return diets.length > 0 ? `&diet=${diets.join(',')}` : '';
+function filterFromParams(params) {
+  return {
+    diets: dietsFromParams(params),
+    avoid: (params.get('avoid') || '').split(',').filter(Boolean),
+  };
+}
+
+// Query-string suffix that carries a filter to another page
+function filterQuery({ diets = [], avoid = [] } = {}) {
+  let query = '';
+  if (diets.length > 0) query += `&diet=${diets.join(',')}`;
+  if (avoid.length > 0) query += `&avoid=${avoid.map(encodeURIComponent).join(',')}`;
+  return query;
 }
 
 // ── Gluten-free version ──

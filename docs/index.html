@@ -54,6 +54,9 @@
         aria-label="Search recipes and ingredients"
       >
       <div class="search-actions">
+        <button id="cooking-for-btn" class="search-action-btn" aria-label="Cooking for…" aria-haspopup="dialog">
+          <svg data-icon="users" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
         <button id="favorites-filter" class="search-action-btn" aria-label="Show favorites only">
           <svg data-icon="heart" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
         </button>
@@ -63,8 +66,9 @@
       </div>
     </div>
 
+    <div id="cooking-for-bar" class="cooking-for-bar" hidden></div>
+
     <div class="chip-filters">
-      <div class="chip-row" id="diet-chips"></div>
       <div class="chip-row" id="meal-type-chips"></div>
       <div class="chip-row" id="cuisine-chips"></div>
     </div>
@@ -91,6 +95,10 @@
           <svg data-icon="calendar" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
           <span>Meal Plan</span>
         </a>
+        <a href="friends.html" class="drawer-item">
+          <svg data-icon="users" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+          <span>Friends</span>
+        </a>
         <a href="cooking-log.html" class="drawer-item">
           <svg data-icon="clock" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
           <span>Cooking Log</span>
@@ -110,6 +118,22 @@
         </div>
       </div>
     </nav>
+  </div>
+
+  <!-- Cooking for: pick friends or diets -->
+  <div id="cooking-for-sheet" class="sheet" hidden>
+    <div class="sheet-overlay"></div>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="cooking-for-title">
+      <h2 id="cooking-for-title" class="sheet-title">Cooking for</h2>
+      <ul id="friend-options" class="friend-options"></ul>
+      <p id="no-friends" class="sheet-empty" hidden>Add friends with their diets and the ingredients they avoid, then pick who you're cooking for.</p>
+      <div class="sheet-section-label">Or just a diet</div>
+      <div class="chip-row" id="diet-chips"></div>
+      <div class="sheet-footer">
+        <a href="friends.html" class="sheet-link">Edit friends</a>
+        <button id="cooking-for-done" class="button">Done</button>
+      </div>
+    </div>
   </div>
 
   <script src="js/icons.js"></script>
