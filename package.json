@@ -9,10 +9,10 @@
   "scripts": {
     "dev": "http-server docs -p 8080 -c-1",
     "test": "playwright test",
-    "test-parser": "~/.cargo/bin/cargo test --manifest-path recipe-parser/Cargo.toml",
+    "test-parser": "cargo test --manifest-path recipe-parser/Cargo.toml",
     "test:all": "npm run test-parser && npm test",
-    "parse-recipes": "~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release",
-    "lint-recipes": "~/.cargo/bin/cargo run --manifest-path recipe-parser/Cargo.toml --release -- --lint",
+    "parse-recipes": "cargo run --manifest-path recipe-parser/Cargo.toml --release",
+    "lint-recipes": "cargo run --manifest-path recipe-parser/Cargo.toml --release -- --lint",
     "screenshots": "node scripts/screenshots.js"
   },
   "repository": {
