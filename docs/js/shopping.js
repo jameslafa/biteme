@@ -70,6 +70,7 @@ async function resolveAllItems() {
       section,
       ratio,
       checked: !!item.checked_at,
+      glutenFree: !!item.gluten_free && !!glutenFreeNote(ingredient),
       scaledText: scaleIngredientText(ingredient, ratio, { omitPreparation: true })
     });
   }
@@ -84,14 +85,16 @@ function buildMergedGroups(resolvedItems) {
 
   for (const item of resolvedItems) {
     const { ingredient, ratio } = item;
-    const canonicalKey = ingredient.canonical || ingredient.text;
+    // Gluten-free swaps are a different product, so they don't merge with the regular version
+    const canonicalKey = (ingredient.canonical || ingredient.text) + (item.glutenFree ? '|gf' : '');
 
     if (!groups.has(canonicalKey)) {
       groups.set(canonicalKey, {
         unitLines: new Map(),
         sources: [],
         hasQuantity: false,
-        section: item.section
+        section: item.section,
+        gfNote: item.glutenFree ? renderGlutenFreeNote(ingredient) : ''
       });
     }
 
@@ -254,7 +257,7 @@ function renderByRecipeView(resolvedItems) {
                 ${item.checked ? 'checked' : ''}
                 data-item-id="${item.itemId}"
               />
-              <label for="item-${item.itemId}" class="shopping-item-label">${item.scaledText}</label>
+              <label for="item-${item.itemId}" class="shopping-item-label">${item.scaledText}${item.glutenFree ? renderGlutenFreeNote(item.ingredient) : ''}</label>
             </div>
             <button class="remove-item" data-item-id="${item.itemId}" aria-label="Remove item">
               ${icon('x', 16)}
@@ -299,6 +302,7 @@ function renderMergedView(mergedGroups) {
           />
           <div class="merged-item-content">
             ${labelsHtml}
+            ${group.gfNote}
           </div>
         </div>
       </li>

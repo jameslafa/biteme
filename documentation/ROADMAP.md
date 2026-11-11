@@ -4,13 +4,6 @@ This document tracks feature ideas and improvements for BiteMe.
 
 ## User Features
 
-### [ ] Cooking For — Gluten-Free Swaps
-
-- Gluten flags in `docs/ingredients.json`: `contains` (needs a swap, e.g. soy sauce → tamari) or `check` (read the label, e.g. stock, oats)
-- Linter: a `gluten-free` recipe can't use a `contains` ingredient without a swap
-- When gluten-free is active: swap notes on the recipe page, GF markers in cooking mode and the shopping list
-- Fix existing mislabel: a gluten-free recipe uses kecap manis (usually contains wheat)
-
 ### [ ] Cooking For — Friends
 
 - Friends with diets and ingredients to avoid, stored locally
@@ -78,6 +71,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Meal Plan** — Weekly meal planner with IDF-weighted greedy recipe selection, seed recipe support, per-recipe servings, swap panel, shared ingredient callout, and per-ingredient cart buttons; active plan mode with cooked-state tracking (auto-synced from cooking sessions + manual toggle); home screen banner shows plan progress; back navigation uses `history.back()` on all sub-pages
 - **Ingredient display improvements** — Preparation text stripped from shopping contexts (shopping list, plan); first letter capitalised; text fractions (`1/2`) used consistently instead of unicode (`½`); attribution removed from merged shopping list view
 - **Diet Chips** — Vegan / Vegetarian / Gluten-free chips on the home page replace the Settings toggles; combinable; state in the URL so it resets when the app is reopened; vegan counts as vegetarian; diet carried to the recipe page (badges, similar recipes)
+- **Gluten-Free Version** — Gluten flags per ingredient in `docs/ingredients.json` (`contains` + swap, or `check`); parser rejects gluten-free recipes using unswappable gluten; recipe-page toggle (on with the gluten-free diet) shows swap notes on the recipe, in cooking mode, and on shopping items added while it's on
 - **Dark Mode** — Light/Dark/Auto theme selector in Settings; Auto follows the OS preference via `prefers-color-scheme`; no flash of wrong theme on load (inline script sets `data-theme` before first paint); JS always resolves the theme so CSS only needs `[data-theme="dark"]` selectors
 
 ---

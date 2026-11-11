@@ -172,7 +172,7 @@ Current test-curry step count: **4** (reduced from 6 during optimisation — don
 
 Key fixture recipes and what they test:
 - `test-curry` — `[vegan]`; main recipe: multi-step cooking, timer on step 3, word duration on step 4, ingredient refs, notes
-- `test-salad` — `[vegan, gluten-free]`; no notes or serving suggestions; shares garlic+lentil canonicals with curry (for recommendations/merge tests)
+- `test-salad` — `[vegan, gluten-free]`; no notes or serving suggestions; shares garlic+lentil canonicals with curry (for recommendations/merge tests); soy sauce (`gluten: contains` + swap, used in step 3) and oat milk (`gluten: check` + note) for gluten-free version tests
 - `test-toast` — `[vegetarian]`; breakfast/american; no shared ingredients (tests "no matches" edge case)
 - `test-soup` — `tested: false`; excluded from recommendations and plan generation
 - `test-fresh-sharer` / `test-pantry-sharer` — used only for IDF category weight scoring test

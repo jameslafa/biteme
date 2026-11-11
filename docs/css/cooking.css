@@ -280,6 +280,16 @@
   border-bottom: none;
 }
 
+/* Gluten-free note goes on its own line below the ingredient */
+.step-ingredients-cooking li {
+  flex-wrap: wrap;
+  row-gap: 0;
+}
+
+.step-ingredients-cooking .gf-note {
+  flex-basis: 100%;
+}
+
 /* Footer Navigation */
 .cooking-footer {
   position: sticky;

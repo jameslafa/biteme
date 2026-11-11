@@ -42,7 +42,7 @@ test.describe('Diet Badges', () => {
     await expect(card(page, 'Test Toast').locator('.diet-badge')).toHaveText(['Vg']);
 
     await page.goto('/recipe.html?id=test-salad');
-    await expect(page.locator('.recipe .diet-badge')).toHaveText(['V', 'GF']);
+    await expect(page.locator('.recipe-tags .diet-badge')).toHaveText(['V', 'GF']);
   });
 });
 

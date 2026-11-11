@@ -33,7 +33,7 @@ date: 2026-02-10
 | `servings`    | integer | 1–100.                                                                                                                                                                                                                 |
 | `time`        | integer | 1–1440. Total time in minutes (1440 = 24 hours).                                                                                                                                                                       |
 | `difficulty`  | string  | Exactly one of: `easy`, `medium`, `hard`. Lowercase only.                                                                                                                                                              |
-| `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`. Don't list both `vegan` and `vegetarian` — vegan already implies vegetarian (the linter rejects it). For `gluten-free`: tag the recipe if gluten only appears in ingredients with a widely available GF alternative (soy sauce → tamari, gnocchi → GF gnocchi, stock → GF stock). Do **not** tag if gluten is structural to the dish (wheat flour, pasta, ramen noodles, soba noodles, bread). |
+| `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`. Don't list both `vegan` and `vegetarian` — vegan already implies vegetarian (the linter rejects it). For `gluten-free`: tag the recipe if gluten only appears in ingredients with a widely available GF alternative (soy sauce → tamari, gnocchi → GF gnocchi, stock → GF stock). Do **not** tag if gluten is structural to the dish (wheat flour, pasta, ramen noodles, soba noodles, bread). This is enforced: ingredients that contain gluten are flagged in `docs/ingredients.json` (see [Gluten flags](#gluten-flags)), and the parser rejects a gluten-free recipe using a flagged ingredient with no swap. |
 | `cuisine`     | array   | At least 1 value. Valid values: `indian`, `middle-eastern`, `asian`, `french`, `italian`, `british`, `american`, `mediterranean`. |
 | `meal_type`   | array   | At least 1 value. Valid values: `breakfast`, `brunch`, `lunch`, `dinner`, `dessert`, `baking`. A recipe can belong to multiple meal types. |
 | `date`        | string  | Format: `YYYY-MM-DD`. Date the recipe was added.                                                                                                                                                                       |
@@ -166,6 +166,23 @@ Add `<!-- no-scale -->` to explicitly exclude a numbered ingredient from scaling
 ```markdown
 - 1 large handful [spinach] <!-- no-scale -->
 ```
+
+### Gluten flags
+
+Entries in `docs/ingredients.json` can carry gluten information, used for the recipe's gluten-free version in the app:
+
+```json
+"soy sauce":       { "section": "Condiments", "gluten": "contains", "gf_swap": "gluten-free soy sauce or tamari" },
+"plain flour":     { "section": "Pantry", "gluten": "contains" },
+"vegetable stock": { "section": "Pantry", "gluten": "check" },
+"oat milk":        { "section": "Fridge", "gluten": "check", "gf_note": "use certified gluten-free oat milk" }
+```
+
+- `"gluten": "contains"` — normally contains gluten. With `gf_swap`, a gluten-free recipe may use it (the app shows "Use …"); without one, it can't appear in a gluten-free recipe.
+- `"gluten": "check"` — often fine but some products contain gluten. The app shows `gf_note`, or "Check the label says gluten-free".
+- Leave pure spices and naturally gluten-free ingredients unflagged — flagging everything that might contain a trace makes every warning noise.
+
+When adding a new ingredient, decide whether it needs a flag.
 
 ---
 

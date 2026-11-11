@@ -218,6 +218,30 @@
   color: var(--text-secondary);
 }
 
+.gf-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.gf-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.gf-toggle-label .diet-icons {
+  margin: 0;
+}
+
 .serving-adjuster button {
   width: 2rem;
   height: 2rem;

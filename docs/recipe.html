@@ -37,13 +37,17 @@
   <script src="js/notes.js"></script>
   <script src="js/rating.js"></script>
   <script>
+    // Active diets (from the URL); gluten-free here also switches on the recipe's gluten-free version
+    let diets = [];
+    let glutenFreeMode = false;
+
     // Load recipe detail
     document.addEventListener('DOMContentLoaded', async function() {
       await loadIngredientVocabulary();
 
       const urlParams = new URLSearchParams(window.location.search);
       const recipeId = urlParams.get('id');
-      const diets = dietsFromParams(urlParams);
+      diets = dietsFromParams(urlParams);
 
       if (!recipeId) {
         window.location.href = 'index.html';
@@ -99,6 +103,15 @@
               <span><span id="current-servings">${recipe.servings}</span> servings</span>
               <button id="increase-servings" aria-label="Increase servings">+</button>
             </div>
+            ${hasGlutenFreeVersion(recipe) ? `
+            <label class="gf-toggle-row">
+              <span class="gf-toggle-label">${renderDietIcons(['gluten-free'])} Gluten-free version</span>
+              <span class="toggle">
+                <input type="checkbox" id="gf-toggle">
+                <span class="toggle-slider"></span>
+              </span>
+            </label>
+            ` : ''}
             <div id="ingredients-list"></div>
           </section>
 
@@ -142,6 +155,12 @@
       // Render ingredients with current serving ratio
       let currentServings = getServings(recipeId, recipe.servings);
       document.getElementById('current-servings').textContent = currentServings;
+      glutenFreeMode = hasGlutenFreeVersion(recipe) && diets.includes('gluten-free');
+
+      function refreshIngredients() {
+        renderIngredients(recipe, currentServings / recipe.servings);
+        setupShoppingCartButtons(recipe);
+      }
       renderIngredients(recipe, currentServings / recipe.servings);
 
       // Setup serving adjuster
@@ -150,17 +169,31 @@
           currentServings--;
           document.getElementById('current-servings').textContent = currentServings;
           setServings(recipeId, currentServings);
-          renderIngredients(recipe, currentServings / recipe.servings);
-          setupShoppingCartButtons(recipeId, recipe.name);
+          refreshIngredients();
         }
       });
       document.getElementById('increase-servings').addEventListener('click', () => {
         currentServings++;
         document.getElementById('current-servings').textContent = currentServings;
         setServings(recipeId, currentServings);
-        renderIngredients(recipe, currentServings / recipe.servings);
-        setupShoppingCartButtons(recipeId, recipe.name);
+        refreshIngredients();
       });
+
+      // Gluten-free version toggle — kept in the URL as the gluten-free diet, so it
+      // carries into cooking mode and survives back/forward navigation
+      const gfToggle = document.getElementById('gf-toggle');
+      if (gfToggle) {
+        gfToggle.checked = glutenFreeMode;
+        gfToggle.addEventListener('change', () => {
+          glutenFreeMode = gfToggle.checked;
+          diets = glutenFreeMode
+            ? DIETS.filter(d => d === 'gluten-free' || diets.includes(d))
+            : diets.filter(d => d !== 'gluten-free');
+          history.replaceState(null, '', `recipe.html?id=${recipeId}${dietQuery(diets)}`);
+          refreshIngredients();
+          renderSimilarRecipes(recipeId, diets);
+        });
+      }
 
       // Setup favorite button
       setupFavoriteButton(recipeId);
@@ -169,7 +202,7 @@
       setupShareButton(recipe);
 
       // Setup add to cart buttons
-      setupShoppingCartButtons(recipeId, recipe.name);
+      setupShoppingCartButtons(recipe);
 
       // Show cooking stats + rating
       showCookingStats(recipeId);
@@ -193,12 +226,13 @@
             <ul>
               ${items.map((ingredient) => {
                 const displayText = scaleIngredientText(ingredient, ratio);
+                const gfNote = glutenFreeMode ? renderGlutenFreeNote(ingredient) : '';
                 return `
                 <li>
                   <div class="ingredient-item">
                     <div class="ingredient-checkbox">
                       <input type="checkbox" id="ingredient-${ingredient.id}" />
-                      <label for="ingredient-${ingredient.id}">${displayText}</label>
+                      <label for="ingredient-${ingredient.id}">${displayText}${gfNote}</label>
                     </div>
                     <button class="add-to-cart" data-ingredient-id="${ingredient.id}" aria-label="Add to shopping list">
                       ${icon('cart', 16)}
@@ -284,11 +318,13 @@
     }
 
     function startCooking(id) {
-      window.location.href = `cooking.html?id=${id}`;
+      window.location.href = `cooking.html?id=${id}${dietQuery(diets)}`;
     }
 
-    async function setupShoppingCartButtons(recipeId, recipeName) {
+    async function setupShoppingCartButtons(recipe) {
       await initDB();
+      const recipeId = recipe.id;
+      const ingredientsById = new Map(Object.values(recipe.ingredients).flat().map(i => [i.id, i]));
 
       const cartButtons = document.querySelectorAll('.add-to-cart');
 
@@ -308,8 +344,9 @@
               button.classList.remove('in-cart');
               button.setAttribute('aria-label', 'Add to shopping list');
             } else {
-              // Add to list
-              await addToShoppingList(recipeId, ingredientId);
+              // Add to list — as the gluten-free swap when the GF version is on
+              const glutenFree = glutenFreeMode && !!glutenFreeNote(ingredientsById.get(ingredientId));
+              await addToShoppingList(recipeId, ingredientId, glutenFree);
               button.classList.add('in-cart');
               button.setAttribute('aria-label', 'Remove from shopping list');
             }
@@ -392,7 +429,11 @@
     async function renderSimilarRecipes(recipeId, diets) {
       const results = await getSimilarRecipes(recipeId, 5, diets);
       const section = document.getElementById('similar-recipes');
-      if (!section || results.length === 0) return;
+      if (!section) return;
+      if (results.length === 0) {
+        section.innerHTML = '';
+        return;
+      }
 
       section.innerHTML = `
         <h3>Same ingredients, different dish</h3>

@@ -140,8 +140,9 @@ async function toggleFavorite(recipeId) {
 
 // Shopping List Functions
 
-// Add item to shopping list
-async function addToShoppingList(recipeId, ingredientId) {
+// Add item to shopping list. glutenFree marks it as added from a recipe's
+// gluten-free version, so the list shows the gluten-free swap.
+async function addToShoppingList(recipeId, ingredientId, glutenFree = false) {
   if (!db) await initDB();
 
   // Check if already in list
@@ -157,6 +158,7 @@ async function addToShoppingList(recipeId, ingredientId) {
   const item = {
     recipe_id: recipeId,
     ingredient_id: ingredientId,
+    gluten_free: glutenFree,
     checked_at: null,
     created_at: Date.now()
   };

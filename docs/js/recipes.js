@@ -172,6 +172,31 @@ function dietQuery(diets) {
   return diets.length > 0 ? `&diet=${diets.join(',')}` : '';
 }
 
+// ── Gluten-free version ──
+// Ingredients carry an optional `gluten` flag (from ingredients.json via the parser):
+// { level: 'contains', swap } must be swapped; { level: 'check', note? } means read the label.
+
+// The note to show for an ingredient in a recipe's gluten-free version, or null
+function glutenFreeNote(ingredient) {
+  const gluten = ingredient.gluten;
+  if (!gluten) return null;
+  if (gluten.level === 'contains') return gluten.swap ? `Use ${gluten.swap}` : null;
+  const note = gluten.note || 'check the label says gluten-free';
+  return note[0].toUpperCase() + note.slice(1);
+}
+
+// Only recipes tagged gluten-free offer a gluten-free version, and only if something
+// in them needs swapping or checking
+function hasGlutenFreeVersion(recipe) {
+  return (recipe.diet || []).includes('gluten-free')
+    && Object.values(recipe.ingredients).flat().some(i => glutenFreeNote(i));
+}
+
+function renderGlutenFreeNote(ingredient) {
+  const note = glutenFreeNote(ingredient);
+  return note ? `<span class="gf-note"><span class="gf-note-tag">GF</span>${note}</span>` : '';
+}
+
 // Resolve a step ref name to the single ingredient it refers to.
 // Exact canonical match always wins; a word-boundary text match is only used
 // as a fallback when no ingredient's canonical matches. This prevents a bare

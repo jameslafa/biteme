@@ -69,6 +69,20 @@ struct Ingredient {
     preparation: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     quantity: Option<ParsedQuantity>,
+    /// Gluten flag copied from ingredients.json, if the canonical has one.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    gluten: Option<GlutenInfo>,
+}
+
+/// Gluten information for a canonical ingredient (from ingredients.json).
+/// `level` is "contains" (needs a swap to be gluten-free) or "check" (read the label).
+#[derive(Debug, Clone, Serialize)]
+struct GlutenInfo {
+    level: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    swap: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    note: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
@@ -117,6 +131,12 @@ struct CanonicalIngredientEntry {
     #[serde(default)]
     plural: Option<String>,
     section: String,
+    #[serde(default)]
+    gluten: Option<String>,
+    #[serde(default)]
+    gf_swap: Option<String>,
+    #[serde(default)]
+    gf_note: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -131,6 +151,8 @@ struct CanonicalData {
     ingredients: HashMap<String, String>,
     /// Maps singular canonical (lowercase) → section name (e.g. "Fresh", "Pantry").
     ingredient_sections: HashMap<String, String>,
+    /// Maps singular canonical (lowercase) → gluten flag, for flagged ingredients only.
+    ingredient_gluten: HashMap<String, GlutenInfo>,
     /// All known unit forms (both singular and plural), sorted by length descending.
     units: Vec<String>,
 }
@@ -144,10 +166,14 @@ impl CanonicalData {
 
         let mut ingredients = HashMap::new();
         let mut ingredient_sections = HashMap::new();
+        let mut ingredient_gluten = HashMap::new();
         for (key, entry) in &json.ingredients {
             let canonical = key.to_lowercase();
             ingredients.insert(canonical.clone(), canonical.clone());
             ingredient_sections.insert(canonical.clone(), entry.section.clone());
+            if let Some(gluten) = parse_gluten_entry(key, entry)? {
+                ingredient_gluten.insert(canonical.clone(), gluten);
+            }
             if let Some(plural) = &entry.plural {
                 ingredients.insert(plural.to_lowercase(), canonical);
             }
@@ -164,7 +190,7 @@ impl CanonicalData {
         units.sort_by(|a, b| b.len().cmp(&a.len()).then(a.cmp(b)));
         units.dedup();
 
-        Ok(Self { ingredients, ingredient_sections, units })
+        Ok(Self { ingredients, ingredient_sections, ingredient_gluten, units })
     }
 
     /// Empty canonical data for use in unit tests; falls back to hardcoded units.
@@ -175,7 +201,7 @@ impl CanonicalData {
             "cans".to_string(), "can".to_string(), "medium".to_string(), "small".to_string(),
             "large".to_string(), "kg".to_string(), "ml".to_string(), "g".to_string(), "l".to_string(),
         ];
-        Self { ingredients: HashMap::new(), ingredient_sections: HashMap::new(), units }
+        Self { ingredients: HashMap::new(), ingredient_sections: HashMap::new(), ingredient_gluten: HashMap::new(), units }
     }
 
     fn lookup_ingredient(&self, raw: &str) -> Option<&str> {
@@ -184,6 +210,31 @@ impl CanonicalData {
 
     fn lookup_section(&self, canonical: &str) -> Option<&str> {
         self.ingredient_sections.get(canonical).map(|s| s.as_str())
+    }
+
+    fn lookup_gluten(&self, canonical: &str) -> Option<&GlutenInfo> {
+        self.ingredient_gluten.get(canonical)
+    }
+}
+
+/// Validate an ingredients.json entry's gluten fields: `gluten` must be "contains" or
+/// "check"; `gf_swap` only makes sense with "contains", `gf_note` only with "check".
+fn parse_gluten_entry(name: &str, entry: &CanonicalIngredientEntry) -> Result<Option<GlutenInfo>> {
+    let Some(level) = &entry.gluten else {
+        if entry.gf_swap.is_some() || entry.gf_note.is_some() {
+            bail!("ingredients.json: '{}' has gf_swap/gf_note but no gluten level", name);
+        }
+        return Ok(None);
+    };
+    match level.as_str() {
+        "contains" if entry.gf_note.is_some() => bail!("ingredients.json: '{}' is 'contains' — use gf_swap, not gf_note", name),
+        "check" if entry.gf_swap.is_some() => bail!("ingredients.json: '{}' is 'check' — use gf_note, not gf_swap", name),
+        "contains" | "check" => Ok(Some(GlutenInfo {
+            level: level.clone(),
+            swap: entry.gf_swap.clone(),
+            note: entry.gf_note.clone(),
+        })),
+        other => bail!("ingredients.json: '{}' has invalid gluten value '{}' (expected 'contains' or 'check')", name, other),
     }
 }
 
@@ -849,6 +900,7 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
                         id: ingredient_id,
                         text: clean_text,
                         canonical: canonical_resolved,
+                        gluten: None,
                         preparation,
                         quantity,
                     });
@@ -908,7 +960,8 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
 
     // Assign sections from ingredients.json and group by section
     let mut ingredients: HashMap<String, Vec<Ingredient>> = HashMap::new();
-    for ing in flat_ingredients {
+    for mut ing in flat_ingredients {
+        ing.gluten = ing.canonical.as_deref().and_then(|c| canonical.lookup_gluten(c)).cloned();
         let section = ing.canonical.as_deref()
             .and_then(|c| canonical.lookup_section(c))
             .unwrap_or("Pantry")
@@ -922,6 +975,21 @@ fn parse_recipe_file(path: &PathBuf, lint: bool, canonical: &CanonicalData) -> R
     }
     if steps.is_empty() {
         bail!("Recipe must have at least one instruction step");
+    }
+
+    // A gluten-free recipe may only use gluten-containing ingredients that have a GF swap
+    if frontmatter.diet.iter().any(|d| d == "gluten-free") {
+        let mut unswappable: Vec<&str> = ingredients.values().flatten()
+            .filter(|i| i.gluten.as_ref().is_some_and(|g| g.level == "contains" && g.swap.is_none()))
+            .filter_map(|i| i.canonical.as_deref())
+            .collect();
+        if !unswappable.is_empty() {
+            unswappable.sort();
+            bail!(
+                "Recipe is tagged gluten-free but uses ingredients that contain gluten with no gluten-free swap: {}. Remove 'gluten-free' from diet, or add a gf_swap in docs/ingredients.json",
+                unswappable.join(", ")
+            );
+        }
     }
 
     // Lint mode: check for empty ingredients and steps
@@ -2787,9 +2855,9 @@ date: 2026-01-01
     fn test_unreferenced_matches_substring() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Fresh".to_string(), vec![
-            Ingredient { id: 1, text: "Few ice cubes".to_string(), canonical: None, preparation: None, quantity: None },
-            Ingredient { id: 2, text: "Juice of 1 lemon".to_string(), canonical: None, preparation: None, quantity: None },
-            Ingredient { id: 3, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 1, text: "Few ice cubes".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
+            Ingredient { id: 2, text: "Juice of 1 lemon".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
+            Ingredient { id: 3, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
         ]);
         let refs = vec!["ice cubes".to_string(), "lemon".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
@@ -2800,8 +2868,8 @@ date: 2026-01-01
     fn test_unreferenced_all_matched() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Pantry".to_string(), vec![
-            Ingredient { id: 1, text: "250 g dried chickpeas".to_string(), canonical: None, preparation: None, quantity: None },
-            Ingredient { id: 2, text: "120 g tahini".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 1, text: "250 g dried chickpeas".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
+            Ingredient { id: 2, text: "120 g tahini".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
         ]);
         let refs = vec!["chickpeas".to_string(), "tahini".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
@@ -2812,7 +2880,7 @@ date: 2026-01-01
     fn test_unreferenced_none_matched() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Spices".to_string(), vec![
-            Ingredient { id: 1, text: "Salt to taste".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 1, text: "Salt to taste".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
         ]);
         let refs = vec!["oil".to_string()];
         let unreferenced = find_unreferenced_ingredients(&ingredients, &refs, &CanonicalData::empty());
@@ -2825,8 +2893,8 @@ date: 2026-01-01
     fn test_ambiguous_ref_oil_matches_multiple() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Pantry".to_string(), vec![
-            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None },
-            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
+            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
         ]);
         let refs = vec!["oil".to_string()];
         let ambiguous = find_ambiguous_refs(&ingredients, &refs, &CanonicalData::empty());
@@ -2839,8 +2907,8 @@ date: 2026-01-01
     fn test_specific_ref_not_ambiguous() {
         let mut ingredients = HashMap::new();
         ingredients.insert("Pantry".to_string(), vec![
-            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None },
-            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None },
+            Ingredient { id: 1, text: "2 tbsp olive oil".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
+            Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(), canonical: None, preparation: None, quantity: None, gluten: None },
         ]);
         let refs = vec!["olive oil".to_string()];
         let ambiguous = find_ambiguous_refs(&ingredients, &refs, &CanonicalData::empty());
@@ -3017,7 +3085,83 @@ date: 2026-01-01
             "tbsp".to_string(), "tsp".to_string(),
             "g".to_string(), "ml".to_string(),
         ];
-        CanonicalData { ingredients, ingredient_sections, units }
+        CanonicalData { ingredients, ingredient_sections, ingredient_gluten: HashMap::new(), units }
+    }
+
+    fn make_gluten_canonical_data() -> CanonicalData {
+        let mut data = make_canonical_data();
+        let flagged = [
+            ("plain flour", "Pantry", "contains", None),
+            ("soy sauce", "Condiments", "contains", Some("tamari")),
+            ("vegetable stock", "Pantry", "check", None),
+        ];
+        for (name, section, level, swap) in flagged {
+            data.ingredients.insert(name.to_string(), name.to_string());
+            data.ingredient_sections.insert(name.to_string(), section.to_string());
+            data.ingredient_gluten.insert(name.to_string(), GlutenInfo {
+                level: level.to_string(),
+                swap: swap.map(String::from),
+                note: None,
+            });
+        }
+        data
+    }
+
+    fn parse_with_gluten(id: &str, diet: &str, ingredients: &str) -> Result<Recipe> {
+        let test_recipe = format!(
+            "---\nid: {id}\nname: Gluten Test\ndescription: Recipe for gluten validation tests\nservings: 2\ntime: 10\ndifficulty: easy\ndiet: [{diet}]\ncuisine: [french]\nmeal_type: [dinner]\ndate: 2026-01-01\n---\n\n# Ingredients\n\n{ingredients}\n\n# Instructions\n\n1. Cook everything\n"
+        );
+        let test_file = std::env::temp_dir().join(format!("{id}.md"));
+        fs::write(&test_file, test_recipe).unwrap();
+        let result = parse_recipe_file(&test_file, false, &make_gluten_canonical_data());
+        fs::remove_file(&test_file).ok();
+        result
+    }
+
+    #[test]
+    fn test_gluten_free_rejects_unswappable_gluten() {
+        let result = parse_with_gluten("gf-flour", "vegan, gluten-free", "- 200 g [plain flour]");
+        let err = result.unwrap_err().to_string();
+        assert!(err.contains("tagged gluten-free"));
+        assert!(err.contains("plain flour"));
+
+        // Not tagged gluten-free: flour is fine
+        assert!(parse_with_gluten("non-gf-flour", "vegan", "- 200 g [plain flour]").is_ok());
+    }
+
+    #[test]
+    fn test_gluten_free_allows_swappable_and_check_ingredients() {
+        let recipe = parse_with_gluten(
+            "gf-swaps",
+            "vegan, gluten-free",
+            "- 2 tbsp [soy sauce]\n- 500 ml [vegetable stock]\n- 1 tbsp [olive oil]",
+        ).unwrap();
+        let all: Vec<&Ingredient> = recipe.ingredients.values().flatten().collect();
+        let find = |c: &str| all.iter().find(|i| i.canonical.as_deref() == Some(c)).unwrap();
+
+        let soy = find("soy sauce").gluten.as_ref().unwrap();
+        assert_eq!(soy.level, "contains");
+        assert_eq!(soy.swap.as_deref(), Some("tamari"));
+        assert_eq!(find("vegetable stock").gluten.as_ref().unwrap().level, "check");
+        assert!(find("olive oil").gluten.is_none());
+    }
+
+    #[test]
+    fn test_gluten_entry_validation() {
+        let entry = |gluten: Option<&str>, swap: Option<&str>, note: Option<&str>| CanonicalIngredientEntry {
+            plural: None,
+            section: "Pantry".to_string(),
+            gluten: gluten.map(String::from),
+            gf_swap: swap.map(String::from),
+            gf_note: note.map(String::from),
+        };
+        assert!(parse_gluten_entry("x", &entry(None, None, None)).unwrap().is_none());
+        assert!(parse_gluten_entry("x", &entry(Some("contains"), Some("tamari"), None)).unwrap().is_some());
+        assert!(parse_gluten_entry("x", &entry(Some("check"), None, Some("certified oats"))).unwrap().is_some());
+        assert!(parse_gluten_entry("x", &entry(Some("maybe"), None, None)).is_err());
+        assert!(parse_gluten_entry("x", &entry(Some("check"), Some("tamari"), None)).is_err());
+        assert!(parse_gluten_entry("x", &entry(Some("contains"), None, Some("note"))).is_err());
+        assert!(parse_gluten_entry("x", &entry(None, Some("tamari"), None)).is_err());
     }
 
     #[test]
@@ -3233,9 +3377,9 @@ date: 2026-01-01
         let mut ingredients = HashMap::new();
         ingredients.insert("Pantry".to_string(), vec![
             Ingredient { id: 1, text: "2 tbsp olive oil".to_string(),
-                canonical: Some("olive oil".to_string()), preparation: None, quantity: None },
+                canonical: Some("olive oil".to_string()), preparation: None, quantity: None, gluten: None },
             Ingredient { id: 2, text: "1 tbsp vegetable oil".to_string(),
-                canonical: Some("vegetable oil".to_string()), preparation: None, quantity: None },
+                canonical: Some("vegetable oil".to_string()), preparation: None, quantity: None, gluten: None },
         ]);
 
         // {olive oil} — exact match, not ambiguous
@@ -3255,7 +3399,7 @@ date: 2026-01-01
         let mut ingredients = HashMap::new();
         ingredients.insert("Fridge".to_string(), vec![
             Ingredient { id: 1, text: "2 eggs".to_string(),
-                canonical: Some("egg".to_string()), preparation: None, quantity: None },
+                canonical: Some("egg".to_string()), preparation: None, quantity: None, gluten: None },
         ]);
 
         let refs = vec!["egg".to_string()];

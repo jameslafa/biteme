@@ -225,6 +225,20 @@ All user data is local-first. Sync is additive, not required.
 
 ---
 
+## Gluten-Free Version
+
+**Decision:** Gluten knowledge lives per ingredient in `docs/ingredients.json` (`contains` + optional swap, or `check`), not per recipe. The parser copies it onto each ingredient in `recipes.json` and rejects a gluten-free recipe using a `contains` ingredient with no swap.
+
+**Why per ingredient:** Written once, applies to every recipe, and new recipes are checked automatically. "Gluten-free" on a recipe means "gluten-free *with these swaps*" — the app has to say which.
+
+**How it works:**
+- Recipes tagged gluten-free with something to swap or check show a "Gluten-free version" toggle on the recipe page. It's on when the gluten-free diet is active, and toggling it adds/removes `gluten-free` from the URL's diets — so it carries into cooking mode and back
+- When on, flagged ingredients show a note ("Use tamari…", "Check the label…") on the recipe page and in cooking mode
+- Shopping items added while it's on are stored with `gluten_free: true`; the list shows the swap and keeps them separate from the regular version
+- Only `contains` and `check` exist; pure spices are deliberately unflagged to avoid warning fatigue
+
+---
+
 ## Recipe Recommendation Engine
 
 **Decision:** IDF-weighted ingredient similarity with category weighting, computed client-side on demand

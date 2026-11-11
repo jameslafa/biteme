@@ -70,6 +70,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
   id: number;              // Auto-increment primary key
   recipe_id: string;       // References recipe (e.g., "pad-thai")
   ingredient_id: number;   // References ingredient within recipe (1, 2, 3...)
+  gluten_free: boolean;    // Added from the recipe's gluten-free version: list shows the GF swap
   checked_at: number | null; // Unix timestamp when checked, null if unchecked
   created_at: number;      // Unix timestamp when added
 }
@@ -88,6 +89,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Notes:**
 - Stores `recipe_id + ingredient_id` pair (no text duplication)
+- `gluten_free` items don't merge with the regular version of the same ingredient (different product); items added before this field existed read as `false`
 - Ingredient text looked up from recipe data for display
 - TTL cleanup: Items with `checked_at` older than 1 hour are auto-deleted
 - Provides 1-hour undo window for checked items
@@ -262,7 +264,7 @@ The `diet` field holds dietary labels separated from `cuisine` and `meal_type`. 
 
 Each ingredient in the JSON includes a `text` field (display-ready text), `canonical` and `preparation` fields for shopping list merging, and an optional `quantity` field with structured data for scaling.
 
-Ingredient canonical names and sections are controlled by `docs/ingredients.json`. Each entry maps a singular canonical name to an object with an optional `plural` form and a required `section` (`Fresh`, `Fridge`, `Pantry`, `Condiments`, or `Spices`). The parser derives the section for each ingredient from this file at build time — recipe markdown files do not contain section headers. Authors tag ingredients in recipe markdown using `[brackets]`:
+Ingredient canonical names and sections are controlled by `docs/ingredients.json`. Each entry maps a singular canonical name to an object with an optional `plural` form, a required `section` (`Fresh`, `Fridge`, `Pantry`, `Condiments`, or `Spices`), and optional gluten flags (`gluten`, `gf_swap`, `gf_note` — see RECIPE_FORMAT.md), which the parser copies onto each ingredient as `gluten`. The parser derives the section for each ingredient from this file at build time — recipe markdown files do not contain section headers. Authors tag ingredients in recipe markdown using `[brackets]`:
 
 ```
 - 2 cloves [garlic], minced    →  canonical: "garlic",  preparation: "minced"
@@ -287,6 +289,11 @@ The parser strips brackets for display, normalises plural forms to singular cano
     secondary_unit?: string;     // Parenthetical unit
     secondary_prefix?: string;   // Modifier like "about" in "(about 150 g)"
     prefix?: string;       // Text before the quantity (e.g., "Juice of")
+  }
+  gluten?: {               // Omitted unless the canonical is flagged in ingredients.json
+    level: "contains" | "check";
+    swap?: string;         // GF replacement ("contains" only), e.g. "gluten-free soy sauce or tamari"
+    note?: string;         // Specific advice ("check" only), e.g. "use certified gluten-free oat milk"
   }
 }
 ```

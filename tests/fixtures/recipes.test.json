@@ -40,19 +40,6 @@
           }
         }
       ],
-      "Spices": [
-        {
-          "id": 3,
-          "text": "1 tsp curry powder",
-          "canonical": null,
-          "preparation": null,
-          "quantity": {
-            "amount": 1,
-            "unit": "tsp",
-            "item": "curry powder"
-          }
-        }
-      ],
       "Pantry": [
         {
           "id": 4,
@@ -87,6 +74,19 @@
             "amount": 1,
             "unit": "tbsp",
             "item": "oil"
+          }
+        }
+      ],
+      "Spices": [
+        {
+          "id": 3,
+          "text": "1 tsp curry powder",
+          "canonical": null,
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "tsp",
+            "item": "curry powder"
           }
         }
       ]
@@ -173,6 +173,23 @@
           }
         }
       ],
+      "Fridge": [
+        {
+          "id": 7,
+          "text": "100 ml oat milk",
+          "canonical": "oat milk",
+          "preparation": null,
+          "quantity": {
+            "amount": 100,
+            "unit": "ml",
+            "item": "oat milk"
+          },
+          "gluten": {
+            "level": "check",
+            "note": "use certified gluten-free oat milk"
+          }
+        }
+      ],
       "Pantry": [
         {
           "id": 5,
@@ -197,6 +214,21 @@
             "unit": "tbsp",
             "item": "olive oil"
           }
+        },
+        {
+          "id": 6,
+          "text": "1 tbsp soy sauce",
+          "canonical": "soy sauce",
+          "preparation": null,
+          "quantity": {
+            "amount": 1,
+            "unit": "tbsp",
+            "item": "soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free soy sauce or tamari"
+          }
         }
       ]
     },
@@ -208,7 +240,7 @@
         "text": "Slice tomato"
       },
       {
-        "text": "Mix and add oil"
+        "text": "Mix, then add {olive oil} and {soy sauce}"
       }
     ],
     "tested": true

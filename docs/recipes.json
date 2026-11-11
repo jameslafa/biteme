@@ -70,6 +70,10 @@
             "amount": 125.0,
             "unit": "ml",
             "item": "oat cream"
+          },
+          "gluten": {
+            "level": "check",
+            "note": "use certified gluten-free oat cream"
           }
         }
       ],
@@ -82,6 +86,9 @@
             "amount": 750.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -131,6 +138,9 @@
             "amount_max": 2.0,
             "unit": "tsp",
             "item": "curry powder"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ]
@@ -448,6 +458,9 @@
             "amount": 190.0,
             "unit": "g",
             "item": "plain flour"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -458,6 +471,9 @@
             "amount": 1.0,
             "unit": "tsp",
             "item": "baking powder"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -827,6 +843,9 @@
             "amount": 175.0,
             "unit": "g",
             "item": "plain flour"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -1305,6 +1324,10 @@
             "amount": 3.0,
             "unit": "tbsp",
             "item": "kecap manis"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free kecap manis"
           }
         },
         {
@@ -1315,6 +1338,10 @@
             "amount": 3.0,
             "unit": "tbsp",
             "item": "soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free soy sauce or tamari"
           }
         },
         {
@@ -1325,6 +1352,10 @@
             "amount": 4.0,
             "unit": "tsp",
             "item": "dark soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free dark soy sauce"
           }
         }
       ],
@@ -1729,6 +1760,10 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free soy sauce or tamari"
           }
         },
         {
@@ -2116,6 +2151,9 @@
             "amount": 100.0,
             "unit": "g",
             "item": "vegan yogurt"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -2138,6 +2176,9 @@
             "amount": 580.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -2387,7 +2428,10 @@
           "id": 19,
           "text": "chilli oil, to serve (optional)",
           "canonical": "chilli oil",
-          "preparation": "to serve (optional)"
+          "preparation": "to serve (optional)",
+          "gluten": {
+            "level": "check"
+          }
         }
       ],
       "Spices": [
@@ -2604,6 +2648,10 @@
             "amount": 3.0,
             "unit": "tbsp",
             "item": "soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free soy sauce or tamari"
           }
         },
         {
@@ -2833,6 +2881,9 @@
           "quantity": {
             "amount": 1.0,
             "item": "curry powder"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -2955,6 +3006,10 @@
             "amount": 300.0,
             "unit": "ml",
             "item": "oat milk"
+          },
+          "gluten": {
+            "level": "check",
+            "note": "use certified gluten-free oat milk"
           }
         },
         {
@@ -2965,6 +3020,9 @@
             "amount": 180.0,
             "unit": "g",
             "item": "smoked tofu"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -2977,6 +3035,9 @@
             "amount": 300.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -2987,6 +3048,9 @@
             "amount": 100.0,
             "unit": "g",
             "item": "ramen noodles"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -3040,6 +3104,10 @@
             "amount": 12.0,
             "unit": "tbsp",
             "item": "soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free soy sauce or tamari"
           }
         },
         {
@@ -3092,6 +3160,9 @@
             "amount": 3.0,
             "unit": "tsp",
             "item": "crispy chili oil"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -3494,6 +3565,9 @@
             "amount": 400.0,
             "unit": "g",
             "item": "spaghetti"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -3503,13 +3577,19 @@
           "quantity": {
             "amount": 1.2,
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
           "id": 15,
           "text": "nutritional yeast to serve",
           "canonical": "nutritional yeast",
-          "preparation": "to serve"
+          "preparation": "to serve",
+          "gluten": {
+            "level": "check"
+          }
         }
       ],
       "Condiments": [
@@ -3887,6 +3967,9 @@
           "quantity": {
             "amount": 1.0,
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -4501,6 +4584,9 @@
             "amount": 250.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -4723,6 +4809,9 @@
             "amount": 2.0,
             "unit": "bundles",
             "item": "soba noodles"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -4752,6 +4841,10 @@
             "amount": 80.0,
             "unit": "ml",
             "item": "teriyaki sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free teriyaki sauce"
           }
         }
       ],
@@ -4878,6 +4971,9 @@
             "amount": 250.0,
             "unit": "g",
             "item": "buckwheat flour"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -5073,6 +5169,9 @@
             "amount": 2.0,
             "unit": "portions",
             "item": "ramen noodles"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -5083,6 +5182,9 @@
             "amount": 300.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -5117,6 +5219,9 @@
             "amount": 0.5,
             "unit": "tbsp",
             "item": "miso paste"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -5137,6 +5242,10 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free soy sauce or tamari"
           }
         },
         {
@@ -5168,6 +5277,9 @@
             "amount": 1.0,
             "unit": "tsp",
             "item": "rayu"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -5178,6 +5290,9 @@
             "amount": 1.0,
             "unit": "tsp",
             "item": "chilli oil"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ]
@@ -5268,6 +5383,10 @@
             "amount": 120.0,
             "unit": "ml",
             "item": "oat milk"
+          },
+          "gluten": {
+            "level": "check",
+            "note": "use certified gluten-free oat milk"
           }
         },
         {
@@ -5279,6 +5398,9 @@
             "amount": 1.0,
             "unit": "tbsp",
             "item": "vegan yogurt"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -5291,6 +5413,9 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "nutritional yeast"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -5586,6 +5711,9 @@
             "amount": 400.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -5857,6 +5985,9 @@
             "amount": 500.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -5984,6 +6115,10 @@
             "amount": 500.0,
             "unit": "ml",
             "item": "oat milk"
+          },
+          "gluten": {
+            "level": "check",
+            "note": "use certified gluten-free oat milk"
           }
         },
         {
@@ -6003,6 +6138,9 @@
             "amount": 220.0,
             "unit": "g",
             "item": "plain flour"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -6227,6 +6365,10 @@
             "amount": 450.0,
             "unit": "g",
             "item": "gnocchi"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free gnocchi"
           }
         }
       ],
@@ -6272,6 +6414,9 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "nutritional yeast"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -6387,6 +6532,9 @@
             "amount": 150.0,
             "unit": "ml",
             "item": "plant milk"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -6400,6 +6548,9 @@
             "amount": 225.0,
             "unit": "g",
             "item": "plain flour"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -6410,6 +6561,9 @@
             "amount": 3.0,
             "unit": "tsp",
             "item": "baking powder"
+          },
+          "gluten": {
+            "level": "check"
           }
         },
         {
@@ -6729,6 +6883,10 @@
             "amount": 200.0,
             "unit": "ml",
             "item": "oat cream"
+          },
+          "gluten": {
+            "level": "check",
+            "note": "use certified gluten-free oat cream"
           }
         }
       ],
@@ -6741,6 +6899,9 @@
             "amount": 750.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -6763,6 +6924,10 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "soy sauce"
+          },
+          "gluten": {
+            "level": "contains",
+            "swap": "gluten-free soy sauce or tamari"
           }
         }
       ]
@@ -6879,6 +7044,9 @@
             "item": "plain flour",
             "secondary_amount": 1.75,
             "secondary_unit": "cups"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {
@@ -6925,6 +7093,9 @@
             "amount": 2.0,
             "unit": "tsp",
             "item": "spice mix"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ]
@@ -7065,6 +7236,9 @@
             "amount": 200.0,
             "unit": "ml",
             "item": "vegetable stock"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -7089,6 +7263,9 @@
             "amount": 2.0,
             "unit": "tbsp",
             "item": "curry paste"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -7193,6 +7370,9 @@
             "amount": 60.0,
             "unit": "ml",
             "item": "plant milk"
+          },
+          "gluten": {
+            "level": "check"
           }
         }
       ],
@@ -7216,6 +7396,9 @@
             "amount": 250.0,
             "unit": "g",
             "item": "plain flour"
+          },
+          "gluten": {
+            "level": "contains"
           }
         },
         {

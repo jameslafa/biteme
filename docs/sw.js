@@ -1,4 +1,4 @@
-const CACHE_NAME = 'biteme-v40';
+const CACHE_NAME = 'biteme-v41';
 const NETWORK_TIMEOUT_MS = 3000;
 const SLOW_NETWORK_WINDOW_MS = 30000;
 let slowNetworkUntil = 0;
