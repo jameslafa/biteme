@@ -175,6 +175,36 @@
   margin: 0 auto;
 }
 
+/* Shown after resuming a cook that iOS reloaded */
+.resume-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  margin: 0 0 var(--spacing-sm);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.resume-notice[hidden] {
+  display: none;
+}
+
+.start-over-btn {
+  padding: 0.25rem 0.5rem;
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.timer-bar.timer-expired .timer-display {
+  color: #c0392b;
+}
+
 .step-container {
   background-color: var(--surface);
   border: 1px solid var(--border);

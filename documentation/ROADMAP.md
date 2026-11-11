@@ -73,6 +73,7 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Diet Filtering** — Vegan / Vegetarian / Gluten-free replace the Settings toggles; combinable; state in the URL so it resets when the app is reopened; vegan counts as vegetarian; diet carried to the recipe page (badges, similar recipes)
 - **Cooking For** — Friends page (name, diets, ingredients to avoid; stored locally, sync-ready); "Cooking for" sheet from the search bar to pick friends (one tap for a single friend, checkboxes for several) or plain diets; recipes must suit everyone selected; summary line with one-tap clear when active; avoided ingredients and diets carried to the recipe page
 - **Gluten-Free Version** — Gluten flags per ingredient in `docs/ingredients.json` (`contains` + swap, or `check`); parser rejects gluten-free recipes using unswappable gluten; recipe-page toggle (on with the gluten-free diet) shows swap notes on the recipe, in cooking mode, and on shopping items added while it's on
+- **Resume Cooking** — Step and timer saved as you cook; cooking mode resumes after iOS reloads the app (same session, timer keeps counting, "Time's up" if it ran out); recipe page offers "Resume · step N"; "Start over" to restart
 - **Dark Mode** — Light/Dark/Auto theme selector in Settings; Auto follows the OS preference via `prefers-color-scheme`; no flash of wrong theme on load (inline script sets `data-theme` before first paint); JS always resolves the theme so CSS only needs `[data-theme="dark"]` selectors
 
 ---

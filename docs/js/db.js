@@ -363,6 +363,44 @@ async function getShoppingListCount() {
   return items.filter(item => !item.checked_at).length;
 }
 
+// Cooking Progress
+// The step and timer of the cook in progress, so cooking mode can pick up where it
+// left off if iOS reloads the app. localStorage (synchronous) so it's available
+// before the first render. One cook at a time; ignored once stale.
+
+const COOKING_PROGRESS_KEY = 'cooking_progress';
+const COOKING_PROGRESS_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+
+// Progress for this recipe, or null if none or stale
+function getCookingProgress(recipeId) {
+  try {
+    const progress = JSON.parse(localStorage.getItem(COOKING_PROGRESS_KEY));
+    if (progress && progress.recipe_id === recipeId
+        && Date.now() - progress.updated_at < COOKING_PROGRESS_MAX_AGE_MS) {
+      return progress;
+    }
+  } catch {
+    // Unreadable — treat as no progress
+  }
+  return null;
+}
+
+function saveCookingProgress(progress) {
+  try {
+    localStorage.setItem(COOKING_PROGRESS_KEY, JSON.stringify({ ...progress, updated_at: Date.now() }));
+  } catch {
+    // Storage unavailable — resuming just won't work
+  }
+}
+
+function clearCookingProgress() {
+  try {
+    localStorage.removeItem(COOKING_PROGRESS_KEY);
+  } catch {
+    // Storage unavailable
+  }
+}
+
 // Cooking Session Functions
 
 // Save a cooking session start

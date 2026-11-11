@@ -6,7 +6,7 @@ This document defines the data schemas used in BiteMe for local storage and futu
 
 **Database name:** `biteme_db`
 
-**Version:** 6
+**Version:** 7
 
 **Object stores:** favorites, shopping_list, cooking_sessions, settings, cooking_notes, ratings, friends
 
@@ -366,6 +366,25 @@ Steps are stored as objects with the original text and any durations extracted b
 ### Serving Preferences (localStorage)
 
 Stored per recipe as `servings_{recipeId}` in localStorage. Read by the recipe detail page, cooking mode, and shopping list to scale ingredient quantities.
+
+### Cooking Progress (localStorage)
+
+Stored as `cooking_progress` — the cook in progress, so cooking mode can resume after iOS reloads the app. One at a time; ignored after 6 hours; cleared on finish or "Start over".
+
+```typescript
+{
+  recipe_id: string;
+  step: number;                // 0-based current step
+  session_id: number | null;   // cooking_sessions id, reused on resume
+  timer: {
+    seconds: number;           // timer length (0 = no timer)
+    remaining: number;         // seconds left when last saved (paused/suggested)
+    started_at: number | null; // when the running timer effectively started; remaining is derived from it
+    running: boolean;
+  };
+  updated_at: number;          // Unix ms; staleness check
+}
+```
 
 ## Sync Strategy (Future)
 

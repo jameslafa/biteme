@@ -15,6 +15,7 @@ let timerInterval = null;
 let timerRunning = false;
 let timerFinished = false;
 let timerDismissed = false;
+let timerExpiredWhileAway = false;
 let timerAudio = null;
 
 document.addEventListener('visibilitychange', function() {
@@ -61,14 +62,71 @@ document.addEventListener('DOMContentLoaded', async function() {
     ? `${recipe.name} (${savedServings} servings)`
     : recipe.name;
   document.getElementById('recipe-name').textContent = headerText;
+
+  // Pick up where we left off if iOS reloaded the app mid-cook: same step, same
+  // timer, same cooking session (so the cooking time stays right)
+  const progress = getCookingProgress(recipeId);
+  if (progress) {
+    currentStep = Math.min(Math.max(progress.step, 0), recipe.steps.length - 1);
+    cookingSessionId = progress.session_id;
+  }
+
   initializeCookingMode();
   renderStep();
 
-  saveCookingStart(recipeId).then(id => {
-    cookingSessionId = id;
-  }).catch(() => {});
+  if (progress) {
+    restoreTimer(progress.timer);
+    document.getElementById('resume-notice').hidden = currentStep === 0 && !timerRunning;
+  }
 
+  if (!cookingSessionId) {
+    saveCookingStart(recipeId).then(id => {
+      cookingSessionId = id;
+      persistProgress();
+    }).catch(() => {});
+  }
 });
+
+function persistProgress() {
+  saveCookingProgress({
+    recipe_id: recipe.id,
+    step: currentStep,
+    session_id: cookingSessionId,
+    timer: {
+      seconds: timerSeconds,
+      remaining: timerRemaining,
+      started_at: timerStartedAt,
+      running: timerRunning,
+    },
+  });
+}
+
+// A running timer keeps counting from when it was started. One that ran out while
+// the app was closed shows "Time's up" (sound needs a tap first on iOS, so it may not ring).
+function restoreTimer(saved) {
+  if (!saved || !saved.seconds) return;
+  timerSeconds = saved.seconds;
+  timerDismissed = false;
+  if (saved.running && saved.started_at) {
+    const remaining = saved.seconds - Math.floor((Date.now() - saved.started_at) / 1000);
+    if (remaining > 0) {
+      timerRemaining = remaining;
+      startTimer();
+    } else {
+      timerRemaining = 0;
+      timerExpiredWhileAway = true;
+      onTimerComplete();
+    }
+  } else {
+    timerRemaining = saved.remaining;
+    renderTimerBar();
+  }
+}
+
+function startOver() {
+  clearCookingProgress();
+  window.location.reload();
+}
 
 // Screen wake lock — toggled by user via header button.
 // Uses Wake Lock API + unmuted silent video (iOS needs a user gesture
@@ -149,6 +207,7 @@ function initializeCookingMode() {
   document.getElementById('prev-btn').addEventListener('click', previousStep);
   document.getElementById('next-btn').addEventListener('click', nextStep);
   document.getElementById('exit-btn').addEventListener('click', exitCookingMode);
+  document.getElementById('start-over-btn').addEventListener('click', startOver);
   initScreenLockButton();
   initTimerToggleButton();
 }
@@ -159,6 +218,7 @@ function initTimerToggleButton() {
 
 function toggleTimerBar() {
   const bar = document.getElementById('timer-bar');
+  timerExpiredWhileAway = false;
   if (!bar.hidden && !timerRunning) {
     // Hide the timer bar
     timerDismissed = true;
@@ -175,6 +235,7 @@ function toggleTimerBar() {
     timerRemaining = timerSeconds;
     renderTimerBar();
   }
+  persistProgress();
 }
 
 function updateProgressBar() {
@@ -258,6 +319,7 @@ function renderStep() {
   }
 
   suggestTimerForStep();
+  persistProgress();
 }
 
 function transitionStep(callback) {
@@ -275,6 +337,7 @@ function transitionStep(callback) {
 }
 
 function previousStep() {
+  document.getElementById('resume-notice').hidden = true;
   if (currentStep === 0) {
     exitCookingMode();
   } else {
@@ -288,6 +351,7 @@ function previousStep() {
 
 function nextStep() {
   const totalSteps = recipe.steps.length;
+  document.getElementById('resume-notice').hidden = true;
 
   if (currentStep < totalSteps - 1) {
     transitionStep(() => {
@@ -311,6 +375,7 @@ function exitCookingMode() {
 
 function finishCookingMode() {
   disableScreenLock();
+  clearCookingProgress();
   const params = new URLSearchParams({ id: recipe.id });
   if (cookingSessionId) params.set('session', cookingSessionId);
   window.location.href = `completion.html?${params}`;
@@ -350,6 +415,21 @@ function renderTimerBar() {
 
   // Toggle button is always visible; active when timer bar is showing
   toggleBtn.hidden = false;
+
+  // A timer ran out while the app was closed: say so until dismissed
+  if (timerExpiredWhileAway) {
+    bar.hidden = false;
+    bar.className = 'timer-bar timer-expired';
+    bar.innerHTML = `
+      <span></span>
+      <span class="timer-display">Time's up</span>
+      <span class="timer-controls">
+        <button class="timer-media-btn timer-media-btn-stop" onclick="dismissExpiredTimer()" aria-label="Dismiss">${icon('stop')}</button>
+      </span>
+    `;
+    updateToggleActive(true);
+    return;
+  }
 
   if (timerRunning) {
     // During ticks, only update the time text to avoid DOM rebuild flicker
@@ -430,6 +510,12 @@ function adjustTimer(delta) {
   timerSeconds = Math.max(5, timerSeconds + delta);
   timerRemaining = timerSeconds;
   renderTimerBar();
+  persistProgress();
+}
+
+function dismissExpiredTimer() {
+  timerExpiredWhileAway = false;
+  renderTimerBar();
 }
 
 function ensureTimerAudio() {
@@ -449,6 +535,7 @@ function ensureTimerAudio() {
 }
 
 function startTimer() {
+  timerExpiredWhileAway = false;
   ensureTimerAudio();
   // Keep screen on so the timer can ring
   if (!screenLockActive) enableScreenLock();
@@ -470,6 +557,7 @@ function startTimer() {
     renderTimerBar();
   }, 1000);
   renderTimerBar();
+  persistProgress();
 }
 
 function pauseTimer() {
@@ -478,6 +566,7 @@ function pauseTimer() {
   clearInterval(timerInterval);
   timerInterval = null;
   renderTimerBar();
+  persistProgress();
 }
 
 function stopTimer() {
@@ -488,6 +577,7 @@ function stopTimer() {
   timerInterval = null;
   // Re-suggest from current step
   suggestTimerForStep();
+  persistProgress();
 }
 
 function onTimerComplete() {
@@ -498,6 +588,7 @@ function onTimerComplete() {
   // Auto-reset: go back to suggestion for current step
   timerFinished = false;
   suggestTimerForStep();
+  persistProgress();
 }
 
 function playTimerBeep() {
@@ -508,11 +599,13 @@ function playTimerBeep() {
 
 function prefillTimer(seconds) {
   if (timerRunning) return;
+  timerExpiredWhileAway = false;
   timerFinished = false;
   timerDismissed = false;
   timerSeconds = seconds;
   timerRemaining = seconds;
   renderTimerBar();
+  persistProgress();
   document.getElementById('timer-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 

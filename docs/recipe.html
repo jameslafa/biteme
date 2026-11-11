@@ -147,7 +147,7 @@
               ${icon('calendar', 20)}
             </a>
             <button class="button button-primary" onclick="startCooking('${recipe.id}')">
-              Start cooking
+              ${startCookingLabel(recipe)}
             </button>
           </div>
         </article>
@@ -317,6 +317,14 @@
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
       }, 2000);
+    }
+
+    // "Resume" when a cook of this recipe is in progress past step 1
+    function startCookingLabel(recipe) {
+      const progress = getCookingProgress(recipe.id);
+      return progress && progress.step > 0
+        ? `Resume · step ${progress.step + 1} of ${recipe.steps.length}`
+        : 'Start cooking';
     }
 
     function startCooking(id) {

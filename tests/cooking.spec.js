@@ -341,3 +341,101 @@ test.describe('Cooking Timer', () => {
     await expect(page.locator('.timer-display')).toHaveText('1:30');
   });
 });
+
+test.describe('Resume after reload', () => {
+  const sessionCount = page => page.evaluate(async () => {
+    await initDB();
+    return new Promise(resolve => {
+      const req = db.transaction(['cooking_sessions'], 'readonly').objectStore('cooking_sessions').count();
+      req.onsuccess = () => resolve(req.result);
+    });
+  });
+
+  // Write progress directly, e.g. to simulate a cook left hours ago
+  const seedProgress = (page, progress) => page.evaluate(p => {
+    localStorage.setItem('cooking_progress', JSON.stringify(p));
+  }, progress);
+
+  test('reload keeps the step and the cooking session; moving on hides the notice', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+    await expect(page.locator('#resume-notice')).toBeHidden();
+    await navigateToTimerStep(page);
+    await page.waitForFunction(() => JSON.parse(localStorage.getItem('cooking_progress'))?.session_id);
+
+    await page.reload();
+    await expect(page.locator('#step-progress')).toHaveText(`Step 3 of ${CURRY_STEPS}`);
+    await expect(page.locator('#resume-notice')).toBeVisible();
+    expect(await sessionCount(page)).toBe(1);
+
+    await page.locator('#next-btn').click();
+    await expect(page.locator('#resume-notice')).toBeHidden();
+  });
+
+  test('a running timer keeps counting across a reload', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+    await navigateToTimerStep(page);
+    await page.locator('.timer-media-btn-play').click();
+    await expect(page.locator('#timer-bar')).toHaveClass(/timer-running/);
+
+    // Pretend it was started 5 minutes ago
+    await page.evaluate(() => {
+      const p = JSON.parse(localStorage.getItem('cooking_progress'));
+      p.timer.started_at -= 5 * 60 * 1000;
+      localStorage.setItem('cooking_progress', JSON.stringify(p));
+    });
+    await page.reload();
+    await expect(page.locator('#timer-bar')).toHaveClass(/timer-running/);
+    await expect(page.locator('#timer-bar .timer-display')).toHaveText(/^14:5\d$/);
+  });
+
+  test('a timer that ran out while away shows "Time\'s up" until dismissed', async ({ page }) => {
+    await seedProgress(page, {
+      recipe_id: 'test-curry', step: 2, session_id: null, updated_at: Date.now(),
+      timer: { seconds: 1200, remaining: 1200, started_at: Date.now() - 25 * 60 * 1000, running: true },
+    });
+    await page.goto('/cooking.html?id=test-curry');
+    await expect(page.locator('#timer-bar')).toHaveClass(/timer-expired/);
+    await expect(page.locator('#timer-bar .timer-display')).toHaveText("Time's up");
+
+    await page.locator('#timer-bar [aria-label="Dismiss"]').click();
+    await expect(page.locator('#timer-bar')).not.toHaveClass(/timer-expired/);
+    await expect(page.locator('#timer-bar .timer-display')).toHaveText('20:00');
+  });
+
+  test('recipe page offers to resume; "Start over" restarts with a new session', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+    await navigateToTimerStep(page);
+    await page.waitForFunction(() => JSON.parse(localStorage.getItem('cooking_progress'))?.session_id);
+    await page.locator('#exit-btn').click();
+
+    const startBtn = page.locator('.action-buttons .button-primary');
+    await expect(startBtn).toHaveText(`Resume · step 3 of ${CURRY_STEPS}`);
+    await startBtn.click();
+    await expect(page.locator('#step-progress')).toHaveText(`Step 3 of ${CURRY_STEPS}`);
+
+    await page.locator('#start-over-btn').click();
+    await expect(page.locator('#step-progress')).toHaveText(`Step 1 of ${CURRY_STEPS}`);
+    await expect(page.locator('#resume-notice')).toBeHidden();
+    await expect.poll(() => sessionCount(page)).toBe(2);
+  });
+
+  test('finishing clears progress; stale progress is ignored', async ({ page }) => {
+    await page.goto('/cooking.html?id=test-curry');
+    await navigateToLastStep(page);
+    await page.locator('#next-btn').click();
+    await expect(page).toHaveURL(/completion\.html/);
+    expect(await page.evaluate(() => localStorage.getItem('cooking_progress'))).toBeNull();
+
+    await page.goto('/recipe.html?id=test-curry');
+    await expect(page.locator('.action-buttons .button-primary')).toHaveText('Start cooking');
+
+    // Left 7 hours ago: start fresh
+    await seedProgress(page, {
+      recipe_id: 'test-curry', step: 2, session_id: null, updated_at: Date.now() - 7 * 60 * 60 * 1000,
+      timer: { seconds: 0, remaining: 0, started_at: null, running: false },
+    });
+    await page.goto('/cooking.html?id=test-curry');
+    await expect(page.locator('#step-progress')).toHaveText(`Step 1 of ${CURRY_STEPS}`);
+    await expect(page.locator('#resume-notice')).toBeHidden();
+  });
+});
