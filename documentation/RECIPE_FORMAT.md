@@ -33,7 +33,7 @@ date: 2026-02-10
 | `servings`    | integer | 1–100.                                                                                                                                                                                                                 |
 | `time`        | integer | 1–1440. Total time in minutes (1440 = 24 hours).                                                                                                                                                                       |
 | `difficulty`  | string  | Exactly one of: `easy`, `medium`, `hard`. Lowercase only.                                                                                                                                                              |
-| `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`. For `gluten-free`: tag the recipe if gluten only appears in ingredients with a widely available GF alternative (soy sauce → tamari, gnocchi → GF gnocchi, stock → GF stock). Do **not** tag if gluten is structural to the dish (wheat flour, pasta, ramen noodles, soba noodles, bread). |
+| `diet`        | array   | At least 1 value. Valid values: `vegan`, `vegetarian`, `gluten-free`. Don't list both `vegan` and `vegetarian` — vegan already implies vegetarian (the linter rejects it). For `gluten-free`: tag the recipe if gluten only appears in ingredients with a widely available GF alternative (soy sauce → tamari, gnocchi → GF gnocchi, stock → GF stock). Do **not** tag if gluten is structural to the dish (wheat flour, pasta, ramen noodles, soba noodles, bread). |
 | `cuisine`     | array   | At least 1 value. Valid values: `indian`, `middle-eastern`, `asian`, `french`, `italian`, `british`, `american`, `mediterranean`. |
 | `meal_type`   | array   | At least 1 value. Valid values: `breakfast`, `brunch`, `lunch`, `dinner`, `dessert`, `baking`. A recipe can belong to multiple meal types. |
 | `date`        | string  | Format: `YYYY-MM-DD`. Date the recipe was added.                                                                                                                                                                       |
@@ -307,7 +307,7 @@ Before outputting the recipe, verify:
 - [ ] `description` is 10–500 characters
 - [ ] `servings` is 1–100, `time` is 1–1440
 - [ ] `difficulty` is exactly `easy`, `medium`, or `hard`
-- [ ] `diet` values (if present) are only `vegan`, `vegetarian`, or `gluten-free`
+- [ ] `diet` values (if present) are only `vegan`, `vegetarian`, or `gluten-free`, and not both `vegan` and `vegetarian`
 - [ ] `cuisine` has at least 1 value from: `indian`, `middle-eastern`, `asian`, `french`, `italian`, `british`, `american`, `mediterranean`
 - [ ] `meal_type` has at least 1 value from: `breakfast`, `brunch`, `lunch`, `dinner`, `dessert`, `baking`
 - [ ] Sections use `#` (H1) headings: `# Notes`, `# Ingredients`, `# Instructions`, `# Serving Suggestions`

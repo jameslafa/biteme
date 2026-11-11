@@ -144,7 +144,7 @@ All user data is local-first. Sync is additive, not required.
 
 **Decision:** Dedicated settings page (not inline in the drawer)
 
-**How it works:** Toggle-based UI backed by `getSetting()` / `setSetting()` from `db.js`. Covers dietary filters (vegan, gluten-free), untested recipe visibility, and theme preference. All filters are applied on home page load.
+**How it works:** Toggle-based UI backed by `getSetting()` / `setSetting()` from `db.js`. Covers untested recipe visibility and theme preference.
 
 **Why separate:** Settings will grow; a dedicated page is consistent with other sub-pages (Cooking Log, Meal Plan) and avoids cluttering the drawer.
 
@@ -212,6 +212,19 @@ All user data is local-first. Sync is additive, not required.
 
 ---
 
+## Diet Filtering
+
+**Decision:** Diet chips (vegan, vegetarian, gluten-free) on the home page, combinable, with state in the URL (`?diet=vegan,gluten-free`) — not a persistent setting
+
+**Why:** Diet filtering is usually per occasion ("cooking for a gluten-free friend tonight"). A persistent setting hidden in Settings silently hid recipes long after the occasion. URL state survives navigation (recipe page and back) but resets when the app is reopened, and the active chips are always visible.
+
+**How it works:**
+- `matchesDiets()` in `recipes.js` is the single matching rule: a recipe matches if it satisfies every selected diet; vegan recipes count as vegetarian, so recipes are never tagged both (the linter rejects it)
+- `viewRecipe()` carries the diets to the recipe page via `dietQuery()`; similar-recipe suggestions there respect them and keep them in their links
+- The meal plan ignores diets — it plans for the user's own week
+
+---
+
 ## Recipe Recommendation Engine
 
 **Decision:** IDF-weighted ingredient similarity with category weighting, computed client-side on demand
@@ -224,7 +237,7 @@ All user data is local-first. Sync is additive, not required.
 
 **Why IDF over raw count:** Naïve counting is dominated by garlic and onion. IDF surfaces meaningful flavour connections — two recipes sharing an unusual ingredient score far higher.
 
-**Corpus filtering:** Respects dietary and untested-recipe settings so only recipes the user can see are recommended.
+**Corpus filtering:** Untested recipes are excluded per the user setting. Active diets filter which recipes are *suggested*, but IDF is computed over the whole corpus — in a small diet-filtered set, ingredients shared by every recipe would get IDF 0 and nothing would match.
 
 ---
 

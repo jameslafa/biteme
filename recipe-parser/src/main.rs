@@ -1170,6 +1170,9 @@ fn validate_frontmatter(fm: &RecipeFrontmatter, lint: bool) -> Result<()> {
             bail!("Invalid diet value: '{}'. Valid values: {:?}", d, valid_diets);
         }
     }
+    if fm.diet.iter().any(|d| d == "vegan") && fm.diet.iter().any(|d| d == "vegetarian") {
+        bail!("Diet lists both 'vegan' and 'vegetarian'. Vegan already implies vegetarian — remove 'vegetarian'");
+    }
 
     // Validate cuisine values
     if fm.cuisine.is_empty() {
@@ -2381,6 +2384,41 @@ date: 2026-01-01
 
         assert!(result.is_err());
         assert!(result.unwrap_err().to_string().contains("Invalid diet value"));
+    }
+
+    #[test]
+    fn test_diet_vegan_and_vegetarian_rejected() {
+        let test_recipe = r#"---
+id: redundant-diet
+name: Redundant Diet
+description: Recipe tagged both vegan and vegetarian
+servings: 2
+time: 15
+difficulty: easy
+diet: [vegan, vegetarian]
+cuisine: [french]
+meal_type: [dinner]
+date: 2026-01-01
+---
+
+# Ingredients
+
+- 1 cup ingredient
+
+# Instructions
+
+1. Step one
+"#;
+
+        let temp_dir = std::env::temp_dir();
+        let test_file = temp_dir.join("redundant-diet.md");
+        fs::write(&test_file, test_recipe).unwrap();
+
+        let result = parse_recipe_file(&test_file, false, &CanonicalData::empty());
+        fs::remove_file(&test_file).ok();
+
+        assert!(result.is_err());
+        assert!(result.unwrap_err().to_string().contains("Vegan already implies vegetarian"));
     }
 
     #[test]

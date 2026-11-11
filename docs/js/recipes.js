@@ -131,6 +131,47 @@ async function getRecipeById(id) {
   return find();
 }
 
+// Diet badge config: letter(s) in a circle
+const DIET_BADGES = {
+  vegan: { label: 'V', title: 'Vegan', color: '#6B9080' },
+  vegetarian: { label: 'Vg', title: 'Vegetarian', color: '#b8860b' },
+  'gluten-free': { label: 'GF', title: 'Gluten-free', color: '#C4A882' },
+};
+
+function renderDietIcons(diet) {
+  if (!diet || diet.length === 0) return '';
+  const badges = diet
+    .filter(d => DIET_BADGES[d])
+    .map(d => {
+      const b = DIET_BADGES[d];
+      return `<span class="diet-badge" title="${b.title}" style="--diet-color:${b.color}">${b.label}</span>`;
+    })
+    .join('');
+  return badges ? `<span class="diet-icons">${badges}</span>` : '';
+}
+
+// ── Diet filtering ──
+// The active diets travel in the URL (?diet=vegan,gluten-free) so they survive
+// navigation within a session but reset when the app is reopened.
+
+const DIETS = Object.keys(DIET_BADGES);
+
+// A recipe matches if it satisfies every requested diet. Vegan recipes count as
+// vegetarian, so recipes only need to be tagged vegan.
+function matchesDiets(recipe, diets) {
+  const tags = recipe.diet || [];
+  return diets.every(d => tags.includes(d) || (d === 'vegetarian' && tags.includes('vegan')));
+}
+
+function dietsFromParams(params) {
+  return (params.get('diet') || '').split(',').filter(d => DIETS.includes(d));
+}
+
+// Query-string suffix that carries the active diets to another page
+function dietQuery(diets) {
+  return diets.length > 0 ? `&diet=${diets.join(',')}` : '';
+}
+
 // Resolve a step ref name to the single ingredient it refers to.
 // Exact canonical match always wins; a word-boundary text match is only used
 // as a fallback when no ingredient's canonical matches. This prevents a bare

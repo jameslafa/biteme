@@ -21,13 +21,12 @@ function isStopIngredient(canonical) {
 // Condiments (tahini, miso, soy sauce) are more distinctive than generic pantry staples.
 const CATEGORY_WEIGHT = { Fresh: 2, Fridge: 2, Pantry: 1, Condiments: 1.5 };
 
-// Returns Map<recipeId, Map<canonical, category>> filtered by user settings.
+// Returns Map<recipeId, Map<canonical, category>> filtered by the untested setting.
 // Excludes Spices and pantry stoplist ingredients.
-function buildRecipeIngredientMaps(recipes, { showUntestedRecipes = true, dietaryFilters = [] } = {}) {
+function buildRecipeIngredientMaps(recipes, { showUntestedRecipes = true } = {}) {
   const maps = new Map();
   for (const recipe of recipes) {
     if (!showUntestedRecipes && recipe.tested === false) continue;
-    if (dietaryFilters.length > 0 && !dietaryFilters.every(d => (recipe.diet || []).includes(d))) continue;
     const ingredientMap = new Map();
     for (const [category, ingredients] of Object.entries(recipe.ingredients)) {
       if (category === 'Spices') continue; // Spices don't define recipe identity
@@ -61,18 +60,19 @@ function computeIDF(ingredientMaps) {
 // Returns [{ recipe, score, sharedIngredients: string[] }] sorted by score desc.
 // n = max results to return. Excludes the recipe itself.
 // Excludes recipes with score 0 (no shared meaningful ingredients).
-// Respects the user's showUntestedRecipes and dietaryFilters settings.
-async function getSimilarRecipes(recipeId, n = 5) {
+// Respects the user's showUntestedRecipes setting. Only recipes matching `diets` are
+// suggested, but IDF is computed over the whole corpus: ingredient distinctiveness
+// shouldn't depend on the filter (in a small filtered set, shared ingredients get IDF 0).
+async function getSimilarRecipes(recipeId, n = 5, diets = []) {
   const recipes = await getRecipes();
 
   await initDB();
   const showUntestedRecipes = !!(await getSetting('showUntestedRecipes'));
-  const dietaryFilters = (await getSetting('dietaryFilters')) || [];
 
-  const ingredientMaps = buildRecipeIngredientMaps(recipes, { showUntestedRecipes, dietaryFilters });
+  const ingredientMaps = buildRecipeIngredientMaps(recipes, { showUntestedRecipes });
   const idf = computeIDF(ingredientMaps);
 
-  // Get target map from corpus; if not there (e.g. recipe filtered by diet but user navigated directly),
+  // Get target map from corpus; if not there (an untested recipe opened directly),
   // build it from the raw recipe data so we can still score against the visible corpus.
   let targetMap = ingredientMaps.get(recipeId);
   if (!targetMap) {
@@ -92,6 +92,8 @@ async function getSimilarRecipes(recipeId, n = 5) {
   const scores = [];
   for (const [otherId, otherMap] of ingredientMaps) {
     if (otherId === recipeId) continue;
+    const recipe = recipes.find(r => r.id === otherId);
+    if (!matchesDiets(recipe, diets)) continue;
 
     const shared = [];
     let score = 0;
@@ -107,7 +109,6 @@ async function getSimilarRecipes(recipeId, n = 5) {
     }
 
     if (score > 0) {
-      const recipe = recipes.find(r => r.id === otherId);
       scores.push({ recipe, score: Math.round(score * 100) / 100, sharedIngredients: shared });
     }
   }

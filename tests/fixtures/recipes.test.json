@@ -128,7 +128,8 @@
     "time": 10,
     "difficulty": "easy",
     "diet": [
-      "vegan"
+      "vegan",
+      "gluten-free"
     ],
     "cuisine": [
       "mediterranean",
@@ -220,7 +221,7 @@
     "time": 5,
     "difficulty": "easy",
     "diet": [
-      "vegan"
+      "vegetarian"
     ],
     "cuisine": [
       "american"

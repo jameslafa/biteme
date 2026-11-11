@@ -339,7 +339,7 @@ function clearSeed() {
 
 function showSeedWarning(recipeName) {
   const el = document.getElementById('plan-seed-warning');
-  el.textContent = `${recipeName} is excluded by your dietary filters and won't appear in suggestions.`;
+  el.textContent = `${recipeName} is untested and won't appear in suggestions.`;
   el.style.display = 'block';
 }
 
@@ -844,9 +844,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   _allRecipes = await getRecipes();
 
   const showUntestedRecipes = !!(await getSetting('showUntestedRecipes'));
-  const dietaryFilters = (await getSetting('dietaryFilters')) || [];
 
-  _ingredientMaps = buildRecipeIngredientMaps(_allRecipes, { showUntestedRecipes, dietaryFilters });
+  _ingredientMaps = buildRecipeIngredientMaps(_allRecipes, { showUntestedRecipes });
   _idf = computeIDF(_ingredientMaps);
   _corpusIds = [..._ingredientMaps.keys()];
   _pairwiseMatrix = buildPairwiseMatrix(_corpusIds, _ingredientMaps, _idf);

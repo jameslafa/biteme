@@ -4,6 +4,19 @@ This document tracks feature ideas and improvements for BiteMe.
 
 ## User Features
 
+### [ ] Cooking For — Gluten-Free Swaps
+
+- Gluten flags in `docs/ingredients.json`: `contains` (needs a swap, e.g. soy sauce → tamari) or `check` (read the label, e.g. stock, oats)
+- Linter: a `gluten-free` recipe can't use a `contains` ingredient without a swap
+- When gluten-free is active: swap notes on the recipe page, GF markers in cooking mode and the shopping list
+- Fix existing mislabel: a gluten-free recipe uses kecap manis (usually contains wheat)
+
+### [ ] Cooking For — Friends
+
+- Friends with diets and ingredients to avoid, stored locally
+- Friend chips on the home page; selecting several combines their constraints
+- Later: backed up to a homelab backend; the app must keep working when it's unreachable
+
 ### [ ] Recipe Rating — Phase 2 (Community)
 
 - Firebase backend with anonymous auth (no account required)
@@ -61,9 +74,10 @@ This document tracks feature ideas and improvements for BiteMe.
 - **Ingredient Search (Phase 1)** — Search bar matches ingredient text, relevance-scored results (name > tag/description > ingredient)
 - **Side Drawer (Hamburger Menu)** — Navigation drawer on home page, houses Meal Plan, Cooking Log, Settings and footer links
 - **Cooking Log** — Dedicated page with stats (recipes cooked, sessions, total time, week streak), most-made recipes, and monthly timeline of all completed cooks
-- **Recipe Recommendations** — IDF-weighted ingredient similarity engine with category weighting (Fresh/Fridge > Pantry) and pantry stoplist (oils, flour, sugar, etc.); "Same ingredients, different dish" section on recipe detail page showing top 5 related recipes with shared ingredients; respects user's dietary and untested-recipe settings
+- **Recipe Recommendations** — IDF-weighted ingredient similarity engine with category weighting (Fresh/Fridge > Pantry) and pantry stoplist (oils, flour, sugar, etc.); "Same ingredients, different dish" section on recipe detail page showing top 5 related recipes with shared ingredients; respects the active diets and the untested-recipe setting
 - **Meal Plan** — Weekly meal planner with IDF-weighted greedy recipe selection, seed recipe support, per-recipe servings, swap panel, shared ingredient callout, and per-ingredient cart buttons; active plan mode with cooked-state tracking (auto-synced from cooking sessions + manual toggle); home screen banner shows plan progress; back navigation uses `history.back()` on all sub-pages
 - **Ingredient display improvements** — Preparation text stripped from shopping contexts (shopping list, plan); first letter capitalised; text fractions (`1/2`) used consistently instead of unicode (`½`); attribution removed from merged shopping list view
+- **Diet Chips** — Vegan / Vegetarian / Gluten-free chips on the home page replace the Settings toggles; combinable; state in the URL so it resets when the app is reopened; vegan counts as vegetarian; diet carried to the recipe page (badges, similar recipes)
 - **Dark Mode** — Light/Dark/Auto theme selector in Settings; Auto follows the OS preference via `prefers-color-scheme`; no flash of wrong theme on load (inline script sets `data-theme` before first paint); JS always resolves the theme so CSS only needs `[data-theme="dark"]` selectors
 
 ---

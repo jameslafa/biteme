@@ -5,7 +5,7 @@ description: Chickpeas simmered in a bold, deeply spiced tomato sauce with a bri
 servings: 4
 time: 55
 difficulty: medium
-diet: [vegan, vegetarian]
+diet: [vegan]
 cuisine: [indian]
 meal_type: [dinner]
 date: 2026-03-06

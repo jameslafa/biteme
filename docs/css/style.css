@@ -554,6 +554,35 @@ a.tag-meal-type {
   border-style: dashed;
 }
 
+/* Diet chips — each in its badge colour; badge inverts when active */
+.chip-diet {
+  gap: 0.4rem;
+  padding-left: 0.35rem;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.chip-diet .diet-badge {
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 0.55rem;
+}
+
+.chip-diet:hover {
+  border-color: var(--diet-color);
+}
+
+.chip-diet.chip-active {
+  background: var(--diet-color);
+  border-color: var(--diet-color);
+  color: #fff;
+}
+
+.chip-diet.chip-active .diet-badge {
+  background: #fff;
+  color: var(--diet-color);
+}
+
 @keyframes chip-appear {
   from { opacity: 0; transform: scale(0.85); }
   to   { opacity: 1; transform: scale(1); }

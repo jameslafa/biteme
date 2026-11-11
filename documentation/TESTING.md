@@ -171,9 +171,9 @@ If a new feature introduces a new data source (e.g. a new JSON file), add a rout
 Current test-curry step count: **4** (reduced from 6 during optimisation — don't add steps without good reason).
 
 Key fixture recipes and what they test:
-- `test-curry` — main recipe: multi-step cooking, timer on step 3, word duration on step 4, ingredient refs, notes
-- `test-salad` — no notes or serving suggestions; shares garlic+lentil canonicals with curry (for recommendations/merge tests)
-- `test-toast` — breakfast/american; no shared ingredients (tests "no matches" edge case)
+- `test-curry` — `[vegan]`; main recipe: multi-step cooking, timer on step 3, word duration on step 4, ingredient refs, notes
+- `test-salad` — `[vegan, gluten-free]`; no notes or serving suggestions; shares garlic+lentil canonicals with curry (for recommendations/merge tests)
+- `test-toast` — `[vegetarian]`; breakfast/american; no shared ingredients (tests "no matches" edge case)
 - `test-soup` — `tested: false`; excluded from recommendations and plan generation
 - `test-fresh-sharer` / `test-pantry-sharer` — used only for IDF category weight scoring test
 - `test-spice-collision` — `tested: false`; fresh/ground form pairs (`chilli`/`chilli powder`, `coriander`/`ground coriander`) to verify step refs resolve 1:1 and don't conflate

@@ -43,6 +43,7 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       const recipeId = urlParams.get('id');
+      const diets = dietsFromParams(urlParams);
 
       if (!recipeId) {
         window.location.href = 'index.html';
@@ -86,6 +87,7 @@
           <div class="recipe-tags">
             ${(recipe.meal_type || []).map(m => `<a href="index.html?meal_type=${encodeURIComponent(m)}" class="tag tag-meal-type">${m}</a>`).join('')}
             ${(recipe.cuisine || []).map(c => `<a href="index.html?cuisine=${encodeURIComponent(c)}" class="tag tag-cuisine">${c}</a>`).join('')}
+            ${renderDietIcons(recipe.diet)}
           </div>
 
           <div id="cooking-notes-display"></div>
@@ -176,7 +178,7 @@
       showCookingNotes(recipeId);
 
       // Show similar recipes
-      renderSimilarRecipes(recipeId);
+      renderSimilarRecipes(recipeId, diets);
 
       // Update cart count
       updateCartCount();
@@ -387,8 +389,8 @@
       return text.replace(/</g, '&lt;');
     }
 
-    async function renderSimilarRecipes(recipeId) {
-      const results = await getSimilarRecipes(recipeId);
+    async function renderSimilarRecipes(recipeId, diets) {
+      const results = await getSimilarRecipes(recipeId, 5, diets);
       const section = document.getElementById('similar-recipes');
       if (!section || results.length === 0) return;
 
@@ -397,7 +399,7 @@
         <ul class="similar-recipes-list">
           ${results.map(({ recipe, sharedIngredients }) => `
             <li>
-              <a href="recipe.html?id=${recipe.id}" class="similar-recipe-item">
+              <a href="recipe.html?id=${recipe.id}${dietQuery(diets)}" class="similar-recipe-item">
                 <div class="similar-recipe-body">
                   <span class="similar-recipe-name">${recipe.name}</span>
                   <span class="similar-recipe-shared">${sharedIngredients.join(' · ')}</span>

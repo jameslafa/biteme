@@ -224,7 +224,6 @@ This document defines the data schemas used in BiteMe for local storage and futu
 **Notes:**
 - Generic key-value store for app settings
 - Used by Settings page for `showUntestedRecipes` toggle
-- Used by Settings page for `dietaryFilters` (array of active diet values, e.g. `["vegan", "gluten-free"]`)
 - Designed for reuse by future features needing simple persistent settings
 
 ## Recipe JSON (`recipes.json`)
@@ -257,7 +256,7 @@ Each recipe object includes:
 
 The `tested` field is controlled by recipe frontmatter (`tested: false`). When omitted or `true`, the recipe is considered tested. Untested recipes are hidden by default on the home page — users can opt in via the Settings page.
 
-The `diet` field holds dietary labels separated from `cuisine` and `meal_type`. Valid values: `"vegan"`, `"vegetarian"`, `"gluten-free"`. Always serialized (empty array if none apply). Used by the Settings page dietary filters and rendered as text badges (circled letters) on recipe cards.
+The `diet` field holds dietary labels separated from `cuisine` and `meal_type`. Valid values: `"vegan"`, `"vegetarian"`, `"gluten-free"`. Always serialized (empty array if none apply). Vegan implies vegetarian, so a recipe is never tagged both. Used by the Settings page dietary filters and rendered as text badges (circled letters) on recipe cards.
 
 ### Ingredient Schema
 

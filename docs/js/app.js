@@ -7,7 +7,7 @@ let activeMealType = null;
 let cachedAllRecipes = [];
 let cachedRatingsMap = {};
 let cachedFavoriteIds = new Set();
-let activeDietaryFilters = [];
+let activeDiets = [];
 let mealTypeChipsExpanded = false;
 let cuisineChipsExpanded = false;
 
@@ -21,11 +21,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Load untested setting from IndexedDB
   showUntestedRecipes = !!(await getSetting('showUntestedRecipes'));
 
-  // Load dietary filters from IndexedDB
-  activeDietaryFilters = (await getSetting('dietaryFilters')) || [];
-
-  // Read cuisine/meal_type filters from URL params
+  // Read diet/cuisine/meal_type filters from URL params
   const urlParams = new URLSearchParams(window.location.search);
+  activeDiets = dietsFromParams(urlParams);
   activeCuisine = urlParams.get('cuisine') || null;
   activeMealType = urlParams.get('meal_type') || null;
 
@@ -68,9 +66,7 @@ function filterRecipes({ cuisine, mealType, favoritesOnly, searchQuery }) {
     recipes = recipes.filter(r => r.tested !== false);
   }
 
-  if (activeDietaryFilters.length > 0) {
-    recipes = recipes.filter(r => activeDietaryFilters.every(d => (r.diet || []).includes(d)));
-  }
+  recipes = recipes.filter(r => matchesDiets(r, activeDiets));
 
   if (favoritesOnly) {
     recipes = recipes.filter(r => cachedFavoriteIds.has(r.id));
@@ -156,8 +152,30 @@ function setActiveMealType(mealType) {
   loadRecipes();
 }
 
+// Toggle a diet on or off; diets combine (vegan + gluten-free shows recipes that are both)
+function toggleDiet(diet) {
+  activeDiets = activeDiets.includes(diet)
+    ? activeDiets.filter(d => d !== diet)
+    : DIETS.filter(d => d === diet || activeDiets.includes(d));
+  updateFilterURL();
+  loadRecipes();
+}
+
+function clearAllFilters() {
+  document.getElementById('search-input').value = '';
+  activeDiets = [];
+  activeCuisine = null;
+  activeMealType = null;
+  updateFilterURL();
+}
+
 function updateFilterURL() {
   const url = new URL(window.location);
+  if (activeDiets.length > 0) {
+    url.searchParams.set('diet', activeDiets.join(','));
+  } else {
+    url.searchParams.delete('diet');
+  }
   if (activeCuisine) {
     url.searchParams.set('cuisine', activeCuisine);
   } else {
@@ -174,8 +192,7 @@ function updateFilterURL() {
 function renderChips() {
   let base = cachedAllRecipes;
   if (!showUntestedRecipes) base = base.filter(r => r.tested !== false);
-  if (activeDietaryFilters.length > 0)
-    base = base.filter(r => activeDietaryFilters.every(d => (r.diet || []).includes(d)));
+  base = base.filter(r => matchesDiets(r, activeDiets));
 
   // Meal type counts — narrowed by active cuisine
   const mealTypePool = activeCuisine
@@ -193,6 +210,7 @@ function renderChips() {
   for (const r of cuisinePool)
     for (const c of (r.cuisine || [])) cuisineCounts[c] = (cuisineCounts[c] || 0) + 1;
 
+  renderDietChips();
   renderChipRow(
     document.getElementById('meal-type-chips'),
     mealTypeCounts, activeMealType, 'mealType',
@@ -203,6 +221,19 @@ function renderChips() {
     cuisineCounts, activeCuisine, 'cuisine',
     cuisineChipsExpanded, v => { cuisineChipsExpanded = v; }
   );
+}
+
+function renderDietChips() {
+  const container = document.getElementById('diet-chips');
+  container.innerHTML = DIETS.map(d => {
+    const b = DIET_BADGES[d];
+    const active = activeDiets.includes(d);
+    return `<button class="chip chip-diet${active ? ' chip-active' : ''}" data-value="${d}" style="--diet-color:${b.color}" aria-pressed="${active}">`
+      + `<span class="diet-badge">${b.label}</span>${b.title}</button>`;
+  }).join('');
+  container.querySelectorAll('.chip').forEach(btn => {
+    btn.addEventListener('click', () => toggleDiet(btn.dataset.value));
+  });
 }
 
 function renderChipRow(container, counts, activeValue, type, expanded, setExpanded) {
@@ -302,25 +333,6 @@ async function getCookingStatsMap() {
   }
 }
 
-// Diet badge config: letter(s) in a circle
-const DIET_BADGES = {
-  vegan: { label: 'V', title: 'Vegan', color: '#6B9080' },
-  vegetarian: { label: 'Vg', title: 'Vegetarian', color: '#b8860b' },
-  'gluten-free': { label: 'GF', title: 'Gluten-free', color: '#C4A882' },
-};
-
-function renderDietIcons(diet) {
-  if (!diet || diet.length === 0) return '';
-  const badges = diet
-    .filter(d => DIET_BADGES[d])
-    .map(d => {
-      const b = DIET_BADGES[d];
-      return `<span class="diet-badge" title="${b.title}" style="--diet-color:${b.color}">${b.label}</span>`;
-    })
-    .join('');
-  return badges ? `<span class="diet-icons">${badges}</span>` : '';
-}
-
 // Display recipes in the grid
 async function displayRecipes(recipes) {
   const recipeGrid = document.getElementById('recipe-grid');
@@ -343,9 +355,7 @@ async function displayRecipes(recipes) {
         const filterBtn = document.getElementById('favorites-filter');
         filterBtn.classList.remove('active');
         filterBtn.setAttribute('aria-label', 'Show favourites only');
-        activeCuisine = null;
-        activeMealType = null;
-        updateFilterURL();
+        clearAllFilters();
         loadRecipes();
       });
     } else {
@@ -360,10 +370,7 @@ async function displayRecipes(recipes) {
         </div>
       `;
       document.getElementById('clear-search-btn').addEventListener('click', () => {
-        document.getElementById('search-input').value = '';
-        activeCuisine = null;
-        activeMealType = null;
-        updateFilterURL();
+        clearAllFilters();
         loadRecipes();
       });
     }
@@ -458,7 +465,7 @@ function updateFavoriteButtonSmall(button, favorited) {
 
 // Navigate to recipe detail page
 function viewRecipe(id) {
-  window.location.href = `recipe.html?id=${id}`;
+  window.location.href = `recipe.html?id=${id}${dietQuery(activeDiets)}`;
 }
 
 // Setup favorites filter toggle

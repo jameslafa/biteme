@@ -1,6 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const testRecipes = require('./fixtures/recipes.test.json');
 
+// Fixture diets: test-curry [vegan], test-salad [vegan, gluten-free], test-toast [vegetarian]
+
 async function clearAppState(page) {
   await page.evaluate(async () => {
     localStorage.clear();
@@ -16,88 +18,94 @@ async function clearAppState(page) {
   });
 }
 
-test.describe('Diet Badges on Cards', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.route('**/recipes.json', route => {
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(testRecipes)
-      });
+test.beforeEach(async ({ page }) => {
+  await page.route('**/recipes.json', route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(testRecipes)
     });
-    await page.goto('/');
-    await clearAppState(page);
-    await page.goto('/');
   });
+  await page.goto('/');
+  await clearAppState(page);
+  await page.goto('/');
+});
 
-  test('all test recipes show vegan badge', async ({ page }) => {
-    const cards = page.locator('.recipe-card');
-    await expect(cards).toHaveCount(3);
+const card = (page, name) => page.locator('.recipe-card', { hasText: name });
+const dietChip = (page, diet) => page.locator(`#diet-chips .chip[data-value="${diet}"]`);
 
-    for (let i = 0; i < 3; i++) {
-      const badge = cards.nth(i).locator('.diet-icons .diet-badge');
-      await expect(cards.nth(i).locator('.diet-icons')).toBeVisible();
-      await expect(badge).toHaveCount(1);
-      await expect(badge).toHaveText('V');
-      await expect(badge).toHaveAttribute('title', 'Vegan');
-    }
+test.describe('Diet Badges', () => {
+  test('cards and recipe page show the recipe\'s diet badges', async ({ page }) => {
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+    await expect(card(page, 'Test Curry').locator('.diet-badge')).toHaveText(['V']);
+    await expect(card(page, 'Test Salad').locator('.diet-badge')).toHaveText(['V', 'GF']);
+    await expect(card(page, 'Test Toast').locator('.diet-badge')).toHaveText(['Vg']);
+
+    await page.goto('/recipe.html?id=test-salad');
+    await expect(page.locator('.recipe .diet-badge')).toHaveText(['V', 'GF']);
   });
 });
 
-test.describe('Settings Dietary Toggles', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/settings.html');
-    await clearAppState(page);
-    await page.goto('/settings.html');
+test.describe('Diet Chips', () => {
+  test('diets combine; vegan counts as vegetarian; selection lives in the URL', async ({ page }) => {
+    await expect(page.locator('#diet-chips .chip')).toHaveText(['VVegan', 'VgVegetarian', 'GFGluten-free']);
+    await expect(page.locator('#diet-chips .chip-active')).toHaveCount(0);
+
+    await dietChip(page, 'gluten-free').click();
+    await expect(page.locator('.recipe-title')).toHaveText(['Test Salad']);
+    await expect(dietChip(page, 'gluten-free')).toHaveAttribute('aria-pressed', 'true');
+
+    await dietChip(page, 'vegan').click();
+    await expect(page).toHaveURL(/diet=vegan%2Cgluten-free/);
+    await expect(page.locator('.recipe-title')).toHaveText(['Test Salad']);
+
+    await dietChip(page, 'gluten-free').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(2);
+    await expect(card(page, 'Test Toast')).toHaveCount(0);
+
+    // Vegetarian includes vegan recipes
+    await dietChip(page, 'vegan').click();
+    await dietChip(page, 'vegetarian').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+
+    // Reload keeps the selection (it's in the URL)
+    await page.reload();
+    await expect(dietChip(page, 'vegetarian')).toHaveClass(/chip-active/);
+
+    // Opening the app fresh starts with no diet selected
+    await page.goto('/');
+    await expect(page.locator('#diet-chips .chip-active')).toHaveCount(0);
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
   });
 
-  test('toggles off by default; toggling vegan saves and persists on reload', async ({ page }) => {
-    const veganToggle = page.locator('#toggle-vegan');
-    const glutenFreeToggle = page.locator('#toggle-gluten-free');
+  test('"Browse all recipes" on the empty state clears diets too', async ({ page }) => {
+    await dietChip(page, 'gluten-free').click();
+    await page.fill('#search-input', 'toast');
+    await expect(page.locator('.recipe-card')).toHaveCount(0);
 
-    await expect(veganToggle).not.toBeChecked();
-    await expect(glutenFreeToggle).not.toBeChecked();
-
-    await page.locator('#toggle-vegan + .toggle-slider').click();
-
-    const filters = await page.evaluate(async () => getSetting('dietaryFilters'));
-    expect(filters).toEqual(['vegan']);
-
-    await page.goto('/settings.html');
-    await expect(veganToggle).toBeChecked();
-    await expect(glutenFreeToggle).not.toBeChecked();
+    await page.locator('#clear-search-btn').click();
+    await expect(page.locator('.recipe-card')).toHaveCount(3);
+    await expect(page.locator('#diet-chips .chip-active')).toHaveCount(0);
+    await expect(page).not.toHaveURL(/diet=/);
   });
 });
 
-test.describe('Dietary Filtering on Home Page', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.route('**/recipes.json', route => {
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(testRecipes)
-      });
-    });
-    await page.goto('/');
-    await clearAppState(page);
-    await page.goto('/');
-  });
+test.describe('Diet on the Recipe Page', () => {
+  test('active diet carries to the recipe page and filters similar recipes', async ({ page }) => {
+    await dietChip(page, 'vegan').click();
+    await card(page, 'Test Curry').click();
+    await expect(page).toHaveURL(/id=test-curry&diet=vegan/);
 
-  test('vegan filter shows only matching recipes; no recipes hidden when all match', async ({ page }) => {
-    await page.evaluate(async () => {
-      await setSetting('dietaryFilters', ['vegan']);
-    });
+    // Salad shares ingredients with curry and is vegan: shown, and its link keeps the diet
+    const similar = page.locator('.similar-recipe-item', { hasText: 'Test Salad' });
+    await expect(similar).toHaveAttribute('href', 'recipe.html?id=test-salad&diet=vegan');
 
-    await page.goto('/');
-
-    // All 3 test recipes are vegan — none should be hidden
-    const cards = page.locator('.recipe-card');
-    await expect(cards.first()).toBeVisible();
-    const count = await cards.count();
-    expect(count).toBe(3);
-
-    for (let i = 0; i < count; i++) {
-      await expect(cards.nth(i).locator('.diet-badge')).toHaveText('V');
-    }
+    // Curry isn't gluten-free, so it's not suggested from the salad under a GF diet
+    await page.goto('/recipe.html?id=test-salad');
+    await expect(page.locator('.similar-recipe-item', { hasText: 'Test Curry' })).toBeVisible();
+    await page.goto('/recipe.html?id=test-salad&diet=gluten-free');
+    await expect(page.locator('.recipe-name')).toHaveText('Test Salad');
+    await page.waitForTimeout(500);
+    await expect(page.locator('.similar-recipe-item', { hasText: 'Test Curry' })).toHaveCount(0);
   });
 });
