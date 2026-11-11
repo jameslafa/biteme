@@ -84,6 +84,7 @@ All user data is local-first. Sync is additive, not required.
 - Checked on page load and on app resume (`visibilitychange`)
 - Pull-to-refresh forces a network fetch regardless of version
 - Recipe data bypasses the service worker cache — the SW handles the app shell (HTML, CSS, JS) on a different cadence
+- Every file a page or script needs must be listed in `APP_SHELL` in `docs/sw.js`: each SW version bump deletes the old cache, so an unlisted file is unavailable offline until revisited online. `tests/sw.spec.js` enforces this
 
 ---
 
